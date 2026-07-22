@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telat Group - Portal Institucional de Presentaciones Ejecutivas</title>
+    
+    <!-- Google Fonts oficiales Telat (DM Sans & Montserrat) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Google Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandOscuro: '#222221',
+                        brandCeleste: '#3284C6',
+                        brandNaranja: '#EB5B27',
+                        brandNaranjaClaro: '#FECA66',
+                        brandClaro: '#FBFBFD',
+                    },
+                    fontFamily: {
+                        subheadings: ['DM Sans', 'sans-serif'],
+                        body: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --brand-celeste: #3284C6;
+            --brand-naranja: #EB5B27;
+            --brand-oscuro: #222221;
+            --brand-claro: #FBFBFD;
+        }
+
+        body {
+            background-color: var(--brand-claro);
+            color: var(--brand-oscuro);
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+        }
+
+        .tech-grid-bg {
+            background-image: radial-gradient(rgba(50, 132, 198, 0.07) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        @keyframes icon-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.12); }
+        }
+        .animate-icon-pulse { animation: icon-pulse 3s ease-in-out infinite; }
+    </style>
+</head>
+<body class="tech-grid-bg antialiased flex flex-col justify-between min-h-screen selection:bg-brandNaranjaClaro selection:text-brandOscuro">
+
+    <!-- CABECERA INSTITUCIONAL -->
+    <header class="w-full border-b border-brandOscuro/10 bg-white/80 backdrop-blur-md sticky top-0 z-30">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-10 object-contain filter drop-shadow-sm">
+                <span class="text-gray-300 text-xl font-light">|</span>
+                <span class="text-xs font-subheadings font-bold text-brandOscuro/70 tracking-wider uppercase">Portal Ejecutivo</span>
+            </div>
+            <div class="bg-brandCeleste/10 border border-brandCeleste/20 text-brandCeleste text-xs font-subheadings px-3.5 py-1 rounded-full font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
+                <span class="material-symbols-outlined text-sm animate-icon-pulse">verified_user</span> Acceso Directivo
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENIDO NEUTRO DE SEGURIDAD / BIENVENIDA -->
+    <main class="max-w-xl mx-auto px-6 py-16 flex-grow flex flex-col justify-center text-center">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-brandCeleste to-brandNaranja text-white flex items-center justify-center mx-auto mb-6 shadow-xl">
+            <span class="material-symbols-outlined text-3xl">shield_lock</span>
+        </div>
+        
+        <h1 class="font-body text-3xl font-extrabold text-brandOscuro mb-3">
+            TELAT <span class="text-transparent bg-clip-text bg-gradient-to-r from-brandCeleste to-brandNaranja">EXECUTIVE DECKS</span>
+        </h1>
+        
+        <p class="font-body text-xs text-brandOscuro/70 leading-relaxed mb-6">
+            Bienvenido al portal institucional de presentaciones ejecutivas y propuestas comerciales estratégicas de Telat Group.
+        </p>
+
+        <div class="bg-white p-5 rounded-2xl border border-brandOscuro/10 shadow-sm text-left font-subheadings">
+            <div class="flex items-center gap-2 text-xs font-bold text-brandOscuro mb-1">
+                <span class="material-symbols-outlined text-brandCeleste text-base">info</span> Indicaciones de Acceso
+            </div>
+            <p class="text-[0.75rem] text-brandOscuro/70 leading-normal">
+                Las presentaciones de la Dirección General y propuestas de cuentas clave se consultan mediante enlace directo proporcionado por el equipo ejecutivo.
+            </p>
+        </div>
+    </main>
+
+    <!-- PIE DE PÁGINA CORPORATIVO -->
+    <footer class="w-full border-t border-brandOscuro/10 bg-white/60 backdrop-blur-md py-6 text-center">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div class="text-xs font-body text-brandOscuro/60">
+                &copy; 2026 <strong>Telat Group</strong>. Todos los derechos reservados.
+            </div>
+            <div class="text-xs font-subheadings text-brandOscuro/50 font-medium flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm text-brandNaranja">auto_awesome</span> Tecnología Aplicada a la Experiencia
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
