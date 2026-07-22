@@ -1,1 +1,1528 @@
-<!-- ESPACIO PARA EL DASHBOARD OPERATIVO DE INSTITUTO -->
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telat - Consola Omnisciente GOC Instituto</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- CDNs de Dependencias de Diseño -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <!-- Configuración para compatibilidad de Tailwind -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        montserrat: ['Montserrat', 'sans-serif'],
+                        roboto: ['Roboto', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Hojas de Estilos Dual-Theme Personalizadas -->
+    <style>
+        :root {
+            /* Identidad Visual de Telat (Inmutable) */
+            --azul-brand: #2443FC;
+            --naranja-brand: #F84E2D;
+            --gradient-border: linear-gradient(90deg, #2443FC 0%, #a855f7 50%, #F84E2D 100%);
+
+            /* Variables de Tema Oscuro (Defecto Técnico) */
+            --bg-body: #090d16;
+            --bg-capsule: rgba(15, 23, 42, 0.9);
+            --bg-glass: rgba(22, 30, 49, 0.7);
+            --text-main: #FFFFFF;
+            --text-sec: #94a3b8;
+            --border-glass: rgba(255, 255, 255, 0.1);
+            --shadow-card: 0 10px 40px -10px rgba(0, 0, 0, 0.7);
+            --btn-border: rgba(255, 255, 255, 0.2);
+            --btn-hover-bg: rgba(36, 67, 252, 0.2);
+            --glow-color: rgba(36, 67, 252, 0.45);
+            --loader-bg: #090d16;
+
+            /* Sub-tarjetas Especializadas de Soporte (Estilo Oscuro) */
+            --bg-specialized-card: rgba(30, 41, 59, 0.6);
+            --border-specialized-card: rgba(255, 255, 255, 0.08);
+            --text-specialized-card: #34d399;
+        }
+
+        /* Variables de Tema Claro (Contraste Corporativo Riguroso) */
+        html[data-theme="light"] {
+            --bg-body: #f8fafc;
+            --bg-capsule: rgba(255, 255, 255, 0.95);
+            --bg-glass: rgba(255, 255, 255, 0.95);
+            --text-main: #0f172a;
+            --text-sec: #475569;
+            --border-glass: rgba(15, 23, 42, 0.12);
+            --shadow-card: 0 10px 30px -5px rgba(15, 23, 42, 0.08);
+            --btn-border: rgba(15, 23, 42, 0.2);
+            --btn-hover-bg: rgba(36, 67, 252, 0.08);
+            --glow-color: rgba(36, 67, 252, 0.2);
+            --loader-bg: #ffffff;
+
+            /* Sub-tarjetas Especializadas de Soporte (Estilo Claro con Contraste WCAG) */
+            --bg-specialized-card: rgba(16, 185, 129, 0.08);
+            --border-specialized-card: rgba(16, 185, 129, 0.22);
+            --text-specialized-card: #047857;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'Roboto', sans-serif;
+            transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Contenedor de la Cápsula Flotante */
+        .header-capsule {
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 92%;
+            max-width: 1280px;
+            z-index: 50;
+            background: linear-gradient(var(--bg-capsule), var(--bg-capsule)) padding-box,
+                var(--gradient-border) border-box;
+            border: 2px solid transparent;
+            border-radius: 9999px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-card);
+            transition: all 0.4s ease;
+        }
+
+        /* Zona de Blindaje para Logotipo */
+        .logo-safe-zone img,
+        .logo-safe-zone svg {
+            height: 100% !important;
+            width: auto !important;
+            max-width: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* Botón Híbrido */
+        .btn-hybrid {
+            background: linear-gradient(90deg, var(--azul-brand), var(--naranja-brand));
+            color: #FFFFFF !important;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            padding: 0.6rem 1.2rem;
+            border-radius: 9999px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--glow-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-hybrid:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--glow-color);
+            filter: brightness(1.1);
+        }
+
+        /* Tarjeta de Cristal Estilizada */
+        .card-glass {
+            background-color: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 1.25rem;
+            box-shadow: var(--shadow-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease;
+        }
+
+        .card-glass:hover {
+            border-color: rgba(36, 67, 252, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Botones de Navegación del Panel */
+        .tab-btn {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: var(--text-sec);
+        }
+
+        .tab-btn.active {
+            background-color: var(--azul-brand);
+            color: #FFFFFF !important;
+            box-shadow: 0 4px 12px var(--glow-color);
+        }
+
+        /* Pantalla de Carga Inicial */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background-color: var(--loader-bg);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .text-theme-main {
+            color: var(--text-main);
+        }
+
+        .text-theme-sec {
+            color: var(--text-sec);
+        }
+    </style>
+</head>
+
+<body class="pb-12 pt-36">
+
+    <!-- Loader de Pantalla Completa -->
+    <div id="loader">
+        <div class="logo-safe-zone h-14 w-auto mb-6">
+            <img src="https://telat.mx/assets/img/logo.png" alt="Telat Logo">
+        </div>
+        <div class="flex items-center gap-3 text-theme-main font-montserrat font-bold text-sm">
+            <i class="fa-solid fa-circle-notch animate-spin text-2xl text-[var(--azul-brand)]"></i>
+            <span>Estableciendo conexión segura con Consola GOC...</span>
+        </div>
+    </div>
+
+    <!-- Cápsula de Navegación Flotante -->
+    <nav class="header-capsule px-4 md:px-8 py-3 flex justify-between items-center">
+        <!-- Izquierda: Identidad Visual -->
+        <div class="flex items-center gap-4">
+            <div class="logo-safe-zone h-8 md:h-10 w-auto flex items-center">
+                <img src="https://telat.mx/assets/img/logo.png" alt="Telat Logo">
+            </div>
+
+            <div class="hidden md:block h-6 w-px bg-[var(--text-sec)] opacity-30"></div>
+
+            <div class="hidden md:flex flex-col justify-center leading-none">
+                <span class="text-xs font-montserrat font-bold text-[var(--naranja-brand)]">PORTAL BPO</span>
+                <span class="text-[10px] font-montserrat font-bold text-theme-sec tracking-wider">INSTITUTO</span>
+            </div>
+        </div>
+
+        <!-- Centro: Navegador de Vistas Dinámicas (Módulo GOC) -->
+        <div
+            class="flex items-center gap-1 bg-slate-800/30 dark:bg-slate-900/40 p-1 rounded-full border border-slate-700/30">
+            <button onclick="app.switchTab('goc')" id="tab-btn-goc" class="tab-btn active"
+                title="Ir a la vista de Gestión Operativa (SLAs, TSF y Desempeño Técnico)">MANDO GOC</button>
+            <button onclick="app.switchTab('calidad')" id="tab-btn-calidad" class="tab-btn"
+                title="Ir a la vista de Aseguramiento de Calidad y Calibraciones del Instituto">CALIDAD</button>
+            <button onclick="app.switchTab('plantilla')" id="tab-btn-plantilla" class="tab-btn"
+                title="Ir al listado detallado de la plantilla de 50 asesores operativos">PLANTILLA</button>
+        </div>
+
+        <!-- Derecha: Interruptores Operativos -->
+        <div class="flex items-center gap-3">
+            <button onclick="app.toggleTheme()"
+                class="w-9 h-9 rounded-full flex items-center justify-center text-theme-sec hover:text-theme-main hover:bg-[var(--btn-hover-bg)] transition-all"
+                title="Alternar entre Tema Oscuro (Defecto Técnico) y Tema Claro (Corporativo)">
+                <i id="theme-icon" class="fa-solid fa-sun text-lg text-yellow-400"></i>
+            </button>
+            <button onclick="app.triggerGOCSimulation()" class="btn-hybrid group"
+                title="Simular desvío aleatorio en vivo para probar la reactividad del CRM">
+                <i class="fa-solid fa-bolt group-hover:animate-pulse"></i>
+                <span class="hidden sm:inline">ALERTA</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Contenedor Principal de Elementos -->
+    <main class="max-w-7xl mx-auto px-4 md:px-8 space-y-8">
+
+        <!-- Tarjeta de Alerta Contextual e Informativa -->
+        <div
+            class="p-4 rounded-2xl bg-[var(--azul-brand)]/10 border border-[var(--azul-brand)]/30 text-theme-main text-xs md:text-sm flex items-start gap-3">
+            <i class="fa-solid fa-tower-broadcast text-[var(--azul-brand)] text-xl animate-pulse mt-0.5"></i>
+            <div>
+                <strong class="font-montserrat">Consola Unificada del Instituto:</strong> Monitoreo de tráfico,
+                infraestructura omnicanal y calidad de servicio operada por Telat. Coloque el puntero sobre cualquier
+                KPI o encabezado para ver una descripción simple de su funcionamiento.
+            </div>
+        </div>
+
+        <!-- SECCIÓN 1: PANEL DE MANDO GOC (GESTIÓN OPERATIVA DE CAMPAÑA) -->
+        <section id="tab-section-goc" class="space-y-8">
+            <!-- Mosaico de KPIs Operativos -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Infraestructura Técnica -->
+                <div class="card-glass p-6 relative overflow-hidden"
+                    title="Porcentaje de tiempo que el sistema telefónico y chat han estado encendidos y funcionando sin caídas técnicas.">
+                    <p class="text-xs font-bold uppercase tracking-wider text-theme-sec font-montserrat">Infraestructura
+                        (SLA)</p>
+                    <h3 class="text-3xl font-extrabold text-theme-main font-montserrat mt-2" id="goc-infra">99.85%</h3>
+                    <span class="text-xs font-semibold flex items-center gap-1 mt-2 text-emerald-400"
+                        id="goc-infra-label">
+                        <i class="fa-solid fa-circle-check"></i> Meta &ge; 99.5%
+                    </span>
+                </div>
+
+                <!-- Tasa de Abandono -->
+                <div class="card-glass p-6 relative overflow-hidden"
+                    title="Porcentaje de usuarios que colgaron la llamada o cerraron la ventana antes de ser atendidos por un asesor.">
+                    <p class="text-xs font-bold uppercase tracking-wider text-theme-sec font-montserrat">Tasa de
+                        Abandono</p>
+                    <h3 class="text-3xl font-extrabold text-theme-main font-montserrat mt-2" id="goc-abandono">2.84%
+                    </h3>
+                    <span class="text-xs font-semibold flex items-center gap-1 mt-2 text-emerald-400"
+                        id="goc-abandono-label">
+                        <i class="fa-solid fa-shield-halved"></i> Meta &le; 4.00%
+                    </span>
+                </div>
+
+                <!-- Precisión de Pronóstico WFM -->
+                <div class="card-glass p-6 relative overflow-hidden"
+                    title="Mide la exactitud en la estimación del volumen de llamadas proyectado contra el tráfico real recibido.">
+                    <p class="text-xs font-bold uppercase tracking-wider text-theme-sec font-montserrat">Precisión WFM
+                    </p>
+                    <h3 class="text-3xl font-extrabold text-theme-main font-montserrat mt-2" id="goc-wfm">94.15%</h3>
+                    <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1 mt-2">
+                        <i class="fa-solid fa-compass"></i> Tolerancia &plusmn; 10%
+                    </span>
+                </div>
+
+                <!-- Adherencia a la Agenda -->
+                <div class="card-glass p-6 relative overflow-hidden"
+                    title="Porcentaje de tiempo que los asesores respetaron exactamente su horario programado de conexión.">
+                    <p class="text-xs font-bold uppercase tracking-wider text-theme-sec font-montserrat">Adherencia
+                        Agenda</p>
+                    <h3 class="text-3xl font-extrabold text-theme-main font-montserrat mt-2" id="goc-adherencia">96.48%
+                    </h3>
+                    <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1 mt-2">
+                        <i class="fa-solid fa-user-clock"></i> Meta &ge; 95.0%
+                    </span>
+                </div>
+            </div>
+
+            <!-- Gráficas de Rendimiento y SLAs de Tiempo de Respuesta -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- TSF Canales Omnicanal -->
+                <div class="card-glass p-6 flex flex-col justify-between"
+                    title="Telephone Service Factor: La velocidad de respuesta del Centro de Contacto medida de forma independiente en cada canal.">
+                    <div>
+                        <h4 class="text-md font-bold font-montserrat text-theme-main mb-1">Nivel de Servicio (TSF)</h4>
+                        <p class="text-xs text-theme-sec mb-4">Cumplimiento en velocidad de respuesta por canal activo
+                        </p>
+                    </div>
+                    <div id="goc-chart-tsf" class="w-full h-64"></div>
+                    <div class="grid grid-cols-3 gap-2 mt-2 pt-4 border-t border-slate-700/20 text-center text-xs">
+                        <div
+                            title="Meta de atención: Contestar el 83% de las llamadas telefónicas en menos de 30 segundos.">
+                            <p class="text-[10px] text-theme-sec">Voz (&ge;83% &le;30s)</p>
+                            <p class="text-sm font-bold text-emerald-400" id="goc-tsf-voz">84.5%</p>
+                        </div>
+                        <div
+                            title="Meta de atención: Contestar el 83% de los mensajes de chat/WhatsApp en menos de 90 segundos.">
+                            <p class="text-[10px] text-theme-sec">Texto (&ge;83% &le;90s)</p>
+                            <p class="text-sm font-bold text-emerald-400" id="goc-tsf-texto">86.2%</p>
+                        </div>
+                        <div
+                            title="Meta de atención: El ChatBot automático debe contestar el 95% de los mensajes entre 0 y 0.5 segundos.">
+                            <p class="text-[10px] text-theme-sec">Bot (&ge;95% &le;0.5s)</p>
+                            <p class="text-sm font-bold text-emerald-400" id="goc-tsf-bot">97.4%</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tiempos de Operación AHT por Departamento / Piloto -->
+                <div class="card-glass p-6 lg:col-span-2 flex flex-col justify-between"
+                    title="Average Handling Time: Tiempo promedio en segundos que toma atender a un usuario, incluyendo conversación y post-llamada.">
+                    <div>
+                        <h4 class="text-md font-bold font-montserrat text-theme-main mb-1">Tiempos Promedio de Operación
+                            (AHT)</h4>
+                        <p class="text-xs text-theme-sec mb-4">Seguimiento de tiempos reales frente a los límites
+                            establecidos por departamento</p>
+                    </div>
+                    <div id="goc-chart-aht" class="w-full h-64"></div>
+                    <div
+                        class="flex justify-between items-center mt-2 pt-4 border-t border-slate-700/20 text-xs text-theme-sec">
+                        <span><i class="fa-solid fa-clock-rotate-left mr-1"></i> Mediciones dinámicas de conversación
+                            neta activa</span>
+                        <span class="flex items-center gap-4">
+                            <span><span
+                                    class="inline-block w-3 h-3 bg-[var(--azul-brand)] rounded-full mr-1 align-middle"></span>
+                                Real</span>
+                            <span><span
+                                    class="inline-block w-3 h-3 bg-[var(--naranja-brand)] rounded-full mr-1 align-middle"></span>
+                                Target</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel de Mensajes Masivos y Procesamiento Especializado -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Lanzamiento Masivo Blaster -->
+                <div class="card-glass p-6"
+                    title="Envío automatizado de recordatorios masivos por llamada telefónica de salida. Capacidad diaria de 200 mil envíos en 6 horas.">
+                    <h5 class="text-sm font-bold font-montserrat text-theme-main mb-2">Mensajes Masivos (Blaster)</h5>
+                    <div class="flex justify-between text-xs text-theme-sec mb-1">
+                        <span>Procesamiento acumulado hoy</span>
+                        <span id="goc-blaster-count" class="font-bold text-theme-main">164,285 / 200,000</span>
+                    </div>
+                    <div class="w-full bg-slate-700/30 rounded-full h-2">
+                        <div class="bg-[var(--azul-brand)] h-2 rounded-full transition-all duration-500"
+                            id="goc-blaster-bar" style="width: 82%"></div>
+                    </div>
+                    <p class="text-[10px] text-theme-sec mt-2">Mecanismo preventivo para difusión masiva de trámites del
+                        Instituto.</p>
+                </div>
+
+                <!-- Mensajes Omnicanal Masivos -->
+                <div class="card-glass p-6"
+                    title="Volumen de notificaciones preventivas e informativas despachadas mensualmente sumando WhatsApp, SMS y correos masivos.">
+                    <h5 class="text-sm font-bold font-montserrat text-theme-main mb-2">Notificación Masiva Omnicanal
+                    </h5>
+                    <div class="flex justify-between text-xs text-theme-sec mb-1">
+                        <span>Envíos acumulados del mes</span>
+                        <span id="goc-omni-count" class="font-bold text-theme-main">918,450 / 1,200,000</span>
+                    </div>
+                    <div class="w-full bg-slate-700/30 rounded-full h-2">
+                        <div class="bg-purple-500 h-2 rounded-full transition-all duration-500" id="goc-omni-bar"
+                            style="width: 76.5%"></div>
+                    </div>
+                    <p class="text-[10px] text-theme-sec mt-2">Soporte técnico para envío a gran escala del Instituto.
+                    </p>
+                </div>
+
+                <!-- Back-Office & Soporte Especializado de Segundo Nivel con Alto Contraste Claro -->
+                <div class="card-glass p-6 flex flex-col justify-between"
+                    title="Verificación técnica de documentos cargados por usuarios fuera de línea y resoluciones de segundo nivel.">
+                    <h5 class="text-sm font-bold font-montserrat text-theme-main mb-2">Soporte Operativo Especializado
+                    </h5>
+                    <div class="grid grid-cols-2 gap-4 text-xs">
+                        <div style="background-color: var(--bg-specialized-card); border-color: var(--border-specialized-card);"
+                            class="p-2.5 rounded-lg border flex flex-col justify-center transition-colors">
+                            <span class="text-[10px] text-theme-sec block">Back-Office Docs</span>
+                            <span style="color: var(--text-specialized-card);" class="font-bold text-sm">100%
+                                Validado</span>
+                        </div>
+                        <div style="background-color: var(--bg-specialized-card); border-color: var(--border-specialized-card);"
+                            class="p-2.5 rounded-lg border flex flex-col justify-center transition-colors">
+                            <span class="text-[10px] text-theme-sec block">Consultas 2do Nivel</span>
+                            <span style="color: var(--text-specialized-card);" class="font-bold text-sm">100%
+                                Resuelto</span>
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-theme-sec mt-2">Asegura la legitimidad del 100% de expedientes de
+                        usuarios.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: CALIDAD Y SEGUIMIENTO CONTRACTUAL DEL INSTITUTO -->
+        <section id="tab-section-calidad" class="hidden space-y-8">
+            <!-- Mosaico de KPIs de Calidad -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Calidad Percibida (ICS) -->
+                <div class="card-glass p-6"
+                    title="Índice de Calidad en el Servicio: Evaluado mediante encuestas posteriores a la atención a través de la metodología Top Two Box.">
+                    <p class="text-xs font-bold uppercase tracking-wider text-theme-sec font-montserrat">Satisfacción
+                        (ICS)</p>
+                    <h3 class="text-3xl font-extrabold text-theme-main font-montserrat mt-2" id="cal-ics">87.52%</h3>
+                    <span class="text-xs font-semibold flex items-center gap-1 mt-2 text-emerald-400"
+                        id="cal-ics-label">
+                        <i class="fa-solid fa-circle-check"></i> Cumple Meta &ge; 86.0% (T2B)
+                    </span>
+                </div>
+
+                <!-- Calidad Promedio por Cédula de Evaluación -->
+                <div class="card-glass p-6"
+                    title="La calificación promedio de las llamadas evaluadas mensualmente por el staff técnico de Telat (Escala de 0 a 100 puntos).">
+                    <p class="text-xs font-bold uppercase tracking-wider text-theme-sec font-montserrat">Calidad
+                        Operativa</p>
+                    <h3 class="text-3xl font-extrabold text-theme-main font-montserrat mt-2" id="cal-general">91.48</h3>
+                    <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1 mt-2">
+                        <i class="fa-solid fa-arrow-trend-up"></i> Meta Contractual &ge; 90.00
+                    </span>
+                </div>
+
+                <!-- Desviaciones de Calibración -->
+                <div class="card-glass p-6"
+                    title="Mapea la diferencia de puntajes otorgados al mismo caso entre Telat y el Instituto. Margen máximo tolerable: +-10 puntos.">
+                    <p class="text-xs font-bold uppercase tracking-wider text-theme-sec font-montserrat">Desviación
+                        Calibración</p>
+                    <h3 class="text-3xl font-extrabold text-theme-main font-montserrat mt-2" id="cal-desviacion">
+                        &plusmn; 4.2 pts</h3>
+                    <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1 mt-2">
+                        <i class="fa-solid fa-scale-balanced"></i> Tolerancia &le; &plusmn; 10 pts
+                    </span>
+                </div>
+
+                <!-- Conteo de Personal Operativo en Alerta -->
+                <div class="card-glass p-6"
+                    title="Asesores con bajo desempeño o que cuentan con cartas compromiso activas bajo seguimiento estrecho de capacitación.">
+                    <p class="text-xs font-bold uppercase tracking-wider text-theme-sec font-montserrat">Asesores en
+                        Riesgo</p>
+                    <h3 class="text-3xl font-extrabold text-[var(--naranja-brand)] font-montserrat mt-2"
+                        id="cal-riesgo">4</h3>
+                    <span class="text-xs text-theme-sec font-semibold flex items-center gap-1 mt-2">
+                        Monitoreo preventivo de desempeño
+                    </span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Avance y Registro de Cuotas de Monitoreo -->
+                <div class="card-glass p-6 flex flex-col justify-between"
+                    title="Muestra el progreso mensual de llamadas auditadas para asegurar la validez estadística del servicio.">
+                    <div>
+                        <h4 class="text-md font-bold font-montserrat text-theme-main mb-1">Cuotas de Monitoreo Mensuales
+                        </h4>
+                        <p class="text-xs text-theme-sec mb-6">Controles estadísticos auditados para el Instituto</p>
+                    </div>
+
+                    <div class="space-y-4 my-auto">
+                        <!-- Auditoría de Telat -->
+                        <div
+                            title="El staff de calidad de Telat evalúa por contrato un mínimo de 8 llamadas al mes por cada asesor (distribuidos en 2 semanales).">
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span>Monitoreo Staff Telat (8/asesor)</span>
+                                <span id="cal-quota-telat-text" class="text-theme-main">0 / 400</span>
+                            </div>
+                            <div class="w-full bg-slate-700/30 rounded-full h-2">
+                                <div class="bg-[var(--azul-brand)] h-2 rounded-full transition-all duration-500"
+                                    id="cal-quota-telat-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Auditoría del Instituto -->
+                        <div
+                            title="Mapea la cuota de llamadas auditadas directamente por personal supervisor del propio Instituto (mínimo de 2 al mes por asesor).">
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span>Monitoreo Instituto (2/asesor)</span>
+                                <span id="cal-quota-inst-text" class="text-theme-main">0 / 100</span>
+                            </div>
+                            <div class="w-full bg-slate-700/30 rounded-full h-2">
+                                <div class="bg-purple-500 h-2 rounded-full transition-all duration-500"
+                                    id="cal-quota-inst-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Auditoría de los Supervisores Operativos -->
+                        <div
+                            title="Mapea los monitoreos obligatorios hechos en línea por los Supervisores de Operación de Telat (mínimo de 2 al mes por asesor).">
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span>Monitoreo Supervisión (2/asesor)</span>
+                                <span id="cal-quota-super-text" class="text-theme-main">0 / 100</span>
+                            </div>
+                            <div class="w-full bg-slate-700/30 rounded-full h-2">
+                                <div class="bg-[var(--naranja-brand)] h-2 rounded-full transition-all duration-500"
+                                    id="cal-quota-super-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="mt-6 pt-4 border-t border-slate-700/20 flex justify-between items-center text-xs text-theme-sec">
+                        <span>Curva de Aprendizaje (Periodo de gracia):</span>
+                        <span class="font-bold text-amber-500">60 días naturales</span>
+                    </div>
+                </div>
+
+                <!-- Gráfico de Curva de Aprendizaje Incremental -->
+                <div class="card-glass p-6 lg:col-span-2 flex flex-col justify-between"
+                    title="Muestra cómo sube la meta de calidad exigida a los asesores conforme maduran en la cuenta (Mes 1: &ge;80, Mes 2: &ge;85, Mes 3+: &ge;90).">
+                    <div>
+                        <h4 class="text-md font-bold font-montserrat text-theme-main mb-1">Curva de Aprendizaje
+                            Incremental</h4>
+                        <p class="text-xs text-theme-sec mb-4">Evolución de calidad lograda vs Metas progresivas
+                            contractuales</p>
+                    </div>
+                    <div id="cal-chart-curva" class="w-full h-64"></div>
+                    <div
+                        class="flex justify-between items-center mt-2 pt-4 border-t border-slate-700/20 text-xs text-theme-sec">
+                        <span><i class="fa-solid fa-graduation-cap text-[var(--azul-brand)] mr-1"></i> Sesiones de
+                            calibración mensuales activas</span>
+                        <span class="flex items-center gap-4">
+                            <span><span
+                                    class="inline-block w-3 h-3 bg-[var(--azul-brand)] rounded-full mr-1 align-middle"></span>
+                                Lograda</span>
+                            <span><span
+                                    class="inline-block w-3 h-3 bg-[var(--naranja-brand)] rounded-full mr-1 align-middle"></span>
+                                Meta</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: CONTROL OPERATIVO DE PLANTILLA (50 ASESORES) -->
+        <section id="tab-section-plantilla" class="hidden space-y-8">
+            <div class="card-glass p-6">
+                <!-- Controles del Mosaico de Filtros -->
+                <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6">
+                    <div>
+                        <h4 class="text-lg font-bold font-montserrat text-theme-main">Control Operativo de Asesores</h4>
+                        <p class="text-xs text-theme-sec">Supervise las métricas de sincronización CRM, AHT, adherencia
+                            y estatus de cada asesor</p>
+                    </div>
+
+                    <!-- Filtros e Inserción -->
+                    <div class="flex flex-wrap items-center gap-3 w-full lg:w-auto">
+                        <!-- Filtrar por Piloto -->
+                        <select onchange="app.filterByPiloto(this.value)" id="plantilla-select-piloto"
+                            class="px-3 py-2 text-xs rounded-xl bg-slate-800/40 dark:bg-slate-900/60 border border-slate-700/50 text-slate-800 dark:text-slate-100 focus:outline-none transition-all"
+                            title="Ver solo los asesores asignados a un piloto o departamento específico.">
+                            <option value="todos">Todos los Departamentos</option>
+                            <option value="Cartera">Cartera</option>
+                            <option value="Trámites">Trámites</option>
+                            <option value="Aportaciones">Aportaciones</option>
+                            <option value="Quejas">Quejas</option>
+                            <option value="Denuncias">Denuncias</option>
+                            <option value="Soporte">Soporte</option>
+                        </select>
+
+                        <!-- Filtrar por Estatus -->
+                        <select onchange="app.filterByStatus(this.value)" id="plantilla-select-status"
+                            class="px-3 py-2 text-xs rounded-xl bg-slate-800/40 dark:bg-slate-900/60 border border-slate-700/50 text-slate-800 dark:text-slate-100 focus:outline-none transition-all"
+                            title="Ver asesores según su estatus operativo actual.">
+                            <option value="todos">Todos los Estatus</option>
+                            <option value="Activo">Activo</option>
+                            <option value="En Riesgo">En Riesgo</option>
+                            <option value="Baja">Baja</option>
+                        </select>
+
+                        <!-- Buscador por Nombre / ID -->
+                        <div class="relative flex-1 sm:flex-none"
+                            title="Escriba el nombre o el ID del asesor para un filtrado instantáneo.">
+                            <i
+                                class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                            <input oninput="app.searchPlantilla(this.value)" type="text"
+                                placeholder="Buscar asesor o ID..."
+                                class="w-full sm:w-48 pl-8 pr-3 py-2 text-xs rounded-xl bg-slate-800/40 dark:bg-slate-900/60 border border-slate-700/50 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-[var(--azul-brand)] transition-all">
+                        </div>
+
+                        <!-- Registrar Asesor Nuevo -->
+                        <button onclick="app.openNewAgentModal()"
+                            class="w-full sm:w-auto bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-theme-main font-semibold text-xs px-3.5 py-2 rounded-xl flex items-center justify-center gap-1.5 transition-all"
+                            title="Agregar un nuevo asesor a la base de datos de control.">
+                            <i class="fa-solid fa-user-plus"></i> Registrar Asesor
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tabla Detallada -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr
+                                class="border-b border-slate-700/50 text-theme-sec text-[10px] uppercase font-bold tracking-wider">
+                                <th class="py-3 px-4">Asesor</th>
+                                <th class="py-3 px-4">Piloto / Dep</th>
+                                <th class="py-3 px-4 text-center"
+                                    title="Tiempo promedio de llamada de este asesor vs el target permitido en su departamento.">
+                                    AHT Real / Target</th>
+                                <th class="py-3 px-4 text-center"
+                                    title="Puntaje de calidad promedio obtenido en auditorías vs meta según su antigüedad.">
+                                    Calidad / Target</th>
+                                <th class="py-3 px-4 text-center"
+                                    title="Porcentaje de atenciones telefónicas registradas correctamente en el CRM SAP del Instituto.">
+                                    Sync SAP</th>
+                                <th class="py-3 px-4 text-center"
+                                    title="Nivel de puntualidad y conexión de acuerdo a su agenda asignada (Meta &ge; 95%).">
+                                    Adherencia</th>
+                                <th class="py-3 px-4 text-center" title="Estatus operativo del asesor.">Estado</th>
+                                <th class="py-3 px-4 text-right">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="plantilla-table-body" class="divide-y divide-slate-800/30 text-xs text-theme-main">
+                            <!-- Inyectado vía Script -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Paginación de la Plantilla -->
+                <div
+                    class="flex flex-col sm:flex-row justify-between items-center gap-4 mt-6 pt-4 border-t border-slate-700/30 text-xs text-theme-sec">
+                    <div>
+                        Mostrando <span id="pag-start" class="font-bold text-theme-main">1</span> a <span id="pag-end"
+                            class="font-bold text-theme-main">10</span> de <span id="pag-total"
+                            class="font-bold text-theme-main">50</span> asesores
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="app.prevPage()"
+                            class="px-3 py-1.5 rounded-lg bg-slate-800/40 dark:bg-slate-900/40 border border-slate-700/50 hover:bg-slate-700/50 transition-all text-theme-main flex items-center gap-1">
+                            <i class="fa-solid fa-chevron-left text-[10px]"></i> Anterior
+                        </button>
+                        <button onclick="app.nextPage()"
+                            class="px-3 py-1.5 rounded-lg bg-slate-800/40 dark:bg-slate-900/40 border border-slate-700/50 hover:bg-slate-700/50 transition-all text-theme-main flex items-center gap-1">
+                            Siguiente <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BITÁCORA UNIFICADA (Consola Omnisciente Común en Pie de Tablero) -->
+        <div class="card-glass p-6"
+            title="Registro histórico de desvíos en vivo e incidencias críticas ocurridas durante el día.">
+            <div class="flex justify-between items-center mb-4">
+                <div>
+                    <h4 class="text-md font-bold font-montserrat text-theme-main">Bitácora GOC e Incidencias Críticas
+                    </h4>
+                    <p class="text-xs text-theme-sec">Detección preventiva de desvíos operativos y faltas graves de
+                        calidad en vivo</p>
+                </div>
+                <button onclick="app.clearAlertsLog()"
+                    class="text-xs text-theme-sec hover:text-theme-main border border-slate-700 hover:bg-slate-800/50 px-3 py-1.5 rounded-lg transition-all"
+                    title="Limpiar todos los reportes del log actual">
+                    Limpiar Bitácora
+                </button>
+            </div>
+            <div id="unified-alerts-feed" class="space-y-3 max-h-52 overflow-y-auto pr-2">
+                <!-- Inyectado vía Script -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Script de Lógica, Estado y Base de Datos Integrada -->
+    <script>
+        class Application {
+            constructor() {
+                this.state = {
+                    theme: 'dark',
+                    activeTab: 'goc',
+                    agents: [],
+                    alerts: [],
+                    currentPage: 1,
+                    itemsPerPage: 10,
+                    searchQuery: '',
+                    selectedPiloto: 'todos',
+                    selectedStatus: 'todos',
+                    charts: {
+                        tsf: null,
+                        aht: null,
+                        curva: null
+                    },
+                    // Catálogo de Departamentos del Instituto
+                    pilotos: {
+                        "Cartera": { targetAHT: 686, label: "11:26" },
+                        "Trámites": { targetAHT: 765, label: "12:45" },
+                        "Aportaciones": { targetAHT: 723, label: "12:03" },
+                        "Quejas": { targetAHT: 510, label: "08:30" },
+                        "Denuncias": { targetAHT: 555, label: "09:15" },
+                        "Soporte": { targetAHT: 360, label: "06:00" }
+                    }
+                };
+
+                // Semillas de nombres para simular personal con apellido representativo
+                this.firstNames = ["Carlos", "Ana", "Luis", "Sofía", "Jorge", "María", "Pedro", "Elena", "Miguel", "Lucía", "David", "Laura", "Javier", "Carmen", "Daniel", "Patricia", "Alejandro", "Isabel", "Andrés", "Gabriela"];
+                this.lastNames = ["Gómez", "Rodríguez", "Martínez", "Hernández", "López", "González", "Pérez", "Sánchez", "Ramírez", "Torres", "Flores", "Rivera", "Díaz", "Cruz", "Morales", "Ortiz", "Gutiérrez", "Ruiz", "Álvarez", "Castillo"];
+
+                this.init();
+            }
+
+            init() {
+                this.generate50AgentsDatabase();
+                this.generateBaseAlerts();
+
+                // Quitar Loader simulando lectura remota
+                setTimeout(() => {
+                    const ldr = document.getElementById('loader');
+                    ldr.style.opacity = '0';
+                    setTimeout(() => ldr.style.display = 'none', 500);
+                }, 1500);
+
+                window.addEventListener('DOMContentLoaded', () => {
+                    this.renderAllViews();
+                    this.initApexCharts();
+                });
+            }
+
+            toggleTheme() {
+                const html = document.documentElement;
+                const icon = document.getElementById('theme-icon');
+                if (html.getAttribute('data-theme') === 'dark') {
+                    html.setAttribute('data-theme', 'light');
+                    html.classList.remove('dark');
+                    icon.className = 'fa-solid fa-moon text-lg text-slate-800';
+                    this.state.theme = 'light';
+                } else {
+                    html.setAttribute('data-theme', 'dark');
+                    html.classList.add('dark');
+                    icon.className = 'fa-solid fa-sun text-lg text-yellow-400';
+                    this.state.theme = 'dark';
+                }
+                this.refreshChartsTheme();
+            }
+
+            switchTab(tabName) {
+                this.state.activeTab = tabName;
+
+                // Toggle en estados de botones de la Cápsula
+                ['goc', 'calidad', 'plantilla'].forEach(t => {
+                    const btn = document.getElementById(`tab-btn-${t}`);
+                    if (t === tabName) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+
+                // Toggle en visibilidad de las vistas
+                ['goc', 'calidad', 'plantilla'].forEach(t => {
+                    const section = document.getElementById(`tab-section-${t}`);
+                    if (t === tabName) {
+                        section.classList.remove('hidden');
+                    } else {
+                        section.classList.add('hidden');
+                    }
+                });
+
+                // Forzar redibujado de charts para prevenir bugs de canvas en componentes ocultos
+                setTimeout(() => {
+                    if (tabName === 'goc') {
+                        this.state.charts.tsf.render();
+                        this.state.charts.aht.render();
+                    } else if (tabName === 'calidad') {
+                        this.state.charts.curva.render();
+                    }
+                }, 50);
+            }
+
+            // Generador dinámico de 50 registros distribuidos por rampa del Instituto
+            generate50AgentsDatabase() {
+                const agents = [];
+                const listaPilotos = Object.keys(this.state.pilotos);
+
+                for (let i = 1; i <= 50; i++) {
+                    const fName = this.firstNames[i % this.firstNames.length];
+                    const lName = this.lastNames[(i * 7) % this.lastNames.length];
+                    const piloto = listaPilotos[i % listaPilotos.length];
+                    const targetAHT = this.state.pilotos[piloto].targetAHT;
+
+                    // Distribución proporcional de antigüedad (Meta progresiva)
+                    let mesCampaña = 3;
+                    if (i <= 10) mesCampaña = 1;
+                    else if (i <= 20) mesCampaña = 2;
+
+                    // Puntaje conforme a la curva de aprendizaje
+                    let calidad = 91.5;
+                    if (mesCampaña === 1) calidad = parseFloat((78 + Math.random() * 12).toFixed(1));
+                    else if (mesCampaña === 2) calidad = parseFloat((84 + Math.random() * 11).toFixed(1));
+                    else calidad = parseFloat((88 + Math.random() * 11.5).toFixed(1));
+                    if (calidad > 100) calidad = 100;
+
+                    // Tiempos promedios de llamada (AHT)
+                    const desvAHT = (Math.random() * 120) - 40;
+                    const ahtReal = Math.round(targetAHT + desvAHT);
+
+                    // Registro correcto en CRM SAP e ICS
+                    const sapSync = Math.random() > 0.15 ? 100.0 : parseFloat((92 + Math.random() * 8).toFixed(1));
+                    const ics = parseFloat((82 + Math.random() * 17.5).toFixed(1));
+
+                    // Adherencia Agenda (Meta 95%)
+                    const adherencia = parseFloat((91 + Math.random() * 8.5).toFixed(1));
+
+                    // Monitoreos del mes acumulados
+                    const monTelat = Math.floor(Math.random() * 3) + 6;
+                    const monInst = Math.floor(Math.random() * 2) + 1;
+                    const monSuper = Math.floor(Math.random() * 2) + 1;
+
+                    // Desviación promedio en calibraciones con Instituto
+                    const desviacion = parseFloat(((Math.random() * 12) - 6).toFixed(1));
+
+                    // Cartas compromiso de calidad acumuladas (0 a 3)
+                    let cartasCompromiso = 0;
+                    if (calidad < 90 && mesCampaña === 3 && Math.random() > 0.4) {
+                        cartasCompromiso = Math.floor(Math.random() * 3);
+                    }
+
+                    // Determinar Estatus
+                    let estatus = "Activo";
+                    if (cartasCompromiso >= 2 || calidad < 80 || adherencia < 92) {
+                        estatus = "En Riesgo";
+                    }
+
+                    agents.push({
+                        id: `TELAT-${String(i).padStart(3, '0')}`,
+                        nombre: `${fName} ${lName}`,
+                        piloto: piloto,
+                        mes: mesCampaña,
+                        aht: ahtReal,
+                        targetAHT: targetAHT,
+                        calidad: calidad,
+                        sap_sync: sapSync,
+                        ics: ics,
+                        adherencia: adherencia,
+                        mon_telat: monTelat,
+                        mon_inst: monInst,
+                        mon_super: monSuper,
+                        desviacion: desviacion,
+                        cartas: cartasCompromiso,
+                        estatus: estatus
+                    });
+                }
+                this.state.agents = agents;
+            }
+
+            generateBaseAlerts() {
+                this.state.alerts = [
+                    {
+                        id: 1,
+                        timestamp: "10:42",
+                        agente: "TELAT-009 - Jorge Martínez",
+                        tipo: "Exceso de AHT Crítico",
+                        descripcion: "Llamada activa en el piloto Trámites supera los 20 minutos de retención sin justificación registrada.",
+                        severidad: "high"
+                    },
+                    {
+                        id: 2,
+                        timestamp: "10:35",
+                        agente: "TELAT-042 - Sofía Rivera",
+                        tipo: "Omisión de Registro CRM SAP",
+                        descripcion: "Se detectó llamada finalizada en telefonía sin ticket de soporte abierto en el CRM SAP del Instituto.",
+                        severidad: "medium"
+                    },
+                    {
+                        id: 3,
+                        timestamp: "10:10",
+                        agente: "TELAT-021 - Javier Castillo",
+                        tipo: "Baja Directa del Asesor",
+                        descripcion: "Asesor colgó llamada intencionalmente al usuario durante el proceso de validación de identidad.",
+                        severidad: "high"
+                    }
+                ];
+            }
+
+            renderAllViews() {
+                const active = this.state.agents.filter(a => a.estatus !== 'Baja');
+
+                // ----- RENDERS VISTA DE MANDO GOC -----
+                // Abandono Promedio General
+                const avgAbandono = parseFloat((1.5 + Math.random() * 2).toFixed(2));
+                const abandonoEl = document.getElementById('goc-abandono');
+                const abandonoLbl = document.getElementById('goc-abandono-label');
+                abandonoEl.innerText = `${avgAbandono}%`;
+                if (avgAbandono <= 4.00) {
+                    abandonoLbl.className = "text-xs font-semibold flex items-center gap-1 mt-2 text-emerald-400";
+                    abandonoLbl.innerHTML = '<i class="fa-solid fa-shield-halved"></i> Meta &le; 4.00%';
+                } else {
+                    abandonoLbl.className = "text-xs font-semibold flex items-center gap-1 mt-2 text-rose-500";
+                    abandonoLbl.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> SLA Excedido';
+                }
+
+                // Adherencia Promedio de la Plantilla
+                const avgAdherencia = active.reduce((acc, curr) => acc + curr.adherencia, 0) / active.length;
+                document.getElementById('goc-adherencia').innerText = `${avgAdherencia.toFixed(2)}%`;
+
+                // ----- RENDERS VISTA DE CALIDAD -----
+                // ICS Promedio (Satisfacción del Cliente)
+                const avgIcs = active.reduce((acc, curr) => acc + curr.ics, 0) / active.length;
+                document.getElementById('cal-ics').innerText = `${avgIcs.toFixed(2)}%`;
+                const calIcsLbl = document.getElementById('cal-ics-label');
+                if (avgIcs >= 86.0) {
+                    calIcsLbl.className = "text-xs font-semibold flex items-center gap-1 mt-2 text-emerald-400";
+                    calIcsLbl.innerHTML = '<i class="fa-solid fa-circle-check"></i> Cumple Meta &ge; 86.0% (T2B)';
+                } else {
+                    calIcsLbl.className = "text-xs font-semibold flex items-center gap-1 mt-2 text-rose-500";
+                    calIcsLbl.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Abajo de Meta Contractual';
+                }
+
+                // Calidad General Promedio
+                const avgCal = active.reduce((acc, curr) => acc + curr.calidad, 0) / active.length;
+                document.getElementById('cal-general').innerText = avgCal.toFixed(2);
+
+                // Desviación Promedio en Calibración
+                const avgDesv = active.reduce((acc, curr) => acc + Math.abs(curr.desviacion), 0) / active.length;
+                document.getElementById('cal-desviacion').innerText = `\u00B1 ${avgDesv.toFixed(1)} pts`;
+
+                // Asesores en Riesgo Activos
+                const totalRiesgo = active.filter(a => a.estatus === 'En Riesgo').length;
+                document.getElementById('cal-riesgo').innerText = totalRiesgo;
+
+                // Seguimiento de Cuotas de Monitoreo Contractuales
+                const totalTelatMon = active.reduce((acc, curr) => acc + curr.mon_telat, 0);
+                const totalInstMon = active.reduce((acc, curr) => acc + curr.mon_inst, 0);
+                const totalSuperMon = active.reduce((acc, curr) => acc + curr.mon_super, 0);
+
+                const goalTelat = active.length * 8;
+                const goalInst = active.length * 2;
+                const goalSuper = active.length * 2;
+
+                document.getElementById('cal-quota-telat-text').innerText = `${totalTelatMon} / ${goalTelat}`;
+                document.getElementById('cal-quota-telat-bar').style.width = `${Math.min(100, (totalTelatMon / goalTelat) * 100)}%`;
+
+                document.getElementById('cal-quota-inst-text').innerText = `${totalInstMon} / ${goalInst}`;
+                document.getElementById('cal-quota-inst-bar').style.width = `${Math.min(100, (totalInstMon / goalInst) * 100)}%`;
+
+                document.getElementById('cal-quota-super-text').innerText = `${totalSuperMon} / ${goalSuper}`;
+                document.getElementById('cal-quota-super-bar').style.width = `${Math.min(100, (totalSuperMon / goalSuper) * 100)}%`;
+
+                // Render de Tabla y Consola Común de Alertas
+                this.renderPlantillaTable();
+                this.renderAlerts();
+            }
+
+            renderPlantillaTable() {
+                const tbody = document.getElementById('plantilla-table-body');
+                tbody.innerHTML = '';
+
+                let filtered = this.state.agents;
+
+                // Filtro por Piloto / Departamento
+                if (this.state.selectedPiloto !== 'todos') {
+                    filtered = filtered.filter(a => a.piloto === this.state.selectedPiloto);
+                }
+
+                // Filtro por Estatus Operativo
+                if (this.state.selectedStatus !== 'todos') {
+                    filtered = filtered.filter(a => a.estatus === this.state.selectedStatus);
+                }
+
+                // Filtro por Entrada de Buscador
+                if (this.state.searchQuery.trim() !== '') {
+                    const q = this.state.searchQuery.toLowerCase();
+                    filtered = filtered.filter(a => a.nombre.toLowerCase().includes(q) || a.id.toLowerCase().includes(q));
+                }
+
+                // Ajustar paginación
+                const total = filtered.length;
+                document.getElementById('pag-total').innerText = total;
+
+                const startIdx = (this.state.currentPage - 1) * this.state.itemsPerPage;
+                const endIdx = Math.min(startIdx + this.state.itemsPerPage, total);
+
+                document.getElementById('pag-start').innerText = total === 0 ? 0 : startIdx + 1;
+                document.getElementById('pag-end').innerText = endIdx;
+
+                const paginated = filtered.slice(startIdx, endIdx);
+
+                if (paginated.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="8" class="py-8 text-center text-theme-sec">
+                                <i class="fa-solid fa-circle-question text-xl block mb-2"></i> Sin asesores registrados para los filtros seleccionados.
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                paginated.forEach(a => {
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-slate-800/10 dark:hover:bg-slate-800/30 transition-colors";
+
+                    // Formato de tiempos AHT
+                    const ahtRealFm = this.formatSeconds(a.aht);
+                    const ahtTargetFm = this.state.pilotos[a.piloto].label;
+                    const ahtColor = a.aht > a.targetAHT ? 'text-rose-500 font-semibold' : 'text-emerald-500 font-semibold';
+
+                    // Formato Calidad vs Target Progresivo
+                    let targetCalidad = 90;
+                    if (a.mes === 1) targetCalidad = 80;
+                    else if (a.mes === 2) targetCalidad = 85;
+                    const calColor = a.calidad < targetCalidad ? 'text-rose-500' : 'text-emerald-500';
+
+                    // Sincronización SAP
+                    const sapColor = a.sap_sync < 100.0 ? 'text-amber-500 font-semibold' : 'text-theme-main font-semibold';
+
+                    // Estatus Badges
+                    let statusBadge = '';
+                    if (a.estatus === 'Activo') {
+                        statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Activo</span>';
+                    } else if (a.estatus === 'En Riesgo') {
+                        statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/10 text-amber-500 border border-amber-500/20">Riesgo</span>';
+                    } else {
+                        statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-500/10 text-rose-400 border border-rose-500/20">Baja</span>';
+                    }
+
+                    tr.innerHTML = `
+                        <td class="py-3 px-4 font-semibold">
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-slate-700/20 dark:bg-slate-800/50 text-[var(--azul-brand)] font-bold flex items-center justify-center text-[10px] border border-slate-700/20">
+                                    ${a.nombre.split(' ').map(n => n[0]).join('')}
+                                </div>
+                                <div>
+                                    <p class="font-montserrat">${a.nombre}</p>
+                                    <p class="text-[10px] text-theme-sec">${a.id}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="py-3 px-4 text-theme-sec font-semibold">${a.piloto}</td>
+                        <td class="py-3 px-4 text-center">
+                            <span class="${ahtColor}">${ahtRealFm}</span> <span class="text-[10px] text-theme-sec">/ ${ahtTargetFm}</span>
+                        </td>
+                        <td class="py-3 px-4 text-center">
+                            <span class="font-bold ${calColor}">${a.calidad.toFixed(1)}</span> <span class="text-[10px] text-theme-sec">/ ${targetCalidad}</span>
+                        </td>
+                        <td class="py-3 px-4 text-center ${sapColor}">${a.sap_sync.toFixed(1)}%</td>
+                        <td class="py-3 px-4 text-center text-theme-sec font-semibold">${a.adherencia}%</td>
+                        <td class="py-3 px-4 text-center">${statusBadge}</td>
+                        <td class="py-3 px-4 text-right">
+                            <button onclick="app.actionPlanCoaching('${a.id}')" class="text-[10px] font-montserrat text-[var(--azul-brand)] hover:text-white border border-[var(--azul-brand)] hover:bg-[var(--azul-brand)] px-2.5 py-1 rounded-lg transition-all font-bold" title="Abrir mesa de retroalimentación o plan de coaching para este asesor">
+                                Coaching GOC
+                            </button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+
+            renderAlerts() {
+                const feed = document.getElementById('unified-alerts-feed');
+                feed.innerHTML = '';
+
+                if (this.state.alerts.length === 0) {
+                    feed.innerHTML = `
+                        <div class="text-center py-6 text-theme-sec text-xs">
+                            <i class="fa-solid fa-circle-check text-emerald-400 text-lg mb-2 block animate-bounce"></i> Consola despejada. Sin anomalías operacionales en vivo.
+                        </div>
+                    `;
+                    return;
+                }
+
+                this.state.alerts.forEach(a => {
+                    let borderCol = 'border-l-4 border-amber-500';
+                    let icon = 'fa-triangle-exclamation text-amber-500';
+
+                    if (a.severidad === 'high') {
+                        borderCol = 'border-l-4 border-rose-600';
+                        icon = 'fa-radiation text-rose-500 animate-pulse';
+                    } else if (a.severidad === 'low') {
+                        borderCol = 'border-l-4 border-blue-500';
+                        icon = 'fa-info-circle text-blue-500';
+                    }
+
+                    const div = document.createElement('div');
+                    div.className = `p-3 rounded-xl bg-slate-800/10 dark:bg-slate-900/40 border border-slate-700/20 flex items-start gap-3 ${borderCol} hover:bg-slate-800/30 dark:hover:bg-slate-800/40 transition-all`;
+                    div.innerHTML = `
+                        <div class="mt-0.5 text-base">
+                            <i class="fa-solid ${icon}"></i>
+                        </div>
+                        <div class="flex-1 min-w-0 text-xs">
+                            <div class="flex justify-between items-center mb-0.5">
+                                <span class="font-bold font-montserrat text-theme-main">${a.tipo}</span>
+                                <span class="text-[10px] text-theme-sec font-mono">${a.timestamp}</span>
+                            </div>
+                            <p class="text-theme-main font-semibold mb-0.5">${a.agente}</p>
+                            <p class="text-theme-sec leading-normal">${a.descripcion}</p>
+                        </div>
+                    `;
+                    feed.appendChild(div);
+                });
+            }
+
+            // Simulación Interactiva GOC para Presentación Directiva
+            triggerGOCSimulation() {
+                const activeOnes = this.state.agents.filter(a => a.estatus !== 'Baja');
+                if (activeOnes.length === 0) return;
+
+                const randomAgent = activeOnes[Math.floor(Math.random() * activeOnes.length)];
+
+                // Set de incidencias agnósticas (Instituto)
+                const incidents = [
+                    {
+                        tipo: "Falta de Conducta Grave",
+                        descripcion: "Se detectó el uso de herramientas ajenas a las autorizadas en una consulta de aportaciones.",
+                        severidad: "high"
+                    },
+                    {
+                        tipo: "Fuga de Adherencia Crítica",
+                        descripcion: "Asesor se desconectó de la línea de Cartera por más de 15 minutos sin registrar auxiliar en la consola GOC.",
+                        severidad: "high"
+                    },
+                    {
+                        tipo: "Falta de Registro CRM SAP",
+                        descripcion: "Atención finalizada en telefonía sin ticket de trámite registrado en el CRM del Instituto.",
+                        severidad: "medium"
+                    },
+                    {
+                        tipo: "Exceso de AHT Crítico",
+                        descripcion: "Módulo de Quejas con llamadas en hold prolongado por encima del umbral máximo de soporte.",
+                        severidad: "medium"
+                    }
+                ];
+
+                const mock = incidents[Math.floor(Math.random() * incidents.length)];
+                const d = new Date();
+                const timeStr = `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+
+                const alertObj = {
+                    id: Date.now(),
+                    timestamp: timeStr,
+                    agente: `${randomAgent.id} - ${randomAgent.nombre} (${randomAgent.piloto})`,
+                    tipo: mock.tipo,
+                    descripcion: mock.descripcion,
+                    severidad: mock.severidad
+                };
+
+                // Inyectar alerta al log y modificar métricas del agente seleccionado
+                this.state.alerts.unshift(alertObj);
+
+                randomAgent.adherencia = parseFloat((randomAgent.adherencia * 0.9).toFixed(1));
+                randomAgent.sap_sync = parseFloat((randomAgent.sap_sync * 0.85).toFixed(1));
+                randomAgent.aht = Math.round(randomAgent.aht * 1.45); // Aumenta severamente el tiempo promedio de atención
+
+                if (mock.severidad === 'high') {
+                    randomAgent.cartas += 1;
+                    if (randomAgent.cartas >= 3) {
+                        randomAgent.estatus = 'Baja';
+                        Swal.fire({
+                            title: 'Suspensión Directa de Operaciones',
+                            text: `Asesor ${randomAgent.nombre} fue suspendido preventivamente tras acumular 3 cartas compromiso en el Instituto.`,
+                            icon: 'error',
+                            confirmButtonColor: '#F84E2D'
+                        });
+                    } else {
+                        randomAgent.estatus = 'En Riesgo';
+                    }
+                }
+
+                this.renderAllViews();
+                this.refreshChartsData();
+
+                Swal.fire({
+                    title: '¡Anomalía GOC Simulada!',
+                    html: `Se inyectó un error tipo <strong>${mock.tipo}</strong> en el piloto de <strong>${randomAgent.piloto}</strong>.<br><small>Las métricas generales del dashboard y el rendimiento del asesor fueron actualizados.</small>`,
+                    icon: 'warning',
+                    confirmButtonColor: '#2443FC'
+                });
+            }
+
+            clearAlertsLog() {
+                this.state.alerts = [];
+                this.renderAlerts();
+                Swal.fire({
+                    title: 'Bitácora Despejada',
+                    text: 'Todos los logs de la consola unificada han sido limpiados con éxito.',
+                    icon: 'success',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            }
+
+            // Controles de Filtrado de la Plantilla
+            filterByPiloto(val) {
+                this.state.selectedPiloto = val;
+                this.state.currentPage = 1;
+                this.renderPlantillaTable();
+            }
+
+            filterByStatus(val) {
+                this.state.selectedStatus = val;
+                this.state.currentPage = 1;
+                this.renderPlantillaTable();
+            }
+
+            searchPlantilla(val) {
+                this.state.searchQuery = val;
+                this.state.currentPage = 1;
+                this.renderPlantillaTable();
+            }
+
+            prevPage() {
+                if (this.state.currentPage > 1) {
+                    this.state.currentPage--;
+                    this.renderPlantillaTable();
+                }
+            }
+
+            nextPage() {
+                let filtered = this.state.agents;
+                if (this.state.selectedPiloto !== 'todos') filtered = filtered.filter(a => a.piloto === this.state.selectedPiloto);
+                if (this.state.selectedStatus !== 'todos') filtered = filtered.filter(a => a.estatus === this.state.selectedStatus);
+                if (this.state.searchQuery.trim() !== '') {
+                    const q = this.state.searchQuery.toLowerCase();
+                    filtered = filtered.filter(a => a.nombre.toLowerCase().includes(q) || a.id.toLowerCase().includes(q));
+                }
+
+                if (this.state.currentPage < Math.ceil(filtered.length / this.state.itemsPerPage)) {
+                    this.state.currentPage++;
+                    this.renderPlantillaTable();
+                }
+            }
+
+            // Coaching para GOC y Calidad Integrado (CRM SAP y AHT)
+            actionPlanCoaching(agentId) {
+                const agent = this.state.agents.find(a => a.id === agentId);
+                if (!agent) return;
+
+                Swal.fire({
+                    title: `Plan de Acción GOC: ${agent.nombre}`,
+                    html: `
+                        <div class="text-left text-xs space-y-3">
+                            <p><strong>Piloto Técnico:</strong> ${agent.piloto}</p>
+                            <p><strong>AHT Promedio:</strong> ${this.formatSeconds(agent.aht)} (Target: ${this.state.pilotos[agent.piloto].label})</p>
+                            <p><strong>Sincronización SAP:</strong> ${agent.sap_sync}%</p>
+                            <hr class="border-slate-300 dark:border-slate-700">
+                            <label class="block font-bold">Tipo de Reforzamiento Operativo:</label>
+                            <select id="swal-goc-type" class="w-full p-2 border rounded-lg bg-white dark:bg-slate-800 text-slate-800 dark:text-white border-slate-300 dark:border-slate-700">
+                                <option value="Optimización de AHT">Estrategias de Optimización de AHT y Solución al Primer Contacto</option>
+                                <option value="Acreditación SAP">Captura y Conciliación Correcta de Expedientes en CRM SAP</option>
+                                <option value="Adherencia Horaria">Cumplimiento Estricto de Tiempos de Conexión Auxiliar</option>
+                            </select>
+                            <label class="block font-bold mt-2">Notas y Compromisos:</label>
+                            <textarea id="swal-goc-notes" class="w-full p-2 border rounded-lg bg-white dark:bg-slate-800 text-slate-800 dark:text-white border-slate-300 dark:border-slate-700 text-[11px]" rows="3" placeholder="Definir compromisos del asesor..."></textarea>
+                        </div>
+                    `,
+                    showCancelButton: true,
+                    confirmButtonText: 'Aplicar Reforzamiento',
+                    cancelButtonText: 'Cerrar',
+                    confirmButtonColor: '#2443FC',
+                    preConfirm: () => {
+                        return {
+                            tipo: document.getElementById('swal-goc-type').value,
+                            notes: document.getElementById('swal-goc-notes').value
+                        };
+                    }
+                }).then((r) => {
+                    if (r.isConfirmed) {
+                        Swal.fire({
+                            title: 'Retroalimentación Guardada',
+                            text: `Se ha registrado el plan de '${r.value.tipo}' en la bitácora operativa de Telat.`,
+                            icon: 'success',
+                            confirmButtonColor: '#2443FC'
+                        });
+                    }
+                });
+            }
+
+            openNewAgentModal() {
+                Swal.fire({
+                    title: 'Dar de Alta Nuevo Asesor',
+                    html: `
+                        <div class="text-left text-xs space-y-3">
+                            <label class="block font-bold">Nombre Completo:</label>
+                            <input id="new-name" class="w-full p-2 border rounded-lg bg-white dark:bg-slate-800 text-slate-800 dark:text-white border-slate-300 dark:border-slate-700" placeholder="Nombre completo...">
+                            
+                            <label class="block font-bold">Línea de Servicio / Piloto:</label>
+                            <select id="new-piloto" class="w-full p-2 border rounded-lg bg-white dark:bg-slate-800 text-slate-800 dark:text-white border-slate-300 dark:border-slate-700">
+                                <option value="Cartera">Cartera</option>
+                                <option value="Trámites">Trámites</option>
+                                <option value="Aportaciones">Aportaciones</option>
+                                <option value="Quejas">Quejas</option>
+                                <option value="Denuncias">Denuncias</option>
+                                <option value="Soporte">Soporte</option>
+                            </select>
+                        </div>
+                    `,
+                    showCancelButton: true,
+                    confirmButtonText: 'Registrar',
+                    confirmButtonColor: '#2443FC',
+                    preConfirm: () => {
+                        const name = document.getElementById('new-name').value;
+                        const piloto = document.getElementById('new-piloto').value;
+                        if (!name.trim()) {
+                            Swal.showValidationMessage('El nombre completo es obligatorio');
+                        }
+                        return { name, piloto };
+                    }
+                }).then((r) => {
+                    if (r.isConfirmed) {
+                        const newId = `TELAT-${String(this.state.agents.length + 1).padStart(3, '0')}`;
+                        const targetAHT = this.state.pilotos[r.value.piloto].targetAHT;
+
+                        this.state.agents.push({
+                            id: newId,
+                            nombre: r.value.name,
+                            piloto: r.value.piloto,
+                            mes: 1, // Mes 1 (Curva de Aprendizaje - Meta Calidad: 80)
+                            aht: targetAHT,
+                            targetAHT: targetAHT,
+                            calidad: 85.0,
+                            sap_sync: 100.0,
+                            ics: 90.0,
+                            adherencia: 96.0,
+                            mon_telat: 0,
+                            mon_inst: 0,
+                            mon_super: 0,
+                            desviacion: 0.0,
+                            cartas: 0,
+                            estatus: 'Activo'
+                        });
+
+                        this.renderAllViews();
+                        this.refreshChartsData();
+                        Swal.fire({
+                            title: 'Asesor Registrado',
+                            text: `Asesor ${r.value.name} agregado a la plantilla en el piloto de ${r.value.piloto} con el ID ${newId}.`,
+                            icon: 'success',
+                            confirmButtonColor: '#2443FC'
+                        });
+                    }
+                });
+            }
+
+            // Inicialización de Gráficos Dual-Theme (ApexCharts)
+            initApexCharts() {
+                const isDark = this.state.theme === 'dark';
+                const textCol = isDark ? '#94a3b8' : '#475569';
+
+                // Chart 1: SLAs de Canal Cruzado (GOC)
+                const tsfOptions = {
+                    series: [84.5, 86.2, 97.4],
+                    chart: {
+                        type: 'radialBar',
+                        height: 250,
+                        foreColor: textCol
+                    },
+                    plotOptions: {
+                        radialBar: {
+                            dataLabels: {
+                                name: { fontSize: '13px', fontFamily: 'Montserrat', fontWeight: 600 },
+                                value: {
+                                    fontSize: '15px',
+                                    fontFamily: 'Roboto',
+                                    formatter: (val) => `${val}%`
+                                },
+                                total: {
+                                    show: true,
+                                    label: 'Promedio',
+                                    formatter: () => '89.3%'
+                                }
+                            }
+                        }
+                    },
+                    colors: ['#2443FC', '#a855f7', '#F84E2D'],
+                    labels: ['Voz', 'Texto', 'Bot'],
+                };
+                this.state.charts.tsf = new ApexCharts(document.getElementById("goc-chart-tsf"), tsfOptions);
+                this.state.charts.tsf.render();
+
+                // Chart 2: Tiempos AHT vs Target por Piloto (GOC)
+                const ahtOptions = {
+                    series: [
+                        { name: 'AHT Promedio Real (s)', data: [675, 780, 715, 498, 540, 355] },
+                        { name: 'AHT Target Contractual (s)', data: [686, 765, 723, 510, 555, 360] }
+                    ],
+                    chart: {
+                        type: 'bar',
+                        height: 250,
+                        toolbar: { show: false },
+                        foreColor: textCol
+                    },
+                    plotOptions: {
+                        bar: {
+                            horizontal: false,
+                            columnWidth: '55%',
+                            borderRadius: 6
+                        },
+                    },
+                    dataLabels: { enabled: false },
+                    stroke: { show: true, width: 2, colors: ['transparent'] },
+                    xaxis: {
+                        categories: ['Cartera', 'Trámites', 'Aportaciones', 'Quejas', 'Denuncias', 'Soporte'],
+                    },
+                    yaxis: { title: { text: 'Segundos' } },
+                    fill: { opacity: 1 },
+                    colors: ['#2443FC', '#F84E2D'],
+                };
+                this.state.charts.aht = new ApexCharts(document.getElementById("goc-chart-aht"), ahtOptions);
+                this.state.charts.aht.render();
+
+                // Chart 3: Calidad por Curva de Aprendizaje (Calidad)
+                const curvaOptions = {
+                    series: [
+                        { name: 'Calidad Lograda', type: 'column', data: [81.8, 86.4, 92.5] },
+                        { name: 'Meta Contractual', type: 'line', data: [80, 85, 90] }
+                    ],
+                    chart: {
+                        height: 250,
+                        type: 'line',
+                        toolbar: { show: false },
+                        foreColor: textCol
+                    },
+                    stroke: { width: [0, 4] },
+                    colors: ['#2443FC', '#F84E2D'],
+                    labels: ['Mes 1 (80 pts)', 'Mes 2 (85 pts)', 'Mes 3+ (90 pts)'],
+                    yaxis: { min: 70, max: 100 },
+                    plotOptions: {
+                        bar: { columnWidth: '40%', borderRadius: 6 }
+                    }
+                };
+                this.state.charts.curva = new ApexCharts(document.getElementById("cal-chart-curva"), curvaOptions);
+                this.state.charts.curva.render();
+            }
+
+            refreshChartsData() {
+                const active = this.state.agents.filter(a => a.estatus !== 'Baja');
+
+                // 1. Recalcular TSFs
+                const tsfVoz = parseFloat((active.reduce((acc, curr) => acc + curr.tsf_voz, 0) / active.length).toFixed(1));
+                const tsfTexto = parseFloat((83 + Math.random() * 5).toFixed(1));
+                const tsfBot = parseFloat((95 + Math.random() * 3).toFixed(1));
+                this.state.charts.tsf.updateSeries([tsfVoz, tsfTexto, tsfBot]);
+
+                document.getElementById('goc-tsf-voz').innerText = `${tsfVoz}%`;
+                document.getElementById('goc-tsf-texto').innerText = `${tsfTexto}%`;
+                document.getElementById('goc-tsf-bot').innerText = `${tsfBot}%`;
+
+                // 2. Recalcular AHT por Departamentos
+                const listaPilotos = Object.keys(this.state.pilotos);
+                const realAHTValues = listaPilotos.map(p => {
+                    const filtered = active.filter(a => a.piloto === p);
+                    return filtered.length ? Math.round(filtered.reduce((acc, curr) => acc + curr.aht, 0) / filtered.length) : this.state.pilotos[p].targetAHT;
+                });
+                const targetAHTValues = listaPilotos.map(p => this.state.pilotos[p].targetAHT);
+
+                this.state.charts.aht.updateSeries([
+                    { name: 'AHT Promedio Real (s)', data: realAHTValues },
+                    { name: 'AHT Target Contractual (s)', data: targetAHTValues }
+                ]);
+
+                // 3. Recalcular Calidad Promedio por Antigüedad
+                const m1 = active.filter(a => a.mes === 1);
+                const m2 = active.filter(a => a.mes === 2);
+                const m3 = active.filter(a => a.mes === 3);
+
+                const avgM1 = m1.length ? parseFloat((m1.reduce((acc, curr) => acc + curr.calidad, 0) / m1.length).toFixed(1)) : 80;
+                const avgM2 = m2.length ? parseFloat((m2.reduce((acc, curr) => acc + curr.calidad, 0) / m2.length).toFixed(1)) : 85;
+                const avgM3 = m3.length ? parseFloat((m3.reduce((acc, curr) => acc + curr.calidad, 0) / m3.length).toFixed(1)) : 90;
+
+                this.state.charts.curva.updateSeries([
+                    { name: 'Calidad Lograda', type: 'column', data: [avgM1, avgM2, avgM3] },
+                    { name: 'Meta Contractual', type: 'line', data: [80, 85, 90] }
+                ]);
+            }
+
+            refreshChartsTheme() {
+                const isDark = this.state.theme === 'dark';
+                const textCol = isDark ? '#94a3b8' : '#475569';
+
+                this.state.charts.tsf.updateOptions({ chart: { foreColor: textCol } });
+                this.state.charts.aht.updateOptions({ chart: { foreColor: textCol } });
+                this.state.charts.curva.updateOptions({ chart: { foreColor: textCol } });
+            }
+
+            // Convertidor de segundos a formato legible MM:SS
+            formatSeconds(sec) {
+                const m = Math.floor(sec / 60);
+                const s = Math.round(sec % 60);
+                return `${m}:${s < 10 ? '0' : ''}${s}`;
+            }
+        }
+
+        // Inicialización de la Aplicación Omnisciente
+        const app = new Application();
+    </script>
+</body>
+
+</html>
