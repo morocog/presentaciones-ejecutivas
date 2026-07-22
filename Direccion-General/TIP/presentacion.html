@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telat & TIP México | Propuesta de Valor Tecnológico</title>
+    
+    <!-- Import Google Fonts (DM Sans & Montserrat) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        /* 1. SISTEMA TIPOGRÁFICO AVANZADO */
+        @font-face {
+            font-family: 'Momo Trust';
+            src: local('Impact'), local('Arial Black');
+            font-weight: 800;
+            font-display: swap;
+        }
+
+        /* 2. IDENTIDAD CROMÁTICA (TOKENS ESTRICTOS) */
+        :root {
+            --oscuro: #222221;
+            --azul-claro: #FBFBFD;
+            --celeste: #3284C6;
+            --naranja: #EB5B27;
+            --naranja-claro: #FECA66;
+            --grad-vibrante: linear-gradient(135deg, var(--celeste) 0%, var(--naranja-claro) 100%);
+        }
+
+        body {
+            background-color: var(--azul-claro);
+            color: var(--oscuro);
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            overflow: hidden; /* Prohibido el scroll, es una presentación */
+        }
+
+        h1, h2, h3, h4, .font-momo {
+            font-family: 'Momo Trust', sans-serif;
+        }
+
+        .subheading, button, .kpi-badge {
+            font-family: 'DM Sans', sans-serif;
+            letter-spacing: -0.02em; 
+        }
+
+        /* 3. LÓGICA DE DIAPOSITIVAS (SLIDES) */
+        #presentation-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: scale(0.98) translateY(10px);
+            display: flex;
+            flex-direction: column;
+            z-index: 1;
+            background-color: var(--azul-claro);
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1) translateY(0);
+            z-index: 10;
+        }
+
+        .bg-light-slide { background-color: var(--azul-claro); color: var(--oscuro); }
+
+        /* 4. ELEMENTOS UI DE LA PRESENTACIÓN */
+        .kpi-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.4rem;
+            border-radius: 9999px;
+            font-size: 1rem;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .kpi-up { background-color: rgba(50, 132, 198, 0.12); color: #3284C6; border: 2.5px solid rgba(50, 132, 198, 0.25); }
+        .kpi-down { background-color: rgba(235, 91, 39, 0.12); color: #EB5B27; border: 2.5px solid rgba(235, 91, 39, 0.25); }
+        .kpi-neutral { background-color: rgba(254, 202, 102, 0.12); color: #b48512; border: 2.5px solid rgba(254, 202, 102, 0.25); }
+
+        .text-hollow {
+            -webkit-text-stroke: 2px var(--naranja);
+            color: transparent;
+        }
+
+        /* 5. ANIMACIONES DOODLES VIBRANTES */
+        @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(5deg); } }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        
+        @keyframes spin-slow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .animate-spin-slow { animation: spin-slow 20s linear infinite; }
+        
+        @keyframes wiggle { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+        .animate-wiggle { animation: wiggle 4s ease-in-out infinite; }
+
+        /* Controles y Progreso */
+        #controls {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 100;
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .control-btn {
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            background-color: var(--oscuro);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .control-btn:hover {
+            background-color: var(--naranja);
+            transform: scale(1.1);
+            border-color: var(--naranja);
+        }
+
+        #progress-bar-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background-color: rgba(0,0,0,0.05);
+            z-index: 100;
+        }
+
+        #progress-bar {
+            height: 100%;
+            background: var(--grad-vibrante);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        #slide-counter {
+            position: fixed;
+            bottom: 2.5rem;
+            left: 2rem;
+            z-index: 100;
+            font-family: 'Momo Trust', sans-serif;
+            font-size: 1.5rem;
+            color: var(--celeste);
+            opacity: 0.7;
+        }
+
+        /* Resplandores Dinámicos para Marcos de Video */
+        .glow-frame-celeste { box-shadow: 0 20px 50px rgba(50, 132, 198, 0.15); border: 2px solid rgba(50, 132, 198, 0.2); }
+        .glow-frame-naranja { box-shadow: 0 20px 50px rgba(235, 91, 39, 0.15); border: 2px solid rgba(235, 91, 39, 0.2); }
+        .glow-frame-amarillo { box-shadow: 0 20px 50px rgba(254, 202, 102, 0.15); border: 2px solid rgba(254, 202, 102, 0.2); }
+    </style>
+</head>
+<body class="antialiased selection:bg-[#FECA66] selection:text-[#222221]">
+
+    <div id="presentation-container">
+
+        <!-- SLIDE 1: PORTADA CLARA Y VIBRANTE -->
+        <div class="slide bg-light-slide overflow-hidden" id="slide-1">
+            
+            <!-- VIDEO DE FONDO VIMEO CON MIX-BLEND CLARO -->
+            <div class="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden bg-[#FBFBFD]">
+                <iframe src="https://player.vimeo.com/video/1195458364?background=1&autopause=0&muted=1&loop=1&autoplay=1" 
+                        class="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 mix-blend-multiply opacity-25" 
+                        frameborder="0" 
+                        allow="autoplay; fullscreen; picture-in-picture" 
+                        allowfullscreen>
+                </iframe>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#FBFBFD] via-[#FBFBFD]/40 to-[#FBFBFD]/80"></div>
+            </div>
+
+            <!-- Doodles Hero -->
+            <div class="absolute top-20 right-32 animate-float opacity-80 z-10">
+                <svg width="120" height="120" viewBox="0 0 100 100" fill="none">
+                    <path d="M50 0L56.5 35.5L95 20.5L66 50L95 79.5L56.5 64.5L50 100L43.5 64.5L5 79.5L34 50L5 20.5L43.5 35.5L50 0Z" fill="#FECA66"/>
+                </svg>
+            </div>
+            <div class="absolute bottom-20 left-20 animate-spin-slow opacity-30 z-10">
+                <svg width="200" height="200" viewBox="0 0 100 100" fill="none">
+                    <circle cx="50" cy="50" r="45" stroke="#3284C6" stroke-width="2" stroke-dasharray="10 15"/>
+                    <circle cx="50" cy="50" r="30" stroke="#EB5B27" stroke-width="2" stroke-dasharray="5 10"/>
+                </svg>
+            </div>
+
+            <!-- Contenido Central -->
+            <div class="w-full h-full flex flex-col items-center justify-center text-center px-10 relative z-20">
+                <div class="flex items-center gap-8 mb-10 bg-white p-6 rounded-[2.5rem] border border-gray-100 shadow-xl shadow-[#3284C6]/5">
+                    <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-16 object-contain">
+                    <span class="text-gray-300 text-4xl font-light">|</span>
+                    <h2 class="font-momo text-4xl text-[#3284C6] tracking-widest mt-2">TIP MÉXICO</h2>
+                </div>
+                
+                <h1 class="font-momo text-[5rem] lg:text-[6rem] leading-[0.9] mb-6 text-[#222221]">
+                    EL SOCIO B2B<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#3284C6] to-[#EB5B27]">DE VANGUARDIA</span>
+                </h1>
+                <p class="text-2xl font-medium text-[#222221]/80 max-w-3xl">
+                    Más que proveer personal. Blindamos su operación y experiencia de usuario a través del ecosistema <strong>Telat IA</strong>.
+                </p>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: Reclutamiento IA -->
+        <div class="slide bg-light-slide" id="slide-2">
+            <div class="w-full h-full flex px-16 py-12 gap-12 items-center">
+                <!-- Izquierda: Contenedor Media -->
+                <div class="w-[55%] h-[80%] relative rounded-[3rem] bg-[#222221] p-2 glow-frame-celeste">
+                    <div class="absolute -top-7 -left-7 bg-white border-4 border-[#3284C6] text-[#3284C6] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[-5deg] shadow-xl">1. Atracción</div>
+                    
+                    <div class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
+                        <iframe src="https://player.vimeo.com/video/1195445245?background=1&autopause=0&autoplay=1&loop=1&byline=0&title=0&muted=1" 
+                                class="absolute inset-0 w-full h-full scale-[1.05]" 
+                                frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Derecha: Texto Comercial -->
+                <div class="w-[45%] flex flex-col justify-center">
+                    <span class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-sm mb-4 block">Evaluación de Talento IA</span>
+                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">No dejamos el perfil de su marca al azar.</h2>
+                    
+                    <p class="text-[1.2rem] text-gray-600 font-medium leading-relaxed mb-8">
+                        Nuestra tecnología evalúa a los candidatos antes de que toquen su operación. Un simulador interactivo califica de forma objetiva su <strong>pronunciación, captura de datos y capacidad de respuesta bajo presión</strong>.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4">
+                        <span class="kpi-badge kpi-up">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path></svg>
+                            <span>Resolución en Primer Contacto Asegurada</span>
+                        </span>
+                        <span class="kpi-badge kpi-down">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path></svg>
+                            <span>Curva de Aprendizaje de Novatos</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: Copiloto Asistente IA (REDISEÑO CLARO Y LUMINOSO) -->
+        <div class="slide bg-light-slide" id="slide-3">
+            <div class="w-full h-full flex px-16 py-12 gap-12 items-center flex-row-reverse">
+                <!-- Derecha: Contenedor Media -->
+                <div class="w-[55%] h-[80%] relative rounded-[3rem] bg-[#222221] p-2 glow-frame-naranja">
+                    <div class="absolute -top-7 -right-7 bg-white border-4 border-[#EB5B27] text-[#EB5B27] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[5deg] shadow-xl">2. Soporte IA</div>
+                    
+                    <div class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
+                        <iframe src="https://player.vimeo.com/video/1205962480?background=1&autopause=0&autoplay=1&loop=1&byline=0&title=0&muted=1" 
+                                class="absolute inset-0 w-full h-full scale-[1.05]" 
+                                frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Izquierda: Texto Comercial -->
+                <div class="w-[45%] flex flex-col justify-center">
+                    <span class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-sm mb-4 block">Asistencia en Tiempo Real</span>
+                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">Cero dudas frente al cliente de TIP.</h2>
+                    
+                    <p class="text-[1.2rem] text-gray-600 font-medium leading-relaxed mb-8">
+                        Un chatbot contextual escucha la llamada en vivo, consulta nuestras bases de conocimiento y sugiere la respuesta exacta al agente. <strong>El agente no busca manuales; el sistema se los entrega.</strong>
+                    </p>
+
+                    <div class="flex flex-wrap gap-4">
+                        <span class="kpi-badge kpi-down">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path></svg>
+                            <span>Tiempos de Espera (Hold)</span>
+                        </span>
+                        <span class="kpi-badge kpi-up">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path></svg>
+                            <span>Exactitud de Respuesta B2B</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: Evaluador QA -->
+        <div class="slide bg-light-slide" id="slide-4">
+            <div class="w-full h-full flex px-16 py-12 gap-12 items-center">
+                <!-- Izquierda: Contenedor Media -->
+                <div class="w-[55%] h-[80%] relative rounded-[3rem] bg-[#222221] p-2 glow-frame-amarillo">
+                    <div class="absolute -top-7 -left-7 bg-white border-4 border-[#FECA66] text-[#b48512] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[-5deg] shadow-xl">3. Calidad IA</div>
+                    
+                    <div class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
+                        <iframe src="https://player.vimeo.com/video/1205962477?background=1&autopause=0&autoplay=1&loop=1&byline=0&title=0&muted=1" 
+                                class="absolute inset-0 w-full h-full scale-[1.05]" 
+                                frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Derecha: Texto Comercial -->
+                <div class="w-[45%] flex flex-col justify-center">
+                    <span class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-sm mb-4 block">Auditoría QA Inteligente</span>
+                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">Visibilidad operativa que trasciende lo humano.</h2>
+                    
+                    <p class="text-[1.2rem] text-gray-600 font-medium leading-relaxed mb-8">
+                        Nuestra tecnología tiene la capacidad de transcribir, analizar sentimiento y evaluar matemáticamente el apego al script. Detectamos áreas de oportunidad mucho antes de que impacten la experiencia de TIP México.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4">
+                        <span class="kpi-badge kpi-up">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path></svg>
+                            <span>Cumplimiento del Protocolo de Marca</span>
+                        </span>
+                        <span class="kpi-badge kpi-neutral">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            <span>Auditoría Escalable y Dinámica</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: CIERRE (CLARO, PREMIUM, ENERGÉTICO) -->
+        <div class="slide bg-light-slide overflow-hidden" id="slide-5">
+            <!-- Doodle de fondo suave -->
+            <div class="absolute right-20 top-20 animate-float opacity-10 pointer-events-none">
+                <svg width="200" height="200" viewBox="0 0 100 100" fill="none">
+                    <circle cx="50" cy="50" r="40" stroke="#3284C6" stroke-width="3" stroke-dasharray="10 10"/>
+                </svg>
+            </div>
+
+            <!-- Gradiente de fondo ultra-sutil para dinamismo -->
+            <div class="absolute inset-0 bg-gradient-to-tr from-[#3284C6]/5 via-[#FBFBFD] to-[#FECA66]/5 pointer-events-none"></div>
+
+            <div class="w-full h-full flex flex-col items-center justify-center text-center px-10 relative z-10">
+                <!-- Tarjeta de logotipo corporativo -->
+                <div class="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-xl shadow-[#3284C6]/5 mb-10 transform hover:scale-105 transition-transform duration-300">
+                    <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-16 w-auto object-contain">
+                </div>
+
+                <h2 class="font-momo text-6xl lg:text-[5.5rem] mb-6 leading-none text-[#222221]">
+                    MÁS ALLÁ DE <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#3284C6] to-[#EB5B27]">LA VOZ.</span>
+                </h2>
+                
+                <p class="text-2xl font-bold text-[#222221]/80 max-w-3xl mb-12">
+                    No están contratando asientos. Están integrando un brazo tecnológico diseñado para proteger e impulsar la marca de TIP México.
+                </p>
+                
+                <div class="relative">
+                    <button class="group inline-flex items-center gap-3 bg-[#EB5B27] text-white font-sans font-bold text-xl px-10 py-5 rounded-full hover:bg-[#FECA66] hover:text-[#222221] transition-all duration-300 shadow-xl shadow-[#EB5B27]/25 hover:scale-105 border border-white/10">
+                        <span>Iniciar Implementación</span>
+                        <svg class="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTROLES Y BARRA DE PROGRESO -->
+        <div id="slide-counter">01 / 05</div>
+        <div id="controls">
+            <button class="control-btn" id="btn-prev">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+            </button>
+            <button class="control-btn" id="btn-next">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Lógica de interacciones -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = Array.from(document.querySelectorAll('.slide'));
+            const btnNext = document.getElementById('btn-next');
+            const btnPrev = document.getElementById('btn-prev');
+            const progressBar = document.getElementById('progress-bar');
+            const counter = document.getElementById('slide-counter');
+            let currentSlideIndex = 0;
+
+            function updatePresentation() {
+                // Actualiza clases activas
+                slides.forEach((slide, idx) => {
+                    if (idx === currentSlideIndex) {
+                        slide.classList.add('active');
+                    } else {
+                        slide.classList.remove('active');
+                    }
+                });
+
+                // Actualiza contador visual
+                if (counter) {
+                    counter.textContent = `0${currentSlideIndex + 1} / 0${slides.length}`;
+                }
+
+                // Actualiza barra de progreso
+                if (progressBar) {
+                    const percentage = ((currentSlideIndex + 1) / slides.length) * 100;
+                    progressBar.style.width = `${percentage}%`;
+                }
+            }
+
+            // Eventos de botones
+            if (btnNext) {
+                btnNext.addEventListener('click', () => {
+                    currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+                    updatePresentation();
+                });
+            }
+
+            if (btnPrev) {
+                btnPrev.addEventListener('click', () => {
+                    currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+                    updatePresentation();
+                });
+            }
+
+            // Teclado (Flechas de navegación)
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === ' ') {
+                    currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+                    updatePresentation();
+                } else if (e.key === 'ArrowLeft') {
+                    currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+                    updatePresentation();
+                }
+            });
+
+            // Inicialización
+            updatePresentation();
+        });
+    </script>
+</body>
+</html>
