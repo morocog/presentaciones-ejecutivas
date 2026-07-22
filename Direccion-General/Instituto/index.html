@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Telat Tech Presentation 2026 - Propuesta Comercial</title>
-    
+
     <!-- Import Google Fonts (DM Sans & Montserrat) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700&family=Montserrat:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -37,16 +40,23 @@
             color: var(--oscuro);
             font-family: 'Montserrat', sans-serif;
             margin: 0;
-            overflow: hidden; /* Prohibido el scroll, es una presentación */
+            overflow: hidden;
+            /* Prohibido el scroll, es una presentación */
         }
 
-        h1, h2, h3, h4, .font-momo {
+        h1,
+        h2,
+        h3,
+        h4,
+        .font-momo {
             font-family: 'Momo Trust', sans-serif;
         }
 
-        .subheading, button, .kpi-badge {
+        .subheading,
+        button,
+        .kpi-badge {
             font-family: 'DM Sans', sans-serif;
-            letter-spacing: -0.02em; 
+            letter-spacing: -0.02em;
         }
 
         /* 3. LÓGICA DE DIAPOSITIVAS (SLIDES) */
@@ -82,7 +92,10 @@
             z-index: 10;
         }
 
-        .bg-light-slide { background-color: var(--azul-claro); color: var(--oscuro); }
+        .bg-light-slide {
+            background-color: var(--azul-claro);
+            color: var(--oscuro);
+        }
 
         /* 4. ELEMENTOS UI DE LA PRESENTACIÓN */
         .kpi-badge {
@@ -93,21 +106,73 @@
             border-radius: 9999px;
             font-size: 1rem;
             font-weight: 700;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
-        .kpi-up { background-color: rgba(50, 132, 198, 0.12); color: #3284C6; border: 2.5px solid rgba(50, 132, 198, 0.25); }
-        .kpi-down { background-color: rgba(235, 91, 39, 0.12); color: #EB5B27; border: 2.5px solid rgba(235, 91, 39, 0.25); }
-        .kpi-neutral { background-color: rgba(254, 202, 102, 0.12); color: #b48512; border: 2.5px solid rgba(254, 202, 102, 0.25); }
+
+        .kpi-up {
+            background-color: rgba(50, 132, 198, 0.12);
+            color: #3284C6;
+            border: 2.5px solid rgba(50, 132, 198, 0.25);
+        }
+
+        .kpi-down {
+            background-color: rgba(235, 91, 39, 0.12);
+            color: #EB5B27;
+            border: 2.5px solid rgba(235, 91, 39, 0.25);
+        }
+
+        .kpi-neutral {
+            background-color: rgba(254, 202, 102, 0.12);
+            color: #b48512;
+            border: 2.5px solid rgba(254, 202, 102, 0.25);
+        }
 
         /* 5. ANIMACIONES DOODLES VIBRANTES */
-        @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(5deg); } }
-        .animate-float { animation: float 6s ease-in-out infinite; }
-        
-        @keyframes spin-slow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .animate-spin-slow { animation: spin-slow 20s linear infinite; }
-        
-        @keyframes wiggle { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
-        .animate-wiggle { animation: wiggle 4s ease-in-out infinite; }
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes spin-slow {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animate-spin-slow {
+            animation: spin-slow 20s linear infinite;
+        }
+
+        @keyframes wiggle {
+
+            0%,
+            100% {
+                transform: rotate(-3deg);
+            }
+
+            50% {
+                transform: rotate(3deg);
+            }
+        }
+
+        .animate-wiggle {
+            animation: wiggle 4s ease-in-out infinite;
+        }
 
         /* Controles y Progreso */
         #controls {
@@ -118,22 +183,22 @@
             display: flex;
             gap: 1rem;
         }
-        
+
         .control-btn {
             width: 3.5rem;
             height: 3.5rem;
             border-radius: 50%;
             background-color: var(--oscuro);
             color: white;
-            border: 2px solid rgba(255,255,255,0.1);
+            border: 2px solid rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
-        
+
         .control-btn:hover {
             background-color: var(--naranja);
             transform: scale(1.1);
@@ -146,7 +211,7 @@
             left: 0;
             width: 100%;
             height: 6px;
-            background-color: rgba(0,0,0,0.05);
+            background-color: rgba(0, 0, 0, 0.05);
             z-index: 100;
         }
 
@@ -169,25 +234,36 @@
         }
 
         /* Resplandores Dinámicos para Marcos de Video */
-        .glow-frame-celeste { box-shadow: 0 20px 50px rgba(50, 132, 198, 0.15); border: 2px solid rgba(50, 132, 198, 0.2); }
-        .glow-frame-naranja { box-shadow: 0 20px 50px rgba(235, 91, 39, 0.15); border: 2px solid rgba(235, 91, 39, 0.2); }
-        .glow-frame-amarillo { box-shadow: 0 20px 50px rgba(254, 202, 102, 0.15); border: 2px solid rgba(254, 202, 102, 0.2); }
+        .glow-frame-celeste {
+            box-shadow: 0 20px 50px rgba(50, 132, 198, 0.15);
+            border: 2px solid rgba(50, 132, 198, 0.2);
+        }
+
+        .glow-frame-naranja {
+            box-shadow: 0 20px 50px rgba(235, 91, 39, 0.15);
+            border: 2px solid rgba(235, 91, 39, 0.2);
+        }
+
+        .glow-frame-amarillo {
+            box-shadow: 0 20px 50px rgba(254, 202, 102, 0.15);
+            border: 2px solid rgba(254, 202, 102, 0.2);
+        }
     </style>
 </head>
+
 <body class="antialiased selection:bg-[#FECA66] selection:text-[#222221]">
 
     <div id="presentation-container">
 
         <!-- SLIDE 1: PORTADA CLARA Y VIBRANTE -->
         <div class="slide bg-light-slide overflow-hidden active" id="slide-1">
-            
+
             <!-- VIDEO DE FONDO VIMEO CON MIX-BLEND CLARO -->
             <div class="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden bg-[#FBFBFD]">
-                <iframe src="https://player.vimeo.com/video/1195458364?background=1&autopause=0&muted=1&loop=1&autoplay=1" 
-                        class="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 mix-blend-multiply opacity-25" 
-                        frameborder="0" 
-                        allow="autoplay; fullscreen; picture-in-picture" 
-                        allowfullscreen>
+                <iframe
+                    src="https://player.vimeo.com/video/1195458364?background=1&autopause=0&muted=1&loop=1&autoplay=1"
+                    class="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 mix-blend-multiply opacity-25"
+                    frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
                 </iframe>
                 <div class="absolute inset-0 bg-gradient-to-t from-[#FBFBFD] via-[#FBFBFD]/40 to-[#FBFBFD]/80"></div>
             </div>
@@ -195,28 +271,33 @@
             <!-- Doodles Hero -->
             <div class="absolute top-20 right-32 animate-float opacity-80 z-10">
                 <svg width="120" height="120" viewBox="0 0 100 100" fill="none">
-                    <path d="M50 0L56.5 35.5L95 20.5L66 50L95 79.5L56.5 64.5L50 100L43.5 64.5L5 79.5L34 50L5 20.5L43.5 35.5L50 0Z" fill="#FECA66"/>
+                    <path
+                        d="M50 0L56.5 35.5L95 20.5L66 50L95 79.5L56.5 64.5L50 100L43.5 64.5L5 79.5L34 50L5 20.5L43.5 35.5L50 0Z"
+                        fill="#FECA66" />
                 </svg>
             </div>
             <div class="absolute bottom-20 left-20 animate-spin-slow opacity-30 z-10">
                 <svg width="200" height="200" viewBox="0 0 100 100" fill="none">
-                    <circle cx="50" cy="50" r="45" stroke="#3284C6" stroke-width="2" stroke-dasharray="10 15"/>
-                    <circle cx="50" cy="50" r="30" stroke="#EB5B27" stroke-width="2" stroke-dasharray="5 10"/>
+                    <circle cx="50" cy="50" r="45" stroke="#3284C6" stroke-width="2" stroke-dasharray="10 15" />
+                    <circle cx="50" cy="50" r="30" stroke="#EB5B27" stroke-width="2" stroke-dasharray="5 10" />
                 </svg>
             </div>
 
             <!-- Contenido Central -->
             <div class="w-full h-full flex flex-col items-center justify-center text-center px-10 relative z-20">
-                <div class="flex items-center gap-8 mb-10 bg-white p-6 rounded-[2.5rem] border border-gray-100 shadow-xl shadow-[#3284C6]/5">
+                <div
+                    class="flex items-center gap-8 mb-10 bg-white p-6 rounded-[2.5rem] border border-gray-100 shadow-xl shadow-[#3284C6]/5">
                     <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-16 object-contain">
                 </div>
-                
+
                 <h1 class="font-momo text-[5rem] lg:text-[6rem] leading-[0.9] mb-6 text-[#222221]">
                     EL SOCIO B2B<br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#3284C6] to-[#EB5B27]">DE VANGUARDIA</span>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#3284C6] to-[#EB5B27]">DE
+                        VANGUARDIA</span>
                 </h1>
                 <p class="text-2xl font-medium text-[#222221]/80 max-w-3xl">
-                    Más que proveer personal. Blindamos su operación y experiencia de usuario a través del ecosistema <strong>Telat IA</strong>.
+                    Más que proveer personal. Blindamos su operación y experiencia de usuario a través del ecosistema
+                    <strong>Telat IA</strong>.
                 </p>
             </div>
         </div>
@@ -225,24 +306,35 @@
         <div class="slide bg-light-slide" id="slide-2">
             <div class="absolute right-10 bottom-10 animate-wiggle opacity-10">
                 <svg width="150" height="150" viewBox="0 0 100 100" fill="none">
-                    <path d="M50 0L56.5 35.5L95 20.5L66 50L95 79.5L56.5 64.5L50 100L43.5 64.5L5 79.5L34 50L5 20.5L43.5 35.5L50 0Z" fill="#EB5B27"/>
+                    <path
+                        d="M50 0L56.5 35.5L95 20.5L66 50L95 79.5L56.5 64.5L50 100L43.5 64.5L5 79.5L34 50L5 20.5L43.5 35.5L50 0Z"
+                        fill="#EB5B27" />
                 </svg>
             </div>
 
             <div class="w-full h-full flex flex-col px-16 pt-8 pb-10 justify-start gap-y-4">
                 <div class="text-center">
-                    <span class="subheading font-bold text-[#EB5B27] tracking-widest uppercase text-xs mb-1 block">La Realidad Financiera</span>
-                    <h2 class="font-momo text-5xl text-[#222221] leading-none">Garantías Operativas vs. Procesos Tradicionales</h2>
+                    <span class="subheading font-bold text-[#EB5B27] tracking-widest uppercase text-xs mb-1 block">La
+                        Realidad Financiera</span>
+                    <h2 class="font-momo text-5xl text-[#222221] leading-none">Garantías Operativas vs. Procesos
+                        Tradicionales</h2>
                 </div>
-                
+
                 <div class="grid grid-cols-2 gap-12 h-[75%] items-stretch">
                     <!-- Fuga (Pérdida) -->
-                    <div class="bg-white rounded-[3rem] p-10 border-2 border-dashed border-[#EB5B27]/40 flex flex-col justify-center relative overflow-hidden shadow-lg shadow-[#EB5B27]/5">
+                    <div
+                        class="bg-white rounded-[3rem] p-10 border-2 border-dashed border-[#EB5B27]/40 flex flex-col justify-center relative overflow-hidden shadow-lg shadow-[#EB5B27]/5">
                         <div class="absolute -right-16 -top-16 w-36 h-36 bg-[#EB5B27]/5 rounded-full"></div>
-                        
+
                         <div class="flex items-center gap-4 mb-6 relative z-10">
-                            <div class="w-12 h-12 rounded-2xl bg-[#EB5B27]/10 flex items-center justify-center text-[#EB5B27] animate-pulse">
-                                <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            <div
+                                class="w-12 h-12 rounded-2xl bg-[#EB5B27]/10 flex items-center justify-center text-[#EB5B27] animate-pulse">
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2.5"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                                    </path>
+                                </svg>
                             </div>
                             <h3 class="font-momo text-3xl text-gray-500">Inconsistencias del BPO Tradicional</h3>
                         </div>
@@ -250,33 +342,59 @@
                         <ul class="space-y-5 text-[1.15rem] text-gray-600 font-semibold relative z-10">
                             <li class="flex items-start gap-3">
                                 <span class="text-[#EB5B27] mt-1 flex-shrink-0">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12">
+                                        </path>
+                                    </svg>
                                 </span>
-                                <span><strong>Tiempos Muertos No Registrados:</strong> Falta de visibilidad de conexión que eleva los costos facturados por agentes inactivos.</span>
+                                <span><strong>Tiempos Muertos No Registrados:</strong> Falta de visibilidad de conexión
+                                    que eleva los costos facturados por agentes inactivos.</span>
                             </li>
                             <li class="flex items-start gap-3">
                                 <span class="text-[#EB5B27] mt-1 flex-shrink-0">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12">
+                                        </path>
+                                    </svg>
                                 </span>
-                                <span><strong>Llamadas Cortadas por Evasión:</strong> Pérdida de clientes finales por llamadas que se cuelgan en piso para cumplir métricas de volumen.</span>
+                                <span><strong>Llamadas Cortadas por Evasión:</strong> Pérdida de clientes finales por
+                                    llamadas que se cuelgan en piso para cumplir métricas de volumen.</span>
                             </li>
                             <li class="flex items-start gap-3">
                                 <span class="text-[#EB5B27] mt-1 flex-shrink-0">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12">
+                                        </path>
+                                    </svg>
                                 </span>
-                                <span><strong>Caídas de Nivel de Servicio (SLA):</strong> Interrupción de la línea de atención al sacar agentes para reuniones en horas de tráfico crítico.</span>
+                                <span><strong>Caídas de Nivel de Servicio (SLA):</strong> Interrupción de la línea de
+                                    atención al sacar agentes para reuniones en horas de tráfico crítico.</span>
                             </li>
                         </ul>
                     </div>
 
                     <!-- Telat Tech (Blindaje y Retorno) -->
-                    <div class="bg-white rounded-[3rem] p-10 border-2 border-[#3284C6]/30 flex flex-col justify-center relative overflow-hidden shadow-xl shadow-[#3284C6]/5">
-                        <div class="absolute -right-20 -top-20 w-64 h-64 bg-[#3284C6] blur-[80px] rounded-full opacity-10"></div>
-                        <div class="absolute -left-20 -bottom-20 w-64 h-64 bg-[#EB5B27] blur-[80px] rounded-full opacity-5"></div>
-                        
+                    <div
+                        class="bg-white rounded-[3rem] p-10 border-2 border-[#3284C6]/30 flex flex-col justify-center relative overflow-hidden shadow-xl shadow-[#3284C6]/5">
+                        <div
+                            class="absolute -right-20 -top-20 w-64 h-64 bg-[#3284C6] blur-[80px] rounded-full opacity-10">
+                        </div>
+                        <div
+                            class="absolute -left-20 -bottom-20 w-64 h-64 bg-[#EB5B27] blur-[80px] rounded-full opacity-5">
+                        </div>
+
                         <div class="flex items-center gap-4 mb-6 relative z-10">
-                            <div class="w-12 h-12 rounded-2xl bg-[#3284C6]/20 flex items-center justify-center text-[#3284C6] animate-float">
-                                <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                            <div
+                                class="w-12 h-12 rounded-2xl bg-[#3284C6]/20 flex items-center justify-center text-[#3284C6] animate-float">
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2.5"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                                    </path>
+                                </svg>
                             </div>
                             <h3 class="font-momo text-3xl text-[#222221]">Blindaje Sistémico Telat IA</h3>
                         </div>
@@ -284,21 +402,34 @@
                         <ul class="space-y-5 text-[1.15rem] text-gray-700 font-semibold relative z-10">
                             <li class="flex items-start gap-3">
                                 <span class="text-[#3284C6] mt-1 flex-shrink-0">
-                                    <svg class="w-5 h-5 animate-pulse" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                                    <svg class="w-5 h-5 animate-pulse" fill="none" stroke="currentColor"
+                                        stroke-width="3" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                                    </svg>
                                 </span>
-                                <span><strong>Transparencia de Facturación Absoluta:</strong> Aseguramos que cada minuto facturado corresponda a un agente presente y conectado.</span>
+                                <span><strong>Transparencia de Facturación Absoluta:</strong> Aseguramos que cada minuto
+                                    facturado corresponda a un agente presente y conectado.</span>
                             </li>
                             <li class="flex items-start gap-3">
                                 <span class="text-[#3284C6] mt-1 flex-shrink-0">
-                                    <svg class="w-5 h-5 animate-pulse" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                                    <svg class="w-5 h-5 animate-pulse" fill="none" stroke="currentColor"
+                                        stroke-width="3" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                                    </svg>
                                 </span>
-                                <span><strong>Garantía de Atención Continuada:</strong> Monitoreo sistémico que bloquea y audita las llamadas colgadas de forma inmediata.</span>
+                                <span><strong>Garantía de Atención Continuada:</strong> Monitoreo sistémico que bloquea
+                                    y audita las llamadas colgadas de forma inmediata.</span>
                             </li>
                             <li class="flex items-start gap-3">
                                 <span class="text-[#3284C6] mt-1 flex-shrink-0">
-                                    <svg class="w-5 h-5 animate-pulse" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                                    <svg class="w-5 h-5 animate-pulse" fill="none" stroke="currentColor"
+                                        stroke-width="3" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                                    </svg>
                                 </span>
-                                <span><strong>SLA Protegido Sistémicamente:</strong> El software administra las reuniones de piso fuera de línea, blindando los niveles de servicio contratados.</span>
+                                <span><strong>SLA Protegido Sistémicamente:</strong> El software administra las
+                                    reuniones de piso fuera de línea, blindando los niveles de servicio
+                                    contratados.</span>
                             </li>
                         </ul>
                     </div>
@@ -311,38 +442,58 @@
             <div class="w-full h-full flex px-16 py-12 gap-12 items-center">
                 <!-- Izquierda: Contenedor Media -->
                 <div class="w-[55%] h-[80%] relative rounded-[3rem] bg-[#222221] p-2 glow-frame-celeste">
-                    <div class="absolute -top-7 -left-7 bg-white border-4 border-[#3284C6] text-[#3284C6] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[-5deg] shadow-xl">1. Atracción</div>
-                    
-                    <div class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
-                        <iframe src="https://player.vimeo.com/video/1195445245?background=1&autopause=0&autoplay=1&loop=1&byline=0&title=0&muted=1" 
-                                class="absolute inset-0 w-full h-full scale-[1.05]" 
-                                frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                    <div
+                        class="absolute -top-7 -left-7 bg-white border-4 border-[#3284C6] text-[#3284C6] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[-5deg] shadow-xl">
+                        1. Atracción</div>
+
+                    <div
+                        class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
+                        <iframe
+                            src="https://player.vimeo.com/video/1195445245?background=1&autopause=0&autoplay=1&loop=1&byline=0&title=0&muted=1"
+                            class="absolute inset-0 w-full h-full scale-[1.05]" frameborder="0"
+                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
                         </iframe>
                     </div>
                 </div>
 
                 <!-- Derecha: Texto Comercial -->
                 <div class="w-[45%] flex flex-col justify-center">
-                    <span class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-sm mb-4 block">Evaluación de Talento IA</span>
-                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">No dejamos el perfil de su marca al azar.</h2>
-                    
+                    <span
+                        class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-sm mb-4 block">Evaluación
+                        de Talento IA</span>
+                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">No dejamos el perfil de su marca al
+                        azar.</h2>
+
                     <div class="mb-4">
-                        <h4 class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-xs mb-1">El Desafío de la Industria</h4>
-                        <span class="text-[1.15rem] text-gray-600 font-medium">Variaciones en la calidad de atención de agentes de nuevo ingreso que dañan la experiencia de sus clientes.</span>
+                        <h4 class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-xs mb-1">El
+                            Desafío de la Industria</h4>
+                        <span class="text-[1.15rem] text-gray-600 font-medium">Variaciones en la calidad de atención de
+                            agentes de nuevo ingreso que dañan la experiencia de sus clientes.</span>
                     </div>
 
                     <div class="mb-8">
-                        <h4 class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-xs mb-1">La Respuesta de Telat IA</h4>
-                        <p class="text-[1.15rem] text-[#222221] font-bold">Nuestra tecnología evalúa a los candidatos antes de que ingresen. Un simulador interactivo califica objetivamente su pronunciación, captura de datos y velocidad de respuesta bajo presión.</p>
+                        <h4 class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-xs mb-1">La
+                            Respuesta de Telat IA</h4>
+                        <p class="text-[1.15rem] text-[#222221] font-bold">Nuestra tecnología evalúa a los candidatos
+                            antes de que ingresen. Un simulador interactivo califica objetivamente su pronunciación,
+                            captura de datos y velocidad de respuesta bajo presión.</p>
                     </div>
 
                     <div class="flex flex-wrap gap-4">
                         <span class="kpi-badge kpi-up">
-                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path></svg>
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5">
+                                </path>
+                            </svg>
                             <span>Resolución en Primer Contacto Asegurada</span>
                         </span>
                         <span class="kpi-badge kpi-down">
-                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path></svg>
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5">
+                                </path>
+                            </svg>
                             <span>Tiempo de Atención de Llamada Optimizado</span>
                         </span>
                     </div>
@@ -355,32 +506,49 @@
             <div class="w-full h-full flex px-16 py-12 gap-12 items-center flex-row-reverse">
                 <!-- Derecha: Contenedor Media -->
                 <div class="w-[55%] h-[80%] relative rounded-[3rem] bg-[#222221] p-2 glow-frame-naranja">
-                    <div class="absolute -top-7 -right-7 bg-white border-4 border-[#EB5B27] text-[#EB5B27] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[5deg] shadow-xl">2. Soporte IA</div>
-                    
-                    <div class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
-                        <iframe src="https://player.vimeo.com/video/1205962480?background=1&autopause=0&autoplay=1&loop=1&byline=0&title=0&muted=1" 
-                                class="absolute inset-0 w-full h-full scale-[1.05]" 
-                                frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                    <div
+                        class="absolute -top-7 -right-7 bg-white border-4 border-[#EB5B27] text-[#EB5B27] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[5deg] shadow-xl">
+                        2. Soporte IA</div>
+
+                    <div
+                        class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
+                        <iframe
+                            src="https://player.vimeo.com/video/1205962480?background=1&autopause=0&autoplay=1&loop=1&byline=0&title=0&muted=1"
+                            class="absolute inset-0 w-full h-full scale-[1.05]" frameborder="0"
+                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
                         </iframe>
                     </div>
                 </div>
 
                 <!-- Izquierda: Texto Comercial -->
                 <div class="w-[45%] flex flex-col justify-center">
-                    <span class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-sm mb-4 block">Asistencia en Tiempo Real</span>
-                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">Cero dudas frente a sus clientes.</h2>
-                    
+                    <span
+                        class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-sm mb-4 block">Asistencia
+                        en Tiempo Real</span>
+                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">Cero dudas frente a sus clientes.
+                    </h2>
+
                     <p class="text-[1.2rem] text-gray-600 font-medium leading-relaxed mb-8">
-                        Un asistente conversacional contextual escucha la llamada en vivo, consulta de inmediato sus bases de conocimiento internas y sugiere la respuesta exacta al agente. <strong>El agente no busca manuales; el sistema se los entrega de manera inmediata.</strong>
+                        Un asistente conversacional contextual escucha la llamada en vivo, consulta de inmediato sus
+                        bases de conocimiento internas y sugiere la respuesta exacta al agente. <strong>El agente no
+                            busca manuales; el sistema se los entrega de manera inmediata.</strong>
                     </p>
 
                     <div class="flex flex-wrap gap-4">
                         <span class="kpi-badge kpi-down">
-                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path></svg>
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5">
+                                </path>
+                            </svg>
                             <span>Tiempos de Espera (Hold)</span>
                         </span>
                         <span class="kpi-badge kpi-up">
-                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path></svg>
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5">
+                                </path>
+                            </svg>
                             <span>Exactitud de Respuesta B2B</span>
                         </span>
                     </div>
@@ -393,32 +561,50 @@
             <div class="w-full h-full flex px-16 py-12 gap-12 items-center">
                 <!-- Izquierda: Contenedor Media -->
                 <div class="w-[55%] h-[80%] relative rounded-[3rem] bg-[#222221] p-2 glow-frame-amarillo">
-                    <div class="absolute -top-7 -left-7 bg-white border-4 border-[#FECA66] text-[#b48512] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[-5deg] shadow-xl">3. Calidad IA</div>
-                    
-                    <div class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
-                        <iframe src="https://player.vimeo.com/video/1205962477?background=1&autopause=0&autoplay=1&loop=1&byline=0&title=0&muted=1" 
-                                class="absolute inset-0 w-full h-full scale-[1.05]" 
-                                frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                    <div
+                        class="absolute -top-7 -left-7 bg-white border-4 border-[#FECA66] text-[#b48512] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[-5deg] shadow-xl">
+                        3. Calidad IA</div>
+
+                    <div
+                        class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
+                        <iframe
+                            src="https://player.vimeo.com/video/1205962477?background=1&autopause=0&autoplay=1&loop=1&byline=0&title=0&muted=1"
+                            class="absolute inset-0 w-full h-full scale-[1.05]" frameborder="0"
+                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
                         </iframe>
                     </div>
                 </div>
 
                 <!-- Derecha: Texto Comercial -->
                 <div class="w-[45%] flex flex-col justify-center">
-                    <span class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-sm mb-4 block">Auditoría QA Inteligente</span>
-                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">Visibilidad operativa que trasciende lo humano.</h2>
-                    
+                    <span
+                        class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-sm mb-4 block">Auditoría
+                        QA Inteligente</span>
+                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">Visibilidad operativa que
+                        trasciende lo humano.</h2>
+
                     <p class="text-[1.2rem] text-gray-600 font-medium leading-relaxed mb-8">
-                        Nuestra tecnología tiene la capacidad de transcribir, analizar sentimiento y evaluar matemáticamente el apego al script en todas las llamadas. Detectamos áreas de oportunidad de manera anticipada para proteger la reputación de su marca.
+                        Nuestra tecnología tiene la capacidad de transcribir, analizar sentimiento y evaluar
+                        matemáticamente el apego al script en todas las llamadas. Detectamos áreas de oportunidad de
+                        manera anticipada para proteger la reputación de su marca.
                     </p>
 
                     <div class="flex flex-wrap gap-4">
                         <span class="kpi-badge kpi-up">
-                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path></svg>
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5">
+                                </path>
+                            </svg>
                             <span>Cumplimiento de Protocolo de Marca</span>
                         </span>
                         <span class="kpi-badge kpi-neutral">
-                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                                </path>
+                            </svg>
                             <span>Auditoría Escalable y Dinámica</span>
                         </span>
                     </div>
@@ -430,35 +616,53 @@
         <div class="slide bg-light-slide" id="slide-6">
             <div class="w-full h-full flex px-16 py-12 gap-12 items-center flex-row-reverse">
                 <div class="w-[55%] h-[80%] relative rounded-[3rem] bg-[#222221] p-2 glow-frame-naranja">
-                    <div class="absolute -top-7 -right-7 bg-white border-4 border-[#EB5B27] text-[#EB5B27] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[5deg] shadow-xl">Retención</div>
-                    
-                    <div id="media-kudos" class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
-                        <iframe src="https://player.vimeo.com/video/1195446645?background=1&autopause=0&muted=1&loop=1&autoplay=1" 
-                                class="absolute inset-0 w-full h-full scale-[1.05]" 
-                                frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                    <div
+                        class="absolute -top-7 -right-7 bg-white border-4 border-[#EB5B27] text-[#EB5B27] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[5deg] shadow-xl">
+                        Retención</div>
+
+                    <div id="media-kudos"
+                        class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
+                        <iframe
+                            src="https://player.vimeo.com/video/1195446645?background=1&autopause=0&muted=1&loop=1&autoplay=1"
+                            class="absolute inset-0 w-full h-full scale-[1.05]" frameborder="0"
+                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
                         </iframe>
                     </div>
                 </div>
                 <div class="w-[45%] flex flex-col justify-center">
-                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">¿Cómo blindamos la consistencia del servicio y evitamos la rotación?</h2>
-                    
+                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">¿Cómo blindamos la consistencia del
+                        servicio y evitamos la rotación?</h2>
+
                     <div class="mb-4">
-                        <h4 class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-xs mb-1">El Desafío Operativo</h4>
-                        <span class="text-[1.15rem] text-gray-600 font-medium">Curvas de aprendizaje infinitas y bajas de calidad debido a la constante rotación de personal del BPO convencional.</span>
+                        <h4 class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-xs mb-1">El
+                            Desafío Operativo</h4>
+                        <span class="text-[1.15rem] text-gray-600 font-medium">Curvas de aprendizaje infinitas y bajas
+                            de calidad debido a la constante rotación de personal del BPO convencional.</span>
                     </div>
-                    
+
                     <div class="mb-8">
-                        <h4 class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-xs mb-1">La Respuesta de Telat IA (Kudos 3.0)</h4>
-                        <p class="text-[1.15rem] text-[#222221] font-bold">Módulo automatizado de incentivos que calcula y asigna recompensas de desempeño de manera inmediata y transparente, elevando el compromiso del equipo asignado.</p>
+                        <h4 class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-xs mb-1">La
+                            Respuesta de Telat IA (Kudos 3.0)</h4>
+                        <p class="text-[1.15rem] text-[#222221] font-bold">Módulo automatizado de incentivos que calcula
+                            y asigna recompensas de desempeño de manera inmediata y transparente, elevando el compromiso
+                            del equipo asignado.</p>
                     </div>
 
                     <div class="flex flex-wrap gap-4">
                         <span class="kpi-badge kpi-up">
-                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path></svg>
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5">
+                                </path>
+                            </svg>
                             <span>Métricas de Calidad de la Marca</span>
                         </span>
                         <span class="kpi-badge kpi-down">
-                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path></svg>
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5">
+                                </path>
+                            </svg>
                             <span>Rotación del Personal Asignado</span>
                         </span>
                     </div>
@@ -470,35 +674,54 @@
         <div class="slide bg-light-slide" id="slide-7">
             <div class="w-full h-full flex px-16 py-12 gap-12 items-center">
                 <div class="w-[55%] h-[80%] relative rounded-[3rem] bg-[#222221] p-2 glow-frame-amarillo">
-                    <div class="absolute -top-7 -left-7 bg-white border-4 border-[#FECA66] text-[#b48512] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[-5deg] shadow-xl">Cultura</div>
-                    
-                    <div id="media-cumpleanos" class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
-                        <iframe src="https://player.vimeo.com/video/1195450227?background=1&autopause=0&muted=1&loop=1&autoplay=1" 
-                                class="absolute inset-0 w-full h-full scale-[1.05]" 
-                                frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                    <div
+                        class="absolute -top-7 -left-7 bg-white border-4 border-[#FECA66] text-[#b48512] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[-5deg] shadow-xl">
+                        Cultura</div>
+
+                    <div id="media-cumpleanos"
+                        class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
+                        <iframe
+                            src="https://player.vimeo.com/video/1195450227?background=1&autopause=0&muted=1&loop=1&autoplay=1"
+                            class="absolute inset-0 w-full h-full scale-[1.05]" frameborder="0"
+                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
                         </iframe>
                     </div>
                 </div>
                 <div class="w-[45%] flex flex-col justify-center">
-                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">¿Cómo retenemos a los agentes expertos que ya conocen su negocio?</h2>
-                    
+                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">¿Cómo retenemos a los agentes
+                        expertos que ya conocen su negocio?</h2>
+
                     <div class="mb-4">
-                        <h4 class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-xs mb-1">El Desafío Operativo</h4>
-                        <span class="text-[1.15rem] text-gray-600 font-medium">La falta de pertenencia en equipos tercerizados tradicionales, lo que genera desinterés general al interactuar con sus clientes.</span>
+                        <h4 class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-xs mb-1">El
+                            Desafío Operativo</h4>
+                        <span class="text-[1.15rem] text-gray-600 font-medium">La falta de pertenencia en equipos
+                            tercerizados tradicionales, lo que genera desinterés general al interactuar con sus
+                            clientes.</span>
                     </div>
-                    
+
                     <div class="mb-8">
-                        <h4 class="subheading text-[#b48512] font-bold uppercase tracking-widest text-xs mb-1">La Respuesta de Telat IA (Salario Emocional IA)</h4>
-                        <p class="text-[1.15rem] text-[#222221] font-bold">Consola inteligente de salario emocional que genera de manera automatizada interacciones personalizadas y reconocimientos, fortaleciendo el sentido de pertenencia.</p>
+                        <h4 class="subheading text-[#b48512] font-bold uppercase tracking-widest text-xs mb-1">La
+                            Respuesta de Telat IA (Salario Emocional IA)</h4>
+                        <p class="text-[1.15rem] text-[#222221] font-bold">Consola inteligente de salario emocional que
+                            genera de manera automatizada interacciones personalizadas y reconocimientos, fortaleciendo
+                            el sentido de pertenencia.</p>
                     </div>
 
                     <div class="flex flex-wrap gap-4">
                         <span class="kpi-badge kpi-up">
-                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path></svg>
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5">
+                                </path>
+                            </svg>
                             <span>Retención de Agentes Clave</span>
                         </span>
                         <span class="kpi-badge kpi-down">
-                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path></svg>
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5">
+                                </path>
+                            </svg>
                             <span>Costo de Reclutamiento Constante</span>
                         </span>
                     </div>
@@ -510,35 +733,53 @@
         <div class="slide bg-light-slide" id="slide-8">
             <div class="w-full h-full flex px-16 py-12 gap-12 items-center flex-row-reverse">
                 <div class="w-[55%] h-[80%] relative rounded-[3rem] bg-[#222221] p-2 glow-frame-naranja">
-                    <div class="absolute -top-7 -right-7 bg-white border-4 border-[#EB5B27] text-[#EB5B27] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[5deg] shadow-xl">Eficiencia</div>
-                    
-                    <div id="media-torre" class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
-                        <iframe src="https://player.vimeo.com/video/1195451694?background=1&autopause=0&muted=1&loop=1&autoplay=1" 
-                                class="absolute inset-0 w-full h-full scale-[1.05]" 
-                                frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                    <div
+                        class="absolute -top-7 -right-7 bg-white border-4 border-[#EB5B27] text-[#EB5B27] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[5deg] shadow-xl">
+                        Eficiencia</div>
+
+                    <div id="media-torre"
+                        class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
+                        <iframe
+                            src="https://player.vimeo.com/video/1195451694?background=1&autopause=0&muted=1&loop=1&autoplay=1"
+                            class="absolute inset-0 w-full h-full scale-[1.05]" frameborder="0"
+                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
                         </iframe>
                     </div>
                 </div>
                 <div class="w-[45%] flex flex-col justify-center">
-                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">¿Cómo garantizamos que cada hora facturada sea de productividad real?</h2>
-                    
+                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">¿Cómo garantizamos que cada hora
+                        facturada sea de productividad real?</h2>
+
                     <div class="mb-4">
-                        <h4 class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-xs mb-1">El Desafío Operativo</h4>
-                        <span class="text-[1.15rem] text-gray-600 font-medium">Incertidumbre operativa en la facturación del BPO por fallas de conexión o agentes inactivos en sistemas tradicionales.</span>
+                        <h4 class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-xs mb-1">El
+                            Desafío Operativo</h4>
+                        <span class="text-[1.15rem] text-gray-600 font-medium">Incertidumbre operativa en la facturación
+                            del BPO por fallas de conexión o agentes inactivos en sistemas tradicionales.</span>
                     </div>
-                    
+
                     <div class="mb-8">
-                        <h4 class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-xs mb-1">La Respuesta de Telat IA (Torre de Control)</h4>
-                        <p class="text-[1.15rem] text-[#222221] font-bold">Consola en tiempo real que triangula el acceso biométrico al edificio con la conexión del sistema de telefonía, asegurando una visibilidad operativa total.</p>
+                        <h4 class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-xs mb-1">La
+                            Respuesta de Telat IA (Torre de Control)</h4>
+                        <p class="text-[1.15rem] text-[#222221] font-bold">Consola en tiempo real que triangula el
+                            acceso biométrico al edificio con la conexión del sistema de telefonía, asegurando una
+                            visibilidad operativa total.</p>
                     </div>
 
                     <div class="flex flex-wrap gap-4">
                         <span class="kpi-badge kpi-up">
-                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path></svg>
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5">
+                                </path>
+                            </svg>
                             <span>Eficiencia de Horas Facturadas</span>
                         </span>
                         <span class="kpi-badge kpi-down">
-                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path></svg>
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5">
+                                </path>
+                            </svg>
                             <span>Cargos por Sillas Vacías o Inactivas</span>
                         </span>
                     </div>
@@ -550,48 +791,67 @@
         <div class="slide bg-light-slide" id="slide-9">
             <div class="w-full h-full flex px-16 py-12 gap-12 items-center">
                 <div class="w-[55%] h-[80%] relative rounded-[3rem] bg-[#222221] p-2 glow-frame-celeste">
-                    <div class="absolute -top-7 -left-7 bg-white border-4 border-[#3284C6] text-[#3284C6] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[-5deg] shadow-xl">Eficiencia</div>
-                    
-                    <div id="media-states" class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
-                        <iframe src="https://player.vimeo.com/video/1195453050?background=1&autopause=0&muted=1&loop=1&autoplay=1" 
-                                class="absolute inset-0 w-full h-full scale-[1.05]" 
-                                frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                    <div
+                        class="absolute -top-7 -left-7 bg-white border-4 border-[#3284C6] text-[#3284C6] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[-5deg] shadow-xl">
+                        Eficiencia</div>
+
+                    <div id="media-states"
+                        class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
+                        <iframe
+                            src="https://player.vimeo.com/video/1195453050?background=1&autopause=0&muted=1&loop=1&autoplay=1"
+                            class="absolute inset-0 w-full h-full scale-[1.05]" frameborder="0"
+                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
                         </iframe>
                     </div>
                 </div>
                 <div class="w-[45%] flex flex-col justify-center">
-                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">¿Cómo erradicamos la inactividad y aseguramos la disponibilidad en el piso?</h2>
-                    
+                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">¿Cómo erradicamos la inactividad y
+                        aseguramos la disponibilidad en el piso?</h2>
+
                     <div class="mb-4">
-                        <h4 class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-xs mb-1">El Desafío Operativo</h4>
-                        <span class="text-[1.15rem] text-gray-600 font-medium">Bajas de productividad por llamadas colgadas deliberadamente o cambios inusuales de estado en horas pico.</span>
+                        <h4 class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-xs mb-1">El
+                            Desafío Operativo</h4>
+                        <span class="text-[1.15rem] text-gray-600 font-medium">Bajas de productividad por llamadas
+                            colgadas deliberadamente o cambios inusuales de estado en horas pico.</span>
                     </div>
-                    
+
                     <div class="mb-6">
-                        <h4 class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-xs mb-2">Auditoría con Telat IA (Agent States)</h4>
+                        <h4 class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-xs mb-2">Auditoría
+                            con Telat IA (Agent States)</h4>
                         <ul class="space-y-2 text-base text-gray-700 font-medium">
                             <li class="flex items-center gap-2">
                                 <span class="w-2.5 h-2.5 rounded-full bg-[#3284C6] animate-pulse"></span>
-                                <span><strong>Protección de Llamadas del Cliente:</strong> Detiene de inmediato cuelgues inusuales del personal.</span>
+                                <span><strong>Protección de Llamadas del Cliente:</strong> Detiene de inmediato cuelgues
+                                    inusuales del personal.</span>
                             </li>
                             <li class="flex items-center gap-2">
                                 <span class="w-2.5 h-2.5 rounded-full bg-[#3284C6] animate-pulse"></span>
-                                <span><strong>Garantía de Atención:</strong> Asegura la disponibilidad real de la plantilla en línea de fuego.</span>
+                                <span><strong>Garantía de Atención:</strong> Asegura la disponibilidad real de la
+                                    plantilla en línea de fuego.</span>
                             </li>
                             <li class="flex items-center gap-2">
                                 <span class="w-2.5 h-2.5 rounded-full bg-[#3284C6] animate-pulse"></span>
-                                <span><strong>Cumplimiento de KPIs Contratados:</strong> Historial auditable de conexión productiva real.</span>
+                                <span><strong>Cumplimiento de KPIs Contratados:</strong> Historial auditable de conexión
+                                    productiva real.</span>
                             </li>
                         </ul>
                     </div>
 
                     <div class="flex flex-wrap gap-4">
                         <span class="kpi-badge kpi-up">
-                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path></svg>
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5">
+                                </path>
+                            </svg>
                             <span>Nivel de Servicio Asegurado</span>
                         </span>
                         <span class="kpi-badge kpi-down">
-                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path></svg>
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5">
+                                </path>
+                            </svg>
                             <span>Tasa de Abandono Controlada</span>
                         </span>
                     </div>
@@ -603,32 +863,47 @@
         <div class="slide bg-light-slide" id="slide-10">
             <div class="w-full h-full flex px-16 py-12 gap-12 items-center flex-row-reverse">
                 <div class="w-[55%] h-[80%] relative rounded-[3rem] bg-[#222221] p-2 glow-frame-amarillo">
-                    <div class="absolute -top-7 -right-7 bg-white border-4 border-[#FECA66] text-[#b48512] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[5deg] shadow-xl">Eficiencia</div>
-                    
-                    <div id="media-blocks" class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
-                        <iframe src="https://player.vimeo.com/video/1195437763?background=1&autopause=0&muted=1&loop=1&autoplay=1" 
-                                class="absolute inset-0 w-full h-full scale-[1.05]" 
-                                frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                    <div
+                        class="absolute -top-7 -right-7 bg-white border-4 border-[#FECA66] text-[#b48512] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[5deg] shadow-xl">
+                        Eficiencia</div>
+
+                    <div id="media-blocks"
+                        class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
+                        <iframe
+                            src="https://player.vimeo.com/video/1195437763?background=1&autopause=0&muted=1&loop=1&autoplay=1"
+                            class="absolute inset-0 w-full h-full scale-[1.05]" frameborder="0"
+                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
                         </iframe>
                     </div>
                 </div>
                 <div class="w-[45%] flex flex-col justify-center">
-                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">¿Cómo protegemos su Nivel de Servicio (SLA) durante juntas y capacitaciones?</h2>
-                    
+                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">¿Cómo protegemos su Nivel de
+                        Servicio (SLA) durante juntas y capacitaciones?</h2>
+
                     <div class="mb-4">
-                        <h4 class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-xs mb-1">El Desafío Operativo</h4>
-                        <span class="text-[1.15rem] text-gray-600 font-medium">Saturación imprevista de la línea por salidas desorganizadas de agentes para retroalimentación en horarios de tráfico crítico.</span>
+                        <h4 class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-xs mb-1">El
+                            Desafío Operativo</h4>
+                        <span class="text-[1.15rem] text-gray-600 font-medium">Saturación imprevista de la línea por
+                            salidas desorganizadas de agentes para retroalimentación en horarios de tráfico
+                            crítico.</span>
                     </div>
-                    
+
                     <div class="mb-8">
-                        <h4 class="subheading text-[#FECA66] font-bold uppercase tracking-widest text-xs mb-1">La Respuesta de Telat IA (Smart Time Blocks)</h4>
-                        <p class="text-[1.15rem] text-[#222221] font-bold">Un semáforo inteligente de SLA que bloquea reuniones fuera de línea en picos de llamadas, garantizando una disponibilidad óptima y programando actividades en horas de menor tráfico.</p>
+                        <h4 class="subheading text-[#FECA66] font-bold uppercase tracking-widest text-xs mb-1">La
+                            Respuesta de Telat IA (Smart Time Blocks)</h4>
+                        <p class="text-[1.15rem] text-[#222221] font-bold">Un semáforo inteligente de SLA que bloquea
+                            reuniones fuera de línea en picos de llamadas, garantizando una disponibilidad óptima y
+                            programando actividades en horas de menor tráfico.</p>
                     </div>
 
                     <div class="flex flex-wrap gap-4">
                         <span class="kpi-badge kpi-neutral">Sesiones Fuera de Línea Programadas</span>
                         <span class="kpi-badge kpi-down">
-                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path></svg>
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5">
+                                </path>
+                            </svg>
                             <span>Mermas Operativas de Workforce</span>
                         </span>
                     </div>
@@ -640,35 +915,54 @@
         <div class="slide bg-light-slide" id="slide-11">
             <div class="w-full h-full flex px-16 py-12 gap-12 items-center">
                 <div class="w-[55%] h-[80%] relative rounded-[3rem] bg-[#222221] p-2 glow-frame-celeste">
-                    <div class="absolute -top-7 -left-7 bg-white border-4 border-[#3284C6] text-[#3284C6] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[-5deg] shadow-xl">CX</div>
-                    
-                    <div id="media-supcalls" class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
-                        <iframe src="https://player.vimeo.com/video/1195457098?background=1&autopause=0&muted=1&loop=1&autoplay=1" 
-                                class="absolute inset-0 w-full h-full scale-[1.05]" 
-                                frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                    <div
+                        class="absolute -top-7 -left-7 bg-white border-4 border-[#3284C6] text-[#3284C6] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[-5deg] shadow-xl">
+                        CX</div>
+
+                    <div id="media-supcalls"
+                        class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
+                        <iframe
+                            src="https://player.vimeo.com/video/1195457098?background=1&autopause=0&muted=1&loop=1&autoplay=1"
+                            class="absolute inset-0 w-full h-full scale-[1.05]" frameborder="0"
+                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
                         </iframe>
                     </div>
                 </div>
                 <div class="w-[45%] flex flex-col justify-center">
-                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">¿Cómo evitamos llamadas abandonadas cuando se requiere la ayuda de un supervisor?</h2>
-                    
+                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">¿Cómo evitamos llamadas abandonadas
+                        cuando se requiere la ayuda de un supervisor?</h2>
+
                     <div class="mb-4">
-                        <h4 class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-xs mb-1">El Desafío Operativo</h4>
-                        <span class="text-[1.15rem] text-gray-600 font-medium">Llamadas colgadas de clientes con requerimientos especializados debido a procesos de escalación manuales, lentos y poco eficientes.</span>
+                        <h4 class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-xs mb-1">El
+                            Desafío Operativo</h4>
+                        <span class="text-[1.15rem] text-gray-600 font-medium">Llamadas colgadas de clientes con
+                            requerimientos especializados debido a procesos de escalación manuales, lentos y poco
+                            eficientes.</span>
                     </div>
-                    
+
                     <div class="mb-8">
-                        <h4 class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-xs mb-1">La Respuesta de Telat IA (Escalaciones IA)</h4>
-                        <p class="text-[1.15rem] text-[#222221] font-bold">Un motor inteligente de escalaciones que asegura soporte inmediato en vivo, asignando al supervisor de manera asertiva y evitando la desconexión del cliente.</p>
+                        <h4 class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-xs mb-1">La
+                            Respuesta de Telat IA (Escalaciones IA)</h4>
+                        <p class="text-[1.15rem] text-[#222221] font-bold">Un motor inteligente de escalaciones que
+                            asegura soporte inmediato en vivo, asignando al supervisor de manera asertiva y evitando la
+                            desconexión del cliente.</p>
                     </div>
 
                     <div class="flex flex-wrap gap-4">
                         <span class="kpi-badge kpi-down">
-                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path></svg>
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5">
+                                </path>
+                            </svg>
                             <span>Tiempo Promedio de Operación (AHT)</span>
                         </span>
                         <span class="kpi-badge kpi-up">
-                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path></svg>
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5">
+                                </path>
+                            </svg>
                             <span>Mejora de FCR Operativo General</span>
                         </span>
                     </div>
@@ -680,35 +974,54 @@
         <div class="slide bg-light-slide" id="slide-12">
             <div class="w-full h-full flex px-16 py-12 gap-12 items-center flex-row-reverse">
                 <div class="w-[55%] h-[80%] relative rounded-[3rem] bg-[#222221] p-2 glow-frame-naranja">
-                    <div class="absolute -top-7 -right-7 bg-white border-4 border-[#EB5B27] text-[#EB5B27] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[5deg] shadow-xl">Back-Office</div>
-                    
-                    <div id="media-refund" class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
-                        <iframe src="https://player.vimeo.com/video/1195454257?background=1&autopause=0&muted=1&loop=1&autoplay=1" 
-                                class="absolute inset-0 w-full h-full scale-[1.05]" 
-                                frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                    <div
+                        class="absolute -top-7 -right-7 bg-white border-4 border-[#EB5B27] text-[#EB5B27] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[5deg] shadow-xl">
+                        Back-Office</div>
+
+                    <div id="media-refund"
+                        class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
+                        <iframe
+                            src="https://player.vimeo.com/video/1195454257?background=1&autopause=0&muted=1&loop=1&autoplay=1"
+                            class="absolute inset-0 w-full h-full scale-[1.05]" frameborder="0"
+                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
                         </iframe>
                     </div>
                 </div>
                 <div class="w-[45%] flex flex-col justify-center">
-                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">¿Cómo garantizamos la precisión y seguridad de sus procesos transaccionales?</h2>
-                    
+                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">¿Cómo garantizamos la precisión y
+                        seguridad de sus procesos transaccionales?</h2>
+
                     <div class="mb-4">
-                        <h4 class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-xs mb-1">El Desafío Operativo</h4>
-                        <span class="text-[1.15rem] text-gray-600 font-medium">Lentitud y riesgos en el procesamiento de validaciones financieras del usuario, afectando el cumplimiento y la experiencia general de marca.</span>
+                        <h4 class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-xs mb-1">El
+                            Desafío Operativo</h4>
+                        <span class="text-[1.15rem] text-gray-600 font-medium">Lentitud y riesgos en el procesamiento de
+                            validaciones financieras del usuario, afectando el cumplimiento y la experiencia general de
+                            marca.</span>
                     </div>
-                    
+
                     <div class="mb-8">
-                        <h4 class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-xs mb-1">La Respuesta de Telat IA (Tracker de Reembolsos)</h4>
-                        <p class="text-[1.15rem] text-[#222221] font-bold">Consola transaccional donde subir capturas de validación es ágil e intuitivo, organizando eficientemente las colas de trabajo y los callbacks de soporte técnico.</p>
+                        <h4 class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-xs mb-1">La
+                            Respuesta de Telat IA (Tracker de Reembolsos)</h4>
+                        <p class="text-[1.15rem] text-[#222221] font-bold">Consola transaccional donde subir capturas de
+                            validación es ágil e intuitivo, organizando eficientemente las colas de trabajo y los
+                            callbacks de soporte técnico.</p>
                     </div>
 
                     <div class="flex flex-wrap gap-4">
                         <span class="kpi-badge kpi-up">
-                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path></svg>
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5">
+                                </path>
+                            </svg>
                             <span>Garantía de Cumplimiento Regulatorio</span>
                         </span>
                         <span class="kpi-badge kpi-down">
-                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path></svg>
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5">
+                                </path>
+                            </svg>
                             <span>Tiempo de Procesamiento de Back-Office</span>
                         </span>
                     </div>
@@ -720,83 +1033,290 @@
         <div class="slide bg-light-slide" id="slide-13">
             <div class="w-full h-full flex px-16 py-12 gap-12 items-center">
                 <div class="w-[55%] h-[80%] relative rounded-[3rem] bg-[#222221] p-2 glow-frame-amarillo">
-                    <div class="absolute -top-7 -left-7 bg-white border-4 border-[#FECA66] text-[#b48512] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[-5deg] shadow-xl">Identidad</div>
-                    
-                    <div id="media-firmas" class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
-                        <iframe src="https://player.vimeo.com/video/1195455648?background=1&autopause=0&muted=1&loop=1&autoplay=1" 
-                                class="absolute inset-0 w-full h-full scale-[1.05]" 
-                                frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                    <div
+                        class="absolute -top-7 -left-7 bg-white border-4 border-[#FECA66] text-[#b48512] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[-5deg] shadow-xl">
+                        Identidad</div>
+
+                    <div id="media-firmas"
+                        class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
+                        <iframe
+                            src="https://player.vimeo.com/video/1195455750?background=1&autopause=0&muted=1&loop=1&autoplay=1"
+                            class="absolute inset-0 w-full h-full scale-[1.05]" frameborder="0"
+                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
                         </iframe>
                     </div>
                 </div>
                 <div class="w-[45%] flex flex-col justify-center">
-                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">¿Cómo proyectamos la máxima seriedad institucional en cada comunicación?</h2>
-                    
+                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">¿Cómo proyectamos una imagen de
+                        marca corporativa, uniforme y segura?</h2>
+
                     <div class="mb-4">
-                        <h4 class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-xs mb-1">El Desafío Operativo</h4>
-                        <span class="text-[1.15rem] text-gray-600 font-medium">Firmas desactualizadas o no homogéneas en correos electrónicos corporativos enviadas por personal del BPO.</span>
+                        <h4 class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-xs mb-1">El
+                            Desafío Operativo</h4>
+                        <p class="text-[1.15rem] text-gray-600 font-medium">Discrepancias en la firma e identidad
+                            corporativa de los agentes al dar soporte, lo que puede debilitar la imagen ante el usuario.
+                        </p>
                     </div>
-                    
+
                     <div class="mb-8">
-                        <h4 class="subheading text-[#b48512] font-bold uppercase tracking-widest text-xs mb-1">La Respuesta de Telat IA (Firmas Unificadas)</h4>
-                        <p class="text-[1.15rem] text-[#222221] font-bold">Consola que centraliza y estandariza la identidad gráfica de todo el personal asignado, asegurando una imagen pulcra en cada interacción digital.</p>
+                        <h4 class="subheading text-[#b48512] font-bold uppercase tracking-widest text-xs mb-1">La
+                            Respuesta de Telat IA (Identidad Digital)</h4>
+                        <p class="text-[1.15rem] text-[#222221] font-bold">Herramienta interna de generación instantánea
+                            de firmas institucionales, asegurando de forma centralizada la consistencia visual y los
+                            avisos legales vigentes.</p>
                     </div>
 
                     <div class="flex flex-wrap gap-4">
                         <span class="kpi-badge kpi-up">
-                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path></svg>
-                            <span>Homogeneidad de Imagen Corporativa</span>
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5">
+                                </path>
+                            </svg>
+                            <span>Consistencia de Imagen de Marca</span>
+                        </span>
+                        <span class="kpi-badge kpi-down">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5">
+                                </path>
+                            </svg>
+                            <span>Errores de Configuración Manual</span>
                         </span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 14: CIERRE (CLARO, PREMIUM, ENERGÉTICO) -->
-        <div class="slide bg-light-slide overflow-hidden" id="slide-14">
+        <!-- SLIDE 14: Buscador de Instalaciones Especializadas (Facility List) -->
+        <div class="slide bg-light-slide" id="slide-12">
+            <div class="w-full h-full flex px-16 py-12 gap-12 items-center">
+                <!-- Izquierda: Contenedor Media -->
+                <div class="w-[55%] h-[80%] relative rounded-[3rem] bg-[#222221] p-2 glow-frame-amarillo">
+                    <div
+                        class="absolute -top-7 -left-7 bg-white border-4 border-[#FECA66] text-[#b48512] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[-5deg] shadow-xl">
+                        Back-Office</div>
+
+                    <div id="media-facility"
+                        class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
+                        <iframe
+                            src="https://player.vimeo.com/video/1195812063?background=1&autopause=0&autoplay=1&loop=1&byline=0&title=0&muted=1"
+                            class="absolute inset-0 w-full h-full scale-[1.05]" frameborder="0"
+                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Derecha: Texto Comercial -->
+                <div class="w-[45%] flex flex-col justify-center">
+                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">¿Cómo eliminamos el error humano en
+                        campañas con regulaciones complejas?</h2>
+
+                    <div class="mb-4">
+                        <h4 class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-xs mb-1">El
+                            Desafío Operativo</h4>
+                        <span class="text-[1.15rem] text-gray-600 font-medium">Riesgo de multas por cumplimiento o
+                            información inexacta debido a consultas manuales lentas en bases de datos
+                            tradicionales.</span>
+                    </div>
+
+                    <div class="mb-8">
+                        <h4 class="subheading text-[#b48512] font-bold uppercase tracking-widest text-xs mb-1">La
+                            Respuesta de Telat IA (Facility List)</h4>
+                        <p class="text-[1.15rem] text-[#222221] font-bold">Consola de búsqueda unificada Telat IA.
+                            Localiza de forma instantánea reglamentos, servicios y restricciones aplicables por tipo de
+                            instalación especializada, eliminando consultas en archivos de texto o manuales.</p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4">
+                        <span class="kpi-badge kpi-down">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5">
+                                </path>
+                            </svg>
+                            <span>Riesgos de Incumplimiento Normativo</span>
+                        </span>
+                        <span class="kpi-badge kpi-up">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5">
+                                </path>
+                            </svg>
+                            <span>Exactitud de Datos de Campaña</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 15: Rapid Call Protocol - RCP (EFICIENCIA) -->
+        <div class="slide bg-light-slide" id="slide-13">
+            <div class="w-full h-full flex px-16 py-12 gap-12 items-center flex-row-reverse">
+                <!-- Izquierda: Contenedor Media -->
+                <div class="w-[55%] h-[80%] relative rounded-[3rem] bg-[#222221] p-2 glow-frame-naranja">
+                    <div
+                        class="absolute -top-7 -right-7 bg-white border-4 border-[#EB5B27] text-[#EB5B27] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[5deg] shadow-xl">
+                        Eficiencia</div>
+
+                    <div id="media-rcp"
+                        class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
+                        <iframe
+                            src="https://player.vimeo.com/video/1195811290?background=1&autopause=0&autoplay=1&loop=1&byline=0&title=0&muted=1"
+                            class="absolute inset-0 w-full h-full scale-[1.05]" frameborder="0"
+                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Derecha: Texto Comercial -->
+                <div class="w-[45%] flex flex-col justify-center">
+                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">¿Cómo protegemos la operación ante
+                        picos críticos de llamadas?</h2>
+
+                    <div class="mb-4">
+                        <h4 class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-xs mb-1">El
+                            Desafío Operativo</h4>
+                        <span class="text-[1.15rem] text-gray-600 font-medium">Tiempos de espera excesivos y abandono de
+                            llamadas de clientes durante incrementos imprevistos de la demanda.</span>
+                    </div>
+
+                    <div class="mb-8">
+                        <h4 class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-xs mb-1">La
+                            Respuesta de Telat IA (Protocolo RCP)</h4>
+                        <p class="text-[1.15rem] text-[#222221] font-bold">Activación dinámica del protocolo RCP que
+                            flexibiliza parámetros de evaluación de manera inmediata para desahogar la cola de llamadas.
+                            El sistema de conciliación audita de forma precisa cada interacción bajo este estado.</p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4">
+                        <span class="kpi-badge kpi-down">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5">
+                                </path>
+                            </svg>
+                            <span>Tasa de Abandono de Clientes</span>
+                        </span>
+                        <span class="kpi-badge kpi-up">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5">
+                                </path>
+                            </svg>
+                            <span>Estabilidad de Nivel de Servicio (SLA)</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 16: EL IMPACTO HUMANO DE LA EFICIENCIA -->
+        <div class="slide bg-light-slide" id="slide-14">
+            <!-- Doodle de fondo -->
+            <div class="absolute right-20 top-20 animate-float opacity-10">
+                <svg width="200" height="200" viewBox="0 0 100 100" fill="none">
+                    <circle cx="50" cy="50" r="40" stroke="#3284C6" stroke-width="3" stroke-dasharray="10 10" />
+                </svg>
+            </div>
+
+            <div class="w-full h-full flex flex-col px-16 py-12 justify-center items-center text-center">
+                <span class="subheading font-bold text-[#3284C6] tracking-widest uppercase text-sm mb-4 block">El
+                    Retorno Humano de la Automatización</span>
+                <h2 class="font-momo text-[4rem] text-[#222221] mb-6 leading-none">Redirección del Tiempo: El Impacto de
+                    la Eficiencia</h2>
+
+                <p class="text-2xl text-gray-600 font-medium max-w-4xl mb-12">
+                    No eliminamos el toque humano; usamos la tecnología para liberarlo. Al automatizar las tareas
+                    burocráticas del piso, permitimos que el personal de supervisión se enfoque en el desarrollo directo
+                    de las personas.
+                </p>
+
+                <div class="grid grid-cols-2 gap-8 w-full max-w-5xl">
+                    <div
+                        class="bg-white border-2 border-[#3284C6]/20 p-8 rounded-3xl shadow-lg hover:shadow-xl transition-shadow text-left">
+                        <h4 class="font-momo text-2xl text-[#3284C6] mb-3">Liberación de Tareas Manuales</h4>
+                        <p class="text-gray-600 font-semibold text-lg leading-relaxed">
+                            Al automatizar el rastreo de tiempos, nóminas, firmas y aprobaciones complejas, la
+                            supervisión recupera horas-hombre esenciales para dar soporte directo en el piso.
+                        </p>
+                    </div>
+
+                    <div
+                        class="bg-white border-2 border-[#EB5B27]/20 p-8 rounded-3xl shadow-lg hover:shadow-xl transition-shadow text-left">
+                        <h4 class="font-momo text-2xl text-[#EB5B27] mb-3">Retroalimentación Humana y Cercana</h4>
+                        <p class="text-gray-600 font-semibold text-lg leading-relaxed">
+                            El tiempo liberado se reasigna a lo que verdaderamente importa: sesiones de acompañamiento
+                            empático y coaching dinámico que fidelizan al agente y elevan la calidad de atención.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 17: CIERRE PREMIUM -->
+        <div class="slide bg-light-slide overflow-hidden" id="slide-15">
             <!-- Doodle de fondo suave -->
             <div class="absolute right-20 top-20 animate-float opacity-10 pointer-events-none">
                 <svg width="200" height="200" viewBox="0 0 100 100" fill="none">
-                    <circle cx="50" cy="50" r="40" stroke="#3284C6" stroke-width="3" stroke-dasharray="10 10"/>
+                    <circle cx="50" cy="50" r="40" stroke="#3284C6" stroke-width="3" stroke-dasharray="10 10" />
                 </svg>
             </div>
 
             <!-- Gradiente de fondo ultra-sutil para dinamismo -->
-            <div class="absolute inset-0 bg-gradient-to-tr from-[#3284C6]/5 via-[#FBFBFD] to-[#FECA66]/5 pointer-events-none"></div>
+            <div
+                class="absolute inset-0 bg-gradient-to-tr from-[#3284C6]/5 via-[#FBFBFD] to-[#FECA66]/5 pointer-events-none">
+            </div>
 
             <div class="w-full h-full flex flex-col items-center justify-center text-center px-10 relative z-10">
                 <!-- Tarjeta de logotipo corporativo -->
-                <div class="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-xl shadow-[#3284C6]/5 mb-10 transform hover:scale-105 transition-transform duration-300">
-                    <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-16 w-auto object-contain">
+                <div
+                    class="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-xl shadow-[#3284C6]/5 mb-10 transform hover:scale-105 transition-transform duration-300">
+                    <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group"
+                        class="h-16 w-auto object-contain">
                 </div>
 
                 <h2 class="font-momo text-6xl lg:text-[5.5rem] mb-6 leading-none text-[#222221]">
                     MÁS ALLÁ DE <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#3284C6] to-[#EB5B27]">LA VOZ.</span>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#3284C6] to-[#EB5B27]">LA
+                        VOZ.</span>
                 </h2>
-                
+
                 <p class="text-2xl font-bold text-[#222221]/80 max-w-3xl mb-12">
-                    No están contratando asientos. Están integrando un brazo tecnológico diseñado para proteger e impulsar su marca.
+                    No están contratando asientos. Están integrando un brazo tecnológico diseñado para proteger e
+                    impulsar el crecimiento de su marca.
                 </p>
-                
+
                 <div class="relative">
-                    <button class="group inline-flex items-center gap-3 bg-[#EB5B27] text-white font-sans font-bold text-xl px-10 py-5 rounded-full hover:bg-[#FECA66] hover:text-[#222221] transition-all duration-300 shadow-xl shadow-[#EB5B27]/25 hover:scale-105 border border-white/10">
+                    <button
+                        class="group inline-flex items-center gap-3 bg-[#EB5B27] text-white font-sans font-bold text-xl px-10 py-5 rounded-full hover:bg-[#FECA66] hover:text-[#222221] transition-all duration-300 shadow-xl shadow-[#EB5B27]/25 hover:scale-105 border border-white/10">
                         <span>Iniciar Implementación</span>
-                        <svg class="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path></svg>
+                        <svg class="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none"
+                            stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+                        </svg>
                     </button>
                 </div>
             </div>
         </div>
 
         <!-- CONTROLES Y BARRA DE PROGRESO -->
-        <div id="slide-counter">01 / 14</div>
+        <div id="slide-counter">01 / 17</div>
         <div id="controls">
             <button class="control-btn" id="btn-prev">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7"></path>
+                </svg>
             </button>
             <button class="control-btn" id="btn-next">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path>
+                </svg>
             </button>
+        </div>
+        <div id="progress-bar-container">
+            <div id="progress-bar"></div>
         </div>
 
     </div>
@@ -823,41 +1343,47 @@
 
                 // Actualiza contador visual
                 if (counter) {
-                    const currentNum = String(currentSlideIndex + 1).padStart(2, '0');
-                    const totalNum = String(slides.length).padStart(2, '0');
-                    counter.textContent = `${currentNum} / ${totalNum}`;
+                    counter.textContent = `${String(currentSlideIndex + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
                 }
 
                 // Actualiza barra de progreso
                 if (progressBar) {
-                    const percentage = ((currentSlideIndex + 1) / slides.length) * 100;
+                    const percentage = ((currentSlideIndex) / (slides.length - 1)) * 100;
                     progressBar.style.width = `${percentage}%`;
                 }
             }
 
-            // Eventos de botones
+            // Eventos de botones con límites de navegación
             if (btnNext) {
                 btnNext.addEventListener('click', () => {
-                    currentSlideIndex = (currentSlideIndex + 1) % slides.length;
-                    updatePresentation();
+                    if (currentSlideIndex < slides.length - 1) {
+                        currentSlideIndex++;
+                        updatePresentation();
+                    }
                 });
             }
 
             if (btnPrev) {
                 btnPrev.addEventListener('click', () => {
-                    currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
-                    updatePresentation();
+                    if (currentSlideIndex > 0) {
+                        currentSlideIndex--;
+                        updatePresentation();
+                    }
                 });
             }
 
             // Teclado (Flechas de navegación)
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'ArrowRight' || e.key === ' ') {
-                    currentSlideIndex = (currentSlideIndex + 1) % slides.length;
-                    updatePresentation();
+                    if (currentSlideIndex < slides.length - 1) {
+                        currentSlideIndex++;
+                        updatePresentation();
+                    }
                 } else if (e.key === 'ArrowLeft') {
-                    currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
-                    updatePresentation();
+                    if (currentSlideIndex > 0) {
+                        currentSlideIndex--;
+                        updatePresentation();
+                    }
                 }
             });
 
@@ -866,4 +1392,5 @@
         });
     </script>
 </body>
+
 </html>
