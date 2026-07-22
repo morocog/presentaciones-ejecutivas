@@ -1,11 +1,1564 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark" class="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TIP - Dashboard Operativo</title>
+    <title>Telat - Consola GOC TIP México</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700&family=Montserrat:wght@400;600;700;800&family=Roboto:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- CDNs de Dependencias -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <!-- Configuración Tailwind -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        montserrat: ['Montserrat', 'sans-serif'],
+                        roboto: ['Roboto', 'sans-serif'],
+                        dmsans: ['DM Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Estilos de Marca Telat -->
+    <style>
+        /* 1. SISTEMA TIPOGRÁFICO */
+        @font-face {
+            font-family: 'Momo Trust';
+            src: local('Impact'), local('Arial Black');
+            font-weight: 800;
+        }
+
+        /* 2. IDENTIDAD CROMÁTICA TELAT */
+        :root {
+            --oscuro: #222221;
+            --azul-claro: #FBFBFD;
+            --celeste: #3284C6;
+            --naranja: #EB5B27;
+            --naranja-claro: #FECA66;
+            --grad-vibrante: linear-gradient(135deg, var(--celeste) 0%, var(--naranja-claro) 100%);
+
+            /* Tema Oscuro por Defecto */
+            --bg-body: #0d1117;
+            --bg-capsule: rgba(34, 34, 33, 0.9);
+            --bg-glass: rgba(34, 34, 33, 0.85);
+            --text-main: #FBFBFD;
+            --text-sec: #94a3b8;
+            --border-glass: rgba(255, 255, 255, 0.1);
+            --shadow-card: 0 10px 40px -10px rgba(0, 0, 0, 0.7);
+            --btn-border: rgba(255, 255, 255, 0.15);
+            --btn-hover-bg: rgba(50, 132, 198, 0.15);
+            --glow-color: rgba(50, 132, 198, 0.4);
+            --loader-bg: #222221;
+
+            /* Tarjetas de soporte */
+            --bg-specialized-card: rgba(50, 132, 198, 0.1);
+            --border-specialized-card: rgba(50, 132, 198, 0.3);
+            --text-specialized-card: #FECA66;
+        }
+
+        /* Tema Claro */
+        html[data-theme="light"] {
+            --bg-body: #FBFBFD;
+            --bg-capsule: rgba(255, 255, 255, 0.95);
+            --bg-glass: rgba(255, 255, 255, 0.95);
+            --text-main: #222221;
+            --text-sec: #475569;
+            --border-glass: rgba(34, 34, 33, 0.12);
+            --shadow-card: 0 10px 30px -5px rgba(34, 34, 33, 0.06);
+            --btn-border: rgba(34, 34, 33, 0.15);
+            --btn-hover-bg: rgba(50, 132, 198, 0.08);
+            --glow-color: rgba(50, 132, 198, 0.15);
+            --loader-bg: #FBFBFD;
+
+            --bg-specialized-card: rgba(235, 91, 39, 0.06);
+            --border-specialized-card: rgba(235, 91, 39, 0.2);
+            --text-specialized-card: #EB5B27;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'Roboto', sans-serif;
+            transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .font-momo {
+            font-family: 'Momo Trust', sans-serif;
+        }
+
+        .subheading,
+        button,
+        .tab-btn {
+            font-family: 'DM Sans', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        /* Cápsula Flotante de Navegación */
+        .header-capsule {
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 92%;
+            max-width: 1280px;
+            z-index: 50;
+            background: linear-gradient(var(--bg-capsule), var(--bg-capsule)) padding-box,
+                var(--grad-vibrante) border-box;
+            border: 2px solid transparent;
+            border-radius: 9999px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-card);
+            transition: all 0.4s ease;
+        }
+
+        /* Logotipo Safe Zone */
+        .logo-safe-zone img {
+            height: 100%;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+            display: block;
+            filter: drop-shadow(0 0 0 transparent) !important;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-safe-zone:hover img {
+            transform: scale(1.05) rotate(-2deg);
+        }
+
+        /* Botón Pill de Acción */
+        .btn-hybrid {
+            background: linear-gradient(90deg, var(--celeste), var(--naranja));
+            color: #FFFFFF !important;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            padding: 0.6rem 1.4rem;
+            border-radius: 9999px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--glow-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-hybrid:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--glow-color);
+            filter: brightness(1.08);
+        }
+
+        /* Tarjeta de Cristal */
+        .card-glass {
+            background-color: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 1.5rem;
+            box-shadow: var(--shadow-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card-glass:hover {
+            border-color: rgba(50, 132, 198, 0.4);
+            transform: translateY(-4px);
+        }
+
+        .tab-btn {
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            padding: 0.5rem 1.2rem;
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+            color: var(--text-sec);
+        }
+
+        .tab-btn.active {
+            background-color: var(--celeste);
+            color: #FFFFFF !important;
+            box-shadow: 0 4px 12px var(--glow-color);
+        }
+
+        /* ANIMACIONES DOODLEVERSE */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(5deg);
+            }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes spin-slow {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animate-spin-slow {
+            animation: spin-slow 20s linear infinite;
+        }
+
+        /* Loader */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background-color: var(--loader-bg);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        /* Easter Egg */
+        .easter-egg-dog {
+            opacity: 0;
+            transform: translateY(20px) scale(0.9);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+        }
+
+        .trigger-egg:hover .easter-egg-dog {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    </style>
 </head>
-<body>
-    <!-- Pega aquí el código HTML del Dashboard Operativo para el cliente TIP -->
+
+<body class="pb-12 pt-36">
+
+    <!-- Loader Corporativo -->
+    <div id="loader">
+        <div class="logo-safe-zone h-14 w-auto mb-6">
+            <img src="https://telat.mx/assets/img/logo.png" alt="Telat Logo">
+        </div>
+        <div class="flex items-center gap-3 text-[var(--text-main)] font-montserrat font-bold text-sm">
+            <i class="fa-solid fa-circle-notch animate-spin text-2xl text-[var(--celeste)]"></i>
+            <span>Estableciendo conexión con el Nodo Operativo TIP México...</span>
+        </div>
+    </div>
+
+    <!-- Cápsula de Navegación Flotante -->
+    <nav class="header-capsule px-4 md:px-8 py-3 flex justify-between items-center">
+        <div class="flex items-center gap-4">
+            <div class="logo-safe-zone h-8 md:h-10 w-auto flex items-center cursor-pointer">
+                <img src="https://telat.mx/assets/img/logo.png" alt="Telat Logo">
+            </div>
+            <div class="hidden md:block h-6 w-px bg-[var(--text-sec)] opacity-30"></div>
+            <div class="hidden md:flex flex-col justify-center leading-none">
+                <span class="text-xs font-montserrat font-bold text-[var(--naranja)]">GOC TIP MÉXICO</span>
+                <span class="text-[10px] font-montserrat font-bold text-slate-500 tracking-wider">ALLIANCE</span>
+            </div>
+        </div>
+
+        <!-- Mando Dinámico -->
+        <div
+            class="flex items-center gap-1 bg-slate-800/20 dark:bg-slate-900/40 p-1 rounded-full border border-slate-700/20">
+            <button onclick="app.switchTab('goc')" id="tab-btn-goc" class="tab-btn active">MANDO GOC</button>
+            <button onclick="app.switchTab('calidad')" id="tab-btn-calidad" class="tab-btn">CALIDAD & SLA</button>
+            <button onclick="app.switchTab('plantilla')" id="tab-btn-plantilla" class="tab-btn">PLANTILLA</button>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <button onclick="app.toggleTheme()"
+                class="w-9 h-9 rounded-full flex items-center justify-center text-slate-400 hover:text-[var(--text-main)] transition-all">
+                <i id="theme-icon" class="fa-solid fa-sun text-lg text-yellow-400"></i>
+            </button>
+            <button onclick="app.triggerGOCSimulation()" class="btn-hybrid group"
+                title="Simular desvío aleatorio de tráfico">
+                <i class="fa-solid fa-bolt group-hover:animate-pulse"></i>
+                <span class="hidden sm:inline">DETECTAR DESVÍO</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Contenedor Principal -->
+    <main class="max-w-7xl mx-auto px-4 md:px-8 space-y-8 relative">
+
+        <!-- Doodle Animado de Fondo -->
+        <div class="absolute -top-10 -right-10 opacity-10 animate-spin-slow pointer-events-none z-0">
+            <svg width="200" height="200" viewBox="0 0 100 100" fill="none">
+                <path d="M10 50 A40 40 0 1 1 90 50 A40 40 0 1 1 10 50" stroke="#EB5B27" stroke-width="4"
+                    stroke-dasharray="10 10" />
+            </svg>
+        </div>
+
+        <!-- Alerta Contextual -->
+        <div
+            class="p-4 rounded-2xl bg-[var(--celeste)]/10 border border-[var(--celeste)]/30 text-[var(--text-main)] text-xs md:text-sm flex items-start gap-3 relative z-10">
+            <i class="fa-solid fa-tower-broadcast text-[var(--celeste)] text-xl animate-pulse mt-0.5"></i>
+            <div>
+                <strong class="font-montserrat text-[var(--celeste)]">Consola de Operaciones TIP México:</strong>
+                Monitoreo de SLA contractual, AHT (Voz: 7:00 min) y calibraciones de calidad operadas por Telat. Pase el
+                cursor por los módulos para ver definiciones de uso.
+            </div>
+        </div>
+
+        <!-- SECCIÓN 1: PANEL GOC -->
+        <section id="tab-section-goc" class="space-y-8 relative z-10">
+            <!-- Mosaico KPIs -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Nivel de Servicio -->
+                <div class="card-glass p-6 relative overflow-hidden"
+                    title="Porcentaje de llamadas e interacciones contestadas en menos de 20 segundos (Meta Contractual: 85%).">
+                    <p class="text-xs font-bold uppercase tracking-wider text-slate-400 font-montserrat">Nivel de
+                        Servicio (SLA)</p>
+                    <h3 class="text-3xl font-extrabold text-[var(--text-main)] font-montserrat mt-2" id="goc-infra">
+                        86.42%</h3>
+                    <span class="text-xs font-semibold flex items-center gap-1 mt-2 text-emerald-400"
+                        id="goc-infra-label">
+                        <i class="fa-solid fa-circle-check"></i> Meta Contractual &ge; 85%
+                    </span>
+                </div>
+
+                <!-- Tasa de Abandono -->
+                <div class="card-glass p-6 relative overflow-hidden"
+                    title="Porcentaje de llamadas colgadas por el usuario antes de ser atendido por un agente TIP.">
+                    <p class="text-xs font-bold uppercase tracking-wider text-slate-400 font-montserrat">Tasa de
+                        Abandono</p>
+                    <h3 class="text-3xl font-extrabold text-[var(--text-main)] font-montserrat mt-2" id="goc-abandono">
+                        2.14%</h3>
+                    <span class="text-xs font-semibold flex items-center gap-1 mt-2 text-emerald-400"
+                        id="goc-abandono-label">
+                        <i class="fa-solid fa-shield-halved"></i> Meta Contractual &le; 3.0%
+                    </span>
+                </div>
+
+                <!-- FCR Promedio -->
+                <div class="card-glass p-6 relative overflow-hidden"
+                    title="First Contact Resolution: Casos resueltos en el primer contacto del cliente sin necesidad de rellamada.">
+                    <p class="text-xs font-bold uppercase tracking-wider text-slate-400 font-montserrat">Resolución
+                        Primer Contacto</p>
+                    <h3 class="text-3xl font-extrabold text-[var(--text-main)] font-montserrat mt-2" id="goc-wfm">74.50%
+                    </h3>
+                    <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1 mt-2">
+                        <i class="fa-solid fa-compass"></i> Meta Contractual &ge; 70%
+                    </span>
+                </div>
+
+                <!-- Adherencia a la Agenda -->
+                <div class="card-glass p-6 relative overflow-hidden"
+                    title="Porcentaje de adherencia de los asesores a sus turnos de conexión programados.">
+                    <p class="text-xs font-bold uppercase tracking-wider text-slate-400 font-montserrat">Adherencia
+                        Agenda</p>
+                    <h3 class="text-3xl font-extrabold text-[var(--text-main)] font-montserrat mt-2"
+                        id="goc-adherencia">96.80%</h3>
+                    <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1 mt-2">
+                        <i class="fa-solid fa-user-clock"></i> Meta Operativa &ge; 95%
+                    </span>
+                </div>
+            </div>
+
+            <!-- Gráficas de Rendimiento -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- TSF Canales -->
+                <div class="card-glass p-6 flex flex-col justify-between"
+                    title="Telephone Service Factor: Velocidad de respuesta por canal.">
+                    <div>
+                        <h4 class="text-md font-bold font-montserrat text-[var(--text-main)] mb-1">Nivel de Servicio por
+                            Canal</h4>
+                        <p class="text-xs text-slate-400 mb-4">Porcentaje de atención en tiempo objetivo</p>
+                    </div>
+                    <div id="goc-chart-tsf" class="w-full h-64"></div>
+                    <div class="grid grid-cols-3 gap-2 mt-2 pt-4 border-t border-slate-700/20 text-center text-xs">
+                        <div title="Meta: Contestar 85% en menos de 20s.">
+                            <p class="text-[10px] text-slate-400">Voz (&le;20s)</p>
+                            <p class="text-sm font-bold text-emerald-400" id="goc-tsf-voz">86.4%</p>
+                        </div>
+                        <div title="Meta: Contestar 85% en menos de 90s.">
+                            <p class="text-[10px] text-slate-400">WhatsApp (&le;90s)</p>
+                            <p class="text-sm font-bold text-emerald-400" id="goc-tsf-texto">88.1%</p>
+                        </div>
+                        <div title="Meta: Responder el 95% de correos en menos de 24h.">
+                            <p class="text-[10px] text-slate-400">Email (&le;24h)</p>
+                            <p class="text-sm font-bold text-emerald-400" id="goc-tsf-bot">96.5%</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tiempos de Operación AHT -->
+                <div class="card-glass p-6 lg:col-span-2 flex flex-col justify-between"
+                    title="Average Handling Time: Tiempo promedio en segundos por tipo de interacción.">
+                    <div>
+                        <h4 class="text-md font-bold font-montserrat text-[var(--text-main)] mb-1">Tiempos de Operación
+                            (AHT)</h4>
+                        <p class="text-xs text-slate-400 mb-4">Rendimiento real por canal frente al límite establecido
+                            por TIP</p>
+                    </div>
+                    <div id="goc-chart-aht" class="w-full h-64"></div>
+                    <div
+                        class="flex justify-between items-center mt-2 pt-4 border-t border-slate-700/20 text-xs text-slate-400">
+                        <span><i class="fa-solid fa-clock-rotate-left mr-1"></i> Mediciones de tiempo de conversación y
+                            post-contacto</span>
+                        <span class="flex items-center gap-4">
+                            <span><span
+                                    class="inline-block w-3 h-3 bg-[var(--celeste)] rounded-full mr-1 align-middle"></span>
+                                Real</span>
+                            <span><span
+                                    class="inline-block w-3 h-3 bg-[var(--naranja)] rounded-full mr-1 align-middle"></span>
+                                Target Contractual</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Avance Mensual vs Dimensionamiento RFQ -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Llamadas de Voz -->
+                <div class="card-glass p-6"
+                    title="Progreso de atención acumulada frente al volumen promedio mensual de 2,800 llamadas.">
+                    <h5 class="text-sm font-bold font-montserrat text-[var(--text-main)] mb-2">Tráfico de Voz (Llamadas)
+                    </h5>
+                    <div class="flex justify-between text-xs text-slate-400 mb-1">
+                        <span>Llamadas atendidas este mes</span>
+                        <span id="goc-blaster-count" class="font-bold text-[var(--text-main)]">2,350 / 2,800</span>
+                    </div>
+                    <div class="w-full bg-slate-700/30 rounded-full h-2">
+                        <div class="bg-[var(--celeste)] h-2 rounded-full transition-all duration-500"
+                            id="goc-blaster-bar" style="width: 83.9%"></div>
+                    </div>
+                    <p class="text-[10px] text-slate-400 mt-2">Cumplimiento del volumen base solicitado por TIP.</p>
+                </div>
+
+                <!-- interacciones WhatsApp -->
+                <div class="card-glass p-6"
+                    title="Progreso de atención acumulada frente al volumen promedio mensual de 1,000 chats de WhatsApp.">
+                    <h5 class="text-sm font-bold font-montserrat text-[var(--text-main)] mb-2">Atención WhatsApp</h5>
+                    <div class="flex justify-between text-xs text-slate-400 mb-1">
+                        <span>Interacciones concluidas</span>
+                        <span id="goc-omni-count" class="font-bold text-[var(--text-main)]">840 / 1,000</span>
+                    </div>
+                    <div class="w-full bg-slate-700/30 rounded-full h-2">
+                        <div class="bg-purple-500 h-2 rounded-full transition-all duration-500" id="goc-omni-bar"
+                            style="width: 84%"></div>
+                    </div>
+                    <p class="text-[10px] text-slate-400 mt-2">Gestión omnicanal preventiva en plataforma unificada.</p>
+                </div>
+
+                <!-- Back-Office / Validación Especializada -->
+                <div class="card-glass p-6 flex flex-col justify-between"
+                    title="Tratamiento de casos y validación de documentos de segundo nivel de TIP.">
+                    <h5 class="text-sm font-bold font-montserrat text-[var(--text-main)] mb-2">Back-Office & Validación
+                    </h5>
+                    <div class="grid grid-cols-2 gap-4 text-xs">
+                        <div style="background-color: var(--bg-specialized-card); border-color: var(--border-specialized-card);"
+                            class="p-2.5 rounded-lg border flex flex-col justify-center transition-colors">
+                            <span class="text-[10px] text-slate-400 block">Soporte Correo</span>
+                            <span style="color: var(--text-specialized-card);" class="font-bold text-sm"
+                                id="bo-mail-count">390 / 500</span>
+                        </div>
+                        <div style="background-color: var(--bg-specialized-card); border-color: var(--border-specialized-card);"
+                            class="p-2.5 rounded-lg border flex flex-col justify-center transition-colors">
+                            <span class="text-[10px] text-slate-400 block">Validación Docs</span>
+                            <span style="color: var(--text-specialized-card);" class="font-bold text-sm">100% Ok</span>
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-slate-400 mt-2">Validación y escalamiento seguro de trámites e
+                        información.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: CALIDAD Y SLA -->
+        <section id="tab-section-calidad" class="hidden space-y-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Satisfacción (CSAT) -->
+                <div class="card-glass p-6"
+                    title="Porcentaje de encuestas de satisfacción con resultado excelente o muy bueno (Meta: 85%).">
+                    <p class="text-xs font-bold uppercase tracking-wider text-slate-400 font-montserrat">Satisfacción
+                        (CSAT)</p>
+                    <h3 class="text-3xl font-extrabold text-[var(--text-main)] font-montserrat mt-2" id="cal-ics">87.50%
+                    </h3>
+                    <span class="text-xs font-semibold flex items-center gap-1 mt-2 text-emerald-400"
+                        id="cal-ics-label">
+                        <i class="fa-solid fa-circle-check"></i> Cumple Meta &ge; 85%
+                    </span>
+                </div>
+
+                <!-- Calidad General Promedio -->
+                <div class="card-glass p-6"
+                    title="Calificación promedio obtenida en las evaluaciones del equipo de Calidad Telat.">
+                    <p class="text-xs font-bold uppercase tracking-wider text-slate-400 font-montserrat">Calidad
+                        Promedio</p>
+                    <h3 class="text-3xl font-extrabold text-[var(--text-main)] font-montserrat mt-2" id="cal-general">
+                        91.40</h3>
+                    <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1 mt-2">
+                        <i class="fa-solid fa-arrow-trend-up"></i> Meta Contractual &ge; 90.00
+                    </span>
+                </div>
+
+                <!-- Margen de Desviación de Calibración -->
+                <div class="card-glass p-6" title="Diferencia de evaluación en calibración entre TIP y Telat.">
+                    <p class="text-xs font-bold uppercase tracking-wider text-slate-400 font-montserrat">Desviación
+                        Calibración</p>
+                    <h3 class="text-3xl font-extrabold text-[var(--text-main)] font-montserrat mt-2"
+                        id="cal-desviacion">&plusmn; 3.5 pts</h3>
+                    <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1 mt-2">
+                        <i class="fa-solid fa-scale-balanced"></i> Tolerancia &le; &plusmn; 10 pts
+                    </span>
+                </div>
+
+                <!-- Rotación de Agentes -->
+                <div class="card-glass p-6"
+                    title="Tasa de deserción acumulada de la plantilla Telat asignada a TIP México.">
+                    <p class="text-xs font-bold uppercase tracking-wider text-slate-400 font-montserrat">Rotación
+                        Mensual</p>
+                    <h3 class="text-3xl font-extrabold text-[var(--naranja)] font-montserrat mt-2" id="cal-riesgo">4.0%
+                    </h3>
+                    <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1 mt-2">
+                        <i class="fa-solid fa-user-shield"></i> Meta Contractual &le; 8%
+                    </span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Avance y Registro de Cuotas de Monitoreo -->
+                <div class="card-glass p-6 flex flex-col justify-between"
+                    title="Progreso de las cuotas de auditoría pactadas por contrato para asegurar calibración constante.">
+                    <div>
+                        <h4 class="text-md font-bold font-montserrat text-[var(--text-main)] mb-1">Cuotas de Monitoreo
+                            Contractuales</h4>
+                        <p class="text-xs text-slate-400 mb-6">Controles de auditorías del mes en curso</p>
+                    </div>
+
+                    <div class="space-y-4 my-auto">
+                        <!-- Auditoría Telat (8 por agente) -->
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span>Monitoreo Staff Telat (8/agente)</span>
+                                <span id="cal-quota-telat-text" class="text-[var(--text-main)]">0 / 80</span>
+                            </div>
+                            <div class="w-full bg-slate-700/30 rounded-full h-2">
+                                <div class="bg-[var(--celeste)] h-2 rounded-full transition-all duration-500"
+                                    id="cal-quota-telat-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Auditoría TIP (2 por agente) -->
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span>Auditoría de Calibración TIP (2/agente)</span>
+                                <span id="cal-quota-inst-text" class="text-[var(--text-main)]">0 / 20</span>
+                            </div>
+                            <div class="w-full bg-slate-700/30 rounded-full h-2">
+                                <div class="bg-purple-500 h-2 rounded-full transition-all duration-500"
+                                    id="cal-quota-inst-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Auditoría de los Supervisores Operativos -->
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span>Monitoreo Supervisión Telat (2/agente)</span>
+                                <span id="cal-quota-super-text" class="text-[var(--text-main)]">0 / 20</span>
+                            </div>
+                            <div class="w-full bg-slate-700/30 rounded-full h-2">
+                                <div class="bg-[var(--naranja)] h-2 rounded-full transition-all duration-500"
+                                    id="cal-quota-super-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="mt-6 pt-4 border-t border-slate-700/20 flex justify-between items-center text-xs text-slate-400">
+                        <span>Periodo de Rampa de Aprendizaje:</span>
+                        <span class="font-bold text-amber-500">30 días naturales</span>
+                    </div>
+                </div>
+
+                <!-- Historial de Calidad por Antigüedad -->
+                <div class="card-glass p-6 lg:col-span-2 flex flex-col justify-between"
+                    title="Muestra las metas de calidad progresivas (Mes 1: &ge;80, Mes 2: &ge;85, Mes 3+: &ge;90) y el desempeño real logrado por el equipo TIP.">
+                    <div>
+                        <h4 class="text-md font-bold font-montserrat text-[var(--text-main)] mb-1">Curva de Aprendizaje
+                            Incremental</h4>
+                        <p class="text-xs text-slate-400 mb-4">Evolución de calidad del equipo frente a metas
+                            contractuales progresivas</p>
+                    </div>
+                    <div id="cal-chart-curva" class="w-full h-64"></div>
+                    <div
+                        class="flex justify-between items-center mt-2 pt-4 border-t border-slate-700/20 text-xs text-slate-400">
+                        <span><i class="fa-solid fa-graduation-cap text-[var(--celeste)] mr-1"></i> Calibraciones
+                            conjuntas programadas de forma quincenal</span>
+                        <span class="flex items-center gap-4">
+                            <span><span
+                                    class="inline-block w-3 h-3 bg-[var(--celeste)] rounded-full mr-1 align-middle"></span>
+                                Lograda</span>
+                            <span><span
+                                    class="inline-block w-3 h-3 bg-[var(--naranja)] rounded-full mr-1 align-middle"></span>
+                                Meta Progresiva</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: CONTROL DE PLANTILLA TIP (10 ASESORES) -->
+        <section id="tab-section-plantilla" class="hidden space-y-8">
+            <div class="card-glass p-6">
+                <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6">
+                    <div>
+                        <h4 class="text-lg font-bold font-montserrat text-[var(--text-main)]">Estructura Operativa TIP
+                        </h4>
+                        <p class="text-xs text-slate-400">Control operativo individual de los asesores asignados a la
+                            cuenta</p>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-3 w-full lg:w-auto">
+                        <!-- Filtrar por Canal -->
+                        <select onchange="app.filterByPiloto(this.value)" id="plantilla-select-piloto"
+                            class="px-3 py-2 text-xs rounded-xl bg-slate-800/40 dark:bg-slate-900/60 border border-slate-700/50 text-slate-800 dark:text-slate-100 focus:outline-none transition-all">
+                            <option value="todos">Todos los Canales</option>
+                            <option value="Voz (Atención)">Voz (Atención)</option>
+                            <option value="WhatsApp">WhatsApp</option>
+                            <option value="Email">Email</option>
+                            <option value="Back-Office">Back-Office</option>
+                        </select>
+
+                        <!-- Filtrar por Estatus -->
+                        <select onchange="app.filterByStatus(this.value)" id="plantilla-select-status"
+                            class="px-3 py-2 text-xs rounded-xl bg-slate-800/40 dark:bg-slate-900/60 border border-slate-700/50 text-slate-800 dark:text-slate-100 focus:outline-none transition-all">
+                            <option value="todos">Todos los Estatus</option>
+                            <option value="Activo">Activo</option>
+                            <option value="En Riesgo">En Riesgo</option>
+                        </select>
+
+                        <!-- Buscador -->
+                        <div class="relative flex-1 sm:flex-none">
+                            <i
+                                class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                            <input oninput="app.searchPlantilla(this.value)" type="text" placeholder="Buscar asesor..."
+                                class="w-full sm:w-48 pl-8 pr-3 py-2 text-xs rounded-xl bg-slate-800/40 dark:bg-slate-900/60 border border-slate-700/50 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-[var(--celeste)] transition-all">
+                        </div>
+
+                        <!-- Registrar Asesor Nuevo -->
+                        <button onclick="app.openNewAgentModal()"
+                            class="w-full sm:w-auto bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-[var(--text-main)] font-semibold text-xs px-3.5 py-2 rounded-xl flex items-center justify-center gap-1.5 transition-all">
+                            <i class="fa-solid fa-user-plus"></i> Registrar Asesor
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tabla Detallada -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr
+                                class="border-b border-slate-700/50 text-slate-400 text-[10px] uppercase font-bold tracking-wider">
+                                <th class="py-3 px-4">Asesor</th>
+                                <th class="py-3 px-4">Canal Asignado</th>
+                                <th class="py-3 px-4 text-center">AHT Real / Target</th>
+                                <th class="py-3 px-4 text-center">Calidad / Target</th>
+                                <th class="py-3 px-4 text-center">CSAT Logrado</th>
+                                <th class="py-3 px-4 text-center">Adherencia</th>
+                                <th class="py-3 px-4 text-center">Estatus</th>
+                                <th class="py-3 px-4 text-right">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="plantilla-table-body"
+                            class="divide-y divide-slate-800/30 text-xs text-[var(--text-main)]">
+                            <!-- Inyectado vía Script -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Paginación de la Plantilla -->
+                <div
+                    class="flex flex-col sm:flex-row justify-between items-center gap-4 mt-6 pt-4 border-t border-slate-700/30 text-xs text-slate-400">
+                    <div>
+                        Mostrando <span id="pag-start" class="font-bold text-[var(--text-main)]">1</span> a <span
+                            id="pag-end" class="font-bold text-[var(--text-main)]">10</span> de <span id="pag-total"
+                            class="font-bold text-[var(--text-main)]">10</span> asesores
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="app.prevPage()"
+                            class="px-3 py-1.5 rounded-lg bg-slate-800/40 dark:bg-slate-900/40 border border-slate-700/50 hover:bg-slate-700/50 transition-all text-[var(--text-main)] flex items-center gap-1">
+                            <i class="fa-solid fa-chevron-left text-[10px]"></i> Anterior
+                        </button>
+                        <button onclick="app.nextPage()"
+                            class="px-3 py-1.5 rounded-lg bg-slate-800/40 dark:bg-slate-900/40 border border-slate-700/50 hover:bg-slate-700/50 transition-all text-[var(--text-main)] flex items-center gap-1">
+                            Siguiente <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BITÁCORA UNIFICADA -->
+        <div class="card-glass p-6" title="Eventos en tiempo real de la operación de TIP México.">
+            <div class="flex justify-between items-center mb-4">
+                <div>
+                    <h4 class="text-md font-bold font-montserrat text-[var(--text-main)]">Bitácora GOC e Incidencias en
+                        Vivo (TIP)</h4>
+                    <p class="text-xs text-slate-400">Monitoreo de desvíos operativos detectados por nuestro software
+                    </p>
+                </div>
+                <button onclick="app.clearAlertsLog()"
+                    class="text-xs text-slate-400 hover:text-[var(--text-main)] border border-slate-700 hover:bg-slate-800/50 px-3 py-1.5 rounded-lg transition-all">
+                    Limpiar Bitácora
+                </button>
+            </div>
+            <div id="unified-alerts-feed" class="space-y-3 max-h-52 overflow-y-auto pr-2">
+                <!-- Inyectado vía Script -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER INMERSIVO MAESTRO CON EASTER EGG -->
+    <footer class="bg-[#222221] pt-20 border-t-4 border-[#EB5B27] relative overflow-hidden mt-20">
+        <div
+            class="absolute top-0 left-0 w-full overflow-hidden opacity-5 pointer-events-none select-none flex items-center justify-center">
+            <h2 class="font-momo text-[12vw] text-white whitespace-nowrap">THE VOICE OF YOUR COMPANY</h2>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16 text-slate-400">
+                <div>
+                    <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group"
+                        class="brand-logo bg-white rounded-2xl mb-6 shadow-lg shadow-white/5 p-4 w-32">
+                    <p class="text-sm font-medium">Consola GOC de monitoreo en tiempo real exclusiva para TIP México.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="subheading font-bold text-white mb-6 text-lg">Soporte Técnico GOC</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li>Monterrey 149, Roma Nte. CDMX.</li>
+                        <li><a href="mailto:ventas@telat-group.com"
+                                class="text-[#EB5B27] hover:text-[#FECA66] font-bold transition-colors">oscar.gomez@telat-group.com</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <!-- EASTER EGG OFICIAL DE MARCA -->
+                    <h4 class="subheading font-bold text-white mb-6 text-lg">Cultura Operativa</h4>
+                    <div class="trigger-egg inline-block cursor-pointer relative">
+                        <span class="text-sm hover:text-[#FECA66] transition-colors flex items-center gap-2">
+                            Stay Chill en Operaciones <span class="text-xl">🐾</span>
+                        </span>
+                        <!-- El perrito Golden Retriever Chill -->
+                        <div
+                            class="easter-egg-dog absolute bottom-full right-0 mb-4 w-48 bg-white text-[#222221] p-4 rounded-2xl shadow-xl border-2 border-[#EB5B27]">
+                            <p class="font-momo text-lg leading-tight mb-1">¡Stay Chill!</p>
+                            <p class="text-xs font-bold text-[#EB5B27]">Póngase a jalar 🐶🕶️</p>
+                            <div
+                                class="absolute -bottom-2 right-6 w-4 h-4 bg-white border-r-2 border-b-2 border-[#EB5B27] transform rotate-45">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 py-8 text-center text-slate-500 text-xs font-medium">
+                <p>&copy; 2026 Telat Group. No presumimos, resolvemos. Información Confidencial | TIP México.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lógica de Estado de GOC -->
+    <script>
+        class Application {
+            constructor() {
+                this.state = {
+                    theme: 'dark',
+                    activeTab: 'goc',
+                    agents: [],
+                    alerts: [],
+                    currentPage: 1,
+                    itemsPerPage: 10,
+                    searchQuery: '',
+                    selectedPiloto: 'todos',
+                    selectedStatus: 'todos',
+                    charts: {
+                        tsf: null,
+                        aht: null,
+                        curva: null
+                    },
+                    // Canales y Targets definidos por la RFQ de TIP México
+                    pilotos: {
+                        "Voz (Atención)": { targetAHT: 420, label: "07:00" },
+                        "WhatsApp": { targetAHT: 300, label: "05:00" },
+                        "Email": { targetAHT: 600, label: "10:00" },
+                        "Back-Office": { targetAHT: 480, label: "08:00" }
+                    }
+                };
+
+                // Personal TIP adaptado
+                this.namesSeed = [
+                    { nombre: "Carlos Rivera", piloto: "Voz (Atención)", mes: 3 },
+                    { nombre: "Ana Gómez", piloto: "Voz (Atención)", mes: 3 },
+                    { nombre: "Luis Martínez", piloto: "Voz (Atención)", mes: 2 },
+                    { nombre: "Sofía Hernández", piloto: "Voz (Atención)", mes: 1 },
+                    { nombre: "Jorge Pérez", piloto: "WhatsApp", mes: 3 },
+                    { nombre: "María González", piloto: "WhatsApp", mes: 2 },
+                    { nombre: "David Castillo", piloto: "Email", mes: 3 },
+                    { nombre: "Laura Flores", piloto: "Email", mes: 1 },
+                    { nombre: "Andrés Morales", piloto: "Back-Office", mes: 3 },
+                    { nombre: "Gabriela Ortiz", piloto: "Back-Office", mes: 2 }
+                ];
+
+                this.init();
+            }
+
+            init() {
+                this.generateTIPDatabase();
+                this.generateBaseAlerts();
+
+                // Simulador de Carga
+                setTimeout(() => {
+                    const ldr = document.getElementById('loader');
+                    if (ldr) {
+                        ldr.style.opacity = '0';
+                        setTimeout(() => ldr.style.display = 'none', 500);
+                    }
+                }, 1500);
+
+                window.addEventListener('DOMContentLoaded', () => {
+                    this.renderAllViews();
+                    this.initApexCharts();
+                });
+            }
+
+            toggleTheme() {
+                const html = document.documentElement;
+                const icon = document.getElementById('theme-icon');
+                if (html.getAttribute('data-theme') === 'dark') {
+                    html.setAttribute('data-theme', 'light');
+                    html.classList.remove('dark');
+                    icon.className = 'fa-solid fa-moon text-lg text-slate-800';
+                    this.state.theme = 'light';
+                } else {
+                    html.setAttribute('data-theme', 'dark');
+                    html.classList.add('dark');
+                    icon.className = 'fa-solid fa-sun text-lg text-yellow-400';
+                    this.state.theme = 'dark';
+                }
+                this.refreshChartsTheme();
+            }
+
+            switchTab(tabName) {
+                this.state.activeTab = tabName;
+
+                ['goc', 'calidad', 'plantilla'].forEach(t => {
+                    const btn = document.getElementById(`tab-btn-${t}`);
+                    if (btn) {
+                        if (t === tabName) btn.classList.add('active');
+                        else btn.classList.remove('active');
+                    }
+                });
+
+                ['goc', 'calidad', 'plantilla'].forEach(t => {
+                    const section = document.getElementById(`tab-section-${t}`);
+                    if (section) {
+                        if (t === tabName) section.classList.remove('hidden');
+                        else section.add ? section.add('hidden') : section.classList.add('hidden');
+                    }
+                });
+
+                // Evitar bugs de redibujado de ApexCharts
+                setTimeout(() => {
+                    if (tabName === 'goc') {
+                        this.state.charts.tsf.render();
+                        this.state.charts.aht.render();
+                    } else if (tabName === 'calidad') {
+                        this.state.charts.curva.render();
+                    }
+                }, 50);
+            }
+
+            // Generador de base de datos para TIP México (10 Agentes)
+            generateTIPDatabase() {
+                const agents = [];
+
+                for (let i = 0; i < this.namesSeed.length; i++) {
+                    const seed = this.namesSeed[i];
+                    const targetAHT = this.state.pilotos[seed.piloto].targetAHT;
+
+                    // Calidad progresiva por antigüedad en rampa
+                    let calidad = 91.2;
+                    if (seed.mes === 1) calidad = parseFloat((79 + Math.random() * 8).toFixed(1));
+                    else if (seed.mes === 2) calidad = parseFloat((84 + Math.random() * 7).toFixed(1));
+                    else calidad = parseFloat((89 + Math.random() * 9.5).toFixed(1));
+
+                    // AHT Real
+                    const desvAHT = (Math.random() * 80) - 30;
+                    const ahtReal = Math.round(targetAHT + desvAHT);
+
+                    // Sync SAP (Llegando a la excelencia solicitada en primer nivel)
+                    const sapSync = Math.random() > 0.2 ? 100.0 : parseFloat((94 + Math.random() * 6).toFixed(1));
+                    const ics = parseFloat((84 + Math.random() * 12.5).toFixed(1));
+                    const adherencia = parseFloat((94 + Math.random() * 5.2).toFixed(1));
+
+                    // Monitoreos mensuales (Meta contract: 8)
+                    const monTelat = seed.mes === 1 ? Math.floor(Math.random() * 2) + 4 : Math.floor(Math.random() * 2) + 6;
+                    const monInst = Math.floor(Math.random() * 2) + 1;
+                    const monSuper = Math.floor(Math.random() * 2) + 1;
+
+                    const desviacion = parseFloat(((Math.random() * 6) - 3).toFixed(1));
+                    let estatus = "Activo";
+                    if (calidad < 80 || adherencia < 94) {
+                        estatus = "En Riesgo";
+                    }
+
+                    agents.push({
+                        id: `TIP-${String(i + 1).padStart(3, '0')}`,
+                        nombre: seed.nombre,
+                        piloto: seed.piloto,
+                        mes: seed.mes,
+                        aht: ahtReal,
+                        targetAHT: targetAHT,
+                        calidad: calidad,
+                        sap_sync: sapSync,
+                        ics: ics,
+                        adherencia: adherencia,
+                        mon_telat: monTelat,
+                        mon_inst: monInst,
+                        mon_super: monSuper,
+                        desviacion: desviacion,
+                        estatus: estatus
+                    });
+                }
+                this.state.agents = agents;
+            }
+
+            generateBaseAlerts() {
+                this.state.alerts = [
+                    {
+                        id: 1,
+                        timestamp: "12:15",
+                        agente: "TIP-004 - Sofía Hernández",
+                        tipo: "AHT Elevado en Canal Voz",
+                        descripcion: "Llamada activa de aclaración de cuenta excede los 9 minutos. Se sugiere activar copiloto de soporte técnico.",
+                        severidad: "medium"
+                    },
+                    {
+                        id: 2,
+                        timestamp: "11:42",
+                        agente: "TIP-008 - Laura Flores",
+                        tipo: "Conexión de Adherencia en Riesgo",
+                        descripcion: "Falta de conexión detectada al inicio de turno de email. Agente se conecta con 10 minutos de demora.",
+                        severidad: "low"
+                    }
+                ];
+            }
+
+            renderAllViews() {
+                const active = this.state.agents;
+
+                // Actualizar Abandono en base a la meta TIP (3%)
+                const avgAbandono = parseFloat((1.2 + Math.random() * 1.5).toFixed(2));
+                const abandonoEl = document.getElementById('goc-abandono');
+                const abandonoLbl = document.getElementById('goc-abandono-label');
+                if (abandonoEl && abandonoLbl) {
+                    abandonoEl.innerText = `${avgAbandono}%`;
+                    if (avgAbandono <= 3.0) {
+                        abandonoLbl.className = "text-xs font-semibold flex items-center gap-1 mt-2 text-emerald-400";
+                        abandonoLbl.innerHTML = '<i class="fa-solid fa-shield-halved"></i> Meta TIP &le; 3.0%';
+                    } else {
+                        abandonoLbl.className = "text-xs font-semibold flex items-center gap-1 mt-2 text-rose-500";
+                        abandonoLbl.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Abandono Excedido';
+                    }
+                }
+
+                // Adherencia Promedio
+                const avgAdherencia = active.reduce((acc, curr) => acc + curr.adherencia, 0) / active.length;
+                const adhEl = document.getElementById('goc-adherencia');
+                if (adhEl) adhEl.innerText = `${avgAdherencia.toFixed(2)}%`;
+
+                // CSAT Promedio (Meta TIP: 85%)
+                const avgIcs = active.reduce((acc, curr) => acc + curr.ics, 0) / active.length;
+                const calIcs = document.getElementById('cal-ics');
+                const calIcsLbl = document.getElementById('cal-ics-label');
+                if (calIcs && calIcsLbl) {
+                    calIcs.innerText = `${avgIcs.toFixed(2)}%`;
+                    if (avgIcs >= 85.0) {
+                        calIcsLbl.className = "text-xs font-semibold flex items-center gap-1 mt-2 text-emerald-400";
+                        calIcsLbl.innerHTML = '<i class="fa-solid fa-circle-check"></i> Cumple Meta &ge; 85%';
+                    } else {
+                        calIcsLbl.className = "text-xs font-semibold flex items-center gap-1 mt-2 text-rose-500";
+                        calIcsLbl.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Abajo de Meta CSAT';
+                    }
+                }
+
+                // Calidad General Promedio
+                const avgCal = active.reduce((acc, curr) => acc + curr.calidad, 0) / active.length;
+                const calGen = document.getElementById('cal-general');
+                if (calGen) calGen.innerText = avgCal.toFixed(2);
+
+                // Desviación en calibración
+                const avgDesv = active.reduce((acc, curr) => acc + Math.abs(curr.desviacion), 0) / active.length;
+                const calDesv = document.getElementById('cal-desviacion');
+                if (calDesv) calDesv.innerText = `\u00B1 ${avgDesv.toFixed(1)} pts`;
+
+                // Conteo de Monitoreos
+                const totalTelatMon = active.reduce((acc, curr) => acc + curr.mon_telat, 0);
+                const totalInstMon = active.reduce((acc, curr) => acc + curr.mon_inst, 0);
+                const totalSuperMon = active.reduce((acc, curr) => acc + curr.mon_super, 0);
+
+                const goalTelat = active.length * 8;
+                const goalInst = active.length * 2;
+                const goalSuper = active.length * 2;
+
+                const monTelatText = document.getElementById('cal-quota-telat-text');
+                const monTelatBar = document.getElementById('cal-quota-telat-bar');
+                if (monTelatText && monTelatBar) {
+                    monTelatText.innerText = `${totalTelatMon} / ${goalTelat}`;
+                    monTelatBar.style.width = `${Math.min(100, (totalTelatMon / goalTelat) * 100)}%`;
+                }
+
+                const monInstText = document.getElementById('cal-quota-inst-text');
+                const monInstBar = document.getElementById('cal-quota-inst-bar');
+                if (monInstText && monInstBar) {
+                    monInstText.innerText = `${totalInstMon} / ${goalInst}`;
+                    monInstBar.style.width = `${Math.min(100, (totalInstMon / goalInst) * 100)}%`;
+                }
+
+                const monSuperText = document.getElementById('cal-quota-super-text');
+                const monSuperBar = document.getElementById('cal-quota-super-bar');
+                if (monSuperText && monSuperBar) {
+                    monSuperText.innerText = `${totalSuperMon} / ${goalSuper}`;
+                    monSuperBar.style.width = `${Math.min(100, (totalSuperMon / goalSuper) * 100)}%`;
+                }
+
+                this.renderPlantillaTable();
+                this.renderAlerts();
+            }
+
+            renderPlantillaTable() {
+                const tbody = document.getElementById('plantilla-table-body');
+                if (!tbody) return;
+                tbody.innerHTML = '';
+
+                let filtered = this.state.agents;
+
+                if (this.state.selectedPiloto !== 'todos') {
+                    filtered = filtered.filter(a => a.piloto === this.state.selectedPiloto);
+                }
+
+                if (this.state.selectedStatus !== 'todos') {
+                    filtered = filtered.filter(a => a.estatus === this.state.selectedStatus);
+                }
+
+                if (this.state.searchQuery.trim() !== '') {
+                    const q = this.state.searchQuery.toLowerCase();
+                    filtered = filtered.filter(a => a.nombre.toLowerCase().includes(q) || a.id.toLowerCase().includes(q));
+                }
+
+                const total = filtered.length;
+                const totalEl = document.getElementById('pag-total');
+                if (totalEl) totalEl.innerText = total;
+
+                const startIdx = (this.state.currentPage - 1) * this.state.itemsPerPage;
+                const endIdx = Math.min(startIdx + this.state.itemsPerPage, total);
+
+                const pagStart = document.getElementById('pag-start');
+                const pagEnd = document.getElementById('pag-end');
+                if (pagStart && pagEnd) {
+                    pagStart.innerText = total === 0 ? 0 : startIdx + 1;
+                    pagEnd.innerText = endIdx;
+                }
+
+                const paginated = filtered.slice(startIdx, endIdx);
+
+                if (paginated.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="8" class="py-8 text-center text-slate-400">
+                                <i class="fa-solid fa-circle-question text-xl block mb-2"></i> Sin asesores registrados para los filtros seleccionados.
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                paginated.forEach(a => {
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-slate-800/10 dark:hover:bg-slate-800/30 transition-colors";
+
+                    const ahtRealFm = this.formatSeconds(a.aht);
+                    const ahtTargetFm = this.state.pilotos[a.piloto].label;
+                    const ahtColor = a.aht > a.targetAHT ? 'text-rose-500 font-semibold' : 'text-emerald-500 font-semibold';
+
+                    let targetCalidad = 90;
+                    if (a.mes === 1) targetCalidad = 80;
+                    else if (a.mes === 2) targetCalidad = 85;
+                    const calColor = a.calidad < targetCalidad ? 'text-rose-500 font-bold' : 'text-emerald-500 font-bold';
+
+                    let statusBadge = '';
+                    if (a.estatus === 'Activo') {
+                        statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Activo</span>';
+                    } else {
+                        statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/10 text-amber-500 border border-amber-500/20">Riesgo</span>';
+                    }
+
+                    tr.innerHTML = `
+                        <td class="py-3 px-4 font-semibold">
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-slate-700/20 dark:bg-slate-800/50 text-[var(--celeste)] font-bold flex items-center justify-center text-[10px] border border-slate-700/20">
+                                    ${a.nombre.split(' ').map(n => n[0]).join('')}
+                                </div>
+                                <div>
+                                    <p class="font-montserrat">${a.nombre}</p>
+                                    <p class="text-[10px] text-slate-500">${a.id}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="py-3 px-4 text-slate-500 font-bold">${a.piloto}</td>
+                        <td class="py-3 px-4 text-center">
+                            <span class="${ahtColor}">${ahtRealFm}</span> <span class="text-[10px] text-slate-500">/ ${ahtTargetFm}</span>
+                        </td>
+                        <td class="py-3 px-4 text-center">
+                            <span class="${calColor}">${a.calidad.toFixed(1)}</span> <span class="text-[10px] text-slate-500">/ ${targetCalidad}</span>
+                        </td>
+                        <td class="py-3 px-4 text-center font-bold text-emerald-500">${a.ics.toFixed(1)}%</td>
+                        <td class="py-3 px-4 text-center text-slate-500 font-semibold">${a.adherencia}%</td>
+                        <td class="py-3 px-4 text-center">${statusBadge}</td>
+                        <td class="py-3 px-4 text-right">
+                            <button onclick="app.actionPlanCoaching('${a.id}')" class="text-[10px] font-montserrat text-[var(--celeste)] hover:text-white border border-[var(--celeste)] hover:bg-[var(--celeste)] px-2.5 py-1 rounded-lg transition-all font-bold">
+                                Coaching GOC
+                            </button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+
+            renderAlerts() {
+                const feed = document.getElementById('unified-alerts-feed');
+                if (!feed) return;
+                feed.innerHTML = '';
+
+                if (this.state.alerts.length === 0) {
+                    feed.innerHTML = `
+                        <div class="text-center py-6 text-slate-500 text-xs">
+                            <i class="fa-solid fa-circle-check text-emerald-400 text-lg mb-2 block animate-bounce"></i> Operación TIP México en orden. Sin anomalías en vivo.
+                        </div>
+                    `;
+                    return;
+                }
+
+                this.state.alerts.forEach(a => {
+                    let borderCol = 'border-l-4 border-amber-500';
+                    let icon = 'fa-triangle-exclamation text-amber-500';
+
+                    if (a.severidad === 'high') {
+                        borderCol = 'border-l-4 border-rose-600';
+                        icon = 'fa-radiation text-rose-500 animate-pulse';
+                    }
+
+                    const div = document.createElement('div');
+                    div.className = `p-3 rounded-xl bg-slate-800/10 dark:bg-slate-900/40 border border-slate-700/20 flex items-start gap-3 ${borderCol} hover:bg-slate-800/30 dark:hover:bg-slate-800/40 transition-all`;
+                    div.innerHTML = `
+                        <div class="mt-0.5 text-base">
+                            <i class="fa-solid ${icon}"></i>
+                        </div>
+                        <div class="flex-1 min-w-0 text-xs">
+                            <div class="flex justify-between items-center mb-0.5">
+                                <span class="font-bold font-montserrat text-[var(--text-main)]">${a.tipo}</span>
+                                <span class="text-[10px] text-slate-500 font-mono">${a.timestamp}</span>
+                            </div>
+                            <p class="text-[var(--text-main)] font-semibold mb-0.5">${a.agente}</p>
+                            <p class="text-slate-400 leading-normal">${a.descripcion}</p>
+                        </div>
+                    `;
+                    feed.appendChild(div);
+                });
+            }
+
+            triggerGOCSimulation() {
+                const randomAgent = this.state.agents[Math.floor(Math.random() * this.state.agents.length)];
+
+                const incidents = [
+                    {
+                        tipo: "AHT Excedido en Voz",
+                        descripcion: "Se detectó hold prolongado superior a 4 minutos en llamada de atención del canal Voz.",
+                        severidad: "high"
+                    },
+                    {
+                        tipo: "Fuga de Adherencia WhatsApp",
+                        descripcion: "Agente inactivo por más de 10 minutos sin causa justificada en el canal de mensajería.",
+                        severidad: "high"
+                    },
+                    {
+                        tipo: "Omisión de Registro en TIP-CRM",
+                        descripcion: "Interacción finalizada en telefonía sin registro de ticket correspondiente en el sistema TIP.",
+                        severidad: "medium"
+                    }
+                ];
+
+                const mock = incidents[Math.floor(Math.random() * incidents.length)];
+                const d = new Date();
+                const timeStr = `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+
+                const alertObj = {
+                    id: Date.now(),
+                    timestamp: timeStr,
+                    agente: `${randomAgent.id} - ${randomAgent.nombre} (${randomAgent.piloto})`,
+                    tipo: mock.tipo,
+                    descripcion: mock.descripcion,
+                    severidad: mock.severidad
+                };
+
+                this.state.alerts.unshift(alertObj);
+
+                randomAgent.adherencia = parseFloat((randomAgent.adherencia * 0.95).toFixed(1));
+                randomAgent.aht = Math.round(randomAgent.aht * 1.35); // Afecta el AHT real
+
+                if (mock.severidad === 'high') {
+                    randomAgent.estatus = 'En Riesgo';
+                }
+
+                this.renderAllViews();
+                this.refreshChartsData();
+
+                Swal.fire({
+                    title: '¡Desvío de Tránsito Simulado!',
+                    html: `Se inyectó una alerta de <strong>${mock.tipo}</strong> en el canal <strong>${randomAgent.piloto}</strong>.<br><small>El tablero recalculó las métricas en vivo de TIP México.</small>`,
+                    icon: 'warning',
+                    confirmButtonColor: '#3284C6'
+                });
+            }
+
+            clearAlertsLog() {
+                this.state.alerts = [];
+                this.renderAlerts();
+                Swal.fire({
+                    title: 'Bitácora Limpia',
+                    text: 'Todos los registros de incidencias TIP han sido borrados de la memoria.',
+                    icon: 'success',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            }
+
+            filterByPiloto(val) {
+                this.state.selectedPiloto = val;
+                this.state.currentPage = 1;
+                this.renderPlantillaTable();
+            }
+
+            filterByStatus(val) {
+                this.state.selectedStatus = val;
+                this.state.currentPage = 1;
+                this.renderPlantillaTable();
+            }
+
+            searchPlantilla(val) {
+                this.state.searchQuery = val;
+                this.state.currentPage = 1;
+                this.renderPlantillaTable();
+            }
+
+            prevPage() {
+                if (this.state.currentPage > 1) {
+                    this.state.currentPage--;
+                    this.renderPlantillaTable();
+                }
+            }
+
+            nextPage() {
+                let filtered = this.state.agents;
+                if (this.state.selectedPiloto !== 'todos') filtered = filtered.filter(a => a.piloto === this.state.selectedPiloto);
+                if (this.state.selectedStatus !== 'todos') filtered = filtered.filter(a => a.estatus === this.state.selectedStatus);
+                if (this.state.searchQuery.trim() !== '') {
+                    const q = this.state.searchQuery.toLowerCase();
+                    filtered = filtered.filter(a => a.nombre.toLowerCase().includes(q) || a.id.toLowerCase().includes(q));
+                }
+
+                if (this.state.currentPage < Math.ceil(filtered.length / this.state.itemsPerPage)) {
+                    this.state.currentPage++;
+                    this.renderPlantillaTable();
+                }
+            }
+
+            actionPlanCoaching(agentId) {
+                const agent = this.state.agents.find(a => a.id === agentId);
+                if (!agent) return;
+
+                Swal.fire({
+                    title: `Coaching GOC TIP: ${agent.nombre}`,
+                    html: `
+                        <div class="text-left text-xs space-y-3">
+                            <p><strong>Canal Asignado:</strong> ${agent.piloto}</p>
+                            <p><strong>AHT Promedio:</strong> ${this.formatSeconds(agent.aht)} (Target: ${this.state.pilotos[agent.piloto].label})</p>
+                            <p><strong>ICS del Agente:</strong> ${agent.ics.toFixed(1)}%</p>
+                            <hr class="border-slate-300 dark:border-slate-700">
+                            <label class="block font-bold">Tipo de Reforzamiento Operativo:</label>
+                            <select id="swal-goc-type" class="w-full p-2 border rounded-lg bg-white dark:bg-slate-800 text-slate-800 dark:text-white border-slate-300 dark:border-slate-700">
+                                <option value="Optimización de AHT">Estrategia de Optimización de AHT y Reducción de Hold</option>
+                                <option value="Apego a Procesos">Apego estricto a procesos y validación de datos TIP</option>
+                                <option value="Mejora de FCR">Tácticas de Resolución en Primer Contacto (FCR)</option>
+                            </select>
+                            <label class="block font-bold mt-2">Notas de Compromiso:</label>
+                            <textarea id="swal-goc-notes" class="w-full p-2 border rounded-lg bg-white dark:bg-slate-800 text-slate-800 dark:text-white border-slate-300 dark:border-slate-700 text-[11px]" rows="3" placeholder="Ingresar notas..."></textarea>
+                        </div>
+                    `,
+                    showCancelButton: true,
+                    confirmButtonText: 'Aplicar Plan',
+                    cancelButtonText: 'Cerrar',
+                    confirmButtonColor: '#3284C6',
+                    preConfirm: () => {
+                        return {
+                            tipo: document.getElementById('swal-goc-type').value,
+                            notes: document.getElementById('swal-goc-notes').value
+                        };
+                    }
+                }).then((r) => {
+                    if (r.isConfirmed) {
+                        Swal.fire({
+                            title: 'Plan de Reforzamiento Registrado',
+                            text: `Se ha guardado el plan de '${r.value.tipo}' en la bitácora operativa de Telat para TIP.`,
+                            icon: 'success',
+                            confirmButtonColor: '#3284C6'
+                        });
+                    }
+                });
+            }
+
+            openNewAgentModal() {
+                Swal.fire({
+                    title: 'Dar de Alta Nuevo Asesor TIP',
+                    html: `
+                        <div class="text-left text-xs space-y-3">
+                            <label class="block font-bold">Nombre Completo:</label>
+                            <input id="new-name" class="w-full p-2 border rounded-lg bg-white dark:bg-slate-800 text-slate-800 dark:text-white border-slate-300 dark:border-slate-700" placeholder="Nombre completo...">
+                            
+                            <label class="block font-bold">Canal de Servicio:</label>
+                            <select id="new-piloto" class="w-full p-2 border rounded-lg bg-white dark:bg-slate-800 text-slate-800 dark:text-white border-slate-300 dark:border-slate-700">
+                                <option value="Voz (Atención)">Voz (Atención)</option>
+                                <option value="WhatsApp">WhatsApp</option>
+                                <option value="Email">Email</option>
+                                <option value="Back-Office">Back-Office</option>
+                            </select>
+                        </div>
+                    `,
+                    showCancelButton: true,
+                    confirmButtonText: 'Registrar',
+                    confirmButtonColor: '#3284C6',
+                    preConfirm: () => {
+                        const name = document.getElementById('new-name').value;
+                        const piloto = document.getElementById('new-piloto').value;
+                        if (!name.trim()) {
+                            Swal.showValidationMessage('El nombre completo es obligatorio');
+                        }
+                        return { name, piloto };
+                    }
+                }).then((r) => {
+                    if (r.isConfirmed) {
+                        const newId = `TIP-${String(this.state.agents.length + 1).padStart(3, '0')}`;
+                        const targetAHT = this.state.pilotos[r.value.piloto].targetAHT;
+
+                        this.state.agents.push({
+                            id: newId,
+                            nombre: r.value.name,
+                            piloto: r.value.piloto,
+                            mes: 1, // Rampa (Mes 1)
+                            aht: targetAHT,
+                            targetAHT: targetAHT,
+                            calidad: 85.0,
+                            sap_sync: 100.0,
+                            ics: 90.0,
+                            adherencia: 96.0,
+                            mon_telat: 0,
+                            mon_inst: 0,
+                            mon_super: 0,
+                            desviacion: 0.0,
+                            estatus: 'Activo'
+                        });
+
+                        this.renderAllViews();
+                        this.refreshChartsData();
+                        Swal.fire({
+                            title: 'Asesor Registrado',
+                            text: `Asesor ${r.value.name} agregado exitosamente con ID ${newId}.`,
+                            icon: 'success',
+                            confirmButtonColor: '#3284C6'
+                        });
+                    }
+                });
+            }
+
+            initApexCharts() {
+                const isDark = this.state.theme === 'dark';
+                const textCol = isDark ? '#94a3b8' : '#475569';
+
+                // Chart 1: Radial TSF por Canal (Atención TIP)
+                const tsfOptions = {
+                    series: [86.4, 88.1, 96.5],
+                    chart: {
+                        type: 'radialBar',
+                        height: 250,
+                        foreColor: textCol
+                    },
+                    plotOptions: {
+                        radialBar: {
+                            dataLabels: {
+                                name: { fontSize: '13px', fontFamily: 'Montserrat', fontWeight: 600 },
+                                value: {
+                                    fontSize: '15px',
+                                    fontFamily: 'Roboto',
+                                    formatter: (val) => `${val}%`
+                                },
+                                total: {
+                                    show: true,
+                                    label: 'Promedio',
+                                    formatter: () => '90.3%'
+                                }
+                            }
+                        }
+                    },
+                    colors: ['#3284C6', '#a855f7', '#EB5B27'],
+                    labels: ['Voz', 'WhatsApp', 'Email'],
+                };
+                this.state.charts.tsf = new ApexCharts(document.getElementById("goc-chart-tsf"), tsfOptions);
+                this.state.charts.tsf.render();
+
+                // Chart 2: AHT vs Target por Canal (SLA TIP)
+                const ahtOptions = {
+                    series: [
+                        { name: 'AHT Promedio Real (s)', data: [405, 290, 580, 465] },
+                        { name: 'AHT Target Contractual (s)', data: [420, 300, 600, 480] }
+                    ],
+                    chart: {
+                        type: 'bar',
+                        height: 250,
+                        toolbar: { show: false },
+                        foreColor: textCol
+                    },
+                    plotOptions: {
+                        bar: {
+                            horizontal: false,
+                            columnWidth: '55%',
+                            borderRadius: 6
+                        },
+                    },
+                    dataLabels: { enabled: false },
+                    stroke: { show: true, width: 2, colors: ['transparent'] },
+                    xaxis: {
+                        categories: ['Voz (Atención)', 'WhatsApp', 'Email', 'Back-Office'],
+                    },
+                    yaxis: { title: { text: 'Segundos' } },
+                    fill: { opacity: 1 },
+                    colors: ['#3284C6', '#EB5B27'],
+                };
+                this.state.charts.aht = new ApexCharts(document.getElementById("goc-chart-aht"), ahtOptions);
+                this.state.charts.aht.render();
+
+                // Chart 3: Curva de Aprendizaje Progresiva
+                const curvaOptions = {
+                    series: [
+                        { name: 'Calidad Lograda', type: 'column', data: [82.5, 87.8, 92.1] },
+                        { name: 'Meta Contractual', type: 'line', data: [80, 85, 90] }
+                    ],
+                    chart: {
+                        height: 250,
+                        type: 'line',
+                        toolbar: { show: false },
+                        foreColor: textCol
+                    },
+                    stroke: { width: [0, 4] },
+                    colors: ['#3284C6', '#EB5B27'],
+                    labels: ['Mes 1 (80 pts)', 'Mes 2 (85 pts)', 'Mes 3+ (90 pts)'],
+                    yaxis: { min: 70, max: 100 },
+                    plotOptions: {
+                        bar: { columnWidth: '40%', borderRadius: 6 }
+                    }
+                };
+                this.state.charts.curva = new ApexCharts(document.getElementById("cal-chart-curva"), curvaOptions);
+                this.state.charts.curva.render();
+            }
+
+            refreshChartsData() {
+                const active = this.state.agents;
+
+                // 1. TSF por Canal
+                const tsfVoz = parseFloat((82 + Math.random() * 5).toFixed(1));
+                const tsfWhatsApp = parseFloat((84 + Math.random() * 5).toFixed(1));
+                const tsfEmail = parseFloat((94 + Math.random() * 3).toFixed(1));
+                this.state.charts.tsf.updateSeries([tsfVoz, tsfWhatsApp, tsfEmail]);
+
+                document.getElementById('goc-tsf-voz').innerText = `${tsfVoz}%`;
+                document.getElementById('goc-tsf-texto').innerText = `${tsfWhatsApp}%`;
+                document.getElementById('goc-tsf-bot').innerText = `${tsfEmail}%`;
+
+                // 2. AHT por Canales
+                const listaPilotos = Object.keys(this.state.pilotos);
+                const realAHTValues = listaPilotos.map(p => {
+                    const filtered = active.filter(a => a.piloto === p);
+                    return filtered.length ? Math.round(filtered.reduce((acc, curr) => acc + curr.aht, 0) / filtered.length) : this.state.pilotos[p].targetAHT;
+                });
+                const targetAHTValues = listaPilotos.map(p => this.state.pilotos[p].targetAHT);
+
+                this.state.charts.aht.updateSeries([
+                    { name: 'AHT Promedio Real (s)', data: realAHTValues },
+                    { name: 'AHT Target Contractual (s)', data: targetAHTValues }
+                ]);
+
+                // 3. Calidad por Rampa
+                const m1 = active.filter(a => a.mes === 1);
+                const m2 = active.filter(a => a.mes === 2);
+                const m3 = active.filter(a => a.mes === 3);
+
+                const avgM1 = m1.length ? parseFloat((m1.reduce((acc, curr) => acc + curr.calidad, 0) / m1.length).toFixed(1)) : 80;
+                const avgM2 = m2.length ? parseFloat((m2.reduce((acc, curr) => acc + curr.calidad, 0) / m2.length).toFixed(1)) : 85;
+                const avgM3 = m3.length ? parseFloat((m3.reduce((acc, curr) => acc + curr.calidad, 0) / m3.length).toFixed(1)) : 90;
+
+                this.state.charts.curva.updateSeries([
+                    { name: 'Calidad Lograda', type: 'column', data: [avgM1, avgM2, avgM3] },
+                    { name: 'Meta Contractual', type: 'line', data: [80, 85, 90] }
+                ]);
+            }
+
+            refreshChartsTheme() {
+                const isDark = this.state.theme === 'dark';
+                const textCol = isDark ? '#94a3b8' : '#475569';
+
+                this.state.charts.tsf.updateOptions({ chart: { foreColor: textCol } });
+                this.state.charts.aht.updateOptions({ chart: { foreColor: textCol } });
+                this.state.charts.curva.updateOptions({ chart: { foreColor: textCol } });
+            }
+
+            formatSeconds(sec) {
+                const m = Math.floor(sec / 60);
+                const s = Math.round(sec % 60);
+                return `${m}:${s < 10 ? '0' : ''}${s}`;
+            }
+        }
+
+        const app = new Application();
+    </script>
 </body>
+
 </html>
