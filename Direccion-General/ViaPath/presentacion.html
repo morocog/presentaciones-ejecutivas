@@ -1,1 +1,1176 @@
-<!-- PRESENTACIÓN EJECUTIVA VIAPATH - CAPACIDADES IA & GENERADOR DE NOTAS -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telat & ViaPath Partnership 2026</title>
+
+    <!-- Import Google Fonts (DM Sans & Montserrat) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700&family=Montserrat:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        /* 1. TYPOGRAPHY SYSTEM */
+        @font-face {
+            font-family: 'Momo Trust';
+            src: local('Impact'), local('Arial Black');
+            font-weight: 800;
+            font-display: swap;
+        }
+
+        /* 2. CHROMATIC TOKENS */
+        :root {
+            --oscuro: #222221;
+            --azul-claro: #FBFBFD;
+            --celeste: #3284C6;
+            --naranja: #EB5B27;
+            --naranja-claro: #FECA66;
+            --grad-vibrante: linear-gradient(135deg, var(--celeste) 0%, var(--naranja-claro) 100%);
+        }
+
+        body {
+            background-color: var(--oscuro);
+            color: var(--azul-claro);
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            overflow: hidden;
+            /* Prevent scrolling on presentation screens */
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .font-momo {
+            font-family: 'Momo Trust', sans-serif;
+        }
+
+        .subheading,
+        button,
+        .kpi-badge {
+            font-family: 'DM Sans', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        /* 3. SLIDE SHOW LOGIC */
+        #presentation-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: scale(0.98) translateY(10px);
+            display: flex;
+            flex-direction: column;
+            z-index: 1;
+            background-color: var(--azul-claro);
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1) translateY(0);
+            z-index: 10;
+        }
+
+        /* Specific Slide Backgrounds */
+        .bg-dark-slide {
+            background-color: var(--oscuro);
+            color: var(--azul-claro);
+        }
+
+        .bg-light-slide {
+            background-color: var(--azul-claro);
+            color: var(--oscuro);
+        }
+
+        /* 4. UI COMPONENTS */
+        .kpi-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.4rem;
+            border-radius: 9999px;
+            font-size: 1rem;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .kpi-up {
+            background-color: rgba(50, 132, 198, 0.12);
+            color: #3284C6;
+            border: 2.5px solid rgba(50, 132, 198, 0.25);
+        }
+
+        .kpi-down {
+            background-color: rgba(235, 91, 39, 0.12);
+            color: #EB5B27;
+            border: 2.5px solid rgba(235, 91, 39, 0.25);
+        }
+
+        .kpi-neutral {
+            background-color: rgba(254, 202, 102, 0.12);
+            color: #b48512;
+            border: 2.5px solid rgba(254, 202, 102, 0.25);
+        }
+
+        /* 5. ANIMATIONS */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes spin-slow {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animate-spin-slow {
+            animation: spin-slow 20s linear infinite;
+        }
+
+        @keyframes pulse-tech {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.6;
+                transform: scale(1.03);
+            }
+        }
+
+        .animate-pulse-tech {
+            animation: pulse-tech 3s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+
+            0%,
+            100% {
+                transform: rotate(-3deg);
+            }
+
+            50% {
+                transform: rotate(3deg);
+            }
+        }
+
+        .animate-wiggle {
+            animation: wiggle 4s ease-in-out infinite;
+        }
+
+        /* Controls & Navigation */
+        #controls {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 100;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .control-btn {
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            background-color: var(--oscuro);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .control-btn:hover {
+            background-color: var(--naranja);
+            transform: scale(1.1);
+            border-color: var(--naranja);
+        }
+
+        #progress-bar-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background-color: rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        #progress-bar {
+            height: 100%;
+            background: var(--grad-vibrante);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        #slide-counter {
+            position: fixed;
+            bottom: 2.5rem;
+            left: 2rem;
+            z-index: 100;
+            font-family: 'Momo Trust', sans-serif;
+            font-size: 1.5rem;
+            color: var(--celeste);
+            opacity: 0.7;
+        }
+
+        /* Dynamic Frames Glow */
+        .glow-frame-celeste {
+            box-shadow: 0 20px 50px rgba(50, 132, 198, 0.25);
+            border: 2px solid rgba(50, 132, 198, 0.3);
+        }
+
+        .glow-frame-naranja {
+            box-shadow: 0 20px 50px rgba(235, 91, 39, 0.25);
+            border: 2px solid rgba(235, 91, 39, 0.3);
+        }
+
+        .glow-frame-amarillo {
+            box-shadow: 0 20px 50px rgba(254, 202, 102, 0.25);
+            border: 2px solid rgba(254, 202, 102, 0.3);
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-[#FECA66] selection:text-[#222221]">
+
+    <div id="presentation-container">
+
+        <!-- SLIDE 1: PORTADA -->
+        <div class="slide bg-dark-slide active overflow-hidden" id="slide-1">
+
+            <!-- VIDEO DE FONDO VIMEO -->
+            <div class="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden bg-[#222221]">
+                <iframe
+                    src="https://player.vimeo.com/video/1195458364?background=1&autopause=0&muted=1&loop=1&autoplay=1"
+                    class="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 mix-blend-screen opacity-80"
+                    frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                </iframe>
+                <div class="absolute inset-0 bg-black/50"></div>
+            </div>
+
+            <!-- Doodles Hero -->
+            <div class="absolute top-20 right-32 animate-float opacity-80 z-10">
+                <svg width="120" height="120" viewBox="0 0 100 100" fill="none">
+                    <path
+                        d="M50 0L56.5 35.5L95 20.5L66 50L95 79.5L56.5 64.5L50 100L43.5 64.5L5 79.5L34 50L5 20.5L43.5 35.5L50 0Z"
+                        fill="#FECA66" />
+                </svg>
+            </div>
+            <div class="absolute bottom-20 left-20 animate-spin-slow opacity-30 z-10">
+                <svg width="200" height="200" viewBox="0 0 100 100" fill="none">
+                    <circle cx="50" cy="50" r="45" stroke="#3284C6" stroke-width="2" stroke-dasharray="10 15" />
+                    <circle cx="50" cy="50" r="30" stroke="#EB5B27" stroke-width="2" stroke-dasharray="5 10" />
+                </svg>
+            </div>
+
+            <!-- Contenido Central -->
+            <div class="w-full h-full flex flex-col items-center justify-center text-center px-10 relative z-20">
+                <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group"
+                    class="h-24 mb-12 bg-white/10 p-4 rounded-3xl backdrop-blur-md border border-white/20 shadow-2xl">
+                <h1 class="font-momo text-[5.5rem] leading-[0.9] mb-6 drop-shadow-2xl">
+                    TELAT & VIAPATH<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#3284C6] to-[#FECA66]">BEYOND THE
+                        VOICE</span>
+                </h1>
+                <p class="text-2xl font-medium text-white/90 max-w-3xl drop-shadow-lg">
+                    A behind-the-scenes look at the proprietary technology suite protecting your operations, metrics,
+                    and customer experience.
+                </p>
+            </div>
+        </div>
+
+
+        <!-- SLIDE 2: KUDOS 3.0 (RETENTION & CONSISTENCY) -->
+        <div class="slide bg-light-slide" id="slide-2">
+            <div class="w-full h-full flex px-16 py-12 gap-12 items-center flex-row-reverse">
+                <!-- Video Section -->
+                <div class="w-[55%] h-[80%] relative rounded-[3rem] bg-[#222221] p-2 glow-frame-naranja">
+                    <div
+                        class="absolute -top-7 -right-7 bg-white border-4 border-[#EB5B27] text-[#EB5B27] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[5deg] shadow-xl">
+                        Retention</div>
+
+                    <div id="media-kudos"
+                        class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
+                        <iframe
+                            src="https://player.vimeo.com/video/1195446645?background=1&autopause=0&muted=1&loop=1&autoplay=1"
+                            class="absolute inset-0 w-full h-full scale-[1.05]" frameborder="0"
+                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Text Section -->
+                <div class="w-[45%] flex flex-col justify-center">
+                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">How do we guarantee service
+                        consistency and prevent agent attrition?</h2>
+
+                    <div class="mb-4">
+                        <h4 class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-xs mb-1">The
+                            Challenge</h4>
+                        <p class="text-[1.15rem] text-gray-600 font-medium">Constant agent turnover in traditional BPOs
+                            triggers endless learning curves, hurting quality and campaign metrics.</p>
+                    </div>
+
+                    <div class="mb-8">
+                        <h4 class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-xs mb-1">Our
+                            Technology (Kudos 3.0)</h4>
+                        <p class="text-[1.15rem] text-[#222221] font-bold">An automated recognition and performance
+                            gamification system. It instantly awards transparent, objective bonuses to top-performing
+                            agents on the floor.</p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4">
+                        <span class="kpi-badge kpi-up">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5">
+                                </path>
+                            </svg>
+                            <span>Customer Satisfaction (CSAT)</span>
+                        </span>
+                        <span class="kpi-badge kpi-down">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5">
+                                </path>
+                            </svg>
+                            <span>Agent Turn Rate on Floor</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- SLIDE 3: TORRE DE CONTROL (BILLABLE HOUR PRODUCTIVITY) -->
+        <div class="slide bg-dark-slide" id="slide-3">
+            <div class="w-full h-full flex px-16 py-12 gap-12 items-center flex-row-reverse">
+                <!-- Video Section -->
+                <div class="w-[55%] h-[80%] relative rounded-[3rem] bg-white p-2 glow-frame-naranja">
+                    <div
+                        class="absolute -top-7 -right-7 bg-[#222221] border-4 border-[#EB5B27] text-white font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[5deg] shadow-xl">
+                        Audit</div>
+
+                    <div id="media-torre"
+                        class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-200 relative pointer-events-none bg-[#111]">
+                        <iframe
+                            src="https://player.vimeo.com/video/1195451694?background=1&autopause=0&muted=1&loop=1&autoplay=1"
+                            class="absolute inset-0 w-full h-full scale-[1.05]" frameborder="0"
+                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Text Section -->
+                <div class="w-[45%] flex flex-col justify-center">
+                    <h2 class="font-momo text-5xl text-white mb-6 leading-tight">How do we ensure every single billable
+                        hour is active, productive value?</h2>
+
+                    <div class="mb-4">
+                        <h4 class="subheading text-[#FECA66] font-bold uppercase tracking-widest text-xs mb-1">The
+                            Challenge</h4>
+                        <p class="text-[1.15rem] text-white/70 font-medium">BPO invoice discrepancies caused by "ghost
+                            connections" or agents logged in but completely inactive on physical stations.</p>
+                    </div>
+
+                    <div class="mb-8">
+                        <h4 class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-xs mb-1">Our
+                            Technology (Control Tower)</h4>
+                        <p class="text-[1.15rem] text-white font-bold">A real-time console that cross-references
+                            physical building biometric scan logs (QR check-ins) directly with active state connections
+                            on NICE CXone.</p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4">
+                        <span class="kpi-badge kpi-up bg-transparent border-white text-white">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5">
+                                </path>
+                            </svg>
+                            <span>Schedule Adherence Rate</span>
+                        </span>
+                        <span class="kpi-badge kpi-down bg-transparent border-white text-white">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5">
+                                </path>
+                            </svg>
+                            <span>Unproductive Inactive Billing</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- SLIDE 4: AGENT STATES (PREVENTING BAD FLOOR PRACTICES) -->
+        <div class="slide bg-dark-slide" id="slide-4">
+            <div class="w-full h-full flex px-16 py-12 gap-12 items-center">
+                <!-- Video Section -->
+                <div class="w-[55%] h-[80%] relative rounded-[3rem] bg-white p-2 glow-frame-celeste">
+                    <div
+                        class="absolute -top-7 -left-7 bg-[#222221] border-4 border-[#3284C6] text-white font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[-5deg] shadow-xl">
+                        Compliance</div>
+
+                    <div id="media-states"
+                        class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-200 relative pointer-events-none bg-[#111]">
+                        <iframe
+                            src="https://player.vimeo.com/video/1195453050?background=1&autopause=0&muted=1&loop=1&autoplay=1"
+                            class="absolute inset-0 w-full h-full scale-[1.05]" frameborder="0"
+                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Text Section -->
+                <div class="w-[45%] flex flex-col justify-center">
+                    <h2 class="font-momo text-5xl text-white mb-6 leading-tight">How do we eliminate call-avoidance and
+                        bad floor habits?</h2>
+
+                    <div class="mb-4">
+                        <h4 class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-xs mb-1">The
+                            Challenge</h4>
+                        <p class="text-[1.15rem] text-white/70 font-medium">Agents intentionally manipulating connection
+                            states (AUX abuse) or dropping calls early to protect personal speed metrics.</p>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-xs mb-2">Our
+                            Technology (Agent States Monitor)</h4>
+                        <ul class="space-y-2 text-base text-white/90 font-medium">
+                            <li class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#3284C6] animate-pulse"></span>
+                                <span><strong>Short-Call Detection:</strong> Instantly flags interactions lasting under
+                                    15 seconds to audit potential drops.</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#3284C6] animate-pulse"></span>
+                                <span><strong>State Hopper Warning:</strong> Alerts supervisors when agents shift states
+                                    rapidly to dodge incoming queues.</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#3284C6] animate-pulse"></span>
+                                <span><strong>Live Accountability:</strong> Generates automatic operational logs for
+                                    instant quality correction.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4">
+                        <span class="kpi-badge bg-[#3284C6] text-white border-none">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5">
+                                </path>
+                            </svg>
+                            <span>Active Agent Availability</span>
+                        </span>
+                        <span class="kpi-badge bg-[#EB5B27] text-white border-none">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5">
+                                </path>
+                            </svg>
+                            <span>Dropped Call Rate</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- SLIDE 5: SMART TIME BLOCKS (SLA PROTECTION) -->
+        <div class="slide bg-dark-slide" id="slide-5">
+            <div class="w-full h-full flex px-16 py-12 gap-12 items-center flex-row-reverse">
+                <!-- Video Section -->
+                <div class="w-[55%] h-[80%] relative rounded-[3rem] bg-white p-2 glow-frame-amarillo">
+                    <div
+                        class="absolute -top-7 -right-7 bg-[#222221] border-4 border-[#FECA66] text-white font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[5deg] shadow-xl">
+                        Planning</div>
+
+                    <div id="media-blocks"
+                        class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-200 relative pointer-events-none bg-[#111]">
+                        <iframe
+                            src="https://player.vimeo.com/video/1195437763?background=1&autopause=0&muted=1&loop=1&autoplay=1"
+                            class="absolute inset-0 w-full h-full scale-[1.05]" frameborder="0"
+                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Text Section -->
+                <div class="w-[45%] flex flex-col justify-center">
+                    <h2 class="font-momo text-5xl text-white mb-6 leading-tight">How do we protect your SLAs when
+                        training on-floor agents?</h2>
+
+                    <div class="mb-4">
+                        <h4 class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-xs mb-1">The
+                            Challenge</h4>
+                        <p class="text-[1.15rem] text-white/70 font-medium">SLA drops caused by pulling floor agents
+                            into meetings or training sessions during unexpected customer volume peaks.</p>
+                    </div>
+
+                    <div class="mb-8">
+                        <h4 class="subheading text-[#FECA66] font-bold uppercase tracking-widest text-xs mb-1">Our
+                            Technology (Smart Time Blocks)</h4>
+                        <p class="text-[1.15rem] text-white font-bold">An automated traffic-light system connected
+                            directly to current queue size. It strictly blocks offline tasks (meetings, feedback) during
+                            high-traffic peaks, rescheduling them for low-volume windows.</p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4">
+                        <span class="kpi-badge bg-transparent border-white text-white">SLA-Safe Offline Blocks</span>
+                        <span class="kpi-badge bg-[#EB5B27] text-white border-none">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5">
+                                </path>
+                            </svg>
+                            <span>SLA Breaches</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- SLIDE 6: SUP CALLS (INSTANT ESCALATION CONTROL) -->
+        <div class="slide bg-light-slide" id="slide-6">
+            <div class="w-full h-full flex px-16 py-12 gap-12 items-center">
+                <!-- Video Section -->
+                <div class="w-[55%] h-[80%] relative rounded-[3rem] bg-[#222221] p-2 glow-frame-celeste">
+                    <div
+                        class="absolute -top-7 -left-7 bg-white border-4 border-[#3284C6] text-[#3284C6] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[-5deg] shadow-xl">
+                        Support</div>
+
+                    <div id="media-supcalls"
+                        class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
+                        <iframe
+                            src="https://player.vimeo.com/video/1195457098?background=1&autopause=0&muted=1&loop=1&autoplay=1"
+                            class="absolute inset-0 w-full h-full scale-[1.05]" frameborder="0"
+                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Text Section -->
+                <div class="w-[45%] flex flex-col justify-center">
+                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">How do we prevent abandoned calls
+                        when a customer asks for a supervisor?</h2>
+
+                    <div class="mb-4">
+                        <h4 class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-xs mb-1">The
+                            Challenge</h4>
+                        <p class="text-[1.15rem] text-gray-600 font-medium">Traditional call hold times balloon and
+                            drive abandon rates because agents struggle to find an available supervisor physically on
+                            the floor.</p>
+                    </div>
+
+                    <div class="mb-8">
+                        <h4 class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-xs mb-1">Our
+                            Technology (Escalations IA)</h4>
+                        <p class="text-[1.15rem] text-[#222221] font-bold">A digital routing system that instantly
+                            tracks supervisor queues, shifts, and active availability, ensuring immediate escalations
+                            are assigned within seconds.</p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4">
+                        <span class="kpi-badge kpi-down">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5">
+                                </path>
+                            </svg>
+                            <span>Hold Times during Escalations</span>
+                        </span>
+                        <span class="kpi-badge kpi-up">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5">
+                                </path>
+                            </svg>
+                            <span>First Contact Resolution (FCR)</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- SLIDE 7: REFUND TRACKER (TRANSACTION ACCURACY & SECURITY) -->
+        <div class="slide bg-light-slide" id="slide-7">
+            <div class="w-full h-full flex px-16 py-12 gap-12 items-center flex-row-reverse">
+                <!-- Video Section -->
+                <div class="w-[55%] h-[80%] relative rounded-[3rem] bg-[#222221] p-2 glow-frame-naranja">
+                    <div
+                        class="absolute -top-7 -right-7 bg-white border-4 border-[#EB5B27] text-[#EB5B27] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[5deg] shadow-xl">
+                        Finance</div>
+
+                    <div id="media-refund"
+                        class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
+                        <iframe
+                            src="https://player.vimeo.com/video/1195454257?background=1&autopause=0&muted=1&loop=1&autoplay=1"
+                            class="absolute inset-0 w-full h-full scale-[1.05]" frameborder="0"
+                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Text Section -->
+                <div class="w-[45%] flex flex-col justify-center">
+                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">How do we guarantee the accuracy
+                        and speed of your back-office financial refunds?</h2>
+
+                    <div class="mb-4">
+                        <h4 class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-xs mb-1">The
+                            Challenge</h4>
+                        <p class="text-[1.15rem] text-gray-600 font-medium">Regulatory risks and delayed transaction
+                            audits when agents manually copy, paste, and compile refund proof verification files.</p>
+                    </div>
+
+                    <div class="mb-8">
+                        <h4 class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-xs mb-1">Our
+                            Technology (Refund Tracker)</h4>
+                        <p class="text-[1.15rem] text-[#222221] font-bold">A secure transactional workspace that
+                            simplifies screenshot audits down to a single `Ctrl+V`. It logs compliance-ready proof,
+                            routes callback queues, and maintains error-free accounts.</p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4">
+                        <span class="kpi-badge kpi-up">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5">
+                                </path>
+                            </svg>
+                            <span>Audit & Compliance Accuracy</span>
+                        </span>
+                        <span class="kpi-badge kpi-down">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5">
+                                </path>
+                            </svg>
+                            <span>Refund Processing Window</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- SLIDE 8: FACILITY LIST (COMPLEX CORRECTIONAL REGULATIONS) -->
+        <div class="slide bg-light-slide" id="slide-8">
+            <div class="w-full h-full flex px-16 py-12 gap-12 items-center">
+                <!-- Video Section -->
+                <div class="w-[55%] h-[80%] relative rounded-[3rem] bg-[#222221] p-2 glow-frame-amarillo">
+                    <div
+                        class="absolute -top-7 -left-7 bg-white border-4 border-[#FECA66] text-[#b48512] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[-5deg] shadow-xl">
+                        Operations</div>
+
+                    <div id="media-facility"
+                        class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
+                        <iframe
+                            src="https://player.vimeo.com/video/1195812063?background=1&autopause=0&autoplay=1&loop=1&byline=0&title=0&muted=1"
+                            class="absolute inset-0 w-full h-full scale-[1.05]" frameborder="0"
+                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Text Section -->
+                <div class="w-[45%] flex flex-col justify-center">
+                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">How do we eliminate human error
+                        across complex facility rules?</h2>
+
+                    <div class="mb-4">
+                        <h4 class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-xs mb-1">The
+                            Challenge</h4>
+                        <p class="text-[1.15rem] text-gray-600 font-medium">Agents searching massive, outdated
+                            spreadsheets to find specific jail or prison regulations, causing delays and wrong
+                            compliance answers.</p>
+                    </div>
+
+                    <div class="mb-8">
+                        <h4 class="subheading text-[#b48512] font-bold uppercase tracking-widest text-xs mb-1">Our
+                            Technology (Facility Lookup)</h4>
+                        <p class="text-[1.15rem] text-[#222221] font-bold">A unified search terminal that immediately
+                            surfaces local rules, payment types, and account options matching any correctional
+                            institution, instantly preventing errors.</p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4">
+                        <span class="kpi-badge kpi-down">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5">
+                                </path>
+                            </svg>
+                            <span>Regulatory Fine Risk</span>
+                        </span>
+                        <span class="kpi-badge kpi-up">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5">
+                                </path>
+                            </svg>
+                            <span>Query Lookup Accuracy</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- SLIDE 9: RAPID CALL PROTOCOL (MANAGING CALL SPIKES) -->
+        <div class="slide bg-light-slide" id="slide-9">
+            <div class="w-full h-full flex px-16 py-12 gap-12 items-center flex-row-reverse">
+                <!-- Video Section -->
+                <div class="w-[55%] h-[80%] relative rounded-[3rem] bg-[#222221] p-2 glow-frame-naranja">
+                    <div
+                        class="absolute -top-7 -right-7 bg-white border-4 border-[#EB5B27] text-[#EB5B27] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[5deg] shadow-xl">
+                        Queues</div>
+
+                    <div id="media-rcp"
+                        class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
+                        <iframe
+                            src="https://player.vimeo.com/video/1195811290?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1"
+                            class="absolute inset-0 w-full h-full scale-[1.05]" frameborder="0"
+                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Text Section -->
+                <div class="w-[45%] flex flex-col justify-center">
+                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">How do we protect your queues from
+                        crashing during massive traffic spikes?</h2>
+
+                    <div class="mb-4">
+                        <h4 class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-xs mb-1">The
+                            Challenge</h4>
+                        <p class="text-[1.15rem] text-gray-600 font-medium">Unpredictable surges of customer calls
+                            causing huge hold times, high drop rates, and stressed team dynamics.</p>
+                    </div>
+
+                    <div class="mb-8">
+                        <h4 class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-xs mb-1">Our
+                            Technology (Rapid Call Protocol)</h4>
+                        <p class="text-[1.15rem] text-[#222221] font-bold">A queue management system that automatically
+                            triggers adaptive protocols during spike emergencies, prioritizing routing and letting
+                            supervisors track caller details securely.</p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4">
+                        <span class="kpi-badge kpi-down">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5">
+                                </path>
+                            </svg>
+                            <span>Customer Abandon Rates</span>
+                        </span>
+                        <span class="kpi-badge kpi-up">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5">
+                                </path>
+                            </svg>
+                            <span>SLA Stability during Peaks</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- SLIDE 10: REDIRECCIÓN DEL TIEMPO (HUMAN IMPACT) -->
+        <div class="slide bg-light-slide" id="slide-10">
+            <div class="absolute right-20 top-20 animate-float opacity-10">
+                <svg width="200" height="200" viewBox="0 0 100 100" fill="none">
+                    <circle cx="50" cy="50" r="40" stroke="#3284C6" stroke-width="3" stroke-dasharray="10 10" />
+                </svg>
+            </div>
+
+            <div class="w-full h-full flex flex-col px-16 py-12 justify-center items-center text-center">
+                <span class="subheading font-bold text-[#3284C6] tracking-widest uppercase text-sm mb-4 block">The Real
+                    Return of Automation</span>
+                <h2 class="font-momo text-[4rem] text-[#222221] mb-6 leading-none">Redirecting Hours: The Impact of
+                    Efficiency</h2>
+
+                <p class="text-2xl text-gray-600 font-medium max-w-4xl mb-12">
+                    We don’t use automation to replace the human touch. We use it to liberate it. By removing repetitive
+                    back-office tasks, we give supervisors their time back to focus on active floor coaching and team
+                    development.
+                </p>
+
+                <div class="grid grid-cols-2 gap-8 w-full max-w-5xl">
+                    <div
+                        class="bg-white border-2 border-[#3284C6]/20 p-8 rounded-3xl shadow-lg hover:shadow-xl transition-shadow text-left">
+                        <h4 class="font-momo text-2xl text-[#3284C6] mb-3">Liberating Manual Overhead</h4>
+                        <p class="text-gray-600 font-semibold text-lg leading-relaxed">
+                            Automating sign-offs, biometric audits, identity templates, and system states keeps
+                            leadership from getting bogged down in administrative tasks.
+                        </p>
+                    </div>
+
+                    <div
+                        class="bg-white border-2 border-[#EB5B27]/20 p-8 rounded-3xl shadow-lg hover:shadow-xl transition-shadow text-left">
+                        <h4 class="font-momo text-2xl text-[#EB5B27] mb-3">Empowering Human Connections</h4>
+                        <p class="text-gray-600 font-semibold text-lg leading-relaxed">
+                            Every minute we save is put directly back into high-quality coaching, agent support, and
+                            empathetic conversations that keep agent teams stable and focused.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- SLIDE 11: NOTE GENERATOR - AGENT WORKFLOW (FRONT-END) -->
+        <div class="slide bg-light-slide" id="slide-11">
+            <div class="w-full h-full flex flex-col px-16 pt-8 pb-10 justify-start gap-y-4">
+                <div class="text-center">
+                    <span
+                        class="subheading font-bold text-[#3284C6] tracking-widest uppercase text-xs mb-1 block">Proprietary
+                        Technology Suite</span>
+                    <h2 class="font-momo text-5xl text-[#222221] leading-none">Note Generator: Instant Copy-Paste &
+                        Dynamic Customization</h2>
+                </div>
+
+                <div class="grid grid-cols-2 gap-8 h-[75%] items-stretch">
+
+                    <!-- Intake Box (Agent View) -->
+                    <div
+                        class="bg-white rounded-[2.5rem] p-6 border-2 border-[#3284C6]/20 flex flex-col justify-between shadow-lg relative overflow-hidden">
+                        <div>
+                            <div class="flex items-center gap-3 mb-3 relative z-10">
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-[#3284C6]/10 flex items-center justify-center text-[#3284C6]">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <h3 class="font-momo text-2xl text-[#222221]">1. The Agent Workspace (Intake View)</h3>
+                            </div>
+                            <p class="text-gray-600 font-semibold text-sm mb-4">Agents generate structured call notes in
+                                seconds to paste directly (Ctrl+V) into CRM/NICE. Includes a one-click button to
+                                escalate into a full back-office ticket.</p>
+                        </div>
+
+                        <!-- Video Frame 1 -->
+                        <div
+                            class="w-full h-[65%] rounded-2xl overflow-hidden bg-black border border-gray-100 relative pointer-events-none">
+                            <iframe
+                                src="https://player.vimeo.com/video/1197821646?background=1&autopause=0&muted=1&loop=1&autoplay=1"
+                                class="absolute inset-0 w-full h-full scale-[1.05]" frameborder="0"
+                                allow="autoplay; fullscreen" allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+
+                    <!-- Clean Output Box (Completed Ticket) -->
+                    <div
+                        class="bg-white rounded-[2.5rem] p-6 border-2 border-[#3284C6]/20 flex flex-col justify-between shadow-lg relative overflow-hidden">
+                        <div>
+                            <div class="flex items-center gap-3 mb-3 relative z-10">
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-[#3284C6]/10 flex items-center justify-center text-[#3284C6]">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+                                        </path>
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="font-momo text-2xl text-[#222221]">2. Personalized Tickets & Custom Templates
+                                </h3>
+                            </div>
+                            <p class="text-gray-600 font-semibold text-sm mb-4">Complete dynamic flexibility. Easily
+                                personalize layouts, adding custom fields such as dates, custom text inputs, numerical
+                                parameters, or dropdown menus.</p>
+                        </div>
+
+                        <!-- Video Frame 2 -->
+                        <div
+                            class="w-full h-[65%] rounded-2xl overflow-hidden bg-black border border-gray-100 relative pointer-events-none">
+                            <iframe
+                                src="https://player.vimeo.com/video/1197825425?background=1&autopause=0&muted=1&loop=1&autoplay=1"
+                                class="absolute inset-0 w-full h-full scale-[1.05]" frameborder="0"
+                                allow="autoplay; fullscreen" allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- SLIDE 12: NOTE GENERATOR - SUPERVISOR FLUX (BACK-END) -->
+        <div class="slide bg-light-slide" id="slide-12">
+            <div class="w-full h-full flex flex-col px-16 pt-8 pb-10 justify-start gap-y-4">
+                <div class="text-center">
+                    <span
+                        class="subheading font-bold text-[#EB5B27] tracking-widest uppercase text-xs mb-1 block">Proprietary
+                        Technology Suite</span>
+                    <h2 class="font-momo text-5xl text-[#222221] leading-none">Note Generator: Queue Command & Dispatch
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-2 gap-8 h-[75%] items-stretch">
+
+                    <!-- Queue Inbox (Supervisor View) -->
+                    <div
+                        class="bg-white rounded-[2.5rem] p-6 border-2 border-[#EB5B27]/20 flex flex-col justify-between shadow-lg relative overflow-hidden">
+                        <div>
+                            <div class="flex items-center gap-3 mb-3 relative z-10">
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-[#EB5B27]/10 flex items-center justify-center text-[#EB5B27]">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <h3 class="font-momo text-2xl text-[#222221]">3. Unified Back-Office (Supervisor View)
+                                </h3>
+                            </div>
+                            <p class="text-gray-600 font-semibold text-sm mb-4">All notes converted to tickets are
+                                routed directly to this centralized back-office control desk. Supervisors monitor queue
+                                sizes, pending items, and active workloads.</p>
+                        </div>
+
+                        <!-- Video Frame 3 -->
+                        <div
+                            class="w-full h-[65%] rounded-2xl overflow-hidden bg-black border border-gray-100 relative pointer-events-none">
+                            <iframe
+                                src="https://player.vimeo.com/video/1197854174?background=1&autopause=0&muted=1&loop=1&autoplay=1"
+                                class="absolute inset-0 w-full h-full scale-[1.05]" frameborder="0"
+                                allow="autoplay; fullscreen" allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+
+                    <!-- Workload Dispatch (Assign to Agent) -->
+                    <div
+                        class="bg-white rounded-[2.5rem] p-6 border-2 border-[#EB5B27]/20 flex flex-col justify-between shadow-lg relative overflow-hidden">
+                        <div>
+                            <div class="flex items-center gap-3 mb-3 relative z-10">
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-[#EB5B27]/10 flex items-center justify-center text-[#EB5B27]">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <h3 class="font-momo text-2xl text-[#222221]">4. Dynamic Back-Office Dispatch &
+                                    Scheduling</h3>
+                            </div>
+                            <p class="text-gray-600 font-semibold text-sm mb-4">Intelligently assigns incoming tickets.
+                                Integrates staff schedules, vacations, and active floor hours, dynamically balancing and
+                                distributing workload to available agents.</p>
+                        </div>
+
+                        <!-- Video Frame 4 -->
+                        <div
+                            class="w-full h-[65%] rounded-2xl overflow-hidden bg-black border border-gray-100 relative pointer-events-none">
+                            <iframe
+                                src="https://player.vimeo.com/video/1197854926?background=1&autopause=0&muted=1&loop=1&autoplay=1"
+                                class="absolute inset-0 w-full h-full scale-[1.05]" frameborder="0"
+                                allow="autoplay; fullscreen" allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- SLIDE 13: CIERRE / SAAS OFFER (VISUAL IMPROVEMENTS) -->
+        <div class="slide bg-dark-slide" id="slide-13" style="background: var(--grad-vibrante);">
+            <div class="w-full h-full flex flex-col items-center justify-center text-center px-10 relative">
+                <div class="absolute inset-0 bg-black/25 mix-blend-multiply pointer-events-none"></div>
+
+                <!-- White Logo Card -->
+                <div
+                    class="bg-white/80 backdrop-blur-md p-6 rounded-[2rem] border-2 border-white/40 shadow-2xl mb-6 relative z-10 transform hover:scale-105 transition-transform duration-300">
+                    <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group"
+                        class="h-16 w-auto object-contain">
+                </div>
+
+                <!-- Balanced Smaller Header -->
+                <h2
+                    class="font-momo text-4xl md:text-[2.75rem] text-white mb-4 relative z-10 drop-shadow-md leading-tight">
+                    Empowering Your Entire Ecosystem: <span
+                        class="text-[#F34E12] drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">Note Generator SaaS</span>
+                </h2>
+                <p class="text-lg md:text-xl font-medium text-white/95 max-w-3xl relative z-10 mb-8 drop-shadow-md">
+                    We are ready to open-license this tool so you can deploy it across all your operations and BPO
+                    vendors.
+                </p>
+
+                <!-- Larger, More Spacious Cards -->
+                <div class="grid grid-cols-3 gap-8 max-w-6xl w-full relative z-10">
+
+                    <!-- Card 1 -->
+                    <div
+                        class="bg-white/10 backdrop-blur-md p-10 rounded-[2.5rem] border border-white/20 text-left flex flex-col justify-between shadow-2xl hover:scale-[1.02] transition-all duration-300">
+                        <div>
+                            <span class="text-[#FECA66] font-momo text-2xl uppercase tracking-wider block mb-4">SaaS
+                                Model</span>
+                            <p class="text-white text-5xl font-extrabold mb-3">$50 USD</p>
+                        </div>
+                        <p class="text-white/90 text-base font-semibold leading-relaxed">per active user / month.
+                            Standardized cost, zero integration overhead.</p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div
+                        class="bg-white/10 backdrop-blur-md p-10 rounded-[2.5rem] border border-white/20 text-left flex flex-col justify-between shadow-2xl hover:scale-[1.02] transition-all duration-300">
+                        <div>
+                            <span class="text-[#FECA66] font-momo text-2xl uppercase tracking-wider block mb-4">Zero
+                                Rework</span>
+                            <p class="text-white text-5xl font-extrabold mb-3">100%</p>
+                        </div>
+                        <p class="text-white/90 text-base font-semibold leading-relaxed">Structured, audit-ready notes
+                            standardly generated, or pushed directly to back-office.</p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div
+                        class="bg-white/10 backdrop-blur-md p-10 rounded-[2.5rem] border border-white/20 text-left flex flex-col justify-between shadow-2xl hover:scale-[1.02] transition-all duration-300">
+                        <div>
+                            <span
+                                class="text-[#FECA66] font-momo text-2xl uppercase tracking-wider block mb-4">Universal</span>
+                            <p class="text-white text-5xl font-extrabold mb-3">Multi-Vendor</p>
+                        </div>
+                        <p class="text-white/90 text-base font-semibold leading-relaxed">Standardize data capture across
+                            all your partner centers and competitors in days.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- CONTROLS & PROGRESS BAR -->
+        <div id="slide-counter">01 / 13</div>
+        <div id="controls">
+            <button class="control-btn" onclick="prevSlide()"><svg class="w-8 h-8" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7"></path>
+                </svg></button>
+            <button class="control-btn" onclick="nextSlide()"><svg class="w-8 h-8" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path>
+                </svg></button>
+        </div>
+        <div id="progress-bar-container">
+            <div id="progress-bar"></div>
+        </div>
+
+    </div>
+
+    <script>
+        // Presentation logic
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progress-bar');
+        const counter = document.getElementById('slide-counter');
+
+        function updateUI() {
+            slides.forEach((slide, index) => {
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+
+            // Update Progress and Counter
+            const progress = ((currentSlide) / (slides.length - 1)) * 100;
+            progressBar.style.width = `${progress}%`;
+            counter.innerText = `${String(currentSlide + 1).padStart(2, '0')} / ${slides.length}`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateUI();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateUI();
+            }
+        }
+
+        // Keyboard Navigation (Arrows & Spacebar)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        // Initialize UI
+        updateUI();
+    </script>
+</body>
+
+</html>
