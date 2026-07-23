@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- FontAwesome Icons & Material Symbols -->
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
 
@@ -77,11 +77,12 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            padding: 0.75rem 1.25rem;
+            padding: 0.85rem 1.25rem;
             border-radius: 1rem;
             font-family: 'DM Sans', sans-serif;
             font-weight: 700;
             font-size: 0.875rem;
+            white-space: nowrap;
             transition: all 0.25s ease;
         }
 
@@ -111,7 +112,7 @@
             display: inline-flex;
             align-items: center;
             gap: 0.35rem;
-            padding: 0.25rem 0.65rem;
+            padding: 0.3rem 0.75rem;
             border-radius: 9999px;
             font-size: 0.7rem;
             font-weight: 700;
@@ -178,9 +179,10 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- REJILLA DE 2 COLUMNAS (MÁXIMO 2 EMPRESAS POR FILA PARA ESPACIO ÓPTIMO) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-                <!-- TARJETA CLIENTE: TIP MÉXICO -->
+                <!-- TARJETA CLIENTE 1: TIP MÉXICO -->
                 <div class="card-executive p-6 sm:p-8 flex flex-col justify-between space-y-6 border-l-4 border-l-brandCeleste">
                     <div class="space-y-4">
                         <div class="flex justify-between items-start">
@@ -207,7 +209,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                         <a href="./Direccion-General/TIP/presentacion.html" class="btn-portal btn-celeste">
                             <i class="fa-solid fa-person-chalkboard"></i>
-                            <span>Ver Presentación (Slides)</span>
+                            <span>Ver Presentación</span>
                         </a>
                         <a href="./Direccion-General/TIP/dashboard.html" class="btn-portal btn-naranja">
                             <i class="fa-solid fa-chart-line"></i>
@@ -216,7 +218,7 @@
                     </div>
                 </div>
 
-                <!-- TARJETA CLIENTE: INSTITUTO -->
+                <!-- TARJETA CLIENTE 2: INSTITUTO -->
                 <div class="card-executive p-6 sm:p-8 flex flex-col justify-between space-y-6 border-l-4 border-l-brandNaranja">
                     <div class="space-y-4">
                         <div class="flex justify-between items-start">
@@ -241,22 +243,22 @@
 
                     <!-- BOTONES DE ACCESO INSTITUTO -->
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-                        <a href="./Direccion-General/Instituto/presentacion.html" class="btn-portal btn-celeste">
+                        <a href="./Direccion-General/Instituto/presentacion.html" class="btn-portal btn-celeste text-xs px-2">
                             <i class="fa-solid fa-desktop"></i>
-                            <span>Ver Slides (17)</span>
+                            <span>Slides (17)</span>
                         </a>
-                        <a href="./Direccion-General/Instituto/dashboard.html" class="btn-portal btn-naranja">
+                        <a href="./Direccion-General/Instituto/dashboard.html" class="btn-portal btn-naranja text-xs px-2">
                             <i class="fa-solid fa-chart-line"></i>
-                            <span>Dashboard Operativo</span>
+                            <span>Dashboard</span>
                         </a>
-                        <a href="./Direccion-General/Instituto/simulador-olas.html" class="btn-portal btn-celeste">
+                        <a href="./Direccion-General/Instituto/simulador-olas.html" class="btn-portal btn-celeste text-xs px-2">
                             <i class="fa-solid fa-calculator"></i>
-                            <span>Simulador de Olas</span>
+                            <span>Simulador WFM</span>
                         </a>
                     </div>
                 </div>
 
-                <!-- TARJETA CLIENTE: VIAPATH -->
+                <!-- TARJETA CLIENTE 3: VIAPATH -->
                 <div class="card-executive p-6 sm:p-8 flex flex-col justify-between space-y-6 border-l-4 border-l-purple-600">
                     <div class="space-y-4">
                         <div class="flex justify-between items-start">
@@ -288,7 +290,7 @@
                     </div>
                 </div>
 
-                <!-- TARJETA CLIENTE: DRIVEN BRANDS / AGN -->
+                <!-- TARJETA CLIENTE 4: DRIVEN BRANDS / AGN -->
                 <div class="card-executive p-6 sm:p-8 flex flex-col justify-between space-y-6 border-l-4 border-l-red-500">
                     <div class="space-y-4">
                         <div class="flex justify-between items-start">
@@ -298,7 +300,7 @@
                                 </div>
                                 <div>
                                     <h4 class="text-xl font-bold font-body text-brandOscuro">Driven Brands / AGN</h4>
-                                    <span class="text-xs text-red-500 font-bold uppercase tracking-wider font-subheadings">Capacidades de IA & Automatización</span>
+                                    <span class="text-xs text-red-500 font-bold uppercase tracking-wider font-subheadings">Capacidades de IA & Operación</span>
                                 </div>
                             </div>
                             <span class="badge-live bg-red-50 text-red-600 border border-red-200">
@@ -307,7 +309,7 @@
                         </div>
 
                         <p class="text-xs text-slate-600 font-medium leading-relaxed">
-                            Presentación comercial ejecutiva de la suite tecnológica de IA (Kudos 3.0, Torre de Control, Agent States, Smart Blocks, Escalaciones) con llamado a la acción operativo para Driven Brands / AGN.
+                            Presentación ejecutiva comercial de la suite tecnológica de IA (Kudos 3.0, Torre de Control, Agent States, Smart Blocks, Escalaciones) con llamado a la acción operativo.
                         </p>
                     </div>
 
@@ -320,8 +322,8 @@
                     </div>
                 </div>
 
-                <!-- TARJETA CLIENTE: NEXGEN AGENCY -->
-                <div class="card-executive p-6 sm:p-8 flex flex-col justify-between space-y-6 border-l-4 border-l-emerald-500">
+                <!-- TARJETA CLIENTE 5: NEXGEN AGENCY -->
+                <div class="card-executive p-6 sm:p-8 flex flex-col justify-between space-y-6 border-l-4 border-l-emerald-500 md:col-span-2 lg:col-span-1">
                     <div class="space-y-4">
                         <div class="flex justify-between items-start">
                             <div class="flex items-center gap-3">
@@ -330,7 +332,7 @@
                                 </div>
                                 <div>
                                     <h4 class="text-xl font-bold font-body text-brandOscuro">NexGen Agency</h4>
-                                    <span class="text-xs text-emerald-600 font-bold uppercase tracking-wider font-subheadings">Digitalization & AI Operations</span>
+                                    <span class="text-xs text-emerald-600 font-bold uppercase tracking-wider font-subheadings">AI, Automation & Digital Workflows</span>
                                 </div>
                             </div>
                             <span class="badge-live bg-emerald-50 text-emerald-600 border border-emerald-200">
@@ -339,7 +341,7 @@
                         </div>
 
                         <p class="text-xs text-slate-600 font-medium leading-relaxed">
-                            Executive Deck in English focused on End-to-End Back-Office Digitalization, Process Automation, AI Virtualization, and Operations Hubs tailored for NexGen Agency.
+                            Executive Deck in English highlighting the seamless integration of Artificial Intelligence, Process Automation, and Digital Operations Hubs tailored for NexGen Agency.
                         </p>
                     </div>
 
@@ -347,7 +349,7 @@
                     <div class="grid grid-cols-1 gap-3 pt-2">
                         <a href="./Direccion-General/NexGen-Agency/presentacion.html" class="btn-portal btn-celeste">
                             <i class="fa-solid fa-globe"></i>
-                            <span>Ver Presentación (Digitalization Deck)</span>
+                            <span>Ver Presentación (Global Tech Deck)</span>
                         </a>
                     </div>
                 </div>
