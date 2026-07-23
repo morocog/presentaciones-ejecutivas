@@ -779,7 +779,7 @@
 
             const progress = ((currentSlide) / (slides.length - 1)) * 100;
             progressBar.style.width = `${progress}%`;
-            counter.innerText = `${String(currentSlide + 1).padStart(2, '0')} / ${slides.length}`;
+            counter.innerText = `${String(currentSlide + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
         }
 
         function nextSlide() {
