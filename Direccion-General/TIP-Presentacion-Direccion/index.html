@@ -102,11 +102,23 @@
             color: var(--azul-claro); 
         }
 
-        /* Logo Safe Zone (AGENTS.md) */
-        .logo-safe-zone img {
+        /* Contenedor Fijo Logo Cápsula (Garantiza visibilidad en cualquier fondo sin filtros) */
+        .logo-capsule-container {
+            background-color: #FFFFFF;
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            display: inline-flex;
+            align-items: center;
+            height: 3rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            border: 1.5px solid rgba(34,34,33,0.06);
+            flex-shrink: 0;
+        }
+
+        .logo-capsule-container img {
             height: 100% !important;
             width: auto !important;
-            max-height: 44px;
+            max-height: 28px;
             object-fit: contain;
             display: block;
         }
@@ -116,9 +128,9 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1.2rem;
             border-radius: 9999px;
-            font-size: 0.875rem;
+            font-size: 0.95rem;
             font-weight: 700;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
@@ -131,11 +143,11 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
+            padding: 0.85rem 1.75rem;
             border-radius: 1rem;
             font-family: 'DM Sans', sans-serif;
             font-weight: 700;
-            font-size: 0.875rem;
+            font-size: 0.95rem;
             white-space: nowrap;
             transition: all 0.25s ease;
             cursor: pointer;
@@ -161,7 +173,7 @@
             box-shadow: 0 8px 16px rgba(235, 91, 39, 0.25);
         }
 
-        /* 5. ANIMACIONES SUTILES (AGENTS.md / Web App Dev guidelines) */
+        /* 5. ANIMACIONES SUTILES */
         @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-12px) rotate(3deg); } }
         .animate-float { animation: float 6s ease-in-out infinite; }
         
@@ -179,8 +191,8 @@
         }
         
         .control-btn {
-            width: 3rem;
-            height: 3rem;
+            width: 3.25rem;
+            height: 3.25rem;
             border-radius: 50%;
             background-color: var(--oscuro);
             color: white;
@@ -223,7 +235,7 @@
             z-index: 100;
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             color: var(--celeste);
             opacity: 0.8;
         }
@@ -232,16 +244,24 @@
             border-radius: 9999px;
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-            border: 1px solid rgba(34,34,33,0.08);
+            box-shadow: 0 4px 25px rgba(0,0,0,0.05);
+            border: 1.5px solid rgba(34,34,33,0.06);
+            background: rgba(255, 255, 255, 0.85);
         }
         .header-capsule-dark {
             border-radius: 9999px;
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 4px 25px rgba(0,0,0,0.3);
+            border: 1.5px solid rgba(255,255,255,0.08);
             background: rgba(34,34,33,0.85);
+        }
+
+        /* Estilo para las pestañas de casos de éxito */
+        .case-tab-btn.active {
+            background-color: rgba(50, 132, 198, 0.1);
+            border-color: var(--celeste);
+            color: var(--celeste);
         }
     </style>
 </head>
@@ -262,35 +282,35 @@
 
             <!-- Doodles Hero -->
             <div class="absolute top-16 right-24 animate-float opacity-30 z-10">
-                <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+                <svg width="120" height="120" viewBox="0 0 100 100" fill="none">
                     <path d="M50 0L56.5 35.5L95 20.5L66 50L95 79.5L56.5 64.5L50 100L43.5 64.5L5 79.5L34 50L5 20.5L43.5 35.5L50 0Z" fill="#FECA66"/>
                 </svg>
             </div>
 
             <!-- Header Interno -->
-            <header class="absolute top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-7xl px-8 py-3 flex items-center justify-between z-30 header-capsule-dark">
-                <div class="logo-safe-zone flex items-center h-10">
-                    <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="filter brightness-0 invert">
+            <header class="absolute top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl px-8 py-3 flex items-center justify-between z-30 header-capsule-dark">
+                <div class="logo-capsule-container">
+                    <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group">
                 </div>
                 <div class="text-right">
-                    <span class="text-xs font-subheadings font-bold text-[#FECA66] uppercase tracking-wider block">Propuesta Corporativa</span>
-                    <span class="text-[9px] text-[#3284C6] font-bold">Campaña TIP México</span>
+                    <span class="text-xs font-subheadings font-bold text-[#FECA66] uppercase tracking-wider block">Propuesta de Valor</span>
+                    <span class="text-[10px] text-[#3284C6] font-bold">Dirección General TIP México</span>
                 </div>
             </header>
 
-            <!-- Contenido Principal -->
-            <div class="w-full h-full flex flex-col items-center justify-center text-center px-10 relative z-20 mt-8">
-                <span class="bg-[#EB5B27]/10 text-[#EB5B27] border border-[#EB5B27]/20 text-xs font-semibold px-5 py-2 rounded-full uppercase tracking-widest mb-6">
-                    Sesión de Dirección General
+            <!-- Contenido Principal - Optimización de Espacio y Mayor Tipografía -->
+            <div class="w-full h-full flex flex-col items-center justify-center text-center px-10 relative z-20 mt-8 space-y-8">
+                <span class="bg-[#EB5B27]/10 text-[#EB5B27] border border-[#EB5B27]/20 text-sm font-semibold px-6 py-2.5 rounded-full uppercase tracking-widest">
+                    Presentación de Capacidades y Gobernanza
                 </span>
                 
-                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight max-w-5xl mb-6">
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight leading-tight max-w-5xl">
                     PROPUESTA DE VALOR Y<br>
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#3284C6] to-[#EB5B27]">GOBERNANZA OPERATIVA</span>
                 </h1>
                 
-                <p class="text-lg md:text-xl text-neutral-300 max-w-3xl font-subheadings font-medium">
-                    Presentación institucional y estrategia de resiliencia operativa diseñada para salvaguardar la experiencia del usuario de **TIP México**.
+                <p class="text-xl md:text-2xl text-neutral-300 max-w-4xl font-subheadings font-medium leading-relaxed">
+                    Estrategias integrales y plan de continuidad de negocio (BCP) diseñados para proteger la operación y asegurar la experiencia de servicio en todo momento.
                 </p>
             </div>
         </div>
@@ -299,8 +319,8 @@
         <!-- SLIDE 2: ¿QUIÉNES SOMOS? (LIGHT) -->
         <div class="slide bg-light-slide overflow-hidden" id="slide-2">
             <!-- Header Interno -->
-            <header class="absolute top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-7xl px-8 py-3 flex items-center justify-between z-30 header-capsule bg-white/90">
-                <div class="logo-safe-zone flex items-center h-10">
+            <header class="absolute top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl px-8 py-3 flex items-center justify-between z-30 header-capsule">
+                <div class="logo-capsule-container">
                     <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group">
                 </div>
                 <div>
@@ -308,141 +328,296 @@
                 </div>
             </header>
 
-            <div class="w-full h-full flex px-16 py-28 gap-12 items-center">
-                <!-- Izquierda: Concepto Principal -->
-                <div class="w-1/2 space-y-6">
-                    <span class="text-[#3284C6] font-bold text-xs uppercase tracking-widest block">Sobre Telat Group</span>
-                    <h2 class="text-4xl font-extrabold text-[#222221] leading-tight">
-                        Especialistas en Contact Center & Soluciones Tecnológicas BPO
-                    </h2>
-                    <p class="text-sm text-slate-600 font-semibold leading-relaxed">
-                        Somos más que un proveedor de servicios de atención. Telat Group se integra como un socio de negocio estratégico que combina talento humano especializado con automatización de procesos mediante IA y una infraestructura de seguridad robusta de nivel empresarial.
-                    </p>
-                    <p class="text-xs text-slate-500 font-medium">
-                        Nuestra sede operativa principal está estratégicamente ubicada en la Ciudad de México (CDMX), centralizando los recursos tecnológicos y de supervisión para garantizar un estándar homogéneo de calidad.
-                    </p>
-                </div>
-
-                <!-- Derecha: Pilares -->
-                <div class="w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-3">
-                        <div class="w-10 h-10 rounded-2xl bg-[#3284C6]/10 text-[#3284C6] flex items-center justify-center text-lg">
-                            <i class="fa-solid fa-people-carry-box"></i>
-                        </div>
-                        <h4 class="font-bold text-sm text-[#222221]">Foco Humano</h4>
-                        <p class="text-[11px] text-slate-500 font-medium leading-relaxed">Selección de personal basada en perfiles y competencias específicas para el sector.</p>
+            <!-- Contenido con Espacio Optimizado y Letra Grande -->
+            <div class="w-full h-full flex flex-col justify-between pt-24 pb-12 px-16 max-w-7xl mx-auto">
+                <div class="flex-grow flex flex-col lg:flex-row gap-12 items-center justify-center">
+                    <!-- Izquierda: Concepto Principal -->
+                    <div class="lg:w-1/2 space-y-6">
+                        <span class="text-[#3284C6] font-bold text-sm uppercase tracking-widest block">Sobre Telat Group</span>
+                        <h2 class="text-4xl md:text-5xl font-extrabold text-[#222221] leading-tight">
+                            Especialistas en Contact Center & Soluciones Tecnológicas BPO
+                        </h2>
+                        <p class="text-base md:text-lg text-slate-600 font-semibold leading-relaxed">
+                            Somos un socio de negocio estratégico que integra talento humano de alta especialización con flujos de automatización propios y una infraestructura de seguridad lógica robusta de nivel corporativo.
+                        </p>
+                        <p class="text-sm md:text-base text-slate-500 font-medium leading-relaxed">
+                            Nuestra sede de operaciones principal se encuentra centralizada en la Ciudad de México (CDMX), concentrando la infraestructura tecnológica y el equipo de supervisión para garantizar un estándar homogéneo de calidad.
+                        </p>
                     </div>
 
-                    <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-3">
-                        <div class="w-10 h-10 rounded-2xl bg-[#EB5B27]/10 text-[#EB5B27] flex items-center justify-center text-lg">
-                            <i class="fa-solid fa-microchip"></i>
+                    <!-- Derecha: Pilares -->
+                    <div class="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
+                        <div class="bg-white p-6 rounded-3xl border border-slate-100/80 shadow-md space-y-4 hover:shadow-lg transition-shadow">
+                            <div class="w-12 h-12 rounded-2xl bg-[#3284C6]/10 text-[#3284C6] flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-people-carry-box"></i>
+                            </div>
+                            <h4 class="font-bold text-base text-[#222221]">Foco Humano</h4>
+                            <p class="text-xs md:text-sm text-slate-500 font-semibold leading-relaxed">Selección de personal basada en perfiles y competencias específicas para el sector.</p>
                         </div>
-                        <h4 class="font-bold text-sm text-[#222221]">Core Tecnológico</h4>
-                        <p class="text-[11px] text-slate-500 font-medium leading-relaxed">Sistemas de desarrollo propio en IA aplicados a la calidad y control en tiempo real.</p>
-                    </div>
 
-                    <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-3">
-                        <div class="w-10 h-10 rounded-2xl bg-[#FECA66]/20 text-[#b48512] flex items-center justify-center text-lg">
-                            <i class="fa-solid fa-shield-halved"></i>
+                        <div class="bg-white p-6 rounded-3xl border border-slate-100/80 shadow-md space-y-4 hover:shadow-lg transition-shadow">
+                            <div class="w-12 h-12 rounded-2xl bg-[#EB5B27]/10 text-[#EB5B27] flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-microchip"></i>
+                            </div>
+                            <h4 class="font-bold text-base text-[#222221]">Core Tecnológico</h4>
+                            <p class="text-xs md:text-sm text-slate-500 font-semibold leading-relaxed">Sistemas de desarrollo propio en IA aplicados a la calidad y control en tiempo real.</p>
                         </div>
-                        <h4 class="font-bold text-sm text-[#222221]">Gobernanza Operativa</h4>
-                        <p class="text-[11px] text-slate-500 font-medium leading-relaxed">Estrategias documentadas e inmutables de seguridad lógica, red y BCP.</p>
-                    </div>
 
-                    <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-3">
-                        <div class="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg">
-                            <i class="fa-solid fa-chart-line"></i>
+                        <div class="bg-white p-6 rounded-3xl border border-slate-100/80 shadow-md space-y-4 hover:shadow-lg transition-shadow">
+                            <div class="w-12 h-12 rounded-2xl bg-[#FECA66]/20 text-[#b48512] flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <h4 class="font-bold text-base text-[#222221]">Gobernanza Operativa</h4>
+                            <p class="text-xs md:text-sm text-slate-500 font-semibold leading-relaxed">Estrategias documentadas e inmutables de seguridad lógica, red y BCP.</p>
                         </div>
-                        <h4 class="font-bold text-sm text-[#222221]">Monitoreo Activo</h4>
-                        <p class="text-[11px] text-slate-500 font-medium leading-relaxed">Torre de control GOC dedicada a la supervisión operativa y cumplimiento de KPIs.</p>
+
+                        <div class="bg-white p-6 rounded-3xl border border-slate-100/80 shadow-md space-y-4 hover:shadow-lg transition-shadow">
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                            <h4 class="font-bold text-base text-[#222221]">Monitoreo Activo</h4>
+                            <p class="text-xs md:text-sm text-slate-500 font-semibold leading-relaxed">Torre de control dedicada a la supervisión operativa y cumplimiento de KPIs.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
 
-        <!-- SLIDE 3: CLIENTES ESTRATÉGICOS E INDUSTRIAS (LIGHT) -->
+        <!-- SLIDE 3: CASOS DE ÉXITO EN EXCELENCIA OPERATIVA (LIGHT) - BASADO EN PORTAL DE DIGITALIZACIÓN -->
         <div class="slide bg-light-slide overflow-hidden" id="slide-3">
             <!-- Header Interno -->
-            <header class="absolute top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-7xl px-8 py-3 flex items-center justify-between z-30 header-capsule bg-white/90">
-                <div class="logo-safe-zone flex items-center h-10">
+            <header class="absolute top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl px-8 py-3 flex items-center justify-between z-30 header-capsule bg-white/90">
+                <div class="logo-capsule-container">
                     <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group">
                 </div>
                 <div>
-                    <span class="text-xs font-subheadings font-bold text-gray-500 uppercase">Experiencia por Línea de Negocio</span>
+                    <span class="text-xs font-subheadings font-bold text-gray-500 uppercase">Excelencia Operativa</span>
                 </div>
             </header>
 
-            <div class="w-full h-full flex flex-col justify-center px-16 py-28 space-y-8">
-                <div class="max-w-2xl">
-                    <span class="text-[#EB5B27] font-bold text-xs uppercase tracking-widest block">Nuestra Experiencia</span>
-                    <h2 class="text-3xl font-extrabold text-[#222221]">Líneas de Negocio y Casos de Uso Activos</h2>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                    <!-- Card 1 -->
-                    <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-4 border-t-4 border-t-[#3284C6]">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-[#3284C6]/10 text-[#3284C6] flex items-center justify-center text-lg">
-                                <i class="fa-solid fa-truck"></i>
-                            </div>
-                            <h4 class="font-bold text-xs text-gray-500 uppercase tracking-wide">Transporte / Rent</h4>
+            <!-- Contenido con Espacio Optimizado y Pestañas Interactivas -->
+            <div class="w-full h-full flex flex-col justify-between pt-24 pb-12 px-16 max-w-7xl mx-auto">
+                <div class="flex-grow flex flex-col lg:flex-row gap-10 items-center justify-center">
+                    
+                    <!-- Izquierda: Selectores de Pestañas (6 Casos) -->
+                    <div class="lg:w-[40%] space-y-4 w-full">
+                        <div>
+                            <span class="text-[#EB5B27] font-bold text-sm uppercase tracking-widest block">Logros Reales</span>
+                            <h2 class="text-3xl md:text-4xl font-extrabold text-[#222221] leading-tight">
+                                Logros en Excelencia Operativa
+                            </h2>
                         </div>
-                        <h3 class="font-bold text-base text-[#222221]">TIP México</h3>
-                        <p class="text-[11px] text-slate-500 font-medium leading-relaxed">Operación en vivo con consola de mando GOC integrada, control AHT y optimización de plantilla de agentes.</p>
-                        <div class="pt-2 border-t border-slate-100 flex justify-between items-center text-xs font-bold text-[#3284C6]">
-                            <span>Eficiencia SLA</span>
-                            <span class="font-momo">86%</span>
-                        </div>
-                    </div>
-
-                    <!-- Card 2 -->
-                    <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-4 border-t-4 border-t-[#EB5B27]">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-[#EB5B27]/10 text-[#EB5B27] flex items-center justify-center text-lg">
-                                <i class="fa-solid fa-building-columns"></i>
-                            </div>
-                            <h4 class="font-bold text-xs text-gray-500 uppercase tracking-wide">Educación</h4>
-                        </div>
-                        <h3 class="font-bold text-base text-[#222221]">Instituto Exec</h3>
-                        <p class="text-[11px] text-slate-500 font-medium leading-relaxed">Dimensionamiento predictivo mediante simulación de olas SOTA y planeación activa WFM.</p>
-                        <div class="pt-2 border-t border-slate-100 flex justify-between items-center text-xs font-bold text-[#EB5B27]">
-                            <span>Olas Simulación</span>
-                            <span class="font-momo">17+</span>
+                        
+                        <div class="flex flex-col gap-2">
+                            <button class="case-tab-btn active text-left p-3.5 rounded-xl border border-slate-200/80 bg-white hover:bg-slate-50 transition-all flex justify-between items-center text-sm font-bold text-slate-700" onclick="showCaseBlock('case-telecom', this)">
+                                <span class="flex items-center gap-2"><i class="fa-solid fa-phone-volume"></i> 1. Telecomunicaciones y Servicios</span>
+                            </button>
+                            <button class="case-tab-btn text-left p-3.5 rounded-xl border border-slate-200/80 bg-white hover:bg-slate-50 transition-all flex justify-between items-center text-sm font-bold text-slate-700" onclick="showCaseBlock('case-automotive', this)">
+                                <span class="flex items-center gap-2"><i class="fa-solid fa-car-side"></i> 2. E-Commerce Automotriz</span>
+                            </button>
+                            <button class="case-tab-btn text-left p-3.5 rounded-xl border border-slate-200/80 bg-white hover:bg-slate-50 transition-all flex justify-between items-center text-sm font-bold text-slate-700" onclick="showCaseBlock('case-security', this)">
+                                <span class="flex items-center gap-2"><i class="fa-solid fa-video"></i> 3. Videovigilancia Urbana</span>
+                            </button>
+                            <button class="case-tab-btn text-left p-3.5 rounded-xl border border-slate-200/80 bg-white hover:bg-slate-50 transition-all flex justify-between items-center text-sm font-bold text-slate-700" onclick="showCaseBlock('case-gift', this)">
+                                <span class="flex items-center gap-2"><i class="fa-solid fa-gift"></i> 4. Pedidos Estacionales</span>
+                            </button>
+                            <button class="case-tab-btn text-left p-3.5 rounded-xl border border-slate-200/80 bg-white hover:bg-slate-50 transition-all flex justify-between items-center text-sm font-bold text-slate-700" onclick="showCaseBlock('case-custom', this)">
+                                <span class="flex items-center gap-2"><i class="fa-solid fa-palette"></i> 5. Personalización Omnicanal</span>
+                            </button>
+                            <button class="case-tab-btn text-left p-3.5 rounded-xl border border-slate-200/80 bg-white hover:bg-slate-50 transition-all flex justify-between items-center text-sm font-bold text-slate-700" onclick="showCaseBlock('case-logistic', this)">
+                                <span class="flex items-center gap-2"><i class="fa-solid fa-truck-ramp-box"></i> 6. Logística y Autopartes</span>
+                            </button>
                         </div>
                     </div>
 
-                    <!-- Card 3 -->
-                    <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-4 border-t-4 border-t-[#FECA66]">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-[#FECA66]/20 text-[#b48512] flex items-center justify-center text-lg">
-                                <i class="fa-solid fa-car-burst"></i>
+                    <!-- Derecha: Detalle del Caso Seleccionado (Mayor Contraste y Letra) -->
+                    <div class="lg:w-[60%] w-full">
+                        <div class="bg-white border border-slate-200/80 rounded-3xl p-8 shadow-lg flex flex-col justify-between min-h-[440px]">
+                            
+                            <!-- Caso 1 -->
+                            <div class="case-detail-block space-y-6" id="case-telecom">
+                                <h3 class="text-xl font-bold text-[#3284C6] flex items-center gap-2">
+                                    <i class="fa-solid fa-phone-volume"></i> Telecomunicaciones y Servicios
+                                </h3>
+                                <p class="text-base text-slate-600 font-semibold leading-relaxed">
+                                    Evolución de la infraestructura de atención para una empresa líder en USA, migrando de llamadas manuales de cobro tradicionales a un ecosistema interactivo digital distribuido.
+                                </p>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div class="bg-red-50 p-4 rounded-xl border border-red-100 text-sm">
+                                        <strong class="font-bold block mb-1 text-red-800">Proceso Anterior:</strong>
+                                        Llamadas manuales de voz exclusivas para consulta de saldo y creación de cuenta de pago, provocando filas y cuellos de botella.
+                                    </div>
+                                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100 text-sm">
+                                        <strong class="font-bold block mb-1 text-emerald-800">Proceso Digitalizado:</strong>
+                                        Tabletas interactivas con mensajería digital integrada, videovisitas, ruteo automático de consultas y escaneo de contenido regulado.
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100 text-center">
+                                    <div>
+                                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Tiempo Registro Usuario</span>
+                                        <span class="text-xl font-momo text-[#3284C6]">14m ➔ 3m</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Error de Activación</span>
+                                        <span class="text-xl font-momo text-[#EB5B27]">15% ➔ 1.2%</span>
+                                    </div>
+                                </div>
                             </div>
-                            <h4 class="font-bold text-xs text-gray-500 uppercase tracking-wide">Servicios / Automotriz</h4>
-                        </div>
-                        <h3 class="font-bold text-base text-[#222221]">Driven Brands</h3>
-                        <p class="text-[11px] text-slate-500 font-medium leading-relaxed">Automatización e inteligencia artificial en operation, control de estados de agentes y Kudos 3.0.</p>
-                        <div class="pt-2 border-t border-slate-100 flex justify-between items-center text-xs font-bold text-[#b48512]">
-                            <span>Modulos IA</span>
-                            <span class="font-momo">14</span>
+
+                            <!-- Caso 2 -->
+                            <div class="case-detail-block space-y-6 hidden" id="case-automotive">
+                                <h3 class="text-xl font-bold text-[#3284C6] flex items-center gap-2">
+                                    <i class="fa-solid fa-car-side"></i> E-Commerce Automotriz
+                                </h3>
+                                <p class="text-base text-slate-600 font-semibold leading-relaxed">
+                                    Soporte transaccional para el líder estadounidense de compra-venta de vehículos, validando documentación legal de propiedad y previniendo riesgos financieros.
+                                </p>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div class="bg-red-50 p-4 rounded-xl border border-red-100 text-sm">
+                                        <strong class="font-bold block mb-1 text-red-800">Proceso Anterior:</strong>
+                                        Revisión manual y lenta de títulos de propiedad físicos estatales, generando demoras de entrega y riesgos legales de fraude.
+                                    </div>
+                                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100 text-sm">
+                                        <strong class="font-bold block mb-1 text-emerald-800">Proceso Digitalizado:</strong>
+                                        Validación digital en tiempo real de títulos de propiedad, verificación automatizada de fondos del comprador y apego digital a normativas locales.
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100 text-center">
+                                    <div>
+                                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Verificación de Títulos</span>
+                                        <span class="text-xl font-momo text-[#3284C6]">24h ➔ 4h</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Fallas Regulatorias</span>
+                                        <span class="text-xl font-momo text-[#EB5B27]">8.5% ➔ 0.4%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Caso 3 -->
+                            <div class="case-detail-block space-y-6 hidden" id="case-security">
+                                <h3 class="text-xl font-bold text-[#3284C6] flex items-center gap-2">
+                                    <i class="fa-solid fa-video"></i> Videovigilancia Urbana de Alta Tecnología
+                                </h3>
+                                <p class="text-base text-slate-600 font-semibold leading-relaxed">
+                                    Soporte técnico estructurado a la red líder de videovigilancia urbana, reconocimiento biométrico y lectura automatizada de placas en tiempo real.
+                                </p>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div class="bg-red-50 p-4 rounded-xl border border-red-100 text-sm">
+                                        <strong class="font-bold block mb-1 text-red-800">Proceso Anterior:</strong>
+                                        Escalamiento genérico de fallas de cámaras urbanas a ingenieros en campo sin pre-diagnóstico de red, elevando costos operativos.
+                                    </div>
+                                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100 text-sm">
+                                        <strong class="font-bold block mb-1 text-emerald-800">Proceso Digitalizado:</strong>
+                                        Atención por soporte técnico Tier-1 unificado con software de diagnóstico remoto, solventando incidencias del servidor al instante.
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100 text-center">
+                                    <div>
+                                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Resolución al 1er Contacto</span>
+                                        <span class="text-xl font-momo text-[#3284C6]">62% ➔ 84%</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Tiempo de Respuesta (MTTR)</span>
+                                        <span class="text-xl font-momo text-[#EB5B27]">45m ➔ 12m</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Caso 4 -->
+                            <div class="case-detail-block space-y-6 hidden" id="case-gift">
+                                <h3 class="text-xl font-bold text-[#3284C6] flex items-center gap-2">
+                                    <i class="fa-solid fa-gift"></i> Pedidos y Ventas Estacionales
+                                </h3>
+                                <p class="text-base text-slate-600 font-semibold leading-relaxed">
+                                    Gestión y optimización de ventas para campañas masivas de e-commerce en picos de demanda estacional (Navidad, Acción de Gracias y Año Nuevo).
+                                </p>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div class="bg-red-50 p-4 rounded-xl border border-red-100 text-sm">
+                                        <strong class="font-bold block mb-1 text-red-800">Proceso Anterior:</strong>
+                                        Toma de pedidos tradicional y manual. Conversaciones prolongadas sin sugerencias comerciales de valor añadido.
+                                    </div>
+                                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100 text-sm">
+                                        <strong class="font-bold block mb-1 text-emerald-800">Proceso Digitalizado:</strong>
+                                        Guías inteligentes de venta sugestiva (upselling) integradas en el CRM de pedidos, proponiendo paquetes complementarios al capturar la orden.
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100 text-center">
+                                    <div>
+                                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Tasa de Venta Sugerida</span>
+                                        <span class="text-xl font-momo text-[#3284C6]">8% ➔ 24%</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Valor Medio de Compra</span>
+                                        <span class="text-xl font-momo text-[#EB5B27]">$42 ➔ $68</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Caso 5 -->
+                            <div class="case-detail-block space-y-6 hidden" id="case-custom">
+                                <h3 class="text-xl font-bold text-[#3284C6] flex items-center gap-2">
+                                    <i class="fa-solid fa-palette"></i> Personalización Omnicanal
+                                </h3>
+                                <p class="text-base text-slate-600 font-semibold leading-relaxed">
+                                    Procesamiento de pedidos a medida para plataformas e-commerce de mercancía personalizada (tazas, playeras, mantas, tarjetas de regalo).
+                                </p>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div class="bg-red-50 p-4 rounded-xl border border-red-100 text-sm">
+                                        <strong class="font-bold block mb-1 text-red-800">Proceso Anterior:</strong>
+                                        Errores constantes en la captura de especificaciones de diseño y canales desconectados de soporte que retrasaban la producción.
+                                    </div>
+                                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100 text-sm">
+                                        <strong class="font-bold block mb-1 text-emerald-800">Proceso Digitalizado:</strong>
+                                        Ecosistema unificado multicanal con validador inteligente de compatibilidad de imagen y enrutamiento automatizado a producción.
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100 text-center">
+                                    <div>
+                                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Abandono de Configuración</span>
+                                        <span class="text-xl font-momo text-[#3284C6]">18% ➔ 3.2%</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Satisfacción Cliente (CSAT)</span>
+                                        <span class="text-xl font-momo text-[#EB5B27]">78% ➔ 93%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Caso 6 -->
+                            <div class="case-detail-block space-y-6 hidden" id="case-logistic">
+                                <h3 class="text-xl font-bold text-[#3284C6] flex items-center gap-2">
+                                    <i class="fa-solid fa-truck-ramp-box"></i> Logística y Suministro de Autopartes
+                                </h3>
+                                <p class="text-base text-slate-600 font-semibold leading-relaxed">
+                                    Gestión integral de suministro y despacho de autopartes, optimizando la asignación de técnicos instaladores a nivel nacional.
+                                </p>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div class="bg-red-50 p-4 rounded-xl border border-red-100 text-sm">
+                                        <strong class="font-bold block mb-1 text-red-800">Proceso Anterior:</strong>
+                                        Búsqueda manual de compatibilidad de partes e incapacidad de confirmar fecha/hora de instalación en la llamada de solicitud inicial.
+                                    </div>
+                                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100 text-sm">
+                                        <strong class="font-bold block mb-1 text-emerald-800">Proceso Digitalizado:</strong>
+                                        Perfilado digital del vehículo, verificación de existencias por geolocalización de almacén y agendamiento inmediato de cita técnica.
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100 text-center">
+                                    <div>
+                                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Precisión Geolocalización</span>
+                                        <span class="text-xl font-momo text-[#3284C6]">88% ➔ 99.6%</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Instalación a Tiempo (&lt;48h)</span>
+                                        <span class="text-xl font-momo text-[#EB5B27]">74% ➔ 96.8%</span>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
-                    <!-- Card 4 -->
-                    <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-4 border-t-4 border-t-emerald-500">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg">
-                                <i class="fa-solid fa-wand-magic-sparkles"></i>
-                            </div>
-                            <h4 class="font-bold text-xs text-gray-500 uppercase tracking-wide">Tecnología IA</h4>
-                        </div>
-                        <h3 class="font-bold text-base text-[#222221]">ViaPath</h3>
-                        <p class="text-[11px] text-slate-500 font-medium leading-relaxed">Generador automatizado de notas post-llamada integrado directamente en el CRM operativo.</p>
-                        <div class="pt-2 border-t border-slate-100 flex justify-between items-center text-xs font-bold text-emerald-600">
-                            <span>Sincronización</span>
-                            <span class="font-momo">15m</span>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -451,8 +626,8 @@
         <!-- SLIDE 4: VENTAJAS COMPETITIVAS (LIGHT) -->
         <div class="slide bg-light-slide overflow-hidden" id="slide-4">
             <!-- Header Interno -->
-            <header class="absolute top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-7xl px-8 py-3 flex items-center justify-between z-30 header-capsule bg-white/90">
-                <div class="logo-safe-zone flex items-center h-10">
+            <header class="absolute top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl px-8 py-3 flex items-center justify-between z-30 header-capsule bg-white/90">
+                <div class="logo-capsule-container">
                     <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group">
                 </div>
                 <div>
@@ -460,49 +635,52 @@
                 </div>
             </header>
 
-            <div class="w-full h-full flex px-16 py-28 gap-12 items-center">
-                <!-- Izquierda: Gráfico/Lista Conceptos -->
-                <div class="w-[40%] space-y-6">
-                    <span class="text-[#3284C6] font-bold text-xs uppercase tracking-widest block">Diferenciación</span>
-                    <h2 class="text-4xl font-extrabold text-[#222221] leading-tight">¿Por qué elegir a Telat?</h2>
-                    <p class="text-sm text-slate-600 font-semibold leading-relaxed">
-                        Desarrollamos soluciones adaptadas a la operación de nuestros clientes, eliminando las dependencias de herramientas de terceros y disminuyendo la fricción operativa.
-                    </p>
-                    <div class="p-5 rounded-3xl bg-[#3284C6]/5 border border-[#3284C6]/10 space-y-2">
-                        <span class="text-xs font-bold text-[#3284C6] uppercase tracking-wider block">Gobernanza de Datos</span>
-                        <p class="text-[11px] text-slate-500 font-medium">Cumplimos con marcos internacionales de control y resiliencia para asegurar la integridad operativa.</p>
-                    </div>
-                </div>
-
-                <!-- Derecha: Diferenciadores -->
-                <div class="w-[60%] space-y-6">
-                    <div class="flex items-start gap-4 p-5 rounded-2xl hover:bg-white hover:shadow-sm border border-transparent hover:border-slate-100 transition-all duration-300">
-                        <div class="w-12 h-12 rounded-xl bg-orange-50 text-[#EB5B27] flex items-center justify-center text-xl flex-shrink-0">
-                            <i class="fa-solid fa-code"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-base text-[#222221] mb-1">Tecnología e IA In-House</h3>
-                            <p class="text-xs text-slate-500 font-medium leading-relaxed">Desarrollo propio de consolas de Workforce, simuladores de capacidad y asistentes inteligentes, reduciendo costos de licenciamiento de terceros.</p>
+            <!-- Contenido con Espacio Optimizado y Letra Grande -->
+            <div class="w-full h-full flex flex-col justify-between pt-24 pb-12 px-16 max-w-7xl mx-auto">
+                <div class="flex-grow flex flex-col lg:flex-row gap-12 items-center justify-center">
+                    <!-- Izquierda: Gráfico/Lista Conceptos -->
+                    <div class="lg:w-[40%] space-y-6">
+                        <span class="text-[#3284C6] font-bold text-sm uppercase tracking-widest block">Diferenciación</span>
+                        <h2 class="text-4xl md:text-5xl font-extrabold text-[#222221] leading-tight">¿Por qué elegir a Telat?</h2>
+                        <p class="text-base md:text-lg text-slate-600 font-semibold leading-relaxed">
+                            Ofrecemos una propuesta de valor centrada en la eficiencia operativa, la transparencia de datos y la mitigación de riesgos para impulsar los resultados de TIP México.
+                        </p>
+                        <div class="p-6 rounded-3xl bg-[#3284C6]/5 border border-[#3284C6]/10 space-y-2">
+                            <span class="text-xs font-bold text-[#3284C6] uppercase tracking-wider block">Decisiones Informadas</span>
+                            <p class="text-xs md:text-sm text-slate-500 font-semibold leading-relaxed">Brindamos visibilidad total para que la Dirección de TIP pueda auditar la operación de forma transparente y ágil.</p>
                         </div>
                     </div>
 
-                    <div class="flex items-start gap-4 p-5 rounded-2xl hover:bg-white hover:shadow-sm border border-transparent hover:border-slate-100 transition-all duration-300">
-                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-[#3284C6] flex items-center justify-center text-xl flex-shrink-0">
-                            <i class="fa-solid fa-shield-halved"></i>
+                    <!-- Derecha: Diferenciadores -->
+                    <div class="lg:w-[60%] space-y-6 w-full">
+                        <div class="flex items-start gap-4 p-5 rounded-2xl hover:bg-white hover:shadow-md border border-transparent hover:border-slate-100 transition-all duration-300">
+                            <div class="w-14 h-14 rounded-2xl bg-orange-50 text-[#EB5B27] flex items-center justify-center text-2xl flex-shrink-0">
+                                <i class="fa-solid fa-chart-simple"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-[#222221] mb-1">Inteligencia Operativa y Visibilidad en Tiempo Real</h3>
+                                <p class="text-sm text-slate-500 font-semibold leading-relaxed">Consolas integradas que consolidan métricas clave (Nivel de Servicio, AHT, Adherencia) al instante, permitiendo a la dirección de TIP México tomar decisiones de negocio ágiles y fundamentadas en datos reales.</p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="font-bold text-base text-[#222221] mb-1">Seguridad e Inmutabilidad de Configuración</h3>
-                            <p class="text-xs text-slate-500 font-medium leading-relaxed">Políticas de red restrictivas, enmascaramiento de credenciales seguras (Script Properties) y bases de datos con protección anti-truncamiento de columnas.</p>
-                        </div>
-                    </div>
 
-                    <div class="flex items-start gap-4 p-5 rounded-2xl hover:bg-white hover:shadow-sm border border-transparent hover:border-slate-100 transition-all duration-300">
-                        <div class="w-12 h-12 rounded-xl bg-amber-50 text-[#b48512] flex items-center justify-center text-xl flex-shrink-0">
-                            <i class="fa-solid fa-rotate"></i>
+                        <div class="flex items-start gap-4 p-5 rounded-2xl hover:bg-white hover:shadow-md border border-transparent hover:border-slate-100 transition-all duration-300">
+                            <div class="w-14 h-14 rounded-2xl bg-blue-50 text-[#3284C6] flex items-center justify-center text-2xl flex-shrink-0">
+                                <i class="fa-solid fa-calculator"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-[#222221] mb-1">Eficiencia en Capacidad y Dimensionamiento Predictivo</h3>
+                                <p class="text-sm text-slate-500 font-semibold leading-relaxed">Modelación avanzada de Workforce Management (WFM) para alinear la cantidad de asesores con las curvas reales de llamadas, eliminando el costo por agentes ociosos y previniendo la saturación del canal.</p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="font-bold text-base text-[#222221] mb-1">Cero Alertas Nativas y Soft Reloads</h3>
-                            <p class="text-xs text-slate-500 font-medium leading-relaxed">Diseño de interfaz libre de popups obstructivos mediante notificaciones Toast adaptativas y persistencia reactiva en segundo plano para evitar bloqueos.</p>
+
+                        <div class="flex items-start gap-4 p-5 rounded-2xl hover:bg-white hover:shadow-md border border-transparent hover:border-slate-100 transition-all duration-300">
+                            <div class="w-14 h-14 rounded-2xl bg-amber-50 text-[#b48512] flex items-center justify-center text-2xl flex-shrink-0">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-[#222221] mb-1">Resiliencia y Mitigación de Riesgos ante Contingencias</h3>
+                                <p class="text-sm text-slate-500 font-semibold leading-relaxed">Un plan de continuidad probado que traslada la operación a Trabajo desde Casa en menos de 2 horas ante cortes de red principales, blindando la tasa de abandono mensual y protegiendo el prestigio de su marca.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -513,8 +691,8 @@
         <!-- SLIDE 5: OFERTA COMERCIAL PARA TIP (LIGHT) -->
         <div class="slide bg-light-slide overflow-hidden" id="slide-5">
             <!-- Header Interno -->
-            <header class="absolute top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-7xl px-8 py-3 flex items-center justify-between z-30 header-capsule bg-white/90">
-                <div class="logo-safe-zone flex items-center h-10">
+            <header class="absolute top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl px-8 py-3 flex items-center justify-between z-30 header-capsule bg-white/90">
+                <div class="logo-capsule-container">
                     <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group">
                 </div>
                 <div>
@@ -522,87 +700,90 @@
                 </div>
             </header>
 
-            <div class="w-full h-full flex px-16 py-28 gap-12 items-center">
-                <!-- Izquierda: Estructura Operativa -->
-                <div class="w-1/2 space-y-6">
-                    <span class="text-[#3284C6] font-bold text-xs uppercase tracking-widest block">Propuesta Operativa</span>
-                    <h2 class="text-4xl font-extrabold text-[#222221] leading-tight">Modelo de Servicio y Capacidad</h2>
-                    <p class="text-sm text-slate-600 font-semibold leading-relaxed">
-                        Proponemos una estructura operativa dedicada enfocada en el control de calidad, eficiencia en tiempos de atención y adherencia estricta a los procesos de TIP México.
-                    </p>
+            <!-- Contenido con Espacio Optimizado y Letra Grande -->
+            <div class="w-full h-full flex flex-col justify-between pt-24 pb-12 px-16 max-w-7xl mx-auto">
+                <div class="flex-grow flex flex-col lg:flex-row gap-12 items-center justify-center">
+                    <!-- Izquierda: Estructura Operativa -->
+                    <div class="lg:w-1/2 space-y-6">
+                        <span class="text-[#3284C6] font-bold text-sm uppercase tracking-widest block">Propuesta Operativa</span>
+                        <h2 class="text-4xl md:text-5xl font-extrabold text-[#222221] leading-tight">Modelo de Servicio y Capacidad</h2>
+                        <p class="text-base md:text-lg text-slate-600 font-semibold leading-relaxed">
+                            Proponemos una estructura operativa dedicada enfocada en el control de calidad, eficiencia en tiempos de atención y adherencia estricta a los procesos de TIP México.
+                        </p>
 
-                    <!-- Elementos de Estructura -->
-                    <div class="space-y-4 pt-2">
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-lg bg-[#3284C6]/10 text-[#3284C6] flex items-center justify-center text-sm">
-                                <i class="fa-solid fa-users"></i>
+                        <!-- Elementos de Estructura -->
+                        <div class="space-y-4 pt-2">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-[#3284C6]/10 text-[#3284C6] flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-users"></i>
+                                </div>
+                                <span class="text-sm md:text-base text-slate-700 font-bold">10 Agentes Telefónicos Dedicados en CDMX</span>
                             </div>
-                            <span class="text-xs text-slate-700 font-bold">10 Agentes Telefónicos Dedicados en CDMX</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-lg bg-[#EB5B27]/10 text-[#EB5B27] flex items-center justify-center text-sm">
-                                <i class="fa-solid fa-user-gear"></i>
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-[#EB5B27]/10 text-[#EB5B27] flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-user-gear"></i>
+                                </div>
+                                <span class="text-sm md:text-base text-slate-700 font-bold">1 Supervisor Operativo de Campaña Dedicado</span>
                             </div>
-                            <span class="text-xs text-slate-700 font-bold">1 Supervisor Operativo de Campaña Dedicado</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-lg bg-[#FECA66]/20 text-[#b48512] flex items-center justify-center text-sm">
-                                <i class="fa-solid fa-tv"></i>
-                            </div>
-                            <span class="text-xs text-slate-700 font-bold">Monitoreo GOC (Torre de Control) 24/7 en Tiempo Real</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Derecha: Métricas y KPIs -->
-                <div class="w-1/2 bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm space-y-6">
-                    <h3 class="font-bold text-base text-[#222221] border-b border-slate-100 pb-3 flex items-center gap-2">
-                        <i class="fa-solid fa-chart-simple text-[#EB5B27]"></i> KPIs y SLAs Comprometidos
-                    </h3>
-
-                    <div class="grid grid-cols-2 gap-6">
-                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
-                            <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Nivel de Servicio</span>
-                            <div class="flex items-baseline gap-1">
-                                <span class="text-2xl font-momo text-[#3284C6]">80/20</span>
-                                <span class="text-[10px] text-slate-500 font-bold">SL</span>
-                            </div>
-                        </div>
-
-                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
-                            <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Tasa de Abandono</span>
-                            <div class="flex items-baseline gap-1">
-                                <span class="text-2xl font-momo text-[#EB5B27]">&lt;3%</span>
-                                <span class="text-[10px] text-slate-500 font-bold">Max</span>
-                            </div>
-                        </div>
-
-                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
-                            <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Tiempo de Respuesta (ASA)</span>
-                            <div class="flex items-baseline gap-1">
-                                <span class="text-2xl font-momo text-[#222221]">≤20s</span>
-                                <span class="text-[10px] text-slate-500 font-bold">Promedio</span>
-                            </div>
-                        </div>
-
-                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
-                            <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Cobertura Plantilla</span>
-                            <div class="flex items-baseline gap-1">
-                                <span class="text-2xl font-momo text-emerald-600">95%</span>
-                                <span class="text-[10px] text-slate-500 font-bold">Min</span>
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-[#FECA66]/20 text-[#b48512] flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-tv"></i>
+                                </div>
+                                <span class="text-sm md:text-base text-slate-700 font-bold">Monitoreo GOC (Torre de Control) 24/7 en Tiempo Real</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="text-[10px] text-slate-400 font-medium text-center">
-                        *Métricas monitoreadas y validadas mediante auditorías automáticas periódicas.
+                    <!-- Derecha: Métricas y KPIs -->
+                    <div class="lg:w-1/2 bg-white p-8 rounded-[2rem] border border-slate-200/80 shadow-md space-y-6 w-full">
+                        <h3 class="font-bold text-lg text-[#222221] border-b border-slate-100 pb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-chart-simple text-[#EB5B27]"></i> KPIs y SLAs Comprometidos
+                        </h3>
+
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-100/80 space-y-1">
+                                <span class="text-xs text-slate-500 font-bold uppercase tracking-wider block">Nivel de Servicio</span>
+                                <div class="flex items-baseline gap-1">
+                                    <span class="text-3xl font-momo text-[#3284C6]">80/20</span>
+                                    <span class="text-xs text-slate-500 font-bold">SL</span>
+                                </div>
+                            </div>
+
+                            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-100/80 space-y-1">
+                                <span class="text-xs text-slate-500 font-bold uppercase tracking-wider block">Tasa de Abandono</span>
+                                <div class="flex items-baseline gap-1">
+                                    <span class="text-3xl font-momo text-[#EB5B27]">&lt;3%</span>
+                                    <span class="text-xs text-slate-500 font-bold">Max</span>
+                                </div>
+                            </div>
+
+                            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-100/80 space-y-1">
+                                <span class="text-xs text-slate-500 font-bold uppercase tracking-wider block">Tiempos de Espera (ASA)</span>
+                                <div class="flex items-baseline gap-1">
+                                    <span class="text-3xl font-momo text-[#222221]">≤20s</span>
+                                    <span class="text-xs text-slate-500 font-bold">Promedio</span>
+                                </div>
+                            </div>
+
+                            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-100/80 space-y-1">
+                                <span class="text-xs text-slate-500 font-bold uppercase tracking-wider block">Cobertura Plantilla</span>
+                                <div class="flex items-baseline gap-1">
+                                    <span class="text-3xl font-momo text-emerald-600">95%</span>
+                                    <span class="text-xs text-slate-500 font-bold">Min</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-xs text-slate-400 font-medium text-center">
+                            *Métricas monitoreadas y validadas mediante auditorías automáticas periódicas.
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
 
-        <!-- SLIDE 6: BCP / DRP SIMULATOR (DARK) -->
+        <!-- SLIDE 6: BCP / DRP SIMULATOR (DARK) - TERMINOLOGÍA PURAMENTE FUNCIONAL -->
         <div class="slide bg-dark-slide overflow-hidden" id="slide-6">
             <!-- VIDEO DE FONDO VIMEO CON MIX-BLEND -->
             <div class="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden bg-[#222221]">
@@ -614,114 +795,117 @@
             </div>
 
             <!-- Header Interno -->
-            <header class="absolute top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-7xl px-8 py-3 flex items-center justify-between z-30 header-capsule-dark">
-                <div class="logo-safe-zone flex items-center h-10">
-                    <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="filter brightness-0 invert">
+            <header class="absolute top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl px-8 py-3 flex items-center justify-between z-30 header-capsule-dark">
+                <div class="logo-capsule-container">
+                    <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group">
                 </div>
                 <div>
-                    <span class="text-xs font-subheadings font-bold text-[#FECA66] uppercase">Simulador de Resiliencia BCP/DRP</span>
+                    <span class="text-xs font-subheadings font-bold text-[#FECA66] uppercase">Resiliencia BCP/DRP</span>
                 </div>
             </header>
 
-            <div class="w-full h-full flex px-16 py-28 gap-12 items-center relative z-20">
-                <!-- Izquierda: Plan de Continuidad Corporativo -->
-                <div class="w-[45%] space-y-5">
-                    <span class="text-[#3284C6] font-bold text-xs uppercase tracking-widest block">Resiliencia Empresarial</span>
-                    <h2 class="text-3xl font-extrabold leading-tight text-white">Plan de Continuidad de Negocio (BCP)</h2>
-                    <p class="text-xs text-neutral-300 font-medium leading-relaxed">
-                        Ante contingencias catastróficas en la sede CDMX (ej. corte de fibra óptica mayor a 24 horas sin ETA), la operación se traslada inmediatamente a un modelo **Trabajo desde Casa (WFH)** exclusivo con equipamiento propiedad de Telat.
-                    </p>
+            <!-- Contenido con Espacio Optimizado, Letra Grande y Nombres Funcionales -->
+            <div class="w-full h-full flex flex-col justify-between pt-24 pb-12 px-16 max-w-7xl mx-auto relative z-20">
+                <div class="flex-grow flex flex-col lg:flex-row gap-12 items-center justify-center w-full">
+                    <!-- Izquierda: Plan de Continuidad Corporativo -->
+                    <div class="lg:w-[45%] space-y-5">
+                        <span class="text-[#3284C6] font-bold text-sm uppercase tracking-widest block">Resiliencia Operativa</span>
+                        <h2 class="text-3xl md:text-4xl font-extrabold leading-tight text-white">Plan de Continuidad de Negocio (BCP)</h2>
+                        <p class="text-sm md:text-base text-neutral-300 font-semibold leading-relaxed">
+                            Ante contingencias críticas en la sede CDMX (ej. corte de fibra óptica mayor a 24 horas o sin tiempo estimado de solución), la operación se traslada inmediatamente a un modelo **Trabajo desde Casa** exclusivo con equipamiento propiedad de Telat.
+                        </p>
 
-                    <!-- Tabla de SLAs -->
-                    <div class="bg-neutral-900/60 border border-neutral-800 rounded-2xl p-4 space-y-3">
-                        <span class="text-[10px] text-neutral-400 font-bold uppercase tracking-wider block">Acuerdos de Nivel de Recuperación (SLAs)</span>
-                        <div class="grid grid-cols-3 gap-2 text-center">
-                            <div class="p-2 bg-neutral-950/50 rounded-lg border border-neutral-800">
-                                <span class="text-[9px] text-neutral-400 font-medium block">RTO Voz</span>
-                                <span class="text-xs font-momo text-[#3284C6]">≤2h</span>
+                        <!-- Tabla de SLAs -->
+                        <div class="bg-neutral-900/60 border border-neutral-800 rounded-2xl p-5 space-y-3">
+                            <span class="text-xs text-neutral-400 font-bold uppercase tracking-wider block">Acuerdos de Recuperación (SLAs)</span>
+                            <div class="grid grid-cols-3 gap-3 text-center">
+                                <div class="p-3 bg-neutral-950/50 rounded-lg border border-neutral-800">
+                                    <span class="text-[10px] text-neutral-400 font-bold block mb-1">Recup. Voz</span>
+                                    <span class="text-base font-momo text-[#3284C6]">≤2h</span>
+                                </div>
+                                <div class="p-3 bg-neutral-950/50 rounded-lg border border-neutral-800">
+                                    <span class="text-[10px] text-neutral-400 font-bold block mb-1">Resguardo</span>
+                                    <span class="text-base font-momo text-[#FECA66]">≤15m</span>
+                                </div>
+                                <div class="p-3 bg-neutral-950/50 rounded-lg border border-neutral-800">
+                                    <span class="text-[10px] text-neutral-400 font-bold block mb-1">Notificación</span>
+                                    <span class="text-base font-momo text-[#EB5B27]">30m</span>
+                                </div>
                             </div>
-                            <div class="p-2 bg-neutral-950/50 rounded-lg border border-neutral-800">
-                                <span class="text-[9px] text-neutral-400 font-medium block">RPO Datos</span>
-                                <span class="text-xs font-momo text-[#FECA66]">≤15m</span>
-                            </div>
-                            <div class="p-2 bg-neutral-950/50 rounded-lg border border-neutral-800">
-                                <span class="text-[9px] text-neutral-400 font-medium block">Notificación</span>
-                                <span class="text-xs font-momo text-[#EB5B27]">30m</span>
-                            </div>
+                        </div>
+
+                        <!-- Botón para Iniciar Simulación -->
+                        <div class="pt-2">
+                            <button id="start-bcp-sim" class="btn-portal btn-naranja w-full font-bold uppercase text-sm tracking-wider">
+                                <i class="fa-solid fa-triangle-exclamation animate-pulse"></i> Simular Incidente de Fibra
+                            </button>
                         </div>
                     </div>
 
-                    <!-- Botón para Iniciar Simulación -->
-                    <div class="pt-2">
-                        <button id="start-bcp-sim" class="btn-portal btn-naranja w-full font-bold uppercase text-xs tracking-wider">
-                            <i class="fa-solid fa-triangle-exclamation animate-pulse"></i> Iniciar Simulación de Corte de Fibra
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Derecha: El Simulador Interactivo -->
-                <div class="w-[55%] bg-neutral-900/90 border border-neutral-800 rounded-[2rem] p-6 shadow-2xl relative flex flex-col justify-between min-h-[420px]">
-                    <!-- Cabecera de Consola -->
-                    <div class="flex justify-between items-center border-b border-neutral-800 pb-3">
-                        <div class="flex items-center gap-2">
-                            <span class="w-3 h-3 rounded-full bg-[#3284C6]"></span>
-                            <span class="text-xs font-subheadings font-bold tracking-wider text-neutral-200">CONSOLA DRP ACTIVE-FLOW</span>
-                        </div>
-                        <span id="sim-status" class="text-[10px] font-bold uppercase px-3 py-1 rounded-full bg-neutral-800 text-neutral-400">
-                            Modo Inactivo
-                        </span>
-                    </div>
-
-                    <!-- Contenido Secuencial del Flujo -->
-                    <div class="space-y-4 py-4 flex-grow flex flex-col justify-center">
-                        <!-- Paso 1 -->
-                        <div id="step-1" class="flex gap-4 items-center opacity-40 transition-all duration-500">
-                            <div class="step-num w-8 h-8 rounded-full border border-neutral-700 bg-neutral-950 flex items-center justify-center text-xs font-bold text-neutral-400">1</div>
-                            <div class="flex-grow">
-                                <h4 class="text-xs font-bold text-neutral-200">Enrutamiento CTI e IVR (Fase 1 - ≤30 min)</h4>
-                                <p class="text-[10px] text-neutral-400">Desvío de tráfico de llamadas y mensajes automáticos de espera extendida.</p>
+                    <!-- Derecha: El Simulador Interactivo (Nombres Funcionales y Mayor Espacio) -->
+                    <div class="lg:w-[55%] bg-neutral-900/90 border border-neutral-800 rounded-[2.5rem] p-8 shadow-2xl relative flex flex-col justify-between min-h-[460px] w-full">
+                        <!-- Cabecera de Consola -->
+                        <div class="flex justify-between items-center border-b border-neutral-800 pb-4">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3.5 h-3.5 rounded-full bg-[#3284C6]"></span>
+                                <span class="text-xs font-subheadings font-bold tracking-wider text-neutral-200 uppercase">Flujo Activo de Recuperación</span>
                             </div>
-                            <div class="step-status text-[10px] font-bold text-neutral-500">Pendiente</div>
+                            <span id="sim-status" class="text-[10px] font-bold uppercase px-3.5 py-1 rounded-full bg-neutral-800 text-neutral-400">
+                                Modo Inactivo
+                            </span>
                         </div>
 
-                        <!-- Paso 2 -->
-                        <div id="step-2" class="flex gap-4 items-center opacity-40 transition-all duration-500">
-                            <div class="step-num w-8 h-8 rounded-full border border-neutral-700 bg-neutral-950 flex items-center justify-center text-xs font-bold text-neutral-400">2</div>
-                            <div class="flex-grow">
-                                <h4 class="text-xs font-bold text-neutral-200">Despliegue Remoto WFH (Fase 2 - ≤2 horas)</h4>
-                                <p class="text-[10px] text-neutral-400">Levantamiento de la capacidad mínima del 70% vía NetExtender SSL-VPN (AES-256) e inspección DPI-SSL.</p>
+                        <!-- Contenido Secuencial del Flujo -->
+                        <div class="space-y-6 py-6 flex-grow flex flex-col justify-center">
+                            <!-- Paso 1 -->
+                            <div id="step-1" class="flex gap-4 items-center opacity-40 transition-all duration-500">
+                                <div class="step-num w-10 h-10 rounded-full border border-neutral-700 bg-neutral-950 flex items-center justify-center text-sm font-bold text-neutral-400">1</div>
+                                <div class="flex-grow">
+                                    <h4 class="text-sm font-bold text-neutral-200">Desvío de Tráfico y Enrutamiento Telefónico (Fase 1 - ≤30 min)</h4>
+                                    <p class="text-xs text-neutral-400">Redireccionamiento inmediato del flujo entrante de llamadas e IVR informativo de espera extendida.</p>
+                                </div>
+                                <div class="step-status text-xs font-bold text-neutral-500">Pendiente</div>
                             </div>
-                            <div class="step-status text-[10px] font-bold text-neutral-500">Pendiente</div>
-                        </div>
 
-                        <!-- Paso 3 -->
-                        <div id="step-3" class="flex gap-4 items-center opacity-40 transition-all duration-500">
-                            <div class="step-num w-8 h-8 rounded-full border border-neutral-700 bg-neutral-950 flex items-center justify-center text-xs font-bold text-neutral-400">3</div>
-                            <div class="flex-grow">
-                                <h4 class="text-xs font-bold text-neutral-200">Restablecimiento Total (Fase 3 - ≤4 horas)</h4>
-                                <p class="text-[10px] text-neutral-400">100% de la operación restablecida de forma remota bajo auditoría de seguridad lógica (EDR/DLP, Cisco DUO MFA).</p>
+                            <!-- Paso 2 -->
+                            <div id="step-2" class="flex gap-4 items-center opacity-40 transition-all duration-500">
+                                <div class="step-num w-10 h-10 rounded-full border border-neutral-700 bg-neutral-950 flex items-center justify-center text-sm font-bold text-neutral-400">2</div>
+                                <div class="flex-grow">
+                                    <h4 class="text-sm font-bold text-neutral-200">Activación de Trabajo desde Casa (Fase 2 - ≤2 horas)</h4>
+                                    <p class="text-xs text-neutral-400">Arranque de la capacidad mínima del 70% mediante túneles de conexión segura cifrada e inspección profunda de tráfico.</p>
+                                </div>
+                                <div class="step-status text-xs font-bold text-neutral-500">Pendiente</div>
                             </div>
-                            <div class="step-status text-[10px] font-bold text-neutral-500">Pendiente</div>
-                        </div>
-                    </div>
 
-                    <!-- Detalles de Seguridad Activa -->
-                    <div class="border-t border-neutral-800 pt-3 grid grid-cols-2 gap-3 text-[10px] font-bold">
-                        <div class="flex items-center gap-2 text-neutral-400">
-                            <i class="fa-solid fa-lock text-[#3284C6]"></i>
-                            <span>VPN NetExtender (AES-256)</span>
+                            <!-- Paso 3 -->
+                            <div id="step-3" class="flex gap-4 items-center opacity-40 transition-all duration-500">
+                                <div class="step-num w-10 h-10 rounded-full border border-neutral-700 bg-neutral-950 flex items-center justify-center text-sm font-bold text-neutral-400">3</div>
+                                <div class="flex-grow">
+                                    <h4 class="text-sm font-bold text-neutral-200">Operación Restablecida al 100% (Fase 3 - ≤4 horas)</h4>
+                                    <p class="text-xs text-neutral-400">Estaciones de trabajo normalizadas bajo políticas de prevención de fuga de información y autenticación multifactor con geolocalización.</p>
+                                </div>
+                                <div class="step-status text-xs font-bold text-neutral-500">Pendiente</div>
+                            </div>
                         </div>
-                        <div class="flex items-center gap-2 text-neutral-400">
-                            <i class="fa-solid fa-shield text-[#EB5B27]"></i>
-                            <span>Endpoint EDR & DLP Activos</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-neutral-400">
-                            <i class="fa-solid fa-user-check text-[#FECA66]"></i>
-                            <span>Cisco DUO MFA Geofencing</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-neutral-400">
-                            <i class="fa-solid fa-network-wired text-emerald-500"></i>
-                            <span>Auditoría e Inspección DPI-SSL</span>
+
+                        <!-- Detalles de Seguridad Activa -->
+                        <div class="border-t border-neutral-800 pt-4 grid grid-cols-2 gap-4 text-xs font-bold">
+                            <div class="flex items-center gap-2.5 text-neutral-400">
+                                <i class="fa-solid fa-lock text-[#3284C6] text-sm"></i>
+                                <span>Túneles Seguros Cifrados</span>
+                            </div>
+                            <div class="flex items-center gap-2.5 text-neutral-400">
+                                <i class="fa-solid fa-shield text-[#EB5B27] text-sm"></i>
+                                <span>Prevención de Fuga de Datos</span>
+                            </div>
+                            <div class="flex items-center gap-2.5 text-neutral-400">
+                                <i class="fa-solid fa-user-check text-[#FECA66] text-sm"></i>
+                                <span>Autenticación Multifactor y Geocercas</span>
+                            </div>
+                            <div class="flex items-center gap-2.5 text-neutral-400">
+                                <i class="fa-solid fa-network-wired text-emerald-500 text-sm"></i>
+                                <span>Monitoreo Activo de Amenazas</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -729,11 +913,11 @@
         </div>
 
 
-        <!-- SLIDE 7: CAPACIDADES DE INTELIGENCIA ARTIFICIAL (LIGHT) -->
+        <!-- SLIDE 7: CAPACIDADES DE INTELIGENCIA ARTIFICIAL (LIGHT) - TERMINOLOGÍA PURAMENTE FUNCIONAL -->
         <div class="slide bg-light-slide overflow-hidden" id="slide-7">
             <!-- Header Interno -->
-            <header class="absolute top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-7xl px-8 py-3 flex items-center justify-between z-30 header-capsule bg-white/90">
-                <div class="logo-safe-zone flex items-center h-10">
+            <header class="absolute top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl px-8 py-3 flex items-center justify-between z-30 header-capsule bg-white/90">
+                <div class="logo-capsule-container">
                     <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group">
                 </div>
                 <div>
@@ -741,59 +925,62 @@
                 </div>
             </header>
 
-            <div class="w-full h-full flex px-16 py-28 gap-12 items-center">
-                <!-- Izquierda: Media/Logos Frame -->
-                <div class="w-[50%] h-[80%] relative rounded-[2.5rem] bg-[#222221] p-2 glow-frame-celeste flex items-center justify-center overflow-hidden">
-                    <iframe src="https://player.vimeo.com/video/1205962477?background=1&autopause=0&muted=1&loop=1&autoplay=1" 
-                            class="absolute inset-0 w-full h-full scale-[1.05] opacity-80" 
-                            frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
-                    </iframe>
-                    <div class="absolute inset-0 bg-neutral-950/40"></div>
-                    <div class="relative z-10 text-center space-y-3">
-                        <span class="bg-[#3284C6] text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1 rounded-full">Suite Telat IA</span>
-                        <h3 class="text-2xl font-extrabold text-white">Ecosistema Inteligente</h3>
+            <!-- Contenido con Espacio Optimizado y Letra Grande -->
+            <div class="w-full h-full flex flex-col justify-between pt-24 pb-12 px-16 max-w-7xl mx-auto">
+                <div class="flex-grow flex flex-col lg:flex-row gap-12 items-center justify-center">
+                    <!-- Izquierda: Media/Logos Frame -->
+                    <div class="lg:w-[50%] h-[80%] min-h-[380px] w-full relative rounded-[3rem] bg-[#222221] p-2 glow-frame-celeste flex items-center justify-center overflow-hidden">
+                        <iframe src="https://player.vimeo.com/video/1205962477?background=1&autopause=0&muted=1&loop=1&autoplay=1" 
+                                class="absolute inset-0 w-full h-full scale-[1.05] opacity-80" 
+                                frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                        </iframe>
+                        <div class="absolute inset-0 bg-neutral-950/40"></div>
+                        <div class="relative z-10 text-center space-y-4">
+                            <span class="bg-[#3284C6] text-white text-xs font-bold uppercase tracking-widest px-5 py-1.5 rounded-full">Suite Telat IA</span>
+                            <h3 class="text-3xl font-extrabold text-white">Ecosistema Inteligente</h3>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Derecha: Software e Impacto -->
-                <div class="w-[50%] space-y-6">
-                    <span class="text-[#EB5B27] font-bold text-xs uppercase tracking-widest block">Tecnología de Vanguardia</span>
-                    <h2 class="text-3xl font-extrabold text-[#222221]">Soluciones de IA para Optimizar la Operación</h2>
-                    <p class="text-sm text-slate-600 font-semibold leading-relaxed">
-                        Nuestras herramientas de desarrollo propio están diseñadas para incrementar la productividad de los agentes y asegurar la calidad de atención de TIP México.
-                    </p>
+                    <!-- Derecha: Software e Impacto (Nombres Funcionales) -->
+                    <div class="lg:w-[50%] space-y-6 w-full">
+                        <span class="text-[#EB5B27] font-bold text-sm uppercase tracking-widest block">Tecnología de Vanguardia</span>
+                        <h2 class="text-4xl md:text-5xl font-extrabold text-[#222221] leading-tight">Soluciones de IA para Optimizar la Operación</h2>
+                        <p class="text-base md:text-lg text-slate-600 font-semibold leading-relaxed">
+                            Nuestras herramientas de desarrollo propio están enfocadas en incrementar la productividad de los asesores y asegurar el apego al script en cada llamada.
+                        </p>
 
-                    <div class="space-y-4">
-                        <!-- Tool 1 -->
-                        <div class="flex gap-4">
-                            <div class="w-8 h-8 rounded-lg bg-orange-50 text-[#EB5B27] flex items-center justify-center flex-shrink-0 text-sm">
-                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <div class="space-y-6">
+                            <!-- Tool 1 -->
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-orange-50 text-[#EB5B27] flex items-center justify-center flex-shrink-0 text-lg">
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-[#222221] uppercase tracking-wide">Generador de Notas Post-Llamada</h4>
+                                    <p class="text-xs md:text-sm text-slate-500 font-semibold leading-relaxed">Inteligencia artificial que resume de forma automática la interacción con el cliente al finalizar la llamada y la exporta al CRM en tiempo real.</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="font-bold text-xs text-[#222221] uppercase tracking-wide">Generador de Notas Automatizado</h4>
-                                <p class="text-[11px] text-slate-500 font-medium leading-relaxed">IA que resume de forma automática la interacción con el cliente al finalizar la llamada y la exporta al CRM del cliente en tiempo real.</p>
-                            </div>
-                        </div>
 
-                        <!-- Tool 2 -->
-                        <div class="flex gap-4">
-                            <div class="w-8 h-8 rounded-lg bg-blue-50 text-[#3284C6] flex items-center justify-center flex-shrink-0 text-sm">
-                                <i class="fa-solid fa-ranking-star"></i>
+                            <!-- Tool 2 -->
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-blue-50 text-[#3284C6] flex items-center justify-center flex-shrink-0 text-lg">
+                                    <i class="fa-solid fa-ranking-star"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-[#3284C6] uppercase tracking-wide">Auditoría de Calidad y Tiempos de Atención (AHT) por Voz</h4>
+                                    <p class="text-xs md:text-sm text-slate-500 font-semibold leading-relaxed">Análisis de voz y transcripción automática que evalúa el apego al protocolo y detecta de manera proactiva hold excesivo.</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="font-bold text-xs text-[#3284C6] uppercase tracking-wide">Kudos 3.0 (Calidad y AHT)</h4>
-                                <p class="text-[11px] text-slate-500 font-medium leading-relaxed">Auditoría automática por voz que evalúa el apego al script y detecta de manera proactiva desvíos de AHT o hold excesivo.</p>
-                            </div>
-                        </div>
 
-                        <!-- Tool 3 -->
-                        <div class="flex gap-4">
-                            <div class="w-8 h-8 rounded-lg bg-amber-50 text-[#b48512] flex items-center justify-center flex-shrink-0 text-sm">
-                                <i class="fa-solid fa-triangle-exclamation"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-xs text-amber-600 uppercase tracking-wide">Alertas de Estado de Agente</h4>
-                                <p class="text-[11px] text-slate-500 font-medium leading-relaxed">Integración con el CTI de telefonía que alerta de inmediato al supervisor ante desviaciones no justificadas de estatus.</p>
+                            <!-- Tool 3 -->
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-amber-50 text-[#b48512] flex items-center justify-center flex-shrink-0 text-lg">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-amber-600 uppercase tracking-wide">Alertas de Estado de Agente</h4>
+                                    <p class="text-xs md:text-sm text-slate-500 font-semibold leading-relaxed">Alertas de estatus en tiempo real al supervisor ante desviaciones no justificadas de pausas o hold extendido.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -805,8 +992,8 @@
         <!-- SLIDE 8: ROADMAP DE IMPLEMENTACIÓN (LIGHT) -->
         <div class="slide bg-light-slide overflow-hidden" id="slide-8">
             <!-- Header Interno -->
-            <header class="absolute top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-7xl px-8 py-3 flex items-center justify-between z-30 header-capsule bg-white/90">
-                <div class="logo-safe-zone flex items-center h-10">
+            <header class="absolute top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl px-8 py-3 flex items-center justify-between z-30 header-capsule bg-white/90">
+                <div class="logo-capsule-container">
                     <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group">
                 </div>
                 <div>
@@ -814,54 +1001,57 @@
                 </div>
             </header>
 
-            <div class="w-full h-full flex flex-col justify-center px-16 py-28 space-y-10">
-                <div class="max-w-xl">
-                    <span class="text-[#3284C6] font-bold text-xs uppercase tracking-widest block">Cronograma de Transición</span>
-                    <h2 class="text-3xl font-extrabold text-[#222221]">Plan de Lanzamiento en 4 Semanas</h2>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
-                    <!-- Línea de Fondo para Timeline -->
-                    <div class="hidden md:block absolute top-[28px] left-[5%] right-[5%] h-1 bg-slate-100 z-0"></div>
-
-                    <!-- Fase 1 -->
-                    <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-3 relative z-10">
-                        <div class="w-12 h-12 rounded-2xl bg-[#3284C6] text-white flex items-center justify-center font-bold text-base shadow-md">
-                            01
-                        </div>
-                        <span class="text-[9px] text-[#3284C6] font-bold uppercase tracking-wider block">Semana 1: Setup</span>
-                        <h4 class="font-bold text-sm text-[#222221]">Red e Infraestructura</h4>
-                        <p class="text-[11px] text-slate-500 font-medium leading-relaxed">Conexión de VPNs seguras, direccionamiento IP, aprovisionamiento de troncales SIP y credenciales en Script Properties.</p>
+            <!-- Contenido con Espacio Optimizado y Letra Grande -->
+            <div class="w-full h-full flex flex-col justify-between pt-24 pb-12 px-16 max-w-7xl mx-auto">
+                <div class="flex-grow flex flex-col justify-center space-y-10 w-full">
+                    <div class="max-w-xl">
+                        <span class="text-[#3284C6] font-bold text-sm uppercase tracking-widest block">Cronograma de Transición</span>
+                        <h2 class="text-3xl md:text-4xl font-extrabold text-[#222221] leading-tight">Plan de Lanzamiento en 4 Semanas</h2>
                     </div>
 
-                    <!-- Fase 2 -->
-                    <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-3 relative z-10">
-                        <div class="w-12 h-12 rounded-2xl bg-[#EB5B27] text-white flex items-center justify-center font-bold text-base shadow-md">
-                            02
-                        </div>
-                        <span class="text-[9px] text-[#EB5B27] font-bold uppercase tracking-wider block">Semana 2: Equipamiento</span>
-                        <h4 class="font-bold text-sm text-[#222221]">Estaciones de Trabajo</h4>
-                        <p class="text-[11px] text-slate-500 font-medium leading-relaxed">Configuración de PCs Telat con imagen maestra corporativa, instalación de antivirus EDR, bloqueos DLP y tokens Cisco DUO.</p>
-                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative w-full">
+                        <!-- Línea de Fondo para Timeline -->
+                        <div class="hidden md:block absolute top-[32px] left-[5%] right-[5%] h-1.5 bg-slate-100 z-0"></div>
 
-                    <!-- Fase 3 -->
-                    <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-3 relative z-10">
-                        <div class="w-12 h-12 rounded-2xl bg-[#FECA66] text-[#222221] flex items-center justify-center font-bold text-base shadow-md">
-                            03
+                        <!-- Fase 1 -->
+                        <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-md space-y-4 relative z-10 hover:shadow-lg transition-shadow">
+                            <div class="w-14 h-14 rounded-2xl bg-[#3284C6] text-white flex items-center justify-center font-bold text-lg shadow-md">
+                                01
+                            </div>
+                            <span class="text-[10px] text-[#3284C6] font-bold uppercase tracking-wider block">Semana 1: Configuración</span>
+                            <h4 class="font-bold text-base text-[#222221]">Red e Infraestructura</h4>
+                            <p class="text-xs md:text-sm text-slate-500 font-semibold leading-relaxed">Conexión de VPNs seguras, direccionamiento IP, aprovisionamiento de telefonía SIP y almacenamiento seguro de credenciales.</p>
                         </div>
-                        <span class="text-[9px] text-amber-600 font-bold uppercase tracking-wider block">Semana 3: Certificación</span>
-                        <h4 class="font-bold text-sm text-[#222221]">Pruebas BCP / DRP</h4>
-                        <p class="text-[11px] text-slate-500 font-medium leading-relaxed">Simulacro de corte de fibra real con traslado de operación a WFH y validación de conmutación de telefonía e IVR en &lt;2 horas.</p>
-                    </div>
 
-                    <!-- Fase 4 -->
-                    <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-3 relative z-10">
-                        <div class="w-12 h-12 rounded-2xl bg-emerald-500 text-white flex items-center justify-center font-bold text-base shadow-md">
-                            04
+                        <!-- Fase 2 -->
+                        <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-md space-y-4 relative z-10 hover:shadow-lg transition-shadow">
+                            <div class="w-14 h-14 rounded-2xl bg-[#EB5B27] text-white flex items-center justify-center font-bold text-lg shadow-md">
+                                02
+                            </div>
+                            <span class="text-[10px] text-[#EB5B27] font-bold uppercase tracking-wider block">Semana 2: Equipamiento</span>
+                            <h4 class="font-bold text-base text-[#222221]">Estaciones de Trabajo</h4>
+                            <p class="text-xs md:text-sm text-slate-500 font-semibold leading-relaxed">Configuración de computadoras Telat con imagen maestra, políticas de prevención de fuga de información y autenticación multifactor.</p>
                         </div>
-                        <span class="text-[9px] text-emerald-600 font-bold uppercase tracking-wider block">Semana 4: Go-Live</span>
-                        <h4 class="font-bold text-sm text-[#222221]">Arranque Operativo</h4>
-                        <p class="text-[11px] text-slate-500 font-medium leading-relaxed">Liberación de asesores dedicados en piso CDMX, monitoreo activo de KPIs por GOC e inicio de la operación regular.</p>
+
+                        <!-- Fase 3 -->
+                        <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-md space-y-4 relative z-10 hover:shadow-lg transition-shadow">
+                            <div class="w-14 h-14 rounded-2xl bg-[#FECA66] text-[#222221] flex items-center justify-center font-bold text-lg shadow-md">
+                                03
+                            </div>
+                            <span class="text-[10px] text-amber-600 font-bold uppercase tracking-wider block">Semana 3: Certificación</span>
+                            <h4 class="font-bold text-base text-[#222221]">Pruebas BCP / DRP</h4>
+                            <p class="text-xs md:text-sm text-slate-500 font-semibold leading-relaxed">Simulacro de corte de fibra real con traslado de operación a Trabajo desde Casa y validación de desvío de llamadas en &lt;2 horas.</p>
+                        </div>
+
+                        <!-- Fase 4 -->
+                        <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-md space-y-4 relative z-10 hover:shadow-lg transition-shadow">
+                            <div class="w-14 h-14 rounded-2xl bg-emerald-500 text-white flex items-center justify-center font-bold text-lg shadow-md">
+                                04
+                            </div>
+                            <span class="text-[10px] text-emerald-600 font-bold uppercase tracking-wider block">Semana 4: Lanzamiento</span>
+                            <h4 class="font-bold text-base text-[#222221]">Arranque Operativo</h4>
+                            <p class="text-xs md:text-sm text-slate-500 font-semibold leading-relaxed">Liberación de asesores dedicados en piso CDMX, monitoreo activo de KPIs por Torre de Control e inicio de operación regular.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -880,29 +1070,30 @@
             </div>
 
             <!-- Header Interno -->
-            <header class="absolute top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-7xl px-8 py-3 flex items-center justify-between z-30 header-capsule-dark">
-                <div class="logo-safe-zone flex items-center h-10">
-                    <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="filter brightness-0 invert">
+            <header class="absolute top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl px-8 py-3 flex items-center justify-between z-30 header-capsule-dark">
+                <div class="logo-capsule-container">
+                    <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group">
                 </div>
             </header>
 
-            <div class="w-full h-full flex flex-col items-center justify-center text-center px-10 relative z-20 mt-8">
+            <!-- Contenido Principal - Optimización de Espacio y Mayor Tipografía -->
+            <div class="w-full h-full flex flex-col items-center justify-center text-center px-10 relative z-20 mt-8 space-y-8">
                 <!-- Logotipo e Icono -->
-                <div class="bg-white/5 border border-white/10 p-6 rounded-[2rem] shadow-xl shadow-black/30 mb-8 transform hover:scale-105 transition-transform duration-300">
-                    <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-12 w-auto object-contain filter brightness-0 invert">
+                <div class="logo-capsule-container p-8 h-16 rounded-[2rem] hover:scale-105 transition-transform duration-300 shadow-2xl">
+                    <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-10 object-contain">
                 </div>
 
-                <h2 class="text-5xl lg:text-[4.5rem] mb-4 leading-none font-extrabold tracking-tight">
+                <h2 class="text-5xl lg:text-[5.5rem] mb-4 leading-none font-extrabold tracking-tight">
                     MÁS ALLÁ DE<br>
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#3284C6] to-[#EB5B27]">LA OPERACIÓN.</span>
                 </h2>
                 
-                <p class="text-lg md:text-xl text-neutral-300 max-w-3xl mb-10 font-subheadings font-medium">
+                <p class="text-xl md:text-2xl text-neutral-300 max-w-4xl font-subheadings font-medium leading-relaxed">
                     No están contratando posiciones. Están integrando un brazo tecnológico diseñado para proteger e impulsar el crecimiento de **TIP México**.
                 </p>
                 
                 <div class="flex gap-4">
-                    <a href="https://telat.mx" target="_blank" class="btn-portal btn-naranja font-bold uppercase text-xs tracking-wider">
+                    <a href="https://telat.mx" target="_blank" class="btn-portal btn-naranja font-bold uppercase text-sm tracking-wider">
                         <span>Conoce Más</span>
                     </a>
                 </div>
@@ -1022,17 +1213,17 @@
                         stNum.className = 'step-num w-8 h-8 rounded-full border border-neutral-700 bg-neutral-950 flex items-center justify-center text-xs font-bold text-neutral-400';
                     });
 
-                    // Secuencia Paso 1: Enrutamiento CTI e IVR (Fase 1)
+                    // Secuencia Paso 1: Enrutamiento Telefónico
                     setTimeout(() => {
                         activateStep(0, 'Enrutado', 'text-[#FECA66] border-[#FECA66]/30 bg-[#FECA66]/10');
                     }, 1200);
 
-                    // Secuencia Paso 2: Despliegue Remoto WFH (Fase 2)
+                    // Secuencia Paso 2: Trabajo desde Casa
                     setTimeout(() => {
                         activateStep(1, 'Conectado', 'text-[#3284C6] border-[#3284C6]/30 bg-[#3284C6]/10');
                     }, 3000);
 
-                    // Secuencia Paso 3: Restablecimiento Total (Fase 3)
+                    // Secuencia Paso 3: Restablecimiento Total
                     setTimeout(() => {
                         activateStep(2, 'Operativo', 'text-emerald-500 border-emerald-500/30 bg-emerald-500/10');
                         
@@ -1059,12 +1250,34 @@
                 
                 const stBadge = step.querySelector('.step-status');
                 stBadge.textContent = statusText;
-                stBadge.className = `step-status text-[10px] font-bold px-2 py-0.5 rounded-full ${badgeClasses}`;
+                stBadge.className = `step-status text-xs font-bold px-2 py-0.5 rounded-full ${badgeClasses}`;
 
                 const stNum = step.querySelector('.step-num');
-                stNum.className = 'step-num w-8 h-8 rounded-full border border-emerald-500/50 bg-[#222221] text-emerald-500 flex items-center justify-center text-xs font-bold shadow-lg shadow-emerald-500/10';
+                stNum.className = 'step-num w-10 h-10 rounded-full border border-emerald-500/50 bg-[#222221] text-emerald-500 flex items-center justify-center text-sm font-bold shadow-lg shadow-emerald-500/10';
             }
         });
+
+        // C. LÓGICA DE PESTAÑAS DE CASOS DE ÉXITO (SLIDE 3)
+        function showCaseBlock(caseId, btn) {
+            // Ocultar todos los bloques de detalle
+            const details = document.querySelectorAll('.case-detail-block');
+            details.forEach(detail => detail.classList.add('hidden'));
+
+            // Mostrar el seleccionado
+            const activeDetail = document.getElementById(caseId);
+            if (activeDetail) {
+                activeDetail.classList.remove('hidden');
+            }
+
+            // Desactivar todos los botones de pestañas
+            const buttons = document.querySelectorAll('.case-tab-btn');
+            buttons.forEach(button => button.classList.remove('active'));
+
+            // Activar el pulsado
+            if (btn) {
+                btn.classList.add('active');
+            }
+        }
     </script>
 </body>
 </html>
