@@ -374,11 +374,11 @@
         <!-- SLIDE 2: ¿QUIÉNES SOMOS? (LIGHT - PANORÁMICO EXPANDIDO) -->
         <div class="slide bg-light-slide overflow-hidden" id="slide-2">
             <!-- Contenido Panorámico que llena el 96% de la pantalla -->
-            <div class="w-full h-full flex flex-col justify-between pt-8 pb-12 px-6 sm:px-10 lg:px-12 w-[96vw] max-w-[1850px] mx-auto">
+            <div class="w-full h-full flex flex-col justify-between pt-6 pb-10 px-6 sm:px-10 lg:px-12 w-[96vw] max-w-[1850px] mx-auto">
                 <div class="flex-grow flex flex-col lg:flex-row gap-8 lg:gap-12 items-center justify-center">
                     
                     <!-- Izquierda: Concepto y Evolución -->
-                    <div class="lg:w-[56%] flex flex-col justify-center text-left space-y-4">
+                    <div class="lg:w-[56%] flex flex-col justify-center text-left space-y-3.5">
                         <div>
                             <span class="text-[#3284C6] font-bold text-xs sm:text-sm uppercase tracking-widest block"><i class="fa-solid fa-timeline"></i> Quién es Telat</span>
                             <h2 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight text-[#222221] mt-0.5">
@@ -386,7 +386,7 @@
                             </h2>
                         </div>
 
-                        <div class="bg-gradient-to-r from-[#3284C6]/10 to-[#EB5B27]/10 border-l-4 border-[#EB5B27] p-4 sm:p-5 rounded-r-2xl shadow-sm">
+                        <div class="bg-gradient-to-r from-[#3284C6]/10 to-[#EB5B27]/10 border-l-4 border-[#EB5B27] p-3.5 sm:p-4 rounded-r-2xl shadow-sm">
                             <p class="font-subheadings text-sm sm:text-base lg:text-lg font-bold text-[#222221] leading-relaxed">
                                 Más de 20 años liderando de forma binacional la evolución de la Experiencia del Cliente e Inteligencia Artificial en México y USA (2005 - 2026).
                             </p>
@@ -396,8 +396,8 @@
                             No somos un contact center convencional. Somos un socio tecnológico y operativo que impulsa la excelencia de marcas líderes.
                         </p>
 
-                        <!-- TIMELINE DE 4 HITOS -->
-                        <div class="p-5 sm:p-6 bg-white/90 backdrop-blur-md rounded-3xl border border-slate-200/80 shadow-lg relative overflow-hidden space-y-3">
+                        <!-- TIMELINE DE 4 HITOS (Sin sobrecargar el pie) -->
+                        <div class="p-5 sm:p-6 bg-white/90 backdrop-blur-md rounded-3xl border border-slate-200/80 shadow-lg relative overflow-hidden space-y-2">
                             <div class="flex justify-between items-center mb-1">
                                 <span class="font-subheadings font-bold text-xs sm:text-sm text-[#222221] uppercase tracking-wider flex items-center gap-2">
                                     <i class="fa-solid fa-chart-line text-[#EB5B27] animate-pulse"></i> Evolución del Talento Humano
@@ -449,19 +449,12 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="mt-3 p-3 bg-[#EB5B27]/5 rounded-2xl border border-[#EB5B27]/15 flex items-center gap-2.5">
-                                <i class="fa-solid fa-wand-magic-sparkles text-[#EB5B27] shrink-0 text-base"></i>
-                                <p class="text-xs sm:text-sm text-slate-700 leading-snug font-semibold">
-                                    <strong>Optimización del talento humano gracias a IA</strong> ajustando la operación a 650+ especialistas de alto desempeño.
-                                </p>
-                            </div>
                         </div>
                     </div>
 
-                    <!-- Derecha: Mapa de Hubs -->
-                    <div class="lg:w-[44%] flex justify-center w-full">
-                        <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-xl w-full max-w-lg flex flex-col justify-between space-y-4">
+                    <!-- Derecha: Mapa de Hubs + Bloque de IA Reubicado -->
+                    <div class="lg:w-[44%] flex flex-col justify-center w-full space-y-3.5">
+                        <div class="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200/80 shadow-xl w-full max-w-lg mx-auto flex flex-col justify-between space-y-3.5">
                             <div class="flex justify-between items-center pb-2 border-b border-slate-100">
                                 <h4 class="font-subheadings font-bold text-[#222221] flex items-center gap-2 text-xs sm:text-sm">
                                     <i class="fa-solid fa-map-location-dot text-[#3284C6]"></i> Mapa Operativo de Hubs
@@ -469,7 +462,7 @@
                                 <span class="text-[10px] sm:text-xs font-extrabold text-[#3284C6] bg-[#3284C6]/10 px-2.5 py-0.5 rounded-full uppercase tracking-wider">Binacional US / MX</span>
                             </div>
 
-                            <div class="relative w-full h-52 sm:h-56 bg-slate-950 rounded-2xl overflow-hidden border border-slate-200 shadow-inner flex items-center justify-center">
+                            <div class="relative w-full h-44 sm:h-48 bg-slate-950 rounded-2xl overflow-hidden border border-slate-200 shadow-inner flex items-center justify-center">
                                 <img src="mapa_hubs.png" alt="Mapa Operativo" class="absolute inset-0 w-full h-full object-cover opacity-80 select-none pointer-events-none">
 
                                 <!-- Label El Paso -->
@@ -497,20 +490,30 @@
                                 </div>
                             </div>
 
-                            <div class="space-y-2.5 text-xs sm:text-sm text-slate-700 pt-1">
-                                <div class="flex items-center gap-3 p-2.5 bg-[#FBFBFD] rounded-2xl border border-slate-100">
+                            <div class="space-y-2 text-xs sm:text-sm text-slate-700 pt-0.5">
+                                <div class="flex items-center gap-3 p-2 bg-[#FBFBFD] rounded-xl border border-slate-100">
                                     <i class="fa-solid fa-circle-nodes text-[#EB5B27] text-base"></i>
                                     <div><strong class="text-[#222221]">CDMX (Roma):</strong> Corporativo & Operaciones</div>
                                 </div>
-                                <div class="flex items-center gap-3 p-2.5 bg-[#FBFBFD] rounded-2xl border border-slate-100">
+                                <div class="flex items-center gap-3 p-2 bg-[#FBFBFD] rounded-xl border border-slate-100">
                                     <i class="fa-solid fa-server text-[#3284C6] text-base"></i>
                                     <div><strong class="text-[#222221]">Cd. Juárez:</strong> Soporte Crítico</div>
                                 </div>
-                                <div class="flex items-center gap-3 p-2.5 bg-[#EB5B27]/5 rounded-2xl border border-[#EB5B27]/20">
+                                <div class="flex items-center gap-3 p-2 bg-[#EB5B27]/5 rounded-xl border border-[#EB5B27]/20">
                                     <i class="fa-solid fa-globe text-[#b48512] text-base"></i>
                                     <div><strong class="text-[#EB5B27]">El Paso, TX:</strong> Hub Nearshore Bilingüe (EE. UU.)</div>
                                 </div>
                             </div>
+                        </div>
+
+                        <!-- Bloque de Optimización del Talento Humano por IA (Debajo del mapa) -->
+                        <div class="p-3.5 sm:p-4 bg-gradient-to-r from-[#EB5B27]/10 via-[#EB5B27]/5 to-white rounded-2xl border border-[#EB5B27]/25 flex items-center gap-3 shadow-sm w-full max-w-lg mx-auto">
+                            <div class="w-10 h-10 rounded-xl bg-[#EB5B27]/15 text-[#EB5B27] flex items-center justify-center text-lg flex-shrink-0">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-700 leading-snug font-semibold">
+                                <strong class="text-[#222221]">Optimización del talento humano con IA:</strong> Operación calibrada a 650+ especialistas de alto desempeño y productividad.
+                            </p>
                         </div>
                     </div>
 
@@ -522,16 +525,13 @@
         <!-- SLIDE 3: CASOS DE ÉXITO EN EXCELENCIA OPERATIVA (LIGHT - PANORÁMICO EXPANDIDO) -->
         <div class="slide bg-light-slide overflow-hidden" id="slide-3">
             <!-- Contenido Panorámico que llena el 96% de la pantalla -->
-            <div class="w-full h-full flex flex-col justify-between pt-8 pb-12 px-6 sm:px-10 lg:px-12 w-[96vw] max-w-[1850px] mx-auto">
+            <div class="w-full h-full flex flex-col justify-between pt-6 pb-10 px-6 sm:px-10 lg:px-12 w-[96vw] max-w-[1850px] mx-auto">
                 <div class="flex-grow flex flex-col lg:flex-row gap-8 lg:gap-12 items-center justify-center">
                     
                     <!-- Izquierda: Selectores de Pestañas (6 Casos) -->
                     <div class="lg:w-[38%] space-y-4 w-full">
                         <div>
-                            <div class="inline-flex items-center gap-2 bg-[#3284C6]/10 text-[#3284C6] border border-[#3284C6]/20 text-xs font-bold px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2">
-                                <i class="fa-solid fa-earth-americas"></i> Estándares Bilingüe USA ➔ Mercado Nacional
-                            </div>
-                            <span class="text-[#EB5B27] font-bold text-xs sm:text-sm uppercase tracking-widest block">Logros Reales</span>
+                            <span class="text-[#EB5B27] font-bold text-xs sm:text-sm uppercase tracking-widest block"><i class="fa-solid fa-trophy"></i> Logros Reales</span>
                             <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#222221] leading-tight mt-0.5">
                                 Logros en Excelencia Operativa
                             </h2>
@@ -559,9 +559,20 @@
                         </div>
                     </div>
 
-                    <!-- Derecha: Detalle del Caso Seleccionado (Mayor Contraste y Letra) -->
-                    <div class="lg:w-[62%] w-full">
-                        <div class="bg-white border border-slate-200/80 rounded-3xl lg:rounded-[2.5rem] p-7 sm:p-9 lg:p-10 shadow-xl flex flex-col justify-between min-h-[460px] space-y-6">
+                    <!-- Derecha: Cintillo Superior Destacado + Detalle del Caso Seleccionado -->
+                    <div class="lg:w-[62%] w-full space-y-3">
+                        <!-- Cintillo Superior Flotante de Alta Jerarquía -->
+                        <div class="bg-gradient-to-r from-[#3284C6]/15 via-[#3284C6]/10 to-[#EB5B27]/10 border border-[#3284C6]/30 text-[#222221] rounded-2xl py-2.5 px-4 flex items-center justify-between shadow-sm">
+                            <div class="flex items-center gap-2.5 flex-wrap">
+                                <span class="text-base sm:text-lg">🌐</span>
+                                <span class="font-extrabold text-xs sm:text-sm tracking-wide text-[#3284C6]">ESTÁNDARES OPERATIVOS BILINGÜES USA</span>
+                                <span class="font-extrabold text-xs sm:text-sm tracking-wide text-[#EB5B27]">➔ APLICADOS AL MERCADO NACIONAL</span>
+                            </div>
+                            <span class="hidden xl:inline-block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider bg-white/90 px-2.5 py-0.5 rounded-full border border-slate-200 shadow-xs">Garantía Telat</span>
+                        </div>
+
+                        <!-- Tarjeta del Detalle del Caso -->
+                        <div class="bg-white border border-slate-200/80 rounded-3xl lg:rounded-[2.5rem] p-6 sm:p-8 lg:p-9 shadow-xl flex flex-col justify-between min-h-[440px] space-y-5">
                             
                             <!-- Caso 1 -->
                             <div class="case-detail-block space-y-6" id="case-telecom">
