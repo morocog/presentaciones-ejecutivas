@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telat & TIP México | Propuesta de Valor Tecnológico</title>
+    <title>Telat Group | Propuesta de Valor y Gobernanza TIP México</title>
     
     <!-- Import Google Fonts (DM Sans & Montserrat) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* 1. SISTEMA TIPOGRÁFICO AVANZADO */
@@ -22,14 +25,15 @@
             font-display: swap;
         }
 
-        /* 2. IDENTIDAD CROMÁTICA (TOKENS ESTRICTOS) */
+        /* 2. IDENTIDAD CROMÁTICA (TOKENS ESTRICTOS DE TELAT) */
         :root {
             --oscuro: #222221;
             --azul-claro: #FBFBFD;
             --celeste: #3284C6;
             --naranja: #EB5B27;
-            --naranja-claro: #FECA66;
-            --grad-vibrante: linear-gradient(135deg, var(--celeste) 0%, var(--naranja-claro) 100%);
+            --amarillo: #FECA66;
+            --grad-vibrante: linear-gradient(135deg, var(--celeste) 0%, var(--amarillo) 100%);
+            --grad-secundario: linear-gradient(135deg, var(--naranja) 0%, var(--amarillo) 100%);
         }
 
         body {
@@ -37,14 +41,21 @@
             color: var(--oscuro);
             font-family: 'Montserrat', sans-serif;
             margin: 0;
-            overflow: hidden; /* Prohibido el scroll, es una presentación */
+            overflow: hidden; /* Prohibido el scroll, es una presentación ejecutiva */
         }
 
-        h1, h2, h3, h4, .font-momo {
+        /* font-momo restringido por AGENTS.md (solo números/cifras de 2-4 caracteres) */
+        .font-momo {
             font-family: 'Momo Trust', sans-serif;
+            font-weight: 800;
         }
 
-        .subheading, button, .kpi-badge {
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        .font-subheadings, button, .kpi-badge {
             font-family: 'DM Sans', sans-serif;
             letter-spacing: -0.02em; 
         }
@@ -72,7 +83,6 @@
             display: flex;
             flex-direction: column;
             z-index: 1;
-            background-color: var(--azul-claro);
         }
 
         .slide.active {
@@ -82,37 +92,93 @@
             z-index: 10;
         }
 
-        .bg-light-slide { background-color: var(--azul-claro); color: var(--oscuro); }
+        /* Alternancia de Fondos */
+        .bg-light-slide { 
+            background-color: var(--azul-claro); 
+            color: var(--oscuro); 
+        }
+        .bg-dark-slide { 
+            background-color: var(--oscuro); 
+            color: var(--azul-claro); 
+        }
+
+        /* Contenedor Fijo Logo Cápsula (Garantiza visibilidad en cualquier fondo sin filtros) */
+        .logo-capsule-container {
+            background-color: #FFFFFF;
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            display: inline-flex;
+            align-items: center;
+            height: 3rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            border: 1.5px solid rgba(34,34,33,0.06);
+            flex-shrink: 0;
+        }
+
+        .logo-capsule-container img {
+            height: 100% !important;
+            width: auto !important;
+            max-height: 28px;
+            object-fit: contain;
+            display: block;
+        }
 
         /* 4. ELEMENTOS UI DE LA PRESENTACIÓN */
         .kpi-badge {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.6rem 1.4rem;
+            padding: 0.6rem 1.2rem;
             border-radius: 9999px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 700;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
-        .kpi-up { background-color: rgba(50, 132, 198, 0.12); color: #3284C6; border: 2.5px solid rgba(50, 132, 198, 0.25); }
-        .kpi-down { background-color: rgba(235, 91, 39, 0.12); color: #EB5B27; border: 2.5px solid rgba(235, 91, 39, 0.25); }
-        .kpi-neutral { background-color: rgba(254, 202, 102, 0.12); color: #b48512; border: 2.5px solid rgba(254, 202, 102, 0.25); }
+        .kpi-up { background-color: rgba(50, 132, 198, 0.12); color: #3284C6; border: 2px solid rgba(50, 132, 198, 0.25); }
+        .kpi-down { background-color: rgba(235, 91, 39, 0.12); color: #EB5B27; border: 2px solid rgba(235, 91, 39, 0.25); }
+        .kpi-neutral { background-color: rgba(254, 202, 102, 0.12); color: #b48512; border: 2px solid rgba(254, 202, 102, 0.25); }
 
-        .text-hollow {
-            -webkit-text-stroke: 2px var(--naranja);
-            color: transparent;
+        .btn-portal {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.75rem;
+            border-radius: 1rem;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+        .btn-celeste {
+            background-color: rgba(50, 132, 198, 0.1);
+            color: #3284C6;
+            border: 1.5px solid rgba(50, 132, 198, 0.25);
+        }
+        .btn-celeste:hover {
+            background-color: #3284C6;
+            color: #FFFFFF;
+            box-shadow: 0 8px 16px rgba(50, 132, 198, 0.25);
+        }
+        .btn-naranja {
+            background-color: rgba(235, 91, 39, 0.1);
+            color: #EB5B27;
+            border: 1.5px solid rgba(235, 91, 39, 0.25);
+        }
+        .btn-naranja:hover {
+            background-color: #EB5B27;
+            color: #FFFFFF;
+            box-shadow: 0 8px 16px rgba(235, 91, 39, 0.25);
         }
 
-        /* 5. ANIMACIONES DOODLES VIBRANTES */
-        @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(5deg); } }
+        /* 5. ANIMACIONES SUTILES */
+        @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-12px) rotate(3deg); } }
         .animate-float { animation: float 6s ease-in-out infinite; }
         
         @keyframes spin-slow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .animate-spin-slow { animation: spin-slow 20s linear infinite; }
-        
-        @keyframes wiggle { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
-        .animate-wiggle { animation: wiggle 4s ease-in-out infinite; }
+        .animate-spin-slow { animation: spin-slow 30s linear infinite; }
 
         /* Controles y Progreso */
         #controls {
@@ -125,23 +191,23 @@
         }
         
         .control-btn {
-            width: 3.5rem;
-            height: 3.5rem;
+            width: 3.25rem;
+            height: 3.25rem;
             border-radius: 50%;
             background-color: var(--oscuro);
             color: white;
-            border: 2px solid rgba(255,255,255,0.1);
+            border: 1.5px solid rgba(255,255,255,0.1);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
         }
         
         .control-btn:hover {
             background-color: var(--naranja);
-            transform: scale(1.1);
+            transform: scale(1.08);
             border-color: var(--naranja);
         }
 
@@ -164,236 +230,1049 @@
 
         #slide-counter {
             position: fixed;
-            bottom: 2.5rem;
+            bottom: 2.2rem;
             left: 2rem;
             z-index: 100;
-            font-family: 'Momo Trust', sans-serif;
-            font-size: 1.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.35rem;
             color: var(--celeste);
-            opacity: 0.7;
+            opacity: 0.8;
         }
 
-        /* Resplandores Dinámicos para Marcos de Video */
-        .glow-frame-celeste { box-shadow: 0 20px 50px rgba(50, 132, 198, 0.15); border: 2px solid rgba(50, 132, 198, 0.2); }
-        .glow-frame-naranja { box-shadow: 0 20px 50px rgba(235, 91, 39, 0.15); border: 2px solid rgba(235, 91, 39, 0.2); }
-        .glow-frame-amarillo { box-shadow: 0 20px 50px rgba(254, 202, 102, 0.15); border: 2px solid rgba(254, 202, 102, 0.2); }
+        .header-capsule {
+            border-radius: 9999px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 4px 25px rgba(0,0,0,0.05);
+            border: 1.5px solid rgba(34,34,33,0.06);
+            background: rgba(255, 255, 255, 0.85);
+        }
+        .header-capsule-dark {
+            border-radius: 9999px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 4px 25px rgba(0,0,0,0.3);
+            border: 1.5px solid rgba(255,255,255,0.08);
+            background: rgba(34,34,33,0.85);
+        }
+
+        /* Estilo para las pestañas de casos de éxito */
+        .case-tab-btn.active {
+            background-color: rgba(50, 132, 198, 0.1);
+            border-color: var(--celeste);
+            color: var(--celeste);
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-[#FECA66] selection:text-[#222221]">
 
     <div id="presentation-container">
 
-        <!-- SLIDE 1: PORTADA CLARA Y VIBRANTE -->
-        <div class="slide bg-light-slide overflow-hidden" id="slide-1">
-            
-            <!-- VIDEO DE FONDO VIMEO CON MIX-BLEND CLARO -->
-            <div class="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden bg-[#FBFBFD]">
+        <!-- SLIDE 1: PORTADA EJECUTIVA (DARK) -->
+        <div class="slide bg-dark-slide active overflow-hidden" id="slide-1">
+            <!-- VIDEO DE FONDO VIMEO CON MIX-BLEND -->
+            <div class="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden bg-[#222221]">
                 <iframe src="https://player.vimeo.com/video/1195458364?background=1&autopause=0&muted=1&loop=1&autoplay=1" 
-                        class="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 mix-blend-multiply opacity-25" 
-                        frameborder="0" 
-                        allow="autoplay; fullscreen; picture-in-picture" 
-                        allowfullscreen>
+                        class="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 mix-blend-screen opacity-20" 
+                        frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
                 </iframe>
-                <div class="absolute inset-0 bg-gradient-to-t from-[#FBFBFD] via-[#FBFBFD]/40 to-[#FBFBFD]/80"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-900/50 to-neutral-950"></div>
             </div>
 
             <!-- Doodles Hero -->
-            <div class="absolute top-20 right-32 animate-float opacity-80 z-10">
+            <div class="absolute top-16 right-24 animate-float opacity-30 z-10">
                 <svg width="120" height="120" viewBox="0 0 100 100" fill="none">
                     <path d="M50 0L56.5 35.5L95 20.5L66 50L95 79.5L56.5 64.5L50 100L43.5 64.5L5 79.5L34 50L5 20.5L43.5 35.5L50 0Z" fill="#FECA66"/>
                 </svg>
             </div>
-            <div class="absolute bottom-20 left-20 animate-spin-slow opacity-30 z-10">
-                <svg width="200" height="200" viewBox="0 0 100 100" fill="none">
-                    <circle cx="50" cy="50" r="45" stroke="#3284C6" stroke-width="2" stroke-dasharray="10 15"/>
-                    <circle cx="50" cy="50" r="30" stroke="#EB5B27" stroke-width="2" stroke-dasharray="5 10"/>
-                </svg>
-            </div>
 
-            <!-- Contenido Central -->
-            <div class="w-full h-full flex flex-col items-center justify-center text-center px-10 relative z-20">
-                <div class="flex items-center gap-8 mb-10 bg-white p-6 rounded-[2.5rem] border border-gray-100 shadow-xl shadow-[#3284C6]/5">
-                    <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-16 object-contain">
-                    <span class="text-gray-300 text-4xl font-light">|</span>
-                    <h2 class="font-momo text-4xl text-[#3284C6] tracking-widest mt-2">TIP MÉXICO</h2>
+            <!-- Header Interno -->
+            <header class="absolute top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl px-8 py-3 flex items-center justify-between z-30 header-capsule-dark">
+                <div class="logo-capsule-container">
+                    <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group">
                 </div>
-                
-                <h1 class="font-momo text-[5rem] lg:text-[6rem] leading-[0.9] mb-6 text-[#222221]">
-                    EL SOCIO B2B<br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#3284C6] to-[#EB5B27]">DE VANGUARDIA</span>
-                </h1>
-                <p class="text-2xl font-medium text-[#222221]/80 max-w-3xl">
-                    Más que proveer personal. Blindamos su operación y experiencia de usuario a través del ecosistema <strong>Telat IA</strong>.
-                </p>
-            </div>
-        </div>
-
-        <!-- SLIDE 2: Reclutamiento IA -->
-        <div class="slide bg-light-slide" id="slide-2">
-            <div class="w-full h-full flex px-16 py-12 gap-12 items-center">
-                <!-- Izquierda: Contenedor Media -->
-                <div class="w-[55%] h-[80%] relative rounded-[3rem] bg-[#222221] p-2 glow-frame-celeste">
-                    <div class="absolute -top-7 -left-7 bg-white border-4 border-[#3284C6] text-[#3284C6] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[-5deg] shadow-xl">1. Atracción</div>
-                    
-                    <div class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
-                        <iframe src="https://player.vimeo.com/video/1195445245?background=1&autopause=0&autoplay=1&loop=1&byline=0&title=0&muted=1" 
-                                class="absolute inset-0 w-full h-full scale-[1.05]" 
-                                frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
-                        </iframe>
-                    </div>
+                <div class="text-right">
+                    <span class="text-xs font-subheadings font-bold text-[#FECA66] uppercase tracking-wider block">Propuesta de Valor</span>
+                    <span class="text-[10px] text-[#3284C6] font-bold">Dirección General TIP México</span>
                 </div>
+            </header>
 
-                <!-- Derecha: Texto Comercial -->
-                <div class="w-[45%] flex flex-col justify-center">
-                    <span class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-sm mb-4 block">Evaluación de Talento IA</span>
-                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">No dejamos el perfil de su marca al azar.</h2>
+            <!-- Contenido Principal -->
+            <div class="w-full h-full flex flex-col lg:flex-row items-center justify-center px-12 lg:px-16 relative z-20 gap-10 lg:gap-12 max-w-7xl mx-auto">
+                <!-- Izquierda: Texto Principal -->
+                <div class="flex-1 text-left space-y-6">
+                    <span class="bg-[#EB5B27]/10 text-[#EB5B27] border border-[#EB5B27]/20 text-sm font-semibold px-6 py-2.5 rounded-full uppercase tracking-widest inline-block">
+                        Presentación de Capacidades y Gobernanza
+                    </span>
                     
-                    <p class="text-[1.2rem] text-gray-600 font-medium leading-relaxed mb-8">
-                        Nuestra tecnología evalúa a los candidatos antes de que toquen su operación. Un simulador interactivo califica de forma objetiva su <strong>pronunciación, captura de datos y capacidad de respuesta bajo presión</strong>.
+                    <h1 class="text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight leading-tight">
+                        EL SOCIO IDEAL PARA<br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#3284C6] to-[#EB5B27]">ESCALAR TU OPERACIÓN.</span>
+                    </h1>
+                    
+                    <p class="text-base lg:text-lg text-neutral-300 font-subheadings font-medium leading-relaxed max-w-xl">
+                        Integramos talento humano de alta especialización, tecnología de inteligencia artificial operativa y gobernanza de clase mundial para proteger e impulsar el crecimiento de TIP México.
                     </p>
 
-                    <div class="flex flex-wrap gap-4">
-                        <span class="kpi-badge kpi-up">
-                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path></svg>
-                            <span>Resolución en Primer Contacto Asegurada</span>
-                        </span>
-                        <span class="kpi-badge kpi-down">
-                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path></svg>
-                            <span>Curva de Aprendizaje de Novatos</span>
-                        </span>
+                    <div class="flex gap-6 pt-2">
+                        <div class="text-center">
+                            <div class="text-3xl font-momo text-[#FECA66]">20+</div>
+                            <div class="text-xs text-neutral-400 font-bold uppercase tracking-wider">Años de Experiencia</div>
+                        </div>
+                        <div class="w-px bg-neutral-700"></div>
+                        <div class="text-center">
+                            <div class="text-3xl font-momo text-[#3284C6]">650+</div>
+                            <div class="text-xs text-neutral-400 font-bold uppercase tracking-wider">Especialistas Activos</div>
+                        </div>
+                        <div class="w-px bg-neutral-700"></div>
+                        <div class="text-center">
+                            <div class="text-2xl md:text-3xl font-extrabold text-[#EB5B27] font-subheadings leading-tight">Auditoría IA</div>
+                            <div class="text-xs text-neutral-400 font-bold uppercase tracking-wider mt-1">Escalable hasta el 100%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Derecha: Tarjetas de Pilares en Grid 2x2 Amplio -->
+                <div class="flex-shrink-0 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full lg:w-[500px]">
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-4 flex items-start gap-3 hover:bg-white/10 transition-all">
+                        <div class="w-10 h-10 rounded-xl bg-[#3284C6]/20 text-[#3284C6] flex items-center justify-center text-lg flex-shrink-0"><i class="fa-solid fa-headset"></i></div>
+                        <div>
+                            <div class="text-white font-bold text-sm">Contact Center Especializado</div>
+                            <div class="text-neutral-400 text-xs mt-1 leading-snug">Agentes dedicados con script propio y supervisión por torre de control.</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-4 flex items-start gap-3 hover:bg-white/10 transition-all">
+                        <div class="w-10 h-10 rounded-xl bg-[#EB5B27]/20 text-[#EB5B27] flex items-center justify-center text-lg flex-shrink-0"><i class="fa-solid fa-comments"></i></div>
+                        <div>
+                            <div class="text-white font-bold text-sm">Omnicanalidad Integrada</div>
+                            <div class="text-neutral-400 text-xs mt-1 leading-snug">Voz, WhatsApp, Email y Back-Office unificados bajo consola única y trazable.</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-4 flex items-start gap-3 hover:bg-white/10 transition-all">
+                        <div class="w-10 h-10 rounded-xl bg-[#FECA66]/20 text-[#FECA66] flex items-center justify-center text-lg flex-shrink-0"><i class="fa-solid fa-brain"></i></div>
+                        <div>
+                            <div class="text-white font-bold text-sm">Inteligencia Artificial Operativa</div>
+                            <div class="text-neutral-400 text-xs mt-1 leading-snug">Suite propia de IA para auditoría, notas y alertas en tiempo real.</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-4 flex items-start gap-3 hover:bg-white/10 transition-all">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg flex-shrink-0"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div>
+                            <div class="text-white font-bold text-sm">Gobernanza y Resiliencia BCP</div>
+                            <div class="text-neutral-400 text-xs mt-1 leading-snug">Plan de continuidad activable en menos de 2 horas ante cualquier contingencia.</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 3: Copiloto Asistente IA (REDISEÑO CLARO Y LUMINOSO) -->
-        <div class="slide bg-light-slide" id="slide-3">
-            <div class="w-full h-full flex px-16 py-12 gap-12 items-center flex-row-reverse">
-                <!-- Derecha: Contenedor Media -->
-                <div class="w-[55%] h-[80%] relative rounded-[3rem] bg-[#222221] p-2 glow-frame-naranja">
-                    <div class="absolute -top-7 -right-7 bg-white border-4 border-[#EB5B27] text-[#EB5B27] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[5deg] shadow-xl">2. Soporte IA</div>
+
+        <!-- SLIDE 2: ¿QUIÉNES SOMOS? (LIGHT) -->
+        <div class="slide bg-light-slide overflow-hidden" id="slide-2">
+            <!-- Contenido con Espacio Optimizado y Letra Grande -->
+            <div class="w-full h-full flex flex-col justify-between pt-10 pb-10 px-16 max-w-7xl mx-auto">
+                <div class="flex-grow flex flex-col lg:flex-row gap-10 items-center justify-center">
                     
-                    <div class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
-                        <iframe src="https://player.vimeo.com/video/1205962480?background=1&autopause=0&autoplay=1&loop=1&byline=0&title=0&muted=1" 
-                                class="absolute inset-0 w-full h-full scale-[1.05]" 
-                                frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
-                        </iframe>
+                    <!-- Izquierda: Concepto y Evolución -->
+                    <div class="lg:w-[58%] flex flex-col justify-center text-left space-y-4">
+                        <div>
+                            <span class="text-[#3284C6] font-bold text-sm uppercase tracking-widest block"><i class="fa-solid fa-timeline"></i> Quién es Telat</span>
+                            <h2 class="text-4xl md:text-5xl font-extrabold leading-tight text-[#222221]">
+                                TECNOLOGÍA APLICADA A <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#3284C6] to-[#EB5B27]">LA EXPERIENCIA</span>
+                            </h2>
+                        </div>
+
+                        <div class="bg-gradient-to-r from-[#3284C6]/10 to-[#EB5B27]/10 border-l-4 border-[#EB5B27] p-4 rounded-r-xl shadow-sm">
+                            <p class="font-subheadings text-sm font-bold text-[#222221] leading-relaxed">
+                                Más de 20 años liderando de forma binacional la evolución de la Experiencia del Cliente e Inteligencia Artificial en México y USA (2005 - 2026).
+                            </p>
+                        </div>
+
+                        <p class="text-xs md:text-sm text-slate-600 font-semibold leading-relaxed">
+                            No somos un contact center convencional. Somos un socio tecnológico y operativo que impulsa la excelencia de marcas líderes.
+                        </p>
+
+                        <!-- TIMELINE DE 4 HITOS -->
+                        <div class="p-5 bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200/80 shadow-lg relative overflow-hidden">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="font-subheadings font-bold text-xs text-[#222221] uppercase tracking-wider flex items-center gap-1.5">
+                                    <i class="fa-solid fa-chart-line text-[#EB5B27] animate-pulse"></i> Evolución del Talento Humano
+                                </span>
+                                <span class="text-[9px] font-extrabold text-[#EB5B27] bg-[#EB5B27]/10 px-2.5 py-0.5 rounded-full uppercase tracking-wider">2005 - 2026</span>
+                            </div>
+                            
+                            <div class="relative pt-1">
+                                <div class="grid grid-cols-4 gap-3 items-end h-28 border-b-2 border-slate-200 pb-0 relative">
+                                    <div class="flex flex-col items-center justify-end">
+                                        <span class="font-subheadings font-bold text-[10px] text-slate-500 mb-1">7 pers.</span>
+                                        <div class="w-full bg-[#3284C6]/40 rounded-t-lg h-3 shadow-md"></div>
+                                    </div>
+
+                                    <div class="flex flex-col items-center justify-end">
+                                        <span class="font-subheadings font-bold text-[10px] text-slate-500 mb-1">280 pers.</span>
+                                        <div class="w-full bg-[#3284C6]/70 rounded-t-lg h-12 shadow-md"></div>
+                                    </div>
+
+                                    <div class="flex flex-col items-center justify-end">
+                                        <span class="font-subheadings font-bold text-xs text-[#EB5B27] mb-1 font-momo">+1,000</span>
+                                        <div class="w-full bg-gradient-to-t from-[#EB5B27]/70 to-[#EB5B27] rounded-t-lg h-24 shadow-md"></div>
+                                    </div>
+
+                                    <div class="flex flex-col items-center justify-end relative pl-2 border-l border-dashed border-[#EB5B27]/40 h-full">
+                                        <span class="font-subheadings font-bold text-xs text-[#3284C6] mb-1 font-momo">+650</span>
+                                        <div class="w-full bg-gradient-to-t from-[#3284C6] via-[#3284C6] to-[#3284C6]/80 rounded-t-lg h-20 relative shadow-lg">
+                                            <div class="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#3284C6] rounded-full border border-white animate-ping"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-4 gap-3 pt-2 text-center text-xs">
+                                    <div>
+                                        <div class="font-subheadings font-bold text-slate-600">2005</div>
+                                        <div class="text-[9px] text-slate-500 leading-tight">Fundación</div>
+                                    </div>
+                                    <div>
+                                        <div class="font-subheadings font-bold text-slate-600">2015</div>
+                                        <div class="text-[9px] text-slate-500 leading-tight">Expansión MX</div>
+                                    </div>
+                                    <div>
+                                        <div class="font-subheadings font-bold text-slate-700">2022</div>
+                                        <div class="text-[9px] text-slate-600 leading-tight font-semibold">Pico Pre-IA</div>
+                                    </div>
+                                    <div class="pl-2 border-l border-dashed border-[#EB5B27]/40">
+                                        <div class="font-subheadings font-bold text-[#3284C6]">Junio 2026</div>
+                                        <div class="text-[9px] font-bold text-[#3284C6] leading-tight">Era Post-IA</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 p-2 bg-[#EB5B27]/5 rounded-xl border border-[#EB5B27]/15 flex items-center gap-2">
+                                <i class="fa-solid fa-wand-magic-sparkles text-[#EB5B27] shrink-0 text-sm"></i>
+                                <p class="text-[11px] text-slate-700 leading-tight font-semibold">
+                                    <strong>Optimización del talento humano gracias a IA</strong> ajustando la operación a 650+ especialistas.
+                                </p>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- Derecha: Mapa de Hubs -->
+                    <div class="lg:w-[42%] flex justify-center w-full">
+                        <div class="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-xl w-full max-w-sm flex flex-col justify-between space-y-3">
+                            <div class="flex justify-between items-center pb-2 border-b border-slate-100">
+                                <h4 class="font-subheadings font-bold text-[#222221] flex items-center gap-2 text-xs">
+                                    <i class="fa-solid fa-map-location-dot text-[#3284C6]"></i> Mapa Operativo de Hubs
+                                </h4>
+                                <span class="text-[9px] font-extrabold text-[#3284C6] bg-[#3284C6]/10 px-2 py-0.5 rounded-full uppercase tracking-wider">Binacional US / MX</span>
+                            </div>
+
+                            <div class="relative w-full h-48 bg-slate-950 rounded-2xl overflow-hidden border border-slate-200 shadow-inner flex items-center justify-center">
+                                <img src="mapa_hubs.png" alt="Mapa Operativo" class="absolute inset-0 w-full h-full object-cover opacity-80 select-none pointer-events-none">
+
+                                <!-- Label El Paso -->
+                                <div class="absolute top-[10%] left-[43.5%] flex items-center gap-1.5 group cursor-pointer z-10">
+                                    <span class="inline-block fa-solid fa-star text-[#FECA66] text-xs animate-pulse"></span>
+                                    <div class="bg-slate-900/95 text-[#FECA66] text-[8px] font-bold px-1.5 py-0.5 rounded border border-[#FECA66]/50 shadow-lg">
+                                        El Paso, TX (USA)
+                                    </div>
+                                </div>
+
+                                <!-- Label Juárez -->
+                                <div class="absolute top-[21%] left-[42.5%] flex items-center gap-1.5 group cursor-pointer z-10">
+                                    <span class="inline-block fa-solid fa-star text-[#3284C6] text-xs animate-pulse"></span>
+                                    <div class="bg-slate-900/95 text-[#3284C6] text-[8px] font-bold px-1.5 py-0.5 rounded border border-[#3284C6]/50 shadow-lg">
+                                        Cd. Juárez
+                                    </div>
+                                </div>
+
+                                <!-- Label CDMX -->
+                                <div class="absolute top-[76%] left-[54.5%] flex items-center gap-1.5 group cursor-pointer z-10">
+                                    <span class="inline-block fa-solid fa-star text-[#EB5B27] text-xs animate-pulse"></span>
+                                    <div class="bg-slate-900/95 text-[#EB5B27] text-[8px] font-bold px-1.5 py-0.5 rounded border border-[#EB5B27]/60 shadow-lg">
+                                        CDMX (Roma)
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-2 text-[11px] text-slate-700 pt-1">
+                                <div class="flex items-center gap-2 p-2 bg-[#FBFBFD] rounded-xl border border-slate-100">
+                                    <i class="fa-solid fa-circle-nodes text-[#EB5B27] text-sm"></i>
+                                    <div><strong class="text-[#222221]">CDMX (Roma):</strong> Corporativo & Operaciones</div>
+                                </div>
+                                <div class="flex items-center gap-2 p-2 bg-[#FBFBFD] rounded-xl border border-slate-100">
+                                    <i class="fa-solid fa-server text-[#3284C6] text-sm"></i>
+                                    <div><strong class="text-[#222221]">Cd. Juárez:</strong> Soporte Crítico</div>
+                                </div>
+                                <div class="flex items-center gap-2 p-2 bg-[#EB5B27]/5 rounded-xl border border-[#EB5B27]/20">
+                                    <i class="fa-solid fa-globe text-[#b48512] text-sm"></i>
+                                    <div><strong class="text-[#EB5B27]">El Paso, TX:</strong> Hub Nearshore Bilingüe (EE. UU.)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+            </div>
+        </div>
 
-                <!-- Izquierda: Texto Comercial -->
-                <div class="w-[45%] flex flex-col justify-center">
-                    <span class="subheading text-[#EB5B27] font-bold uppercase tracking-widest text-sm mb-4 block">Asistencia en Tiempo Real</span>
-                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">Cero dudas frente al cliente de TIP.</h2>
+
+        <!-- SLIDE 3: CASOS DE ÉXITO EN EXCELENCIA OPERATIVA (LIGHT) - BASADO EN PORTAL DE DIGITALIZACIÓN -->
+        <div class="slide bg-light-slide overflow-hidden" id="slide-3">
+            <!-- Contenido con Espacio Optimizado y Pestañas Interactivas -->
+            <div class="w-full h-full flex flex-col justify-between pt-10 pb-10 px-16 max-w-7xl mx-auto">
+                <div class="flex-grow flex flex-col lg:flex-row gap-10 items-center justify-center">
                     
-                    <p class="text-[1.2rem] text-gray-600 font-medium leading-relaxed mb-8">
-                        Un chatbot contextual escucha la llamada en vivo, consulta nuestras bases de conocimiento y sugiere la respuesta exacta al agente. <strong>El agente no busca manuales; el sistema se los entrega.</strong>
-                    </p>
+                    <!-- Izquierda: Selectores de Pestañas (6 Casos) -->
+                    <div class="lg:w-[40%] space-y-4 w-full">
+                        <div>
+                            <div class="inline-flex items-center gap-1.5 bg-[#3284C6]/10 text-[#3284C6] border border-[#3284C6]/20 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2">
+                                <i class="fa-solid fa-earth-americas"></i> Estándares Bilingüe USA ➔ Mercado Nacional
+                            </div>
+                            <span class="text-[#EB5B27] font-bold text-sm uppercase tracking-widest block">Logros Reales</span>
+                            <h2 class="text-3xl md:text-4xl font-extrabold text-[#222221] leading-tight">
+                                Logros en Excelencia Operativa
+                            </h2>
+                        </div>
+                        
+                        <div class="flex flex-col gap-2">
+                            <button class="case-tab-btn active text-left p-3.5 rounded-xl border border-slate-200/80 bg-white hover:bg-slate-50 transition-all flex justify-between items-center text-sm font-bold text-slate-700" onclick="showCaseBlock('case-telecom', this)">
+                                <span class="flex items-center gap-2"><i class="fa-solid fa-phone-volume"></i> 1. Telecomunicaciones y Servicios</span>
+                            </button>
+                            <button class="case-tab-btn text-left p-3.5 rounded-xl border border-slate-200/80 bg-white hover:bg-slate-50 transition-all flex justify-between items-center text-sm font-bold text-slate-700" onclick="showCaseBlock('case-automotive', this)">
+                                <span class="flex items-center gap-2"><i class="fa-solid fa-car-side"></i> 2. E-Commerce Automotriz</span>
+                            </button>
+                            <button class="case-tab-btn text-left p-3.5 rounded-xl border border-slate-200/80 bg-white hover:bg-slate-50 transition-all flex justify-between items-center text-sm font-bold text-slate-700" onclick="showCaseBlock('case-security', this)">
+                                <span class="flex items-center gap-2"><i class="fa-solid fa-video"></i> 3. Videovigilancia Urbana</span>
+                            </button>
+                            <button class="case-tab-btn text-left p-3.5 rounded-xl border border-slate-200/80 bg-white hover:bg-slate-50 transition-all flex justify-between items-center text-sm font-bold text-slate-700" onclick="showCaseBlock('case-gift', this)">
+                                <span class="flex items-center gap-2"><i class="fa-solid fa-gift"></i> 4. Pedidos Estacionales</span>
+                            </button>
+                            <button class="case-tab-btn text-left p-3.5 rounded-xl border border-slate-200/80 bg-white hover:bg-slate-50 transition-all flex justify-between items-center text-sm font-bold text-slate-700" onclick="showCaseBlock('case-custom', this)">
+                                <span class="flex items-center gap-2"><i class="fa-solid fa-palette"></i> 5. Personalización Omnicanal</span>
+                            </button>
+                            <button class="case-tab-btn text-left p-3.5 rounded-xl border border-slate-200/80 bg-white hover:bg-slate-50 transition-all flex justify-between items-center text-sm font-bold text-slate-700" onclick="showCaseBlock('case-logistic', this)">
+                                <span class="flex items-center gap-2"><i class="fa-solid fa-truck-ramp-box"></i> 6. Logística y Autopartes</span>
+                            </button>
+                        </div>
+                    </div>
 
-                    <div class="flex flex-wrap gap-4">
-                        <span class="kpi-badge kpi-down">
-                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path></svg>
-                            <span>Tiempos de Espera (Hold)</span>
-                        </span>
-                        <span class="kpi-badge kpi-up">
-                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path></svg>
-                            <span>Exactitud de Respuesta B2B</span>
-                        </span>
+                    <!-- Derecha: Detalle del Caso Seleccionado (Mayor Contraste y Letra) -->
+                    <div class="lg:w-[60%] w-full">
+                        <div class="bg-white border border-slate-200/80 rounded-3xl p-8 shadow-lg flex flex-col justify-between min-h-[440px]">
+                            
+                            <!-- Caso 1 -->
+                            <div class="case-detail-block space-y-6" id="case-telecom">
+                                <h3 class="text-xl font-bold text-[#3284C6] flex items-center gap-2">
+                                    <i class="fa-solid fa-phone-volume"></i> Telecomunicaciones y Servicios
+                                </h3>
+                                <p class="text-base text-slate-600 font-semibold leading-relaxed">
+                                    Evolución de la infraestructura de atención para una empresa líder en USA, migrando de llamadas manuales de cobro tradicionales a un ecosistema interactivo digital distribuido.
+                                </p>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div class="bg-red-50 p-4 rounded-xl border border-red-100 text-sm">
+                                        <strong class="font-bold block mb-1 text-red-800">Proceso Anterior:</strong>
+                                        Llamadas manuales de voz exclusivas para consulta de saldo y creación de cuenta de pago, provocando filas y cuellos de botella.
+                                    </div>
+                                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100 text-sm">
+                                        <strong class="font-bold block mb-1 text-emerald-800">Proceso Digitalizado:</strong>
+                                        Tabletas interactivas con mensajería digital integrada, videovisitas, ruteo automático de consultas y escaneo de contenido regulado.
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100 text-center">
+                                    <div>
+                                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Tiempo Registro Usuario</span>
+                                        <span class="text-xl font-momo text-[#3284C6]">14m ➔ 3m</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Error de Activación</span>
+                                        <span class="text-xl font-momo text-[#EB5B27]">15% ➔ 1.2%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Caso 2 -->
+                            <div class="case-detail-block space-y-6 hidden" id="case-automotive">
+                                <h3 class="text-xl font-bold text-[#3284C6] flex items-center gap-2">
+                                    <i class="fa-solid fa-car-side"></i> E-Commerce Automotriz
+                                </h3>
+                                <p class="text-base text-slate-600 font-semibold leading-relaxed">
+                                    Soporte transaccional para el líder estadounidense de compra-venta de vehículos, validando documentación legal de propiedad y previniendo riesgos financieros.
+                                </p>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div class="bg-red-50 p-4 rounded-xl border border-red-100 text-sm">
+                                        <strong class="font-bold block mb-1 text-red-800">Proceso Anterior:</strong>
+                                        Revisión manual y lenta de títulos de propiedad físicos estatales, generando demoras de entrega y riesgos legales de fraude.
+                                    </div>
+                                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100 text-sm">
+                                        <strong class="font-bold block mb-1 text-emerald-800">Proceso Digitalizado:</strong>
+                                        Validación digital en tiempo real de títulos de propiedad, verificación automatizada de fondos del comprador y apego digital a normativas locales.
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100 text-center">
+                                    <div>
+                                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Verificación de Títulos</span>
+                                        <span class="text-xl font-momo text-[#3284C6]">24h ➔ 4h</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Fallas Regulatorias</span>
+                                        <span class="text-xl font-momo text-[#EB5B27]">8.5% ➔ 0.4%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Caso 3 -->
+                            <div class="case-detail-block space-y-6 hidden" id="case-security">
+                                <h3 class="text-xl font-bold text-[#3284C6] flex items-center gap-2">
+                                    <i class="fa-solid fa-video"></i> Videovigilancia Urbana de Alta Tecnología
+                                </h3>
+                                <p class="text-base text-slate-600 font-semibold leading-relaxed">
+                                    Soporte técnico estructurado a la red líder de videovigilancia urbana, reconocimiento biométrico y lectura automatizada de placas en tiempo real.
+                                </p>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div class="bg-red-50 p-4 rounded-xl border border-red-100 text-sm">
+                                        <strong class="font-bold block mb-1 text-red-800">Proceso Anterior:</strong>
+                                        Escalamiento genérico de fallas de cámaras urbanas a ingenieros en campo sin pre-diagnóstico de red, elevando costos operativos.
+                                    </div>
+                                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100 text-sm">
+                                        <strong class="font-bold block mb-1 text-emerald-800">Proceso Digitalizado:</strong>
+                                        Atención por soporte técnico Tier-1 unificado con software de diagnóstico remoto, solventando incidencias del servidor al instante.
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100 text-center">
+                                    <div>
+                                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Resolución al 1er Contacto</span>
+                                        <span class="text-xl font-momo text-[#3284C6]">62% ➔ 84%</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Tiempo de Respuesta (MTTR)</span>
+                                        <span class="text-xl font-momo text-[#EB5B27]">45m ➔ 12m</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Caso 4 -->
+                            <div class="case-detail-block space-y-6 hidden" id="case-gift">
+                                <h3 class="text-xl font-bold text-[#3284C6] flex items-center gap-2">
+                                    <i class="fa-solid fa-gift"></i> Pedidos y Ventas Estacionales
+                                </h3>
+                                <p class="text-base text-slate-600 font-semibold leading-relaxed">
+                                    Gestión y optimización de ventas para campañas masivas de e-commerce en picos de demanda estacional (Navidad, Acción de Gracias y Año Nuevo).
+                                </p>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div class="bg-red-50 p-4 rounded-xl border border-red-100 text-sm">
+                                        <strong class="font-bold block mb-1 text-red-800">Proceso Anterior:</strong>
+                                        Toma de pedidos tradicional y manual. Conversaciones prolongadas sin sugerencias comerciales de valor añadido.
+                                    </div>
+                                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100 text-sm">
+                                        <strong class="font-bold block mb-1 text-emerald-800">Proceso Digitalizado:</strong>
+                                        Guías inteligentes de venta sugestiva (upselling) integradas en el CRM de pedidos, proponiendo paquetes complementarios al capturar la orden.
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100 text-center">
+                                    <div>
+                                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Tasa de Venta Sugerida</span>
+                                        <span class="text-xl font-momo text-[#3284C6]">8% ➔ 24%</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Valor Medio de Compra</span>
+                                        <span class="text-xl font-momo text-[#EB5B27]">$42 ➔ $68</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Caso 5 -->
+                            <div class="case-detail-block space-y-6 hidden" id="case-custom">
+                                <h3 class="text-xl font-bold text-[#3284C6] flex items-center gap-2">
+                                    <i class="fa-solid fa-palette"></i> Personalización Omnicanal
+                                </h3>
+                                <p class="text-base text-slate-600 font-semibold leading-relaxed">
+                                    Procesamiento de pedidos a medida para plataformas e-commerce de mercancía personalizada (tazas, playeras, mantas, tarjetas de regalo).
+                                </p>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div class="bg-red-50 p-4 rounded-xl border border-red-100 text-sm">
+                                        <strong class="font-bold block mb-1 text-red-800">Proceso Anterior:</strong>
+                                        Errores constantes en la captura de especificaciones de diseño y canales desconectados de soporte que retrasaban la producción.
+                                    </div>
+                                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100 text-sm">
+                                        <strong class="font-bold block mb-1 text-emerald-800">Proceso Digitalizado:</strong>
+                                        Ecosistema unificado multicanal con validador inteligente de compatibilidad de imagen y enrutamiento automatizado a producción.
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100 text-center">
+                                    <div>
+                                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Abandono de Configuración</span>
+                                        <span class="text-xl font-momo text-[#3284C6]">18% ➔ 3.2%</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Satisfacción Cliente (CSAT)</span>
+                                        <span class="text-xl font-momo text-[#EB5B27]">78% ➔ 93%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Caso 6 -->
+                            <div class="case-detail-block space-y-6 hidden" id="case-logistic">
+                                <h3 class="text-xl font-bold text-[#3284C6] flex items-center gap-2">
+                                    <i class="fa-solid fa-truck-ramp-box"></i> Logística y Suministro de Autopartes
+                                </h3>
+                                <p class="text-base text-slate-600 font-semibold leading-relaxed">
+                                    Gestión integral de suministro y despacho de autopartes, optimizando la asignación de técnicos instaladores a nivel nacional.
+                                </p>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div class="bg-red-50 p-4 rounded-xl border border-red-100 text-sm">
+                                        <strong class="font-bold block mb-1 text-red-800">Proceso Anterior:</strong>
+                                        Búsqueda manual de compatibilidad de partes e incapacidad de confirmar fecha/hora de instalación en la llamada de solicitud inicial.
+                                    </div>
+                                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100 text-sm">
+                                        <strong class="font-bold block mb-1 text-emerald-800">Proceso Digitalizado:</strong>
+                                        Perfilado digital del vehículo, verificación de existencias por geolocalización de almacén y agendamiento inmediato de cita técnica.
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100 text-center">
+                                    <div>
+                                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Precisión Geolocalización</span>
+                                        <span class="text-xl font-momo text-[#3284C6]">88% ➔ 99.6%</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Instalación a Tiempo (&lt;48h)</span>
+                                        <span class="text-xl font-momo text-[#EB5B27]">74% ➔ 96.8%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- SLIDE 4: VENTAJAS COMPETITIVAS (LIGHT) -->
+        <div class="slide bg-light-slide overflow-hidden" id="slide-4">
+            <!-- Contenido con Espacio Optimizado y Letra Grande -->
+            <div class="w-full h-full flex flex-col justify-between pt-10 pb-10 px-16 max-w-7xl mx-auto">
+                <div class="flex-grow flex flex-col lg:flex-row gap-12 items-center justify-center">
+                    <!-- Izquierda: Gráfico/Lista Conceptos -->
+                    <div class="lg:w-[40%] space-y-6">
+                        <span class="text-[#3284C6] font-bold text-sm uppercase tracking-widest block">Diferenciación</span>
+                        <h2 class="text-4xl md:text-5xl font-extrabold text-[#222221] leading-tight">¿Por qué elegir a Telat?</h2>
+                        <p class="text-base md:text-lg text-slate-600 font-semibold leading-relaxed">
+                            Ofrecemos una propuesta de valor centrada en la eficiencia operativa, la transparencia de datos y la mitigación de riesgos para impulsar los resultados de TIP México.
+                        </p>
+                        <div class="p-6 rounded-3xl bg-[#3284C6]/5 border border-[#3284C6]/10 space-y-2">
+                            <span class="text-xs font-bold text-[#3284C6] uppercase tracking-wider block">Decisiones Informadas</span>
+                            <p class="text-xs md:text-sm text-slate-500 font-semibold leading-relaxed">Brindamos visibilidad total para que la Dirección de TIP pueda auditar la operación de forma transparente y ágil.</p>
+                        </div>
+                    </div>
+
+                    <!-- Derecha: Diferenciadores -->
+                    <div class="lg:w-[60%] space-y-6 w-full">
+                        <div class="flex items-start gap-4 p-5 rounded-2xl hover:bg-white hover:shadow-md border border-transparent hover:border-slate-100 transition-all duration-300">
+                            <div class="w-14 h-14 rounded-2xl bg-orange-50 text-[#EB5B27] flex items-center justify-center text-2xl flex-shrink-0">
+                                <i class="fa-solid fa-chart-simple"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-[#222221] mb-1">Inteligencia Operativa y Visibilidad en Tiempo Real</h3>
+                                <p class="text-sm text-slate-500 font-semibold leading-relaxed">Consolas integradas que consolidan métricas clave (Nivel de Servicio, AHT, Adherencia) al instante, permitiendo a la dirección de TIP México tomar decisiones de negocio ágiles y fundamentadas en datos reales.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-5 rounded-2xl hover:bg-white hover:shadow-md border border-transparent hover:border-slate-100 transition-all duration-300">
+                            <div class="w-14 h-14 rounded-2xl bg-blue-50 text-[#3284C6] flex items-center justify-center text-2xl flex-shrink-0">
+                                <i class="fa-solid fa-calculator"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-[#222221] mb-1">Eficiencia en Capacidad y Dimensionamiento Predictivo</h3>
+                                <p class="text-sm text-slate-500 font-semibold leading-relaxed">Modelación avanzada de Workforce Management (WFM) para alinear la cantidad de asesores con las curvas reales de llamadas, eliminando el costo por agentes ociosos y previniendo la saturación del canal.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-5 rounded-2xl hover:bg-white hover:shadow-md border border-transparent hover:border-slate-100 transition-all duration-300">
+                            <div class="w-14 h-14 rounded-2xl bg-amber-50 text-[#b48512] flex items-center justify-center text-2xl flex-shrink-0">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-[#222221] mb-1">Resiliencia y Mitigación de Riesgos ante Contingencias</h3>
+                                <p class="text-sm text-slate-500 font-semibold leading-relaxed">Un plan de continuidad probado que traslada la operación a Trabajo desde Casa en menos de 2 horas ante cortes de red principales, blindando la tasa de abandono mensual y protegiendo el prestigio de su marca.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 4: Evaluador QA -->
-        <div class="slide bg-light-slide" id="slide-4">
-            <div class="w-full h-full flex px-16 py-12 gap-12 items-center">
-                <!-- Izquierda: Contenedor Media -->
-                <div class="w-[55%] h-[80%] relative rounded-[3rem] bg-[#222221] p-2 glow-frame-amarillo">
-                    <div class="absolute -top-7 -left-7 bg-white border-4 border-[#FECA66] text-[#b48512] font-momo px-8 py-3 rounded-full text-3xl z-20 rotate-[-5deg] shadow-xl">3. Calidad IA</div>
-                    
-                    <div class="w-full h-full rounded-[2.5rem] overflow-hidden border border-gray-800 relative pointer-events-none bg-[#111]">
-                        <iframe src="https://player.vimeo.com/video/1205962477?background=1&autopause=0&autoplay=1&loop=1&byline=0&title=0&muted=1" 
-                                class="absolute inset-0 w-full h-full scale-[1.05]" 
-                                frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
-                        </iframe>
-                    </div>
-                </div>
 
-                <!-- Derecha: Texto Comercial -->
-                <div class="w-[45%] flex flex-col justify-center">
-                    <span class="subheading text-[#3284C6] font-bold uppercase tracking-widest text-sm mb-4 block">Auditoría QA Inteligente</span>
-                    <h2 class="font-momo text-5xl text-[#222221] mb-6 leading-tight">Visibilidad operativa que trasciende lo humano.</h2>
-                    
-                    <p class="text-[1.2rem] text-gray-600 font-medium leading-relaxed mb-8">
-                        Nuestra tecnología tiene la capacidad de transcribir, analizar sentimiento y evaluar matemáticamente el apego al script. Detectamos áreas de oportunidad mucho antes de que impacten la experiencia de TIP México.
-                    </p>
-
-                    <div class="flex flex-wrap gap-4">
-                        <span class="kpi-badge kpi-up">
-                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path></svg>
-                            <span>Cumplimiento del Protocolo de Marca</span>
-                        </span>
-                        <span class="kpi-badge kpi-neutral">
-                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                            <span>Auditoría Escalable y Dinámica</span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 5: CIERRE (CLARO, PREMIUM, ENERGÉTICO) -->
+        <!-- SLIDE 5: OFERTA COMERCIAL PARA TIP (LIGHT) -->
         <div class="slide bg-light-slide overflow-hidden" id="slide-5">
-            <!-- Doodle de fondo suave -->
-            <div class="absolute right-20 top-20 animate-float opacity-10 pointer-events-none">
-                <svg width="200" height="200" viewBox="0 0 100 100" fill="none">
-                    <circle cx="50" cy="50" r="40" stroke="#3284C6" stroke-width="3" stroke-dasharray="10 10"/>
-                </svg>
+            <!-- Contenido con Espacio Optimizado y Letra Grande -->
+            <div class="w-full h-full flex flex-col justify-between pt-8 pb-8 px-12 lg:px-16 max-w-7xl mx-auto">
+                <div class="flex-grow flex flex-col lg:flex-row gap-10 items-center justify-center">
+                    <!-- Izquierda: Estructura Operativa y Mejora Continua -->
+                    <div class="lg:w-[48%] space-y-4">
+                        <span class="text-[#3284C6] font-bold text-sm uppercase tracking-widest block">Propuesta Operativa</span>
+                        <h2 class="text-3xl lg:text-4xl font-extrabold text-[#222221] leading-tight">Modelo de Servicio y Capacidad</h2>
+                        <p class="text-sm lg:text-base text-slate-600 font-semibold leading-relaxed">
+                            Proponemos una estructura operativa dedicada enfocada en el control de calidad, eficiencia en tiempos de atención y adherencia estricta a los procesos de TIP México.
+                        </p>
+
+                        <!-- Elementos de Estructura -->
+                        <div class="space-y-3 pt-1">
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-lg bg-[#3284C6]/10 text-[#3284C6] flex items-center justify-center text-base flex-shrink-0">
+                                    <i class="fa-solid fa-users"></i>
+                                </div>
+                                <span class="text-sm text-slate-700 font-bold">8 Agentes Telefónicos Dedicados en CDMX</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-lg bg-[#EB5B27]/10 text-[#EB5B27] flex items-center justify-center text-base flex-shrink-0">
+                                    <i class="fa-solid fa-user-gear"></i>
+                                </div>
+                                <span class="text-sm text-slate-700 font-bold">1 Supervisor Operativo de Campaña Dedicado</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-lg bg-[#FECA66]/20 text-[#b48512] flex items-center justify-center text-base flex-shrink-0">
+                                    <i class="fa-solid fa-tv"></i>
+                                </div>
+                                <span class="text-sm text-slate-700 font-bold">Monitoreo GOC (Torre de Control) 24/7 en Tiempo Real</span>
+                            </div>
+                        </div>
+
+                        <!-- Bloque de Mejora Continua Transversal -->
+                        <div class="flex items-start gap-3 p-3.5 bg-gradient-to-r from-[#3284C6]/10 to-[#EB5B27]/10 rounded-2xl border border-slate-200/80 mt-2">
+                            <div class="w-9 h-9 rounded-lg bg-white text-[#3284C6] flex items-center justify-center text-base shadow-sm flex-shrink-0 mt-0.5">
+                                <i class="fa-solid fa-arrows-rotate animate-spin-slow"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs font-bold text-[#222221] uppercase tracking-wide">Mejora Continua Transversal (Ciclo Kaizen)</div>
+                                <p class="text-xs text-slate-600 font-semibold leading-snug mt-0.5">
+                                    Calibraciones periódicas, análisis de causa raíz y refinamiento constante de scripts a lo largo de todo el ciclo de vida del servicio.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Derecha: Métricas, FCR y Calidad IA -->
+                    <div class="lg:w-[52%] bg-white p-6 lg:p-7 rounded-[2rem] border border-slate-200/80 shadow-md space-y-4 w-full">
+                        <div class="flex justify-between items-center border-b border-slate-100 pb-2.5">
+                            <h3 class="font-bold text-base text-[#222221] flex items-center gap-2">
+                                <i class="fa-solid fa-chart-simple text-[#EB5B27]"></i> KPIs y SLAs Comprometidos
+                            </h3>
+                            <span class="text-[10px] font-extrabold text-[#3284C6] bg-[#3284C6]/10 px-2.5 py-0.5 rounded-full uppercase tracking-wider">Estándar TIP</span>
+                        </div>
+
+                        <!-- Grid de 5 Métricas -->
+                        <div class="grid grid-cols-3 gap-3">
+                            <div class="p-3 rounded-xl bg-slate-50 border border-slate-100/80 space-y-0.5">
+                                <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Nivel Servicio</span>
+                                <div class="flex items-baseline gap-1">
+                                    <span class="text-2xl font-momo text-[#3284C6]">80/20</span>
+                                    <span class="text-[10px] text-slate-500 font-bold">SL</span>
+                                </div>
+                            </div>
+
+                            <div class="p-3 rounded-xl bg-slate-50 border border-slate-100/80 space-y-0.5">
+                                <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Tasa Abandono</span>
+                                <div class="flex items-baseline gap-1">
+                                    <span class="text-2xl font-momo text-[#EB5B27]">&lt;3%</span>
+                                    <span class="text-[10px] text-slate-500 font-bold">Max</span>
+                                </div>
+                            </div>
+
+                            <div class="p-3 rounded-xl bg-slate-50 border border-slate-100/80 space-y-0.5">
+                                <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Resolución FCR</span>
+                                <div class="flex items-baseline gap-1">
+                                    <span class="text-2xl font-momo text-[#FECA66]">&ge;70%</span>
+                                    <span class="text-[10px] text-amber-700 font-bold">Meta</span>
+                                </div>
+                            </div>
+
+                            <div class="p-3 rounded-xl bg-slate-50 border border-slate-100/80 space-y-0.5 col-span-1 sm:col-span-1">
+                                <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Espera (ASA)</span>
+                                <div class="flex items-baseline gap-1">
+                                    <span class="text-2xl font-momo text-[#222221]">≤20s</span>
+                                    <span class="text-[10px] text-slate-500 font-bold">Prom</span>
+                                </div>
+                            </div>
+
+                            <div class="p-3 rounded-xl bg-slate-50 border border-slate-100/80 space-y-0.5 col-span-2 sm:col-span-2">
+                                <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Cobertura Plantilla</span>
+                                <div class="flex items-baseline gap-1">
+                                    <span class="text-2xl font-momo text-emerald-600">95%</span>
+                                    <span class="text-[10px] text-slate-500 font-bold">Mínimo Operativo</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Señalización Integrada de Monitoreo de Calidad por IA -->
+                        <div class="p-3.5 rounded-2xl bg-[#EB5B27]/5 border border-[#EB5B27]/20 flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-[#EB5B27]/15 text-[#EB5B27] flex items-center justify-center text-sm flex-shrink-0 mt-0.5">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs font-bold text-[#EB5B27] uppercase tracking-wide">Auditoría de Calidad con IA Graduable</div>
+                                <p class="text-[11px] text-slate-700 font-semibold leading-relaxed mt-0.5">
+                                    Monitoreo flexible y escalable desde muestreo analítico <strong>hasta el 100% de las interacciones</strong> (voz y chats), adaptable a los requerimientos y fases operativas de TIP México.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="text-[10px] text-slate-400 font-medium text-center">
+                            *Métricas monitoreadas y validadas mediante auditorías automáticas periódicas.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- SLIDE 6: BCP / DRP SIMULATOR (DARK) - TERMINOLOGÍA PURAMENTE FUNCIONAL -->
+        <div class="slide bg-dark-slide overflow-hidden" id="slide-6">
+            <!-- VIDEO DE FONDO VIMEO CON MIX-BLEND -->
+            <div class="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden bg-[#222221]">
+                <iframe src="https://player.vimeo.com/video/1205962480?background=1&autopause=0&muted=1&loop=1&autoplay=1" 
+                        class="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 mix-blend-screen opacity-10" 
+                        frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                </iframe>
+                <div class="absolute inset-0 bg-neutral-950/80"></div>
             </div>
 
-            <!-- Gradiente de fondo ultra-sutil para dinamismo -->
-            <div class="absolute inset-0 bg-gradient-to-tr from-[#3284C6]/5 via-[#FBFBFD] to-[#FECA66]/5 pointer-events-none"></div>
+            <!-- Contenido con Espacio Optimizado, Letra Grande y Nombres Funcionales -->
+            <div class="w-full h-full flex flex-col justify-between pt-10 pb-10 px-16 max-w-7xl mx-auto relative z-20">
+                <div class="flex-grow flex flex-col lg:flex-row gap-12 items-center justify-center w-full">
+                    <!-- Izquierda: Plan de Continuidad Corporativo -->
+                    <div class="lg:w-[45%] space-y-5">
+                        <span class="text-[#3284C6] font-bold text-sm uppercase tracking-widest block">Resiliencia Operativa</span>
+                        <h2 class="text-3xl md:text-4xl font-extrabold leading-tight text-white">Plan de Continuidad de Negocio (BCP)</h2>
+                        <p class="text-sm md:text-base text-neutral-300 font-semibold leading-relaxed">
+                            Ante contingencias críticas en la sede CDMX (ej. corte de fibra óptica mayor a 24 horas o sin tiempo estimado de solución), la operación se traslada inmediatamente a un modelo de <strong>Trabajo desde Casa</strong> exclusivo con equipamiento propiedad de Telat.
+                        </p>
 
-            <div class="w-full h-full flex flex-col items-center justify-center text-center px-10 relative z-10">
-                <!-- Tarjeta de logotipo corporativo -->
-                <div class="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-xl shadow-[#3284C6]/5 mb-10 transform hover:scale-105 transition-transform duration-300">
-                    <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-16 w-auto object-contain">
+                        <!-- Tabla de SLAs -->
+                        <div class="bg-neutral-900/60 border border-neutral-800 rounded-2xl p-5 space-y-3">
+                            <span class="text-xs text-neutral-400 font-bold uppercase tracking-wider block">Acuerdos de Recuperación (SLAs)</span>
+                            <div class="grid grid-cols-3 gap-3 text-center">
+                                <div class="p-3 bg-neutral-950/50 rounded-lg border border-neutral-800">
+                                    <span class="text-[10px] text-neutral-400 font-bold block mb-1">Recup. Voz</span>
+                                    <span class="text-base font-momo text-[#3284C6]">≤2h</span>
+                                </div>
+                                <div class="p-3 bg-neutral-950/50 rounded-lg border border-neutral-800">
+                                    <span class="text-[10px] text-neutral-400 font-bold block mb-1">Resguardo</span>
+                                    <span class="text-base font-momo text-[#FECA66]">≤15m</span>
+                                </div>
+                                <div class="p-3 bg-neutral-950/50 rounded-lg border border-neutral-800">
+                                    <span class="text-[10px] text-neutral-400 font-bold block mb-1">Notificación</span>
+                                    <span class="text-base font-momo text-[#EB5B27]">30m</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botón para Iniciar Simulación -->
+                        <div class="pt-2">
+                            <button id="start-bcp-sim" class="btn-portal btn-naranja w-full font-bold uppercase text-sm tracking-wider">
+                                <i class="fa-solid fa-triangle-exclamation animate-pulse"></i> Simular Incidente de Fibra
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Derecha: El Simulador Interactivo (Nombres Funcionales y Mayor Espacio) -->
+                    <div class="lg:w-[55%] bg-neutral-900/90 border border-neutral-800 rounded-[2.5rem] p-8 shadow-2xl relative flex flex-col justify-between min-h-[460px] w-full">
+                        <!-- Cabecera de Consola -->
+                        <div class="flex justify-between items-center border-b border-neutral-800 pb-4">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3.5 h-3.5 rounded-full bg-[#3284C6]"></span>
+                                <span class="text-xs font-subheadings font-bold tracking-wider text-neutral-200 uppercase">Flujo Activo de Recuperación</span>
+                            </div>
+                            <span id="sim-status" class="text-[10px] font-bold uppercase px-3.5 py-1 rounded-full bg-neutral-800 text-neutral-400">
+                                Modo Inactivo
+                            </span>
+                        </div>
+
+                        <!-- Contenido Secuencial del Flujo -->
+                        <div class="space-y-6 py-6 flex-grow flex flex-col justify-center">
+                            <!-- Paso 1 -->
+                            <div id="step-1" class="flex gap-4 items-center opacity-40 transition-all duration-500">
+                                <div class="step-num w-10 h-10 rounded-full border border-neutral-700 bg-neutral-950 flex items-center justify-center text-sm font-bold text-neutral-400">1</div>
+                                <div class="flex-grow">
+                                    <h4 class="text-sm font-bold text-neutral-200">Desvío de Tráfico y Enrutamiento Telefónico (Fase 1 - ≤30 min)</h4>
+                                    <p class="text-xs text-neutral-400">Redireccionamiento inmediato del flujo entrante de llamadas e IVR informativo de espera extendida.</p>
+                                </div>
+                                <div class="step-status text-xs font-bold text-neutral-500">Pendiente</div>
+                            </div>
+
+                            <!-- Paso 2 -->
+                            <div id="step-2" class="flex gap-4 items-center opacity-40 transition-all duration-500">
+                                <div class="step-num w-10 h-10 rounded-full border border-neutral-700 bg-neutral-950 flex items-center justify-center text-sm font-bold text-neutral-400">2</div>
+                                <div class="flex-grow">
+                                    <h4 class="text-sm font-bold text-neutral-200">Activación de Trabajo desde Casa (Fase 2 - ≤2 horas)</h4>
+                                    <p class="text-xs text-neutral-400">Arranque de la capacidad mínima del 70% mediante túneles de conexión segura cifrada e inspección profunda de tráfico.</p>
+                                </div>
+                                <div class="step-status text-xs font-bold text-neutral-500">Pendiente</div>
+                            </div>
+
+                            <!-- Paso 3 -->
+                            <div id="step-3" class="flex gap-4 items-center opacity-40 transition-all duration-500">
+                                <div class="step-num w-10 h-10 rounded-full border border-neutral-700 bg-neutral-950 flex items-center justify-center text-sm font-bold text-neutral-400">3</div>
+                                <div class="flex-grow">
+                                    <h4 class="text-sm font-bold text-neutral-200">Operación Restablecida al 100% (Fase 3 - ≤4 horas)</h4>
+                                    <p class="text-xs text-neutral-400">Estaciones de trabajo normalizadas bajo políticas de prevención de fuga de información y autenticación multifactor con geolocalización.</p>
+                                </div>
+                                <div class="step-status text-xs font-bold text-neutral-500">Pendiente</div>
+                            </div>
+                        </div>
+
+                        <!-- Detalles de Seguridad Activa -->
+                        <div class="border-t border-neutral-800 pt-4 grid grid-cols-2 gap-4 text-xs font-bold">
+                            <div class="flex items-center gap-2.5 text-neutral-400">
+                                <i class="fa-solid fa-lock text-[#3284C6] text-sm"></i>
+                                <span>Túneles Seguros Cifrados</span>
+                            </div>
+                            <div class="flex items-center gap-2.5 text-neutral-400">
+                                <i class="fa-solid fa-shield text-[#EB5B27] text-sm"></i>
+                                <span>Prevención de Fuga de Datos</span>
+                            </div>
+                            <div class="flex items-center gap-2.5 text-neutral-400">
+                                <i class="fa-solid fa-user-check text-[#FECA66] text-sm"></i>
+                                <span>Autenticación Multifactor y Geocercas</span>
+                            </div>
+                            <div class="flex items-center gap-2.5 text-neutral-400">
+                                <i class="fa-solid fa-network-wired text-emerald-500 text-sm"></i>
+                                <span>Monitoreo Activo de Amenazas</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
+        </div>
 
-                <h2 class="font-momo text-6xl lg:text-[5.5rem] mb-6 leading-none text-[#222221]">
-                    MÁS ALLÁ DE <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#3284C6] to-[#EB5B27]">LA VOZ.</span>
+
+        <!-- SLIDE 7: CAPACIDADES DE INTELIGENCIA ARTIFICIAL (LIGHT) - TERMINOLOGÍA PURAMENTE FUNCIONAL -->
+        <div class="slide bg-light-slide overflow-hidden" id="slide-7">
+            <!-- Contenido con Espacio Optimizado y Letra Grande -->
+            <div class="w-full h-full flex flex-col justify-between pt-10 pb-10 px-16 max-w-7xl mx-auto">
+                <div class="flex-grow flex flex-col lg:flex-row gap-12 items-center justify-center">
+                    <!-- Izquierda: Media/Logos Frame -->
+                    <div class="lg:w-[50%] h-[80%] min-h-[380px] w-full relative rounded-[3rem] bg-[#222221] p-2 glow-frame-celeste flex items-start justify-center overflow-hidden">
+                        <!-- Badge encima del video, sin overlay oscuro -->
+                        <div class="absolute top-5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3">
+                            <span class="bg-[#3284C6] text-white text-xs font-bold uppercase tracking-widest px-5 py-1.5 rounded-full shadow-lg">Suite Telat IA</span>
+                            <span class="text-white/80 text-sm font-extrabold">Ecosistema Inteligente</span>
+                        </div>
+                        <iframe src="https://player.vimeo.com/video/1205962477?background=1&autopause=0&muted=1&loop=1&autoplay=1" 
+                                class="absolute inset-0 w-full h-full scale-[1.05]" 
+                                frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                        </iframe>
+                    </div>
+
+                    <!-- Derecha: Software e Impacto (Nombres Funcionales) -->
+                    <div class="lg:w-[50%] space-y-6 w-full">
+                        <span class="text-[#EB5B27] font-bold text-sm uppercase tracking-widest block">Tecnología de Vanguardia</span>
+                        <h2 class="text-4xl md:text-5xl font-extrabold text-[#222221] leading-tight">Soluciones de IA para Optimizar la Operación</h2>
+                        <p class="text-base md:text-lg text-slate-600 font-semibold leading-relaxed">
+                            Nuestras herramientas de desarrollo propio están enfocadas en incrementar la productividad de los asesores y asegurar el apego al script en cada llamada.
+                        </p>
+
+                        <div class="space-y-6">
+                            <!-- Tool 1 -->
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-orange-50 text-[#EB5B27] flex items-center justify-center flex-shrink-0 text-lg">
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-[#222221] uppercase tracking-wide">Generador de Notas Post-Llamada</h4>
+                                    <p class="text-xs md:text-sm text-slate-500 font-semibold leading-relaxed">Inteligencia artificial que resume de forma automática la interacción con el cliente al finalizar la llamada y la exporta al CRM en tiempo real.</p>
+                                </div>
+                            </div>
+
+                            <!-- Tool 2 -->
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-blue-50 text-[#3284C6] flex items-center justify-center flex-shrink-0 text-lg">
+                                    <i class="fa-solid fa-ranking-star"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-[#3284C6] uppercase tracking-wide">Auditoría de Calidad y Tiempos de Atención (AHT) por Voz</h4>
+                                    <p class="text-xs md:text-sm text-slate-500 font-semibold leading-relaxed">Análisis de voz y transcripción automática que evalúa el apego al protocolo y detecta de manera proactiva hold excesivo.</p>
+                                </div>
+                            </div>
+
+                            <!-- Tool 3 -->
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-amber-50 text-[#b48512] flex items-center justify-center flex-shrink-0 text-lg">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-amber-600 uppercase tracking-wide">Alertas de Estado de Agente</h4>
+                                    <p class="text-xs md:text-sm text-slate-500 font-semibold leading-relaxed">Alertas de estatus en tiempo real al supervisor ante desviaciones no justificadas de pausas o hold extendido.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- SLIDE 8: ROADMAP DE IMPLEMENTACIÓN (LIGHT) -->
+        <div class="slide bg-light-slide overflow-hidden" id="slide-8">
+            <!-- Contenido con Espacio Optimizado -->
+            <div class="w-full h-full flex flex-col justify-between pt-6 pb-6 px-10 lg:px-14 max-w-7xl mx-auto">
+                <div class="flex-grow flex flex-col justify-center space-y-4 w-full">
+                    <div>
+                        <span class="text-[#3284C6] font-bold text-sm uppercase tracking-widest block">Cronograma de Transición</span>
+                        <h2 class="text-2xl lg:text-3xl font-extrabold text-[#222221] leading-tight">Plan de Lanzamiento en 5 Semanas</h2>
+                        <p class="text-xs lg:text-sm text-slate-500 font-semibold mt-0.5">Todas las áreas operativas y administrativas trabajan de forma simultánea garantizando arranque seguro.</p>
+                    </div>
+
+                    <!-- Grid de Fases con filas de actividades simultáneas (5 Semanas) -->
+                    <div class="w-full overflow-x-auto">
+                        <div class="min-w-[920px]">
+                            <!-- Encabezados de semanas -->
+                            <div class="grid grid-cols-6 gap-3 mb-2.5">
+                                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center">Área / Actividad</div>
+                                <div class="text-center">
+                                    <div class="bg-[#3284C6] text-white text-xs font-bold uppercase px-2 py-2 rounded-xl">Semana 1</div>
+                                    <div class="text-[10px] text-[#3284C6] font-bold mt-1">Planeación & Perfiles</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="bg-[#EB5B27] text-white text-xs font-bold uppercase px-2 py-2 rounded-xl">Semana 2</div>
+                                    <div class="text-[10px] text-[#EB5B27] font-bold mt-1">Contratación & Red</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="bg-[#FECA66] text-[#222221] text-xs font-bold uppercase px-2 py-2 rounded-xl">Semana 3</div>
+                                    <div class="text-[10px] text-amber-700 font-bold mt-1">Capacitación I</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="bg-amber-500 text-white text-xs font-bold uppercase px-2 py-2 rounded-xl">Semana 4</div>
+                                    <div class="text-[10px] text-amber-600 font-bold mt-1">Capacitación II & BCP</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="bg-emerald-500 text-white text-xs font-bold uppercase px-2 py-2 rounded-xl">Semana 5</div>
+                                    <div class="text-[10px] text-emerald-600 font-bold mt-1">Go-Live & OJT</div>
+                                </div>
+                            </div>
+
+                            <!-- Fila: Tecnología -->
+                            <div class="grid grid-cols-6 gap-3 mb-2.5 items-stretch">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-xl bg-[#3284C6]/10 text-[#3284C6] flex items-center justify-center text-sm flex-shrink-0"><i class="fa-solid fa-server"></i></div>
+                                    <span class="text-xs font-bold text-slate-700">Tecnología</span>
+                                </div>
+                                <div class="bg-[#3284C6]/10 border border-[#3284C6]/20 rounded-xl p-2.5 text-[11px] text-slate-600 font-semibold leading-snug">Arquitectura de red, VPNs y troncales SIP</div>
+                                <div class="bg-[#3284C6]/10 border border-[#3284C6]/20 rounded-xl p-2.5 text-[11px] text-slate-600 font-semibold leading-snug">Asignación de hardware con imagen maestra</div>
+                                <div class="bg-[#3284C6]/10 border border-[#3284C6]/20 rounded-xl p-2.5 text-[11px] text-slate-600 font-semibold leading-snug">Configuración y perfiles en sistemas TIP</div>
+                                <div class="bg-[#FECA66]/20 border border-[#FECA66]/30 rounded-xl p-2.5 text-[11px] text-slate-600 font-semibold leading-snug">Prueba BCP: simulacro de corte de fibra real</div>
+                                <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-2.5 text-[11px] text-slate-600 font-semibold leading-snug">Monitoreo activo en Torre de Control GOC</div>
+                            </div>
+
+                            <!-- Fila: Reclutamiento -->
+                            <div class="grid grid-cols-6 gap-3 mb-2.5 items-stretch">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-xl bg-[#EB5B27]/10 text-[#EB5B27] flex items-center justify-center text-sm flex-shrink-0"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                                    <span class="text-xs font-bold text-slate-700">Reclutamiento</span>
+                                </div>
+                                <div class="bg-[#EB5B27]/10 border border-[#EB5B27]/20 rounded-xl p-2.5 text-[11px] text-slate-600 font-semibold leading-snug">Apertura y filtro predictivo de perfiles</div>
+                                <div class="bg-[#EB5B27]/10 border border-[#EB5B27]/20 rounded-xl p-2.5 text-[11px] text-slate-600 font-semibold leading-snug">Entrevistas y selección final (8 + 1)</div>
+                                <div class="bg-slate-50 border border-slate-100 rounded-xl p-2.5 text-[11px] text-slate-400 font-semibold text-center flex items-center justify-center">—</div>
+                                <div class="bg-slate-50 border border-slate-100 rounded-xl p-2.5 text-[11px] text-slate-400 font-semibold text-center flex items-center justify-center">—</div>
+                                <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-2.5 text-[11px] text-slate-600 font-semibold leading-snug">Plantilla 100% activa en piso de operación</div>
+                            </div>
+
+                            <!-- Fila: Entrenamiento -->
+                            <div class="grid grid-cols-6 gap-3 mb-2.5 items-stretch">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-xl bg-[#FECA66]/20 text-[#b48512] flex items-center justify-center text-sm flex-shrink-0"><i class="fa-solid fa-graduation-cap"></i></div>
+                                    <span class="text-xs font-bold text-slate-700">Entrenamiento</span>
+                                </div>
+                                <div class="bg-[#FECA66]/15 border border-[#FECA66]/25 rounded-xl p-2.5 text-[11px] text-slate-600 font-semibold leading-snug">Diseño curricular y calibración de guías</div>
+                                <div class="bg-[#FECA66]/15 border border-[#FECA66]/25 rounded-xl p-2.5 text-[11px] text-slate-600 font-semibold leading-snug">Preparación de material y entorno de pruebas</div>
+                                <div class="bg-[#FECA66]/20 border border-[#FECA66]/30 rounded-xl p-2.5 text-[11px] text-slate-700 font-bold leading-snug">Capacitación I: Producto, procesos y sistemas TIP</div>
+                                <div class="bg-amber-50 border border-amber-200 rounded-xl p-2.5 text-[11px] text-slate-700 font-bold leading-snug">Capacitación II: Role plays, objeciones y examen</div>
+                                <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-2.5 text-[11px] text-slate-700 font-bold leading-snug">Go-Live & OJT: Acompañamiento en piso / Nesting</div>
+                            </div>
+
+                            <!-- Fila: RR.HH. y Admin -->
+                            <div class="grid grid-cols-6 gap-3 items-stretch">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm flex-shrink-0"><i class="fa-solid fa-file-contract"></i></div>
+                                    <span class="text-xs font-bold text-slate-700">RR.HH. / Admin</span>
+                                </div>
+                                <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-2.5 text-[11px] text-slate-600 font-semibold leading-snug">Documentación y alta en nómina digital</div>
+                                <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-2.5 text-[11px] text-slate-600 font-semibold leading-snug">Firma de contratos e inducción corporativa</div>
+                                <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-2.5 text-[11px] text-slate-600 font-semibold leading-snug">Acuerdos de confidencialidad y ética</div>
+                                <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-2.5 text-[11px] text-slate-600 font-semibold leading-snug">Validación final de accesos y conformidad</div>
+                                <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-2.5 text-[11px] text-slate-600 font-semibold leading-snug">Arranque formal y entrega de reporte de KPIs</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- SLIDE 9: CIERRE (DARK) -->
+        <div class="slide bg-dark-slide overflow-hidden" id="slide-9">
+            <!-- VIDEO DE FONDO VIMEO CON MIX-BLEND -->
+            <div class="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden bg-[#222221]">
+                <iframe src="https://player.vimeo.com/video/1195458364?background=1&autopause=0&muted=1&loop=1&autoplay=1" 
+                        class="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 mix-blend-screen opacity-15" 
+                        frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                </iframe>
+                <div class="absolute inset-0 bg-neutral-950/80"></div>
+            </div>
+
+            <!-- Header Interno -->
+            <header class="absolute top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl px-8 py-3 flex items-center justify-between z-30 header-capsule-dark">
+                <div class="logo-capsule-container">
+                    <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group">
+                </div>
+            </header>
+
+            <!-- Contenido Principal -->
+            <div class="w-full h-full flex flex-col items-center justify-center text-center px-10 relative z-20 mt-8 space-y-8">
+                <!-- Logotipo limpio, sin cápsula blanca -->
+                <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-12 object-contain drop-shadow-xl hover:scale-105 transition-transform duration-300">
+
+                <h2 class="text-5xl lg:text-[5.5rem] mb-4 leading-none font-extrabold tracking-tight">
+                    MÁS ALLÁ DE<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#3284C6] to-[#EB5B27]">LA OPERACIÓN.</span>
                 </h2>
                 
-                <p class="text-2xl font-bold text-[#222221]/80 max-w-3xl mb-12">
-                    No están contratando asientos. Están integrando un brazo tecnológico diseñado para proteger e impulsar la marca de TIP México.
+                <p class="text-xl md:text-2xl text-neutral-300 max-w-4xl font-subheadings font-medium leading-relaxed">
+                    No están contratando posiciones. Están integrando un brazo tecnológico diseñado para proteger e impulsar el crecimiento de <span class="text-white font-bold">TIP México</span>.
                 </p>
                 
-                <div class="relative">
-                    <button class="group inline-flex items-center gap-3 bg-[#EB5B27] text-white font-sans font-bold text-xl px-10 py-5 rounded-full hover:bg-[#FECA66] hover:text-[#222221] transition-all duration-300 shadow-xl shadow-[#EB5B27]/25 hover:scale-105 border border-white/10">
-                        <span>Iniciar Implementación</span>
-                        <svg class="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path></svg>
-                    </button>
+                <div class="flex gap-4">
+                    <a href="https://telat.mx" target="_blank" class="btn-portal btn-naranja font-bold uppercase text-sm tracking-wider">
+                        <span>Conoce Más</span>
+                    </a>
                 </div>
             </div>
         </div>
 
         <!-- CONTROLES Y BARRA DE PROGRESO -->
-        <div id="slide-counter">01 / 05</div>
+        <div id="slide-counter">01 / 09</div>
         <div id="controls">
             <button class="control-btn" id="btn-prev">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
             </button>
             <button class="control-btn" id="btn-next">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
             </button>
+        </div>
+
+        <div id="progress-bar-container">
+            <div id="progress-bar"></div>
         </div>
 
     </div>
 
-    <!-- Lógica de interacciones -->
+    <!-- LÓGICA DE INTERACCIONES Y SIMULADOR BCP/DRP -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // A. NAVEGACIÓN DE LA PRESENTACIÓN
             const slides = Array.from(document.querySelectorAll('.slide'));
             const btnNext = document.getElementById('btn-next');
             const btnPrev = document.getElementById('btn-prev');
@@ -402,7 +1281,7 @@
             let currentSlideIndex = 0;
 
             function updatePresentation() {
-                // Actualiza clases activas
+                // Actualizar clases activas de slides
                 slides.forEach((slide, idx) => {
                     if (idx === currentSlideIndex) {
                         slide.classList.add('active');
@@ -411,19 +1290,18 @@
                     }
                 });
 
-                // Actualiza contador visual
+                // Actualizar contador visual
                 if (counter) {
-                    counter.textContent = `0${currentSlideIndex + 1} / 0${slides.length}`;
+                    counter.textContent = `${String(currentSlideIndex + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
                 }
 
-                // Actualiza barra de progreso
+                // Actualizar barra de progreso
                 if (progressBar) {
                     const percentage = ((currentSlideIndex + 1) / slides.length) * 100;
                     progressBar.style.width = `${percentage}%`;
                 }
             }
 
-            // Eventos de botones
             if (btnNext) {
                 btnNext.addEventListener('click', () => {
                     currentSlideIndex = (currentSlideIndex + 1) % slides.length;
@@ -438,7 +1316,7 @@
                 });
             }
 
-            // Teclado (Flechas de navegación)
+            // Atajos de Teclado
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'ArrowRight' || e.key === ' ') {
                     currentSlideIndex = (currentSlideIndex + 1) % slides.length;
@@ -449,9 +1327,109 @@
                 }
             });
 
-            // Inicialización
             updatePresentation();
+
+            // B. SIMULADOR DE CONTINGENCIA BCP/DRP
+            const btnSim = document.getElementById('start-bcp-sim');
+            const simStatus = document.getElementById('sim-status');
+            const steps = [
+                document.getElementById('step-1'),
+                document.getElementById('step-2'),
+                document.getElementById('step-3')
+            ];
+
+            let simRunning = false;
+
+            if (btnSim) {
+                btnSim.addEventListener('click', () => {
+                    if (simRunning) return; // Evitar disparos múltiples simultáneos
+                    simRunning = true;
+
+                    // Bloquear botón y reiniciar estados visuales
+                    btnSim.disabled = true;
+                    btnSim.classList.remove('btn-naranja');
+                    btnSim.classList.add('bg-neutral-800', 'text-neutral-500', 'border-neutral-700', 'cursor-not-allowed');
+                    btnSim.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> Simulando Incidente...';
+
+                    simStatus.textContent = 'PROCESANDO CONTINGENCIA';
+                    simStatus.className = 'text-[10px] font-bold uppercase px-3 py-1 rounded-full bg-amber-500/20 text-[#FECA66] border border-[#FECA66]/30 animate-pulse';
+
+                    // Resetear pasos del flujo
+                    steps.forEach(step => {
+                        step.classList.remove('opacity-100');
+                        step.classList.add('opacity-40');
+                        const stBadge = step.querySelector('.step-status');
+                        stBadge.textContent = 'Pendiente';
+                        stBadge.className = 'step-status text-[10px] font-bold text-neutral-500';
+                        const stNum = step.querySelector('.step-num');
+                        stNum.className = 'step-num w-8 h-8 rounded-full border border-neutral-700 bg-neutral-950 flex items-center justify-center text-xs font-bold text-neutral-400';
+                    });
+
+                    // Secuencia Paso 1: Enrutamiento Telefónico
+                    setTimeout(() => {
+                        activateStep(0, 'Enrutado', 'text-[#FECA66] border-[#FECA66]/30 bg-[#FECA66]/10');
+                    }, 1200);
+
+                    // Secuencia Paso 2: Trabajo desde Casa
+                    setTimeout(() => {
+                        activateStep(1, 'Conectado', 'text-[#3284C6] border-[#3284C6]/30 bg-[#3284C6]/10');
+                    }, 3000);
+
+                    // Secuencia Paso 3: Restablecimiento Total
+                    setTimeout(() => {
+                        activateStep(2, 'Operativo', 'text-emerald-500 border-emerald-500/30 bg-emerald-500/10');
+                        
+                        // Finalización de la Simulación
+                        simStatus.textContent = 'BCP ACTIVADO - SEGURO';
+                        simStatus.className = 'text-[10px] font-bold uppercase px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-500 border border-emerald-500/30';
+                        
+                        btnSim.disabled = false;
+                        btnSim.classList.remove('bg-neutral-800', 'text-neutral-500', 'border-neutral-700', 'cursor-not-allowed');
+                        btnSim.classList.add('btn-naranja');
+                        btnSim.innerHTML = '<i class="fa-solid fa-circle-check"></i> Simular Nuevamente';
+                        
+                        simRunning = false;
+                    }, 5000);
+                });
+            }
+
+            function activateStep(index, statusText, badgeClasses) {
+                const step = steps[index];
+                if (!step) return;
+
+                step.classList.remove('opacity-40');
+                step.classList.add('opacity-100');
+                
+                const stBadge = step.querySelector('.step-status');
+                stBadge.textContent = statusText;
+                stBadge.className = `step-status text-xs font-bold px-2 py-0.5 rounded-full ${badgeClasses}`;
+
+                const stNum = step.querySelector('.step-num');
+                stNum.className = 'step-num w-10 h-10 rounded-full border border-emerald-500/50 bg-[#222221] text-emerald-500 flex items-center justify-center text-sm font-bold shadow-lg shadow-emerald-500/10';
+            }
         });
+
+        // C. LÓGICA DE PESTAÑAS DE CASOS DE ÉXITO (SLIDE 3)
+        function showCaseBlock(caseId, btn) {
+            // Ocultar todos los bloques de detalle
+            const details = document.querySelectorAll('.case-detail-block');
+            details.forEach(detail => detail.classList.add('hidden'));
+
+            // Mostrar el seleccionado
+            const activeDetail = document.getElementById(caseId);
+            if (activeDetail) {
+                activeDetail.classList.remove('hidden');
+            }
+
+            // Desactivar todos los botones de pestañas
+            const buttons = document.querySelectorAll('.case-tab-btn');
+            buttons.forEach(button => button.classList.remove('active'));
+
+            // Activar el pulsado
+            if (btn) {
+                btn.classList.add('active');
+            }
+        }
     </script>
 </body>
 </html>
