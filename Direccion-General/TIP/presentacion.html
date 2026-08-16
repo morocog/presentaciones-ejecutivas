@@ -561,14 +561,23 @@
 
                     <!-- Derecha: Cintillo Superior Destacado + Detalle del Caso Seleccionado -->
                     <div class="lg:w-[62%] w-full space-y-3">
-                        <!-- Cintillo Superior Flotante de Alta Jerarquía -->
-                        <div class="bg-gradient-to-r from-[#3284C6]/15 via-[#3284C6]/10 to-[#EB5B27]/10 border border-[#3284C6]/30 text-[#222221] rounded-2xl py-2.5 px-4 flex items-center justify-between shadow-sm">
-                            <div class="flex items-center gap-2.5 flex-wrap">
-                                <span class="text-base sm:text-lg">🌐</span>
-                                <span class="font-extrabold text-xs sm:text-sm tracking-wide text-[#3284C6]">ESTÁNDARES OPERATIVOS BILINGÜES USA</span>
-                                <span class="font-extrabold text-xs sm:text-sm tracking-wide text-[#EB5B27]">➔ APLICADOS AL MERCADO NACIONAL</span>
+                        <!-- Cintillo Superior Flotante 100% en 1 Sola Línea -->
+                        <div class="bg-gradient-to-r from-[#3284C6]/15 via-[#3284C6]/10 to-[#EB5B27]/10 border border-[#3284C6]/30 text-[#222221] rounded-2xl py-2 px-3.5 sm:px-4 flex items-center justify-between shadow-sm whitespace-nowrap overflow-hidden">
+                            <!-- Texto en una sola línea continua -->
+                            <div class="flex items-center gap-1.5 sm:gap-2 whitespace-nowrap min-w-0">
+                                <span class="text-sm sm:text-base shrink-0">🌐</span>
+                                <span class="font-extrabold text-[11px] sm:text-xs xl:text-sm tracking-wide text-[#3284C6] uppercase whitespace-nowrap">ESTÁNDARES OPERATIVOS BILINGÜES USA</span>
+                                <span class="font-extrabold text-[11px] sm:text-xs xl:text-sm tracking-wide text-[#EB5B27] uppercase whitespace-nowrap">➔ APLICADOS AL MERCADO NACIONAL</span>
                             </div>
-                            <span class="hidden xl:inline-block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider bg-white/90 px-2.5 py-0.5 rounded-full border border-slate-200 shadow-xs">Garantía Telat</span>
+
+                            <!-- Insignia Certificado + Logo Telat sin Fondo -->
+                            <div class="flex items-center gap-2 sm:gap-2.5 shrink-0 pl-2.5 sm:pl-3 whitespace-nowrap">
+                                <span class="inline-flex items-center gap-1 bg-[#FECA66]/25 text-amber-900 text-[10px] sm:text-xs font-bold px-2 sm:px-2.5 py-0.5 rounded-full border border-[#FECA66]/50 shadow-xs whitespace-nowrap">
+                                    <i class="fa-solid fa-certificate text-amber-500"></i>
+                                    <span>Certificado</span>
+                                </span>
+                                <img src="https://telat.mx/assets/img/logo.png" alt="Telat" class="h-4 sm:h-5 object-contain">
+                            </div>
                         </div>
 
                         <!-- Tarjeta del Detalle del Caso -->
