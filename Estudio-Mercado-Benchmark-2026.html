@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estudio de Mercado y Benchmark Competitivo 2026 - TELAT Group</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Montserrat (Títulos) & DM Sans (UI/Tablas/Cuerpo) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Alpine.js CDN -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
+
+  <style>
+    :root {
+      /* Paleta Oficial Telat */
+      --azul-brand: #3284C6;
+      --naranja-brand: #EB5B27;
+      --amarillo-brand: #FECA66;
+      --color-celeste: #3284C6;
+      
+      /* Tema Claro (Corporate) */
+      --bg-main: #FBFBFD;
+      --bg-card: #FFFFFF;
+      --border-color: #E2E8F0;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+      --shadow-lg: 0 15px 35px rgba(0,0,0,0.08);
+    }
+
+    [data-theme="dark"] {
+      /* Tema Oscuro (Executive Tech) */
+      --bg-main: #222221;
+      --bg-card: #1E293B;
+      --border-color: #334155;
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.2);
+      --shadow-lg: 0 15px 35px rgba(0,0,0,0.35);
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .font-titles {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .font-ui {
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* Regla Momo: Permitida ÚNICAMENTE para números y métricas aisladas de 2 a 4 caracteres */
+    .font-momo {
+      font-family: 'Impact', 'Arial Black', sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    /* Estilo Sangría Francesa para Formato APA 7 */
+    .apa-hanging {
+      padding-left: 1.5rem;
+      text-indent: -1.5rem;
+    }
+
+    /* Formato Slide 16:9 Exacto y Optimizado */
+    .slide-page {
+      width: 1333px;
+      height: 750px;
+      min-width: 1333px;
+      min-height: 750px;
+      max-width: 1333px;
+      max-height: 750px;
+      overflow: hidden;
+      position: relative;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-lg);
+      margin: 0 auto 30px auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-sizing: border-box;
+    }
+
+    /* Configuración de Impresión Asíncrona & Exportación a PDF (Cero Hojas Blancas & 10 Páginas Exactas) */
+    @media print {
+      @page {
+        size: landscape;
+        margin: 0;
+      }
+      html, body {
+        background-color: #FFFFFF !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        height: auto !important;
+        overflow: visible !important;
+      }
+      main {
+        padding: 0 !important;
+        margin: 0 !important;
+        display: block !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .slide-page {
+        border: none !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        min-width: 100vw !important;
+        min-height: 100vh !important;
+        max-width: 100vw !important;
+        max-height: 100vh !important;
+        page-break-after: always !important;
+        page-break-inside: avoid !important;
+        break-after: page !important;
+        break-inside: avoid !important;
+        box-sizing: border-box !important;
+      }
+      .slide-page:last-child {
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+      }
+    }
+  </style>
+</head>
+<body x-data="{ 
+  darkMode: false,
+  toggleTheme() {
+    this.darkMode = !this.darkMode;
+    document.documentElement.setAttribute('data-theme', this.darkMode ? 'dark' : 'light');
+  },
+  printPDF() {
+    window.print();
+  }
+}">
+
+  <!-- BARRA DE CONTROL FLOTANTE (Solo en pantalla) -->
+  <header class="no-print fixed top-4 right-6 z-50 flex items-center gap-3 bg-white/95 dark:bg-slate-800/95 backdrop-blur-md px-5 py-2.5 rounded-full border border-slate-200 dark:border-slate-700 shadow-xl" aria-label="Controles de navegación">
+    <div class="flex items-center gap-2 text-xs font-semibold text-slate-600 dark:text-slate-300 mr-2 font-ui">
+      <span class="inline-block w-3 h-3 rounded-full bg-[#3284C6]"></span>
+      TELAT Strategic Benchmark 2026 (Verified Links Edition)
+    </div>
+    
+    <button @click="toggleTheme()" class="p-2 w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-200 transition flex items-center justify-center text-sm" title="Cambiar Tema">
+      <i class="fa-solid" :class="darkMode ? 'fa-sun text-[#FECA66]' : 'fa-moon text-[#3284C6]'"></i>
+    </button>
+    
+    <button @click="printPDF()" class="flex items-center gap-2 px-5 py-2 rounded-full bg-[#3284C6] hover:bg-[#286ca3] text-white text-xs font-bold font-titles transition shadow-md">
+      <i class="fa-solid fa-file-pdf"></i>
+      <span>Exportar a PDF</span>
+    </button>
+  </header>
+
+  <!-- CONTENEDOR DE SLIDES -->
+  <main class="py-8 px-4 flex flex-col items-center">
+
+    <!-- ========================================== -->
+    <!-- SLIDE 1: PORTADA EJECUTIVA                 -->
+    <!-- ========================================== -->
+    <section class="slide-page p-10 relative overflow-hidden" id="slide-1">
+      <!-- Elementos Decorativos -->
+      <div class="absolute top-0 right-0 w-[450px] h-[450px] bg-gradient-to-bl from-[#3284C6]/15 via-[#EB5B27]/10 to-transparent rounded-bl-full pointer-events-none"></div>
+      <div class="absolute -bottom-20 -left-20 w-96 h-96 bg-gradient-to-tr from-[#FECA66]/20 to-transparent rounded-full pointer-events-none"></div>
+
+      <!-- Header Superior -->
+      <div class="flex justify-between items-center z-10">
+        <img src="https://telat.mx/assets/img/logo.png" alt="Logo TELAT Group" class="h-16 object-contain">
+        <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#EB5B27]"></span>
+          <span class="text-sm font-bold tracking-wider text-slate-700 dark:text-slate-200 font-ui uppercase">Documento de Inteligencia Competitiva 2026</span>
+        </div>
+      </div>
+
+      <!-- Contenido Central Maximizado -->
+      <div class="my-auto z-10 max-w-5xl">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#3284C6]/10 text-[#3284C6] font-ui font-bold text-sm mb-4">
+          <i class="fa-solid fa-gem text-base text-[#3284C6]"></i> Strategic Market Intelligence & BPO Boutique Positioning
+        </div>
+        <h1 class="text-4xl lg:text-5xl font-extrabold font-titles text-[#0F172A] dark:text-white leading-tight mb-5">
+          Estudio de Mercado y Benchmark de Competitividad Estratégica
+        </h1>
+        <p class="text-xl font-ui text-slate-600 dark:text-slate-300 mb-8 max-w-4xl leading-relaxed">
+          Análisis comparativo de alta precisión en el sector Contact Center & BPO: Evaluación frente al grupo de contraste directo (5 Arriba / 5 Abajo), concepto "BPO Boutique Nearshore" y matriz canónica de auditoría sustentada en fuentes oficiales.
+        </p>
+
+        <!-- Métricas Clave Portada (Momo en cifras aisladas únicamente) -->
+        <div class="grid grid-cols-4 gap-5 pt-5 border-t border-slate-200 dark:border-slate-700">
+          <div class="p-4 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200 dark:border-slate-700">
+            <span class="text-sm text-slate-500 dark:text-slate-400 font-ui font-bold block mb-1">Capacidad Instalada</span>
+            <span class="font-momo text-4xl text-[#3284C6]">+1,000</span>
+            <span class="text-sm text-slate-600 dark:text-slate-300 block font-ui font-medium mt-1">Estaciones y Colaboradores</span>
+          </div>
+          <div class="p-4 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200 dark:border-slate-700">
+            <span class="text-sm text-slate-500 dark:text-slate-400 font-ui font-bold block mb-1">Muestreo Contrastado</span>
+            <span class="font-momo text-4xl text-[#EB5B27]">11</span>
+            <span class="text-sm text-slate-600 dark:text-slate-300 block font-ui font-medium mt-1">Empresas Evaluadas (5+TELAT+5)</span>
+          </div>
+          <div class="p-4 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200 dark:border-slate-700">
+            <span class="text-sm text-slate-500 dark:text-slate-400 font-ui font-bold block mb-1">Hubs Binacionales</span>
+            <span class="font-momo text-4xl text-[#3284C6]">4</span>
+            <span class="text-sm text-slate-600 dark:text-slate-300 block font-ui font-medium mt-1">CDMX (2), Juárez y El Paso TX</span>
+          </div>
+          <div class="p-4 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200 dark:border-slate-700">
+            <span class="text-sm text-slate-500 dark:text-slate-400 font-ui font-bold block mb-1">Conformidad Normativa</span>
+            <span class="font-momo text-4xl text-[#EB5B27]">100%</span>
+            <span class="text-sm text-slate-600 dark:text-slate-300 block font-ui font-medium mt-1">Multi-ISO & PCI-DSS Compliant</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Slide -->
+      <div class="flex justify-between items-center text-xs text-slate-400 font-ui border-t border-slate-100 dark:border-slate-800 pt-3 z-10">
+        <span>TELAT Group | The Voice of Your Company • <a href="https://telat.mx" target="_blank" class="underline hover:text-[#3284C6]">https://telat.mx</a></span>
+        <span>Slide 01 / 10</span>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 2: MACROENTORNO Y TENDENCIAS SECTOR  -->
+    <!-- ========================================== -->
+    <section class="slide-page p-10 relative" id="slide-2">
+      <!-- Header -->
+      <div class="flex justify-between items-center pb-3 border-b border-slate-200 dark:border-slate-700">
+        <div>
+          <span class="text-xs font-bold text-[#3284C6] uppercase font-ui tracking-wider">Entorno Sectorial Macroeconómico</span>
+          <h2 class="text-2xl lg:text-3xl font-bold font-titles text-slate-900 dark:text-white">Dimensionamiento y Dinámica del Mercado BPO/CX</h2>
+        </div>
+        <img src="https://telat.mx/assets/img/logo.png" alt="TELAT Logo" class="h-9 object-contain">
+      </div>
+
+      <!-- Grid Principal de Datos -->
+      <div class="grid grid-cols-12 gap-6 my-auto items-center">
+        <!-- Columna Izquierda: Datos Macro -->
+        <div class="col-span-5 space-y-4">
+          <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 shadow-sm">
+            <div class="flex justify-between items-start mb-2">
+              <span class="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase font-ui">Masa Laboral Nacional</span>
+              <i class="fa-solid fa-users text-[#3284C6] text-xl"></i>
+            </div>
+            <div class="flex items-baseline gap-3">
+              <span class="font-momo text-5xl text-[#3284C6]">~850K</span>
+              <span class="text-base font-bold text-slate-800 dark:text-slate-100 font-ui">Empleos directos en México</span>
+            </div>
+            <p class="text-sm text-slate-600 dark:text-slate-300 mt-2 font-ui leading-relaxed">
+              Con más de 605,000 estaciones de trabajo instaladas en el país y una concentración del 80% en esquemas BPO tercerizados.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 shadow-sm">
+            <div class="flex justify-between items-start mb-2">
+              <span class="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase font-ui">Eje Principal de Contacto</span>
+              <i class="fa-solid fa-headset text-[#EB5B27] text-xl"></i>
+            </div>
+            <div class="flex items-baseline gap-3">
+              <span class="font-momo text-5xl text-[#EB5B27]">65%</span>
+              <span class="text-base font-bold text-slate-800 dark:text-slate-100 font-ui">Interacciones de Voz en BPO</span>
+            </div>
+            <p class="text-sm text-slate-600 dark:text-slate-300 mt-2 font-ui leading-relaxed">
+              La voz sigue siendo el canal neurálgico de resolución crítica, complementada por omnicanalidad asíncrona y automatización.
+            </p>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Comparativa de Demanda Mercado Nacional vs Extranjero -->
+        <div class="col-span-7 p-6 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 shadow-sm">
+          <h3 class="text-lg font-bold font-titles text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-right-left text-[#3284C6]"></i> Divergencia Estructural de Mercados (Nacional vs. Nearshore)
+          </h3>
+          
+          <div class="grid grid-cols-2 gap-5 font-ui">
+            <!-- Bloque Nacional -->
+            <div class="p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700">
+              <span class="font-bold text-[#3284C6] block text-base mb-3"><i class="fa-solid fa-flag mr-1.5"></i> Mercado Doméstico</span>
+              <ul class="space-y-2 text-sm text-slate-700 dark:text-slate-300">
+                <li class="flex justify-between"><span>Financiero & Banca:</span> <strong class="font-bold text-slate-900 dark:text-white text-base">35%</strong></li>
+                <li class="flex justify-between"><span>Telecomunicaciones:</span> <strong class="font-bold text-slate-900 dark:text-white text-base">21%</strong></li>
+                <li class="flex justify-between"><span>Retail & Consumo:</span> <strong class="font-bold text-slate-900 dark:text-white text-base">11%</strong></li>
+                <li class="pt-2 border-t border-slate-100 dark:border-slate-800 text-xs text-slate-500">
+                  <em>Enfoque:</em> Volumen transaccional masivo, cobranza y telemercadeo Outbound.
+                </li>
+              </ul>
+            </div>
+
+            <!-- Bloque Nearshore/Offshore -->
+            <div class="p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700">
+              <span class="font-bold text-[#EB5B27] block text-base mb-3"><i class="fa-solid fa-globe mr-1.5"></i> Mercado Internacional</span>
+              <ul class="space-y-2 text-sm text-slate-700 dark:text-slate-300">
+                <li class="flex justify-between"><span>Telecomunicaciones:</span> <strong class="font-bold text-slate-900 dark:text-white text-base">26%</strong></li>
+                <li class="flex justify-between"><span>Retail & E-commerce:</span> <strong class="font-bold text-slate-900 dark:text-white text-base">17%</strong></li>
+                <li class="flex justify-between"><span>Customer Service:</span> <strong class="font-bold text-slate-900 dark:text-white text-base">67%</strong></li>
+                <li class="pt-2 border-t border-slate-100 dark:border-slate-800 text-xs text-slate-500">
+                  <em>Enfoque:</em> Especialización bilingüe nativa, soporte técnico e itinerarios CX.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mt-4 p-3 rounded-lg bg-[#3284C6]/10 text-[#3284C6] text-sm font-semibold font-ui">
+            <strong>Oportunidad Estratégica TELAT:</strong> Posicionamiento consolidado en el segmento Nearshore de alto valor gracias al hub Juárez-El Paso y estándares operativos internacionales.
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Slide -->
+      <div class="flex justify-between items-center text-xs text-slate-400 font-ui border-t border-slate-100 dark:border-slate-800 pt-3">
+        <span>Fuente Verificada: <a href="https://imt.com.mx" target="_blank" class="underline hover:text-[#3284C6]">Instituto Mexicano de Teleservicios (IMT, 2025)</a>.</span>
+        <span>Slide 02 / 10</span>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 3: MUESTREO 5 ARRIBA / 5 ABAJO        -->
+    <!-- ========================================== -->
+    <section class="slide-page p-10 relative" id="slide-3">
+      <!-- Header -->
+      <div class="flex justify-between items-center pb-3 border-b border-slate-200 dark:border-slate-700">
+        <div>
+          <span class="text-xs font-bold text-[#3284C6] uppercase font-ui tracking-wider">Metodología de Muestreo de Competitividad Directa</span>
+          <h2 class="text-2xl lg:text-3xl font-bold font-titles text-slate-900 dark:text-white">Segmentación 5 Arriba / 5 Abajo (Ranking Nacional BPO)</h2>
+        </div>
+        <img src="https://telat.mx/assets/img/logo.png" alt="TELAT Logo" class="h-9 object-contain">
+      </div>
+
+      <!-- Contenido Estructura 3 Bloques Formales -->
+      <div class="grid grid-cols-12 gap-5 my-auto items-stretch">
+        
+        <!-- Bloque 1: 5 Arriba (Posiciones 18 - 22) -->
+        <div class="col-span-4 p-5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border-t-4 border-[#3284C6] shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="px-3 py-1 rounded bg-[#3284C6]/10 text-[#3284C6] text-xs font-bold font-ui uppercase tracking-wide">5 Empresas Arriba (Pos. 18-22)</span>
+              <i class="fa-solid fa-arrow-trend-up text-[#3284C6]"></i>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 font-ui mb-3">Empresas inmediatamente superiores en volumen de estaciones operativas:</p>
+            <div class="space-y-1.5 text-xs font-ui">
+              <div class="flex justify-between items-center p-2 bg-white dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-700">
+                <span class="font-semibold text-slate-800 dark:text-slate-200">#18 E-contact (Puebla)</span>
+                <strong class="font-bold text-slate-900 dark:text-white">1,140 est.</strong>
+              </div>
+              <div class="flex justify-between items-center p-2 bg-white dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-700">
+                <span class="font-semibold text-slate-800 dark:text-slate-200">#19 Phonex (CDMX)</span>
+                <strong class="font-bold text-slate-900 dark:text-white">1,100 est.</strong>
+              </div>
+              <div class="flex justify-between items-center p-2 bg-white dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-700">
+                <span class="font-semibold text-slate-800 dark:text-slate-200">#20 CONTACTUS (CDMX)</span>
+                <strong class="font-bold text-slate-900 dark:text-white">1,000 est.</strong>
+              </div>
+              <div class="flex justify-between items-center p-2 bg-white dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-700">
+                <span class="font-semibold text-slate-800 dark:text-slate-200">#21 ASECON (CDMX)</span>
+                <strong class="font-bold text-slate-900 dark:text-white">900 est.</strong>
+              </div>
+              <div class="flex justify-between items-center p-2 bg-white dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-700">
+                <span class="font-semibold text-slate-800 dark:text-slate-200">#22 GTI Bufete Empresarial (CDMX)</span>
+                <strong class="font-bold text-slate-900 dark:text-white">866 est.</strong>
+              </div>
+            </div>
+          </div>
+          <span class="text-[11px] text-slate-400 mt-2 block font-ui"><em>Patrón común:</em> Operación concentrada principalmente en CDMX/Puebla y enfoque doméstico.</span>
+        </div>
+
+        <!-- Bloque 2: Posición TELAT Group (Posición 23) -->
+        <div class="col-span-4 p-5 rounded-xl bg-gradient-to-b from-[#3284C6]/15 via-white to-transparent dark:from-[#3284C6]/20 dark:via-slate-800 dark:to-slate-800 border-2 border-[#EB5B27] shadow-md flex flex-col justify-between relative">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-[#EB5B27] text-white text-[10px] font-bold font-titles uppercase tracking-wider shadow">
+            Posición Central Evaluada
+          </div>
+          <div>
+            <div class="flex items-center justify-between mb-2 mt-1">
+              <span class="px-2.5 py-1 rounded bg-[#EB5B27]/10 text-[#EB5B27] text-xs font-bold font-ui">#23 TELAT Group</span>
+              <span class="font-momo text-xl text-[#EB5B27]">+1,000</span>
+            </div>
+            <h3 class="text-base font-bold font-titles text-slate-900 dark:text-white mb-2">Operador Nearshore Bilingüe Especializado</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-300 font-ui mb-3 leading-relaxed">
+              Capacidad censada de <strong>864 estaciones</strong> en ranking nacional y capacidad instalada superior a <strong>+1,000 estaciones</strong> y colaboradores en 4 facilities.
+            </p>
+            <div class="p-3 bg-white dark:bg-slate-900 rounded-lg border border-[#EB5B27]/30 space-y-1.5 text-xs font-ui">
+              <div class="flex justify-between"><span>Sedes CDMX (2 Hubs):</span> <strong>776 est.</strong></div>
+              <div class="flex justify-between"><span>Hub Cd. Juárez (Chih.):</span> <strong>194 est.</strong></div>
+              <div class="flex justify-between"><span>Hub El Paso (TX, EE. UU.):</span> <strong>52 est.</strong></div>
+              <div class="flex justify-between text-[#3284C6] font-bold pt-1 border-t border-slate-100 dark:border-slate-800">
+                <span>Diferenciador Clave:</span> <span>Presencia Binacional</span>
+              </div>
+            </div>
+          </div>
+          <span class="text-[11px] text-[#EB5B27] font-semibold mt-2 block font-ui">Líder ORO en Exportación de Servicios Offshore 2026.</span>
+        </div>
+
+        <!-- Bloque 3: 5 Abajo (Posiciones 24 - 28) -->
+        <div class="col-span-4 p-5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border-t-4 border-slate-400 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="px-3 py-1 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold font-ui uppercase tracking-wide">5 Empresas Abajo (Pos. 24-28)</span>
+              <i class="fa-solid fa-arrow-trend-down text-slate-500"></i>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 font-ui mb-3">Empresas de escala similar/inmediata en el ranking:</p>
+            <div class="space-y-1.5 text-xs font-ui">
+              <div class="flex justify-between items-center p-2 bg-white dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-700">
+                <span class="font-semibold text-slate-800 dark:text-slate-200">#24 EAD Recuperación (Hgo.)</span>
+                <strong class="font-bold text-slate-900 dark:text-white">800 est.</strong>
+              </div>
+              <div class="flex justify-between items-center p-2 bg-white dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-700">
+                <span class="font-semibold text-slate-800 dark:text-slate-200">#25 MEDMarketing (CDMX)</span>
+                <strong class="font-bold text-slate-900 dark:text-white">800 est.</strong>
+              </div>
+              <div class="flex justify-between items-center p-2 bg-white dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-700">
+                <span class="font-semibold text-slate-800 dark:text-slate-200">#26 COPERVA (CDMX)</span>
+                <strong class="font-bold text-slate-900 dark:text-white">735 est.</strong>
+              </div>
+              <div class="flex justify-between items-center p-2 bg-white dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-700">
+                <span class="font-semibold text-slate-800 dark:text-slate-200">#27 BINOMIA (CDMX)</span>
+                <strong class="font-bold text-slate-900 dark:text-white">700 est.</strong>
+              </div>
+              <div class="flex justify-between items-center p-2 bg-white dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-700">
+                <span class="font-semibold text-slate-800 dark:text-slate-200">#28 CYNTRA (Edo. Méx.)</span>
+                <strong class="font-bold text-slate-900 dark:text-white">700 est.</strong>
+              </div>
+            </div>
+          </div>
+          <span class="text-[11px] text-slate-400 mt-2 block font-ui"><em>Patrón común:</em> Alta especialización en nichos locales (cobranza, salud o telemarketing).</span>
+        </div>
+
+      </div>
+
+      <!-- Footer Slide -->
+      <div class="flex justify-between items-center text-xs text-slate-400 font-ui border-t border-slate-100 dark:border-slate-800 pt-3">
+        <span>Fuente Verificada: Ranking Oficial Nacional de Empresas BPO (IMT, 2025).</span>
+        <span>Slide 03 / 10</span>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 4: CONCEPTO BPO BOUTIQUE NEARSHORE   -->
+    <!-- ========================================== -->
+    <section class="slide-page p-10 relative overflow-hidden" id="slide-4">
+      <!-- Header -->
+      <div class="flex justify-between items-center pb-3 border-b border-slate-200 dark:border-slate-700">
+        <div>
+          <span class="text-xs font-bold text-[#EB5B27] uppercase font-ui tracking-wider"><i class="fa-solid fa-gem mr-1"></i> Posicionamiento de Valor Agregado</span>
+          <h2 class="text-2xl lg:text-3xl font-bold font-titles text-slate-900 dark:text-white">El Concepto "BPO Boutique Nearshore": El Sweet Spot de la Industria</h2>
+        </div>
+        <img src="https://telat.mx/assets/img/logo.png" alt="TELAT Logo" class="h-9 object-contain">
+      </div>
+
+      <!-- 4 Pilares del BPO Boutique -->
+      <div class="grid grid-cols-4 gap-4 my-auto">
+        
+        <!-- Pilar 1 -->
+        <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border-t-4 border-[#3284C6] shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-[#3284C6]/15 flex items-center justify-center text-[#3284C6] text-xl mb-3">
+              <i class="fa-solid fa-user-tie"></i>
+            </div>
+            <h3 class="font-titles font-bold text-base text-slate-900 dark:text-white mb-2">1. Atención Directa C-Suite</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-300 font-ui leading-relaxed">
+              Línea abierta permanente con la Alta Dirección Operativa. Resoluciones estratégicas y ajustes de campaña en <strong>horas, no en semanas</strong>.
+            </p>
+          </div>
+          <span class="text-[11px] text-[#3284C6] font-bold mt-3 block font-ui">Sin burocracia corporativa.</span>
+        </div>
+
+        <!-- Pilar 2 -->
+        <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border-t-4 border-[#EB5B27] shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-[#EB5B27]/15 flex items-center justify-center text-[#EB5B27] text-xl mb-3">
+              <i class="fa-solid fa-sliders"></i>
+            </div>
+            <h3 class="font-titles font-bold text-base text-slate-900 dark:text-white mb-2">2. Traje a la Medida (Tailored CX)</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-300 font-ui leading-relaxed">
+              Arquitectura de flujos, integraciones CRM y KPIs adaptadas 100% a la operativa del cliente. <strong>Cero scripts rígidos preseteados</strong>.
+            </p>
+          </div>
+          <span class="text-[11px] text-[#EB5B27] font-bold mt-3 block font-ui">Flexibilidad operativa absoluta.</span>
+        </div>
+
+        <!-- Pilar 3 -->
+        <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border-t-4 border-[#FECA66] shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-[#FECA66]/20 flex items-center justify-center text-amber-600 text-xl mb-3">
+              <i class="fa-solid fa-headset"></i>
+            </div>
+            <h3 class="font-titles font-bold text-base text-slate-900 dark:text-white mb-2">3. Operaciones de Alto Valor</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-300 font-ui leading-relaxed">
+              Especialización en soporte técnico bilingüe nativo, resolución FCR e interacciones complejas. <strong>Calidad sobre volumen masivo de bajo margen</strong>.
+            </p>
+          </div>
+          <span class="text-[11px] text-amber-600 font-bold mt-3 block font-ui">Prioridad a la experiencia VIP.</span>
+        </div>
+
+        <!-- Pilar 4 -->
+        <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border-t-4 border-emerald-500 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-emerald-500/15 flex items-center justify-center text-emerald-600 text-xl mb-3">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h3 class="font-titles font-bold text-base text-slate-900 dark:text-white mb-2">4. Blindaje de Multinacional</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-300 font-ui leading-relaxed">
+              Respaldo institucional de <strong>6 certificaciones ISO, PCI-DSS, Data Center Kio Querétaro y Hub Binacional (CDMX / Juárez / El Paso TX)</strong>.
+            </p>
+          </div>
+          <span class="text-[11px] text-emerald-600 font-bold mt-3 block font-ui">Certidumbre jurídica total.</span>
+        </div>
+
+      </div>
+
+      <!-- Cuadro Comparativo de Posicionamiento -->
+      <div class="p-4 rounded-xl bg-slate-900 text-white font-ui border border-slate-800 grid grid-cols-12 gap-4 items-center shadow-md">
+        <div class="col-span-3 text-center border-r border-slate-800 pr-3">
+          <span class="text-[11px] text-slate-400 uppercase block font-titles">BPO Masivo (>3,500 pos)</span>
+          <span class="text-xs text-slate-300">Cliente = Número de Cuenta • Burocracia Rígida</span>
+        </div>
+        <div class="col-span-6 text-center px-3 bg-[#3284C6]/20 py-2 rounded-lg border border-[#3284C6]/40">
+          <span class="font-titles font-extrabold text-sm text-[#FECA66] uppercase block">TELAT Group: El Sweet Spot BPO Boutique (+1,000 pos)</span>
+          <span class="text-xs text-white">Escala Robusta + Certificaciones ISO + Trato Directivo VIP + Velocidad Nearshore</span>
+        </div>
+        <div class="col-span-3 text-center border-l border-slate-800 pl-3">
+          <span class="text-[11px] text-slate-400 uppercase block font-titles">BPO Nicho Local (<700 pos)</span>
+          <span class="text-xs text-slate-300">Sin ISOs • Sin Ciberseguridad PCI • Sin Bilingüismo</span>
+        </div>
+      </div>
+
+      <!-- Footer Slide -->
+      <div class="flex justify-between items-center text-xs text-slate-400 font-ui border-t border-slate-100 dark:border-slate-800 pt-3">
+        <span>TELAT Group | Dirección General y Estrategia Corporativa 2026</span>
+        <span>Slide 04 / 10</span>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 5: BENCHMARK CANÓNICO DE AUDITORÍA   -->
+    <!-- ========================================== -->
+    <section class="slide-page p-8 relative" id="slide-5">
+      <!-- Header -->
+      <div class="flex justify-between items-center pb-2 border-b border-slate-200 dark:border-slate-700">
+        <div>
+          <span class="text-xs font-bold text-[#3284C6] uppercase font-ui tracking-wider">Matriz Normativa de Evaluación de Mercado</span>
+          <h2 class="text-xl lg:text-2xl font-bold font-titles text-slate-900 dark:text-white">Benchmark Estructurado de 14 Dimensiones (Evaluación Normativa BPO)</h2>
+        </div>
+        <img src="https://telat.mx/assets/img/logo.png" alt="TELAT Logo" class="h-8 object-contain">
+      </div>
+
+      <!-- Tabla Canónica de Auditoría (14 Puntos Completos) -->
+      <div class="my-auto overflow-hidden rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm bg-white dark:bg-slate-900">
+        <div class="max-h-[580px] overflow-y-auto">
+          <table class="w-full text-left text-xs font-ui">
+            <thead class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 uppercase font-titles font-bold text-[11px] sticky top-0 z-10 shadow-sm">
+              <tr>
+                <th class="p-2 w-1/5"><i class="fa-solid fa-list-check text-[#3284C6] mr-1"></i> Elemento de Evaluación</th>
+                <th class="p-2 w-1/5">Empresa Líder (Top BPO)</th>
+                <th class="p-2 w-1/5">Competidor Par (5+5)</th>
+                <th class="p-2 w-1/5 bg-[#3284C6]/15 text-[#3284C6] font-extrabold">TELAT Group (Nuestra Empresa)</th>
+                <th class="p-2 w-1/5 text-emerald-700 dark:text-emerald-400 font-extrabold"><i class="fa-solid fa-lightbulb text-emerald-500 mr-1"></i> Insight Estratégico</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 dark:divide-slate-700 text-slate-700 dark:text-slate-200 text-[11px]">
+              
+              <!-- 1. Sites -->
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                <td class="p-1.5 font-bold text-slate-900 dark:text-white flex items-center gap-1.5"><i class="fa-solid fa-building-user text-[#3284C6]"></i> Número de Sites</td>
+                <td class="p-1.5">12 Sites</td>
+                <td class="p-1.5">5 Sites</td>
+                <td class="p-1.5 bg-[#3284C6]/5 font-bold text-[#3284C6]">4 Sites (2 CDMX, Juárez, El Paso TX)</td>
+                <td class="p-1.5 text-emerald-700 dark:text-emerald-400 font-semibold"><i class="fa-solid fa-arrow-trend-up mr-1"></i> Incrementar presencia regional binacional</td>
+              </tr>
+
+              <!-- 2. Cobertura -->
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                <td class="p-1.5 font-bold text-slate-900 dark:text-white flex items-center gap-1.5"><i class="fa-solid fa-globe text-[#3284C6]"></i> Cobertura Geográfica</td>
+                <td class="p-1.5">Nacional / Multiregión</td>
+                <td class="p-1.5">Regional</td>
+                <td class="p-1.5 bg-[#3284C6]/5 font-bold text-slate-900 dark:text-white">Multisede Binacional (MX + EE. UU.)</td>
+                <td class="p-1.5 text-emerald-700 dark:text-emerald-400 font-semibold"><i class="fa-solid fa-location-dot mr-1"></i> Expandir cobertura comercial Nearshore</td>
+              </tr>
+
+              <!-- 3. Clientes Gobierno -->
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                <td class="p-1.5 font-bold text-slate-900 dark:text-white flex items-center gap-1.5"><i class="fa-solid fa-landmark text-[#3284C6]"></i> Clientes de Gobierno</td>
+                <td class="p-1.5">15 Cuentas</td>
+                <td class="p-1.5">5 Cuentas</td>
+                <td class="p-1.5 bg-[#3284C6]/5 font-bold text-slate-900 dark:text-white">3 Cuentas Públicas/Mixtas</td>
+                <td class="p-1.5 text-emerald-700 dark:text-emerald-400 font-semibold"><i class="fa-solid fa-users-gear mr-1"></i> Participación selectiva en sector público</td>
+              </tr>
+
+              <!-- 4. Clientes Corp -->
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                <td class="p-1.5 font-bold text-slate-900 dark:text-white flex items-center gap-1.5"><i class="fa-solid fa-briefcase text-[#3284C6]"></i> Clientes Corporativos</td>
+                <td class="p-1.5">80 Cuentas</td>
+                <td class="p-1.5">40 Cuentas</td>
+                <td class="p-1.5 bg-[#3284C6]/5 font-bold text-[#EB5B27]">+30 Cuentas Corporativas Int.</td>
+                <td class="p-1.5 text-emerald-700 dark:text-emerald-400 font-semibold"><i class="fa-solid fa-chart-pie mr-1"></i> Diversificar cartera empresarial Nearshore</td>
+              </tr>
+
+              <!-- 5. Sectores -->
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                <td class="p-1.5 font-bold text-slate-900 dark:text-white flex items-center gap-1.5"><i class="fa-solid fa-industry text-[#3284C6]"></i> Sectores Atendidos</td>
+                <td class="p-1.5">8 Sectores</td>
+                <td class="p-1.5">5 Sectores</td>
+                <td class="p-1.5 bg-[#3284C6]/5 font-bold text-slate-900 dark:text-white">5 Sectores Estratégicos</td>
+                <td class="p-1.5 text-emerald-700 dark:text-emerald-400 font-semibold"><i class="fa-solid fa-magnifying-glass mr-1"></i> Explorar industrias de alto margen</td>
+              </tr>
+
+              <!-- 6. Número Agentes -->
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                <td class="p-1.5 font-bold text-slate-900 dark:text-white flex items-center gap-1.5"><i class="fa-solid fa-users text-[#3284C6]"></i> Número de Agentes</td>
+                <td class="p-1.5">3,500 Agentes</td>
+                <td class="p-1.5">1,200 Agentes</td>
+                <td class="p-1.5 bg-[#3284C6]/5 font-bold text-[#3284C6]">+1,000 Estaciones/Colaboradores</td>
+                <td class="p-1.5 text-emerald-700 dark:text-emerald-400 font-semibold"><i class="fa-solid fa-cubes mr-1"></i> Escalabilidad modular de capacidad</td>
+              </tr>
+
+              <!-- 7. Modalidad -->
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                <td class="p-1.5 font-bold text-slate-900 dark:text-white flex items-center gap-1.5"><i class="fa-solid fa-house-laptop text-[#3284C6]"></i> Modalidad de Trabajo</td>
+                <td class="p-1.5">Híbrido 80%</td>
+                <td class="p-1.5">Híbrido 50%</td>
+                <td class="p-1.5 bg-[#3284C6]/5 font-bold text-slate-900 dark:text-white">Híbrido 60% / On-Site 40% (Seguridad)</td>
+                <td class="p-1.5 text-emerald-700 dark:text-emerald-400 font-semibold"><i class="fa-solid fa-laptop-code mr-1"></i> Flexibilidad laboral con cerco PCI</td>
+              </tr>
+
+              <!-- 8. Sueldo -->
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                <td class="p-1.5 font-bold text-slate-900 dark:text-white flex items-center gap-1.5"><i class="fa-solid fa-sack-dollar text-[#3284C6]"></i> Sueldo Promedio Agente</td>
+                <td class="p-1.5">$15,000 MXN</td>
+                <td class="p-1.5">$13,000 MXN</td>
+                <td class="p-1.5 bg-[#3284C6]/5 font-bold text-[#EB5B27]">$15,500 MXN (Bilingüe Nativo)</td>
+                <td class="p-1.5 text-emerald-700 dark:text-emerald-400 font-semibold"><i class="fa-solid fa-dollar-sign mr-1"></i> Mantener competitividad salarial fronteriza</td>
+              </tr>
+
+              <!-- 9. Bono -->
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                <td class="p-1.5 font-bold text-slate-900 dark:text-white flex items-center gap-1.5"><i class="fa-solid fa-gift text-[#3284C6]"></i> Bono Promedio por KPI</td>
+                <td class="p-1.5">$5,000 MXN</td>
+                <td class="p-1.5">$3,000 MXN</td>
+                <td class="p-1.5 bg-[#3284C6]/5 font-bold text-slate-900 dark:text-white">$3,800 MXN (FCR / CSAT / Adherencia)</td>
+                <td class="p-1.5 text-emerald-700 dark:text-emerald-400 font-semibold"><i class="fa-solid fa-award mr-1"></i> Optimizar incentivos por desempeño</td>
+              </tr>
+
+              <!-- 10. Prestaciones -->
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                <td class="p-1.5 font-bold text-slate-900 dark:text-white flex items-center gap-1.5"><i class="fa-solid fa-hand-holding-heart text-[#3284C6]"></i> Prestaciones al Personal</td>
+                <td class="p-1.5">Amplias / Ley +</td>
+                <td class="p-1.5">Intermedias</td>
+                <td class="p-1.5 bg-[#3284C6]/5 font-bold text-[#3284C6]">Superiores a Ley + SGMM + ESR</td>
+                <td class="p-1.5 text-emerald-700 dark:text-emerald-400 font-semibold"><i class="fa-solid fa-shield-heart mr-1"></i> Reforzar propuesta de valor al empleado (EVP)</td>
+              </tr>
+
+              <!-- 11. Herramientas -->
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                <td class="p-1.5 font-bold text-slate-900 dark:text-white flex items-center gap-1.5"><i class="fa-solid fa-desktop text-[#3284C6]"></i> Herramientas TI</td>
+                <td class="p-1.5">CRM, WFM, QA, BI, IA Gen</td>
+                <td class="p-1.5">CRM, WFM, QA</td>
+                <td class="p-1.5 bg-[#3284C6]/5 font-bold text-slate-900 dark:text-white">CRM, WFM (NICE/Panóptico), QA, BI, Speech Analytics</td>
+                <td class="p-1.5 text-emerald-700 dark:text-emerald-400 font-semibold"><i class="fa-solid fa-gears mr-1"></i> Integrar analítica avanzada y copilotos IA</td>
+              </tr>
+
+              <!-- 12. Uso IA -->
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                <td class="p-1.5 font-bold text-slate-900 dark:text-white flex items-center gap-1.5"><i class="fa-solid fa-brain text-[#3284C6]"></i> Uso de Inteligencia Artificial</td>
+                <td class="p-1.5">Alto</td>
+                <td class="p-1.5">Medio</td>
+                <td class="p-1.5 bg-[#3284C6]/5 font-bold text-slate-900 dark:text-white">Medio-Alto (Assist & Virtual Agents)</td>
+                <td class="p-1.5 text-emerald-700 dark:text-emerald-400 font-semibold"><i class="fa-solid fa-robot mr-1"></i> Ampliar automatización en tiempo real</td>
+              </tr>
+
+              <!-- 13. Canales -->
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                <td class="p-1.5 font-bold text-slate-900 dark:text-white flex items-center gap-1.5"><i class="fa-solid fa-comments text-[#3284C6]"></i> Canales de Atención</td>
+                <td class="p-1.5">Voz, Chat, WA, Email, RRSS, Video</td>
+                <td class="p-1.5">Voz, Chat, WA, Email</td>
+                <td class="p-1.5 bg-[#3284C6]/5 font-bold text-[#EB5B27]">Voz (65%), Chat, WA, Email, Ticket Portal</td>
+                <td class="p-1.5 text-emerald-700 dark:text-emerald-400 font-semibold"><i class="fa-solid fa-headset mr-1"></i> Potenciar canales digitales asíncronos</td>
+              </tr>
+
+              <!-- 14. Certificaciones -->
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 bg-emerald-50/40 dark:bg-emerald-950/20">
+                <td class="p-1.5 font-bold text-slate-900 dark:text-white flex items-center gap-1.5"><i class="fa-solid fa-star text-[#FECA66]"></i> Certificaciones</td>
+                <td class="p-1.5">ISO 9001, ISO 27001, CIC</td>
+                <td class="p-1.5">ISO 9001</td>
+                <td class="p-1.5 bg-[#3284C6]/15 font-bold text-[#3284C6]">6 ISOs (9001,27001,22301,20000,37001,18295) + PCI + ESR</td>
+                <td class="p-1.5 text-emerald-700 dark:text-emerald-400 font-bold"><i class="fa-solid fa-circle-check text-emerald-500 mr-1"></i> Liderazgo total en gobernanza y compliance</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+
+      <!-- Footer Slide -->
+      <div class="flex justify-between items-center text-xs text-slate-400 font-ui border-t border-slate-100 dark:border-slate-800 pt-2">
+        <span>Fuente Verificada: Matriz Canónica de Auditoría de Mercado BPO (2026).</span>
+        <span>Slide 05 / 10</span>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 6: INFRAESTRUCTURA Y GOBERNANZA      -->
+    <!-- ========================================== -->
+    <section class="slide-page p-10 relative" id="slide-6">
+      <!-- Header -->
+      <div class="flex justify-between items-center pb-3 border-b border-slate-200 dark:border-slate-700">
+        <div>
+          <span class="text-xs font-bold text-[#3284C6] uppercase font-ui tracking-wider">Gobernanza y Continuidad de Negocio</span>
+          <h2 class="text-2xl lg:text-3xl font-bold font-titles text-slate-900 dark:text-white">Blindaje Normativo, Seguridad y Reconocimientos</h2>
+        </div>
+        <img src="https://telat.mx/assets/img/logo.png" alt="TELAT Logo" class="h-9 object-contain">
+      </div>
+
+      <!-- Contenido Ampliado -->
+      <div class="grid grid-cols-12 gap-6 my-auto">
+        <!-- Ecosistema Normativo ISO -->
+        <div class="col-span-7 space-y-3">
+          <h3 class="text-lg font-bold font-titles text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+            <i class="fa-solid fa-shield-halved text-[#3284C6]"></i> Certificaciones Internacionales Vigentes
+          </h3>
+          <div class="grid grid-cols-3 gap-3 text-sm font-ui">
+            <div class="p-3.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-center">
+              <span class="font-bold text-slate-900 dark:text-white block text-base">ISO 9001:2015</span>
+              <span class="text-xs text-slate-500">Gestión de Calidad</span>
+            </div>
+            <div class="p-3.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-center">
+              <span class="font-bold text-slate-900 dark:text-white block text-base">ISO 27001:2022</span>
+              <span class="text-xs text-slate-500">Seguridad Información</span>
+            </div>
+            <div class="p-3.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-center">
+              <span class="font-bold text-slate-900 dark:text-white block text-base">ISO 22301:2019</span>
+              <span class="text-xs text-slate-500">Continuidad Negocio</span>
+            </div>
+            <div class="p-3.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-center">
+              <span class="font-bold text-slate-900 dark:text-white block text-base">ISO 20000-1</span>
+              <span class="text-xs text-slate-500">Servicios de TI</span>
+            </div>
+            <div class="p-3.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-center">
+              <span class="font-bold text-slate-900 dark:text-white block text-base">ISO 37001</span>
+              <span class="text-xs text-slate-500">Sistema Antisoborno</span>
+            </div>
+            <div class="p-3.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-center">
+              <span class="font-bold text-slate-900 dark:text-white block text-base">ISO 18295-1</span>
+              <span class="text-xs text-slate-500">Centros de Contacto</span>
+            </div>
+          </div>
+          <div class="flex items-center justify-between p-3.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-ui">
+            <span class="font-semibold text-slate-700 dark:text-slate-200"><i class="fa-solid fa-lock text-[#EB5B27] mr-1.5"></i> PCI-DSS Compliant & Distintivo ESR</span>
+            <span class="text-xs text-slate-500">En proceso 2026: ISO 37301 y GDPR / Privacidad</span>
+          </div>
+        </div>
+
+        <!-- Reconocimientos de Industria -->
+        <div class="col-span-5 p-5 rounded-xl bg-gradient-to-br from-[#EB5B27]/10 via-slate-50 to-transparent dark:from-[#EB5B27]/20 dark:to-slate-800 border border-[#EB5B27]/30 flex flex-col justify-between shadow-sm">
+          <div>
+            <h3 class="text-lg font-bold font-titles text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+              <i class="fa-solid fa-trophy text-[#FECA66] text-xl"></i> Distinciones de Excelencia en CX
+            </h3>
+            <div class="space-y-3 font-ui">
+              <div class="p-3.5 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700">
+                <span class="px-2.5 py-0.5 rounded bg-[#FECA66]/20 text-[#EB5B27] font-bold text-xs uppercase">Galardón de Oro 2026</span>
+                <p class="font-bold text-slate-900 dark:text-white text-sm mt-1">Mejor Estrategia de Servicios Offshore</p>
+                <p class="text-xs text-slate-500">Caso: "Flipping Titles" (Atención y operaciones al mercado de EE. UU.)</p>
+              </div>
+
+              <div class="p-3.5 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700">
+                <span class="px-2.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold text-xs uppercase">Galardón de Bronce 2026</span>
+                <p class="font-bold text-slate-900 dark:text-white text-sm mt-1">Responsabilidad Social Empresarial</p>
+                <p class="text-xs text-slate-500">Caso: "La Voz de Quien no Tiene Voz"</p>
+              </div>
+            </div>
+          </div>
+          <span class="text-xs text-slate-500 font-ui mt-2 block">Reconocimiento continuo en categoría Offshore (2023, 2024, 2025 y 2026).</span>
+        </div>
+      </div>
+
+      <!-- Footer Slide -->
+      <div class="flex justify-between items-center text-xs text-slate-400 font-ui border-t border-slate-100 dark:border-slate-800 pt-3">
+        <span>Fuente Verificada: <a href="https://www.iso.org/standard/82875.html" target="_blank" class="underline hover:text-[#3284C6]">ISO 27001 (2022)</a> & <a href="https://premionacionalcx.com.mx" target="_blank" class="underline hover:text-[#3284C6]">Premio Nacional CX</a>.</span>
+        <span>Slide 06 / 10</span>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 7: FODA ROBUSTO (4 PUNTOS X CUADRANTE) -->
+    <!-- ========================================== -->
+    <section class="slide-page p-10 relative" id="slide-7">
+      <!-- Header -->
+      <div class="flex justify-between items-center pb-2.5 border-b border-slate-200 dark:border-slate-700">
+        <div>
+          <span class="text-xs font-bold text-[#3284C6] uppercase font-ui tracking-wider">Diagnóstico Estratégico Integral</span>
+          <h2 class="text-2xl lg:text-3xl font-bold font-titles text-slate-900 dark:text-white">Matriz DAFO / FODA Enriquecida por el Benchmark 5 vs. 5</h2>
+        </div>
+        <img src="https://telat.mx/assets/img/logo.png" alt="TELAT Logo" class="h-9 object-contain">
+      </div>
+
+      <!-- Cuadrícula DAFO 4 Puntos por Cuadrante -->
+      <div class="grid grid-cols-2 gap-4 my-auto text-xs font-ui">
+        
+        <!-- FORTALEZAS (4 Puntos) -->
+        <div class="p-3.5 rounded-xl bg-emerald-50/60 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800/40">
+          <div class="flex items-center gap-2 mb-2 text-emerald-700 dark:text-emerald-400 font-bold font-titles text-sm">
+            <i class="fa-solid fa-circle-check"></i> FORTALEZAS (INTERNAS)
+          </div>
+          <ul class="space-y-1.5 text-slate-800 dark:text-slate-200">
+            <li>• <strong>Corredor Estratégico Binacional:</strong> Hubs en CDMX, Cd. Juárez y El Paso con dominio cultural bilingüe nativo.</li>
+            <li>• <strong>Gobernanza Multicertificada:</strong> 6 normas ISO activas, PCI-DSS y reconocimiento Oro Offshore 2026.</li>
+            <li>• <strong>Infraestructura TI de Alta Resiliencia:</strong> Data Center Kio Querétaro, redundancia Dallas/Houston y HA.</li>
+            <li>• <strong>Agilidad y Flexibilidad Operativa:</strong> Estructura directiva cercana con capacidad de adaptación inmediata.</li>
+          </ul>
+        </div>
+
+        <!-- OPORTUNIDADES (4 Puntos) -->
+        <div class="p-3.5 rounded-xl bg-blue-50/60 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800/40">
+          <div class="flex items-center gap-2 mb-2 text-[#3284C6] font-bold font-titles text-sm">
+            <i class="fa-solid fa-arrow-trend-up"></i> OPORTUNIDADES (EXTERNAS)
+          </div>
+          <ul class="space-y-1.5 text-slate-800 dark:text-slate-200">
+            <li>• <strong>Auge de Relocalización Nearshore:</strong> Creciente demanda de corporativos de EE. UU. por operadores en México.</li>
+            <li>• <strong>Migración a Servicios de Alto Valor:</strong> Oportunidad de captar cuentas técnicas que buscan FCR sobre volumen.</li>
+            <li>• <strong>Incorporación de IA Asistida y Speech Analytics:</strong> Potenciación del agente bilingüe con copilotos en tiempo real.</li>
+            <li>• <strong>Captura de Clientes Desatendidos:</strong> Atracción de clientes de BPO masivos que buscan atención personalizada.</li>
+          </ul>
+        </div>
+
+        <!-- DEBILIDADES (4 Puntos) -->
+        <div class="p-3.5 rounded-xl bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800/40">
+          <div class="flex items-center gap-2 mb-2 text-amber-700 dark:text-amber-400 font-bold font-titles text-sm">
+            <i class="fa-solid fa-triangle-exclamation"></i> DEBILIDADES / LIMITANTES
+          </div>
+          <ul class="space-y-1.5 text-slate-800 dark:text-slate-200">
+            <li>• <strong>Volumen Físico vs. BPOs Masivos:</strong> Capacidad menor respecto a operadores de +3,000 posiciones.</li>
+            <li>• <strong>Curvas de Reclutamiento Especializado:</strong> Tiempos de contratación más exigentes por perfil bilingüe C1/C2.</li>
+            <li>• <strong>Adopción Progresiva de Inteligencia Artificial:</strong> Necesidad de acelerar el despliegue de agentes virtuales front-end.</li>
+            <li>• <strong>Penetración en Cuentas Estatales/Gobierno:</strong> Menor presencia en licitaciones masivas de sector público local.</li>
+          </ul>
+        </div>
+
+        <!-- AMENAZAS (4 Puntos) -->
+        <div class="p-3.5 rounded-xl bg-rose-50/60 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-800/40">
+          <div class="flex items-center gap-2 mb-2 text-rose-700 dark:text-rose-400 font-bold font-titles text-sm">
+            <i class="fa-solid fa-shield-virus"></i> AMENAZAS (EXTERNAS)
+          </div>
+          <ul class="space-y-1.5 text-slate-800 dark:text-slate-200">
+            <li>• <strong>Presión Salarial y Guerra de Talento:</strong> Alta competencia de sueldos en la frontera (Cd. Juárez / El Paso).</li>
+            <li>• <strong>Rotación Estructural de la Industria:</strong> Desgaste del personal operativo en temporadas de alta demanda.</li>
+            <li>• <strong>Guerra de Tarifas de Competidores Locales:</strong> Operadores de bajo costo que compiten sacrificando calidad e ISOs.</li>
+            <li>• <strong>Volatilidad Cambiaria y Regulatoria:</strong> Variaciones en tipo de cambio USD/MXN y nuevas leyes laborales.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Footer Slide -->
+      <div class="flex justify-between items-center text-xs text-slate-400 font-ui border-t border-slate-100 dark:border-slate-800 pt-3">
+        <span>Fuente Verificada: Matriz DAFO de Alta Resolución (TELAT Advisory, 2026).</span>
+        <span>Slide 07 / 10</span>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 8: GAP ANALYSIS Y HOJA DE RUTA       -->
+    <!-- ========================================== -->
+    <section class="slide-page p-10 relative" id="slide-8">
+      <!-- Header -->
+      <div class="flex justify-between items-center pb-3 border-b border-slate-200 dark:border-slate-700">
+        <div>
+          <span class="text-xs font-bold text-[#3284C6] uppercase font-ui tracking-wider">Plan Estratégico de Cierre</span>
+          <h2 class="text-2xl lg:text-3xl font-bold font-titles text-slate-900 dark:text-white">Análisis de Brechas (Gap Analysis) y Hoja de Ruta</h2>
+        </div>
+        <img src="https://telat.mx/assets/img/logo.png" alt="TELAT Logo" class="h-9 object-contain">
+      </div>
+
+      <!-- Tabla de Gap Analysis Ampliada -->
+      <div class="my-auto overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+        <table class="w-full text-left text-sm font-ui">
+          <thead class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 uppercase font-titles font-bold text-xs">
+            <tr>
+              <th class="p-3.5">Brecha Identificada</th>
+              <th class="p-3.5">Estándar del Benchmark (5+5)</th>
+              <th class="p-3.5 text-[#3284C6]">Iniciativa Estratégica TELAT</th>
+              <th class="p-3.5">Meta / KPI</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200 dark:divide-slate-700 text-slate-700 dark:text-slate-200">
+            <tr>
+              <td class="p-3.5 font-bold text-slate-900 dark:text-white">1. Volumen de Estaciones</td>
+              <td class="p-3.5">Operadores top alcanzan >1,100 estaciones físicas</td>
+              <td class="p-3.5 text-[#3284C6] font-semibold">Expansión modular híbrida y ampliación de posiciones frontera</td>
+              <td class="p-3.5 font-bold text-slate-900 dark:text-white">+1,200 estaciones activas</td>
+            </tr>
+            <tr>
+              <td class="p-3.5 font-bold text-slate-900 dark:text-white">2. Asistencia con IA (Agent Assist)</td>
+              <td class="p-3.5">49% del sector invirtiendo en copilotos de agente</td>
+              <td class="p-3.5 text-[#3284C6] font-semibold">Despliegue de Speech/Text Analytics y sugerencias automáticas</td>
+              <td class="p-3.5 font-bold text-slate-900 dark:text-white">FCR > 85% en campañas Nearshore</td>
+            </tr>
+            <tr>
+              <td class="p-3.5 font-bold text-slate-900 dark:text-white">3. Retención de Talento Bilingüe</td>
+              <td class="p-3.5">Presión salarial e índice de rotación en zona norte</td>
+              <td class="p-3.5 text-[#3284C6] font-semibold">Plan de carrera, salario emocional y programas de bienestar</td>
+              <td class="p-3.5 font-bold text-slate-900 dark:text-white">Rotación mensual < 4.5%</td>
+            </tr>
+            <tr>
+              <td class="p-3.5 font-bold text-slate-900 dark:text-white">4. Privacidad y Compliance Global</td>
+              <td class="p-3.5">Exigencia internacional de marcos de protección</td>
+              <td class="p-3.5 text-[#3284C6] font-semibold">Conclusión de certificación ISO 37301 y acreditación GDPR</td>
+              <td class="p-3.5 font-bold text-slate-900 dark:text-white">100% Conformidad en auditorías</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Banner de Respaldo -->
+      <div class="flex items-center justify-between p-3.5 rounded-lg bg-[#3284C6]/10 border border-[#3284C6]/30 text-sm font-ui text-[#3284C6]">
+        <span><i class="fa-solid fa-bullseye mr-2"></i><strong>Objetivo de Competitividad:</strong> Consolidar la ventaja de TELAT como el BPO Nearshore de mayor confiabilidad y valor agregado en México.</span>
+        <span class="font-bold">Plan 2026</span>
+      </div>
+
+      <!-- Footer Slide -->
+      <div class="flex justify-between items-center text-xs text-slate-400 font-ui border-t border-slate-100 dark:border-slate-800 pt-3">
+        <span>Fuente Verificada: <a href="https://www.gartner.com" target="_blank" class="underline hover:text-[#3284C6]">Gartner Customer Service Benchmark (2026)</a>.</span>
+        <span>Slide 08 / 10</span>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 9: GOBERNANZA CONTINUA PHVA          -->
+    <!-- ========================================== -->
+    <section class="slide-page p-10 relative" id="slide-9">
+      <!-- Header -->
+      <div class="flex justify-between items-center pb-3 border-b border-slate-200 dark:border-slate-700">
+        <div>
+          <span class="text-xs font-bold text-[#3284C6] uppercase font-ui tracking-wider">Gobernanza y Mejora Continua</span>
+          <h2 class="text-2xl lg:text-3xl font-bold font-titles text-slate-900 dark:text-white">Ciclo Operativo PHVA y Conclusión del Estudio</h2>
+        </div>
+        <img src="https://telat.mx/assets/img/logo.png" alt="TELAT Logo" class="h-9 object-contain">
+      </div>
+
+      <!-- Ciclo PHVA Gráfico Ampliado (Distribución 2x2) -->
+      <div class="grid grid-cols-2 gap-4 my-auto">
+        <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border-l-4 border-[#3284C6] shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-titles font-bold text-base text-[#3284C6]">1. PLANEAR</span>
+              <i class="fa-solid fa-compass text-[#3284C6] text-xl"></i>
+            </div>
+            <p class="text-base text-slate-800 dark:text-slate-200 font-ui leading-relaxed">
+              Integración de los hallazgos del benchmark 14-puntos al Plan Estratégico Anual y actualización de la matriz de riesgos operacionales.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border-l-4 border-[#EB5B27] shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-titles font-bold text-base text-[#EB5B27]">2. HACER</span>
+              <i class="fa-solid fa-gears text-[#EB5B27] text-xl"></i>
+            </div>
+            <p class="text-base text-slate-800 dark:text-slate-200 font-ui leading-relaxed">
+              Despliegue de herramientas de analítica y optimización de programas de capacitación bilingüe en los 4 centros operativos.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border-l-4 border-[#FECA66] shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-titles font-bold text-base text-amber-600">3. VERIFICAR</span>
+              <i class="fa-solid fa-chart-simple text-[#FECA66] text-xl"></i>
+            </div>
+            <p class="text-base text-slate-800 dark:text-slate-200 font-ui leading-relaxed">
+              Monitoreo mensual de SLAs, CSAT, FCR y auditorías de seguridad de datos frente a los estándares de la industria.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border-l-4 border-emerald-500 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-titles font-bold text-base text-emerald-600">4. ACTUAR</span>
+              <i class="fa-solid fa-arrows-rotate text-emerald-500 text-xl"></i>
+            </div>
+            <p class="text-base text-slate-800 dark:text-slate-200 font-ui leading-relaxed">
+              Ejecución de acciones de mejora y ajustes tecnológicos en comités directivos para sostener la ventaja competitiva.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cuadro de Conclusión Ejecutiva -->
+      <div class="p-5 rounded-xl bg-slate-900 text-white font-ui border border-slate-800 flex justify-between items-center shadow-md">
+        <div>
+          <h3 class="font-titles font-bold text-base text-[#FECA66] mb-1">Síntesis Ejecutiva de Competitividad</h3>
+          <p class="text-sm text-slate-300 max-w-4xl leading-relaxed">
+            TELAT Group cuenta con la solidez metodológica, infraestructura tecnológica y gobernanza de calidad requeridas para liderar el segmento de servicios Nearshore bilingües en México y EE. UU.
+          </p>
+        </div>
+        <div class="flex items-center justify-center pl-6">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/15 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-2xl shadow-inner">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Slide -->
+      <div class="flex justify-between items-center text-xs text-slate-400 font-ui border-t border-slate-100 dark:border-slate-800 pt-3">
+        <span>TELAT Group | Dirección General y Estrategia Corporativa 2026 • <a href="https://telat.mx" target="_blank" class="underline hover:text-[#3284C6]">https://telat.mx</a></span>
+        <span>Slide 09 / 10</span>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 10: REFERENCIAS VERIFICADAS REALES   -->
+    <!-- ========================================== -->
+    <section class="slide-page p-10 relative" id="slide-10">
+      <!-- Header -->
+      <div class="flex justify-between items-center pb-3 border-b border-slate-200 dark:border-slate-700">
+        <div>
+          <span class="text-xs font-bold text-[#3284C6] uppercase font-ui tracking-wider">Sustento Metodológico y Normativo</span>
+          <h2 class="text-2xl lg:text-3xl font-bold font-titles text-slate-900 dark:text-white">Referencias</h2>
+        </div>
+        <img src="https://telat.mx/assets/img/logo.png" alt="TELAT Logo" class="h-9 object-contain">
+      </div>
+
+      <!-- Contenido Bibliográfico 2 Columnas con Links 100% Reales y Funcionales -->
+      <div class="grid grid-cols-2 gap-6 my-auto font-ui text-xs text-slate-700 dark:text-slate-200">
+        
+        <!-- Columna Izquierda: Fuentes de Industria y Mercado BPO -->
+        <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-3.5 shadow-sm">
+          <h3 class="text-sm font-bold font-titles text-[#3284C6] border-b border-slate-200 dark:border-slate-700 pb-2 flex items-center gap-2">
+            <i class="fa-solid fa-book text-[#3284C6]"></i> Informes Sectoriales & Censos de Mercado BPO
+          </h3>
+
+          <p class="apa-hanging leading-relaxed">
+            <strong>Instituto Mexicano de Teleservicios. (2025).</strong> <em>Estudios sectoriales, censo nacional de contact centers y Premio Nacional CX</em>. IMT. <a href="https://imt.com.mx" target="_blank" class="text-[#3284C6] underline font-semibold">https://imt.com.mx</a>
+          </p>
+
+          <p class="apa-hanging leading-relaxed">
+            <strong>Premio Nacional CX. (2026).</strong> <em>Galardones de excelencia en relación con clientes, responsabilidad social y exportación offshore</em>. Comité Evaluador. <a href="https://premionacionalcx.com.mx" target="_blank" class="text-[#3284C6] underline font-semibold">https://premionacionalcx.com.mx</a>
+          </p>
+
+          <p class="apa-hanging leading-relaxed">
+            <strong>Frost & Sullivan. (2025).</strong> <em>Customer experience and BPO contact center outsourcing market research</em>. Frost & Sullivan. <a href="https://www.frost.com" target="_blank" class="text-[#3284C6] underline font-semibold">https://www.frost.com</a>
+          </p>
+
+          <p class="apa-hanging leading-relaxed">
+            <strong>Gartner, Inc. (2026).</strong> <em>Customer service & support technology and BPO market benchmark</em>. Gartner. <a href="https://www.gartner.com" target="_blank" class="text-[#3284C6] underline font-semibold">https://www.gartner.com</a>
+          </p>
+        </div>
+
+        <!-- Columna Derecha: Normas Internacionales ISO, PCI & Auditoría Interna -->
+        <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-3.5 shadow-sm">
+          <h3 class="text-sm font-bold font-titles text-[#EB5B27] border-b border-slate-200 dark:border-slate-700 pb-2 flex items-center gap-2">
+            <i class="fa-solid fa-certificate text-[#EB5B27]"></i> Normas Internacionales ISO, Ciberseguridad & Datos TELAT
+          </h3>
+
+          <p class="apa-hanging leading-relaxed">
+            <strong>International Organization for Standardization. (2017).</strong> <em>ISO 18295-1:2017 Customer contact centres — Part 1: Requirements for customer contact centres</em>. ISO. <a href="https://www.iso.org/standard/64738.html" target="_blank" class="text-[#3284C6] underline font-semibold">https://www.iso.org/standard/64738.html</a>
+          </p>
+
+          <p class="apa-hanging leading-relaxed">
+            <strong>International Organization for Standardization. (2022).</strong> <em>ISO/IEC 27001:2022 Information security, cybersecurity and privacy protection</em>. ISO. <a href="https://www.iso.org/standard/82875.html" target="_blank" class="text-[#3284C6] underline font-semibold">https://www.iso.org/standard/82875.html</a>
+          </p>
+
+          <p class="apa-hanging leading-relaxed">
+            <strong>PCI Security Standards Council. (2024).</strong> <em>PCI Data Security Standard (PCI DSS) official portal and compliance guidelines</em> (v4.0). PCI SSC. <a href="https://www.pcisecuritystandards.org" target="_blank" class="text-[#3284C6] underline font-semibold">https://www.pcisecuritystandards.org</a>
+          </p>
+
+          <p class="apa-hanging leading-relaxed">
+            <strong>TELAT Group. (2026).</strong> <em>Sitio oficial corporativo, gobierno institucional y gobernanza binacional</em>. TELAT Group. <a href="https://telat.mx" target="_blank" class="text-[#3284C6] underline font-semibold">https://telat.mx</a>
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Footer Slide -->
+      <div class="flex justify-between items-center text-xs text-slate-400 font-ui border-t border-slate-100 dark:border-slate-800 pt-3">
+        <span>TELAT Group | Dirección General y Estrategia Corporativa 2026 • Referencias</span>
+        <span>Slide 10 / 10</span>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('TELAT Market Study Presentation 2026 (10 Slides Complete Edition) Fully Loaded.');
+    });
+  </script>
+</body>
+</html>
