@@ -1,30 +1,50 @@
-# 💼 Telat Group — Ecosistema de Presentaciones Ejecutivas y VIP
+# 🏛️ Telat Group · Bóveda Central de Presentaciones Ejecutivas
 
-Repositorio dedicado exclusivamente al alojamiento de **Presentaciones Ejecutivas para la Dirección General** y **Propuestas Comerciales Estratégicas para Clientes VIP**.
+Este repositorio contiene la **bóveda canónica y privada** de todas las propuestas comerciales, pliegos técnicos, protocolos de gobernanza WFM y presentaciones institucionales de Telat Group.
 
 ---
 
-## 🏛️ Estructura del Repositorio
+## 🔒 Política de Seguridad & Publicación On-Demand
+
+1. **Privacidad de la Bóveda:** Este repositorio debe permanecer **100% PRIVADO**. No se utiliza GitHub Pages público en este repositorio para evitar la indexación involuntaria de propuestas cruzadas o benchmarks confidenciales.
+2. **Micro-Sitios Públicos Efímeros:** Cuando un cliente específico (ej. TIP México, Movistar, etc.) requiere acceso web público para evaluación directiva, se utiliza el script `scripts/publish_presentation.ps1` para generar un repositorio satélite dedicado (ej. `tip-direccion`) con **única y exclusivamente** el material aprobado para ese cliente.
+3. **Retiro de la Nube:** Una vez formalizado el contrato o cerrada la oportunidad, el micro-sitio satélite se pasa a privado o se archiva.
+
+---
+
+## 📂 Estructura Canónica de la Bóveda
 
 ```text
 presentaciones-ejecutivas/
-├── .nojekyll                           # Publicación instantánea de archivos estáticos
-├── README.md                           # Documentación de arquitectura y gobernanza
-├── index.html                          # Portal de Acceso Institucional Neutro (Sin enlaces listados)
+├── index.html                                        # Portal / Hub Maestro Central
+├── .nojekyll                                         # Prevención de procesamiento Jekyll
 │
-├── Direccion-General/                  # Presentaciones preparadas para la Dirección General
-│   └── [Año]-[Nombre-Presentacion]/
-│       └── index.html
+├── 01-Propuestas-Comerciales/                        # Clientes y Cuentas Estratégicas
+│   ├── TIP-Mexico/                                   # Propuesta, GOC Dashboard, Brief N2A
+│   ├── Instituto-Tecnologico/                        # Propuesta, Consola GOC, Simulador Olas WFM
+│   ├── ViaPath/                                      # Propuesta BPO Global
+│   ├── Driven-Brands-AGN/                            # Solución Automotriz Omnicanal
+│   └── NexGen-Agency/                                # Suite de Inteligencia Operativa & IA
 │
-└── Clientes-Estrategicos/              # Propuestas dedicadas para cuentas clave / VIP
-    └── [Nombre-Cliente-Propuesta]/
-        └── index.html
+├── 02-Direccion-y-Estrategia/                        # Institucional & Ecosistemas
+│   ├── Presentacion-Digitalizacion/                  # Transformación Digital y Ecosistemas
+│   └── Presentacion-Comercial-Telat/                 # Pitch Comercial Macro Telat Group
+│
+├── 03-Operaciones-y-WFM/                             # Gobernanza & Operaciones
+│   └── STB-Late-Approved-2026/                       # Protocolo y Alineación Entradas Tardías
+│
+├── 04-Estudios-y-Benchmarks/                         # Análisis de Industria Confidencial
+│   └── Estudio-Mercado-Competitivo-2026/             # Benchmark de Tarifas y Competidores BPO
+│
+├── docs/                                             # Fichas técnicas y memoria persistente
+│   └── PENDIENTES.md                                 # Hoja de ruta y pendientes
+│
+└── scripts/                                          # Herramientas de automatización
+    └── publish_presentation.ps1                      # Desplegador de micro-sitios públicos
 ```
 
 ---
 
-## 🛡️ Políticas de Confidencialidad y URLs No Listadas
+## 🚀 Cómo Visualizar Localmente
 
-1. **Gobernanza de Accesos:** El archivo principal `index.html` actúa como una carátula institucional de Telat Group y **no lista públicamente** los enlaces a las subcarpetas de la Dirección General ni a las propuestas de Clientes Estratégicos.
-2. **Acceso por Enlace Directo:** Las presentaciones se comparten exclusivamente proporcionando la URL completa y directa al cliente o directivo (ejemplo: `https://morocog.github.io/presentaciones-ejecutivas/Clientes-Estrategicos/Propuesta-Cliente-Alfa/`).
-3. **Branding Oficial:** Todas las presentaciones integradas en este ecosistema deben seguir los estándares de **MEGA PROMPT MAESTRO v10.0** (Google Fonts Montserrat/DM Sans, colores corporativos Telat `#3284C6` y `#EB5B27`, cero empastes tipográficos).
+Abre el archivo `index.html` en cualquier navegador web o utiliza la extensión **Live Server** de VS Code / Antigravity IDE para navegar fluidamente por todas las presentaciones sin necesidad de conexión a internet ni despliegues en la nube.

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telat Group | Pliego Técnico TIP México para Net2Alliance (N2A)</title>
+    
+    <!-- Google Fonts: Montserrat & DM Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --telat-oscuro: #222221;
+            --telat-celeste: #3284C6;
+            --telat-naranja: #EB5B27;
+            --telat-amarillo: #FECA66;
+            --telat-claro: #FBFBFD;
+            --telat-border: #E2E8F0;
+            --telat-muted: #64748B;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: #ECEFF3;
+            color: #1E293B;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, .font-title {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Hoja de Documento en Pantalla con visual de página física */
+        .document-page {
+            background-color: #FFFFFF;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--telat-border);
+            border-radius: 1rem;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 840px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 2.75rem 3.25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 1080px;
+        }
+
+        .pattern-grid {
+            background-image: radial-gradient(rgba(50, 132, 198, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Marca de Agua Ultra Sutil Institucional */
+        .watermark-bg {
+            position: absolute;
+            right: -50px;
+            bottom: -30px;
+            width: 440px;
+            opacity: 0.032; /* 3.2% de opacidad: presencia fantasma ultra sutil */
+            pointer-events: none;
+            z-index: 1;
+            user-select: none;
+        }
+        .watermark-bg img {
+            width: 100%;
+            height: auto;
+            filter: grayscale(100%);
+        }
+
+        .page-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Control Estricto de 2 Páginas en Impresión / PDF */
+        @media print {
+            body {
+                background-color: #FFFFFF !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            .document-page {
+                box-shadow: none !important;
+                border: none !important;
+                border-radius: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                height: 254mm !important;
+                max-height: 254mm !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: space-between !important;
+                page-break-inside: avoid !important;
+            }
+
+            .page-1 {
+                page-break-after: always !important;
+                break-after: page !important;
+            }
+
+            .page-2 {
+                page-break-before: always !important;
+                break-before: page !important;
+            }
+
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            @page {
+                size: letter;
+                margin: 11mm 13mm;
+            }
+        }
+    </style>
+</head>
+<body class="py-6 px-4">
+
+    <!-- Barra Superior Flotante de Acciones -->
+    <div class="max-w-[840px] mx-auto mb-4 flex justify-between items-center no-print">
+        <div class="flex items-center gap-2.5">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold font-title bg-slate-800 text-white shadow-sm">
+                <i class="fa-solid fa-file-pdf text-[#EB5B27]"></i> Telat Executive Dossier
+            </span>
+            <span class="text-xs text-slate-500 font-semibold hidden sm:inline">
+                Formato Calibrado: Exactamente 2 Páginas
+            </span>
+        </div>
+        <button onclick="window.print()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-title font-bold text-xs uppercase tracking-wider bg-[#3284C6] hover:bg-[#286ba3] text-white shadow-md hover:shadow-lg transition-all cursor-pointer">
+            <i class="fa-solid fa-print"></i> Guardar como PDF (2 Págs)
+        </button>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- PÁGINA 1: CONTEXTO, CAPACIDAD, VOLUMETRÍA Y SLAS                     -->
+    <!-- =================================================================== -->
+    <div class="document-page page-1 pattern-grid mb-6">
+        
+        <!-- Marca de Agua Sutil de Fondo (Inspiración Papel Membretado Exec) -->
+        <div class="watermark-bg">
+            <img src="https://telat.mx/assets/img/logo.png" alt="">
+        </div>
+
+        <div class="page-content">
+            <!-- ENCABEZADO INSTITUCIONAL PÁGINA 1 -->
+            <header class="border-b border-slate-200 pb-4 mb-6 flex justify-between items-center">
+                <div class="flex items-center gap-3.5">
+                    <img src="https://telat.mx/assets/img/logo.png" alt="Telat Logo" class="h-9 w-auto object-contain">
+                    <div class="h-7 w-px bg-slate-200"></div>
+                    <div>
+                        <h2 class="font-title font-black text-sm uppercase tracking-wider text-[#222221] leading-none">Telat Group</h2>
+                        <p class="text-[11px] font-bold text-[#EB5B27] tracking-wider uppercase mt-0.5">The Voice of Your Company</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="inline-block px-3 py-1 rounded-md bg-slate-100 border border-slate-200 text-[10.5px] font-bold font-title text-slate-700 uppercase">
+                        CLIENTE: TIP MÉXICO
+                    </div>
+                    <p class="text-[10.5px] text-slate-500 font-semibold mt-0.5">Atención: Net2Alliance (N2A)</p>
+                </div>
+            </header>
+
+            <!-- BANNER DE TITULACIÓN -->
+            <section class="bg-[#222221] text-white rounded-xl p-5 sm:p-6 mb-6 relative overflow-hidden shadow-md">
+                <div class="absolute -right-8 -top-8 w-44 h-44 bg-gradient-to-br from-[#3284C6] to-[#FECA66] opacity-20 rounded-full blur-xl pointer-events-none"></div>
+
+                <div class="relative z-10 space-y-2.5">
+                    <div class="flex items-center gap-2">
+                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black font-title uppercase tracking-wider bg-[#3284C6] text-white">
+                            Pliego de Infraestructura
+                        </span>
+                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold font-title uppercase tracking-wider bg-white/10 text-[#FECA66] border border-[#FECA66]/30">
+                            Atención a Clientes en Vivo
+                        </span>
+                    </div>
+
+                    <h1 class="text-xl sm:text-2xl font-black font-title tracking-tight leading-snug text-white">
+                        Infraestructura Telefónica, DIDs & Conectividad — TIP México
+                    </h1>
+
+                    <p class="text-xs text-slate-300 font-medium leading-relaxed max-w-2xl">
+                        Alineación técnica de la alianza estratégica: <strong class="text-white">Telat Group</strong> (operación BPO & talento en vivo) y <strong class="text-white">Net2Alliance</strong> (telefonía cloud, numeración DID e infraestructura de telecomunicaciones) para la cuenta de TIP México.
+                    </p>
+
+                    <div class="pt-2 flex flex-wrap items-center gap-x-6 gap-y-1.5 text-[11px] text-slate-400 font-medium border-t border-white/10">
+                        <div><i class="fa-solid fa-handshake text-[#3284C6] mr-1"></i> Partner Tecnológico: <strong>Net2Alliance (N2A)</strong></div>
+                        <div><i class="fa-solid fa-headset text-[#EB5B27] mr-1"></i> Operador BPO: <strong>Telat Group</strong></div>
+                        <div><i class="fa-solid fa-car text-[#FECA66] mr-1"></i> Cuenta: <strong>TIP México (Flotas/Leasing)</strong></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 1: MOSAICO DE MÉTRICAS -->
+            <section class="mb-6">
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="w-1.5 h-4 bg-[#3284C6] rounded-full"></div>
+                    <h2 class="text-xs sm:text-sm font-extrabold font-title uppercase tracking-wider text-[#222221]">
+                        1. Dimensionamiento de Demanda y Capacidad en Piso
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-4 gap-3.5">
+                    <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-4 text-center shadow-2xs">
+                        <span class="text-[10.5px] font-bold uppercase tracking-wider text-slate-500 block mb-0.5">Posiciones Piso</span>
+                        <span class="text-2xl font-black font-title text-[#3284C6]">8 FTEs</span>
+                        <span class="text-[10px] text-slate-500 font-medium block mt-0.5">Agentes en Vivo</span>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-4 text-center shadow-2xs">
+                        <span class="text-[10.5px] font-bold uppercase tracking-wider text-slate-500 block mb-0.5">Tráfico Inbound</span>
+                        <span class="text-2xl font-black font-title text-[#EB5B27]">2,800</span>
+                        <span class="text-[10px] text-slate-500 font-medium block mt-0.5">Llamadas / Mes</span>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-4 text-center shadow-2xs">
+                        <span class="text-[10.5px] font-bold uppercase tracking-wider text-slate-500 block mb-0.5">Target Operativo</span>
+                        <span class="text-2xl font-black font-title text-[#222221]">07:00</span>
+                        <span class="text-[10px] text-slate-500 font-medium block mt-0.5">Minutos AHT</span>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-4 text-center shadow-2xs">
+                        <span class="text-[10.5px] font-bold uppercase tracking-wider text-slate-500 block mb-0.5">Carga Horaria</span>
+                        <span class="text-2xl font-black font-title text-emerald-600">51.5 h</span>
+                        <span class="text-[10px] text-slate-500 font-medium block mt-0.5">Semanales en Piso</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 2: VOLUMETRÍA Y SLAS -->
+            <section class="mb-6">
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="w-1.5 h-4 bg-[#EB5B27] rounded-full"></div>
+                    <h2 class="text-xs sm:text-sm font-extrabold font-title uppercase tracking-wider text-[#222221]">
+                        2. Canales de Contacto y Niveles de Servicio (SLAs)
+                    </h2>
+                </div>
+
+                <div class="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead>
+                            <tr class="bg-[#222221] text-white font-title">
+                                <th class="py-3 px-4 uppercase text-[10.5px] tracking-wider">Canal / Indicador</th>
+                                <th class="py-3 px-4 uppercase text-[10.5px] tracking-wider">Demanda Mensual</th>
+                                <th class="py-3 px-4 uppercase text-[10.5px] tracking-wider">Horario de Operación en Vivo</th>
+                                <th class="py-3 px-4 uppercase text-[10.5px] tracking-wider text-right">SLA Contractual</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="bg-white">
+                                <td class="py-3 px-4 font-bold text-slate-900">
+                                    <i class="fa-solid fa-phone text-[#3284C6] mr-1.5"></i> Telefonía Inbound (Voz)
+                                </td>
+                                <td class="py-3 px-4 font-semibold text-slate-700">2,800 llamadas (~80%)</td>
+                                <td class="py-3 px-4 text-slate-600">L-V 08:30 a 18:00 | Sáb 09:00 a 13:00</td>
+                                <td class="py-3 px-4 text-right font-bold text-[#3284C6]">85% atención (ASA ≤ 20s)</td>
+                            </tr>
+                            <tr class="bg-slate-50/50">
+                                <td class="py-3 px-4 font-bold text-slate-900">
+                                    <i class="fa-brands fa-whatsapp text-emerald-600 mr-1.5"></i> WhatsApp Corporativo
+                                </td>
+                                <td class="py-3 px-4 font-semibold text-slate-700">1,000 chats</td>
+                                <td class="py-3 px-4 text-slate-600">L-V 08:30 a 18:00 | Sáb 09:00 a 13:00</td>
+                                <td class="py-3 px-4 text-right font-bold text-emerald-600">FCR ≥ 70%</td>
+                            </tr>
+                            <tr class="bg-white">
+                                <td class="py-3 px-4 font-bold text-slate-900">
+                                    <i class="fa-solid fa-envelope text-amber-600 mr-1.5"></i> Correo Electrónico
+                                </td>
+                                <td class="py-3 px-4 font-semibold text-slate-700">500 tickets</td>
+                                <td class="py-3 px-4 text-slate-600">Lunes a Viernes 08:30 a 18:00</td>
+                                <td class="py-3 px-4 text-right font-bold text-amber-600">Backlog ≤ 24h on-time</td>
+                            </tr>
+                            <tr class="bg-slate-100/80 font-bold border-t border-slate-200">
+                                <td class="py-2.5 px-4 text-slate-800">Tasa de Abandono Máxima</td>
+                                <td class="py-2.5 px-4 text-slate-700">&lt; 3.0% mensual</td>
+                                <td class="py-2.5 px-4 text-slate-800">Resolución Primer Contacto</td>
+                                <td class="py-2.5 px-4 text-right text-emerald-700">&ge; 70% FCR</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- CALLOUT DIAGNÓSTICO OPERATIVO -->
+            <section class="p-4 rounded-xl bg-blue-50/80 border border-blue-200/90 flex items-start gap-3.5">
+                <div class="w-8 h-8 rounded-lg bg-[#3284C6]/15 text-[#3284C6] flex items-center justify-center flex-shrink-0 mt-0.5 text-sm">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <div class="text-xs text-slate-700 leading-relaxed">
+                    <strong class="font-title font-bold text-slate-900 block mb-0.5">Diagnóstico Operativo del Cliente TIP México:</strong>
+                    La operación actual de TIP México opera con un AHT elevado de 12:32 minutos y un FCR de solo 24%, provocando que los clientes llamen hasta 3.8 veces por asunto. El despliegue de las <strong>8 posiciones dedicadas de Telat</strong> tiene como objetivo reducir y estabilizar el AHT contractual a <strong>07:00 minutos</strong> con atención resolutiva en vivo.
+                </div>
+            </section>
+        </div>
+
+        <!-- PIE DE PÁGINA 1 LIMPIO -->
+        <footer class="border-t border-slate-200 pt-3.5 mt-6 flex justify-between items-center text-[11px] text-slate-500 relative z-10">
+            <div class="flex items-center gap-2">
+                <span class="font-bold text-slate-800 font-title uppercase tracking-wider text-xs">Telat Group</span>
+                <span class="text-slate-300">•</span>
+                <span class="font-semibold text-[#EB5B27] font-title uppercase text-[10.5px]">The Voice of Your Company</span>
+            </div>
+            <div class="text-slate-400 font-medium">
+                Página 1 de 2 | Confidencial N2A
+            </div>
+        </footer>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- PÁGINA 2: TIPIFICACIONES EN LLAMADA Y ENTREGABLES N2A               -->
+    <!-- =================================================================== -->
+    <div class="document-page page-2 pattern-grid">
+        
+        <!-- Marca de Agua Sutil de Fondo (Inspiración Papel Membretado Exec) -->
+        <div class="watermark-bg">
+            <img src="https://telat.mx/assets/img/logo.png" alt="">
+        </div>
+
+        <div class="page-content">
+            <!-- ENCABEZADO DE CONTINUIDAD PÁGINA 2 -->
+            <header class="border-b border-slate-200 pb-3.5 mb-6 flex justify-between items-center text-xs">
+                <div class="flex items-center gap-3">
+                    <img src="https://telat.mx/assets/img/logo.png" alt="Logo" class="h-6 w-auto object-contain">
+                    <span class="font-title font-bold text-xs text-[#222221] uppercase">Telat Group</span>
+                    <span class="text-slate-300">|</span>
+                    <span class="text-[11.5px] font-semibold text-[#3284C6]">TIP México — Requerimientos Técnicos</span>
+                </div>
+                <div class="text-right text-[11px] text-slate-500 font-medium">
+                    Partner Tecnológico: <strong class="text-slate-700">Net2Alliance (N2A)</strong>
+                </div>
+            </header>
+
+            <!-- SECCIÓN 3: MATRIZ DE TIPIFICACIONES (QUÉ SE HACE EN LLAMADA) -->
+            <section class="mb-6">
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="w-1.5 h-4 bg-[#FECA66] rounded-full"></div>
+                    <h2 class="text-xs sm:text-sm font-extrabold font-title uppercase tracking-wider text-[#222221]">
+                        3. Matriz de Tipificaciones en Llamada (Alcance Tier 1 — TIP México)
+                    </h2>
+                </div>
+
+                <div class="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                    <table class="w-full text-left text-[11.5px] border-collapse">
+                        <thead>
+                            <tr class="bg-[#222221] text-white font-title">
+                                <th class="py-2.5 px-4 uppercase text-[10px] tracking-wider w-1/3">Motivo / Módulo</th>
+                                <th class="py-2.5 px-4 uppercase text-[10px] tracking-wider">Gestión Específica del Agente en Llamada</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-slate-700">
+                            <tr class="bg-white">
+                                <td class="py-2.5 px-4 font-bold text-slate-900 flex items-center gap-2">
+                                    <i class="fa-solid fa-wrench text-[#3284C6]"></i> Mantenimiento & Taller
+                                </td>
+                                <td class="py-2.5 px-4">Seguimiento de estatus de unidades en reparación, agendamiento de citas de mantenimiento preventivo y enlace con agencias.</td>
+                            </tr>
+                            <tr class="bg-slate-50/50">
+                                <td class="py-2.5 px-4 font-bold text-slate-900 flex items-center gap-2">
+                                    <i class="fa-solid fa-car-burst text-[#EB5B27]"></i> Seguros & Siniestros
+                                </td>
+                                <td class="py-2.5 px-4">Recepción y reporte inicial de colisiones o robo de vehículos; consulta y envío de pólizas de seguro vigentes.</td>
+                            </tr>
+                            <tr class="bg-white">
+                                <td class="py-2.5 px-4 font-bold text-slate-900 flex items-center gap-2">
+                                    <i class="fa-solid fa-id-card text-emerald-600"></i> Gestorías & Trámites
+                                </td>
+                                <td class="py-2.5 px-4">Consulta de estatus de pagos de tenencias vehiculares (en GLPI), trámites de placas y verificación ambiental.</td>
+                            </tr>
+                            <tr class="bg-slate-50/50">
+                                <td class="py-2.5 px-4 font-bold text-slate-900 flex items-center gap-2">
+                                    <i class="fa-solid fa-file-invoice text-indigo-600"></i> Documentación de Flota
+                                </td>
+                                <td class="py-2.5 px-4">Búsqueda y descarga en SisFlot de facturas de las unidades arrendadas, copias de contratos, anexos y pagarés.</td>
+                            </tr>
+                            <tr class="bg-white">
+                                <td class="py-2.5 px-4 font-bold text-slate-900 flex items-center gap-2">
+                                    <i class="fa-solid fa-calculator text-amber-600"></i> Facturación & Cuentas
+                                </td>
+                                <td class="py-2.5 px-4">Explicación de conceptos facturados en Oracle, aplicación de notas de crédito y confirmación de pagos reflejados.</td>
+                            </tr>
+                            <tr class="bg-slate-50/50">
+                                <td class="py-2.5 px-4 font-bold text-slate-900 flex items-center gap-2">
+                                    <i class="fa-solid fa-location-dot text-rose-600"></i> Telemetría & GPS
+                                </td>
+                                <td class="py-2.5 px-4">Verificación del estado operativo y transmisión de señal de los dispositivos de rastreo satelital vehicular.</td>
+                            </tr>
+                            <tr class="bg-white">
+                                <td class="py-2.5 px-4 font-bold text-slate-900 flex items-center gap-2">
+                                    <i class="fa-solid fa-ticket text-slate-600"></i> Escalamiento a Back-Office
+                                </td>
+                                <td class="py-2.5 px-4">Generación formal de ticket en Salesforce Service Cloud hacia áreas resolutoras internas (cuando excede el 1er nivel).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- CAJA COMPACTA: ECOSISTEMA DE SISTEMAS DEL CLIENTE -->
+            <section class="mb-6 p-3.5 rounded-xl bg-slate-100/90 border border-slate-200 text-xs text-slate-600 flex flex-wrap items-center justify-between gap-3">
+                <div>
+                    <strong class="text-slate-800 font-title uppercase text-xs"><i class="fa-solid fa-laptop-code text-[#3284C6] mr-1.5"></i> Ecosistema Tecnológico de TIP:</strong>
+                    Los agentes operarán sobre <strong>Salesforce Service Cloud</strong> (CRM), <strong>SisFlot</strong> (flotas), <strong>Oracle</strong> (ERP) y <strong>GLPI</strong> (tenencias).
+                </div>
+                <div class="text-[10px] text-[#EB5B27] font-bold uppercase bg-white px-2.5 py-1 rounded-md border border-[#EB5B27]/30 shadow-2xs">
+                    Telefonía actual cliente: InConcert
+                </div>
+            </section>
+
+            <!-- SECCIÓN 4: ENTREGABLES SOLICITADOS A N2A -->
+            <section class="mb-6">
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="w-1.5 h-4 bg-[#3284C6] rounded-full"></div>
+                    <h2 class="text-xs sm:text-sm font-extrabold font-title uppercase tracking-wider text-[#222221]">
+                        4. Requerimientos de Infraestructura Solicitados a Net2Alliance (N2A)
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3.5">
+                    <div class="p-3.5 rounded-xl bg-white border border-slate-200 shadow-sm">
+                        <div class="flex items-center gap-2 mb-1.5">
+                            <span class="w-6 h-6 rounded-lg bg-[#3284C6]/10 text-[#3284C6] font-bold text-xs flex items-center justify-center">01</span>
+                            <h3 class="font-title font-bold text-xs uppercase text-[#222221]">Cloud CommServer: DIDs & Troncales</h3>
+                        </div>
+                        <p class="text-[11.5px] text-slate-600 leading-relaxed">
+                            Asignación de <strong>números telefónicos (DIDs)</strong> para TIP México y troncales SIP concurrentes para absorber <strong>2,800 llamadas/mes</strong> con <strong>ASA ≤ 20s</strong> y abandono <strong>&lt; 3%</strong>.
+                        </p>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-white border border-slate-200 shadow-sm">
+                        <div class="flex items-center gap-2 mb-1.5">
+                            <span class="w-6 h-6 rounded-lg bg-[#EB5B27]/10 text-[#EB5B27] font-bold text-xs flex items-center justify-center">02</span>
+                            <h3 class="font-title font-bold text-xs uppercase text-[#222221]">Extensiones Softphone & PBX Cloud</h3>
+                        </div>
+                        <p class="text-[11.5px] text-slate-600 leading-relaxed">
+                            Licenciamiento para <strong>8 posiciones de agentes Telat en piso</strong> con softphones en PC corporativa, árbol IVR de bienvenida y distribución inteligente (ACD).
+                        </p>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-white border border-slate-200 shadow-sm">
+                        <div class="flex items-center gap-2 mb-1.5">
+                            <span class="w-6 h-6 rounded-lg bg-[#FECA66]/25 text-[#b48512] font-bold text-xs flex items-center justify-center">03</span>
+                            <h3 class="font-title font-bold text-xs uppercase text-[#222221]">Call Intelligence & Analytics (QA)</h3>
+                        </div>
+                        <p class="text-[11.5px] text-slate-600 leading-relaxed">
+                            Grabación ininterrumpida del <strong>100% de llamadas</strong> con tableros en vivo e históricos para auditar SLA (85%), AHT (07:00 min) y tráfico atendido en tiempo real.
+                        </p>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-white border border-slate-200 shadow-sm">
+                        <div class="flex items-center gap-2 mb-1.5">
+                            <span class="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-700 font-bold text-xs flex items-center justify-center">04</span>
+                            <h3 class="font-title font-bold text-xs uppercase text-[#222221]">Cloud IntelliNet: Enlaces & BCP</h3>
+                        </div>
+                        <p class="text-[11.5px] text-slate-600 leading-relaxed">
+                            Conectividad segura y arquitectura de telefonía redundante con failover automático para asegurar disponibilidad ininterrumpida <strong>51.5 horas semanales</strong>.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PIE DE PÁGINA 2 LIMPIO -->
+        <footer class="border-t border-slate-200 pt-3.5 mt-6 flex justify-between items-center text-[11px] text-slate-500 relative z-10">
+            <div class="flex items-center gap-2">
+                <span class="font-bold text-slate-800 font-title uppercase tracking-wider text-xs">Telat Group</span>
+                <span class="text-slate-300">•</span>
+                <span class="font-semibold text-[#EB5B27] font-title uppercase text-[10.5px]">The Voice of Your Company</span>
+            </div>
+            <div class="text-slate-400 font-medium">
+                Página 2 de 2 | Telat BPO & Net2Alliance © 2026
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>

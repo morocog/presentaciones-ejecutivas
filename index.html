@@ -1,16 +1,22 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telat Group - Portal Institucional de Presentaciones Ejecutivas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Telat Group - Bóveda Central de Presentaciones Ejecutivas</title>
     
+    <!-- PWA & Mobile Meta Tags -->
+    <meta name="theme-color" content="#222221">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Centro de mando móvil y de escritorio para todas las presentaciones estratégicas, propuestas comerciales y dashboards de Telat Group.">
+
     <!-- Google Fonts oficiales Telat (DM Sans & Montserrat) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- FontAwesome Icons -->
+    <!-- FontAwesome Icons & Material Symbols -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
 
@@ -27,6 +33,8 @@
                         brandNaranja: '#EB5B27',
                         brandAmarillo: '#FECA66',
                         brandClaro: '#FBFBFD',
+                        brandCardBg: '#272726',
+                        brandBorder: '#3D3D3C',
                     },
                     fontFamily: {
                         subheadings: ['DM Sans', 'sans-serif'],
@@ -38,38 +46,39 @@
     </script>
 
     <style>
-        :root {
-            --brand-celeste: #3284C6;
-            --brand-naranja: #EB5B27;
-            --brand-amarillo: #FECA66;
-            --brand-oscuro: #222221;
-            --brand-claro: #FBFBFD;
+        * {
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--brand-claro);
-            color: var(--brand-oscuro);
             font-family: 'Montserrat', sans-serif;
-            min-height: 100vh;
+            background-color: #171716;
+            color: #FBFBFD;
         }
 
-        .tech-grid-bg {
-            background-image: radial-gradient(rgba(50, 132, 198, 0.08) 1.5px, transparent 1.5px);
-            background-size: 28px 28px;
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'DM Sans', sans-serif;
         }
 
-        .card-executive {
-            background: #FFFFFF;
-            border: 1px solid rgba(34, 34, 33, 0.08);
-            border-radius: 1.5rem;
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
+        .glass-header {
+            background: rgba(34, 34, 33, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .card-executive:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px -10px rgba(50, 132, 198, 0.15);
-            border-color: rgba(50, 132, 198, 0.3);
+        .card-exec {
+            background: #222221;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @media (hover: hover) {
+            .card-exec:hover {
+                transform: translateY(-3px);
+                border-color: rgba(50, 132, 198, 0.45);
+                box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.7);
+            }
         }
 
         .btn-portal {
@@ -77,315 +86,308 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            padding: 0.85rem 1.25rem;
-            border-radius: 1rem;
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 700;
-            font-size: 0.875rem;
-            white-space: nowrap;
-            transition: all 0.25s ease;
+            font-weight: 600;
+            border-radius: 0.65rem;
+            transition: all 0.18s ease;
+            touch-action: manipulation;
         }
 
         .btn-celeste {
-            background-color: rgba(50, 132, 198, 0.1);
-            color: #3284C6;
-            border: 1.5px solid rgba(50, 132, 198, 0.25);
-        }
-        .btn-celeste:hover {
             background-color: #3284C6;
             color: #FFFFFF;
-            box-shadow: 0 8px 16px rgba(50, 132, 198, 0.25);
+        }
+        .btn-celeste:hover, .btn-celeste:active {
+            background-color: #276ea7;
         }
 
         .btn-naranja {
-            background-color: rgba(235, 91, 39, 0.1);
-            color: #EB5B27;
-            border: 1.5px solid rgba(235, 91, 39, 0.25);
-        }
-        .btn-naranja:hover {
             background-color: #EB5B27;
             color: #FFFFFF;
-            box-shadow: 0 8px 16px rgba(235, 91, 39, 0.25);
+        }
+        .btn-naranja:hover, .btn-naranja:active {
+            background-color: #c94617;
         }
 
-        .badge-live {
+        .btn-ghost {
+            background-color: rgba(255, 255, 255, 0.06);
+            color: #FBFBFD;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .btn-ghost:hover, .btn-ghost:active {
+            background-color: rgba(255, 255, 255, 0.14);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .badge {
             display: inline-flex;
             align-items: center;
             gap: 0.35rem;
-            padding: 0.3rem 0.75rem;
+            padding: 0.25rem 0.65rem;
             border-radius: 9999px;
             font-size: 0.7rem;
             font-weight: 700;
-            font-family: 'DM Sans', sans-serif;
+            letter-spacing: 0.03em;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
         }
 
-        @keyframes pulse-ring {
-            0% { transform: scale(0.95); opacity: 0.8; }
-            50% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(0.95); opacity: 0.8; }
+        /* Toast de confirmación de copia */
+        #copyToast {
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
         }
-        .pulse-live { animation: pulse-ring 2s infinite ease-in-out; }
     </style>
 </head>
-<body class="tech-grid-bg antialiased flex flex-col justify-between min-h-screen selection:bg-brandAmarillo selection:text-brandOscuro">
+<body class="min-h-screen flex flex-col selection:bg-brandCeleste selection:text-white pb-12 sm:pb-8">
 
-    <!-- CABECERA INSTITUCIONAL MAESTRA -->
-    <header class="w-full border-b border-brandOscuro/10 bg-white/90 backdrop-blur-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-11 object-contain filter drop-shadow-sm">
-                <span class="text-gray-300 text-2xl font-light">|</span>
-                <div>
-                    <h1 class="text-xs font-subheadings font-bold text-brandOscuro tracking-wider uppercase">Portal Institucional Exec</h1>
-                    <p class="text-[10px] text-brandCeleste font-semibold">Dirección General & Operaciones</p>
-                </div>
+    <!-- NAVBAR CANÓNICO TELAT (MOBILE-OPTIMIZED) -->
+    <header class="sticky top-0 z-50 glass-header px-4 sm:px-6 lg:px-8 py-3">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
+            <!-- Brand & Identidad -->
+            <div class="flex items-center gap-3 sm:gap-4">
+                <a href="#" class="flex items-center gap-3 group">
+                    <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-7 sm:h-8 w-auto object-contain transition-transform group-hover:scale-105">
+                    <div class="h-5 w-px bg-white/20 hidden sm:block"></div>
+                    <div>
+                        <h1 class="text-sm sm:text-base font-bold text-white tracking-wide flex items-center gap-2">
+                            Bóveda de Presentaciones
+                        </h1>
+                        <p class="text-[10px] sm:text-[11px] text-gray-400 font-medium hidden xs:block">
+                            Telat Group Exec Suite · Ricardo García
+                        </p>
+                    </div>
+                </a>
             </div>
-            
-            <div class="flex items-center gap-3">
-                <div class="hidden sm:flex items-center gap-2 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200 text-xs font-semibold text-slate-600">
-                    <i class="fa-solid fa-lock text-brandCeleste"></i> Acceso Directivo Seguro
-                </div>
+
+            <!-- Accesos Rápidos Header -->
+            <div class="flex items-center gap-2">
+                <a href="https://morocog.github.io/tip-direccion/" target="_blank" rel="noopener noreferrer" class="btn-portal btn-ghost text-xs px-2.5 sm:px-3 py-1.5" title="Abrir micro-sitio público de TIP México">
+                    <i class="fa-solid fa-arrow-up-right-from-square text-brandAmarillo"></i>
+                    <span class="hidden md:inline">TIP Dirección</span>
+                </a>
+                <button onclick="scrollToSearch()" class="btn-portal btn-ghost text-xs p-2 sm:px-3 sm:py-1.5" title="Buscar presentación">
+                    <i class="fa-solid fa-magnifying-glass text-brandCeleste"></i>
+                    <span class="hidden sm:inline">Buscar</span>
+                </button>
             </div>
         </div>
     </header>
 
-    <!-- HERO DE BIENVENIDA -->
-    <main class="max-w-7xl mx-auto px-6 py-10 flex-grow w-full space-y-12">
+    <!-- MAIN CONTAINER -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-6 sm:space-y-8">
 
-        <div class="text-center max-w-3xl mx-auto space-y-4">
-            <span class="bg-brandNaranja/10 text-brandNaranja text-xs font-subheadings px-4 py-1.5 rounded-full font-bold uppercase tracking-widest inline-flex items-center gap-2 border border-brandNaranja/20">
-                <i class="fa-solid fa-layer-group"></i> Catálogo de Presentaciones & Consolas
-            </span>
-            <h2 class="font-body text-3xl md:text-5xl font-extrabold text-brandOscuro tracking-tight leading-tight">
-                PORTAL EJECUTIVO DE <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brandCeleste to-brandNaranja">PRESENTACIONES & OPERACIONES</span>
-            </h2>
-            <p class="text-slate-600 text-sm md:text-base font-medium leading-relaxed">
-                Seleccione el proyecto o cliente para acceder directamente a las diapositivas ejecutivas o a la consola de mando en tiempo real.
-            </p>
-        </div>
+        <!-- HERO SECTION & STATS -->
+        <section class="bg-gradient-to-br from-[#242423] to-[#1c1c1b] p-5 sm:p-7 rounded-2xl border border-white/10 relative overflow-hidden shadow-2xl">
+            <div class="absolute -right-16 -top-16 w-64 h-64 bg-brandCeleste/15 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-16 -bottom-16 w-64 h-64 bg-brandNaranja/15 rounded-full blur-3xl pointer-events-none"></div>
 
-        <!-- SECCIÓN 1: DIRECCIÓN GENERAL -->
-        <section class="space-y-6">
-            <div class="flex items-center gap-3 border-b border-slate-200 pb-4">
-                <div class="w-10 h-10 rounded-xl bg-brandCeleste/10 text-brandCeleste flex items-center justify-center text-lg font-bold">
-                    <i class="fa-solid fa-user-tie"></i>
+            <div class="relative z-10 space-y-5">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="space-y-1.5 max-w-2xl">
+                        <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-brandCeleste/15 text-brandCeleste text-[11px] font-bold uppercase tracking-wider">
+                            <i class="fa-solid fa-layer-group"></i> Portal Central Maestro
+                        </div>
+                        <h2 class="text-xl sm:text-3xl font-extrabold text-white tracking-tight leading-snug">
+                            Centro de Presentaciones & Estrategia
+                        </h2>
+                        <p class="text-xs sm:text-sm text-gray-300 font-normal leading-relaxed">
+                            Acceso integral en móvil y escritorio a todas tus propuestas de clientes, estudios de mercado confidenciales, herramientas interactivas y material institucional.
+                        </p>
+                    </div>
+
+                    <!-- Métricas Rápidas -->
+                    <div class="flex items-center gap-2 sm:gap-3 self-start sm:self-auto bg-black/30 p-2 sm:p-3 rounded-xl border border-white/5">
+                        <div class="text-center px-3 py-1">
+                            <span class="block text-lg sm:text-xl font-black text-brandCeleste font-heading" id="totalDecksCount">9</span>
+                            <span class="text-[10px] text-gray-400 uppercase font-semibold">Decks</span>
+                        </div>
+                        <div class="h-7 w-px bg-white/10"></div>
+                        <div class="text-center px-3 py-1">
+                            <span class="block text-lg sm:text-xl font-black text-brandAmarillo font-heading">4</span>
+                            <span class="text-[10px] text-gray-400 uppercase font-semibold">Módulos</span>
+                        </div>
+                        <div class="h-7 w-px bg-white/10"></div>
+                        <div class="text-center px-3 py-1">
+                            <span class="block text-lg sm:text-xl font-black text-emerald-400 font-heading">3</span>
+                            <span class="text-[10px] text-gray-400 uppercase font-semibold">Dashboards</span>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="text-xl font-bold font-body text-brandOscuro">Dirección General</h3>
-                    <p class="text-xs text-slate-500 font-medium">Presentaciones estratégicas y tableros operativos de alta relevancia directiva</p>
+
+                <!-- BUSCADOR INTERACTIVO Y FILTROS TÁCTILES -->
+                <div class="space-y-3 pt-2">
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                        <input type="text" id="searchInput" placeholder="Buscar por cliente (TIP, Instituto, ViaPath...), WFM, IA, tarifas..." class="w-full bg-[#181817] border border-white/15 rounded-xl pl-10 pr-10 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brandCeleste shadow-inner transition-colors">
+                        <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white text-xs p-1">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+
+                    <!-- Botones de Categoría con Scroll Horizontal en Móvil -->
+                    <div class="flex items-center gap-2 overflow-x-auto pb-1.5 no-scrollbar scroll-smooth">
+                        <button onclick="filterCategory('all')" class="cat-filter-btn whitespace-nowrap px-3.5 py-2 rounded-xl text-xs font-semibold bg-brandCeleste text-white shadow-sm transition-all" data-cat="all">
+                            Todas (<span id="countAll">9</span>)
+                        </button>
+                        <button onclick="filterCategory('01-comercial')" class="cat-filter-btn whitespace-nowrap px-3.5 py-2 rounded-xl text-xs font-semibold bg-white/5 text-gray-300 hover:bg-white/10 transition-all" data-cat="01-comercial">
+                            💼 Clientes & Propuestas (5)
+                        </button>
+                        <button onclick="filterCategory('02-estrategia')" class="cat-filter-btn whitespace-nowrap px-3.5 py-2 rounded-xl text-xs font-semibold bg-white/5 text-gray-300 hover:bg-white/10 transition-all" data-cat="02-estrategia">
+                            🚀 Dirección & Estrategia (2)
+                        </button>
+                        <button onclick="filterCategory('03-operaciones')" class="cat-filter-btn whitespace-nowrap px-3.5 py-2 rounded-xl text-xs font-semibold bg-white/5 text-gray-300 hover:bg-white/10 transition-all" data-cat="03-operaciones">
+                            ⚙️ Operaciones & WFM (1)
+                        </button>
+                        <button onclick="filterCategory('04-estudios')" class="cat-filter-btn whitespace-nowrap px-3.5 py-2 rounded-xl text-xs font-semibold bg-white/5 text-gray-300 hover:bg-white/10 transition-all" data-cat="04-estudios">
+                            📊 Estudios & Tarifas (1)
+                        </button>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <!-- REJILLA DE 2 COLUMNAS (MÁXIMO 2 EMPRESAS POR FILA PARA ESPACIO ÓPTIMO) -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- SECCIÓN 1: PROPUESTAS COMERCIALES & CLIENTES -->
+        <section class="space-y-4 presentation-section" data-cat-section="01-comercial">
+            <div class="flex items-center justify-between border-b border-brandBorder/60 pb-2.5">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-7 h-7 rounded-lg bg-brandCeleste/20 text-brandCeleste flex items-center justify-center font-bold text-xs">01</span>
+                    <h3 class="text-base sm:text-lg font-bold text-white tracking-wide">Propuestas Comerciales & Clientes Estratégicos</h3>
+                </div>
+                <span class="text-[11px] text-gray-400 font-medium">5 Cuentas</span>
+            </div>
 
-                <!-- TARJETA CLIENTE 1: TIP MÉXICO -->
-                <div class="card-executive p-6 sm:p-8 flex flex-col justify-between space-y-6 border-l-4 border-l-brandCeleste">
-                    <div class="space-y-4">
-                        <div class="flex justify-between items-start">
-                            <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-brandCeleste to-blue-700 text-white flex items-center justify-center font-bold text-xl shadow-md">
-                                    <i class="fa-solid fa-truck-monster"></i>
-                                </div>
-                                <div>
-                                    <h4 class="text-xl font-bold font-body text-brandOscuro">TIP México</h4>
-                                    <span class="text-xs text-brandCeleste font-bold uppercase tracking-wider font-subheadings">Transporte & Arrendamiento</span>
-                                </div>
-                            </div>
-                            <span class="badge-live bg-emerald-50 text-emerald-600 border border-emerald-200">
-                                <span class="w-2 h-2 rounded-full bg-emerald-500 pulse-live"></span> En Vivo
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+
+                <!-- CARD 1: TIP MÉXICO -->
+                <div class="card-exec rounded-2xl p-5 flex flex-col justify-between space-y-4 presentation-card" data-keywords="tip mexico net2alliance dids telefonia contact center direccion comercial propuesta arrendamiento automotriz">
+                    <div class="space-y-3">
+                        <div class="flex items-start justify-between gap-2">
+                            <span class="badge bg-amber-500/15 text-amber-400 border border-amber-500/30">
+                                <i class="fa-solid fa-handshake"></i> En Negociación
                             </span>
+                            <button onclick="copyDeckLink('./01-Propuestas-Comerciales/TIP-Mexico/index.html', 'TIP México')" class="text-gray-400 hover:text-white text-xs p-1" title="Copiar enlace">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
                         </div>
-
-                        <p class="text-xs text-slate-600 font-medium leading-relaxed">
-                            Propuesta comercial de vanguardia con simulador de selección de personal, copiloto IA y monitoreo de la Consola de Mando GOC (Nivel de Servicio 86.42%, AHT y Control de 10 Asesores).
+                        <h4 class="text-base sm:text-lg font-bold text-white leading-snug">Propuesta de Valor & Gobernanza TIP México</h4>
+                        <p class="text-xs text-gray-300 leading-relaxed font-normal">
+                            Estrategia de escalabilidad operativa, modelo de gobernanza B2B, infraestructura telefónica y gestión integral de talento para TIP México.
                         </p>
                     </div>
+                    <div class="space-y-2 pt-2 border-t border-white/5">
+                        <div class="grid grid-cols-2 gap-2">
+                            <a href="./01-Propuestas-Comerciales/TIP-Mexico/index.html" class="btn-portal btn-celeste text-xs py-2.5 px-3">
+                                <i class="fa-solid fa-play"></i> Presentación
+                            </a>
+                            <a href="./01-Propuestas-Comerciales/TIP-Mexico/dashboard.html" class="btn-portal btn-naranja text-xs py-2.5 px-3">
+                                <i class="fa-solid fa-gauge-high"></i> Dashboard GOC
+                            </a>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <a href="./01-Propuestas-Comerciales/TIP-Mexico/brief-tecnico-n2a.html" class="btn-portal btn-ghost text-xs py-2 px-2">
+                                <i class="fa-solid fa-file-lines text-brandCeleste"></i> Brief N2A
+                            </a>
+                            <a href="https://morocog.github.io/tip-direccion/" target="_blank" rel="noopener noreferrer" class="btn-portal btn-ghost text-xs py-2 px-2 text-brandAmarillo hover:text-white">
+                                <i class="fa-solid fa-globe"></i> Ver Público
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-                    <!-- BOTONES DE ACCESO TIP -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-                        <a href="./Direccion-General/TIP/presentacion.html" class="btn-portal btn-celeste text-xs px-2">
-                            <i class="fa-solid fa-person-chalkboard"></i>
-                            <span>Presentación Comercial</span>
-                        </a>
-                        <a href="https://morocog.github.io/tip-direccion/" class="btn-portal btn-celeste text-xs px-2" target="_blank" rel="noopener noreferrer">
-                            <i class="fa-solid fa-user-tie"></i>
-                            <span>Presentación Dirección</span>
-                        </a>
-                        <a href="./Direccion-General/TIP/dashboard.html" class="btn-portal btn-naranja text-xs px-2">
-                            <i class="fa-solid fa-chart-line"></i>
-                            <span>Dashboard GOC</span>
+                <!-- CARD 2: INSTITUTO TECNOLÓGICO -->
+                <div class="card-exec rounded-2xl p-5 flex flex-col justify-between space-y-4 presentation-card" data-keywords="instituto tecnologico propuesta comercial b2b goc simulador olas wfm capacidad contact center educacion">
+                    <div class="space-y-3">
+                        <div class="flex items-start justify-between gap-2">
+                            <span class="badge bg-blue-500/15 text-blue-400 border border-blue-500/30">
+                                <i class="fa-solid fa-building-columns"></i> Cuenta B2B
+                            </span>
+                            <button onclick="copyDeckLink('./01-Propuestas-Comerciales/Instituto-Tecnologico/index.html', 'Instituto Tecnológico')" class="text-gray-400 hover:text-white text-xs p-1" title="Copiar enlace">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                        <h4 class="text-base sm:text-lg font-bold text-white leading-snug">Propuesta Comercial Instituto Tecnológico</h4>
+                        <p class="text-xs text-gray-300 leading-relaxed font-normal">
+                            Socio B2B de vanguardia, modelo operativo omnisciente, consola GOC y simulador matemático de olas de llamadas y dimensionamiento WFM.
+                        </p>
+                    </div>
+                    <div class="space-y-2 pt-2 border-t border-white/5">
+                        <div class="grid grid-cols-2 gap-2">
+                            <a href="./01-Propuestas-Comerciales/Instituto-Tecnologico/index.html" class="btn-portal btn-celeste text-xs py-2.5 px-3">
+                                <i class="fa-solid fa-play"></i> Presentación
+                            </a>
+                            <a href="./01-Propuestas-Comerciales/Instituto-Tecnologico/dashboard.html" class="btn-portal btn-naranja text-xs py-2.5 px-3">
+                                <i class="fa-solid fa-gauge-high"></i> Consola GOC
+                            </a>
+                        </div>
+                        <a href="./01-Propuestas-Comerciales/Instituto-Tecnologico/simulador-olas.html" class="btn-portal btn-ghost text-xs py-2 w-full">
+                            <i class="fa-solid fa-chart-line text-emerald-400"></i> Simulador de Olas & Capacidad SOTA
                         </a>
                     </div>
                 </div>
 
-                <!-- TARJETA CLIENTE 2: INSTITUTO -->
-                <div class="card-executive p-6 sm:p-8 flex flex-col justify-between space-y-6 border-l-4 border-l-brandNaranja">
-                    <div class="space-y-4">
-                        <div class="flex justify-between items-start">
-                            <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-brandNaranja to-amber-600 text-white flex items-center justify-center font-bold text-xl shadow-md">
-                                    <i class="fa-solid fa-building-columns"></i>
-                                </div>
-                                <div>
-                                    <h4 class="text-xl font-bold font-body text-brandOscuro">Instituto</h4>
-                                    <span class="text-xs text-brandNaranja font-bold uppercase tracking-wider font-subheadings">Sector Educativo / Institucional</span>
-                                </div>
-                            </div>
-                            <span class="badge-live bg-indigo-50 text-indigo-600 border border-indigo-200">
-                                <span class="w-2 h-2 rounded-full bg-indigo-500 pulse-live"></span> Simulador SOTA
+                <!-- CARD 3: VIAPATH -->
+                <div class="card-exec rounded-2xl p-5 flex flex-col justify-between space-y-4 presentation-card" data-keywords="viapath partnership beyond the voice operaciones soporte bpo seguridad estados unidos">
+                    <div class="space-y-3">
+                        <div class="flex items-start justify-between gap-2">
+                            <span class="badge bg-purple-500/15 text-purple-400 border border-purple-500/30">
+                                <i class="fa-solid fa-network-wired"></i> BPO Global
                             </span>
+                            <button onclick="copyDeckLink('./01-Propuestas-Comerciales/ViaPath/index.html', 'ViaPath')" class="text-gray-400 hover:text-white text-xs p-1" title="Copiar enlace">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
                         </div>
-
-                        <p class="text-xs text-slate-600 font-medium leading-relaxed">
-                            Propuesta Comercial Telat Tech 2026 de 17 diapositivas interactivas, Consola de Mando / Dashboard Operativo y el Simulador de Capacidad SOTA & Olas de Entrenamiento WFM.
+                        <h4 class="text-base sm:text-lg font-bold text-white leading-snug">Telat & ViaPath Partnership 2026</h4>
+                        <p class="text-xs text-gray-300 leading-relaxed font-normal">
+                            Beyond The Voice: Solución operativa de alta especialización, protocolos de seguridad y continuidad transaccional para ViaPath.
                         </p>
                     </div>
-
-                    <!-- BOTONES DE ACCESO INSTITUTO -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-                        <a href="./Direccion-General/Instituto/presentacion.html" class="btn-portal btn-celeste text-xs px-2">
-                            <i class="fa-solid fa-desktop"></i>
-                            <span>Slides (17)</span>
-                        </a>
-                        <a href="./Direccion-General/Instituto/dashboard.html" class="btn-portal btn-naranja text-xs px-2">
-                            <i class="fa-solid fa-chart-line"></i>
-                            <span>Dashboard</span>
-                        </a>
-                        <a href="./Direccion-General/Instituto/simulador-olas.html" class="btn-portal btn-celeste text-xs px-2">
-                            <i class="fa-solid fa-calculator"></i>
-                            <span>Simulador WFM</span>
+                    <div class="pt-2 border-t border-white/5">
+                        <a href="./01-Propuestas-Comerciales/ViaPath/index.html" class="btn-portal btn-celeste text-xs py-2.5 w-full">
+                            <i class="fa-solid fa-play"></i> Abrir Presentación ViaPath
                         </a>
                     </div>
                 </div>
 
-                <!-- TARJETA CLIENTE 3: VIAPATH -->
-                <div class="card-executive p-6 sm:p-8 flex flex-col justify-between space-y-6 border-l-4 border-l-purple-600">
-                    <div class="space-y-4">
-                        <div class="flex justify-between items-start">
-                            <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-600 to-indigo-800 text-white flex items-center justify-center font-bold text-xl shadow-md">
-                                    <i class="fa-solid fa-brain"></i>
-                                </div>
-                                <div>
-                                    <h4 class="text-xl font-bold font-body text-brandOscuro">ViaPath</h4>
-                                    <span class="text-xs text-purple-600 font-bold uppercase tracking-wider font-subheadings">Capacidades IA & Licenciamiento</span>
-                                </div>
-                            </div>
-                            <span class="badge-live bg-purple-50 text-purple-600 border border-purple-200">
-                                <span class="w-2 h-2 rounded-full bg-purple-500 pulse-live"></span> Propuesta IA
+                <!-- CARD 4: DRIVEN BRANDS / AGN -->
+                <div class="card-exec rounded-2xl p-5 flex flex-col justify-between space-y-4 presentation-card" data-keywords="driven brands agn auto glass now partnership beyond voice automotriz bpo vidrios">
+                    <div class="space-y-3">
+                        <div class="flex items-start justify-between gap-2">
+                            <span class="badge bg-orange-500/15 text-orange-400 border border-orange-500/30">
+                                <i class="fa-solid fa-car"></i> Automotriz / BPO
                             </span>
+                            <button onclick="copyDeckLink('./01-Propuestas-Comerciales/Driven-Brands-AGN/index.html', 'Driven Brands')" class="text-gray-400 hover:text-white text-xs p-1" title="Copiar enlace">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
                         </div>
-
-                        <p class="text-xs text-slate-600 font-medium leading-relaxed">
-                            Demostración de capacidades tecnológicas de programación e IA aplicada a la operación, con propuesta comercial de licenciamiento para el Generador de Notas Automatizado.
+                        <h4 class="text-base sm:text-lg font-bold text-white leading-snug">Telat & Driven Brands / AGN Partnership</h4>
+                        <p class="text-xs text-gray-300 leading-relaxed font-normal">
+                            Estrategia de atención omnicanal, escalamiento de volumen de servicios automotrices y arquitectura de calidad en tiempo real.
                         </p>
                     </div>
-
-                    <!-- BOTONES DE ACCESO VIAPATH -->
-                    <div class="grid grid-cols-1 gap-3 pt-2">
-                        <a href="./Direccion-General/ViaPath/presentacion.html" class="btn-portal btn-celeste">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i>
-                            <span>Ver Presentación (13 Slides IA)</span>
+                    <div class="pt-2 border-t border-white/5">
+                        <a href="./01-Propuestas-Comerciales/Driven-Brands-AGN/index.html" class="btn-portal btn-naranja text-xs py-2.5 w-full">
+                            <i class="fa-solid fa-play"></i> Abrir Presentación Driven Brands
                         </a>
                     </div>
                 </div>
 
-                <!-- TARJETA CLIENTE 4: DRIVEN BRANDS / AGN -->
-                <div class="card-executive p-6 sm:p-8 flex flex-col justify-between space-y-6 border-l-4 border-l-red-500">
-                    <div class="space-y-4">
-                        <div class="flex justify-between items-start">
-                            <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-red-500 to-rose-700 text-white flex items-center justify-center font-bold text-xl shadow-md">
-                                    <i class="fa-solid fa-car-burst"></i>
-                                </div>
-                                <div>
-                                    <h4 class="text-xl font-bold font-body text-brandOscuro">Driven Brands / AGN</h4>
-                                    <span class="text-xs text-red-500 font-bold uppercase tracking-wider font-subheadings">Capacidades de IA & Operación</span>
-                                </div>
-                            </div>
-                            <span class="badge-live bg-red-50 text-red-600 border border-red-200">
-                                <span class="w-2 h-2 rounded-full bg-red-500 pulse-live"></span> Tech Suite
+                <!-- CARD 5: NEXGEN AGENCY -->
+                <div class="card-exec rounded-2xl p-5 flex flex-col justify-between space-y-4 presentation-card" data-keywords="nexgen agency ia suite operational intelligence inteligencia artificial contact center automatizacion">
+                    <div class="space-y-3">
+                        <div class="flex items-start justify-between gap-2">
+                            <span class="badge bg-teal-500/15 text-teal-400 border border-teal-500/30">
+                                <i class="fa-solid fa-robot"></i> IA & Tech Suite
                             </span>
+                            <button onclick="copyDeckLink('./01-Propuestas-Comerciales/NexGen-Agency/index.html', 'NexGen Agency')" class="text-gray-400 hover:text-white text-xs p-1" title="Copiar enlace">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
                         </div>
-
-                        <p class="text-xs text-slate-600 font-medium leading-relaxed">
-                            Presentación ejecutiva comercial de la suite tecnológica de IA (Kudos 3.0, Torre de Control, Agent States, Smart Blocks, Escalaciones) con llamado a la acción operativo.
+                        <h4 class="text-base sm:text-lg font-bold text-white leading-snug">Telat Group & NexGen Agency IA Suite</h4>
+                        <p class="text-xs text-gray-300 leading-relaxed font-normal">
+                            Suite de Inteligencia Operativa y Automatización aplicada a centros de contacto avanzados y experiencia de usuario digital.
                         </p>
                     </div>
-
-                    <!-- BOTONES DE ACCESO DRIVEN BRANDS -->
-                    <div class="grid grid-cols-1 gap-3 pt-2">
-                        <a href="./Direccion-General/Driven-Brands-AGN/presentacion.html" class="btn-portal btn-naranja">
-                            <i class="fa-solid fa-microchip"></i>
-                            <span>Ver Presentación (14 Slides IA)</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- TARJETA CLIENTE 5: NEXGEN AGENCY -->
-                <div class="card-executive p-6 sm:p-8 flex flex-col justify-between space-y-6 border-l-4 border-l-emerald-500 md:col-span-2 lg:col-span-1">
-                    <div class="space-y-4">
-                        <div class="flex justify-between items-start">
-                            <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-700 text-white flex items-center justify-center font-bold text-xl shadow-md">
-                                    <i class="fa-solid fa-bolt"></i>
-                                </div>
-                                <div>
-                                    <h4 class="text-xl font-bold font-body text-brandOscuro">NexGen Agency</h4>
-                                    <span class="text-xs text-emerald-600 font-bold uppercase tracking-wider font-subheadings">AI, Automation & Digital Workflows</span>
-                                </div>
-                            </div>
-                            <span class="badge-live bg-emerald-50 text-emerald-600 border border-emerald-200">
-                                <span class="w-2 h-2 rounded-full bg-emerald-500 pulse-live"></span> Global Deck
-                            </span>
-                        </div>
-
-                        <p class="text-xs text-slate-600 font-medium leading-relaxed">
-                            Executive Deck in English highlighting the seamless integration of Artificial Intelligence, Process Automation, and Digital Operations Hubs tailored for NexGen Agency.
-                        </p>
-                    </div>
-
-                    <!-- BOTONES DE ACCESO NEXGEN AGENCY -->
-                    <div class="grid grid-cols-1 gap-3 pt-2">
-                        <a href="./Direccion-General/NexGen-Agency/presentacion.html" class="btn-portal btn-celeste">
-                            <i class="fa-solid fa-globe"></i>
-                            <span>Ver Presentación (Global Tech Deck)</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- TARJETA PROYECTO 6: SMART TIME BLOCKS (STB) LATE APPROVED -->
-                <div class="card-executive p-6 sm:p-8 flex flex-col justify-between space-y-6 border-l-4 border-l-brandCeleste md:col-span-2 lg:col-span-1">
-                    <div class="space-y-4">
-                        <div class="flex justify-between items-start">
-                            <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-brandCeleste to-blue-800 text-white flex items-center justify-center font-bold text-xl shadow-md">
-                                    <i class="fa-solid fa-clock-rotate-left"></i>
-                                </div>
-                                <div>
-                                    <h4 class="text-xl font-bold font-body text-brandOscuro">Smart Time Blocks (STB)</h4>
-                                    <span class="text-xs text-brandCeleste font-bold uppercase tracking-wider font-subheadings">Late Approved • Alineación 2026</span>
-                                </div>
-                            </div>
-                            <span class="badge-live bg-blue-50 text-blue-600 border border-blue-200">
-                                <span class="w-2 h-2 rounded-full bg-blue-500 pulse-live"></span> Versión 104
-                            </span>
-                        </div>
-
-                        <p class="text-xs text-slate-600 font-medium leading-relaxed">
-                            Presentación ejecutiva de 9 diapositivas para la alineación interdepartamental entre RH, Operaciones y WFM sobre el protocolo de Entradas Tardías y cadena de custodia en NICE.
-                        </p>
-                    </div>
-
-                    <!-- BOTONES DE ACCESO STB -->
-                    <div class="grid grid-cols-1 gap-3 pt-2">
-                        <a href="./STB-Late-Approved-Alineacion-2026.html" class="btn-portal btn-celeste">
-                            <i class="fa-solid fa-desktop"></i>
-                            <span>Ver Presentación (9 Slides STB)</span>
+                    <div class="pt-2 border-t border-white/5">
+                        <a href="./01-Propuestas-Comerciales/NexGen-Agency/index.html" class="btn-portal btn-celeste text-xs py-2.5 w-full">
+                            <i class="fa-solid fa-play"></i> Abrir Presentación NexGen
                         </a>
                     </div>
                 </div>
@@ -393,42 +395,277 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 2: ÁREA COMERCIAL & PROPUESTAS -->
-        <section class="space-y-6">
-            <div class="flex items-center gap-3 border-b border-slate-200 pb-4">
-                <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center text-lg font-bold">
-                    <i class="fa-solid fa-chart-pie"></i>
+        <!-- SECCIÓN 2: DIRECCIÓN, ESTRATEGIA & ECOSISTEMAS -->
+        <section class="space-y-4 presentation-section" data-cat-section="02-estrategia">
+            <div class="flex items-center justify-between border-b border-brandBorder/60 pb-2.5">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-7 h-7 rounded-lg bg-brandNaranja/20 text-brandNaranja flex items-center justify-center font-bold text-xs">02</span>
+                    <h3 class="text-base sm:text-lg font-bold text-white tracking-wide">Dirección, Estrategia & Ecosistemas Digitales</h3>
                 </div>
-                <div>
-                    <h3 class="text-xl font-bold font-body text-brandOscuro">Área Comercial</h3>
-                    <p class="text-xs text-slate-500 font-medium">Propuestas generales y presentaciones de servicios de atención a clientes</p>
-                </div>
+                <span class="text-[11px] text-gray-400 font-medium">2 Presentaciones</span>
             </div>
 
-            <div class="bg-white p-6 rounded-2xl border border-dashed border-slate-300 text-center space-y-3">
-                <div class="w-12 h-12 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto text-xl">
-                    <i class="fa-solid fa-folder-plus"></i>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+
+                <!-- CARD 6: PRESENTACIÓN DIGITALIZACIÓN -->
+                <div class="card-exec rounded-2xl p-5 flex flex-col justify-between space-y-4 presentation-card" data-keywords="digitalizacion inteligencia operativa automatizacion ecosistemas digitales telat innovacion transformacion software app script arquitectura">
+                    <div class="space-y-3">
+                        <div class="flex items-start justify-between gap-2">
+                            <span class="badge bg-indigo-500/15 text-indigo-400 border border-indigo-500/30">
+                                <i class="fa-solid fa-microchip"></i> Transformación Digital
+                            </span>
+                            <button onclick="copyDeckLink('./02-Direccion-y-Estrategia/Presentacion-Digitalizacion/index.html', 'Digitalización')" class="text-gray-400 hover:text-white text-xs p-1" title="Copiar enlace">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                        <h4 class="text-base sm:text-lg font-bold text-white leading-snug">Inteligencia Operativa, Automatización & Ecosistemas</h4>
+                        <p class="text-xs text-gray-300 leading-relaxed font-normal">
+                            Presentación insignia de digitalización Telat: Arquitectura de software interna, automatización de flujos, tableros forenses y eficiencia operativa.
+                        </p>
+                    </div>
+                    <div class="pt-2 border-t border-white/5">
+                        <a href="./02-Direccion-y-Estrategia/Presentacion-Digitalizacion/index.html" class="btn-portal btn-celeste text-xs py-2.5 w-full">
+                            <i class="fa-solid fa-play"></i> Abrir Presentación Digitalización
+                        </a>
+                    </div>
                 </div>
-                <h4 class="font-bold text-sm text-slate-700">Módulo Comercial en Preparación</h4>
-                <p class="text-xs text-slate-500 max-w-md mx-auto">
-                    Las presentaciones comerciales de prospección general se agregarán a esta sección conforme sean habilitadas por la Dirección Comercial.
-                </p>
+
+                <!-- CARD 7: PRESENTACIÓN COMERCIAL TELAT -->
+                <div class="card-exec rounded-2xl p-5 flex flex-col justify-between space-y-4 presentation-card" data-keywords="presentacion comercial experiencia cliente ia operativa telat group ventas b2b servicios resolucion omnicanal">
+                    <div class="space-y-3">
+                        <div class="flex items-start justify-between gap-2">
+                            <span class="badge bg-amber-500/15 text-amber-400 border border-amber-500/30">
+                                <i class="fa-solid fa-bullhorn"></i> Pitch Comercial Macro
+                            </span>
+                            <button onclick="copyDeckLink('./02-Direccion-y-Estrategia/Presentacion-Comercial-Telat/index.html', 'Pitch Comercial Telat')" class="text-gray-400 hover:text-white text-xs p-1" title="Copiar enlace">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                        <h4 class="text-base sm:text-lg font-bold text-white leading-snug">Experiencia del Cliente e Inteligencia Artificial Operativa</h4>
+                        <p class="text-xs text-gray-300 leading-relaxed font-normal">
+                            Pitch comercial macro de servicios Telat: Solución orientada a resolución inmediata, omnicanalidad con agentes humanos asistidos por IA y analítica de voz.
+                        </p>
+                    </div>
+                    <div class="pt-2 border-t border-white/5">
+                        <a href="./02-Direccion-y-Estrategia/Presentacion-Comercial-Telat/index.html" class="btn-portal btn-naranja text-xs py-2.5 w-full">
+                            <i class="fa-solid fa-play"></i> Abrir Presentación Comercial Telat
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: OPERACIONES & WFM -->
+        <section class="space-y-4 presentation-section" data-cat-section="03-operaciones">
+            <div class="flex items-center justify-between border-b border-brandBorder/60 pb-2.5">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">03</span>
+                    <h3 class="text-base sm:text-lg font-bold text-white tracking-wide">Operaciones, Workforce Management & Gobernanza</h3>
+                </div>
+                <span class="text-[11px] text-gray-400 font-medium">1 Protocolo</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+
+                <!-- CARD 8: STB LATE APPROVED -->
+                <div class="card-exec rounded-2xl p-5 flex flex-col justify-between space-y-4 presentation-card" data-keywords="stb smart time blocks late approved entradas tardias rh wfm auditoria nice protocolo alineacion retardos asistencias">
+                    <div class="space-y-3">
+                        <div class="flex items-start justify-between gap-2">
+                            <span class="badge bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                                <i class="fa-solid fa-clock-rotate-left"></i> Protocolo WFM
+                            </span>
+                            <button onclick="copyDeckLink('./03-Operaciones-y-WFM/STB-Late-Approved-2026/index.html', 'STB Late Approved')" class="text-gray-400 hover:text-white text-xs p-1" title="Copiar enlace">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                        <h4 class="text-base sm:text-lg font-bold text-white leading-snug">Protocolo y Alineación: STB Late Approved 2026</h4>
+                        <p class="text-xs text-gray-300 leading-relaxed font-normal">
+                            Flujo de aprobación en 2 pasos (RH ➔ WFM), matriz de responsabilidades, conciliación contra El Panóptico/NICE y control de ausentismo / retardos.
+                        </p>
+                    </div>
+                    <div class="pt-2 border-t border-white/5">
+                        <a href="./03-Operaciones-y-WFM/STB-Late-Approved-2026/index.html" class="btn-portal btn-celeste text-xs py-2.5 w-full">
+                            <i class="fa-solid fa-play"></i> Abrir Alineación Late Approved
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: ESTUDIOS & BENCHMARKS -->
+        <section class="space-y-4 presentation-section" data-cat-section="04-estudios">
+            <div class="flex items-center justify-between border-b border-brandBorder/60 pb-2.5">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-7 h-7 rounded-lg bg-yellow-500/20 text-brandAmarillo flex items-center justify-center font-bold text-xs">04</span>
+                    <h3 class="text-base sm:text-lg font-bold text-white tracking-wide">Estudios de Mercado & Benchmarks Competitivos</h3>
+                </div>
+                <span class="text-[11px] text-gray-400 font-medium">1 Estudio</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+
+                <!-- CARD 9: ESTUDIO DE MERCADO BENCHMARK 2026 -->
+                <div class="card-exec rounded-2xl p-5 flex flex-col justify-between space-y-4 presentation-card" data-keywords="estudio mercado benchmark competitivo 2026 precios tarifas teleperformance concentrix atento bpo mexico bilingue espanol sueldos costeo">
+                    <div class="space-y-3">
+                        <div class="flex items-start justify-between gap-2">
+                            <span class="badge bg-yellow-500/15 text-brandAmarillo border border-yellow-500/30">
+                                <i class="fa-solid fa-chart-pie"></i> Confidencial
+                            </span>
+                            <button onclick="copyDeckLink('./04-Estudios-y-Benchmarks/Estudio-Mercado-Competitivo-2026/index.html', 'Benchmark 2026')" class="text-gray-400 hover:text-white text-xs p-1" title="Copiar enlace">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                        <h4 class="text-base sm:text-lg font-bold text-white leading-snug">Estudio de Mercado y Benchmark Competitivo 2026</h4>
+                        <p class="text-xs text-gray-300 leading-relaxed font-normal">
+                            Análisis comparativo de tarifas por hora bilingüe vs. español, modelos de pricing de la industria BPO en México y posicionamiento de Telat Group.
+                        </p>
+                    </div>
+                    <div class="pt-2 border-t border-white/5">
+                        <a href="./04-Estudios-y-Benchmarks/Estudio-Mercado-Competitivo-2026/index.html" class="btn-portal btn-naranja text-xs py-2.5 w-full">
+                            <i class="fa-solid fa-play"></i> Abrir Estudio de Benchmark
+                        </a>
+                    </div>
+                </div>
+
             </div>
         </section>
 
     </main>
 
-    <!-- PIE DE PÁGINA CORPORATIVO -->
-    <footer class="w-full border-t border-brandOscuro/10 bg-white/90 backdrop-blur-md py-6 text-center mt-12">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-3">
-            <div class="text-xs font-body text-brandOscuro/70">
-                &copy; 2026 <strong>Telat Group</strong>. Portal Confidencial de Uso Exclusivo Directivo.
-            </div>
-            <div class="text-xs font-subheadings text-brandCeleste font-bold flex items-center gap-1.5">
-                <i class="fa-solid fa-shield-halved text-brandNaranja"></i> Identidad Corporativa Telat
-            </div>
+    <!-- FOOTER CORPORATIVO -->
+    <footer class="border-t border-brandBorder/60 py-6 px-4 sm:px-6 lg:px-8 mt-10 bg-[#121211] text-center text-xs text-gray-400 space-y-2">
+        <div class="flex items-center justify-center gap-2">
+            <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-5 w-auto opacity-75">
+            <span class="text-white font-semibold">Telat Group</span>
         </div>
+        <p class="text-[11px] text-gray-500">Bóveda Central de Presentaciones Ejecutivas · Ricardo García (rgarcia@telat-group.com)</p>
     </footer>
 
+    <!-- TOAST FLOTANTE DE COPIA -->
+    <div id="copyToast" class="fixed bottom-5 right-5 z-50 transform translate-y-24 opacity-0 pointer-events-none bg-brandOscuro border border-brandCeleste/40 text-white px-4 py-2.5 rounded-xl shadow-2xl flex items-center gap-2 text-xs font-semibold">
+        <i class="fa-solid fa-circle-check text-emerald-400"></i>
+        <span id="toastMsg">Enlace copiado al portapapeles</span>
+    </div>
+
+    <!-- INTERACTIVIDAD & FILTROS JS -->
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const clearBtn = document.getElementById('clearSearchBtn');
+        const cards = document.querySelectorAll('.presentation-card');
+        const sections = document.querySelectorAll('.presentation-section');
+        const filterBtns = document.querySelectorAll('.cat-filter-btn');
+        const totalCountEl = document.getElementById('totalDecksCount');
+
+        let currentCategory = 'all';
+
+        // Scroll suave al buscador
+        function scrollToSearch() {
+            searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            setTimeout(() => searchInput.focus(), 300);
+        }
+
+        // Limpiar búsqueda
+        function clearSearch() {
+            searchInput.value = '';
+            clearBtn.classList.add('hidden');
+            filterAll('', currentCategory);
+        }
+
+        // Filtro por Buscador
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase().trim();
+            if (query.length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+            filterAll(query, currentCategory);
+        });
+
+        // Filtro por Botón de Categoría
+        function filterCategory(cat) {
+            currentCategory = cat;
+            
+            filterBtns.forEach(btn => {
+                if (btn.getAttribute('data-cat') === cat) {
+                    btn.classList.remove('bg-white/5', 'text-gray-300');
+                    btn.classList.add('bg-brandCeleste', 'text-white', 'shadow-sm');
+                } else {
+                    btn.classList.remove('bg-brandCeleste', 'text-white', 'shadow-sm');
+                    btn.classList.add('bg-white/5', 'text-gray-300');
+                }
+            });
+
+            filterAll(searchInput.value.toLowerCase().trim(), currentCategory);
+        }
+
+        function filterAll(query, cat) {
+            let visibleCount = 0;
+
+            sections.forEach(section => {
+                const sectionCat = section.getAttribute('data-cat-section');
+                let sectionHasVisibleCards = false;
+
+                const sectionCards = section.querySelectorAll('.presentation-card');
+                sectionCards.forEach(card => {
+                    const keywords = card.getAttribute('data-keywords').toLowerCase();
+                    const text = card.textContent.toLowerCase();
+                    const matchesQuery = query === '' || keywords.includes(query) || text.includes(query);
+                    const matchesCat = cat === 'all' || cat === sectionCat;
+
+                    if (matchesQuery && matchesCat) {
+                        card.style.display = 'flex';
+                        sectionHasVisibleCards = true;
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                if (sectionHasVisibleCards) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+
+            if (totalCountEl) {
+                totalCountEl.textContent = visibleCount;
+            }
+        }
+
+        // Copiar enlace al portapapeles
+        function copyDeckLink(relPath, deckName) {
+            const fullUrl = new URL(relPath, window.location.href).href;
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(fullUrl).then(() => {
+                    showToast(`Enlace copiado: ${deckName}`);
+                }).catch(() => {
+                    promptCopy(fullUrl);
+                });
+            } else {
+                promptCopy(fullUrl);
+            }
+        }
+
+        function promptCopy(url) {
+            window.prompt('Copia este enlace directo:', url);
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('copyToast');
+            const toastMsg = document.getElementById('toastMsg');
+            toastMsg.textContent = msg;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 2500);
+        }
+    </script>
 </body>
 </html>
