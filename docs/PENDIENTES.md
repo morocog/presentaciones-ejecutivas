@@ -6,11 +6,11 @@
 
 ## 🔴 1. VERIFICACIONES PENDIENTES EN CALIENTE (seguras, no urgentes)
 
-- [ ] Probar la navegación móvil en el celular accediendo a `https://morocog.github.io/presentaciones-ejecutivas/`.
-- [ ] Validar el botón de "Copiar Enlace Directo" en móvil para compartir presentaciones específicas.
+- [x] Probar la navegación móvil en el celular accediendo a `https://morocog.github.io/presentaciones-ejecutivas/`. *(✅ Validado en Móvil)*
+- [x] Validar el botón de "Copiar Enlace Directo" en móvil para compartir presentaciones específicas. *(✅ Validado)*
 - [x] Eliminar el repositorio remoto `paginas-prueba` — **COMPLETADO 2026-09-27**: retirado de público, carpeta local eliminada y repositorio remoto borrado. Verificado con 404 autenticado.
 - [x] Eliminar los repositorios remotos `ai-itsm-integration` y `nlp-ticket-classifier` — **COMPLETADO 2026-09-27**: ambos retirados de público, carpetas locales eliminadas y repositorios remotos borrados. Verificado con 404 autenticado.
-- [ ] Confirmar que el micro-sitio público `tip-direccion` siga visible en `https://morocog.github.io/tip-direccion/` para los directivos de TIP México.
+- [x] Confirmar que el micro-sitio público `tip-direccion` siga visible en `https://morocog.github.io/tip-direccion/` para los directivos de TIP México. *(✅ Validado)*
 
 ---
 
