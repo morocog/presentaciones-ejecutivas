@@ -17,7 +17,7 @@
 ## 🟡 2. MEJORAS FUTURAS & ROADMAP
 
 - [ ] Incorporar el deck comercial interactivo de la campaña Movistar Portabilidad en `01-Propuestas-Comerciales/Movistar-Portabilidad/`.
-- [ ] Exportador de presentaciones a PDF de alta resolución con vista ejecutiva a 1 sola página cuando se requiera entrega impresa.
+- [x] Exportador de presentaciones a PDF de alta resolución con vista ejecutiva 16:9 panorámica — **COMPLETADO 2026-10-01**: Implementado estándar `@media print` en `Presentacion-Comercial-Telat` con división balanceada de 6 casos en 2 láminas horizontales de 3 columnas (3 y 3), sustitución de iframes por fichas mockup HD de software y compilador headless Chromium automatizado (`scripts/export_pdf.ps1`). Generado `Presentacion_Comercial_Telat_Group.pdf` (11 páginas vectoriales HD).
 - [ ] Script unificado en PowerShell para archivar micro-sitios públicos con 1 solo comando tras la firma de contratos.
 
 ---
