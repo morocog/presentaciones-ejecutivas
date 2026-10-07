@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diferenciadores Tecnológicos para el Instituto - Telat Group</title>
+
+  <!-- Modern Google Fonts: DM Sans & Montserrat con display swap -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN v3 (Configuración con tokens corporativos Telat) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            telat: {
+              celeste: '#3284C6',
+              naranja: '#EB5B27',
+              amarillo: '#FECA66',
+              oscuro: '#222221',
+              claro: '#FBFBFD'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* 1. TIPOGRAFÍAS CANÓNICAS TELAT */
+    @font-face {
+      font-family: 'Momo Trust';
+      src: local('Impact'), local('Arial Black');
+      font-weight: 800;
+      font-display: swap;
+    }
+
+    :root {
+      --oscuro: #222221;
+      --azul-claro: #FBFBFD;
+      --celeste: #3284C6;
+      --naranja: #EB5B27;
+      --amarillo: #FECA66;
+      --grad-vibrante: linear-gradient(135deg, var(--celeste) 0%, var(--naranja) 100%);
+    }
+
+    body {
+      background-color: var(--azul-claro);
+      color: var(--oscuro);
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .font-subheading,
+    .subheading {
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .font-body {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    /* Uso estricto de Momo Trust: única y exclusivamente para cifras o métricas aisladas */
+    .metric-number {
+      font-family: 'Momo Trust', sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    /* 2. CONTENEDOR Y DIAPOSITIVAS */
+    #presentation-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 1;
+      background-color: #FBFBFD;
+      box-sizing: border-box;
+      padding: 2.2rem 3.5rem 1.6rem 3.5rem;
+    }
+
+    .slide.active {
+      display: flex;
+      z-index: 10;
+      animation: slideFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes slideFadeIn {
+      from { opacity: 0; transform: scale(0.995); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* 3. ELEMENTOS DECORATIVOS & TARJETAS */
+    .card-tech {
+      background: #FFFFFF;
+      border: 1.5px solid rgba(50, 132, 198, 0.18);
+      border-radius: 1.25rem;
+      box-shadow: 0 8px 24px -4px rgba(34, 34, 33, 0.05);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .card-tech:hover {
+      border-color: rgba(235, 91, 39, 0.35);
+      box-shadow: 0 14px 28px -6px rgba(235, 91, 39, 0.09);
+    }
+
+    .card-tech::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--grad-vibrante);
+      opacity: 0.9;
+    }
+
+    /* Medallas y Píldoras Multi-ISO */
+    .kpi-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.22rem 0.62rem;
+      border-radius: 9999px;
+      font-size: 0.69rem;
+      font-weight: 700;
+      font-family: 'DM Sans', sans-serif;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    .kpi-pill-blue {
+      background: rgba(50, 132, 198, 0.1);
+      color: #3284C6;
+      border: 1px solid rgba(50, 132, 198, 0.28);
+    }
+
+    .kpi-pill-orange {
+      background: rgba(235, 91, 39, 0.1);
+      color: #EB5B27;
+      border: 1px solid rgba(235, 91, 39, 0.28);
+    }
+
+    .kpi-pill-green {
+      background: rgba(16, 185, 129, 0.1);
+      color: #059669;
+      border: 1px solid rgba(16, 185, 129, 0.28);
+    }
+
+    .kpi-pill-purple {
+      background: rgba(124, 58, 237, 0.1);
+      color: #7C3AED;
+      border: 1px solid rgba(124, 58, 237, 0.28);
+    }
+
+    .kpi-pill-cyan {
+      background: rgba(6, 182, 212, 0.1);
+      color: #0891B2;
+      border: 1px solid rgba(6, 182, 212, 0.28);
+    }
+
+    /* 4. CONTROLES EN PANTALLA (CENTRADOS INFERIORES SIN TRASLAPE) */
+    #nav-controls {
+      position: fixed;
+      bottom: 0.35rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    .nav-btn {
+      width: 1.85rem;
+      height: 1.85rem;
+      border-radius: 9999px;
+      background: var(--oscuro);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .nav-btn:hover {
+      background: var(--naranja);
+      transform: scale(1.05);
+    }
+
+    #slide-indicator {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #64748B;
+      padding: 0 0.4rem;
+    }
+
+    /* ==========================================================================
+       ESTÁNDAR CANÓNICO DE IMPRESIÓN Y EXPORTACIÓN A PDF (16:9 PANORÁMICO)
+       ========================================================================== */
+    @media print {
+      @page {
+        size: 16in 9in;
+        margin: 0;
+      }
+
+      *, *:before, *:after {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+        animation: none !important;
+        transition: none !important;
+      }
+
+      html, body {
+        width: 16in !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        background-color: #FBFBFD !important;
+      }
+
+      #presentation-container {
+        width: 16in !important;
+        height: auto !important;
+        display: block !important;
+        overflow: visible !important;
+      }
+
+      .slide {
+        position: relative !important;
+        inset: auto !important;
+        width: 16in !important;
+        height: 9in !important;
+        min-height: 9in !important;
+        max-height: 9in !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        padding: 2.2rem 3.5rem 1.6rem 3.5rem !important;
+        page-break-after: always !important;
+        page-break-inside: avoid !important;
+        break-after: page !important;
+        break-inside: avoid !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        background-color: #FBFBFD !important;
+      }
+
+      /* Forzar cuadrículas horizontales en motor Chromium de impresión */
+      .grid { display: grid !important; }
+      .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+      .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+
+      #nav-controls {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="antialiased">
+
+  <div id="presentation-container">
+
+    <!-- ====================================================================
+         SLIDE 1: PISO DE OPERACIÓN & ATENCIÓN CIUDADANA EN VIVO
+         ==================================================================== -->
+    <section class="slide active" id="slide-1" data-slide="1">
+
+      <!-- Header Superior de la Diapositiva -->
+      <div class="flex items-center justify-between pb-2 mb-1.5 border-b border-slate-200">
+        <div class="flex items-center gap-4">
+          <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-9 w-auto">
+          <div class="h-7 w-[2px] bg-slate-300"></div>
+          <div>
+            <span class="subheading text-xs font-bold uppercase tracking-widest text-[#3284C6] block">Propuesta Técnica · Atención Integral al Ciudadano</span>
+            <h1 class="subheading text-[1.35rem] font-bold text-[#222221] leading-tight">Tecnología de Piso en Vivo: Asistencia con Inteligencia Artificial y Protección de Datos</h1>
+          </div>
+        </div>
+        <div class="text-right">
+          <span class="subheading text-xs font-bold uppercase tracking-widest text-[#3284C6] bg-[#3284C6]/10 px-3 py-1 rounded-full border border-[#3284C6]/20">Telat Group · 2026</span>
+        </div>
+      </div>
+
+      <!-- Resumen Ejecutivo Superior -->
+      <div class="mb-2">
+        <p class="font-body text-[0.92rem] text-slate-700 leading-snug">
+          Asistimos al operador durante cada llamada: eliminamos tiempos de espera con respuestas asistidas por inteligencia artificial en un par de segundos, cerramos expedientes con folio en 20 segundos o menos y blindamos la privacidad de los datos ciudadanos bajo estándares internacionales.
+        </p>
+      </div>
+
+      <!-- 3 Tarjetas de Diferenciadores (Distribución Vertical Equilibrada y Tipografía Grande) -->
+      <div class="grid grid-cols-3 gap-5 flex-1 items-stretch my-1.5">
+
+        <!-- 1. Asistente con IA en Pantalla -->
+        <div class="card-tech p-6 flex flex-col justify-between">
+          
+          <!-- Bloque Superior: Encabezado -->
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="px-3 py-1 rounded-md bg-[#3284C6]/15 text-[#3284C6] text-xs font-bold tracking-wide uppercase font-subheading flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                1. Asistencia en Línea · IA Contextual
+              </span>
+              <span class="text-xs font-semibold text-slate-400 font-subheading">Copiloto en Pantalla</span>
+            </div>
+            <h2 class="subheading text-[1.28rem] font-bold text-[#222221] leading-tight mb-2">
+              Asistente Inteligente en Pantalla durante la Llamada
+            </h2>
+            <p class="font-body text-[13.2px] text-slate-600 leading-relaxed">
+              Copiloto con inteligencia artificial contextual que analiza la consulta en vivo y despliega la respuesta oficial y requisitos exactos en la pantalla del operador en un par de segundos, evitando manuales o transferencias.
+            </p>
+          </div>
+
+          <!-- Bloque Medio: Reto vs Solución -->
+          <div class="grid grid-cols-2 gap-3 my-2 text-[12px] font-body">
+            <div class="bg-rose-50 border border-rose-200/80 p-3.5 rounded-xl text-rose-800 flex flex-col justify-between">
+              <span class="font-bold block text-rose-900 mb-1 flex items-center gap-1 text-xs">
+                <svg class="w-3.5 h-3.5 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                Operación Tradicional:
+              </span>
+              <span>3 a 5 minutos de espera mientras el operador busca requisitos en papel o manuales.</span>
+            </div>
+            <div class="bg-emerald-50 border border-emerald-200/80 p-3.5 rounded-xl text-emerald-800 flex flex-col justify-between">
+              <span class="font-bold block text-emerald-900 mb-1 flex items-center gap-1 text-xs">
+                <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Innovación Telat (IA Asistiva):
+              </span>
+              <span>Requisitos normativos oficiales proyectados por IA en pantalla en un par de segundos.</span>
+            </div>
+          </div>
+
+          <!-- Bloque Visual: Simulación de Pantalla en Vivo -->
+          <div class="bg-slate-900 text-slate-100 p-4 rounded-xl font-body text-[11.8px] leading-relaxed border border-slate-700 shadow-inner my-1.5">
+            <div class="flex items-center justify-between text-[#3284C6] font-bold text-[11px] mb-1.5 font-subheading">
+              <span class="flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#3284C6]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                Copiloto de IA en Pantalla (Sugerencia Normativa en Vivo)
+              </span>
+              <span class="text-emerald-400 font-bold">IA Activa ✓</span>
+            </div>
+            <p class="text-slate-200 leading-snug">
+              "Motor de IA procesó el trámite: el ciudadano califica para <span class="text-[#FECA66] font-bold">Convenio de Regularización</span>. Cita sugerida en módulo más cercano: <span class="text-[#3284C6] font-semibold">Atención Norte (Jueves 10:30h)</span>."
+            </p>
+          </div>
+
+          <!-- Bloque Inferior: Indicador de Respaldo y Cifras de Impacto -->
+          <div>
+            <div class="bg-blue-50/80 border border-blue-100 px-3.5 py-2 rounded-lg text-xs font-body text-slate-700 flex items-center justify-between mb-2">
+              <span><strong class="text-[#3284C6]">Motor de IA:</strong> Catálogo Normativo 100%</span>
+              <span><strong class="text-[#3284C6]">Orientación:</strong> En un par de segundos</span>
+            </div>
+            <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
+              <div class="flex flex-col">
+                <span class="metric-number text-4xl text-[#3284C6]">-65%</span>
+                <span class="text-[10.5px] font-bold text-slate-600 font-subheading">Tiempo de Espera</span>
+              </div>
+              <div class="flex flex-col text-right">
+                <span class="metric-number text-4xl text-[#059669]">99%</span>
+                <span class="text-[10.5px] font-bold text-slate-600 font-subheading">Apego a Trámites</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 2. Registro y Tipificación Asistida por IA -->
+        <div class="card-tech p-6 flex flex-col justify-between">
+          
+          <!-- Bloque Superior: Encabezado -->
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="px-3 py-1 rounded-md bg-[#EB5B27]/15 text-[#EB5B27] text-xs font-bold tracking-wide uppercase font-subheading flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                2. Cierre Inmediato · Síntesis con IA
+              </span>
+              <span class="text-xs font-semibold text-slate-400 font-subheading">Expediente Único</span>
+            </div>
+            <h2 class="subheading text-[1.28rem] font-bold text-[#222221] leading-tight mb-2">
+              Registro y Tipificación Asistida por IA
+            </h2>
+            <p class="font-body text-[13.2px] text-slate-600 leading-relaxed">
+              Algoritmo de inteligencia artificial para síntesis que resume la llamada y genera la nota de atención homologada, registrando folios oficiales para canalizarlos al CRM del Instituto en 20 segundos o menos.
+            </p>
+          </div>
+
+          <!-- Bloque Medio: Reto vs Solución -->
+          <div class="grid grid-cols-2 gap-3 my-2 text-[12px] font-body">
+            <div class="bg-rose-50 border border-rose-200/80 p-3.5 rounded-xl text-rose-800 flex flex-col justify-between">
+              <span class="font-bold block text-rose-900 mb-1 flex items-center gap-1 text-xs">
+                <svg class="w-3.5 h-3.5 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                Operación Tradicional:
+              </span>
+              <span>Captura manual lenta y tardía con notas incompletas y antecedentes extraviados.</span>
+            </div>
+            <div class="bg-emerald-50 border border-emerald-200/80 p-3.5 rounded-xl text-emerald-800 flex flex-col justify-between">
+              <span class="font-bold block text-emerald-900 mb-1 flex items-center gap-1 text-xs">
+                <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Innovación Telat (Síntesis con IA):
+              </span>
+              <span>Resumen estructurado y folio inyectado al sistema mediante IA en 20 segundos o menos.</span>
+            </div>
+          </div>
+
+          <!-- Bloque Visual: Expediente Estructurado -->
+          <div class="bg-slate-900 text-slate-100 p-4 rounded-xl font-body text-[11.8px] leading-relaxed border border-slate-700 shadow-inner my-1.5">
+            <div class="flex items-center justify-between text-[#EB5B27] font-bold text-[11px] mb-1.5 font-subheading">
+              <span class="flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#EB5B27]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                Expediente Digital Estructurado por IA
+              </span>
+              <span class="text-emerald-400 font-bold">Folio Creado ✓</span>
+            </div>
+            <div class="text-[11px] text-slate-300 space-y-0.5">
+              <div><strong class="text-slate-400">ID Ciudadano:</strong> 12948291024 · <strong class="text-slate-400">Folio:</strong> INST-2026-9481 (Autogenerado)</div>
+              <div><strong class="text-slate-400">Trámite Asistido:</strong> Regularización y Aclaración de Saldo</div>
+              <div><strong class="text-slate-400">Resolución:</strong> Cita agendada en módulo · SMS de confirmación enviado</div>
+            </div>
+          </div>
+
+          <!-- Bloque Inferior: Indicador de Respaldo y Cifras de Impacto -->
+          <div>
+            <div class="bg-orange-50/80 border border-orange-100 px-3.5 py-2 rounded-lg text-xs font-body text-slate-700 flex items-center justify-between mb-2">
+              <span><strong class="text-[#EB5B27]">Integración:</strong> CRM Institucional con IA</span>
+              <span><strong class="text-[#EB5B27]">Trazabilidad:</strong> Notificación al Ciudadano</span>
+            </div>
+            <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
+              <div class="flex flex-col">
+                <span class="metric-number text-4xl text-[#EB5B27]">≤20s</span>
+                <span class="text-[10.5px] font-bold text-slate-600 font-subheading">Cierre y Tipificación</span>
+              </div>
+              <div class="flex flex-col text-right">
+                <span class="metric-number text-4xl text-[#059669]">100%</span>
+                <span class="text-[10.5px] font-bold text-slate-600 font-subheading">Expedientes con Folio</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 3. Grabación Segura y Protección de Datos con IA -->
+        <div class="card-tech p-6 flex flex-col justify-between">
+          
+          <!-- Bloque Superior: Encabezado -->
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="px-3 py-1 rounded-md bg-[#059669]/15 text-[#059669] text-xs font-bold tracking-wide uppercase font-subheading flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                3. Seguridad y Privacidad · Detección Inteligente
+              </span>
+              <span class="text-xs font-semibold text-slate-400 font-subheading">Protección PII</span>
+            </div>
+            <h2 class="subheading text-[1.28rem] font-bold text-[#222221] leading-tight mb-2">
+              Grabación Segura y Protección de Datos con IA
+            </h2>
+            <p class="font-body text-[13.2px] text-slate-600 leading-relaxed">
+              Mecanismo con inteligencia artificial que detecta patrones de datos sensibles o financieros y activa de forma autónoma el silenciamiento y pausa de grabación, garantizando que ninguna información quede almacenada.
+            </p>
+          </div>
+
+          <!-- Bloque Medio: Reto vs Solución -->
+          <div class="grid grid-cols-2 gap-3 my-2 text-[12px] font-body">
+            <div class="bg-rose-50 border border-rose-200/80 p-3.5 rounded-xl text-rose-800 flex flex-col justify-between">
+              <span class="font-bold block text-rose-900 mb-1 flex items-center gap-1 text-xs">
+                <svg class="w-3.5 h-3.5 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                Operación Tradicional:
+              </span>
+              <span>Riesgo de grabar datos bancarios o personales, exponiendo al Instituto a sanciones.</span>
+            </div>
+            <div class="bg-emerald-50 border border-emerald-200/80 p-3.5 rounded-xl text-emerald-800 flex flex-col justify-between">
+              <span class="font-bold block text-emerald-900 mb-1 flex items-center gap-1 text-xs">
+                <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Innovación Telat (Blindaje con IA):
+              </span>
+              <span>Detección y pausa autónoma por IA (cero datos confidenciales almacenados).</span>
+            </div>
+          </div>
+
+          <!-- Bloque Visual: Blindaje de Privacidad -->
+          <div class="bg-slate-900 text-slate-100 p-4 rounded-xl font-body text-[11.8px] leading-relaxed border border-slate-700 shadow-inner my-1.5">
+            <div class="flex items-center justify-between text-emerald-400 font-bold text-[11px] mb-1.5 font-subheading">
+              <span class="flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                Protocolo Inteligente de Blindaje Activo
+              </span>
+              <span class="text-emerald-400 font-bold">100% Seguro ✓</span>
+            </div>
+            <div class="flex items-center gap-2 text-[11px] text-slate-300">
+              <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold">Pausa Inteligente</span>
+              <span>Captura de Convenio / Datos Personales Sensibles</span>
+            </div>
+            <div class="text-[10.5px] text-slate-400 mt-1">Audio y pantalla enmascarados de forma autónoma por IA durante la transacción confidencial.</div>
+          </div>
+
+          <!-- Bloque Inferior: Indicador de Respaldo y Cifras de Impacto -->
+          <div>
+            <div class="bg-emerald-50/80 border border-emerald-100 px-3.5 py-2 rounded-lg text-xs font-body text-slate-700 flex items-center justify-between mb-2">
+              <span><strong class="text-[#059669]">Cifrado:</strong> Alta Seguridad en Reposo</span>
+              <span><strong class="text-[#059669]">Auditoría:</strong> Registro Inmutable</span>
+            </div>
+            <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
+              <div class="flex flex-col">
+                <span class="metric-number text-4xl text-[#059669]">100%</span>
+                <span class="text-[10.5px] font-bold text-slate-600 font-subheading">Protección de Datos</span>
+              </div>
+              <div class="flex flex-col text-right">
+                <span class="metric-number text-4xl text-[#3284C6]">0</span>
+                <span class="text-[10.5px] font-bold text-slate-600 font-subheading">Fugas de Información</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Cintillo Inferior Institucional: 2 Líneas Completas (Sin Puntos Suspensivos) -->
+      <div class="bg-white/95 border border-slate-200/90 rounded-xl px-5 py-2.5 flex flex-col gap-1.5 shadow-sm">
+        <!-- Línea 1: Impacto Directo al Ciudadano (Texto Completo) -->
+        <div class="flex items-center gap-2 text-slate-700">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#3284C6] flex-shrink-0 animate-pulse"></span>
+          <span class="font-subheading text-[12.5px] font-bold text-slate-900 flex-shrink-0">
+            Impacto Directo al Ciudadano:
+          </span>
+          <span class="font-body text-[12px] text-slate-600">
+            Atención telefónica ágil, empática y con antecedentes uniformes que facilitan el seguimiento y eliminan la fricción ciudadana.
+          </span>
+        </div>
+        <!-- Línea 2: Operación & Ciberseguridad + Certificaciones ISO -->
+        <div class="flex items-center justify-between pt-1 border-t border-slate-100">
+          <div class="flex items-center gap-1.5">
+            <span class="text-[10.5px] font-bold text-slate-500 uppercase tracking-wider font-subheading flex items-center gap-1">
+              <svg class="w-3.5 h-3.5 text-[#3284C6]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              Estándares de Operación & Ciberseguridad:
+            </span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="kpi-pill kpi-pill-blue">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 18v-6a9 9 0 0118 0v6M3 18a3 3 0 003 3h1a2 2 0 002-2v-4a2 2 0 00-2-2H4a1 1 0 01-1-1v0zm18 0a3 3 0 01-3 3h-1a2 2 0 01-2-2v-4a2 2 0 012-2h3a1 1 0 001-1v0z"/></svg>
+              ISO 18295-1 (Contact Centers)
+            </span>
+            <span class="kpi-pill kpi-pill-purple">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+              ISO 27001 (Ciberseguridad)
+            </span>
+            <span class="kpi-pill kpi-pill-cyan">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/></svg>
+              ISO 20000-1 (Gestión TI)
+            </span>
+            <span class="kpi-pill kpi-pill-green">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+              PCI-DSS v4.0
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================================
+         SLIDE 2: GOBERNANZA, CALIDAD TOTAL & DESPLIEGUE MASIVO
+         ==================================================================== -->
+    <section class="slide" id="slide-2" data-slide="2">
+
+      <!-- Header Superior de la Diapositiva -->
+      <div class="flex items-center justify-between pb-2 mb-1.5 border-b border-slate-200">
+        <div class="flex items-center gap-4">
+          <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-9 w-auto">
+          <div class="h-7 w-[2px] bg-slate-300"></div>
+          <div>
+            <span class="subheading text-xs font-bold uppercase tracking-widest text-[#3284C6] block">Propuesta Técnica · Gobernanza y Planificación</span>
+            <h1 class="subheading text-[1.35rem] font-bold text-[#222221] leading-tight">Gobernanza Operativa: Evaluación con IA y Garantía de Despliegue desde 0 hasta 450 Agentes</h1>
+          </div>
+        </div>
+        <div class="text-right">
+          <span class="subheading text-xs font-bold uppercase tracking-widest text-[#3284C6] bg-[#3284C6]/10 px-3 py-1 rounded-full border border-[#3284C6]/20">Telat Group · 2026</span>
+        </div>
+      </div>
+
+      <!-- Resumen Ejecutivo Superior -->
+      <div class="mb-2">
+        <p class="font-body text-[0.92rem] text-slate-700 leading-snug">
+          Garantizamos la ejecución impecable del contrato mediante dos pilares estratégicos: supervisión de calidad con inteligencia artificial con cobertura de hasta el 100% y garantía de despliegue desde 0 hasta 450 agentes con un plan estructurado y escalonado.
+        </p>
+      </div>
+
+      <!-- 2 Grandes Bloques Ejecutivos (Equilibrados Horizontal y Verticalmente) -->
+      <div class="grid grid-cols-2 gap-5 flex-1 items-stretch my-1">
+
+        <!-- 4. Auditoría Integral de Calidad con IA -->
+        <div class="card-tech p-6 flex flex-col justify-between">
+          
+          <!-- Bloque Superior: Encabezado -->
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="px-3 py-1 rounded-md bg-[#3284C6]/15 text-[#3284C6] text-xs font-bold tracking-wide uppercase font-subheading flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                4. Auditoría Integral de Calidad · Analítica con IA
+              </span>
+              <span class="text-xs font-semibold text-slate-400 font-subheading">Supervisión Continua</span>
+            </div>
+            <h2 class="subheading text-[1.32rem] font-bold text-[#222221] leading-tight mb-2">
+              Auditoría con Inteligencia Artificial: Cobertura Flexible de Hasta el 100%
+            </h2>
+            <p class="font-body text-[13.5px] text-slate-600 leading-relaxed">
+              Superamos las limitaciones del muestreo ciego tradicional (1.5%). Algoritmos de inteligencia artificial analizan de manera continua la voz y transcripción para evaluar muestras desde el 5%, 10% o 50%, con capacidad de alcanzar hasta el 100% de las llamadas según los requerimientos del Instituto, verificando el trato digno, la empatía y el apego normativo.
+            </p>
+          </div>
+
+          <!-- Bloque Medio: Reto vs Solución -->
+          <div class="grid grid-cols-2 gap-3 my-2 text-[12.2px] font-body">
+            <div class="bg-rose-50 border border-rose-200/80 p-3.5 rounded-xl text-rose-800 flex flex-col justify-between">
+              <span class="font-bold block text-rose-900 mb-1 flex items-center gap-1 text-xs">
+                <svg class="w-3.5 h-3.5 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                Muestreo Tradicional (1.5%):
+              </span>
+              <span>El 98.5% queda a ciegas; las malas prácticas se detectan hasta que el ciudadano interpone una queja formal.</span>
+            </div>
+            <div class="bg-emerald-50 border border-emerald-200/80 p-3.5 rounded-xl text-emerald-800 flex flex-col justify-between">
+              <span class="font-bold block text-emerald-900 mb-1 flex items-center gap-1 text-xs">
+                <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Modelo Telat (Hasta 100% con IA):
+              </span>
+              <span>Cobertura flexible adaptada al pliego con IA analítica; evaluación objetiva y refuerzo formativo inmediato en piso.</span>
+            </div>
+          </div>
+
+          <!-- Bloque Visual: Rúbrica y Scorecard -->
+          <div class="space-y-2 my-1.5">
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-[11.5px] font-body text-slate-700">
+              <span class="font-bold text-slate-800 block mb-1.5 font-subheading flex items-center gap-1 text-xs">
+                <svg class="w-3.5 h-3.5 text-[#3284C6]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                Dimensiones Clave Evaluadas por IA en la Rúbrica Oficial:
+              </span>
+              <div class="grid grid-cols-4 gap-2 text-center font-medium">
+                <div class="bg-white p-2 rounded-lg border border-slate-200">
+                  <div class="text-[10px] text-slate-500 mb-0.5">Trato Digno / Empatía</div>
+                  <div class="font-bold text-[#3284C6] text-sm">30%</div>
+                </div>
+                <div class="bg-white p-2 rounded-lg border border-slate-200">
+                  <div class="text-[10px] text-slate-500 mb-0.5">Apego a Requisitos</div>
+                  <div class="font-bold text-[#3284C6] text-sm">35%</div>
+                </div>
+                <div class="bg-white p-2 rounded-lg border border-slate-200">
+                  <div class="text-[10px] text-slate-500 mb-0.5">Identificación Ciudadano</div>
+                  <div class="font-bold text-[#3284C6] text-sm">20%</div>
+                </div>
+                <div class="bg-white p-2 rounded-lg border border-slate-200">
+                  <div class="text-[10px] text-slate-500 mb-0.5">Cierre y Folio</div>
+                  <div class="font-bold text-[#3284C6] text-sm">15%</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Scorecard Visual -->
+            <div class="bg-slate-900 text-slate-100 p-3 rounded-xl font-body text-[11px] leading-relaxed border border-slate-700 shadow-inner flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                <span class="text-slate-200 font-semibold">Calificación Promedio Institucional (Auditoría Continua con IA):</span>
+              </div>
+              <div class="flex items-center gap-2 font-subheading">
+                <span class="text-emerald-400 font-bold text-sm">98.4 / 100</span>
+                <span class="text-slate-400 text-[10px]">(Excelente Apego)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bloque Inferior: Indicador de Respaldo y Cifras de Impacto -->
+          <div>
+            <div class="bg-blue-50/80 border border-blue-100 px-3.5 py-2 rounded-lg text-xs font-body text-slate-700 flex items-center justify-between mb-2">
+              <span><strong class="text-[#3284C6]">Motor de Evaluación:</strong> IA Multidimensional en Voz y Texto</span>
+              <span><strong class="text-[#3284C6]">Retroalimentación:</strong> Refuerzo Formativo en Piso</span>
+            </div>
+            <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <span class="metric-number text-4xl text-[#3284C6]">Hasta 100%</span>
+                <div class="flex flex-col">
+                  <span class="text-[10.5px] font-bold text-slate-800 font-subheading">Supervisión con IA</span>
+                  <span class="text-[10px] text-slate-500">Muestreo Flexible según Pliego</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-2.5 text-right">
+                <div class="flex flex-col">
+                  <span class="text-[10.5px] font-bold text-slate-800 font-subheading">Apego al Protocolo</span>
+                  <span class="text-[10px] text-slate-500">Calidad Homogénea</span>
+                </div>
+                <span class="metric-number text-4xl text-[#059669]">+95%</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 5. Modelo de Capacidad y Despliegue Rápido -->
+        <div class="card-tech p-6 flex flex-col justify-between">
+          
+          <!-- Bloque Superior: Encabezado -->
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="px-3 py-1 rounded-md bg-[#EB5B27]/15 text-[#EB5B27] text-xs font-bold tracking-wide uppercase font-subheading flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                5. Certeza de Despliegue · Planificación con IA
+              </span>
+              <span class="text-xs font-semibold text-slate-400 font-subheading">Capacidad Comprobada</span>
+            </div>
+            <h2 class="subheading text-[1.32rem] font-bold text-[#222221] leading-tight mb-2">
+              Garantía de Despliegue: Desde 0 hasta 450 Agentes
+            </h2>
+            <p class="font-body text-[13.5px] text-slate-600 leading-relaxed">
+              Plan estructurado y escalonado respaldado por modelado predictivo de Workforce Management e IA para proyectar curvas de aprendizaje, rotación y simulación de capacidad en site y aulas continuas, garantizando el arranque puntual sin riesgos de desfase.
+            </p>
+          </div>
+
+          <!-- Bloque Medio: Reto vs Solución -->
+          <div class="grid grid-cols-2 gap-3 my-2 text-[12.2px] font-body">
+            <div class="bg-rose-50 border border-rose-200/80 p-3.5 rounded-xl text-rose-800 flex flex-col justify-between">
+              <span class="font-bold block text-rose-900 mb-1 flex items-center gap-1 text-xs">
+                <svg class="w-3.5 h-3.5 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                Operación Tradicional:
+              </span>
+              <span>Retrasos por saturación de aulas e instructores improvisados, arriesgando el arranque del servicio en Día 1.</span>
+            </div>
+            <div class="bg-emerald-50 border border-emerald-200/80 p-3.5 rounded-xl text-emerald-800 flex flex-col justify-between">
+              <span class="font-bold block text-emerald-900 mb-1 flex items-center gap-1 text-xs">
+                <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Innovación Telat (Modelado con IA):
+              </span>
+              <span>Dimensionamiento predictivo de WFM, aulas continuas e instructores con curva acelerada asistida por simulador.</span>
+            </div>
+          </div>
+
+          <!-- Bloque Visual: Fases de Despliegue y Site -->
+          <div class="space-y-2 my-1.5">
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-[11.5px] font-body text-slate-700">
+              <span class="font-bold text-slate-800 block mb-1.5 font-subheading flex items-center gap-1 text-xs">
+                <svg class="w-3.5 h-3.5 text-[#EB5B27]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                Plan Estructurado de Despliegue Asistido por WFM e IA (Adaptable a Semanas del Instituto):
+              </span>
+              <div class="grid grid-cols-3 gap-2 text-center font-medium">
+                <div class="bg-white p-2 rounded-lg border border-slate-200">
+                  <div class="text-[9.5px] text-slate-400">Fase 1</div>
+                  <div class="font-bold text-[#EB5B27] text-sm">Atracción & Filtros</div>
+                  <div class="text-[9px] text-slate-500 mt-0.5">Perfilamiento & Filtros Inteligentes</div>
+                </div>
+                <div class="bg-white p-2 rounded-lg border border-slate-200">
+                  <div class="text-[9.5px] text-slate-400">Fase 2</div>
+                  <div class="font-bold text-[#EB5B27] text-sm">Capacitación & Aulas</div>
+                  <div class="text-[9px] text-slate-500 mt-0.5">Simulación de Llamadas y Calidad</div>
+                </div>
+                <div class="bg-white p-2 rounded-lg border border-slate-200">
+                  <div class="text-[9.5px] text-slate-400">Fase 3</div>
+                  <div class="font-bold text-emerald-600 text-sm">Operación en Vivo</div>
+                  <div class="text-[9px] text-slate-500 mt-0.5">Curva al 100% en Día 1</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Site & Instructores Visual -->
+            <div class="bg-slate-900 text-slate-100 p-3 rounded-xl font-body text-[11px] leading-relaxed border border-slate-700 shadow-inner flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                <span class="text-slate-200 font-semibold">Dimensionamiento Predictivo:</span>
+              </div>
+              <div class="flex items-center gap-2 font-subheading">
+                <span class="text-[#FECA66] font-bold text-xs">Plan Estructurado en Semanas</span>
+                <span class="text-slate-400 text-[10px]">· Ajustable a los tiempos del Instituto</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bloque Inferior: Indicador de Respaldo y Cifras de Impacto -->
+          <div>
+            <div class="bg-orange-50/80 border border-orange-100 px-3.5 py-2.5 rounded-lg text-xs font-body text-slate-700 flex items-center justify-between mb-2">
+              <span><strong class="text-[#EB5B27]">Infraestructura de Site:</strong> Aulas y Posiciones Listas</span>
+              <span><strong class="text-[#EB5B27]">Curva Operativa:</strong> Aceleración Asistida por IA</span>
+            </div>
+            <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <span class="metric-number text-4xl text-[#EB5B27]">0 a 450</span>
+                <div class="flex flex-col">
+                  <span class="text-[10.5px] font-bold text-slate-800 font-subheading">Agentes en Despliegue</span>
+                  <span class="text-[10px] text-slate-500">Capacidad Total en Site</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-2.5 text-right">
+                <div class="flex flex-col">
+                  <span class="text-[10.5px] font-bold text-slate-800 font-subheading">Cumplimiento en Día 1</span>
+                  <span class="text-[10px] text-slate-500">Cero Riesgo de Retraso</span>
+                </div>
+                <span class="metric-number text-4xl text-[#059669]">100%</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Cintillo Inferior: Gobernanza, Calidad Total & Ecosistema Multi-ISO Telat (2 Líneas Completas) -->
+      <div class="bg-white/95 border border-slate-200/90 rounded-xl px-5 py-2.5 flex flex-col gap-1.5 shadow-sm">
+        <!-- Línea 1: Gobernanza Institucional & Blindaje de SLA (Texto Completo) -->
+        <div class="flex items-center gap-2 text-slate-700">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#059669] flex-shrink-0 animate-pulse"></span>
+          <span class="font-subheading text-[12.5px] font-bold text-slate-900 flex-shrink-0">
+            Gobernanza Institucional & Blindaje de SLA:
+          </span>
+          <span class="font-body text-[12px] text-slate-600">
+            Auditoría integral asistida por inteligencia artificial, resiliencia operativa multisitio y apego normativo contractual comprobado.
+          </span>
+        </div>
+        <!-- Línea 2: Marco de Gobernanza & Calidad + Certificaciones ISO -->
+        <div class="flex items-center justify-between pt-1 border-t border-slate-100">
+          <div class="flex items-center gap-1.5">
+            <span class="text-[10.5px] font-bold text-slate-500 uppercase tracking-wider font-subheading flex items-center gap-1">
+              <svg class="w-3.5 h-3.5 text-[#059669]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              Marco de Gobernanza & Calidad Institucional:
+            </span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="kpi-pill kpi-pill-green">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+            ISO 9001 (Calidad)
+          </span>
+          <span class="kpi-pill kpi-pill-blue">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            ISO 22301 (Continuidad)
+          </span>
+          <span class="kpi-pill kpi-pill-purple">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
+            ISO 37001 (Antisoborno)
+          </span>
+          <span class="kpi-pill kpi-pill-orange">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+            Distintivo ESR 2026
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  </div>
+
+  <!-- Controles flotantes en pantalla (Centrados abajo, ocultos en impresión/PDF) -->
+  <div id="nav-controls">
+    <button class="nav-btn" onclick="prevSlide()" title="Diapositiva Anterior">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+    </button>
+    <span id="slide-indicator">1 / 2</span>
+    <button class="nav-btn" onclick="nextSlide()" title="Siguiente Diapositiva">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 2;
+
+    function showSlide(index) {
+      if (index < 1) index = 1;
+      if (index > totalSlides) index = totalSlides;
+      currentSlide = index;
+
+      document.querySelectorAll('.slide').forEach((slide, idx) => {
+        if (idx + 1 === currentSlide) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+
+      const indicator = document.getElementById('slide-indicator');
+      if (indicator) {
+        indicator.textContent = `${currentSlide} / ${totalSlides}`;
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        showSlide(currentSlide + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        showSlide(currentSlide - 1);
+      }
+    }
+
+    // Navegación por teclado
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        prevSlide();
+      }
+    });
+
+    // Navegación inicial por URL hash
+    if (window.location.hash === '#slide-2') {
+      showSlide(2);
+    } else {
+      showSlide(1);
+    }
+  </script>
+
+</body>
+</html>
