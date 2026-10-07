@@ -499,7 +499,7 @@
               <!-- Detalle de Aulas Ocupadas (Grupo / Agentes) -->
               <td v-if="!modoTablaCompacto" class="px-4 py-2 font-medium text-slate-500">
                 <div v-if="semana.detalleAulas.length > 0" class="flex flex-wrap gap-1">
-                  <span v-for="da in semana.detalleAulas" class="px-1.5 py-0.5 bg-slate-100 border border-slate-200 text-[10px] rounded text-slate-600">
+                  <span v-for="da in semana.detalleAulas" :key="da.nombreAula + da.turno" class="px-1.5 py-0.5 bg-slate-100 border border-slate-200 text-[10px] rounded text-slate-600">
                     <strong>{{ da.nombreAula }} (T{{ da.turno }})</strong>: {{ da.hc }} ag. <span class="text-[9px] text-slate-400">({{ da.origen }})</span>
                   </span>
                 </div>
@@ -587,7 +587,9 @@
         const shrinkageGestion = ref(5);       
         const duracionNesting = ref(1);        
         const rendimientoNesting = ref(60);     
-        const autoBackfill = ref(true);         
+        
+        // Auto-Backfill: false por defecto para respetar el cronograma de 22 olas preprogramadas
+        const autoBackfill = ref(false);         
 
         // Rampa Post-Nesting
         const duracionRampa = ref(4);
@@ -702,7 +704,7 @@
           if (capacitadoresTotales.value < 1) errores.push("Debe contar con al menos 1 capacitador en plantilla.");
           if (semanasSimulacion.value < 1) errores.push("Semanas simuladas debe ser ≥ 1.");
           
-          olas.value.forEach((o, i) => {
+          olas.value.forEach((o) => {
             if (o.cantidadInicial < 1) {
               errores.push(`La ${o.nombre} debe solicitar al menos 1 agente.`);
             }
@@ -723,7 +725,6 @@
           let instanceCounter = 0; 
 
           semanas.forEach((fechaSemanaStr, index) => {
-            const fechaSemana = new Date(fechaSemanaStr + "T00:00:00");
             let altasRealesSemana = 0;
 
             // Calcular plantilla total física activa en Ops (Roster comercial)
@@ -764,196 +765,210 @@
             }
 
             // CORRECCIÓN MATEMÁTICA: Backfill Inteligente Consciente de la Tubería (Pipeline-Aware)
+            // Se inyecta en bloques manejables acordes a la capacidad del site (agentesDefault)
             if (autoBackfill.value) {
-              // Calcular total de agentes que YA están comprometidos en el sistema:
-              // Agentes activos + en aula (Training) + en Nesting + agentes esperando en cola
               let totalComprometido = currentHC_Ops_Roster + currentHC_Training + currentHC_Nesting;
               colaEspera.forEach(g => {
                 totalComprometido += g.totalAgentes;
               });
 
-              // Solo solicitamos la diferencia neta que la tubería actual NO alcanzará a cubrir
-
-              const deficitReal = Math.max(0, metaHc.value - totalComprometido);
-              if (deficitReal > 0 && index > 0 && index % 2 === 0) {
+              const deficitReal = metaHc.value - totalComprometido;
+              if (deficitReal > 0) {
+                const tamanoBackfill = Math.min(deficitReal, agentesDefault.value);
                 colaEspera.push({
-                  idGroup: `backfill_${index}`,
-                  nombre: `Backfill Auto S${index + 1}`,
-                  totalAgentes: Math.min(deficitReal, agentesDefault.value),
-                  duracion: duracionEstandar.value,
+                  idGroup: `backfill_${fechaSemanaStr}_${index}`,
+                  nombre: `Backfill S${index + 1}`,
+                  totalAgentes: tamanoBackfill,
+                  duracion: duracionEstandar.value, 
                   tasaTraining: tasaTrainingSemanalDefault.value,
                   tasaOps: tasaOpsSemanalDefault.value
                 });
               }
             }
 
-            // Asignación de Cola de Espera a Aulas e Instructores Físicos
-            let instructoresLibres = capacitadoresTotales.value;
-            let aulasFisicasDisponibles = [];
-            aulasFisicas.value.forEach(a => {
-              for (let t = 1; t <= (a.turnos || 1); t++) {
-                aulasFisicasDisponibles.push({
-                  idAula: a.id,
-                  nombreAula: a.nombre,
-                  capacidad: a.capacidad || 20,
-                  turno: t,
-                  ocupada: false
-                });
+            // Despachar Cola de Espera aplicando las limitantes físicas, turnos e instructores
+            let aulasOcupacionActual = {};
+            trackAulasActivas.forEach(a => {
+              if (a.fase === "Training") {
+                aulasOcupacionActual[a.aulaFisicaId] = (aulasOcupacionActual[a.aulaFisicaId] || 0) + 1;
               }
             });
 
-            // Marcar aulas ocupadas por clases activas en Training o Nesting
-            trackAulasActivas.forEach(act => {
-              if (act.fase === "Training" || act.fase === "Nesting") {
-                const found = aulasFisicasDisponibles.find(af => af.idAula === act.idAula && af.turno === act.turno && !af.ocupada);
-                if (found) {
-                  found.ocupada = true;
-                }
-                if (act.fase === "Training") {
-                  instructoresLibres--;
-                }
+            let capacitadoresOcupados = trackAulasActivas.filter(a => a.fase === "Training").length;
+
+            let qIdx = 0;
+            while (qIdx < colaEspera.length && capacitadoresOcupados < capacitadoresTotales.value) {
+              const grupo = colaEspera[qIdx];
+              
+              if (grupo.totalAgentes <= 0) {
+                qIdx++;
+                continue;
               }
-            });
 
-            // Asignar elementos de colaEspera a aulas libres e instructores libres
-            let nuevaColaEspera = [];
-            colaEspera.forEach(grupo => {
-              let agentesRestantes = grupo.totalAgentes;
-              while (agentesRestantes > 0) {
-                const aulaLibre = aulasFisicasDisponibles.find(af => !af.ocupada);
-                if (!aulaLibre || instructoresLibres <= 0) {
-                  // No hay aula o instructor -> Queda en cola de espera
-                  nuevaColaEspera.push({
-                    ...grupo,
-                    totalAgentes: agentesRestantes
-                  });
-                  break;
-                }
+              // Buscar aulas físicas con turnos disponibles
+              const aulasLibres = aulasFisicas.value.filter(a => {
+                const ocupados = aulasOcupacionActual[a.id] || 0;
+                return ocupados < (a.turnos || 1);
+              });
 
-                // Asignar subgrupo
-                const capPedagogica = Math.min(limitePedagogico.value, aulaLibre.capacidad);
-                const hcAsignar = Math.min(agentesRestantes, capPedagogica);
-                aulaLibre.ocupada = true;
-                instructoresLibres--;
-                altasRealesSemana += hcAsignar;
-                instanceCounter++;
+              if (aulasLibres.length === 0) {
+                break; // Sin infraestructura libre
+              }
 
+              // Ordenar de mayor a menor capacidad efectiva
+              aulasLibres.sort((a, b) => {
+                const capEffA = Math.min(a.capacidad, limitePedagogico.value);
+                const capEffB = Math.min(b.capacidad, limitePedagogico.value);
+                return capEffB - capEffA;
+              });
+
+              const aulaAsignar = aulasLibres[0];
+              const capMaxEfectiva = Math.min(aulaAsignar.capacidad, limitePedagogico.value);
+              const agentesAIniciar = Math.min(grupo.totalAgentes, capMaxEfectiva);
+
+              if (agentesAIniciar > 0) {
+                const turnoAsignado = (aulasOcupacionActual[aulaAsignar.id] || 0) + 1;
+                
                 trackAulasActivas.push({
-                  idInstance: `inst_${instanceCounter}`,
-                  idAula: aulaLibre.idAula,
-                  nombreAula: aulaLibre.nombreAula,
-                  turno: aulaLibre.turno,
-                  nombreGrupo: grupo.nombre,
-                  fase: "Training",
-                  semanasEnFase: 0,
+                  idInstancia: `inst_${aulaAsignar.id}_${fechaSemanaStr}_${++instanceCounter}`, 
+                  aulaFisicaId: aulaAsignar.id,
+                  nombreAula: aulaAsignar.nombre,
+                  nombreOlaOrigen: grupo.nombre,
+                  hcActual: agentesAIniciar,
                   duracionTraining: grupo.duracion,
+                  semanasActivas: 0,
+                  fase: "Training",
                   tasaTraining: grupo.tasaTraining,
                   tasaOps: grupo.tasaOps,
-                  hcActual: hcAsignar,
-                  hcInicial: hcAsignar
+                  turno: turnoAsignado,
+                  semanasOpsActivas: 0 
                 });
 
-                agentesRestantes -= hcAsignar;
+                altasRealesSemana += agentesAIniciar;
+                grupo.totalAgentes -= agentesAIniciar;
+                
+                aulasOcupacionActual[aulaAsignar.id] = (aulasOcupacionActual[aulaAsignar.id] || 0) + 1;
+                capacitadoresOcupados++;
+              }
+
+              if (grupo.totalAgentes <= 0) {
+                qIdx++;
+              }
+            }
+
+            colaEspera = colaEspera.filter(g => g.totalAgentes > 0);
+
+            // Attrition semanal teórico
+            let bajasSemana = 0;
+            trackAulasActivas.forEach(aula => {
+              if (aula.fase === "Training" || aula.fase === "Nesting") {
+                const bajas = Math.round(aula.hcActual * (aula.tasaTraining / 100));
+                aula.hcActual = Math.max(0, aula.hcActual - bajas);
+                bajasSemana += bajas;
+              } else if (aula.fase === "Ops") {
+                const bajas = Math.round(aula.hcActual * (aula.tasaOps / 100));
+                aula.hcActual = Math.max(0, aula.hcActual - bajas);
+                bajasSemana += bajas;
               }
             });
-            colaEspera = nuevaColaEspera;
 
-            // Procesar bajas y avance de semanas en trackAulasActivas
-            let bajasSemana = 0;
-            let detalleAulasSemana = [];
+            // Consolidar métricas semanales
+            let enCapacitacion = 0;
+            let enNesting = 0;
+            let hcOpsRoster = 0;
+            let hcOpsProductivo = 0;
+            let aulasOcupadasReporte = 0;
+            let instructoresOcupadosReporte = 0;
+            let detalleAulasSemanales = [];
 
             trackAulasActivas.forEach(aula => {
               if (aula.fase === "Training") {
-                const bajas = Math.round(aula.hcActual * (aula.tasaTraining / 100));
-                bajasSemana += bajas;
-                aula.hcActual = Math.max(0, aula.hcActual - bajas);
-                aula.semanasEnFase++;
-
-                detalleAulasSemana.push({
+                enCapacitacion += aula.hcActual;
+                aulasOcupadasReporte++;
+                instructoresOcupadosReporte++;
+                detalleAulasSemanales.push({
                   nombreAula: aula.nombreAula,
-                  turno: aula.turno,
                   hc: aula.hcActual,
-                  origen: aula.nombreGrupo
+                  origen: aula.nombreOlaOrigen,
+                  turno: aula.turno
                 });
-
-                if (aula.semanasEnFase >= aula.duracionTraining) {
-                  aula.fase = duracionNesting.value > 0 ? "Nesting" : "Ops";
-                  aula.semanasEnFase = 0;
-                }
               } else if (aula.fase === "Nesting") {
-                const bajas = Math.round(aula.hcActual * (aula.tasaTraining / 100));
-                bajasSemana += bajas;
-                aula.hcActual = Math.max(0, aula.hcActual - bajas);
-                aula.semanasEnFase++;
-
-                detalleAulasSemana.push({
-                  nombreAula: aula.nombreAula,
-                  turno: aula.turno,
-                  hc: aula.hcActual,
-                  origen: `${aula.nombreGrupo} (Nesting)`
-                });
-
-                if (aula.semanasEnFase >= duracionNesting.value) {
-                  aula.fase = "Ops";
-                  aula.semanasEnFase = 0;
-                }
+                enNesting += aula.hcActual;
+                hcOpsProductivo += aula.hcActual * (rendimientoNesting.value / 100);
               } else if (aula.fase === "Ops") {
-                const bajas = Math.round(aula.hcActual * (aula.tasaOps / 100));
-                bajasSemana += bajas;
-                aula.hcActual = Math.max(0, aula.hcActual - bajas);
-                aula.semanasEnFase++;
+                hcOpsRoster += aula.hcActual;
+                
+                let factorRampa = 1.0;
+                if (aula.semanasOpsActivas < duracionRampa.value) {
+                  const rendInicial = rendimientoInicialRampa.value / 100;
+                  factorRampa = rendInicial + ((1 - rendInicial) * (aula.semanasOpsActivas / duracionRampa.value));
+                }
+
+                hcOpsProductivo += aula.hcActual * factorRampa * (1 - (shrinkageTotal.value / 100));
               }
             });
 
-            // Recalcular métricas consolidadas de la semana
-            let finalHC_Ops = 0;
-            let finalHC_Training = 0;
-            let finalHC_Nesting = 0;
-            let finalAulasActivas = 0;
-
-            trackAulasActivas.forEach(a => {
-              if (a.fase === "Ops") finalHC_Ops += a.hcActual;
-              if (a.fase === "Training") {
-                finalHC_Training += a.hcActual;
-                finalAulasActivas++;
-              }
-              if (a.fase === "Nesting") {
-                finalHC_Nesting += a.hcActual;
-                finalAulasActivas++;
-              }
-            });
-
-            const shrinkPct = shrinkageTotal.value / 100;
-            const hcOpsProductivo = Math.round(finalHC_Ops * (1 - shrinkPct));
-            const diferencia = metaHc.value - finalHC_Ops;
-            const cumplimiento = metaHc.value > 0 ? Math.round((finalHC_Ops / metaHc.value) * 100) : 0;
-            const totalCola = colaEspera.reduce((acc, g) => acc + g.totalAgentes, 0);
+            hcOpsProductivo = Math.round(hcOpsProductivo);
+            const diferencia = metaHc.value - hcOpsRoster; 
+            const cumplimiento = metaHc.value > 0 ? (hcOpsRoster / metaHc.value) * 100 : 0;
+            const totalPendientesCola = colaEspera.reduce((sum, g) => sum + g.totalAgentes, 0);
 
             resultado.push({
               semanaIndex: index + 1,
               fecha: fechaSemanaStr,
               altas: altasRealesSemana,
-              aulasActivas: finalAulasActivas,
-              detalleAulas: detalleAulasSemana,
-              instructoresOcupados: capacitadoresTotales.value - Math.max(0, instructoresLibres),
-              enCapacitacion: finalHC_Training,
-              enNesting: finalHC_Nesting,
-              hcOpsRoster: finalHC_Ops,
-              hcOpsProductivo: hcOpsProductivo,
-              diferencia: diferencia,
-              cumplimiento: cumplimiento,
+              enCapacitacion,
+              enNesting,
+              hcOpsRoster,
+              hcOpsProductivo,
+              aulasActivas: aulasOcupadasReporte,
+              detalleAulas: detalleAulasSemanales,
+              instructoresOcupados: instructoresOcupadosReporte,
+              diferencia,
+              cumplimiento: cumplimiento.toFixed(1),
               bajasTotales: bajasSemana,
-              colaEsperaFinal: totalCola
+              colaEsperaFinal: totalPendientesCola
+            });
+
+            // Transiciones de fases
+            trackAulasActivas.forEach(aula => {
+              if (aula.fase === "Training") {
+                aula.semanasActivas += 1;
+                if (aula.semanasActivas >= aula.duracionTraining) {
+                  aula.fase = duracionNesting.value > 0 ? "Nesting" : "Ops";
+                  aula.semanasActivas = 0;
+                }
+              } else if (aula.fase === "Nesting") {
+                aula.semanasActivas += 1;
+                if (aula.semanasActivas >= duracionNesting.value) {
+                  aula.fase = "Ops";
+                  aula.semanasOpsActivas = 0; 
+                }
+              } else if (aula.fase === "Ops") {
+                aula.semanasOpsActivas += 1; 
+              }
             });
           });
 
           return resultado;
         });
 
-        // KPIs Derivados
+        // --- REPORTES DE CONTROL ---
         const semanasHastaMeta = computed(() => {
-          const idx = proyeccion.value.findIndex(s => s.hcOpsRoster >= metaHc.value);
+          const idx = proyeccion.value.findIndex(s => parseFloat(s.cumplimiento) >= 100);
           return idx !== -1 ? idx : null;
+        });
+
+        const cumplimientoMaximo = computed(() => {
+          if (proyeccion.value.length === 0) return 0;
+          return Math.max(...proyeccion.value.map(s => parseFloat(s.cumplimiento)));
+        });
+
+        const eficienciaTotal = computed(() => {
+          const totalAltas = olas.value.reduce((sum, o) => sum + o.cantidadInicial, 0);
+          if (totalAltas === 0 || proyeccion.value.length === 0) return 0;
+          const ultimoRoster = proyeccion.value[proyeccion.value.length - 1].hcOpsRoster;
+          return (ultimoRoster / totalAltas) * 100;
         });
 
         const maxAulasSimultaneas = computed(() => {
@@ -961,27 +976,20 @@
           return Math.max(...proyeccion.value.map(s => s.aulasActivas));
         });
 
-        const semanasConBottleneck = computed(() => {
+        const hayBottleneckActivo = computed(() => { 
+          return proyeccion.value.some(s => s.colaEsperaFinal > 0);
+        });
+
+        const semanasConBottleneck = computed(() => { 
           return proyeccion.value.filter(s => s.colaEsperaFinal > 0).length;
         });
 
-        const hayBottleneckActivo = computed(() => semanasConBottleneck.value > 0);
-
-        const eficienciaTotal = computed(() => {
-          if (proyeccion.value.length === 0) return 100;
-          const totalAltas = proyeccion.value.reduce((acc, s) => acc + s.altas, 0);
-          const totalOps = proyeccion.value[proyeccion.value.length - 1]?.hcOpsRoster || 0;
-          return totalAltas > 0 ? Math.min(100, (totalOps / totalAltas) * 100) : 100;
-        });
-
-        // Operaciones de Olas
+        // --- ABM REQUERIMIENTOS ---
         const agregarNuevaOla = () => {
-          const sig = olas.value.length + 1;
-          const fechaDef = semanasLista.value[0] || "2026-06-29";
           olas.value.push({
-            id: 'ola_' + Date.now(),
-            nombre: `Ola ${sig}`,
-            fechaInicio: fechaDef,
+            id: 'o_' + Date.now(),
+            nombre: 'Requerimiento ' + (olas.value.length + 1),
+            fechaInicio: fechaInicioProyecto.value,
             cantidadInicial: agentesDefault.value,
             duracionSemanas: duracionEstandar.value,
             tasaBajaTrainingSemanal: tasaTrainingSemanalDefault.value,
@@ -993,29 +1001,24 @@
           olas.value = olas.value.filter(o => o.id !== id);
         };
 
-        const resetearLocalConfig = () => {
-          localStorage.removeItem(STORAGE_KEY);
-          restaurarDatosPreprogramados();
+        const formatearFecha = (fechaStr) => {
+          if (!fechaStr) return "";
+          const partes = fechaStr.split("-");
+          return `${partes[2]}/${partes[1]}/${partes[0]}`;
         };
 
-        // Formato de Fechas
-        const formatearFecha = (str) => {
-          if (!str) return '';
-          const p = str.split('-');
-          return `${p[2]}/${p[1]}/${p[0]}`;
-        };
-
-        // --- MANEJO DEL GRÁFICO CHART.JS ---
+        // --- GRAFICACIÓN ---
         let chartInstance = null;
 
-        const renderChart = () => {
+        const renderizarGrafico = () => {
           const ctx = document.getElementById('capacidadChart');
           if (!ctx) return;
 
-          const labels = proyeccion.value.map(s => `S${s.semanaIndex}`);
-          const dataMeta = proyeccion.value.map(() => metaHc.value);
-          const dataRoster = proyeccion.value.map(s => s.hcOpsRoster);
-          const dataProductivo = proyeccion.value.map(s => s.hcOpsProductivo);
+          const labels = proyeccion.value.map(s => `Semana ${s.semanaIndex}`);
+          const dataOpsRoster = proyeccion.value.map(s => s.hcOpsRoster);
+          const dataOpsProductivo = proyeccion.value.map(s => s.hcOpsProductivo);
+          const dataColaEspera = proyeccion.value.map(s => s.colaEsperaFinal); 
+          const dataReq = proyeccion.value.map(() => metaHc.value);
 
           if (chartInstance) {
             chartInstance.destroy();
@@ -1027,30 +1030,55 @@
               labels: labels,
               datasets: [
                 {
-                  label: 'Meta Roster Contrato',
-                  data: dataMeta,
-                  borderColor: '#ef4444',
-                  borderDash: [5, 5],
-                  borderWidth: 2,
-                  fill: false,
-                  pointRadius: 0
-                },
-                {
-                  label: 'Ops Roster Contratado',
-                  data: dataRoster,
-                  borderColor: '#2563eb',
-                  backgroundColor: 'rgba(37, 99, 235, 0.1)',
-                  borderWidth: 3,
+                  label: 'HC Ops en Roster (Contrato)',
+                  data: dataOpsRoster,
+                  borderColor: '#22c55e',
+                  backgroundColor: 'rgba(34, 197, 94, 0.1)',
                   fill: true,
-                  tension: 0.3
+                  borderWidth: 3,
+                  tension: 0.15,
+                  yAxisID: 'y'
                 },
                 {
-                  label: 'Fuerza Prod. Real (Post-Shrinkage)',
-                  data: dataProductivo,
-                  borderColor: '#10b981',
+                  label: 'HC Ops Productivo Estimado (Línea)',
+                  data: dataOpsProductivo,
+                  borderColor: '#3b82f6',
                   borderWidth: 2,
+                  borderDash: [5, 5],
                   fill: false,
-                  tension: 0.3
+                  yAxisID: 'y'
+                },
+                {
+                  label: 'Meta Requerida (Contratos Roster)',
+                  data: dataReq,
+                  borderColor: '#ef4444',
+                  borderWidth: 1.5,
+                  pointRadius: 0,
+                  fill: false,
+                  yAxisID: 'y'
+                },
+                {
+                  label: '✅ Meta Alcanzada',
+                  data: proyeccion.value.map((s, i) => 
+                    i === semanasHastaMeta.value ? s.hcOpsRoster : null
+                  ),
+                  type: 'scatter',
+                  pointStyle: 'star',
+                  pointRadius: 12,
+                  backgroundColor: '#22c55e',
+                  borderColor: '#16a34a',
+                  borderWidth: 2,
+                  yAxisID: 'y'
+                },
+                {
+                  label: 'Agentes en Cola (Bottleneck)',
+                  data: dataColaEspera,
+                  type: 'bar',
+                  yAxisID: 'y2',
+                  backgroundColor: 'rgba(245, 158, 11, 0.25)',
+                  borderColor: '#f59e0b',
+                  borderWidth: 1.5,
+                  borderRadius: 4
                 }
               ]
             },
@@ -1058,68 +1086,253 @@
               responsive: true,
               maintainAspectRatio: false,
               plugins: {
-                legend: { position: 'top' },
-                tooltip: { mode: 'index', intersect: false }
+                legend: {
+                  position: 'top',
+                  labels: { usePointStyle: true, boxWidth: 6 }
+                }
               },
               scales: {
-                y: { beginAtZero: true }
+                y: {
+                  type: 'linear',
+                  position: 'left',
+                  beginAtZero: true,
+                  grid: { color: '#f1f5f9' },
+                  title: { display: true, text: 'Agentes en Roster / Productivos' }
+                },
+                y2: { 
+                  type: 'linear',
+                  position: 'right',
+                  beginAtZero: true,
+                  grid: { display: false },
+                  title: { display: true, text: 'Agentes en Cola (Bottleneck)' }
+                },
+                x: { grid: { display: false } }
               }
             }
           });
         };
 
-        // --- EXPORTAR PNG / PDF ---
+        // --- EXPORTACIONES ---
         const exportarPNG = () => {
-          const el = document.getElementById('app');
-          if (!el) return;
-          html2canvas(el, { scale: 2 }).then(canvas => {
+          const appElement = document.getElementById('app');
+          html2canvas(appElement, { scale: 2, useCORS: true, backgroundColor: '#f8fafc' }).then((canvas) => {
             const link = document.createElement('a');
-            link.download = `Simulacion_WFM_Instituto_${Date.now()}.png`;
+            link.download = `WFM-Plan_Capacidad-${new Date().toISOString().split('T')[0]}.png`;
             link.href = canvas.toDataURL('image/png');
             link.click();
           });
         };
 
         const exportarPDF = () => {
-          const el = document.getElementById('app');
-          if (!el) return;
-          html2canvas(el, { scale: 2 }).then(canvas => {
-            const imgData = canvas.toDataURL('image/png');
-            const { jsPDF } = window.jspdf;
-            const pdf = new jsPDF('p', 'mm', 'a4');
-            const imgWidth = 210;
-            const pageHeight = 297;
-            const imgHeight = (canvas.height * imgWidth) / canvas.width;
-            let heightLeft = imgHeight;
-            let position = 0;
+          const { jsPDF } = window.jspdf;
+          const pdf = new jsPDF('p', 'pt', 'letter');
+          
+          pdf.setFont('helvetica', 'bold');
+          pdf.setFontSize(20);
+          pdf.setTextColor(30, 41, 59);
+          pdf.text('Reporte de Planeación Operativa y WFM', 40, 50);
 
-            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-            heightLeft -= pageHeight;
+          pdf.setFont('helvetica', 'normal');
+          pdf.setFontSize(10);
+          pdf.setTextColor(100, 116, 139);
+          pdf.text(`Fecha de Reporte: ${new Date().toLocaleDateString()}`, 40, 68);
+          pdf.text(`Meta HC Roster (Contratos): ${metaHc.value} | Merma (Shrinkage): ${shrinkageTotal.value}%`, 40, 82);
 
-            while (heightLeft >= 0) {
-              position = heightLeft - imgHeight;
-              pdf.addPage();
-              pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-              heightLeft -= pageHeight;
-            }
+          const canvas = document.getElementById('capacidadChart');
+          if (canvas) {
+            const chartImg = canvas.toDataURL('image/jpeg', 1.0);
+            pdf.addImage(chartImg, 'JPEG', 40, 100, 530, 200);
+          }
 
-            pdf.save(`Simulacion_WFM_Instituto_${Date.now()}.pdf`);
+          pdf.setFont('helvetica', 'bold');
+          pdf.setFontSize(11);
+          pdf.setTextColor(30, 41, 59);
+          pdf.text('KPIs de Simulación de Plantilla:', 40, 325);
+
+          pdf.setFont('helvetica', 'normal');
+          pdf.text(`- Cumplimiento de Meta Operativa Real: ${cumplimientoMaximo.value.toFixed(1)}%`, 50, 345);
+          pdf.text(`- Plantilla Física Requerida en Roster para Sostener Meta: ${metaHc.value} agentes`, 50, 360);
+          pdf.text(`- Semana de alcance real de Meta: ${semanasHastaMeta.value !== null ? 'Semana ' + (semanasHastaMeta.value + 1) : 'No lograda'}`, 50, 375);
+          pdf.text(`- Total de Aulas Abiertas Simultáneamente (Pico): ${maxAulasSimultaneas.value} aulas`, 50, 390);
+
+          pdf.addPage();
+          pdf.setFont('helvetica', 'bold');
+          pdf.setFontSize(16);
+          pdf.text('Parámetros de Configuración del Escenario', 40, 50);
+
+          pdf.setFontSize(10);
+          pdf.setFont('helvetica', 'normal');
+          pdf.text(`- Total de Capacitadores: ${capacitadoresTotales.value}`, 40, 80);
+          pdf.text(`- Límite Pedagógico de Alumnos: ${limitePedagogico.value} por aula`, 40, 95);
+          pdf.text(`- Shrinkage Planeado: ${shrinkagePlaneado.value}% | No Planeado: ${shrinkageNoPlaneado.value}% | Gestión: ${shrinkageGestion.value}%`, 40, 110);
+          pdf.text(`- Duración de Nesting: ${duracionNesting.value} semanas (Eficiencia: ${rendimientoNesting.value}%)`, 40, 125);
+          pdf.text(`- Duración de Rampa de Aprendizaje: ${duracionRampa.value} semanas (Eficiencia Inicial: ${rendimientoInicialRampa.value}%)`, 40, 140);
+
+          pdf.setFont('helvetica', 'bold');
+          pdf.setFontSize(12);
+          pdf.text('Aulas Físicas Disponibles en Site:', 40, 175);
+          
+          let yAula = 195;
+          pdf.setFont('helvetica', 'normal');
+          pdf.setFontSize(9);
+          aulasFisicas.value.forEach(a => {
+            pdf.text(`* ${a.nombre} (Capacidad: ${a.capacidad} | Turnos: ${a.turnos || 1})`, 50, yAula);
+            yAula += 15;
+          });
+
+          pdf.addPage();
+          pdf.setFont('helvetica', 'bold');
+          pdf.setFontSize(16);
+          pdf.text('Resumen de Capacidad Proyectada (Primeras 20 Semanas)', 40, 50);
+
+          let yTable = 90;
+          pdf.setFontSize(9);
+          pdf.text('Semana', 40, 80);
+          pdf.text('Alta', 100, 80);
+          pdf.text('En Cap.', 150, 80);
+          pdf.text('Nesting', 200, 80);
+          pdf.text('Roster', 260, 80);
+          pdf.text('Productivo', 320, 80);
+          pdf.text('Cumplimiento', 400, 80);
+          pdf.text('Cola', 480, 80);
+          pdf.line(40, 83, 540, 83);
+
+          pdf.setFont('helvetica', 'normal');
+          proyeccion.value.slice(0, 20).forEach(s => {
+            pdf.text(`S${s.semanaIndex}`, 40, yTable);
+            pdf.text(`${s.altas}`, 100, yTable);
+            pdf.text(`${s.enCapacitacion}`, 150, yTable);
+            pdf.text(`${s.enNesting}`, 200, yTable);
+            pdf.text(`${s.hcOpsRoster}`, 260, yTable);
+            pdf.text(`${s.hcOpsProductivo}`, 320, yTable);
+            pdf.text(`${s.cumplimiento}%`, 400, yTable);
+            pdf.text(`${s.colaEsperaFinal}`, 480, yTable);
+            yTable += 16;
+          });
+
+          pdf.save(`WFM_Plan_Capacidad_${new Date().toISOString().split('T')[0]}.pdf`);
+        };
+
+        // --- SISTEMA DE PERSISTENCIA (LOCALSTORAGE) ---
+        const guardarEstado = () => {
+          const estado = {
+            metaHc: metaHc.value,
+            fechaInicioProyecto: fechaInicioProyecto.value,
+            semanasSimulacion: semanasSimulacion.value,
+            limitePedagogico: limitePedagogico.value,
+            shrinkagePlaneado: shrinkagePlaneado.value,
+            shrinkageNoPlaneado: shrinkageNoPlaneado.value,
+            shrinkageGestion: shrinkageGestion.value,
+            duracionNesting: duracionNesting.value,
+            rendimientoNesting: rendimientoNesting.value,
+            duracionRampa: duracionRampa.value,
+            rendimientoInicialRampa: rendimientoInicialRampa.value,
+            autoBackfill: autoBackfill.value,
+            agentesDefault: agentesDefault.value,
+            duracionEstandar: duracionEstandar.value,
+            capacitadoresTotales: capacitadoresTotales.value,
+            aulasFisicas: aulasFisicas.value,
+            olas: olas.value
+          };
+          try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(estado));
+          } catch(e) {}
+        };
+
+        const cargarEstado = () => {
+          try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return false;
+            const estado = JSON.parse(raw);
+            metaHc.value = estado.metaHc ?? metaHc.value;
+            fechaInicioProyecto.value = estado.fechaInicioProyecto ?? fechaInicioProyecto.value;
+            semanasSimulacion.value = estado.semanasSimulacion ?? semanasSimulacion.value;
+            limitePedagogico.value = estado.limitePedagogico ?? limitePedagogico.value;
+            shrinkagePlaneado.value = estado.shrinkagePlaneado ?? shrinkagePlaneado.value;
+            shrinkageNoPlaneado.value = estado.shrinkageNoPlaneado ?? shrinkageNoPlaneado.value;
+            shrinkageGestion.value = estado.shrinkageGestion ?? shrinkageGestion.value;
+            duracionNesting.value = estado.duracionNesting ?? duracionNesting.value;
+            rendimientoNesting.value = estado.rendimientoNesting ?? rendimientoNesting.value;
+            duracionRampa.value = estado.duracionRampa ?? duracionRampa.value;
+            rendimientoInicialRampa.value = estado.rendimientoInicialRampa ?? rendimientoInicialRampa.value;
+            autoBackfill.value = estado.autoBackfill ?? autoBackfill.value;
+            agentesDefault.value = estado.agentesDefault ?? agentesDefault.value;
+            duracionEstandar.value = estado.duracionEstandar ?? duracionEstandar.value;
+            capacitadoresTotales.value = estado.capacitadoresTotales ?? capacitadoresTotales.value;
+            aulasFisicas.value = estado.aulasFisicas ?? aulasFisicas.value;
+            olas.value = estado.olas ?? olas.value;
+            return true;
+          } catch(e) {
+            return false;
+          }
+        };
+
+        const resetearLocalConfig = () => {
+          localStorage.removeItem(STORAGE_KEY);
+          restaurarDatosPreprogramados();
+          nextTick(() => {
+            renderizarGrafico();
           });
         };
 
-        // Persistence & Lifecycle
-        onMounted(() => {
-          restaurarDatosPreprogramados();
-          nextTick(() => {
-            renderChart();
-          });
+        // WATCH ESTRATÉGICO PARA CAMBIOS MASIVOS EN CASCADA
+        watch(agentesDefault, (newVal) => {
+          if (typeof newVal === 'number' && newVal > 0) {
+            olas.value.forEach(o => o.cantidadInicial = newVal);
+          }
         });
 
-        watch(proyeccion, () => {
-          nextTick(() => {
-            renderChart();
-          });
+        watch(duracionEstandar, (newVal) => {
+          if (typeof newVal === 'number' && newVal > 0) {
+            olas.value.forEach(o => o.duracionSemanas = newVal);
+          }
+        });
+
+        // DEBOUNCE TIMER PARA EL RENDIMIENTO DEL GRÁFICO
+        let debounceTimer = null;
+        const renderizarGraficoDebounced = () => {
+          clearTimeout(debounceTimer);
+          debounceTimer = setTimeout(() => {
+            nextTick(() => {
+              renderizarGrafico();
+            });
+          }, 250); 
+        };
+
+        // WATCH PROFUNDO PARA LA ACTUALIZACIÓN EN TIEMPO REAL Y PERSISTENCIA
+        watch([
+          proyeccion, 
+          metaHc, 
+          shrinkagePlaneado,
+          shrinkageNoPlaneado,
+          shrinkageGestion,
+          limitePedagogico, 
+          duracionNesting, 
+          rendimientoNesting, 
+          duracionRampa,
+          rendimientoInicialRampa,
+          autoBackfill, 
+          capacitadoresTotales, 
+          aulasFisicas, 
+          semanasSimulacion, 
+          fechaInicioProyecto, 
+          olas,
+          agentesDefault,
+          duracionEstandar
+        ], () => {
+          guardarEstado(); 
+          renderizarGraficoDebounced(); 
         }, { deep: true });
+
+        onMounted(() => {
+          const cargado = cargarEstado(); 
+          if (!cargado) {
+            restaurarDatosPreprogramados();
+          }
+          nextTick(() => {
+            renderizarGrafico();
+          });
+        });
 
         return {
           metaHc,
@@ -1129,36 +1342,32 @@
           shrinkagePlaneado,
           shrinkageNoPlaneado,
           shrinkageGestion,
+          shrinkageTotal,
           duracionNesting,
           rendimientoNesting,
-          autoBackfill,
           duracionRampa,
           rendimientoInicialRampa,
-          tasaTrainingSemanalDefault,
-          tasaOpsSemanalDefault,
+          autoBackfill,
           agentesDefault,
           duracionEstandar,
-          modoTablaCompacto,
           capacitadoresTotales,
           aulasFisicas,
+          olas,
+          proyeccion,
+          fuerzaProductivaEstimada,
+          semanasHastaMeta,
+          cumplimientoMaximo,
+          eficienciaTotal,
+          maxAulasSimultaneas,
+          hayBottleneckActivo,
+          semanasConBottleneck,
+          erroresValidacion,
+          modoTablaCompacto,
           agregarNuevaAulaFisica,
           eliminarAulaFisica,
-          olas,
-          restaurarDatosPreprogramados,
-          shrinkageTotal,
-          fuerzaProductivaEstimada,
-          calcularAulasParaOla,
-          obtenerDetalleGrupos,
-          semanasLista,
-          erroresValidacion,
-          proyeccion,
-          semanasHastaMeta,
-          maxAulasSimultaneas,
-          semanasConBottleneck,
-          hayBottleneckActivo,
-          eficienciaTotal,
           agregarNuevaOla,
           eliminarOla,
+          restaurarDatosPreprogramados,
           resetearLocalConfig,
           formatearFecha,
           exportarPNG,
