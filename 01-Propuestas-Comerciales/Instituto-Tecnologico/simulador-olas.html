@@ -102,7 +102,7 @@
     <header class="bg-[#222221] text-white border-b border-slate-700/60 sticky top-0 z-30 shadow-md">
       <div class="max-w-[1680px] mx-auto px-4 py-2.5 flex flex-wrap items-center justify-between gap-3">
         
-        <!-- Identidad Corporativa -->
+        <!-- Identidad Corporativa Dinámica -->
         <div class="flex items-center gap-3">
           <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-8 w-auto object-contain brightness-110" />
           <div class="h-6 w-px bg-slate-700 hidden sm:block"></div>
@@ -110,7 +110,7 @@
             <div class="flex items-center gap-2">
               <h1 class="font-heading font-bold text-base tracking-tight text-white">Simulador de Capacidad & WFM</h1>
               <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#3284C6]/20 text-[#3284C6] border border-[#3284C6]/30 uppercase tracking-wider">
-                Licitación Instituto · 519 Contratos
+                Licitación Instituto · Meta: {{ metaHc }} Contratos
               </span>
             </div>
             <p class="text-[11px] text-slate-400 hidden md:block">Dimensionamiento de plantilla, aulas físicas, turnos y rampa de aprendizaje</p>
@@ -242,11 +242,34 @@
 
       </div>
 
+      <!-- BANNER EJECUTIVO DE HITO COMERCIAL (Se activa cuando se alcanza la meta) -->
+      <div v-if="semanasHastaMeta !== null" class="max-w-[1680px] mx-auto mt-2.5 p-3 rounded-xl bg-gradient-to-r from-emerald-50 via-teal-50 to-slate-50 border border-emerald-200/80 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 shadow-xs">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold text-lg shadow-sm">
+            🎯
+          </div>
+          <div>
+            <div class="text-xs font-bold text-slate-900 flex items-center gap-2">
+              <span>Hito Operativo: Meta de {{ metaHc }} contratos alcanzada en Semana {{ semanasHastaMeta + 1 }}</span>
+              <span class="text-[10px] font-semibold text-slate-500">({{ formatearFecha(proyeccion[semanasHastaMeta]?.fecha) }})</span>
+            </div>
+            <div class="text-[11px] text-slate-600 mt-0.5">
+              Se requirieron <strong class="text-emerald-700">{{ olasRequeridasParaMeta }} olas</strong> para consolidar la plantilla. A partir de la Semana {{ semanasHastaMeta + 2 }}, el simulador opera en <strong>régimen de Steady-State</strong> (mantenimiento continuo reponiendo únicamente la deserción semanal).
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 self-end md:self-auto">
+          <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-bold rounded-lg whitespace-nowrap shadow-xs">
+            ✓ Roster 100% Cubierto
+          </span>
+        </div>
+      </div>
+
       <!-- Banner de Alerta de Cuello de Botella si existe -->
       <div v-if="hayBottleneckActivo" class="max-w-[1680px] mx-auto mt-2 px-3 py-1.5 bg-amber-50 border border-amber-200 rounded-lg flex items-center justify-between text-xs text-amber-800">
         <div class="flex items-center gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          <span><strong>Advertencia de Cuello de Botella:</strong> Hay <strong>{{ semanasConBottleneck }} semanas</strong> con agentes en cola de espera. Revisa la disponibilidad de capacitadores o añade turnos a las aulas.</span>
+          <span><strong>Restricción Física de Site:</strong> Hay <strong>{{ semanasConBottleneck }} semanas</strong> con agentes en cola de espera. Revisa la disponibilidad de capacitadores o añade turnos a las aulas.</span>
         </div>
         <button @click="vistaActiva = 'site'" class="text-xs font-bold text-[#3284C6] hover:underline">Ajustar Aulas / Turnos →</button>
       </div>
@@ -300,6 +323,30 @@
                 <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Semanas Simuladas</label>
                 <input type="number" v-model.number="semanasSimulacion" class="w-full px-2.5 py-1.5 border border-slate-300 rounded-lg text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-[#3284C6] outline-none" min="1" />
               </div>
+            </div>
+
+            <!-- Estrategia WFM: Inteligente vs Ciega -->
+            <div class="p-2.5 rounded-xl border border-[#3284C6]/30 bg-[#3284C6]/5 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold text-[#1d5584] uppercase tracking-wider flex items-center gap-1.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/></svg>
+                  Estrategia de Rampa WFM
+                </span>
+                <span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-md">
+                  {{ estrategiaWfm === 'inteligente' ? 'Freno en Meta' : 'Calendario Fijo' }}
+                </span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-[11px]">
+                <button type="button" @click="estrategiaWfm = 'inteligente'" :class="estrategiaWfm === 'inteligente' ? 'bg-[#3284C6] text-white font-bold shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'" class="p-1.5 rounded-lg text-center transition">
+                  🎯 Rampa Inteligente
+                </button>
+                <button type="button" @click="estrategiaWfm = 'fijo'" :class="estrategiaWfm === 'fijo' ? 'bg-[#3284C6] text-white font-bold shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'" class="p-1.5 rounded-lg text-center transition">
+                  📅 Calendario Ciego
+                </button>
+              </div>
+              <p class="text-[10px] text-slate-500 leading-tight">
+                {{ estrategiaWfm === 'inteligente' ? 'Frena nuevas olas masivas al alcanzar la meta de ' + metaHc + ' contratos y mantiene la meseta reponiendo attrition.' : 'Ejecuta todas las olas programadas sin frenar al llegar a la meta.' }}
+              </p>
             </div>
 
             <!-- Asignador Masivo Cascada -->
@@ -364,14 +411,17 @@
               </div>
             </div>
 
-            <!-- Límite Aula & Auto-Backfill -->
+            <!-- Límite Aula & Reposición de Deserción -->
             <div class="grid grid-cols-2 gap-3 items-center">
               <div>
                 <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Límite Aula Pedagógico</label>
                 <input type="number" v-model.number="limitePedagogico" class="w-full px-2.5 py-1.5 border border-slate-300 rounded-lg text-xs font-bold text-slate-800" min="1" />
               </div>
               <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-200">
-                <span class="text-xs font-semibold text-slate-700">Auto-Backfill</span>
+                <div>
+                  <span class="text-xs font-semibold text-slate-700 block">Reposición</span>
+                  <span class="text-[9px] text-slate-400">Backfill Attrition</span>
+                </div>
                 <input type="checkbox" v-model="autoBackfill" class="w-4 h-4 text-[#3284C6] rounded border-slate-300" />
               </div>
             </div>
@@ -432,7 +482,9 @@
         <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
           <div>
             <h2 class="font-heading font-bold text-base text-slate-900">Programación de Olas de Reclutamiento</h2>
-            <p class="text-xs text-slate-500">Configura la fecha de inicio, tamaño inicial y tasas de deserción específicas para cada ola.</p>
+            <p class="text-xs text-slate-500">
+              {{ estrategiaWfm === 'inteligente' ? 'El sistema ejecutará ' + olasRequeridasParaMeta + ' olas para cubrir la meta de ' + metaHc + ' contratos; las olas restantes quedan como opcionales/no requeridas.' : 'Configuración de olas manuales en calendario ciego.' }}
+            </p>
           </div>
           <div class="flex items-center gap-2">
             <button @click="agregarNuevaOla" class="flex items-center gap-1.5 px-3 py-1.5 bg-[#3284C6] hover:bg-[#256ca6] text-white rounded-lg text-xs font-semibold transition shadow-sm">
@@ -441,7 +493,7 @@
             </button>
             <button @click="restaurarDatosPreprogramados" class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 rounded-lg text-xs font-semibold transition">
               <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-              <span>Reset 22 Olas</span>
+              <span>Reset Olas Base</span>
             </button>
           </div>
         </div>
@@ -451,19 +503,20 @@
             <table class="w-full text-left border-collapse">
               <thead class="sticky top-0 bg-slate-50 z-10 text-[10px] font-bold text-slate-500 uppercase tracking-wider border-b border-slate-200">
                 <tr>
-                  <th class="px-4 py-3">Nombre de la Ola</th>
+                  <th class="px-4 py-3">No. / Nombre</th>
                   <th class="px-4 py-3">Fecha Inicio Programada</th>
                   <th class="px-4 py-3 text-center">Agentes Solicitados</th>
                   <th class="px-4 py-3 text-center">Duración Capacitación</th>
                   <th class="px-4 py-3 text-center">Baja Training (%)</th>
                   <th class="px-4 py-3 text-center">Baja Ops (%)</th>
+                  <th class="px-4 py-3 text-center">Estatus WFM</th>
                   <th class="px-4 py-3 text-right">Acción</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-slate-100 text-xs">
-                <tr v-for="ola in olas" :key="ola.id" class="hover:bg-slate-50/80 transition">
+                <tr v-for="(ola, oIdx) in olas" :key="ola.id" class="hover:bg-slate-50/80 transition" :class="esOlaRequerida(oIdx) ? '' : 'bg-slate-50/40 opacity-70'">
                   <td class="px-4 py-2 font-semibold text-slate-700">
-                    <input type="text" v-model="ola.nombre" class="bg-transparent border-b border-transparent hover:border-slate-300 focus:border-[#3284C6] focus:outline-none px-1 py-0.5 w-44 font-semibold" />
+                    <input type="text" v-model="ola.nombre" class="bg-transparent border-b border-transparent hover:border-slate-300 focus:border-[#3284C6] focus:outline-none px-1 py-0.5 w-40 font-semibold" />
                   </td>
                   <td class="px-4 py-2">
                     <input type="date" v-model="ola.fechaInicio" class="bg-slate-50 border border-slate-200 rounded px-2 py-1 text-xs focus:ring-1 focus:ring-[#3284C6] outline-none" />
@@ -480,6 +533,14 @@
                   <td class="px-4 py-2 text-center">
                     <input type="number" step="0.1" v-model.number="ola.tasaBajaOpsSemanal" class="w-14 bg-slate-50 border border-slate-200 rounded px-2 py-1 text-center font-semibold" min="0" /> %
                   </td>
+                  <td class="px-4 py-2 text-center">
+                    <span v-if="esOlaRequerida(oIdx)" class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full text-[10px] font-bold">
+                      ✓ Rampa Activa
+                    </span>
+                    <span v-else class="px-2 py-0.5 bg-slate-100 text-slate-500 rounded-full text-[10px] font-medium">
+                      Excedente (Meta Cubierta)
+                    </span>
+                  </td>
                   <td class="px-4 py-2 text-right">
                     <button @click="eliminarOla(ola.id)" class="text-slate-400 hover:text-danger-600 p-1" title="Eliminar Ola">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
@@ -494,7 +555,7 @@
       </div>
 
       <!-- ======================================================================= -->
-      <!-- VISTA 3: RECURSOS DE SITE & AULAS FÍSICAS -->
+      <!-- VISTA 3: RECURSOS DE SITE & AULAS FÍSICAS (AULA 1 AL INFINITO) -->
       <!-- ======================================================================= -->
       <div v-show="vistaActiva === 'site'" class="space-y-6">
         
@@ -502,7 +563,7 @@
           <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
             <div>
               <h2 class="font-heading font-bold text-base text-slate-900">Infraestructura Física del Site</h2>
-              <p class="text-xs text-slate-500">Configuración de instructores disponibles, capacidad máxima física por aula y turnos diarios asignados.</p>
+              <p class="text-xs text-slate-500">Configuración de instructores disponibles, capacidad física por aula (Aula 1 a N) y turnos diarios asignados.</p>
             </div>
             <button @click="agregarNuevaAulaFisica" class="px-3 py-1.5 bg-[#3284C6] hover:bg-[#256ca6] text-white rounded-lg text-xs font-semibold transition flex items-center gap-1.5 shadow-sm">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
@@ -524,7 +585,7 @@
               </div>
             </div>
 
-            <!-- Listado de Aulas Físicas -->
+            <!-- Listado de Aulas Físicas (Aula 1 al infinito) -->
             <div class="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <div v-for="aula in aulasFisicas" :key="aula.id" class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between relative space-y-3">
                 <button @click="eliminarAulaFisica(aula.id)" class="absolute top-2 right-2 text-slate-300 hover:text-danger-600 transition" title="Eliminar Aula">
@@ -700,10 +761,13 @@
         const vistaActiva = ref('dashboard'); // 'dashboard' | 'olas' | 'site' | 'sabana'
 
         // --- PARÁMETROS OPERATIVOS ---
-        const metaHc = ref(519); 
+        const metaHc = ref(450); 
         const fechaInicioProyecto = ref("2026-06-29");
         const semanasSimulacion = ref(30);
         
+        // Estrategia WFM: 'inteligente' (Freno al llegar a meta + reposición) vs 'fijo' (Ciego)
+        const estrategiaWfm = ref('inteligente');
+
         // Parámetros de Calidad e Industria
         const limitePedagogico = ref(20);      
         const shrinkagePlaneado = ref(15);     
@@ -712,8 +776,8 @@
         const duracionNesting = ref(1);        
         const rendimientoNesting = ref(60);     
         
-        // Auto-Backfill calibrado (false por defecto para respetar el cronograma de 22 olas)
-        const autoBackfill = ref(false);         
+        // Auto-Backfill de reposición de bajas (activo por defecto en modo inteligente)
+        const autoBackfill = ref(true);         
 
         // Rampa Post-Nesting
         const duracionRampa = ref(4);
@@ -729,13 +793,13 @@
         // UX / Visibilidad
         const modoTablaCompacto = ref(false);
 
-        // --- INVENTARIO DE INFRAESTRUCTURA REAL DEL SITE ---
+        // --- INVENTARIO DE INFRAESTRUCTURA REAL DEL SITE (AULA 1 AL INFINITO) ---
         const capacitadoresTotales = ref(4);    
         const aulasFisicas = ref([
-          { id: "a1", nombre: "Aula Alfa", capacidad: 40, turnos: 1 },
-          { id: "a2", nombre: "Aula Beta", capacidad: 30, turnos: 1 },
-          { id: "a3", nombre: "Aula Gamma", capacidad: 20, turnos: 1 },
-          { id: "a4", nombre: "Aula Delta", capacidad: 10, turnos: 1 }
+          { id: "a1", nombre: "Aula 1", capacidad: 40, turnos: 1 },
+          { id: "a2", nombre: "Aula 2", capacidad: 30, turnos: 1 },
+          { id: "a3", nombre: "Aula 3", capacidad: 20, turnos: 1 },
+          { id: "a4", nombre: "Aula 4", capacidad: 10, turnos: 1 }
         ]);
 
         const agregarNuevaAulaFisica = () => {
@@ -822,7 +886,7 @@
           return errores;
         });
 
-        // --- CORE DEL MOTOR DE CÁLCULO WFM (BLINDADO CONTRA BUCLES INFINITOS) ---
+        // --- CORE DEL MOTOR DE CÁLCULO WFM INTELIGENTE (RAMPA + STEADY STATE) ---
         const proyeccion = computed(() => {
           if (erroresValidacion.value.length > 0) return [];
 
@@ -836,6 +900,7 @@
 
           const capTotalesNum = Math.max(1, Number(capacitadoresTotales.value) || 1);
           const limPedagogicoNum = Math.max(1, Number(limitePedagogico.value) || 20);
+          const metaObj = Number(metaHc.value) || 450;
 
           semanas.forEach((fechaSemanaStr, index) => {
             let altasRealesSemana = 0;
@@ -855,46 +920,63 @@
               }
             });
 
-            if (currentHC_Ops_Roster >= metaHc.value) {
+            if (currentHC_Ops_Roster >= metaObj) {
               metaLograda = true;
             }
 
-            // Cargar nuevos requerimientos programados de la semana en la Cola de Espera
+            // TOTAL COMPROMETIDO EN EL SISTEMA:
+            let totalComprometido = currentHC_Ops_Roster + currentHC_Training + currentHC_Nesting;
+            colaEspera.forEach(g => {
+              totalComprometido += g.totalAgentes;
+            });
+
+            // GESTIÓN DE OLAS DE RAMPA VS FRENO INTELIGENTE:
             const olasIniciando = olas.value.filter(o => o.fechaInicio === fechaSemanaStr && Number(o.cantidadInicial) > 0);
             if (olasIniciando.length > 0) {
               olasIniciando.forEach(ola => {
-                if (autoBackfill.value && metaLograda) {
-                  return; // Freno por meta de roster cumplida
+                // En modo inteligente, si la meta ya se alcanzó o la tubería ya la cubre holgadamente, NO meter más olas masivas
+                if (estrategiaWfm.value === 'inteligente') {
+                  if (metaLograda || totalComprometido >= metaObj) {
+                    return; // Freno de sobrecontratación: ola innecesaria
+                  }
                 }
-                colaEspera.push({
-                  idGroup: `${ola.id}_req`,
-                  nombre: ola.nombre,
-                  totalAgentes: Number(ola.cantidadInicial) || 0,
-                  duracion: Number(ola.duracionSemanas) || 3,
-                  tasaTraining: Number(ola.tasaBajaTrainingSemanal) || 2.5,
-                  tasaOps: Number(ola.tasaBajaOpsSemanal) || 1.0
-                });
+                
+                // Si la ola solicitada excede lo necesario para completar la meta, acotarla
+                let agentesOla = Number(ola.cantidadInicial) || 0;
+                if (estrategiaWfm.value === 'inteligente' && totalComprometido + agentesOla > metaObj * 1.05) {
+                  agentesOla = Math.max(0, Math.round(metaObj * 1.02 - totalComprometido));
+                }
+
+                if (agentesOla > 0) {
+                  colaEspera.push({
+                    idGroup: `${ola.id}_req`,
+                    nombre: ola.nombre,
+                    totalAgentes: agentesOla,
+                    duracion: Number(ola.duracionSemanas) || 3,
+                    tasaTraining: Number(ola.tasaBajaTrainingSemanal) || 2.5,
+                    tasaOps: Number(ola.tasaBajaOpsSemanal) || 1.0
+                  });
+                  totalComprometido += agentesOla;
+                }
               });
             }
 
-            // Auto-Backfill en bloques manejables acotados al tamaño estándar
+            // REPOSICIÓN INTELIGENTE DE ATTRITION (STEADY-STATE BACKFILL):
+            // Solo cuando hay déficit real respecto a la meta y el autoBackfill está activo
             if (autoBackfill.value) {
-              let totalComprometido = currentHC_Ops_Roster + currentHC_Training + currentHC_Nesting;
-              colaEspera.forEach(g => {
-                totalComprometido += g.totalAgentes;
-              });
-
-              const deficitReal = metaHc.value - totalComprometido;
-              if (deficitReal > 0) {
-                const tamanoBackfill = Math.min(deficitReal, Number(agentesDefault.value) || 50);
+              const deficitReal = metaObj - totalComprometido;
+              // Si la meta está alcanzada o próxima, y el déficit por bajas acumuladas supera un umbral mínimo operativo (ej. 10 agentes)
+              if (deficitReal >= 10 && (metaLograda || index >= 12)) {
+                const tamanoBackfill = Math.min(deficitReal, Number(agentesDefault.value) || 20);
                 colaEspera.push({
                   idGroup: `backfill_${fechaSemanaStr}_${index}`,
-                  nombre: `Backfill S${index + 1}`,
+                  nombre: `Backfill Reposición`,
                   totalAgentes: tamanoBackfill,
                   duracion: Number(duracionEstandar.value) || 3, 
                   tasaTraining: Number(tasaTrainingSemanalDefault.value) || 2.5,
                   tasaOps: Number(tasaOpsSemanalDefault.value) || 1.0
                 });
+                totalComprometido += tamanoBackfill;
               }
             }
 
@@ -924,14 +1006,14 @@
               // Filtrar solo aulas físicas con capacidad positiva válida y turnos disponibles
               const aulasLibres = aulasFisicas.value.filter(a => {
                 const capVal = Number(a.capacidad);
-                if (!capVal || capVal <= 0 || isNaN(capVal)) return false; // Ignorar aulas sin capacidad válida
+                if (!capVal || capVal <= 0 || isNaN(capVal)) return false; 
                 const turnosMax = Math.max(1, Number(a.turnos) || 1);
                 const ocupados = aulasOcupacionActual[a.id] || 0;
                 return ocupados < turnosMax;
               });
 
               if (aulasLibres.length === 0) {
-                break; // No hay infraestructura física disponible
+                break; // No hay infraestructura física libre
               }
 
               // Ordenar por capacidad pedagógica efectiva descendente
@@ -946,7 +1028,6 @@
               const capMaxEfectiva = Math.min(capAulaNum, limPedagogicoNum);
 
               if (capMaxEfectiva <= 0) {
-                // Protección: si el aula mayor tiene capacidad <= 0, abortar asignación
                 break;
               }
 
@@ -1040,8 +1121,8 @@
             });
 
             hcOpsProductivo = Math.round(hcOpsProductivo);
-            const diferencia = metaHc.value - hcOpsRoster; 
-            const cumplimiento = metaHc.value > 0 ? (hcOpsRoster / metaHc.value) * 100 : 0;
+            const diferencia = metaObj - hcOpsRoster; 
+            const cumplimiento = metaObj > 0 ? (hcOpsRoster / metaObj) * 100 : 0;
             const totalPendientesCola = colaEspera.reduce((sum, g) => sum + g.totalAgentes, 0);
 
             resultado.push({
@@ -1085,11 +1166,25 @@
           return resultado;
         });
 
-        // --- KPIs DERIVADOS ---
+        // --- KPIs DERIVADOS & HITO COMERCIAL ---
         const semanasHastaMeta = computed(() => {
           const idx = proyeccion.value.findIndex(s => parseFloat(s.cumplimiento) >= 100);
           return idx !== -1 ? idx : null;
         });
+
+        const olasRequeridasParaMeta = computed(() => {
+          if (semanasHastaMeta.value === null) return olas.value.length;
+          const fechaMetaStr = proyeccion.value[semanasHastaMeta.value]?.fecha;
+          if (!fechaMetaStr) return olas.value.length;
+          // Contar olas cuya fecha de inicio es anterior o igual a la fecha de alcance
+          const count = olas.value.filter(o => o.fechaInicio <= fechaMetaStr).length;
+          return Math.max(1, count);
+        });
+
+        const esOlaRequerida = (oIdx) => {
+          if (estrategiaWfm.value === 'fijo') return true;
+          return oIdx < olasRequeridasParaMeta.value;
+        };
 
         const cumplimientoMaximo = computed(() => {
           if (proyeccion.value.length === 0) return 0;
@@ -1097,10 +1192,10 @@
         });
 
         const eficienciaTotal = computed(() => {
-          const totalAltas = olas.value.reduce((sum, o) => sum + (Number(o.cantidadInicial) || 0), 0);
+          const totalAltas = proyeccion.value.reduce((sum, s) => sum + s.altas, 0);
           if (totalAltas === 0 || proyeccion.value.length === 0) return 0;
           const ultimoRoster = proyeccion.value[proyeccion.value.length - 1].hcOpsRoster;
-          return (ultimoRoster / totalAltas) * 100;
+          return Math.min(100, (ultimoRoster / totalAltas) * 100);
         });
 
         const maxAulasSimultaneas = computed(() => {
@@ -1153,7 +1248,7 @@
             const dataOpsRoster = proyeccion.value.map(s => s.hcOpsRoster);
             const dataOpsProductivo = proyeccion.value.map(s => s.hcOpsProductivo);
             const dataColaEspera = proyeccion.value.map(s => s.colaEsperaFinal); 
-            const dataReq = proyeccion.value.map(() => metaHc.value);
+            const dataReq = proyeccion.value.map(() => Number(metaHc.value) || 450);
 
             if (chartCapacidad) {
               chartCapacidad.destroy();
@@ -1185,7 +1280,7 @@
                     yAxisID: 'y'
                   },
                   {
-                    label: 'Meta Contrato (519)',
+                    label: `Meta Contrato (${metaHc.value})`,
                     data: dataReq,
                     borderColor: '#EB5B27',
                     borderWidth: 1.5,
@@ -1211,7 +1306,7 @@
                     data: dataColaEspera,
                     type: 'bar',
                     yAxisID: 'y2',
-                    backgroundColor: 'rgba(254, 202, 102, 0.4)',
+                    backgroundColor: 'rgba(254, 202, 102, 0.35)',
                     borderColor: '#FECA66',
                     borderWidth: 1.2,
                     borderRadius: 3
@@ -1324,7 +1419,7 @@
           
           pdf.setFont('helvetica', 'bold');
           pdf.setFontSize(18);
-          pdf.setTextColor(34, 34, 33); // #222221
+          pdf.setTextColor(34, 34, 33);
           pdf.text('Telat Group · Informe Ejecutivo de Capacidad & WFM', 40, 48);
 
           pdf.setFont('helvetica', 'normal');
@@ -1345,9 +1440,9 @@
           pdf.text('Resumen de KPIs de Cumplimiento Operativo:', 40, 315);
 
           pdf.setFont('helvetica', 'normal');
-          pdf.text(`• Cumplimiento Máximo de Roster: ${cumplimientoMaximo.value.toFixed(1)}%`, 50, 335);
+          pdf.text(`• Cumplimiento de Meta de Roster: ${cumplimientoMaximo.value.toFixed(1)}%`, 50, 335);
           pdf.text(`• Plantilla Productiva Neta Requerida: ${fuerzaProductivaEstimada.value} posiciones`, 50, 350);
-          pdf.text(`• Semana de Alcance del 100% de la Meta: ${semanasHastaMeta.value !== null ? 'Semana ' + (semanasHastaMeta.value + 1) : 'No lograda'}`, 50, 365);
+          pdf.text(`• Semana de Alcance del 100% de la Meta: ${semanasHastaMeta.value !== null ? 'Semana ' + (semanasHastaMeta.value + 1) : 'No lograda'} (Requiere ${olasRequeridasParaMeta.value} Olas)`, 50, 365);
           pdf.text(`• Demanda Pico de Aulas Simultáneas: ${maxAulasSimultaneas.value} aulas físicas`, 50, 380);
 
           pdf.addPage();
@@ -1412,6 +1507,7 @@
           const estado = {
             vistaActiva: vistaActiva.value,
             metaHc: metaHc.value,
+            estrategiaWfm: estrategiaWfm.value,
             fechaInicioProyecto: fechaInicioProyecto.value,
             semanasSimulacion: semanasSimulacion.value,
             limitePedagogico: limitePedagogico.value,
@@ -1440,7 +1536,8 @@
             if (!raw) return false;
             const estado = JSON.parse(raw);
             vistaActiva.value = estado.vistaActiva ?? 'dashboard';
-            metaHc.value = estado.metaHc ?? metaHc.value;
+            metaHc.value = estado.metaHc ?? 450;
+            estrategiaWfm.value = estado.estrategiaWfm ?? 'inteligente';
             fechaInicioProyecto.value = estado.fechaInicioProyecto ?? fechaInicioProyecto.value;
             semanasSimulacion.value = estado.semanasSimulacion ?? semanasSimulacion.value;
             limitePedagogico.value = estado.limitePedagogico ?? limitePedagogico.value;
@@ -1451,11 +1548,21 @@
             rendimientoNesting.value = estado.rendimientoNesting ?? rendimientoNesting.value;
             duracionRampa.value = estado.duracionRampa ?? duracionRampa.value;
             rendimientoInicialRampa.value = estado.rendimientoInicialRampa ?? rendimientoInicialRampa.value;
-            autoBackfill.value = estado.autoBackfill ?? false;
+            autoBackfill.value = estado.autoBackfill ?? true;
             agentesDefault.value = estado.agentesDefault ?? agentesDefault.value;
             duracionEstandar.value = estado.duracionEstandar ?? duracionEstandar.value;
             capacitadoresTotales.value = estado.capacitadoresTotales ?? capacitadoresTotales.value;
-            aulasFisicas.value = estado.aulasFisicas ?? aulasFisicas.value;
+            
+            // Sanitizar aulas para que siempre usen "Aula X"
+            if (estado.aulasFisicas && Array.isArray(estado.aulasFisicas)) {
+              aulasFisicas.value = estado.aulasFisicas.map((a, i) => ({
+                id: a.id || `a${i+1}`,
+                nombre: a.nombre && !a.nombre.includes('Alfa') && !a.nombre.includes('Beta') && !a.nombre.includes('Gamma') && !a.nombre.includes('Delta') ? a.nombre : `Aula ${i+1}`,
+                capacidad: Number(a.capacidad) || 20,
+                turnos: Number(a.turnos) || 1
+              }));
+            }
+            
             olas.value = estado.olas ?? olas.value;
             return true;
           } catch(e) {
@@ -1466,6 +1573,15 @@
         const resetearLocalConfig = () => {
           localStorage.removeItem(STORAGE_KEY);
           restaurarDatosPreprogramados();
+          aulasFisicas.value = [
+            { id: "a1", nombre: "Aula 1", capacidad: 40, turnos: 1 },
+            { id: "a2", nombre: "Aula 2", capacidad: 30, turnos: 1 },
+            { id: "a3", nombre: "Aula 3", capacidad: 20, turnos: 1 },
+            { id: "a4", nombre: "Aula 4", capacidad: 10, turnos: 1 }
+          ];
+          metaHc.value = 450;
+          estrategiaWfm.value = 'inteligente';
+          autoBackfill.value = true;
           nextTick(() => {
             renderizarGraficos();
           });
@@ -1500,6 +1616,7 @@
         watch([
           proyeccion, 
           metaHc, 
+          estrategiaWfm,
           shrinkagePlaneado,
           shrinkageNoPlaneado,
           shrinkageGestion,
@@ -1543,6 +1660,7 @@
         return {
           vistaActiva,
           metaHc,
+          estrategiaWfm,
           fechaInicioProyecto,
           semanasSimulacion,
           limitePedagogico,
@@ -1563,6 +1681,8 @@
           proyeccion,
           fuerzaProductivaEstimada,
           semanasHastaMeta,
+          olasRequeridasParaMeta,
+          esOlaRequerida,
           cumplimientoMaximo,
           eficienciaTotal,
           maxAulasSimultaneas,
