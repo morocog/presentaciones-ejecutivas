@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simulador de Capacidad SOTA & Planeación WFM</title>
+  <title>Simulador de Capacidad WFM · Telat Group</title>
   
+  <!-- Google Fonts: Montserrat & DM Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..800;1,9..40,400..800&family=Montserrat:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
   <!-- Vue 3 (Producción) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.4.21/vue.global.prod.js"></script>
   <!-- Tailwind CSS -->
@@ -20,21 +25,32 @@
     tailwind.config = {
       theme: {
         extend: {
+          fontFamily: {
+            sans: ['Montserrat', 'system-ui', 'sans-serif'],
+            heading: ['DM Sans', 'system-ui', 'sans-serif'],
+          },
           colors: {
+            telat: {
+              blue: '#3284C6',
+              orange: '#EB5B27',
+              yellow: '#FECA66',
+              dark: '#222221',
+              light: '#FBFBFD',
+            },
             brand: {
-              50: '#f0f4ff',
-              100: '#e1ebfe',
-              500: '#3b82f6',
-              600: '#2563eb',
-              700: '#1d4ed8',
-              800: '#1e40af',
-              900: '#1e3a8a',
+              50: '#f0f6fc',
+              100: '#e1eefb',
+              500: '#3284C6',
+              600: '#256ca6',
+              700: '#1d5584',
+              800: '#194569',
+              900: '#173955',
             },
             success: {
               50: '#f0fdf4',
-              500: '#22c55e',
-              600: '#16a34a',
-              700: '#15803d',
+              500: '#16a34a',
+              600: '#15803d',
+              700: '#166534',
             },
             danger: {
               50: '#fef2f2',
@@ -76,497 +92,602 @@
     }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
 
-  <div id="app" v-cloak class="p-4 lg:p-6 max-w-[1600px] mx-auto space-y-6">
+  <div id="app" v-cloak class="flex-grow flex flex-col">
     
-    <!-- HEADER -->
-    <header class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-      <div>
-        <div class="flex items-center gap-2">
-          <span class="p-2 bg-brand-50 text-brand-600 rounded-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-          </span>
-          <h1 class="text-2xl font-bold text-slate-900">Simulador de Capacidad SOTA & Planeación WFM</h1>
+    <!-- ========================================================================= -->
+    <!-- NAVBAR SUPERIOR CORPORATIVO TELAT GROUP -->
+    <!-- ========================================================================= -->
+    <header class="bg-[#222221] text-white border-b border-slate-700/60 sticky top-0 z-30 shadow-md">
+      <div class="max-w-[1680px] mx-auto px-4 py-2.5 flex flex-wrap items-center justify-between gap-3">
+        
+        <!-- Identidad Corporativa -->
+        <div class="flex items-center gap-3">
+          <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-8 w-auto object-contain brightness-110" />
+          <div class="h-6 w-px bg-slate-700 hidden sm:block"></div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h1 class="font-heading font-bold text-base tracking-tight text-white">Simulador de Capacidad & WFM</h1>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#3284C6]/20 text-[#3284C6] border border-[#3284C6]/30 uppercase tracking-wider">
+                Licitación Instituto · 519 Contratos
+              </span>
+            </div>
+            <p class="text-[11px] text-slate-400 hidden md:block">Dimensionamiento de plantilla, aulas físicas, turnos y rampa de aprendizaje</p>
+          </div>
         </div>
-        <p class="text-sm text-slate-500 mt-1">Simulación avanzada con cuellos de botella reales de site, turnos de aula, rampa de aprendizaje y persistencia</p>
-      </div>
-      
-      <div class="flex flex-wrap gap-2 w-full md:w-auto">
-        <button @click="resetearLocalConfig" class="flex items-center gap-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded-lg text-xs font-semibold text-slate-700 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-          Resetear Simulador
-        </button>
-        <button @click="exportarPNG" class="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-medium transition shadow-sm">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
-          Exportar PNG
-        </button>
-        <button @click="exportarPDF" class="flex items-center gap-2 px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-lg text-sm font-medium transition shadow-sm">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
-          Exportar PDF
-        </button>
+
+        <!-- Navegación de Vistas SPA (Pills) -->
+        <nav class="flex items-center bg-slate-800/80 p-1 rounded-xl border border-slate-700/80 text-xs font-semibold">
+          <button @click="vistaActiva = 'dashboard'" :class="vistaActiva === 'dashboard' ? 'bg-[#3284C6] text-white shadow-sm' : 'text-slate-300 hover:text-white hover:bg-slate-700/50'" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+            <span>Tablero & Curvas</span>
+          </button>
+          
+          <button @click="vistaActiva = 'olas'" :class="vistaActiva === 'olas' ? 'bg-[#3284C6] text-white shadow-sm' : 'text-slate-300 hover:text-white hover:bg-slate-700/50'" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+            <span>Calendario de Olas</span>
+            <span class="px-1.5 py-0.2 bg-slate-900/60 text-slate-300 rounded text-[10px] font-mono">{{ olas.length }}</span>
+          </button>
+
+          <button @click="vistaActiva = 'site'" :class="vistaActiva === 'site' ? 'bg-[#3284C6] text-white shadow-sm' : 'text-slate-300 hover:text-white hover:bg-slate-700/50'" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>
+            <span>Recursos de Site</span>
+            <span class="px-1.5 py-0.2 bg-slate-900/60 text-slate-300 rounded text-[10px] font-mono">{{ aulasFisicas.length }} aul.</span>
+          </button>
+
+          <button @click="vistaActiva = 'sabana'" :class="vistaActiva === 'sabana' ? 'bg-[#3284C6] text-white shadow-sm' : 'text-slate-300 hover:text-white hover:bg-slate-700/50'" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M12 3v18"/></svg>
+            <span>Sábana Semanal</span>
+          </button>
+        </nav>
+
+        <!-- Botones de Acción Rápida & Exportación -->
+        <div class="flex items-center gap-2">
+          <button @click="resetearLocalConfig" title="Restaurar parámetros preprogramados originales" class="flex items-center gap-1 px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 rounded-lg text-xs font-medium transition">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+            <span class="hidden lg:inline">Reset</span>
+          </button>
+
+          <button @click="exportarPNG" title="Descargar captura en alta resolución" class="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold transition shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+            <span>PNG</span>
+          </button>
+
+          <button @click="exportarPDF" title="Generar informe formal en PDF de 3 páginas" class="flex items-center gap-1.5 px-3 py-1.5 bg-[#EB5B27] hover:bg-[#d44e1e] text-white rounded-lg text-xs font-semibold transition shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+            <span>PDF Ejecutivo</span>
+          </button>
+        </div>
+
       </div>
     </header>
 
-    <!-- BANNER DE VALIDACIÓN DE ENTRADAS -->
-    <div v-if="erroresValidacion.length > 0" class="bg-danger-50 border border-danger-500/30 text-danger-700 p-4 rounded-xl flex items-start gap-3 shadow-sm">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mt-0.5"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
-      <div>
-        <h4 class="font-bold text-sm">Bloqueo de Simulación (Parámetros no válidos):</h4>
-        <ul class="list-disc pl-5 text-xs mt-1 space-y-0.5">
-          <li v-for="err in erroresValidacion" :key="err">{{ err }}</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- KPIS REALISTAS -->
-    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-      <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between">
-        <div class="space-y-1">
-          <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Meta (Roster)</span>
-          <div class="flex items-baseline gap-1.5">
-            <span class="text-2xl font-bold text-slate-900">{{ metaHc }}</span>
-            <span class="text-xs text-slate-400">Contratos</span>
-          </div>
-        </div>
-        <div class="p-2.5 bg-indigo-50 text-indigo-600 rounded-xl">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-        </div>
-      </div>
-
-      <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between">
-        <div class="space-y-1">
-          <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Fuerza Productiva</span>
-          <div class="flex items-baseline gap-1.5">
-            <span class="text-2xl font-bold text-slate-900">{{ fuerzaProductivaEstimada }}</span>
-            <span class="text-xs text-slate-400">Post-Merma</span>
-          </div>
-        </div>
-        <div class="p-2.5 bg-rose-50 text-rose-600 rounded-xl">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-      </div>
-
-      <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between">
-        <div class="space-y-1">
-          <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Semana Meta Roster</span>
-          <div class="flex items-baseline gap-1.5">
-            <span class="text-2xl font-bold font-mono" :class="semanasHastaMeta !== null ? 'text-success-600' : 'text-slate-500'">
-              {{ semanasHastaMeta !== null ? 'Semana ' + (semanasHastaMeta + 1) : 'No Alcanzada' }}
-            </span>
-          </div>
-        </div>
-        <div class="p-2.5 bg-emerald-50 text-emerald-600 rounded-xl">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-        </div>
-      </div>
-
-      <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
-        <div class="flex items-center justify-between w-full">
-          <div class="space-y-1">
-            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Aulas Requeridas</span>
-            <div class="flex items-baseline gap-1.5">
-              <span class="text-2xl font-bold text-slate-900">{{ maxAulasSimultaneas }}</span>
-              <span class="text-xs text-slate-400">Pico</span>
+    <!-- ========================================================================= -->
+    <!-- CINTILLO COMPACTO DE KPIS EJECUTIVOS (Siempre Visible) -->
+    <!-- ========================================================================= -->
+    <section class="bg-white border-b border-slate-200/80 px-4 py-2.5 shadow-sm">
+      <div class="max-w-[1680px] mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+        
+        <!-- KPI 1: Meta HC Contratos -->
+        <div class="bg-slate-50/80 px-3 py-2 rounded-xl border border-slate-200/60 flex items-center justify-between">
+          <div>
+            <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Meta (Roster)</div>
+            <div class="flex items-baseline gap-1 mt-0.5">
+              <span class="text-xl font-bold font-heading text-slate-900">{{ metaHc }}</span>
+              <span class="text-[10px] text-slate-500">Contratos</span>
             </div>
           </div>
-          <div class="p-2.5 bg-amber-50 text-amber-600 rounded-xl">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <div class="w-8 h-8 rounded-lg bg-[#3284C6]/10 text-[#3284C6] flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
           </div>
         </div>
-        <!-- Alerta de cuello de botella visual (VIS-06) -->
-        <div v-if="hayBottleneckActivo" class="mt-2 text-[10px] text-amber-600 font-bold bg-amber-50 border border-amber-200 px-2 py-0.5 rounded flex items-center gap-1">
-          <span>⚠️ {{ semanasConBottleneck }} semanas con cola de espera activa</span>
+
+        <!-- KPI 2: Fuerza Productiva Real -->
+        <div class="bg-slate-50/80 px-3 py-2 rounded-xl border border-slate-200/60 flex items-center justify-between">
+          <div>
+            <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Fuerza Productiva</div>
+            <div class="flex items-baseline gap-1 mt-0.5">
+              <span class="text-xl font-bold font-heading text-slate-900">{{ fuerzaProductivaEstimada }}</span>
+              <span class="text-[10px] text-slate-500">Post-Merma ({{ shrinkageTotal }}%)</span>
+            </div>
+          </div>
+          <div class="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
         </div>
+
+        <!-- KPI 3: Semana Meta Alcanzada -->
+        <div class="bg-slate-50/80 px-3 py-2 rounded-xl border border-slate-200/60 flex items-center justify-between">
+          <div>
+            <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Semana Cumplimiento</div>
+            <div class="flex items-baseline gap-1 mt-0.5">
+              <span class="text-xl font-bold font-heading" :class="semanasHastaMeta !== null ? 'text-success-600' : 'text-slate-500'">
+                {{ semanasHastaMeta !== null ? 'Semana ' + (semanasHastaMeta + 1) : 'No Alcanzada' }}
+              </span>
+            </div>
+          </div>
+          <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+        </div>
+
+        <!-- KPI 4: Aulas Pico Requeridas -->
+        <div class="bg-slate-50/80 px-3 py-2 rounded-xl border border-slate-200/60 flex items-center justify-between">
+          <div>
+            <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Aulas Pico Requeridas</div>
+            <div class="flex items-baseline gap-1.5 mt-0.5">
+              <span class="text-xl font-bold font-heading text-slate-900">{{ maxAulasSimultaneas }}</span>
+              <span class="text-[10px] text-slate-500">de {{ aulasFisicas.length }} disponibles</span>
+            </div>
+          </div>
+          <div class="w-8 h-8 rounded-lg" :class="hayBottleneckActivo ? 'bg-amber-50 text-amber-600' : 'bg-slate-100 text-slate-500'" class="flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+        </div>
+
+        <!-- KPI 5: Eficiencia de Attrition Global -->
+        <div class="bg-slate-50/80 px-3 py-2 rounded-xl border border-slate-200/60 flex items-center justify-between col-span-2 sm:col-span-1">
+          <div>
+            <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Eficiencia de Retención</div>
+            <div class="flex items-baseline gap-1 mt-0.5">
+              <span class="text-xl font-bold font-heading text-indigo-700">{{ eficienciaTotal.toFixed(1) }}%</span>
+              <span class="text-[10px] text-slate-500">Reclutados → Ops</span>
+            </div>
+          </div>
+          <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+          </div>
+        </div>
+
       </div>
 
-      <!-- KPI Card Faltante: Eficiencia de Attrition (VIS-01) -->
-      <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between">
-        <div class="space-y-1">
-          <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Eficiencia de Attrition</span>
-          <div class="flex items-baseline gap-1.5">
-            <span class="text-2xl font-bold text-slate-900">{{ eficienciaTotal.toFixed(1) }}%</span>
-            <span class="text-xs text-slate-400">Reclutados → Ops</span>
-          </div>
+      <!-- Banner de Alerta de Cuello de Botella si existe -->
+      <div v-if="hayBottleneckActivo" class="max-w-[1680px] mx-auto mt-2 px-3 py-1.5 bg-amber-50 border border-amber-200 rounded-lg flex items-center justify-between text-xs text-amber-800">
+        <div class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span><strong>Advertencia de Cuello de Botella:</strong> Hay <strong>{{ semanasConBottleneck }} semanas</strong> con agentes en cola de espera. Revisa la disponibilidad de capacitadores o añade turnos a las aulas.</span>
         </div>
-        <div class="p-2.5 bg-indigo-50 text-indigo-600 rounded-xl">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
-        </div>
+        <button @click="vistaActiva = 'site'" class="text-xs font-bold text-[#3284C6] hover:underline">Ajustar Aulas / Turnos →</button>
       </div>
     </section>
 
-    <!-- INVENTARIO FÍSICO DE INFRAESTRUCTURA -->
-    <section class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-4">
-      <div class="flex items-center gap-2 border-b border-slate-100 pb-3">
-        <span class="p-1 bg-slate-100 rounded text-slate-600">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg>
-        </span>
-        <h2 class="text-lg font-bold text-slate-900">Configuración de Recursos de Site</h2>
+    <!-- ========================================================================= -->
+    <!-- ÁREA DE CONTENIDO PRINCIPAL (SPA TABS) -->
+    <!-- ========================================================================= -->
+    <main class="flex-grow p-4 lg:p-6 max-w-[1680px] mx-auto w-full">
+      
+      <!-- BANNER DE VALIDACIÓN DE ENTRADAS -->
+      <div v-if="erroresValidacion.length > 0" class="mb-4 bg-danger-50 border border-danger-500/30 text-danger-700 p-3 rounded-xl flex items-start gap-3 shadow-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mt-0.5"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+        <div>
+          <h4 class="font-bold text-xs">Parámetros no válidos en simulación:</h4>
+          <ul class="list-disc pl-5 text-[11px] mt-0.5 space-y-0.5">
+            <li v-for="err in erroresValidacion" :key="err">{{ err }}</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- CAPACITADORES -->
-        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col justify-between">
-          <div>
-            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Capacitadores Disponibles</span>
-            <p class="text-[11px] text-slate-500 mb-3">Total de instructores en plantilla para dar capacitación.</p>
-          </div>
-          <div class="flex items-center gap-3">
-            <input type="number" v-model.number="capacitadoresTotales" class="w-24 px-3 py-2 border border-slate-300 rounded-xl text-center font-bold text-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none" min="1" />
-            <span class="text-xs text-slate-500 font-medium">Instructores</span>
-          </div>
-        </div>
-
-        <!-- AULAS FÍSICAS (Con turnos) -->
-        <div class="md:col-span-2 bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
-          <div class="flex justify-between items-center">
-            <div>
-              <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Inventario de Aulas y Turnos</span>
-              <p class="text-[11px] text-slate-500">Define el espacio físico real y turnos diarios configurables.</p>
-            </div>
-            <button @click="agregarNuevaAulaFisica" class="px-3 py-1 bg-brand-600 hover:bg-brand-700 text-white rounded-lg text-xs font-semibold transition flex items-center gap-1">
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-              Añadir Aula
-            </button>
-          </div>
-
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 max-h-40 overflow-y-auto custom-scrollbar p-1">
-            <div v-for="aula in aulasFisicas" :key="aula.id" class="bg-white p-2.5 rounded-lg border border-slate-200 flex flex-col justify-between relative shadow-sm space-y-2">
-              <button @click="eliminarAulaFisica(aula.id)" class="absolute top-1 right-1 text-slate-300 hover:text-danger-600">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+      <!-- ======================================================================= -->
+      <!-- VISTA 1: TABLERO EJECUTIVO & CURVAS DE CAPACIDAD WFM -->
+      <!-- ======================================================================= -->
+      <div v-show="vistaActiva === 'dashboard'" class="space-y-6">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          
+          <!-- Columna Izquierda: Parámetros Operativos WFM (Compacto) -->
+          <div class="lg:col-span-4 bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-4">
+            
+            <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
+              <div class="flex items-center gap-2">
+                <span class="p-1 bg-[#3284C6]/10 text-[#3284C6] rounded-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="4" y1="21" y2="14"/><line x1="4" x2="4" y1="10" y2="3"/><line x1="12" x2="12" y1="21" y2="12"/><line x1="12" x2="12" y1="8" y2="3"/><line x1="20" x2="20" y1="21" y2="16"/><line x1="20" x2="20" y1="12" y2="3"/><line x1="2" x2="6" y1="14" y2="14"/><line x1="10" x2="14" y1="8" y2="8"/><line x1="18" x2="22" y1="16" y2="16"/></svg>
+                </span>
+                <h3 class="font-heading font-bold text-sm text-slate-900">Parámetros Operativos WFM</h3>
+              </div>
+              <button @click="vistaActiva = 'site'" class="text-[11px] font-semibold text-[#3284C6] hover:underline">
+                Site: {{ capacitadoresTotales }} inst / {{ aulasFisicas.length }} aul
               </button>
-              <input type="text" v-model="aula.nombre" class="text-xs font-semibold text-slate-700 border-b border-transparent focus:border-brand-500 focus:outline-none w-5/6 bg-transparent" />
-              <div class="flex flex-col gap-1.5">
-                <div class="flex items-center justify-between text-xs text-slate-500">
-                  <span>Capacidad:</span>
-                  <input type="number" v-model.number="aula.capacidad" class="w-12 text-center text-xs border border-slate-200 rounded px-1 font-bold text-slate-800" min="1" />
+            </div>
+
+            <!-- Metas Base -->
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Meta HC Roster</label>
+                <input type="number" v-model.number="metaHc" class="w-full px-2.5 py-1.5 border border-slate-300 rounded-lg text-sm font-bold text-slate-900 focus:ring-2 focus:ring-[#3284C6] outline-none" min="1" />
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Semanas Simuladas</label>
+                <input type="number" v-model.number="semanasSimulacion" class="w-full px-2.5 py-1.5 border border-slate-300 rounded-lg text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-[#3284C6] outline-none" min="1" />
+              </div>
+            </div>
+
+            <!-- Asignador Masivo Cascada -->
+            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200/80 space-y-2">
+              <span class="text-[10px] font-bold text-slate-600 uppercase tracking-wider block">Estándar de Reclutamiento</span>
+              <div class="grid grid-cols-2 gap-2.5">
+                <div>
+                  <label class="block text-[9px] font-bold text-slate-500 uppercase mb-0.5">Agentes x Ola</label>
+                  <input type="number" v-model.number="agentesDefault" class="w-full px-2 py-1 border border-slate-300 rounded text-center text-xs font-bold text-[#3284C6]" min="1" />
                 </div>
-                <div class="flex items-center justify-between text-xs text-slate-500">
-                  <span>Turnos:</span>
-                  <input type="number" v-model.number="aula.turnos" class="w-12 text-center text-xs border border-slate-200 rounded px-1 font-bold text-slate-800" min="1" max="3" />
+                <div>
+                  <label class="block text-[9px] font-bold text-slate-500 uppercase mb-0.5">Duración Cap. (Sem)</label>
+                  <input type="number" v-model.number="duracionEstandar" class="w-full px-2 py-1 border border-slate-300 rounded text-center text-xs font-bold text-[#3284C6]" min="1" />
                 </div>
               </div>
             </div>
+
+            <!-- Shrinkage Desglosado -->
+            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200/80 space-y-2">
+              <div class="flex justify-between items-center text-xs font-bold text-slate-700 border-b border-slate-200 pb-1">
+                <span>Shrinkage Total:</span>
+                <span class="text-indigo-600 font-mono font-bold">{{ shrinkageTotal }}%</span>
+              </div>
+              <div class="grid grid-cols-3 gap-2">
+                <div>
+                  <label class="block text-[9px] font-bold text-slate-500 uppercase mb-0.5">Planeado</label>
+                  <input type="number" v-model.number="shrinkagePlaneado" class="w-full text-center px-1 py-1 text-xs border border-slate-300 rounded font-semibold" min="0" max="99" />
+                </div>
+                <div>
+                  <label class="block text-[9px] font-bold text-slate-500 uppercase mb-0.5">No Plan.</label>
+                  <input type="number" v-model.number="shrinkageNoPlaneado" class="w-full text-center px-1 py-1 text-xs border border-slate-300 rounded font-semibold" min="0" max="99" />
+                </div>
+                <div>
+                  <label class="block text-[9px] font-bold text-slate-500 uppercase mb-0.5">Gestión</label>
+                  <input type="number" v-model.number="shrinkageGestion" class="w-full text-center px-1 py-1 text-xs border border-slate-300 rounded font-semibold" min="0" max="99" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Rampa & Nesting -->
+            <div class="bg-indigo-50/40 p-3 rounded-xl border border-indigo-100 space-y-2">
+              <span class="text-[10px] font-bold text-indigo-900 uppercase tracking-wider block">Rampa y Nesting (OJT)</span>
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block text-[9px] font-bold text-slate-500 uppercase mb-0.5">Nesting (Sem)</label>
+                  <input type="number" v-model.number="duracionNesting" class="w-full text-center px-1.5 py-1 text-xs border border-slate-300 rounded" min="0" />
+                </div>
+                <div>
+                  <label class="block text-[9px] font-bold text-slate-500 uppercase mb-0.5">Rend. Nesting %</label>
+                  <input type="number" v-model.number="rendimientoNesting" class="w-full text-center px-1.5 py-1 text-xs border border-slate-300 rounded font-semibold" min="0" max="100" />
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block text-[9px] font-bold text-slate-500 uppercase mb-0.5">Rampa Ops (Sem)</label>
+                  <input type="number" v-model.number="duracionRampa" class="w-full text-center px-1.5 py-1 text-xs border border-slate-300 rounded" min="1" />
+                </div>
+                <div>
+                  <label class="block text-[9px] font-bold text-slate-500 uppercase mb-0.5">Rend. Inicial %</label>
+                  <input type="number" v-model.number="rendimientoInicialRampa" class="w-full text-center px-1.5 py-1 text-xs border border-slate-300 rounded font-semibold" min="0" max="100" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Límite Aula & Auto-Backfill -->
+            <div class="grid grid-cols-2 gap-3 items-center">
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Límite Aula Pedagógico</label>
+                <input type="number" v-model.number="limitePedagogico" class="w-full px-2.5 py-1.5 border border-slate-300 rounded-lg text-xs font-bold text-slate-800" min="1" />
+              </div>
+              <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-200">
+                <span class="text-xs font-semibold text-slate-700">Auto-Backfill</span>
+                <input type="checkbox" v-model="autoBackfill" class="w-4 h-4 text-[#3284C6] rounded border-slate-300" />
+              </div>
+            </div>
+
           </div>
+
+          <!-- Columna Derecha: Gráficas de Capacidad (SOTA Dual-Axis) -->
+          <div class="lg:col-span-8 space-y-6">
+            
+            <!-- Gráfica 1: Curva de Capacidad Proyectada vs Meta Real -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 flex flex-col justify-between">
+              <div class="flex justify-between items-center border-b border-slate-100 pb-3 mb-2">
+                <div class="flex items-center gap-2">
+                  <span class="p-1 bg-[#3284C6]/10 text-[#3284C6] rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg>
+                  </span>
+                  <div>
+                    <h3 class="font-heading font-bold text-sm text-slate-900">Curva de Capacidad Proyectada vs Meta Real</h3>
+                    <p class="text-[11px] text-slate-400">Roster comercial vs Capacidad productiva post-merma y agentes varados en cola</p>
+                  </div>
+                </div>
+                <div class="text-[11px] text-slate-500 font-medium hidden sm:block">
+                  Zoom interactivo · 30 semanas
+                </div>
+              </div>
+              <div class="relative min-h-[310px] w-full">
+                <canvas id="capacidadChart"></canvas>
+              </div>
+            </div>
+
+            <!-- Gráfica 2: Distribución de Plantilla por Fase (Ops vs Nesting vs Training vs Bajas) -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80">
+              <div class="flex justify-between items-center border-b border-slate-100 pb-2 mb-2">
+                <div class="flex items-center gap-2">
+                  <span class="p-1 bg-indigo-50 text-indigo-600 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>
+                  </span>
+                  <h3 class="font-heading font-bold text-sm text-slate-900">Composición Semanal de Plantilla por Estado</h3>
+                </div>
+                <span class="text-[11px] text-slate-400">Desglose de estados en plataforma</span>
+              </div>
+              <div class="relative min-h-[200px] w-full">
+                <canvas id="composicionChart"></canvas>
+              </div>
+            </div>
+
+          </div>
+
         </div>
+
       </div>
-    </section>
 
-    <!-- CONFIGURACIÓN GLOBAL Y GRÁFICO -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      
-      <!-- CONTROLES WFM -->
-      <section class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-4">
-        <div class="flex items-center gap-2 border-b border-slate-100 pb-3">
-          <span class="p-1 bg-slate-100 rounded text-slate-600">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><line x1="4" x2="4" y1="21" y2="14"/><line x1="4" x2="4" y1="10" y2="3"/><line x1="12" x2="12" y1="21" y2="12"/><line x1="12" x2="12" y1="8" y2="3"/><line x1="20" x2="20" y1="21" y2="16"/><line x1="20" x2="20" y1="12" y2="3"/><line x1="2" x2="6" y1="14" y2="14"/><line x1="10" x2="14" y1="8" y2="8"/><line x1="18" x2="22" y1="16" y2="16"/></svg>
-          </span>
-          <h2 class="text-lg font-bold text-slate-900">Parámetros Operativos WFM</h2>
-        </div>
-
-        <!-- ENTRADAS DE ASIGNACIÓN EN CASCADA -->
-        <div class="bg-brand-50/50 p-4 rounded-xl border border-brand-100 space-y-3">
-          <span class="text-xs font-bold text-brand-700 uppercase tracking-wider block">Asignador Masivo (Cascada)</span>
-          <div class="grid grid-cols-2 gap-3">
-            <div>
-              <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Agentes por Ola</label>
-              <input type="number" v-model.number="agentesDefault" class="w-full px-2.5 py-1.5 border border-brand-300 rounded-lg text-center font-bold text-brand-700 focus:ring-1 focus:ring-brand-500 outline-none" min="1" />
-            </div>
-            <div>
-              <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Capacitac. Gral.</label>
-              <input type="number" v-model.number="duracionEstandar" class="w-full px-2.5 py-1.5 border border-brand-300 rounded-lg text-center font-bold text-brand-700 focus:ring-1 focus:ring-brand-500 outline-none" min="1" />
-            </div>
-          </div>
-        </div>
+      <!-- ======================================================================= -->
+      <!-- VISTA 2: CALENDARIO DE OLAS & REQUERIMIENTOS -->
+      <!-- ======================================================================= -->
+      <div v-show="vistaActiva === 'olas'" class="space-y-4">
         
-        <div class="grid grid-cols-2 gap-4">
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
           <div>
-            <label class="block text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">Meta HC Roster</label>
-            <input type="number" v-model.number="metaHc" class="w-full px-3 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition font-semibold" min="1" />
+            <h2 class="font-heading font-bold text-base text-slate-900">Programación de Olas de Reclutamiento</h2>
+            <p class="text-xs text-slate-500">Configura la fecha de inicio, tamaño inicial y tasas de deserción específicas para cada ola.</p>
           </div>
-          <div>
-            <label class="block text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">Semanas Simuladas</label>
-            <input type="number" v-model.number="semanasSimulacion" class="w-full px-3 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-500" min="1" />
-          </div>
-        </div>
-
-        <!-- SHRINKAGE DESGLOSADO -->
-        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2">
-          <div class="flex justify-between items-center text-xs font-bold text-slate-700 border-b pb-1">
-            <span>Shrinkage Total:</span>
-            <span class="text-indigo-600 font-mono">{{ shrinkageTotal }}%</span>
-          </div>
-          <div class="grid grid-cols-3 gap-2">
-            <div>
-              <label class="block text-[9px] font-bold text-slate-500 uppercase mb-1">Planeado %</label>
-              <input type="number" v-model.number="shrinkagePlaneado" class="w-full text-center px-1.5 py-1 text-xs border border-slate-300 rounded focus:ring-1 focus:ring-brand-500" min="0" max="99" />
-            </div>
-            <div>
-              <label class="block text-[9px] font-bold text-slate-500 uppercase mb-1">No Planeado %</label>
-              <input type="number" v-model.number="shrinkageNoPlaneado" class="w-full text-center px-1.5 py-1 text-xs border border-slate-300 rounded focus:ring-1 focus:ring-brand-500" min="0" max="99" />
-            </div>
-            <div>
-              <label class="block text-[9px] font-bold text-slate-500 uppercase mb-1">Gestión %</label>
-              <input type="number" v-model.number="shrinkageGestion" class="w-full text-center px-1.5 py-1 text-xs border border-slate-300 rounded focus:ring-1 focus:ring-brand-500" min="0" max="99" />
-            </div>
-          </div>
-        </div>
-
-        <!-- DURACIONES Y CURVA DE APRENDIZAJE -->
-        <div class="bg-indigo-50/40 p-3 rounded-xl border border-indigo-100 space-y-2">
-          <span class="text-xs font-bold text-indigo-800 uppercase tracking-wider block">Fase de Rampa y OJT</span>
-          <div class="grid grid-cols-2 gap-2">
-            <div>
-              <label class="block text-[9px] font-bold text-slate-500 uppercase mb-1">Nesting (Sem.)</label>
-              <input type="number" v-model.number="duracionNesting" class="w-full text-center px-2 py-1 text-xs border border-slate-300 rounded-lg" min="0" />
-            </div>
-            <div>
-              <label class="block text-[9px] font-bold text-slate-500 uppercase mb-1">Rend. Nesting %</label>
-              <input type="number" v-model.number="rendimientoNesting" class="w-full text-center px-2 py-1 text-xs border border-slate-300 rounded-lg" min="0" max="100" />
-            </div>
-          </div>
-          <div class="grid grid-cols-2 gap-2">
-            <div>
-              <label class="block text-[9px] font-bold text-slate-500 uppercase mb-1">Rampa Ops (Sem.)</label>
-              <input type="number" v-model.number="duracionRampa" class="w-full text-center px-2 py-1 text-xs border border-slate-300 rounded-lg" min="1" />
-            </div>
-            <div>
-              <label class="block text-[9px] font-bold text-slate-500 uppercase mb-1">Rend. Inicial %</label>
-              <input type="number" v-model.number="rendimientoInicialRampa" class="w-full text-center px-2 py-1 text-xs border border-slate-300 rounded-lg" min="0" max="100" />
-            </div>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">Límite Aula</label>
-            <input type="number" v-model.number="limitePedagogico" class="w-full px-3 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition" min="1" />
-          </div>
-          <div class="flex items-center justify-between mt-6">
-            <span class="text-xs font-semibold text-slate-700">Auto-Backfill</span>
-            <input type="checkbox" v-model="autoBackfill" class="w-4 h-4 text-brand-600 border-slate-300 rounded focus:ring-brand-500" />
-          </div>
-        </div>
-      </section>
-
-      <!-- GRÁFICO REALISTA -->
-      <section class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 lg:col-span-2 flex flex-col justify-between">
-        <div class="flex justify-between items-center border-b border-slate-100 pb-3 mb-3">
           <div class="flex items-center gap-2">
-            <span class="p-1 bg-slate-100 rounded text-slate-600">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg>
-            </span>
-            <h2 class="text-lg font-bold text-slate-900">Curva de Capacidad Proyectada vs Meta Real</h2>
+            <button @click="agregarNuevaOla" class="flex items-center gap-1.5 px-3 py-1.5 bg-[#3284C6] hover:bg-[#256ca6] text-white rounded-lg text-xs font-semibold transition shadow-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+              <span>Añadir Ola</span>
+            </button>
+            <button @click="restaurarDatosPreprogramados" class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 rounded-lg text-xs font-semibold transition">
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+              <span>Reset 22 Olas</span>
+            </button>
           </div>
         </div>
-        <div class="relative flex-grow min-h-[240px]">
-          <canvas id="capacidadChart"></canvas>
-        </div>
-      </section>
 
-    </div>
-
-    <!-- CONTROL DE OLAS Y REQUERIMIENTOS -->
-    <section class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-4">
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-4">
-        <div class="flex items-center gap-2">
-          <span class="p-1 bg-slate-100 rounded text-slate-600">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>
-          </span>
-          <div>
-            <h2 class="text-lg font-bold text-slate-900">Programación de Reclutamiento & Restricciones Físicas</h2>
-            <p class="text-xs text-slate-500">
-              Las olas masivas que superen el límite pedagógico o la capacidad física se dividirán automáticamente según los turnos y aulas disponibles.
-            </p>
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden">
+          <div class="overflow-x-auto custom-scrollbar max-h-[600px]">
+            <table class="w-full text-left border-collapse">
+              <thead class="sticky top-0 bg-slate-50 z-10 text-[10px] font-bold text-slate-500 uppercase tracking-wider border-b border-slate-200">
+                <tr>
+                  <th class="px-4 py-3">Nombre de la Ola</th>
+                  <th class="px-4 py-3">Fecha Inicio Programada</th>
+                  <th class="px-4 py-3 text-center">Agentes Solicitados</th>
+                  <th class="px-4 py-3 text-center">Duración Capacitación</th>
+                  <th class="px-4 py-3 text-center">Baja Training (%)</th>
+                  <th class="px-4 py-3 text-center">Baja Ops (%)</th>
+                  <th class="px-4 py-3 text-right">Acción</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 text-xs">
+                <tr v-for="ola in olas" :key="ola.id" class="hover:bg-slate-50/80 transition">
+                  <td class="px-4 py-2 font-semibold text-slate-700">
+                    <input type="text" v-model="ola.nombre" class="bg-transparent border-b border-transparent hover:border-slate-300 focus:border-[#3284C6] focus:outline-none px-1 py-0.5 w-44 font-semibold" />
+                  </td>
+                  <td class="px-4 py-2">
+                    <input type="date" v-model="ola.fechaInicio" class="bg-slate-50 border border-slate-200 rounded px-2 py-1 text-xs focus:ring-1 focus:ring-[#3284C6] outline-none" />
+                  </td>
+                  <td class="px-4 py-2 text-center">
+                    <input type="number" v-model.number="ola.cantidadInicial" class="w-16 bg-slate-50 border border-slate-200 rounded px-2 py-1 text-center font-bold text-slate-800" min="1" />
+                  </td>
+                  <td class="px-4 py-2 text-center">
+                    <input type="number" v-model.number="ola.duracionSemanas" class="w-12 bg-slate-50 border border-slate-200 rounded px-2 py-1 text-center font-semibold" min="1" /> sem
+                  </td>
+                  <td class="px-4 py-2 text-center">
+                    <input type="number" step="0.1" v-model.number="ola.tasaBajaTrainingSemanal" class="w-14 bg-slate-50 border border-slate-200 rounded px-2 py-1 text-center font-semibold" min="0" /> %
+                  </td>
+                  <td class="px-4 py-2 text-center">
+                    <input type="number" step="0.1" v-model.number="ola.tasaBajaOpsSemanal" class="w-14 bg-slate-50 border border-slate-200 rounded px-2 py-1 text-center font-semibold" min="0" /> %
+                  </td>
+                  <td class="px-4 py-2 text-right">
+                    <button @click="eliminarOla(ola.id)" class="text-slate-400 hover:text-danger-600 p-1" title="Eliminar Ola">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-        <div class="flex gap-2">
-          <button @click="agregarNuevaOla" class="flex items-center gap-1.5 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 text-white rounded-lg text-xs font-semibold transition">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-            Añadir Requerimiento
-          </button>
-          <button @click="restaurarDatosPreprogramados" class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 rounded-lg text-xs font-semibold transition">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-            Reset Olas Imagen
-          </button>
-        </div>
+
       </div>
 
-      <!-- TABLA DE REQUERIMIENTOS DE ENTRADA -->
-      <div class="overflow-x-auto custom-scrollbar border border-slate-200 rounded-xl">
-        <table class="w-full text-left border-collapse">
-          <thead>
-            <tr class="bg-slate-50 text-slate-400 text-[10px] font-bold uppercase tracking-wider border-b border-slate-200">
-              <th class="px-4 py-3">Nombre Olas Reclutadas</th>
-              <th class="px-4 py-3">Fecha Inicio Programada</th>
-              <th class="px-4 py-3 text-center">Agentes Solicitados</th>
-              <th class="px-4 py-3 text-center">Duración Capacitación</th>
-              <th class="px-4 py-3 text-center">Tasa Training (%)</th>
-              <th class="px-4 py-3 text-center">Tasa Ops (%)</th>
-              <th class="px-4 py-3 text-right">Acción</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100 text-xs">
-            <tr v-for="(ola) in olas" :key="ola.id" class="hover:bg-slate-50 transition">
-              <td class="px-4 py-2 font-semibold text-slate-700">
-                <input type="text" v-model="ola.nombre" class="bg-transparent border-b border-transparent hover:border-slate-300 focus:border-brand-500 focus:outline-none px-1 py-0.5 w-48 font-semibold" />
-              </td>
-              <td class="px-4 py-2">
-                <input type="date" v-model="ola.fechaInicio" class="bg-slate-50 border border-slate-200 rounded px-2 py-1 text-xs focus:outline-none" />
-              </td>
-              <td class="px-4 py-2 text-center">
-                <input type="number" v-model.number="ola.cantidadInicial" class="w-16 bg-slate-50 border border-slate-200 rounded px-2 py-1 text-center font-bold text-slate-800" />
-              </td>
-              <td class="px-4 py-2 text-center">
-                <input type="number" v-model.number="ola.duracionSemanas" class="w-12 bg-slate-50 border border-slate-200 rounded px-2 py-1 text-center" /> sem
-              </td>
-              <td class="px-4 py-2 text-center">
-                <input type="number" step="0.1" v-model.number="ola.tasaBajaTrainingSemanal" class="w-12 bg-slate-50 border border-slate-200 rounded px-2 py-1 text-center" /> %
-              </td>
-              <td class="px-4 py-2 text-center">
-                <input type="number" step="0.1" v-model.number="ola.tasaBajaOpsSemanal" class="w-12 bg-slate-50 border border-slate-200 rounded px-2 py-1 text-center" /> %
-              </td>
-              <td class="px-4 py-2 text-right">
-                <button @click="eliminarOla(ola.id)" class="text-slate-400 hover:text-danger-600 p-1">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+      <!-- ======================================================================= -->
+      <!-- VISTA 3: RECURSOS DE SITE & AULAS FÍSICAS -->
+      <!-- ======================================================================= -->
+      <div v-show="vistaActiva === 'site'" class="space-y-6">
+        
+        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+            <div>
+              <h2 class="font-heading font-bold text-base text-slate-900">Infraestructura Física del Site</h2>
+              <p class="text-xs text-slate-500">Configuración de instructores disponibles, capacidad máxima física por aula y turnos diarios asignados.</p>
+            </div>
+            <button @click="agregarNuevaAulaFisica" class="px-3 py-1.5 bg-[#3284C6] hover:bg-[#256ca6] text-white rounded-lg text-xs font-semibold transition flex items-center gap-1.5 shadow-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+              <span>Añadir Aula Física</span>
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            
+            <!-- Capacitadores -->
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/80 flex flex-col justify-between">
+              <div>
+                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Capacitadores en Plantilla</span>
+                <p class="text-[11px] text-slate-400 mt-1 mb-4">Total de instructores activos disponibles para impartir aulas simultáneas.</p>
+              </div>
+              <div class="flex items-center gap-3">
+                <input type="number" v-model.number="capacitadoresTotales" class="w-24 px-3 py-2 border border-slate-300 rounded-xl text-center font-bold text-xl text-slate-900 focus:ring-2 focus:ring-[#3284C6] outline-none" min="1" />
+                <span class="text-xs font-medium text-slate-500">Instructores</span>
+              </div>
+            </div>
+
+            <!-- Listado de Aulas Físicas -->
+            <div class="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              <div v-for="aula in aulasFisicas" :key="aula.id" class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between relative space-y-3">
+                <button @click="eliminarAulaFisica(aula.id)" class="absolute top-2 right-2 text-slate-300 hover:text-danger-600 transition" title="Eliminar Aula">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
                 </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+                <div>
+                  <input type="text" v-model="aula.nombre" class="text-xs font-bold text-slate-800 border-b border-transparent hover:border-slate-300 focus:border-[#3284C6] focus:outline-none w-5/6 bg-transparent" />
+                  <div class="text-[10px] text-slate-400 mt-0.5">Espacio físico configurable</div>
+                </div>
+                <div class="space-y-2 text-xs text-slate-600 border-t border-slate-100 pt-2">
+                  <div class="flex items-center justify-between">
+                    <span>Capacidad física:</span>
+                    <input type="number" v-model.number="aula.capacidad" class="w-14 text-center border border-slate-200 rounded px-1.5 py-0.5 font-bold text-slate-900 focus:border-[#3284C6]" min="1" />
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span>Turnos diarios:</span>
+                    <input type="number" v-model.number="aula.turnos" class="w-14 text-center border border-slate-200 rounded px-1.5 py-0.5 font-bold text-slate-900 focus:border-[#3284C6]" min="1" max="3" />
+                  </div>
+                </div>
+              </div>
+            </div>
 
-    <!-- REPORTE DE SIMULACIÓN SEMANAL DETALLADO -->
-    <section class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-4">
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-4">
-        <div class="flex items-center gap-2">
-          <span class="p-1 bg-slate-100 rounded text-slate-600">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M12 3v18"/></svg>
-          </span>
-          <div>
-            <h2 class="text-lg font-bold text-slate-900">Métricas y Proyección de Capacidad Semanal</h2>
-            <p class="text-xs text-slate-500">Muestra el desglose detallado de qué aulas físicas están activas y el porcentaje de uso de instructores.</p>
           </div>
         </div>
-        <!-- Toggle Detallado / Compacto (VIS-02) -->
-        <button @click="modoTablaCompacto = !modoTablaCompacto" class="flex items-center gap-1 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20"/><path d="M20 12v8H4v-8"/><path d="M2 12V6h18v6"/></svg>
-          {{ modoTablaCompacto ? 'Ver Detalle Completo' : 'Vista Compacta' }}
-        </button>
+
       </div>
 
-      <!-- TABLA DETALLADA -->
-      <div class="overflow-x-auto custom-scrollbar border border-slate-200 rounded-xl max-h-[550px]">
-        <table class="w-full text-left border-collapse relative">
-          <thead class="sticky top-0 bg-white z-10 shadow-[0_1px_0_0_rgba(226,232,240,1)] text-[10px] uppercase font-bold text-slate-400">
-            <tr>
-              <th class="px-4 py-3 bg-slate-50">No. Sem. (Fecha)</th>
-              <th class="px-4 py-3 bg-slate-50 text-center">Alta Real</th>
-              <th v-if="!modoTablaCompacto" class="px-4 py-3 bg-slate-50 text-center">Aulas Ocupadas</th>
-              <th v-if="!modoTablaCompacto" class="px-4 py-3 bg-slate-50">Detalle de Aulas (Grupo / Agentes / Turno)</th>
-              <th v-if="!modoTablaCompacto" class="px-4 py-3 bg-slate-50 text-center">Capacitadores</th>
-              <th v-if="!modoTablaCompacto" class="px-4 py-3 bg-slate-50 text-center">En Cap.</th>
-              <th v-if="!modoTablaCompacto" class="px-4 py-3 bg-slate-50 text-center">En Nesting</th>
-              <th class="px-4 py-3 bg-slate-50 text-center bg-indigo-50/50 text-indigo-700">Ops (Roster Contrato)</th>
-              <th v-if="!modoTablaCompacto" class="px-4 py-3 bg-slate-50 text-center text-slate-500">Capacidad Prod. (Real)</th>
-              <th v-if="!modoTablaCompacto" class="px-4 py-3 bg-slate-50 text-center font-bold">Meta Roster</th>
-              <th class="px-4 py-3 bg-slate-50 text-center font-bold">Superávit / Déficit</th>
-              <th class="px-4 py-3 bg-slate-50 text-center">Cumplimiento %</th>
-              <th class="px-4 py-3 bg-slate-50 text-center text-rose-600">Bajas</th>
-              <th class="px-4 py-3 bg-slate-50 text-center text-amber-600">Cola Espera (Delay)</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100 text-xs">
-            <tr v-for="(semana) in proyeccion" :key="semana.fecha" class="hover:bg-slate-50 transition" :class="semana.cumplimiento >= 100 ? 'bg-success-50/20' : ''">
-              <!-- No. Semana y Fecha -->
-              <td class="px-4 py-2 font-bold text-slate-700 whitespace-nowrap">
-                <span class="text-brand-600 font-mono">S{{ semana.semanaIndex }}</span>
-                <span class="text-[10px] text-slate-400 font-normal ml-1">({{ formatearFecha(semana.fecha) }})</span>
-              </td>
-              
-              <!-- Altas Reales -->
-              <td class="px-4 py-2 text-center font-bold" :class="semana.altas > 0 ? 'text-brand-600' : 'text-slate-400'">
-                {{ semana.altas }}
-              </td>
+      <!-- ======================================================================= -->
+      <!-- VISTA 4: SÁBANA SEMANAL FORENSE (DETALLE 30 SEMANAS) -->
+      <!-- ======================================================================= -->
+      <div v-show="vistaActiva === 'sabana'" class="space-y-4">
+        
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+          <div>
+            <h2 class="font-heading font-bold text-base text-slate-900">Sábana de Simulación Semanal Forense</h2>
+            <p class="text-xs text-slate-500">Auditoría completa semana a semana: altas, rotación, aulas físicas activas y cuellos de botella.</p>
+          </div>
+          <button @click="modoTablaCompacto = !modoTablaCompacto" class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20"/><path d="M20 12v8H4v-8"/><path d="M2 12V6h18v6"/></svg>
+            <span>{{ modoTablaCompacto ? 'Ver Detalle Completo' : 'Vista Compacta' }}</span>
+          </button>
+        </div>
 
-              <!-- Cantidad de Aulas Ocupadas -->
-              <td v-if="!modoTablaCompacto" class="px-4 py-2 text-center text-slate-600">
-                <span class="font-semibold">{{ semana.aulasActivas }}</span>
-                <span class="text-[10px] text-slate-400"> / {{ aulasFisicas.length }}</span>
-              </td>
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden">
+          <div class="overflow-x-auto custom-scrollbar max-h-[620px]">
+            <table class="w-full text-left border-collapse relative">
+              <thead class="sticky top-0 bg-slate-50 z-10 shadow-[0_1px_0_0_rgba(226,232,240,1)] text-[10px] uppercase font-bold text-slate-400">
+                <tr>
+                  <th class="px-4 py-3 bg-slate-50">Semana (Fecha)</th>
+                  <th class="px-4 py-3 bg-slate-50 text-center">Altas</th>
+                  <th v-if="!modoTablaCompacto" class="px-4 py-3 bg-slate-50 text-center">Aulas</th>
+                  <th v-if="!modoTablaCompacto" class="px-4 py-3 bg-slate-50">Detalle Aulas (Grupo / Agentes / Turno)</th>
+                  <th v-if="!modoTablaCompacto" class="px-4 py-3 bg-slate-50 text-center">Instructores</th>
+                  <th v-if="!modoTablaCompacto" class="px-4 py-3 bg-slate-50 text-center">En Cap.</th>
+                  <th v-if="!modoTablaCompacto" class="px-4 py-3 bg-slate-50 text-center">Nesting</th>
+                  <th class="px-4 py-3 bg-slate-50 text-center bg-indigo-50/50 text-indigo-700 font-bold">Ops Roster</th>
+                  <th v-if="!modoTablaCompacto" class="px-4 py-3 bg-slate-50 text-center text-slate-500">Cap. Prod. Real</th>
+                  <th v-if="!modoTablaCompacto" class="px-4 py-3 bg-slate-50 text-center font-bold">Meta Roster</th>
+                  <th class="px-4 py-3 bg-slate-50 text-center font-bold">Superávit/Déficit</th>
+                  <th class="px-4 py-3 bg-slate-50 text-center">Cumplimiento</th>
+                  <th class="px-4 py-3 bg-slate-50 text-center text-rose-600">Bajas</th>
+                  <th class="px-4 py-3 bg-slate-50 text-center text-amber-600">Cola Espera</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 text-xs">
+                <tr v-for="semana in proyeccion" :key="semana.fecha" class="hover:bg-slate-50/80 transition" :class="semana.cumplimiento >= 100 ? 'bg-success-50/15' : ''">
+                  <!-- No. Semana y Fecha -->
+                  <td class="px-4 py-2 font-bold text-slate-700 whitespace-nowrap">
+                    <span class="text-[#3284C6] font-mono">S{{ semana.semanaIndex }}</span>
+                    <span class="text-[10px] text-slate-400 font-normal ml-1">({{ formatearFecha(semana.fecha) }})</span>
+                  </td>
+                  
+                  <!-- Altas Reales -->
+                  <td class="px-4 py-2 text-center font-bold" :class="semana.altas > 0 ? 'text-[#3284C6]' : 'text-slate-400'">
+                    {{ semana.altas }}
+                  </td>
 
-              <!-- Detalle de Aulas Ocupadas (Grupo / Agentes) -->
-              <td v-if="!modoTablaCompacto" class="px-4 py-2 font-medium text-slate-500">
-                <div v-if="semana.detalleAulas.length > 0" class="flex flex-wrap gap-1">
-                  <span v-for="da in semana.detalleAulas" :key="da.nombreAula + da.turno" class="px-1.5 py-0.5 bg-slate-100 border border-slate-200 text-[10px] rounded text-slate-600">
-                    <strong>{{ da.nombreAula }} (T{{ da.turno }})</strong>: {{ da.hc }} ag. <span class="text-[9px] text-slate-400">({{ da.origen }})</span>
-                  </span>
-                </div>
-                <span v-else class="text-slate-300 italic text-[10px]">Sin aulas activas</span>
-              </td>
+                  <!-- Aulas Ocupadas -->
+                  <td v-if="!modoTablaCompacto" class="px-4 py-2 text-center text-slate-600">
+                    <span class="font-semibold">{{ semana.aulasActivas }}</span>
+                    <span class="text-[10px] text-slate-400"> / {{ aulasFisicas.length }}</span>
+                  </td>
 
-              <!-- Instructores Ocupados -->
-              <td v-if="!modoTablaCompacto" class="px-4 py-2 text-center">
-                <span class="font-semibold" :class="semana.instructoresOcupados >= capacitadoresTotales ? 'text-danger-600 font-bold' : 'text-slate-600'">
-                  {{ semana.instructoresOcupados }}
-                </span>
-                <span class="text-[10px] text-slate-400"> / {{ capacitadoresTotales }}</span>
-              </td>
+                  <!-- Detalle de Aulas Ocupadas -->
+                  <td v-if="!modoTablaCompacto" class="px-4 py-2 font-medium text-slate-500">
+                    <div v-if="semana.detalleAulas.length > 0" class="flex flex-wrap gap-1">
+                      <span v-for="da in semana.detalleAulas" :key="da.nombreAula + da.turno" class="px-1.5 py-0.5 bg-slate-100 border border-slate-200 text-[10px] rounded text-slate-600">
+                        <strong>{{ da.nombreAula }} (T{{ da.turno }})</strong>: {{ da.hc }} ag. <span class="text-[9px] text-slate-400">({{ da.origen }})</span>
+                      </span>
+                    </div>
+                    <span v-else class="text-slate-300 italic text-[10px]">Sin aulas activas</span>
+                  </td>
 
-              <!-- En Capacitación -->
-              <td v-if="!modoTablaCompacto" class="px-4 py-2 text-center text-slate-600">{{ semana.enCapacitacion }}</td>
+                  <!-- Instructores Ocupados -->
+                  <td v-if="!modoTablaCompacto" class="px-4 py-2 text-center">
+                    <span class="font-semibold" :class="semana.instructoresOcupados >= capacitadoresTotales ? 'text-danger-600 font-bold' : 'text-slate-600'">
+                      {{ semana.instructoresOcupados }}
+                    </span>
+                    <span class="text-[10px] text-slate-400"> / {{ capacitadoresTotales }}</span>
+                  </td>
 
-              <!-- En Nesting -->
-              <td v-if="!modoTablaCompacto" class="px-4 py-2 text-center text-amber-600 font-medium">{{ semana.enNesting }}</td>
+                  <!-- En Capacitación -->
+                  <td v-if="!modoTablaCompacto" class="px-4 py-2 text-center text-slate-600">{{ semana.enCapacitacion }}</td>
 
-              <!-- Ops Roster Contrato -->
-              <td class="px-4 py-2 text-center text-indigo-900 font-bold bg-indigo-50/30">{{ semana.hcOpsRoster }}</td>
+                  <!-- En Nesting -->
+                  <td v-if="!modoTablaCompacto" class="px-4 py-2 text-center text-amber-600 font-medium">{{ semana.enNesting }}</td>
 
-              <!-- Ops Productivo Real -->
-              <td v-if="!modoTablaCompacto" class="px-4 py-2 text-center text-slate-500 font-medium bg-slate-50/40">{{ semana.hcOpsProductivo }}</td>
+                  <!-- Ops Roster Contrato -->
+                  <td class="px-4 py-2 text-center text-indigo-900 font-bold bg-indigo-50/20">{{ semana.hcOpsRoster }}</td>
 
-              <!-- Requerido Meta Comercial -->
-              <td v-if="!modoTablaCompacto" class="px-4 py-2 text-center text-slate-700 font-bold bg-indigo-50/10">{{ metaHc }}</td>
+                  <!-- Ops Productivo Real -->
+                  <td v-if="!modoTablaCompacto" class="px-4 py-2 text-center text-slate-500 font-medium bg-slate-50/40">{{ semana.hcOpsProductivo }}</td>
 
-              <!-- Superávit / Déficit -->
-              <td class="px-4 py-2 text-center font-bold" :class="semana.diferencia <= 0 ? 'text-success-600 bg-success-50/30' : 'text-danger-600 bg-danger-50/30'">
-                {{ semana.diferencia <= 0 ? '+' + Math.abs(semana.diferencia) : '-' + semana.diferencia }}
-              </td>
+                  <!-- Requerido Meta Comercial -->
+                  <td v-if="!modoTablaCompacto" class="px-4 py-2 text-center text-slate-700 font-bold bg-indigo-50/10">{{ metaHc }}</td>
 
-              <!-- Cumplimiento % basado en Roster -->
-              <td class="px-4 py-2 text-center">
-                <span class="font-bold px-2 py-0.5 rounded text-[11px]" :class="semana.cumplimiento >= 100 ? 'bg-success-500 text-white' : semana.cumplimiento >= 80 ? 'bg-amber-100 text-amber-700' : 'bg-red-100 text-red-600'">
-                  {{ semana.cumplimiento }}%
-                </span>
-              </td>
+                  <!-- Superávit / Déficit -->
+                  <td class="px-4 py-2 text-center font-bold" :class="semana.diferencia <= 0 ? 'text-success-600 bg-success-50/30' : 'text-danger-600 bg-danger-50/30'">
+                    {{ semana.diferencia <= 0 ? '+' + Math.abs(semana.diferencia) : '-' + semana.diferencia }}
+                  </td>
 
-              <!-- Bajas de Semana -->
-              <td class="px-4 py-2 text-center font-bold text-rose-600">{{ semana.bajasTotales }}</td>
+                  <!-- Cumplimiento % -->
+                  <td class="px-4 py-2 text-center">
+                    <span class="font-bold px-2 py-0.5 rounded text-[11px]" :class="semana.cumplimiento >= 100 ? 'bg-success-500 text-white' : semana.cumplimiento >= 80 ? 'bg-amber-100 text-amber-700' : 'bg-red-100 text-red-600'">
+                      {{ semana.cumplimiento }}%
+                    </span>
+                  </td>
 
-              <!-- Cola de Espera (Delay Bottleneck) -->
-              <td class="px-4 py-2 text-center">
-                <div class="flex flex-col items-center justify-center gap-0.5">
-                  <span v-if="semana.colaEsperaFinal > 0" class="px-2 py-0.5 bg-amber-100 text-amber-700 rounded-full font-bold font-mono">
-                    {{ semana.colaEsperaFinal }} ag.
-                  </span>
-                  <span v-if="semana.instructoresOcupados >= capacitadoresTotales && semana.colaEsperaFinal > 0" class="text-[9px] text-danger-500 font-semibold uppercase tracking-wide">
-                    ⚠️ Sin Instructores
-                  </span>
-                  <span v-else-if="semana.aulasActivas >= aulasFisicas.length && semana.colaEsperaFinal > 0" class="text-[9px] text-danger-500 font-semibold uppercase tracking-wide">
-                    ⚠️ Sin Aulas Libres
-                  </span>
-                  <span v-else-if="semana.colaEsperaFinal <= 0" class="text-slate-300">-</span>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+                  <!-- Bajas Totales -->
+                  <td class="px-4 py-2 text-center font-bold text-rose-600">{{ semana.bajasTotales }}</td>
+
+                  <!-- Cola de Espera (Delay Bottleneck) -->
+                  <td class="px-4 py-2 text-center">
+                    <div class="flex flex-col items-center justify-center gap-0.5">
+                      <span v-if="semana.colaEsperaFinal > 0" class="px-2 py-0.5 bg-amber-100 text-amber-700 rounded-full font-bold font-mono">
+                        {{ semana.colaEsperaFinal }} ag.
+                      </span>
+                      <span v-else class="text-slate-300">-</span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
       </div>
-    </section>
+
+    </main>
+
+    <!-- FOOTER TELAT -->
+    <footer class="bg-white border-t border-slate-200 py-3 text-center text-xs text-slate-400">
+      <div class="max-w-[1680px] mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+        <span>© 2026 <strong>Telat Group</strong> · Soluciones Avanzadas de Tecnología & Contact Center</span>
+        <span class="text-[11px]">Diseñado para la Dirección de Operaciones & Propuestas Comerciales</span>
+      </div>
+    </footer>
 
   </div>
 
+  <!-- ========================================================================= -->
+  <!-- VUE 3 APPLICATION & WFM SIMULATOR ENGINE SOTA -->
+  <!-- ========================================================================= -->
   <script>
     const { createApp, ref, computed, watch, onMounted, nextTick } = Vue;
 
@@ -575,6 +696,9 @@
 
     createApp({
       setup() {
+        // --- CONTROL DE VISTAS SPA ---
+        const vistaActiva = ref('dashboard'); // 'dashboard' | 'olas' | 'site' | 'sabana'
+
         // --- PARÁMETROS OPERATIVOS ---
         const metaHc = ref(519); 
         const fechaInicioProyecto = ref("2026-06-29");
@@ -588,7 +712,7 @@
         const duracionNesting = ref(1);        
         const rendimientoNesting = ref(60);     
         
-        // Auto-Backfill: false por defecto para respetar el cronograma de 22 olas preprogramadas
+        // Auto-Backfill calibrado (false por defecto para respetar el cronograma de 22 olas)
         const autoBackfill = ref(false);         
 
         // Rampa Post-Nesting
@@ -660,7 +784,7 @@
 
         // Shrinkage total calculado
         const shrinkageTotal = computed(() => {
-          return (shrinkagePlaneado.value || 0) + (shrinkageNoPlaneado.value || 0) + (shrinkageGestion.value || 0);
+          return (Number(shrinkagePlaneado.value) || 0) + (Number(shrinkageNoPlaneado.value) || 0) + (Number(shrinkageGestion.value) || 0);
         });
 
         // Fuerza productiva neta tras merma shrinkage
@@ -669,26 +793,12 @@
           return Math.round(metaHc.value * (1 - (shrinkageTotal.value / 100)));
         });
 
-        // Cálculos de aulas para requerimientos individuales
-        const calcularAulasParaOla = (ola) => {
-          if (!limitePedagogico.value || limitePedagogico.value <= 0) return 1;
-          return Math.ceil(ola.cantidadInicial / limitePedagogico.value);
-        };
-
-        const obtenerDetalleGrupos = (ola) => {
-          const aulas = calcularAulasParaOla(ola);
-          if (aulas <= 1) return `${ola.cantidadInicial} agentes`;
-          const porGrupo = Math.floor(ola.cantidadInicial / aulas);
-          const residuo = ola.cantidadInicial % aulas;
-          if (residuo === 0) return `${aulas} de ${porGrupo}`;
-          return `${aulas - 1} de ${porGrupo} + 1 de ${porGrupo + residuo}`;
-        };
-
         const semanasLista = computed(() => {
           const lista = [];
           if (!fechaInicioProyecto.value) return lista;
           let current = new Date(fechaInicioProyecto.value + "T00:00:00");
-          for (let i = 0; i < semanasSimulacion.value; i++) {
+          const totalSem = Math.max(1, Number(semanasSimulacion.value) || 30);
+          for (let i = 0; i < totalSem; i++) {
             lista.push(current.toISOString().split("T")[0]);
             current.setDate(current.getDate() + 7);
           }
@@ -698,21 +808,21 @@
         // Computed de validación global
         const erroresValidacion = computed(() => {
           const errores = [];
-          if (shrinkageTotal.value >= 100) errores.push("El Shrinkage Total no puede ser 100% o más (Ajusta los valores individuales).");
-          if (limitePedagogico.value < 1) errores.push("Límite pedagógico debe ser ≥ 1 alumno por aula.");
-          if (metaHc.value < 1) errores.push("La Meta de HC Roster debe ser mayor o igual a cero.");
-          if (capacitadoresTotales.value < 1) errores.push("Debe contar con al menos 1 capacitador en plantilla.");
-          if (semanasSimulacion.value < 1) errores.push("Semanas simuladas debe ser ≥ 1.");
+          if (shrinkageTotal.value >= 100) errores.push("El Shrinkage Total no puede ser 100% o más.");
+          if (Number(limitePedagogico.value) < 1) errores.push("Límite pedagógico debe ser ≥ 1 alumno por aula.");
+          if (Number(metaHc.value) < 1) errores.push("La Meta de HC Roster debe ser ≥ 1.");
+          if (Number(capacitadoresTotales.value) < 1) errores.push("Debe contar con al menos 1 capacitador.");
+          if (Number(semanasSimulacion.value) < 1) errores.push("Semanas simuladas debe ser ≥ 1.");
           
           olas.value.forEach((o) => {
-            if (o.cantidadInicial < 1) {
+            if (Number(o.cantidadInicial) < 1) {
               errores.push(`La ${o.nombre} debe solicitar al menos 1 agente.`);
             }
           });
           return errores;
         });
 
-        // --- CORE DEL MOTOR DE CÁLCULO DE RECURSOS LIMITADOS ---
+        // --- CORE DEL MOTOR DE CÁLCULO WFM (BLINDADO CONTRA BUCLES INFINITOS) ---
         const proyeccion = computed(() => {
           if (erroresValidacion.value.length > 0) return [];
 
@@ -723,6 +833,9 @@
           let trackAulasActivas = [];
           let metaLograda = false;
           let instanceCounter = 0; 
+
+          const capTotalesNum = Math.max(1, Number(capacitadoresTotales.value) || 1);
+          const limPedagogicoNum = Math.max(1, Number(limitePedagogico.value) || 20);
 
           semanas.forEach((fechaSemanaStr, index) => {
             let altasRealesSemana = 0;
@@ -747,25 +860,24 @@
             }
 
             // Cargar nuevos requerimientos programados de la semana en la Cola de Espera
-            const olasIniciando = olas.value.filter(o => o.fechaInicio === fechaSemanaStr && o.cantidadInicial > 0);
+            const olasIniciando = olas.value.filter(o => o.fechaInicio === fechaSemanaStr && Number(o.cantidadInicial) > 0);
             if (olasIniciando.length > 0) {
               olasIniciando.forEach(ola => {
                 if (autoBackfill.value && metaLograda) {
-                  return; // Freno de contratación masiva por meta de roster comercial cumplida
+                  return; // Freno por meta de roster cumplida
                 }
                 colaEspera.push({
                   idGroup: `${ola.id}_req`,
                   nombre: ola.nombre,
-                  totalAgentes: ola.cantidadInicial,
-                  duracion: ola.duracionSemanas,
-                  tasaTraining: ola.tasaBajaTrainingSemanal,
-                  tasaOps: ola.tasaBajaOpsSemanal
+                  totalAgentes: Number(ola.cantidadInicial) || 0,
+                  duracion: Number(ola.duracionSemanas) || 3,
+                  tasaTraining: Number(ola.tasaBajaTrainingSemanal) || 2.5,
+                  tasaOps: Number(ola.tasaBajaOpsSemanal) || 1.0
                 });
               });
             }
 
-            // CORRECCIÓN MATEMÁTICA: Backfill Inteligente Consciente de la Tubería (Pipeline-Aware)
-            // Se inyecta en bloques manejables acordes a la capacidad del site (agentesDefault)
+            // Auto-Backfill en bloques manejables acotados al tamaño estándar
             if (autoBackfill.value) {
               let totalComprometido = currentHC_Ops_Roster + currentHC_Training + currentHC_Nesting;
               colaEspera.forEach(g => {
@@ -774,19 +886,19 @@
 
               const deficitReal = metaHc.value - totalComprometido;
               if (deficitReal > 0) {
-                const tamanoBackfill = Math.min(deficitReal, agentesDefault.value);
+                const tamanoBackfill = Math.min(deficitReal, Number(agentesDefault.value) || 50);
                 colaEspera.push({
                   idGroup: `backfill_${fechaSemanaStr}_${index}`,
                   nombre: `Backfill S${index + 1}`,
                   totalAgentes: tamanoBackfill,
-                  duracion: duracionEstandar.value, 
-                  tasaTraining: tasaTrainingSemanalDefault.value,
-                  tasaOps: tasaOpsSemanalDefault.value
+                  duracion: Number(duracionEstandar.value) || 3, 
+                  tasaTraining: Number(tasaTrainingSemanalDefault.value) || 2.5,
+                  tasaOps: Number(tasaOpsSemanalDefault.value) || 1.0
                 });
               }
             }
 
-            // Despachar Cola de Espera aplicando las limitantes físicas, turnos e instructores
+            // Despacho de Cola de Espera a Aulas Físicas con Instructores
             let aulasOcupacionActual = {};
             trackAulasActivas.forEach(a => {
               if (a.fase === "Training") {
@@ -796,34 +908,48 @@
 
             let capacitadoresOcupados = trackAulasActivas.filter(a => a.fase === "Training").length;
 
+            // BLINDAJE ANTI-BUCLE: Sanitizar aulas e iterar con límite de seguridad
             let qIdx = 0;
-            while (qIdx < colaEspera.length && capacitadoresOcupados < capacitadoresTotales.value) {
+            let safetyGuard = 0;
+            const MAX_ITERACIONES_SAFETY = 400;
+
+            while (qIdx < colaEspera.length && capacitadoresOcupados < capTotalesNum && safetyGuard++ < MAX_ITERACIONES_SAFETY) {
               const grupo = colaEspera[qIdx];
               
-              if (grupo.totalAgentes <= 0) {
+              if (!grupo || grupo.totalAgentes <= 0) {
                 qIdx++;
                 continue;
               }
 
-              // Buscar aulas físicas con turnos disponibles
+              // Filtrar solo aulas físicas con capacidad positiva válida y turnos disponibles
               const aulasLibres = aulasFisicas.value.filter(a => {
+                const capVal = Number(a.capacidad);
+                if (!capVal || capVal <= 0 || isNaN(capVal)) return false; // Ignorar aulas sin capacidad válida
+                const turnosMax = Math.max(1, Number(a.turnos) || 1);
                 const ocupados = aulasOcupacionActual[a.id] || 0;
-                return ocupados < (a.turnos || 1);
+                return ocupados < turnosMax;
               });
 
               if (aulasLibres.length === 0) {
-                break; // Sin infraestructura libre
+                break; // No hay infraestructura física disponible
               }
 
-              // Ordenar de mayor a menor capacidad efectiva
+              // Ordenar por capacidad pedagógica efectiva descendente
               aulasLibres.sort((a, b) => {
-                const capEffA = Math.min(a.capacidad, limitePedagogico.value);
-                const capEffB = Math.min(b.capacidad, limitePedagogico.value);
+                const capEffA = Math.min(Number(a.capacidad) || 0, limPedagogicoNum);
+                const capEffB = Math.min(Number(b.capacidad) || 0, limPedagogicoNum);
                 return capEffB - capEffA;
               });
 
               const aulaAsignar = aulasLibres[0];
-              const capMaxEfectiva = Math.min(aulaAsignar.capacidad, limitePedagogico.value);
+              const capAulaNum = Number(aulaAsignar.capacidad) || 0;
+              const capMaxEfectiva = Math.min(capAulaNum, limPedagogicoNum);
+
+              if (capMaxEfectiva <= 0) {
+                // Protección: si el aula mayor tiene capacidad <= 0, abortar asignación
+                break;
+              }
+
               const agentesAIniciar = Math.min(grupo.totalAgentes, capMaxEfectiva);
 
               if (agentesAIniciar > 0) {
@@ -849,6 +975,8 @@
                 
                 aulasOcupacionActual[aulaAsignar.id] = (aulasOcupacionActual[aulaAsignar.id] || 0) + 1;
                 capacitadoresOcupados++;
+              } else {
+                qIdx++;
               }
 
               if (grupo.totalAgentes <= 0) {
@@ -856,9 +984,9 @@
               }
             }
 
-            colaEspera = colaEspera.filter(g => g.totalAgentes > 0);
+            colaEspera = colaEspera.filter(g => g && g.totalAgentes > 0);
 
-            // Attrition semanal teórico
+            // Bajas semanales teóricas
             let bajasSemana = 0;
             trackAulasActivas.forEach(aula => {
               if (aula.fase === "Training" || aula.fase === "Nesting") {
@@ -881,6 +1009,10 @@
             let instructoresOcupadosReporte = 0;
             let detalleAulasSemanales = [];
 
+            const dRampa = Math.max(1, Number(duracionRampa.value) || 4);
+            const rInicialRampa = (Number(rendimientoInicialRampa.value) || 40) / 100;
+            const rNesting = (Number(rendimientoNesting.value) || 60) / 100;
+
             trackAulasActivas.forEach(aula => {
               if (aula.fase === "Training") {
                 enCapacitacion += aula.hcActual;
@@ -894,14 +1026,13 @@
                 });
               } else if (aula.fase === "Nesting") {
                 enNesting += aula.hcActual;
-                hcOpsProductivo += aula.hcActual * (rendimientoNesting.value / 100);
+                hcOpsProductivo += aula.hcActual * rNesting;
               } else if (aula.fase === "Ops") {
                 hcOpsRoster += aula.hcActual;
                 
                 let factorRampa = 1.0;
-                if (aula.semanasOpsActivas < duracionRampa.value) {
-                  const rendInicial = rendimientoInicialRampa.value / 100;
-                  factorRampa = rendInicial + ((1 - rendInicial) * (aula.semanasOpsActivas / duracionRampa.value));
+                if (aula.semanasOpsActivas < dRampa) {
+                  factorRampa = rInicialRampa + ((1 - rInicialRampa) * (aula.semanasOpsActivas / dRampa));
                 }
 
                 hcOpsProductivo += aula.hcActual * factorRampa * (1 - (shrinkageTotal.value / 100));
@@ -931,16 +1062,17 @@
             });
 
             // Transiciones de fases
+            const dNesting = Number(duracionNesting.value) || 1;
             trackAulasActivas.forEach(aula => {
               if (aula.fase === "Training") {
                 aula.semanasActivas += 1;
                 if (aula.semanasActivas >= aula.duracionTraining) {
-                  aula.fase = duracionNesting.value > 0 ? "Nesting" : "Ops";
+                  aula.fase = dNesting > 0 ? "Nesting" : "Ops";
                   aula.semanasActivas = 0;
                 }
               } else if (aula.fase === "Nesting") {
                 aula.semanasActivas += 1;
-                if (aula.semanasActivas >= duracionNesting.value) {
+                if (aula.semanasActivas >= dNesting) {
                   aula.fase = "Ops";
                   aula.semanasOpsActivas = 0; 
                 }
@@ -953,7 +1085,7 @@
           return resultado;
         });
 
-        // --- REPORTES DE CONTROL ---
+        // --- KPIs DERIVADOS ---
         const semanasHastaMeta = computed(() => {
           const idx = proyeccion.value.findIndex(s => parseFloat(s.cumplimiento) >= 100);
           return idx !== -1 ? idx : null;
@@ -965,7 +1097,7 @@
         });
 
         const eficienciaTotal = computed(() => {
-          const totalAltas = olas.value.reduce((sum, o) => sum + o.cantidadInicial, 0);
+          const totalAltas = olas.value.reduce((sum, o) => sum + (Number(o.cantidadInicial) || 0), 0);
           if (totalAltas === 0 || proyeccion.value.length === 0) return 0;
           const ultimoRoster = proyeccion.value[proyeccion.value.length - 1].hcOpsRoster;
           return (ultimoRoster / totalAltas) * 100;
@@ -986,14 +1118,16 @@
 
         // --- ABM REQUERIMIENTOS ---
         const agregarNuevaOla = () => {
+          const sig = olas.value.length + 1;
+          const fInicio = semanasLista.value[0] || fechaInicioProyecto.value;
           olas.value.push({
             id: 'o_' + Date.now(),
-            nombre: 'Requerimiento ' + (olas.value.length + 1),
-            fechaInicio: fechaInicioProyecto.value,
-            cantidadInicial: agentesDefault.value,
-            duracionSemanas: duracionEstandar.value,
-            tasaBajaTrainingSemanal: tasaTrainingSemanalDefault.value,
-            tasaBajaOpsSemanal: tasaOpsSemanalDefault.value
+            nombre: `Ola ${sig}`,
+            fechaInicio: fInicio,
+            cantidadInicial: Number(agentesDefault.value) || 50,
+            duracionSemanas: Number(duracionEstandar.value) || 3,
+            tasaBajaTrainingSemanal: Number(tasaTrainingSemanalDefault.value) || 2.5,
+            tasaBajaOpsSemanal: Number(tasaOpsSemanalDefault.value) || 1.0
           });
         };
 
@@ -1007,109 +1141,170 @@
           return `${partes[2]}/${partes[1]}/${partes[0]}`;
         };
 
-        // --- GRAFICACIÓN ---
-        let chartInstance = null;
+        // --- GRAFICACIÓN CHART.JS ---
+        let chartCapacidad = null;
+        let chartComposicion = null;
 
-        const renderizarGrafico = () => {
-          const ctx = document.getElementById('capacidadChart');
-          if (!ctx) return;
+        const renderizarGraficos = () => {
+          // Gráfico 1: Curva de Capacidad
+          const ctxCap = document.getElementById('capacidadChart');
+          if (ctxCap && proyeccion.value.length > 0) {
+            const labels = proyeccion.value.map(s => `S${s.semanaIndex}`);
+            const dataOpsRoster = proyeccion.value.map(s => s.hcOpsRoster);
+            const dataOpsProductivo = proyeccion.value.map(s => s.hcOpsProductivo);
+            const dataColaEspera = proyeccion.value.map(s => s.colaEsperaFinal); 
+            const dataReq = proyeccion.value.map(() => metaHc.value);
 
-          const labels = proyeccion.value.map(s => `Semana ${s.semanaIndex}`);
-          const dataOpsRoster = proyeccion.value.map(s => s.hcOpsRoster);
-          const dataOpsProductivo = proyeccion.value.map(s => s.hcOpsProductivo);
-          const dataColaEspera = proyeccion.value.map(s => s.colaEsperaFinal); 
-          const dataReq = proyeccion.value.map(() => metaHc.value);
+            if (chartCapacidad) {
+              chartCapacidad.destroy();
+            }
 
-          if (chartInstance) {
-            chartInstance.destroy();
+            chartCapacidad = new Chart(ctxCap, {
+              type: 'line',
+              data: {
+                labels: labels,
+                datasets: [
+                  {
+                    label: 'HC Ops en Roster (Contrato)',
+                    data: dataOpsRoster,
+                    borderColor: '#16a34a',
+                    backgroundColor: 'rgba(22, 163, 74, 0.08)',
+                    fill: true,
+                    borderWidth: 2.5,
+                    tension: 0.15,
+                    yAxisID: 'y'
+                  },
+                  {
+                    label: 'HC Ops Productivo Estimado',
+                    data: dataOpsProductivo,
+                    borderColor: '#3284C6',
+                    borderWidth: 2,
+                    borderDash: [4, 4],
+                    fill: false,
+                    tension: 0.15,
+                    yAxisID: 'y'
+                  },
+                  {
+                    label: 'Meta Contrato (519)',
+                    data: dataReq,
+                    borderColor: '#EB5B27',
+                    borderWidth: 1.5,
+                    pointRadius: 0,
+                    fill: false,
+                    yAxisID: 'y'
+                  },
+                  {
+                    label: '✅ Meta Alcanzada',
+                    data: proyeccion.value.map((s, i) => 
+                      i === semanasHastaMeta.value ? s.hcOpsRoster : null
+                    ),
+                    type: 'scatter',
+                    pointStyle: 'star',
+                    pointRadius: 10,
+                    backgroundColor: '#16a34a',
+                    borderColor: '#15803d',
+                    borderWidth: 2,
+                    yAxisID: 'y'
+                  },
+                  {
+                    label: 'Agentes en Cola (Bottleneck)',
+                    data: dataColaEspera,
+                    type: 'bar',
+                    yAxisID: 'y2',
+                    backgroundColor: 'rgba(254, 202, 102, 0.4)',
+                    borderColor: '#FECA66',
+                    borderWidth: 1.2,
+                    borderRadius: 3
+                  }
+                ]
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  legend: {
+                    position: 'top',
+                    labels: { boxWidth: 8, font: { family: 'Montserrat', size: 10 } }
+                  }
+                },
+                scales: {
+                  y: {
+                    type: 'linear',
+                    position: 'left',
+                    beginAtZero: true,
+                    grid: { color: '#f1f5f9' },
+                    title: { display: true, text: 'Agentes Contrato / Productivos', font: { size: 10 } }
+                  },
+                  y2: { 
+                    type: 'linear',
+                    position: 'right',
+                    beginAtZero: true,
+                    grid: { display: false },
+                    title: { display: true, text: 'Agentes en Cola', font: { size: 10 } }
+                  },
+                  x: { grid: { display: false }, ticks: { font: { size: 9 } } }
+                }
+              }
+            });
           }
 
-          chartInstance = new Chart(ctx, {
-            type: 'line',
-            data: {
-              labels: labels,
-              datasets: [
-                {
-                  label: 'HC Ops en Roster (Contrato)',
-                  data: dataOpsRoster,
-                  borderColor: '#22c55e',
-                  backgroundColor: 'rgba(34, 197, 94, 0.1)',
-                  fill: true,
-                  borderWidth: 3,
-                  tension: 0.15,
-                  yAxisID: 'y'
-                },
-                {
-                  label: 'HC Ops Productivo Estimado (Línea)',
-                  data: dataOpsProductivo,
-                  borderColor: '#3b82f6',
-                  borderWidth: 2,
-                  borderDash: [5, 5],
-                  fill: false,
-                  yAxisID: 'y'
-                },
-                {
-                  label: 'Meta Requerida (Contratos Roster)',
-                  data: dataReq,
-                  borderColor: '#ef4444',
-                  borderWidth: 1.5,
-                  pointRadius: 0,
-                  fill: false,
-                  yAxisID: 'y'
-                },
-                {
-                  label: '✅ Meta Alcanzada',
-                  data: proyeccion.value.map((s, i) => 
-                    i === semanasHastaMeta.value ? s.hcOpsRoster : null
-                  ),
-                  type: 'scatter',
-                  pointStyle: 'star',
-                  pointRadius: 12,
-                  backgroundColor: '#22c55e',
-                  borderColor: '#16a34a',
-                  borderWidth: 2,
-                  yAxisID: 'y'
-                },
-                {
-                  label: 'Agentes en Cola (Bottleneck)',
-                  data: dataColaEspera,
-                  type: 'bar',
-                  yAxisID: 'y2',
-                  backgroundColor: 'rgba(245, 158, 11, 0.25)',
-                  borderColor: '#f59e0b',
-                  borderWidth: 1.5,
-                  borderRadius: 4
-                }
-              ]
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: false,
-              plugins: {
-                legend: {
-                  position: 'top',
-                  labels: { usePointStyle: true, boxWidth: 6 }
-                }
-              },
-              scales: {
-                y: {
-                  type: 'linear',
-                  position: 'left',
-                  beginAtZero: true,
-                  grid: { color: '#f1f5f9' },
-                  title: { display: true, text: 'Agentes en Roster / Productivos' }
-                },
-                y2: { 
-                  type: 'linear',
-                  position: 'right',
-                  beginAtZero: true,
-                  grid: { display: false },
-                  title: { display: true, text: 'Agentes en Cola (Bottleneck)' }
-                },
-                x: { grid: { display: false } }
-              }
+          // Gráfico 2: Composición por Fase
+          const ctxComp = document.getElementById('composicionChart');
+          if (ctxComp && proyeccion.value.length > 0) {
+            const labels = proyeccion.value.map(s => `S${s.semanaIndex}`);
+            const dataTraining = proyeccion.value.map(s => s.enCapacitacion);
+            const dataNesting = proyeccion.value.map(s => s.enNesting);
+            const dataOps = proyeccion.value.map(s => s.hcOpsRoster);
+            const dataBajas = proyeccion.value.map(s => s.bajasTotales);
+
+            if (chartComposicion) {
+              chartComposicion.destroy();
             }
-          });
+
+            chartComposicion = new Chart(ctxComp, {
+              type: 'bar',
+              data: {
+                labels: labels,
+                datasets: [
+                  {
+                    label: 'En Ops',
+                    data: dataOps,
+                    backgroundColor: '#3284C6',
+                    stack: 'stack0'
+                  },
+                  {
+                    label: 'En Nesting',
+                    data: dataNesting,
+                    backgroundColor: '#FECA66',
+                    stack: 'stack0'
+                  },
+                  {
+                    label: 'En Capacitación',
+                    data: dataTraining,
+                    backgroundColor: '#64748b',
+                    stack: 'stack0'
+                  },
+                  {
+                    label: 'Bajas de la Semana',
+                    data: dataBajas,
+                    backgroundColor: '#f87171',
+                    stack: 'stack1'
+                  }
+                ]
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  legend: { position: 'top', labels: { boxWidth: 8, font: { family: 'Montserrat', size: 10 } } }
+                },
+                scales: {
+                  x: { stacked: true, grid: { display: false }, ticks: { font: { size: 9 } } },
+                  y: { stacked: true, beginAtZero: true, grid: { color: '#f1f5f9' }, ticks: { font: { size: 9 } } }
+                }
+              }
+            });
+          }
         };
 
         // --- EXPORTACIONES ---
@@ -1117,7 +1312,7 @@
           const appElement = document.getElementById('app');
           html2canvas(appElement, { scale: 2, useCORS: true, backgroundColor: '#f8fafc' }).then((canvas) => {
             const link = document.createElement('a');
-            link.download = `WFM-Plan_Capacidad-${new Date().toISOString().split('T')[0]}.png`;
+            link.download = `Telat-Plan_Capacidad_WFM-${new Date().toISOString().split('T')[0]}.png`;
             link.href = canvas.toDataURL('image/png');
             link.click();
           });
@@ -1128,94 +1323,94 @@
           const pdf = new jsPDF('p', 'pt', 'letter');
           
           pdf.setFont('helvetica', 'bold');
-          pdf.setFontSize(20);
-          pdf.setTextColor(30, 41, 59);
-          pdf.text('Reporte de Planeación Operativa y WFM', 40, 50);
+          pdf.setFontSize(18);
+          pdf.setTextColor(34, 34, 33); // #222221
+          pdf.text('Telat Group · Informe Ejecutivo de Capacidad & WFM', 40, 48);
 
           pdf.setFont('helvetica', 'normal');
           pdf.setFontSize(10);
           pdf.setTextColor(100, 116, 139);
-          pdf.text(`Fecha de Reporte: ${new Date().toLocaleDateString()}`, 40, 68);
-          pdf.text(`Meta HC Roster (Contratos): ${metaHc.value} | Merma (Shrinkage): ${shrinkageTotal.value}%`, 40, 82);
+          pdf.text(`Licitación: Instituto Tecnológico | Fecha de Emisión: ${new Date().toLocaleDateString()}`, 40, 66);
+          pdf.text(`Meta HC Roster: ${metaHc.value} Contratos | Merma Acumulada: ${shrinkageTotal.value}%`, 40, 80);
 
           const canvas = document.getElementById('capacidadChart');
           if (canvas) {
-            const chartImg = canvas.toDataURL('image/jpeg', 1.0);
-            pdf.addImage(chartImg, 'JPEG', 40, 100, 530, 200);
+            const chartImg = canvas.toDataURL('image/jpeg', 0.95);
+            pdf.addImage(chartImg, 'JPEG', 40, 95, 530, 200);
           }
 
           pdf.setFont('helvetica', 'bold');
           pdf.setFontSize(11);
-          pdf.setTextColor(30, 41, 59);
-          pdf.text('KPIs de Simulación de Plantilla:', 40, 325);
+          pdf.setTextColor(34, 34, 33);
+          pdf.text('Resumen de KPIs de Cumplimiento Operativo:', 40, 315);
 
           pdf.setFont('helvetica', 'normal');
-          pdf.text(`- Cumplimiento de Meta Operativa Real: ${cumplimientoMaximo.value.toFixed(1)}%`, 50, 345);
-          pdf.text(`- Plantilla Física Requerida en Roster para Sostener Meta: ${metaHc.value} agentes`, 50, 360);
-          pdf.text(`- Semana de alcance real de Meta: ${semanasHastaMeta.value !== null ? 'Semana ' + (semanasHastaMeta.value + 1) : 'No lograda'}`, 50, 375);
-          pdf.text(`- Total de Aulas Abiertas Simultáneamente (Pico): ${maxAulasSimultaneas.value} aulas`, 50, 390);
+          pdf.text(`• Cumplimiento Máximo de Roster: ${cumplimientoMaximo.value.toFixed(1)}%`, 50, 335);
+          pdf.text(`• Plantilla Productiva Neta Requerida: ${fuerzaProductivaEstimada.value} posiciones`, 50, 350);
+          pdf.text(`• Semana de Alcance del 100% de la Meta: ${semanasHastaMeta.value !== null ? 'Semana ' + (semanasHastaMeta.value + 1) : 'No lograda'}`, 50, 365);
+          pdf.text(`• Demanda Pico de Aulas Simultáneas: ${maxAulasSimultaneas.value} aulas físicas`, 50, 380);
 
           pdf.addPage();
           pdf.setFont('helvetica', 'bold');
-          pdf.setFontSize(16);
-          pdf.text('Parámetros de Configuración del Escenario', 40, 50);
+          pdf.setFontSize(15);
+          pdf.text('Premisas Operativas y Recursos Físicos del Site', 40, 48);
 
           pdf.setFontSize(10);
           pdf.setFont('helvetica', 'normal');
-          pdf.text(`- Total de Capacitadores: ${capacitadoresTotales.value}`, 40, 80);
-          pdf.text(`- Límite Pedagógico de Alumnos: ${limitePedagogico.value} por aula`, 40, 95);
-          pdf.text(`- Shrinkage Planeado: ${shrinkagePlaneado.value}% | No Planeado: ${shrinkageNoPlaneado.value}% | Gestión: ${shrinkageGestion.value}%`, 40, 110);
-          pdf.text(`- Duración de Nesting: ${duracionNesting.value} semanas (Eficiencia: ${rendimientoNesting.value}%)`, 40, 125);
-          pdf.text(`- Duración de Rampa de Aprendizaje: ${duracionRampa.value} semanas (Eficiencia Inicial: ${rendimientoInicialRampa.value}%)`, 40, 140);
+          pdf.text(`• Capacitadores Totales en Plantilla: ${capacitadoresTotales.value} instructores`, 40, 75);
+          pdf.text(`• Límite Pedagógico de Alumnos por Aula: ${limitePedagogico.value} alumnos`, 40, 90);
+          pdf.text(`• Desglose de Shrinkage: Planeado ${shrinkagePlaneado.value}% | No Planeado ${shrinkageNoPlaneado.value}% | Gestión ${shrinkageGestion.value}%`, 40, 105);
+          pdf.text(`• Rampa Post-Nesting: ${duracionRampa.value} semanas (Eficiencia inicial: ${rendimientoInicialRampa.value}%)`, 40, 120);
 
           pdf.setFont('helvetica', 'bold');
           pdf.setFontSize(12);
-          pdf.text('Aulas Físicas Disponibles en Site:', 40, 175);
+          pdf.text('Inventario de Aulas y Turnos:', 40, 150);
           
-          let yAula = 195;
+          let yAula = 170;
           pdf.setFont('helvetica', 'normal');
           pdf.setFontSize(9);
           aulasFisicas.value.forEach(a => {
-            pdf.text(`* ${a.nombre} (Capacidad: ${a.capacidad} | Turnos: ${a.turnos || 1})`, 50, yAula);
+            pdf.text(`* ${a.nombre} (Capacidad física: ${a.capacidad} | Turnos: ${a.turnos || 1})`, 50, yAula);
             yAula += 15;
           });
 
           pdf.addPage();
           pdf.setFont('helvetica', 'bold');
-          pdf.setFontSize(16);
-          pdf.text('Resumen de Capacidad Proyectada (Primeras 20 Semanas)', 40, 50);
+          pdf.setFontSize(15);
+          pdf.text('Sábana de Capacidad Proyectada (Primeras 20 Semanas)', 40, 48);
 
-          let yTable = 90;
+          let yTable = 85;
           pdf.setFontSize(9);
-          pdf.text('Semana', 40, 80);
-          pdf.text('Alta', 100, 80);
-          pdf.text('En Cap.', 150, 80);
-          pdf.text('Nesting', 200, 80);
-          pdf.text('Roster', 260, 80);
-          pdf.text('Productivo', 320, 80);
-          pdf.text('Cumplimiento', 400, 80);
-          pdf.text('Cola', 480, 80);
-          pdf.line(40, 83, 540, 83);
+          pdf.text('Semana', 40, 75);
+          pdf.text('Altas', 95, 75);
+          pdf.text('En Cap.', 140, 75);
+          pdf.text('Nesting', 190, 75);
+          pdf.text('Roster', 245, 75);
+          pdf.text('Productivo', 305, 75);
+          pdf.text('Cumplimiento', 380, 75);
+          pdf.text('Cola', 465, 75);
+          pdf.line(40, 78, 540, 78);
 
           pdf.setFont('helvetica', 'normal');
           proyeccion.value.slice(0, 20).forEach(s => {
             pdf.text(`S${s.semanaIndex}`, 40, yTable);
-            pdf.text(`${s.altas}`, 100, yTable);
-            pdf.text(`${s.enCapacitacion}`, 150, yTable);
-            pdf.text(`${s.enNesting}`, 200, yTable);
-            pdf.text(`${s.hcOpsRoster}`, 260, yTable);
-            pdf.text(`${s.hcOpsProductivo}`, 320, yTable);
-            pdf.text(`${s.cumplimiento}%`, 400, yTable);
-            pdf.text(`${s.colaEsperaFinal}`, 480, yTable);
+            pdf.text(`${s.altas}`, 95, yTable);
+            pdf.text(`${s.enCapacitacion}`, 140, yTable);
+            pdf.text(`${s.enNesting}`, 190, yTable);
+            pdf.text(`${s.hcOpsRoster}`, 245, yTable);
+            pdf.text(`${s.hcOpsProductivo}`, 305, yTable);
+            pdf.text(`${s.cumplimiento}%`, 380, yTable);
+            pdf.text(`${s.colaEsperaFinal}`, 465, yTable);
             yTable += 16;
           });
 
-          pdf.save(`WFM_Plan_Capacidad_${new Date().toISOString().split('T')[0]}.pdf`);
+          pdf.save(`Telat_WFM_Plan_Capacidad_${new Date().toISOString().split('T')[0]}.pdf`);
         };
 
-        // --- SISTEMA DE PERSISTENCIA (LOCALSTORAGE) ---
+        // --- PERSISTENCIA LOCALSTORAGE ---
         const guardarEstado = () => {
           const estado = {
+            vistaActiva: vistaActiva.value,
             metaHc: metaHc.value,
             fechaInicioProyecto: fechaInicioProyecto.value,
             semanasSimulacion: semanasSimulacion.value,
@@ -1244,6 +1439,7 @@
             const raw = localStorage.getItem(STORAGE_KEY);
             if (!raw) return false;
             const estado = JSON.parse(raw);
+            vistaActiva.value = estado.vistaActiva ?? 'dashboard';
             metaHc.value = estado.metaHc ?? metaHc.value;
             fechaInicioProyecto.value = estado.fechaInicioProyecto ?? fechaInicioProyecto.value;
             semanasSimulacion.value = estado.semanasSimulacion ?? semanasSimulacion.value;
@@ -1255,7 +1451,7 @@
             rendimientoNesting.value = estado.rendimientoNesting ?? rendimientoNesting.value;
             duracionRampa.value = estado.duracionRampa ?? duracionRampa.value;
             rendimientoInicialRampa.value = estado.rendimientoInicialRampa ?? rendimientoInicialRampa.value;
-            autoBackfill.value = estado.autoBackfill ?? autoBackfill.value;
+            autoBackfill.value = estado.autoBackfill ?? false;
             agentesDefault.value = estado.agentesDefault ?? agentesDefault.value;
             duracionEstandar.value = estado.duracionEstandar ?? duracionEstandar.value;
             capacitadoresTotales.value = estado.capacitadoresTotales ?? capacitadoresTotales.value;
@@ -1271,35 +1467,36 @@
           localStorage.removeItem(STORAGE_KEY);
           restaurarDatosPreprogramados();
           nextTick(() => {
-            renderizarGrafico();
+            renderizarGraficos();
           });
         };
 
-        // WATCH ESTRATÉGICO PARA CAMBIOS MASIVOS EN CASCADA
+        // WATCH CASCADA
         watch(agentesDefault, (newVal) => {
-          if (typeof newVal === 'number' && newVal > 0) {
-            olas.value.forEach(o => o.cantidadInicial = newVal);
+          const valNum = Number(newVal);
+          if (valNum > 0) {
+            olas.value.forEach(o => o.cantidadInicial = valNum);
           }
         });
 
         watch(duracionEstandar, (newVal) => {
-          if (typeof newVal === 'number' && newVal > 0) {
-            olas.value.forEach(o => o.duracionSemanas = newVal);
+          const valNum = Number(newVal);
+          if (valNum > 0) {
+            olas.value.forEach(o => o.duracionSemanas = valNum);
           }
         });
 
-        // DEBOUNCE TIMER PARA EL RENDIMIENTO DEL GRÁFICO
+        // DEBOUNCE TIMER
         let debounceTimer = null;
-        const renderizarGraficoDebounced = () => {
+        const renderizarGraficosDebounced = () => {
           clearTimeout(debounceTimer);
           debounceTimer = setTimeout(() => {
             nextTick(() => {
-              renderizarGrafico();
+              renderizarGraficos();
             });
-          }, 250); 
+          }, 200); 
         };
 
-        // WATCH PROFUNDO PARA LA ACTUALIZACIÓN EN TIEMPO REAL Y PERSISTENCIA
         watch([
           proyeccion, 
           metaHc, 
@@ -1317,12 +1514,21 @@
           semanasSimulacion, 
           fechaInicioProyecto, 
           olas,
-          agentesDefault,
-          duracionEstandar
+          vistaActiva
         ], () => {
           guardarEstado(); 
-          renderizarGraficoDebounced(); 
+          if (vistaActiva.value === 'dashboard') {
+            renderizarGraficosDebounced(); 
+          }
         }, { deep: true });
+
+        watch(vistaActiva, (newVista) => {
+          if (newVista === 'dashboard') {
+            nextTick(() => {
+              renderizarGraficos();
+            });
+          }
+        });
 
         onMounted(() => {
           const cargado = cargarEstado(); 
@@ -1330,11 +1536,12 @@
             restaurarDatosPreprogramados();
           }
           nextTick(() => {
-            renderizarGrafico();
+            renderizarGraficos();
           });
         });
 
         return {
+          vistaActiva,
           metaHc,
           fechaInicioProyecto,
           semanasSimulacion,
