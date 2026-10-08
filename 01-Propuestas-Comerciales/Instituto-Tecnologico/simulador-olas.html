@@ -154,9 +154,9 @@
             <span>PNG</span>
           </button>
 
-          <button @click="exportarPDF" title="Generar informe formal en PDF de 3 páginas" class="flex items-center gap-1.5 px-3 py-1.5 bg-[#EB5B27] hover:bg-[#d44e1e] text-white rounded-lg text-xs font-semibold transition shadow-sm">
+          <button @click="exportarPDF" title="Generar informe formal en PDF de 2 páginas apaisadas (Landscape)" class="flex items-center gap-1.5 px-3 py-1.5 bg-[#EB5B27] hover:bg-[#d44e1e] text-white rounded-lg text-xs font-semibold transition shadow-sm">
             <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
-            <span>PDF Ejecutivo</span>
+            <span>PDF Ejecutivo (2 Págs.)</span>
           </button>
         </div>
 
@@ -313,15 +313,19 @@
               </button>
             </div>
 
-            <!-- Metas Base -->
-            <div class="grid grid-cols-2 gap-3">
+            <!-- Metas Base & Fecha Inicio Editable -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
               <div>
-                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Meta HC Roster</label>
-                <input type="number" v-model.number="metaHc" class="w-full px-2.5 py-1.5 border border-slate-300 rounded-lg text-sm font-bold text-slate-900 focus:ring-2 focus:ring-[#3284C6] outline-none" min="1" />
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Fecha Inicio</label>
+                <input type="date" v-model="fechaInicioProyecto" class="w-full px-2 py-1.5 border border-slate-300 rounded-lg text-xs font-semibold text-slate-900 focus:ring-2 focus:ring-[#3284C6] outline-none" />
               </div>
               <div>
-                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Semanas Simuladas</label>
-                <input type="number" v-model.number="semanasSimulacion" class="w-full px-2.5 py-1.5 border border-slate-300 rounded-lg text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-[#3284C6] outline-none" min="1" />
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Meta HC Roster</label>
+                <input type="number" v-model.number="metaHc" class="w-full px-2 py-1.5 border border-slate-300 rounded-lg text-xs font-bold text-slate-900 focus:ring-2 focus:ring-[#3284C6] outline-none" min="1" />
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Semanas Simul.</label>
+                <input type="number" v-model.number="semanasSimulacion" class="w-full px-2 py-1.5 border border-slate-300 rounded-lg text-xs font-semibold text-slate-900 focus:ring-2 focus:ring-[#3284C6] outline-none" min="1" />
               </div>
             </div>
 
@@ -555,7 +559,7 @@
       </div>
 
       <!-- ======================================================================= -->
-      <!-- VISTA 3: RECURSOS DE SITE & AULAS FÍSICAS (AULA 1 AL INFINITO) -->
+      <!-- VISTA 3: RECURSOS DE SITE & AULAS FÍSICAS (STEPPERS Y MÁX 2 TURNOS) -->
       <!-- ======================================================================= -->
       <div v-show="vistaActiva === 'site'" class="space-y-6">
         
@@ -563,7 +567,7 @@
           <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
             <div>
               <h2 class="font-heading font-bold text-base text-slate-900">Infraestructura Física del Site</h2>
-              <p class="text-xs text-slate-500">Configuración de instructores disponibles, capacidad física por aula (Aula 1 a N) y turnos diarios asignados.</p>
+              <p class="text-xs text-slate-500">Configuración de instructores disponibles, capacidad física por aula y turnos diarios (Límite estricto: Máx. 2 turnos matutino y vespertino).</p>
             </div>
             <button @click="agregarNuevaAulaFisica" class="px-3 py-1.5 bg-[#3284C6] hover:bg-[#256ca6] text-white rounded-lg text-xs font-semibold transition flex items-center gap-1.5 shadow-sm">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
@@ -573,19 +577,21 @@
 
           <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
             
-            <!-- Capacitadores -->
+            <!-- Capacitadores con Stepper -->
             <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/80 flex flex-col justify-between">
               <div>
                 <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Capacitadores en Plantilla</span>
-                <p class="text-[11px] text-slate-400 mt-1 mb-4">Total de instructores activos disponibles para impartir aulas simultáneas.</p>
+                <p class="text-[11px] text-slate-400 mt-1 mb-2">Total de instructores activos disponibles para impartir aulas simultáneas.</p>
               </div>
-              <div class="flex items-center gap-3">
-                <input type="number" v-model.number="capacitadoresTotales" class="w-24 px-3 py-2 border border-slate-300 rounded-xl text-center font-bold text-xl text-slate-900 focus:ring-2 focus:ring-[#3284C6] outline-none" min="1" />
-                <span class="text-xs font-medium text-slate-500">Instructores</span>
+              <div class="flex items-center gap-2">
+                <button type="button" @click="capacitadoresTotales = Math.max(1, capacitadoresTotales - 1)" class="w-8 h-8 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold flex items-center justify-center transition">−</button>
+                <input type="number" v-model.number="capacitadoresTotales" class="w-16 px-2 py-1.5 border border-slate-300 rounded-lg text-center font-bold text-lg text-slate-900 focus:ring-2 focus:ring-[#3284C6] outline-none" min="1" />
+                <button type="button" @click="capacitadoresTotales++" class="w-8 h-8 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold flex items-center justify-center transition">+</button>
+                <span class="text-xs font-medium text-slate-500 ml-1">Instructores</span>
               </div>
             </div>
 
-            <!-- Listado de Aulas Físicas (Aula 1 al infinito) -->
+            <!-- Listado de Aulas Físicas (Aula 1 al infinito con Steppers y Máx 2 Turnos) -->
             <div class="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <div v-for="aula in aulasFisicas" :key="aula.id" class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between relative space-y-3">
                 <button @click="eliminarAulaFisica(aula.id)" class="absolute top-2 right-2 text-slate-300 hover:text-danger-600 transition" title="Eliminar Aula">
@@ -593,18 +599,33 @@
                 </button>
                 <div>
                   <input type="text" v-model="aula.nombre" class="text-xs font-bold text-slate-800 border-b border-transparent hover:border-slate-300 focus:border-[#3284C6] focus:outline-none w-5/6 bg-transparent" />
-                  <div class="text-[10px] text-slate-400 mt-0.5">Espacio físico configurable</div>
+                  <div class="text-[10px] text-slate-400 mt-0.5">Espacio físico de site</div>
                 </div>
-                <div class="space-y-2 text-xs text-slate-600 border-t border-slate-100 pt-2">
-                  <div class="flex items-center justify-between">
-                    <span>Capacidad física:</span>
-                    <input type="number" v-model.number="aula.capacidad" class="w-14 text-center border border-slate-200 rounded px-1.5 py-0.5 font-bold text-slate-900 focus:border-[#3284C6]" min="1" />
+                
+                <div class="space-y-2.5 text-xs text-slate-600 border-t border-slate-100 pt-2.5">
+                  <!-- Capacidad física con stepper -->
+                  <div class="flex items-center justify-between gap-1">
+                    <span class="text-[11px] font-medium">Capacidad:</span>
+                    <div class="flex items-center gap-1">
+                      <button type="button" @click="aula.capacidad = Math.max(1, (Number(aula.capacidad) || 1) - 5)" class="w-6 h-6 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center transition">−</button>
+                      <input type="number" v-model.number="aula.capacidad" class="w-12 text-center border border-slate-200 rounded px-1 py-0.5 font-bold text-slate-900 focus:border-[#3284C6] text-xs" min="1" />
+                      <button type="button" @click="aula.capacidad = (Number(aula.capacidad) || 1) + 5" class="w-6 h-6 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center transition">+</button>
+                    </div>
                   </div>
-                  <div class="flex items-center justify-between">
-                    <span>Turnos diarios:</span>
-                    <input type="number" v-model.number="aula.turnos" class="w-14 text-center border border-slate-200 rounded px-1.5 py-0.5 font-bold text-slate-900 focus:border-[#3284C6]" min="1" max="3" />
+                  <!-- Turnos diarios con stepper limitado a 1 o 2 -->
+                  <div class="flex items-center justify-between gap-1">
+                    <div>
+                      <span class="text-[11px] font-medium block">Turnos diarios:</span>
+                      <span class="text-[9px] text-[#3284C6] font-bold">{{ aula.turnos == 2 ? 'Matutino y Vesp.' : 'Solo Matutino' }}</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                      <button type="button" @click="aula.turnos = Math.max(1, (Number(aula.turnos) || 1) - 1)" :disabled="aula.turnos <= 1" class="w-6 h-6 rounded bg-slate-100 hover:bg-slate-200 disabled:opacity-40 text-slate-700 font-bold text-xs flex items-center justify-center transition">−</button>
+                      <input type="number" v-model.number="aula.turnos" @change="aula.turnos = Math.min(2, Math.max(1, Number(aula.turnos) || 1))" class="w-10 text-center border border-slate-200 rounded px-1 py-0.5 font-bold text-slate-900 focus:border-[#3284C6] text-xs" min="1" max="2" />
+                      <button type="button" @click="aula.turnos = Math.min(2, (Number(aula.turnos) || 1) + 1)" :disabled="aula.turnos >= 2" class="w-6 h-6 rounded bg-slate-100 hover:bg-slate-200 disabled:opacity-40 text-slate-700 font-bold text-xs flex items-center justify-center transition">+</button>
+                    </div>
                   </div>
                 </div>
+
               </div>
             </div>
 
@@ -819,31 +840,29 @@
         // --- OLAS EN DESARROLLO (REQUERIMIENTOS PROGRAMADOS) ---
         const olas = ref([]);
 
+        // Generador dinámico de olas basado en la fecha de inicio del proyecto
+        const generarOlasBase = (fechaBaseStr) => {
+          const fBase = fechaBaseStr || "2026-06-29";
+          const baseDate = new Date(fBase + "T00:00:00");
+          // Desplazamientos estándar en semanas
+          const offsets = [0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 26, 28];
+          return offsets.map((sem, idx) => {
+            const d = new Date(baseDate);
+            d.setDate(d.getDate() + (sem * 7));
+            return {
+              id: `o${idx + 1}`,
+              nombre: `Ola ${idx + 1}`,
+              fechaInicio: d.toISOString().split("T")[0],
+              cantidadInicial: Number(agentesDefault.value) || 50,
+              duracionSemanas: Number(duracionEstandar.value) || 3,
+              tasaBajaTrainingSemanal: 2.5,
+              tasaBajaOpsSemanal: 1.0
+            };
+          });
+        };
+
         const restaurarDatosPreprogramados = () => {
-          olas.value = [
-            { id: "o1", nombre: "Ola 1", fechaInicio: "2026-06-29", cantidadInicial: agentesDefault.value, duracionSemanas: duracionEstandar.value, tasaBajaTrainingSemanal: 2.5, tasaBajaOpsSemanal: 1.0 },
-            { id: "o2", nombre: "Ola 2", fechaInicio: "2026-07-27", cantidadInicial: agentesDefault.value, duracionSemanas: duracionEstandar.value, tasaBajaTrainingSemanal: 2.5, tasaBajaOpsSemanal: 1.0 },
-            { id: "o3", nombre: "Ola 3", fechaInicio: "2026-08-03", cantidadInicial: agentesDefault.value, duracionSemanas: duracionEstandar.value, tasaBajaTrainingSemanal: 2.5, tasaBajaOpsSemanal: 1.0 },
-            { id: "o4", nombre: "Ola 4", fechaInicio: "2026-08-10", cantidadInicial: agentesDefault.value, duracionSemanas: duracionEstandar.value, tasaBajaTrainingSemanal: 2.5, tasaBajaOpsSemanal: 1.0 },
-            { id: "o5", nombre: "Ola 5", fechaInicio: "2026-08-17", cantidadInicial: agentesDefault.value, duracionSemanas: duracionEstandar.value, tasaBajaTrainingSemanal: 2.5, tasaBajaOpsSemanal: 1.0 },
-            { id: "o6", nombre: "Ola 6", fechaInicio: "2026-08-24", cantidadInicial: agentesDefault.value, duracionSemanas: duracionEstandar.value, tasaBajaTrainingSemanal: 2.5, tasaBajaOpsSemanal: 1.0 },
-            { id: "o7", nombre: "Ola 7", fechaInicio: "2026-08-31", cantidadInicial: agentesDefault.value, duracionSemanas: duracionEstandar.value, tasaBajaTrainingSemanal: 2.5, tasaBajaOpsSemanal: 1.0 },
-            { id: "o8", nombre: "Ola 8", fechaInicio: "2026-09-07", cantidadInicial: agentesDefault.value, duracionSemanas: duracionEstandar.value, tasaBajaTrainingSemanal: 2.5, tasaBajaOpsSemanal: 1.0 },
-            { id: "o9", nombre: "Ola 9", fechaInicio: "2026-09-14", cantidadInicial: agentesDefault.value, duracionSemanas: duracionEstandar.value, tasaBajaTrainingSemanal: 2.5, tasaBajaOpsSemanal: 1.0 },
-            { id: "o10", nombre: "Ola 10", fechaInicio: "2026-09-21", cantidadInicial: agentesDefault.value, duracionSemanas: duracionEstandar.value, tasaBajaTrainingSemanal: 2.5, tasaBajaOpsSemanal: 1.0 },
-            { id: "o11", nombre: "Ola 11", fechaInicio: "2026-09-28", cantidadInicial: agentesDefault.value, duracionSemanas: duracionEstandar.value, tasaBajaTrainingSemanal: 2.5, tasaBajaOpsSemanal: 1.0 },
-            { id: "o12", nombre: "Ola 12", fechaInicio: "2026-10-05", cantidadInicial: agentesDefault.value, duracionSemanas: duracionEstandar.value, tasaBajaTrainingSemanal: 2.5, tasaBajaOpsSemanal: 1.0 },
-            { id: "o13", nombre: "Ola 13", fechaInicio: "2026-10-12", cantidadInicial: agentesDefault.value, duracionSemanas: duracionEstandar.value, tasaBajaTrainingSemanal: 2.5, tasaBajaOpsSemanal: 1.0 },
-            { id: "o14", nombre: "Ola 14", fechaInicio: "2026-10-19", cantidadInicial: agentesDefault.value, duracionSemanas: duracionEstandar.value, tasaBajaTrainingSemanal: 2.5, tasaBajaOpsSemanal: 1.0 },
-            { id: "o15", nombre: "Ola 15", fechaInicio: "2026-10-26", cantidadInicial: agentesDefault.value, duracionSemanas: duracionEstandar.value, tasaBajaTrainingSemanal: 2.5, tasaBajaOpsSemanal: 1.0 },
-            { id: "o16", nombre: "Ola 16", fechaInicio: "2026-11-02", cantidadInicial: agentesDefault.value, duracionSemanas: duracionEstandar.value, tasaBajaTrainingSemanal: 2.5, tasaBajaOpsSemanal: 1.0 },
-            { id: "o17", nombre: "Ola 17", fechaInicio: "2026-11-09", cantidadInicial: agentesDefault.value, duracionSemanas: duracionEstandar.value, tasaBajaTrainingSemanal: 2.5, tasaBajaOpsSemanal: 1.0 },
-            { id: "o18", nombre: "Ola 18", fechaInicio: "2026-11-16", cantidadInicial: agentesDefault.value, duracionSemanas: duracionEstandar.value, tasaBajaTrainingSemanal: 2.5, tasaBajaOpsSemanal: 1.0 },
-            { id: "o19", nombre: "Ola 19", fechaInicio: "2026-11-23", cantidadInicial: agentesDefault.value, duracionSemanas: duracionEstandar.value, tasaBajaTrainingSemanal: 2.5, tasaBajaOpsSemanal: 1.0 },
-            { id: "o20", nombre: "Ola 20", fechaInicio: "2026-12-07", cantidadInicial: agentesDefault.value, duracionSemanas: duracionEstandar.value, tasaBajaTrainingSemanal: 2.5, tasaBajaOpsSemanal: 1.0 },
-            { id: "o21", nombre: "Ola 21", fechaInicio: "2026-12-28", cantidadInicial: agentesDefault.value, duracionSemanas: duracionEstandar.value, tasaBajaTrainingSemanal: 2.5, tasaBajaOpsSemanal: 1.0 },
-            { id: "o22", nombre: "Ola 22", fechaInicio: "2027-01-18", cantidadInicial: agentesDefault.value, duracionSemanas: duracionEstandar.value, tasaBajaTrainingSemanal: 2.5, tasaBajaOpsSemanal: 1.0 }
-          ];
+          olas.value = generarOlasBase(fechaInicioProyecto.value);
         };
 
         // Shrinkage total calculado
@@ -962,10 +981,8 @@
             }
 
             // REPOSICIÓN INTELIGENTE DE ATTRITION (STEADY-STATE BACKFILL):
-            // Solo cuando hay déficit real respecto a la meta y el autoBackfill está activo
             if (autoBackfill.value) {
               const deficitReal = metaObj - totalComprometido;
-              // Si la meta está alcanzada o próxima, y el déficit por bajas acumuladas supera un umbral mínimo operativo (ej. 10 agentes)
               if (deficitReal >= 10 && (metaLograda || index >= 12)) {
                 const tamanoBackfill = Math.min(deficitReal, Number(agentesDefault.value) || 20);
                 colaEspera.push({
@@ -1003,11 +1020,11 @@
                 continue;
               }
 
-              // Filtrar solo aulas físicas con capacidad positiva válida y turnos disponibles
+              // Filtrar solo aulas físicas con capacidad positiva válida y turnos disponibles (MÁXIMO 2 TURNOS)
               const aulasLibres = aulasFisicas.value.filter(a => {
                 const capVal = Number(a.capacidad);
                 if (!capVal || capVal <= 0 || isNaN(capVal)) return false; 
-                const turnosMax = Math.max(1, Number(a.turnos) || 1);
+                const turnosMax = Math.min(2, Math.max(1, Number(a.turnos) || 1));
                 const ocupados = aulasOcupacionActual[a.id] || 0;
                 return ocupados < turnosMax;
               });
@@ -1176,7 +1193,6 @@
           if (semanasHastaMeta.value === null) return olas.value.length;
           const fechaMetaStr = proyeccion.value[semanasHastaMeta.value]?.fecha;
           if (!fechaMetaStr) return olas.value.length;
-          // Contar olas cuya fecha de inicio es anterior o igual a la fecha de alcance
           const count = olas.value.filter(o => o.fechaInicio <= fechaMetaStr).length;
           return Math.max(1, count);
         });
@@ -1413,93 +1429,288 @@
           });
         };
 
+        // --- EXPORTADOR A PDF EJECUTIVO TELAT (2 PÁGINAS HORIZONTALES / LANDSCAPE) ---
         const exportarPDF = () => {
           const { jsPDF } = window.jspdf;
-          const pdf = new jsPDF('p', 'pt', 'letter');
+          // Formato Horizontal (Landscape) Letter: 792 pt de ancho x 612 pt de alto
+          const pdf = new jsPDF('l', 'pt', 'letter');
+          const pageWidth = 792;
+          const pageHeight = 612;
+          const margin = 35;
+          const contentWidth = pageWidth - (margin * 2); // 722 pt
+
+          // ------------------------------------------------------------------
+          // PÁGINA 1: TABLERO EJECUTIVO & CURVA DE CAPACIDAD WFM (LANDSCAPE)
+          // ------------------------------------------------------------------
           
+          // Barra de acento superior corporativa Telat
+          pdf.setFillColor(50, 132, 198); // #3284C6 Celeste Telat
+          pdf.rect(margin, 25, contentWidth, 4, 'F');
+
+          // Encabezado Corporativo
           pdf.setFont('helvetica', 'bold');
           pdf.setFontSize(18);
-          pdf.setTextColor(34, 34, 33);
-          pdf.text('Telat Group · Informe Ejecutivo de Capacidad & WFM', 40, 48);
+          pdf.setTextColor(34, 34, 33); // #222221
+          pdf.text('Telat Group · Informe Ejecutivo de Capacidad & WFM', margin, 46);
 
           pdf.setFont('helvetica', 'normal');
-          pdf.setFontSize(10);
+          pdf.setFontSize(9.5);
           pdf.setTextColor(100, 116, 139);
-          pdf.text(`Licitación: Instituto Tecnológico | Fecha de Emisión: ${new Date().toLocaleDateString()}`, 40, 66);
-          pdf.text(`Meta HC Roster: ${metaHc.value} Contratos | Merma Acumulada: ${shrinkageTotal.value}%`, 40, 80);
+          pdf.text(`Licitación: Instituto Tecnológico  |  Meta HC: ${metaHc.value} Contratos  |  Fecha Inicio: ${formatearFecha(fechaInicioProyecto.value)}  |  Emisión: ${new Date().toLocaleDateString()}`, margin, 61);
 
+          // Fila de 5 Tarjetas de KPIs Compactas
+          const kpiY = 72;
+          const kpiHeight = 38;
+          const kpiWidth = (contentWidth - (4 * 8)) / 5; // ~138 pt cada una
+
+          const kpis = [
+            { label: 'META (ROSTER)', val: `${metaHc.value} Contratos`, color: [50, 132, 198] },
+            { label: 'FUERZA PROD.', val: `${fuerzaProductivaEstimada.value} Post-Merma`, color: [225, 29, 72] },
+            { label: 'CUMPLIMIENTO', val: semanasHastaMeta.value !== null ? `Semana ${semanasHastaMeta.value + 1}` : 'No Lograda', color: [22, 163, 74] },
+            { label: 'AULAS PICO', val: `${maxAulasSimultaneas.value} de ${aulasFisicas.value.length} Aulas`, color: [217, 119, 6] },
+            { label: 'RETENCIÓN OPS', val: `${eficienciaTotal.value.toFixed(1)}% Reclutados`, color: [79, 70, 229] }
+          ];
+
+          kpis.forEach((kpi, idx) => {
+            const kX = margin + (idx * (kpiWidth + 8));
+            pdf.setFillColor(248, 250, 252);
+            pdf.setDrawColor(226, 232, 240);
+            pdf.roundedRect(kX, kpiY, kpiWidth, kpiHeight, 4, 4, 'FD');
+
+            pdf.setFont('helvetica', 'bold');
+            pdf.setFontSize(7.5);
+            pdf.setTextColor(100, 116, 139);
+            pdf.text(kpi.label, kX + 8, kpiY + 13);
+
+            pdf.setFont('helvetica', 'bold');
+            pdf.setFontSize(10.5);
+            pdf.setTextColor(kpi.color[0], kpi.color[1], kpi.color[2]);
+            pdf.text(kpi.val, kX + 8, kpiY + 28);
+          });
+
+          // GRÁFICA CON FONDO BLANCO NÍTIDO (SOLUCIÓN A LA GRÁFICA NEGRA)
           const canvas = document.getElementById('capacidadChart');
           if (canvas) {
-            const chartImg = canvas.toDataURL('image/jpeg', 0.95);
-            pdf.addImage(chartImg, 'JPEG', 40, 95, 530, 200);
+            // Se clona en un canvas blanco puro fuera de pantalla para eliminar cualquier canal alfa/transparencia
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = canvas.width;
+            tempCanvas.height = canvas.height;
+            const tCtx = tempCanvas.getContext('2d');
+            tCtx.fillStyle = '#ffffff';
+            tCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+            tCtx.drawImage(canvas, 0, 0);
+
+            const chartImg = tempCanvas.toDataURL('image/png');
+            pdf.setDrawColor(226, 232, 240);
+            pdf.rect(margin, 118, contentWidth, 360, 'S');
+            pdf.addImage(chartImg, 'PNG', margin + 2, 120, contentWidth - 4, 356);
           }
 
+          // Banner de Hito Operativo al calce de la gráfica
+          const hitoY = 486;
+          pdf.setFillColor(240, 253, 244); // bg-emerald-50
+          pdf.setDrawColor(187, 247, 208); // border-emerald-200
+          pdf.roundedRect(margin, hitoY, contentWidth, 48, 6, 6, 'FD');
+
           pdf.setFont('helvetica', 'bold');
-          pdf.setFontSize(11);
+          pdf.setFontSize(10.5);
+          pdf.setTextColor(21, 128, 61); // text-emerald-700
+          const txtHito1 = semanasHastaMeta.value !== null 
+            ? `Hito Operativo de Dimensionamiento: Meta de ${metaHc.value} contratos alcanzada en Semana ${semanasHastaMeta.value + 1} (${formatearFecha(proyeccion.value[semanasHastaMeta.value]?.fecha)})`
+            : `Proyección en Rampa: Meta de ${metaHc.value} contratos en proceso de cobertura.`;
+          pdf.text(txtHito1, margin + 14, hitoY + 18);
+
+          pdf.setFont('helvetica', 'normal');
+          pdf.setFontSize(8.5);
+          pdf.setTextColor(51, 65, 85);
+          const txtHito2 = `Se requirieron ${olasRequeridasParaMeta.value} olas para consolidar la plantilla. A partir de esa fecha, el simulador opera en régimen de Steady-State (mantenimiento continuo reponiendo exclusivamente el attrition semanal para sostener la meseta contractual).`;
+          pdf.text(txtHito2, margin + 14, hitoY + 34);
+
+          // Pie de Página 1
+          pdf.setFont('helvetica', 'normal');
+          pdf.setFontSize(8);
+          pdf.setTextColor(148, 163, 184);
+          pdf.text('Telat Group · Confidencial · Propuesta Comercial y Dimensionamiento Operativo WFM', margin, 585);
+          pdf.text('Página 1 de 2 (Tablero Ejecutivo)', pageWidth - margin - 130, 585);
+
+          // ------------------------------------------------------------------
+          // PÁGINA 2: INFRAESTRUCTURA DE SITE & SÁBANA FORENSE (LANDSCAPE)
+          // ------------------------------------------------------------------
+          pdf.addPage('letter', 'l');
+
+          // Barra de acento Naranja Telat
+          pdf.setFillColor(235, 91, 39); // #EB5B27 Naranja Telat
+          pdf.rect(margin, 25, contentWidth, 4, 'F');
+
+          // Encabezado Página 2
+          pdf.setFont('helvetica', 'bold');
+          pdf.setFontSize(16);
           pdf.setTextColor(34, 34, 33);
-          pdf.text('Resumen de KPIs de Cumplimiento Operativo:', 40, 315);
+          pdf.text('Telat Group · Infraestructura de Site & Sábana Semanal Proyectada', margin, 46);
 
           pdf.setFont('helvetica', 'normal');
-          pdf.text(`• Cumplimiento de Meta de Roster: ${cumplimientoMaximo.value.toFixed(1)}%`, 50, 335);
-          pdf.text(`• Plantilla Productiva Neta Requerida: ${fuerzaProductivaEstimada.value} posiciones`, 50, 350);
-          pdf.text(`• Semana de Alcance del 100% de la Meta: ${semanasHastaMeta.value !== null ? 'Semana ' + (semanasHastaMeta.value + 1) : 'No lograda'} (Requiere ${olasRequeridasParaMeta.value} Olas)`, 50, 365);
-          pdf.text(`• Demanda Pico de Aulas Simultáneas: ${maxAulasSimultaneas.value} aulas físicas`, 50, 380);
+          pdf.setFontSize(9.5);
+          pdf.setTextColor(100, 116, 139);
+          pdf.text('Desglose de premisas físicas, inventario de salones por turno y proyección semanal consolidada', margin, 61);
 
-          pdf.addPage();
+          // COLUMNA IZQUIERDA: PREMISAS & AULAS (Ancho 220 pt)
+          const colIzqX = margin;
+          const colIzqW = 215;
+
+          // Caja 1: Premisas WFM
+          pdf.setFillColor(248, 250, 252);
+          pdf.setDrawColor(226, 232, 240);
+          pdf.roundedRect(colIzqX, 75, colIzqW, 175, 6, 6, 'FD');
+
           pdf.setFont('helvetica', 'bold');
-          pdf.setFontSize(15);
-          pdf.text('Premisas Operativas y Recursos Físicos del Site', 40, 48);
-
           pdf.setFontSize(10);
+          pdf.setTextColor(50, 132, 198);
+          pdf.text('Premisas Operativas WFM', colIzqX + 12, 93);
+
           pdf.setFont('helvetica', 'normal');
-          pdf.text(`• Capacitadores Totales en Plantilla: ${capacitadoresTotales.value} instructores`, 40, 75);
-          pdf.text(`• Límite Pedagógico de Alumnos por Aula: ${limitePedagogico.value} alumnos`, 40, 90);
-          pdf.text(`• Desglose de Shrinkage: Planeado ${shrinkagePlaneado.value}% | No Planeado ${shrinkageNoPlaneado.value}% | Gestión ${shrinkageGestion.value}%`, 40, 105);
-          pdf.text(`• Rampa Post-Nesting: ${duracionRampa.value} semanas (Eficiencia inicial: ${rendimientoInicialRampa.value}%)`, 40, 120);
+          pdf.setFontSize(8.5);
+          pdf.setTextColor(51, 65, 85);
+          let yPrem = 112;
+          const lineasPrem = [
+            `• Fecha Inicio: ${formatearFecha(fechaInicioProyecto.value)}`,
+            `• Semanas Simuladas: ${semanasSimulacion.value} semanas`,
+            `• Capacitadores Totales: ${capacitadoresTotales.value} instructores`,
+            `• Límite Pedagógico: ${limitePedagogico.value} ag./aula`,
+            `• Shrinkage Total: ${shrinkageTotal.value}%`,
+            `  (Plan ${shrinkagePlaneado.value}% | No Plan ${shrinkageNoPlaneado.value}% | Gest ${shrinkageGestion.value}%)`,
+            `• Rampa Ops: ${duracionRampa.value} sem (Inicial ${rendimientoInicialRampa.value}%)`,
+            `• Nesting OJT: ${duracionNesting.value} sem (Rendimiento ${rendimientoNesting.value}%)`
+          ];
+          lineasPrem.forEach(l => {
+            pdf.text(l, colIzqX + 12, yPrem);
+            yPrem += 14.5;
+          });
+
+          // Caja 2: Inventario de Aulas (Máx 2 Turnos)
+          const yAulBox = 260;
+          pdf.setFillColor(248, 250, 252);
+          pdf.setDrawColor(226, 232, 240);
+          pdf.roundedRect(colIzqX, yAulBox, colIzqW, 280, 6, 6, 'FD');
 
           pdf.setFont('helvetica', 'bold');
-          pdf.setFontSize(12);
-          pdf.text('Inventario de Aulas y Turnos:', 40, 150);
-          
-          let yAula = 170;
+          pdf.setFontSize(10);
+          pdf.setTextColor(235, 91, 39);
+          pdf.text('Inventario de Aulas Físicas (Máx 2T)', colIzqX + 12, yAulBox + 18);
+
           pdf.setFont('helvetica', 'normal');
-          pdf.setFontSize(9);
+          pdf.setFontSize(8.5);
+          pdf.setTextColor(51, 65, 85);
+          let yA = yAulBox + 36;
           aulasFisicas.value.forEach(a => {
-            pdf.text(`* ${a.nombre} (Capacidad física: ${a.capacidad} | Turnos: ${a.turnos || 1})`, 50, yAula);
-            yAula += 15;
+            const turnoDesc = a.turnos == 2 ? '2 Turnos (Mat/Vesp)' : '1 Turno (Matutino)';
+            pdf.text(`• ${a.nombre}: Capacidad ${a.capacidad} ag.`, colIzqX + 12, yA);
+            pdf.setTextColor(100, 116, 139);
+            pdf.text(`   Turnos: ${turnoDesc}`, colIzqX + 12, yA + 11);
+            pdf.setTextColor(51, 65, 85);
+            yA += 24;
           });
 
-          pdf.addPage();
+          // Capacidad instalada total
+          const capTotalSite = aulasFisicas.value.reduce((acc, a) => acc + (Math.min(a.capacidad, limitePedagogico.value) * a.turnos), 0);
           pdf.setFont('helvetica', 'bold');
-          pdf.setFontSize(15);
-          pdf.text('Sábana de Capacidad Proyectada (Primeras 20 Semanas)', 40, 48);
+          pdf.setFontSize(8.5);
+          pdf.setTextColor(21, 128, 61);
+          pdf.text(`Capacidad Diaria Efectiva: ${capTotalSite} alumnos/día`, colIzqX + 12, yA + 10);
 
-          let yTable = 85;
-          pdf.setFontSize(9);
-          pdf.text('Semana', 40, 75);
-          pdf.text('Altas', 95, 75);
-          pdf.text('En Cap.', 140, 75);
-          pdf.text('Nesting', 190, 75);
-          pdf.text('Roster', 245, 75);
-          pdf.text('Productivo', 305, 75);
-          pdf.text('Cumplimiento', 380, 75);
-          pdf.text('Cola', 465, 75);
-          pdf.line(40, 78, 540, 78);
+          // COLUMNA DERECHA: SÁBANA SEMANAL TABULAR (Ancho 495 pt)
+          const colDerX = colIzqX + colIzqW + 12; // 262 pt
+          const colDerW = contentWidth - colIzqW - 12; // 495 pt
 
-          pdf.setFont('helvetica', 'normal');
-          proyeccion.value.slice(0, 20).forEach(s => {
-            pdf.text(`S${s.semanaIndex}`, 40, yTable);
-            pdf.text(`${s.altas}`, 95, yTable);
-            pdf.text(`${s.enCapacitacion}`, 140, yTable);
-            pdf.text(`${s.enNesting}`, 190, yTable);
-            pdf.text(`${s.hcOpsRoster}`, 245, yTable);
-            pdf.text(`${s.hcOpsProductivo}`, 305, yTable);
-            pdf.text(`${s.cumplimiento}%`, 380, yTable);
-            pdf.text(`${s.colaEsperaFinal}`, 465, yTable);
-            yTable += 16;
+          // Encabezado de la Tabla
+          pdf.setFillColor(50, 132, 198); // #3284C6
+          pdf.rect(colDerX, 75, colDerW, 18, 'F');
+
+          pdf.setFont('helvetica', 'bold');
+          pdf.setFontSize(8);
+          pdf.setTextColor(255, 255, 255);
+          pdf.text('Sem', colDerX + 6, 87);
+          pdf.text('Fecha', colDerX + 32, 87);
+          pdf.text('Altas', colDerX + 85, 87);
+          pdf.text('Aulas', colDerX + 115, 87);
+          pdf.text('En Cap.', colDerX + 150, 87);
+          pdf.text('Nesting', colDerX + 190, 87);
+          pdf.text('Roster', colDerX + 235, 87);
+          pdf.text('Productivo', colDerX + 280, 87);
+          pdf.text('Cumplimiento', colDerX + 345, 87);
+          pdf.text('Bajas', colDerX + 415, 87);
+          pdf.text('Cola', colDerX + 455, 87);
+
+          // Filas Semanales (Hasta 25 semanas de proyección directa)
+          let yRow = 104;
+          const filasAMostrar = proyeccion.value.slice(0, 25);
+          
+          filasAMostrar.forEach((s, rIdx) => {
+            if (rIdx % 2 === 0) {
+              pdf.setFillColor(248, 250, 252);
+              pdf.rect(colDerX, yRow - 10, colDerW, 16.5, 'F');
+            }
+
+            // Destacar semana de cumplimiento de meta
+            if (s.semanaIndex === (semanasHastaMeta.value !== null ? semanasHastaMeta.value + 1 : -1)) {
+              pdf.setFillColor(240, 253, 244);
+              pdf.setDrawColor(34, 197, 94);
+              pdf.rect(colDerX, yRow - 10, colDerW, 16.5, 'FD');
+            }
+
+            pdf.setFont('helvetica', 'bold');
+            pdf.setFontSize(7.5);
+            pdf.setTextColor(50, 132, 198);
+            pdf.text(`S${s.semanaIndex}`, colDerX + 6, yRow);
+
+            pdf.setFont('helvetica', 'normal');
+            pdf.setTextColor(51, 65, 85);
+            pdf.text(formatearFecha(s.fecha), colDerX + 32, yRow);
+
+            pdf.setFont('helvetica', 'bold');
+            pdf.setTextColor(s.altas > 0 ? 50 : 148, s.altas > 0 ? 132 : 163, s.altas > 0 ? 198 : 184);
+            pdf.text(`${s.altas}`, colDerX + 88, yRow);
+
+            pdf.setFont('helvetica', 'normal');
+            pdf.setTextColor(51, 65, 85);
+            pdf.text(`${s.aulasActivas}`, colDerX + 120, yRow);
+            pdf.text(`${s.enCapacitacion}`, colDerX + 155, yRow);
+            pdf.text(`${s.enNesting}`, colDerX + 195, yRow);
+
+            pdf.setFont('helvetica', 'bold');
+            pdf.setTextColor(30, 41, 59);
+            pdf.text(`${s.hcOpsRoster}`, colDerX + 240, yRow);
+
+            pdf.setFont('helvetica', 'normal');
+            pdf.setTextColor(100, 116, 139);
+            pdf.text(`${s.hcOpsProductivo}`, colDerX + 290, yRow);
+
+            // Badge de cumplimiento %
+            const cumplNum = parseFloat(s.cumplimiento);
+            pdf.setFont('helvetica', 'bold');
+            if (cumplNum >= 100) pdf.setTextColor(22, 163, 74);
+            else if (cumplNum >= 80) pdf.setTextColor(217, 119, 6);
+            else pdf.setTextColor(225, 29, 72);
+            pdf.text(`${s.cumplimiento}%`, colDerX + 355, yRow);
+
+            pdf.setFont('helvetica', 'normal');
+            pdf.setTextColor(225, 29, 72);
+            pdf.text(`${s.bajasTotales}`, colDerX + 420, yRow);
+
+            pdf.setTextColor(s.colaEsperaFinal > 0 ? 217 : 148, s.colaEsperaFinal > 0 ? 119 : 163, s.colaEsperaFinal > 0 ? 6 : 184);
+            pdf.text(s.colaEsperaFinal > 0 ? `${s.colaEsperaFinal}` : '-', colDerX + 460, yRow);
+
+            yRow += 17.5;
           });
 
-          pdf.save(`Telat_WFM_Plan_Capacidad_${new Date().toISOString().split('T')[0]}.pdf`);
+          // Pie de Página 2
+          pdf.setFont('helvetica', 'normal');
+          pdf.setFontSize(8);
+          pdf.setTextColor(148, 163, 184);
+          pdf.text('Telat Group · Confidencial · Propuesta Comercial y Dimensionamiento Operativo WFM', margin, 585);
+          pdf.text('Página 2 de 2 (Sábana Forense)', pageWidth - margin - 130, 585);
+
+          // Guardar archivo PDF con nombre formal
+          pdf.save(`Telat_WFM_Plan_Capacidad_Instituto_${new Date().toISOString().split('T')[0]}.pdf`);
         };
 
         // --- PERSISTENCIA LOCALSTORAGE ---
@@ -1538,28 +1749,28 @@
             vistaActiva.value = estado.vistaActiva ?? 'dashboard';
             metaHc.value = estado.metaHc ?? 450;
             estrategiaWfm.value = estado.estrategiaWfm ?? 'inteligente';
-            fechaInicioProyecto.value = estado.fechaInicioProyecto ?? fechaInicioProyecto.value;
-            semanasSimulacion.value = estado.semanasSimulacion ?? semanasSimulacion.value;
-            limitePedagogico.value = estado.limitePedagogico ?? limitePedagogico.value;
-            shrinkagePlaneado.value = estado.shrinkagePlaneado ?? shrinkagePlaneado.value;
-            shrinkageNoPlaneado.value = estado.shrinkageNoPlaneado ?? shrinkageNoPlaneado.value;
-            shrinkageGestion.value = estado.shrinkageGestion ?? shrinkageGestion.value;
-            duracionNesting.value = estado.duracionNesting ?? duracionNesting.value;
-            rendimientoNesting.value = estado.rendimientoNesting ?? rendimientoNesting.value;
-            duracionRampa.value = estado.duracionRampa ?? duracionRampa.value;
-            rendimientoInicialRampa.value = estado.rendimientoInicialRampa ?? rendimientoInicialRampa.value;
+            fechaInicioProyecto.value = estado.fechaInicioProyecto ?? "2026-06-29";
+            semanasSimulacion.value = estado.semanasSimulacion ?? 30;
+            limitePedagogico.value = estado.limitePedagogico ?? 20;
+            shrinkagePlaneado.value = estado.shrinkagePlaneado ?? 15;
+            shrinkageNoPlaneado.value = estado.shrinkageNoPlaneado ?? 10;
+            shrinkageGestion.value = estado.shrinkageGestion ?? 5;
+            duracionNesting.value = estado.duracionNesting ?? 1;
+            rendimientoNesting.value = estado.rendimientoNesting ?? 60;
+            duracionRampa.value = estado.duracionRampa ?? 4;
+            rendimientoInicialRampa.value = estado.rendimientoInicialRampa ?? 40;
             autoBackfill.value = estado.autoBackfill ?? true;
-            agentesDefault.value = estado.agentesDefault ?? agentesDefault.value;
-            duracionEstandar.value = estado.duracionEstandar ?? duracionEstandar.value;
-            capacitadoresTotales.value = estado.capacitadoresTotales ?? capacitadoresTotales.value;
+            agentesDefault.value = estado.agentesDefault ?? 50;
+            duracionEstandar.value = estado.duracionEstandar ?? 3;
+            capacitadoresTotales.value = estado.capacitadoresTotales ?? 4;
             
-            // Sanitizar aulas para que siempre usen "Aula X"
+            // Sanitizar aulas para que siempre usen "Aula X" y máximo 2 turnos
             if (estado.aulasFisicas && Array.isArray(estado.aulasFisicas)) {
               aulasFisicas.value = estado.aulasFisicas.map((a, i) => ({
                 id: a.id || `a${i+1}`,
                 nombre: a.nombre && !a.nombre.includes('Alfa') && !a.nombre.includes('Beta') && !a.nombre.includes('Gamma') && !a.nombre.includes('Delta') ? a.nombre : `Aula ${i+1}`,
-                capacidad: Number(a.capacidad) || 20,
-                turnos: Number(a.turnos) || 1
+                capacidad: Math.max(1, Number(a.capacidad) || 20),
+                turnos: Math.min(2, Math.max(1, Number(a.turnos) || 1))
               }));
             }
             
@@ -1572,6 +1783,7 @@
 
         const resetearLocalConfig = () => {
           localStorage.removeItem(STORAGE_KEY);
+          fechaInicioProyecto.value = "2026-06-29";
           restaurarDatosPreprogramados();
           aulasFisicas.value = [
             { id: "a1", nombre: "Aula 1", capacidad: 40, turnos: 1 },
@@ -1579,6 +1791,7 @@
             { id: "a3", nombre: "Aula 3", capacidad: 20, turnos: 1 },
             { id: "a4", nombre: "Aula 4", capacidad: 10, turnos: 1 }
           ];
+          capacitadoresTotales.value = 4;
           metaHc.value = 450;
           estrategiaWfm.value = 'inteligente';
           autoBackfill.value = true;
@@ -1586,6 +1799,19 @@
             renderizarGraficos();
           });
         };
+
+        // Sincronizar fecha de inicio del proyecto con la Ola 1 y recalcular calendario de olas
+        watch(fechaInicioProyecto, (nuevaFecha) => {
+          if (nuevaFecha && olas.value.length > 0) {
+            const nuevasOlas = generarOlasBase(nuevaFecha);
+            // Sincronizar fechas preservando cantidades configuradas
+            olas.value.forEach((o, idx) => {
+              if (nuevasOlas[idx]) {
+                o.fechaInicio = nuevasOlas[idx].fechaInicio;
+              }
+            });
+          }
+        });
 
         // WATCH CASCADA
         watch(agentesDefault, (newVal) => {
@@ -1617,6 +1843,7 @@
           proyeccion, 
           metaHc, 
           estrategiaWfm,
+          fechaInicioProyecto,
           shrinkagePlaneado,
           shrinkageNoPlaneado,
           shrinkageGestion,
@@ -1629,7 +1856,6 @@
           capacitadoresTotales, 
           aulasFisicas, 
           semanasSimulacion, 
-          fechaInicioProyecto, 
           olas,
           vistaActiva
         ], () => {
