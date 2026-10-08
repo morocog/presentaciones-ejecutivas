@@ -16,8 +16,8 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Chart.js (UMD) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.umd.js"></script>
-  <!-- html2canvas -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <!-- html2canvas-pro (Fork moderno con corrección de Flexbox y fuentes) -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas-pro/dist/html2canvas-pro.min.js"></script>
   <!-- jsPDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   
@@ -109,7 +109,7 @@
           <div>
             <div class="flex items-center gap-2">
               <h1 class="font-heading font-bold text-base tracking-tight text-white">Simulador de Capacidad & WFM</h1>
-              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#3284C6]/20 text-[#3284C6] border border-[#3284C6]/30 uppercase tracking-wider">
+              <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-[#3284C6]/20 text-[#3284C6] border border-[#3284C6]/30 uppercase tracking-wider leading-none">
                 Licitación Instituto · Meta: {{ metaHc }} Contratos
               </span>
             </div>
@@ -245,8 +245,8 @@
       <!-- BANNER EJECUTIVO DE HITO COMERCIAL (Se activa cuando se alcanza la meta) -->
       <div v-if="semanasHastaMeta !== null" class="max-w-[1680px] mx-auto mt-2.5 p-3 rounded-xl bg-gradient-to-r from-emerald-50 via-teal-50 to-slate-50 border border-emerald-200/80 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 shadow-xs">
         <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold text-lg shadow-sm">
-            🎯
+          <div class="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold text-lg shadow-sm flex-shrink-0">
+            <span style="display:inline-flex; align-items:center; justify-content:center; line-height:1;">🎯</span>
           </div>
           <div>
             <div class="text-xs font-bold text-slate-900 flex items-center gap-2">
@@ -259,7 +259,7 @@
           </div>
         </div>
         <div class="flex items-center gap-2 self-end md:self-auto">
-          <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-bold rounded-lg whitespace-nowrap shadow-xs">
+          <span class="inline-flex items-center px-2.5 py-1 bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-bold rounded-lg whitespace-nowrap shadow-xs leading-none">
             ✓ Roster 100% Cubierto
           </span>
         </div>
@@ -1421,7 +1421,35 @@
         // --- EXPORTACIONES ---
         const exportarPNG = () => {
           const appElement = document.getElementById('app');
-          html2canvas(appElement, { scale: 2, useCORS: true, backgroundColor: '#f8fafc' }).then((canvas) => {
+          if (!window.html2canvas) return;
+
+          html2canvas(appElement, { 
+            scale: 2, 
+            useCORS: true, 
+            backgroundColor: '#f8fafc',
+            onclone: (clonedDoc) => {
+              // Convertir inputs y selects a bloques con su texto visible y centrado para que el canvas los pinte nítidos
+              const clonedInputs = clonedDoc.querySelectorAll('input, select');
+              clonedInputs.forEach(input => {
+                const val = input.value;
+                const rep = clonedDoc.createElement('div');
+                rep.className = input.className;
+                const rect = input.getBoundingClientRect();
+                if (rect.width > 0) rep.style.width = rect.width + 'px';
+                if (rect.height > 0) rep.style.height = rect.height + 'px';
+                rep.style.display = 'inline-flex';
+                rep.style.alignItems = 'center';
+                rep.style.justifyContent = input.classList.contains('text-center') ? 'center' : (input.classList.contains('text-right') ? 'flex-end' : 'flex-start');
+                rep.style.lineHeight = '1.2';
+                rep.style.boxSizing = 'border-box';
+                rep.style.overflow = 'hidden';
+                rep.innerText = val !== undefined && val !== null ? String(val) : '';
+                if (input.parentNode) {
+                  input.parentNode.replaceChild(rep, input);
+                }
+              });
+            }
+          }).then((canvas) => {
             const link = document.createElement('a');
             link.download = `Telat-Plan_Capacidad_WFM-${new Date().toISOString().split('T')[0]}.png`;
             link.href = canvas.toDataURL('image/png');
