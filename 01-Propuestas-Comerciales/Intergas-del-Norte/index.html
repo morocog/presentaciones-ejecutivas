@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Propuesta Comercial y Alianza Estratégica · Intergas del Norte - Telat Group</title>
+
+  <!-- Google Fonts: DM Sans & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN v3 con tokens Telat -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            telat: {
+              celeste: '#3284C6',
+              naranja: '#EB5B27',
+              amarillo: '#FECA66',
+              oscuro: '#222221',
+              claro: '#FBFBFD'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    @font-face {
+      font-family: 'Momo Trust';
+      src: local('Impact'), local('Arial Black');
+      font-weight: 800;
+      font-display: swap;
+    }
+
+    :root {
+      --oscuro: #222221;
+      --azul-claro: #FBFBFD;
+      --celeste: #3284C6;
+      --naranja: #EB5B27;
+      --amarillo: #FECA66;
+    }
+
+    body {
+      background-color: var(--azul-claro);
+      color: var(--oscuro);
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .font-subheading,
+    .subheading {
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .font-body {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .metric-number {
+      font-family: 'Momo Trust', sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    #presentation-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 1;
+      background-color: #FBFBFD;
+      box-sizing: border-box;
+      padding: 1.15rem 3.5rem 0.85rem 3.5rem;
+    }
+
+    .slide.active {
+      display: flex;
+      z-index: 10;
+      animation: slideFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes slideFadeIn {
+      from { opacity: 0; transform: scale(0.995); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .card-tech {
+      background: #FFFFFF;
+      border: 1.5px solid rgba(50, 132, 198, 0.18);
+      border-radius: 1.25rem;
+      box-shadow: 0 8px 24px -4px rgba(34, 34, 33, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .card-tech:hover {
+      border-color: rgba(50, 132, 198, 0.45);
+      box-shadow: 0 12px 32px -4px rgba(50, 132, 198, 0.12);
+    }
+
+    .cert-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.15rem 0.4rem;
+      border-radius: 9999px;
+      font-size: 8.8px;
+      font-weight: 700;
+      line-height: 1;
+      white-space: nowrap;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .kpi-pill-blue {
+      background: rgba(50, 132, 198, 0.1);
+      color: #3284C6;
+      border: 1px solid rgba(50, 132, 198, 0.28);
+    }
+
+    .kpi-pill-orange {
+      background: rgba(235, 91, 39, 0.1);
+      color: #EB5B27;
+      border: 1px solid rgba(235, 91, 39, 0.28);
+    }
+
+    .kpi-pill-green {
+      background: rgba(16, 185, 129, 0.1);
+      color: #059669;
+      border: 1px solid rgba(16, 185, 129, 0.28);
+    }
+
+    .kpi-pill-purple {
+      background: rgba(124, 58, 237, 0.1);
+      color: #7C3AED;
+      border: 1px solid rgba(124, 58, 237, 0.28);
+    }
+
+    .kpi-pill-cyan {
+      background: rgba(6, 182, 212, 0.1);
+      color: #0891B2;
+      border: 1px solid rgba(6, 182, 212, 0.28);
+    }
+
+    #nav-controls {
+      position: fixed;
+      bottom: 0.35rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    .nav-btn {
+      width: 1.85rem;
+      height: 1.85rem;
+      border-radius: 9999px;
+      background: var(--oscuro);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .nav-btn:hover {
+      background: var(--naranja);
+      transform: scale(1.05);
+    }
+
+    #slide-indicator {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #64748B;
+      padding: 0 0.4rem;
+    }
+
+    @media print {
+      @page {
+        size: 16in 9in;
+        margin: 0;
+      }
+
+      *, *:before, *:after {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+        animation: none !important;
+        transition: none !important;
+      }
+
+      html, body {
+        width: 16in !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        background-color: #FBFBFD !important;
+      }
+
+      #presentation-container {
+        width: 16in !important;
+        height: auto !important;
+        display: block !important;
+        overflow: visible !important;
+      }
+
+      .slide {
+        position: relative !important;
+        inset: auto !important;
+        width: 16in !important;
+        height: 9in !important;
+        min-height: 9in !important;
+        max-height: 9in !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        padding: 1.15rem 3.5rem 0.85rem 3.5rem !important;
+        page-break-after: always !important;
+        page-break-inside: avoid !important;
+        break-after: page !important;
+        break-inside: avoid !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        background-color: #FBFBFD !important;
+      }
+
+      .grid { display: grid !important; }
+      .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+      .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+
+      #nav-controls {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="antialiased">
+
+  <div id="presentation-container">
+
+    <!-- ====================================================================
+         SLIDE 1: VISIÓN EJECUTIVA · SPLIT-MAP CON POTENCIACIÓN OPERATIVA
+         ==================================================================== -->
+    <section class="slide active" id="slide-1" data-slide="1">
+
+      <!-- Header Superior -->
+      <div class="flex items-center justify-between pb-1.5 mb-1 border-b border-slate-200 flex-shrink-0">
+        <div class="flex items-center gap-3">
+          <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-8 w-auto" style="height: 32px; width: auto;">
+          <div class="h-6 w-[2px] bg-slate-300"></div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="subheading text-[11px] font-bold uppercase tracking-widest text-[#3284C6] block">Propuesta comercial | Visión ejecutiva institucional</span>
+              <span class="text-slate-300">·</span>
+              <span class="font-subheading text-[11px] font-bold text-[#EB5B27] uppercase tracking-wider">Alianza estratégica con Intergas del Norte</span>
+            </div>
+            <h1 class="subheading text-[1.28rem] font-bold text-[#222221] leading-tight">
+              Potenciación operativa, blindaje de disponibilidad y atención al cliente 24/7
+            </h1>
+          </div>
+        </div>
+        <div class="text-right">
+          <span class="subheading text-xs font-bold uppercase tracking-widest text-[#3284C6] bg-[#3284C6]/10 px-3 py-1 rounded-full border border-[#3284C6]/20">Telat Group | 2026</span>
+        </div>
+      </div>
+
+      <!-- Layout Split-Map Ejecutivo (2 Grandes Alas de Valor) -->
+      <div class="grid grid-cols-2 gap-5 flex-1 items-stretch my-2 min-h-0">
+
+        <!-- ============================================================
+             ALA 1: TECNOLOGÍA EN PISO & EXPERIENCIA DEL CLIENTE
+             ============================================================ -->
+        <div class="card-tech p-5 flex flex-col justify-between border-t-4 border-t-[#3284C6] bg-gradient-to-b from-blue-50/20 to-white">
+          
+          <!-- Encabezado del Ala 1 -->
+          <div class="pb-3 border-b border-slate-100 flex items-center justify-between flex-shrink-0">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="px-2.5 py-0.5 rounded-md bg-[#3284C6]/15 text-[#3284C6] text-[11px] font-black uppercase tracking-wider font-subheading">
+                  Eje Front-Office | En piso de operaciones
+                </span>
+                <span class="text-[11px] font-bold text-slate-400 font-subheading">Atención y cercanía al cliente</span>
+              </div>
+              <h2 class="subheading text-[1.48rem] font-bold text-[#222221] leading-tight">
+                Experiencia de servicio ágil, cálida y sin tiempos muertos
+              </h2>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-[#3284C6]/10 text-[#3284C6] flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            </div>
+          </div>
+
+          <!-- Los 3 Pilares del Ala 1 -->
+          <div class="my-auto flex flex-col justify-center gap-3.5 py-1">
+
+            <!-- Fila 1: Desborde multicanal -->
+            <div class="bg-white border border-slate-200/90 rounded-2xl py-4 px-4 flex items-center justify-between shadow-xs hover:border-[#3284C6]/50 transition-colors">
+              <div class="flex items-center gap-3.5 flex-1 min-w-0 pr-3">
+                <div class="w-11 h-11 rounded-xl bg-[#3284C6]/12 text-[#3284C6] flex items-center justify-center flex-shrink-0 font-black font-subheading text-lg">
+                  1
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2 mb-1">
+                    <span class="font-subheading text-[16px] font-bold text-slate-900">Desborde omnicanal 24/7 y absorción de picos</span>
+                    <span class="text-[11px] font-bold text-[#3284C6] bg-[#3284C6]/10 px-2 py-0.5 rounded-md whitespace-nowrap">Teléfono, WhatsApp y App</span>
+                  </div>
+                  <p class="font-body text-[13px] text-slate-600 leading-snug">
+                    Recepción inmediata de pedidos en horarios de máxima demanda y cobertura nocturna ininterrumpida. Cero llamadas perdidas ante picos de demanda o temporadas de frío.
+                  </p>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0 pl-4 border-l border-slate-100 min-w-[110px]">
+                <span class="metric-number text-[2.4rem] text-[#3284C6] leading-none block">&lt;20s</span>
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider font-subheading mt-1 block">Toma de pedidos</span>
+              </div>
+            </div>
+
+            <!-- Fila 2: Hibridación humano + bot -->
+            <div class="bg-white border border-slate-200/90 rounded-2xl py-4 px-4 flex items-center justify-between shadow-xs hover:border-[#3284C6]/50 transition-colors">
+              <div class="flex items-center gap-3.5 flex-1 min-w-0 pr-3">
+                <div class="w-11 h-11 rounded-xl bg-[#3284C6]/12 text-[#3284C6] flex items-center justify-center flex-shrink-0 font-black font-subheading text-lg">
+                  2
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2 mb-1">
+                    <span class="font-subheading text-[16px] font-bold text-slate-900">Hibridación armónica entre bot y atención humana</span>
+                    <span class="text-[11px] font-bold text-[#059669] bg-[#059669]/10 px-2 py-0.5 rounded-md whitespace-nowrap">Cero callejones sin salida</span>
+                  </div>
+                  <p class="font-body text-[13px] text-slate-600 leading-snug">
+                    Transición fluida de autoservicio digital a ejecutivos calificados ante cualquier duda o requerimiento especial, resolviendo con calidez humana al primer contacto.
+                  </p>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0 pl-4 border-l border-slate-100 min-w-[110px]">
+                <span class="metric-number text-[2.4rem] text-[#059669] leading-none block">99%</span>
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider font-subheading mt-1 block">Registro sin error</span>
+              </div>
+            </div>
+
+            <!-- Fila 3: Célula comercial e industrial -->
+            <div class="bg-white border border-slate-200/90 rounded-2xl py-4 px-4 flex items-center justify-between shadow-xs hover:border-[#3284C6]/50 transition-colors">
+              <div class="flex items-center gap-3.5 flex-1 min-w-0 pr-3">
+                <div class="w-11 h-11 rounded-xl bg-[#3284C6]/12 text-[#3284C6] flex items-center justify-center flex-shrink-0 font-black font-subheading text-lg">
+                  3
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2 mb-1">
+                    <span class="font-subheading text-[16px] font-bold text-slate-900">Célula dedicada a cuentas comerciales e industriales</span>
+                    <span class="text-[11px] font-bold text-[#3284C6] bg-[#3284C6]/10 px-2 py-0.5 rounded-md whitespace-nowrap">Estacionarios y empresas</span>
+                  </div>
+                  <p class="font-body text-[13px] text-slate-600 leading-snug">
+                    Gestión preventiva de recargas de tanques estacionarios para restaurantes, empresas y plantas, asegurando suministro puntual, facturación ágil y fidelización de cuentas clave.
+                  </p>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0 pl-4 border-l border-slate-100 min-w-[110px]">
+                <span class="metric-number text-[2.4rem] text-[#3284C6] leading-none block">100%</span>
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider font-subheading mt-1 block">Suministro continuo</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Pie del Ala 1 -->
+          <div class="pt-2.5 border-t border-slate-100 flex items-center justify-between flex-shrink-0">
+            <span class="text-[11.5px] font-medium text-slate-500 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-[#3284C6]"></span>
+              Fidelización de clientes residenciales y comerciales en La Laguna
+            </span>
+            <span class="px-3 py-0.5 rounded-lg bg-[#3284C6]/10 text-[#3284C6] font-bold text-[11px] font-subheading flex items-center gap-1">
+              Ver modelo de piloto e indicadores en lámina 2 ➔
+            </span>
+          </div>
+
+        </div>
+
+        <!-- ============================================================
+             ALA 2: RESILIENCIA, GOBERNANZA & ANALÍTICA OPERATIVA
+             ============================================================ -->
+        <div class="card-tech p-5 flex flex-col justify-between border-t-4 border-t-[#EB5B27] bg-gradient-to-b from-orange-50/20 to-white">
+          
+          <!-- Encabezado del Ala 2 -->
+          <div class="pb-3 border-b border-slate-100 flex items-center justify-between flex-shrink-0">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="px-2.5 py-0.5 rounded-md bg-[#EB5B27]/15 text-[#EB5B27] text-[11px] font-black uppercase tracking-wider font-subheading">
+                  Eje Back-Office | Continuidad y control
+                </span>
+                <span class="text-[11px] font-bold text-slate-400 font-subheading">Continuidad de negocio y analítica</span>
+              </div>
+              <h2 class="subheading text-[1.48rem] font-bold text-[#222221] leading-tight">
+                Blindaje de infraestructura, contingencia y control en tiempo real
+              </h2>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-[#EB5B27]/10 text-[#EB5B27] flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            </div>
+          </div>
+
+          <!-- Los 3 Pilares del Ala 2 -->
+          <div class="my-auto flex flex-col justify-center gap-3.5 py-1">
+
+            <!-- Fila 1: Continuidad y redundancia -->
+            <div class="bg-white border border-slate-200/90 rounded-2xl py-4 px-4 flex items-center justify-between shadow-xs hover:border-[#EB5B27]/50 transition-colors">
+              <div class="flex items-center gap-3.5 flex-1 min-w-0 pr-3">
+                <div class="w-11 h-11 rounded-xl bg-[#EB5B27]/12 text-[#EB5B27] flex items-center justify-center flex-shrink-0 font-black font-subheading text-lg">
+                  1
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2 mb-1">
+                    <span class="font-subheading text-[16px] font-bold text-slate-900">Continuidad operativa y redundancia multi-sede (ISO 22301)</span>
+                    <span class="text-[11px] font-bold text-[#EB5B27] bg-[#EB5B27]/10 px-2 py-0.5 rounded-md whitespace-nowrap">Alta disponibilidad</span>
+                  </div>
+                  <p class="font-body text-[13px] text-slate-600 leading-snug">
+                    Infraestructura robusta interconectada entre Ciudad Juárez y Ciudad de México con enlaces de respaldo y conmutación automática, blindando la toma de pedidos ante contingencias de red.
+                  </p>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0 pl-4 border-l border-slate-100 min-w-[110px]">
+                <span class="metric-number text-[2.4rem] text-[#EB5B27] leading-none block">99.9%</span>
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider font-subheading mt-1 block">Disponibilidad red</span>
+              </div>
+            </div>
+
+            <!-- Fila 2: Atención crítica y fugas -->
+            <div class="bg-white border border-slate-200/90 rounded-2xl py-4 px-4 flex items-center justify-between shadow-xs hover:border-[#EB5B27]/50 transition-colors">
+              <div class="flex items-center gap-3.5 flex-1 min-w-0 pr-3">
+                <div class="w-11 h-11 rounded-xl bg-[#EB5B27]/12 text-[#EB5B27] flex items-center justify-center flex-shrink-0 font-black font-subheading text-lg">
+                  2
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2 mb-1">
+                    <span class="font-subheading text-[16px] font-bold text-slate-900">Línea prioritaria de fugas y reportes de seguridad</span>
+                    <span class="text-[11px] font-bold text-[#DC2626] bg-[#DC2626]/10 px-2 py-0.5 rounded-md whitespace-nowrap">Respuesta de emergencia</span>
+                  </div>
+                  <p class="font-body text-[13px] text-slate-600 leading-snug">
+                    Atención inmediata en segundos, emisión de instrucciones de seguridad validadas por Intergas y canalización en menos de 2 minutos a la cuadrilla técnica con registro auditable.
+                  </p>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0 pl-4 border-l border-slate-100 min-w-[110px]">
+                <span class="metric-number text-[2.4rem] text-[#DC2626] leading-none block">&lt;10s</span>
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider font-subheading mt-1 block">Respuesta fugas</span>
+              </div>
+            </div>
+
+            <!-- Fila 3: Tableros en tiempo real -->
+            <div class="bg-white border border-slate-200/90 rounded-2xl py-4 px-4 flex items-center justify-between shadow-xs hover:border-[#EB5B27]/50 transition-colors">
+              <div class="flex items-center gap-3.5 flex-1 min-w-0 pr-3">
+                <div class="w-11 h-11 rounded-xl bg-[#EB5B27]/12 text-[#EB5B27] flex items-center justify-center flex-shrink-0 font-black font-subheading text-lg">
+                  3
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2 mb-1">
+                    <span class="font-subheading text-[16px] font-bold text-slate-900">Tableros analíticos y visibilidad operativa en tiempo real</span>
+                    <span class="text-[11px] font-bold text-[#EB5B27] bg-[#EB5B27]/10 px-2 py-0.5 rounded-md whitespace-nowrap">Decisiones con datos</span>
+                  </div>
+                  <p class="font-body text-[13px] text-slate-600 leading-snug">
+                    Monitoreo continuo de pedidos, motivos de contacto, quejas y desempeño por planta, turno y ruta, facilitando la planeación logística de pipas y cilindros en toda La Laguna.
+                  </p>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0 pl-4 border-l border-slate-100 min-w-[110px]">
+                <span class="metric-number text-[2.4rem] text-[#EB5B27] leading-none block">24/7</span>
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider font-subheading mt-1 block">Monitoreo en vivo</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Pie del Ala 2 -->
+          <div class="pt-2.5 border-t border-slate-100 flex items-center justify-between flex-shrink-0">
+            <span class="text-[11.5px] font-medium text-slate-500 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-[#EB5B27]"></span>
+              Gobernanza de datos blindada bajo certificación ISO 27001
+            </span>
+            <span class="px-3 py-0.5 rounded-lg bg-[#EB5B27]/10 text-[#EB5B27] font-bold text-[11px] font-subheading flex items-center gap-1">
+              Célula exclusiva con confidencialidad estricta ➔
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Cintillo Inferior: Garantía de Alianza y 9 Certificaciones -->
+      <div class="bg-white/95 border border-slate-200/90 rounded-xl px-4 py-1.5 flex flex-col gap-0.5 shadow-sm flex-shrink-0">
+        <!-- Línea 1: Garantía Institucional -->
+        <div class="flex items-center gap-2 text-slate-700">
+          <span class="w-2 h-2 rounded-full bg-[#059669] flex-shrink-0 animate-pulse"></span>
+          <span class="font-subheading text-[11px] font-bold text-slate-900 flex-shrink-0">
+            Garantía de Valor para Intergas del Norte:
+          </span>
+          <span class="font-body text-[10.8px] text-slate-600 leading-normal">
+            Operación ininterrumpida que respalda el liderazgo de la energía más rápida de la Comarca Lagunera sin riesgos tecnológicos, con célula dedicada y estricta confidencialidad frente a competidores regionales.
+          </span>
+        </div>
+        <!-- Línea 2: 9 Certificaciones -->
+        <div class="flex items-center justify-between pt-0.5 border-t border-slate-100">
+          <div class="flex items-center gap-1.5 flex-shrink-0">
+            <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading flex items-center gap-1">
+              <svg class="w-2.5 h-2.5 text-[#059669]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              Gobernanza & Certificaciones:
+            </span>
+          </div>
+          <div class="flex items-center gap-1 flex-nowrap">
+            <span class="cert-pill kpi-pill-green">ISO 9001</span>
+            <span class="cert-pill kpi-pill-blue">ISO 18295-1 (Contact Centers)</span>
+            <span class="cert-pill kpi-pill-purple font-bold border border-purple-300">Modelo Global CIC v3.0</span>
+            <span class="cert-pill kpi-pill-blue">ISO 27001 (Seguridad)</span>
+            <span class="cert-pill kpi-pill-green">PCI-DSS v4.0 (PSI)</span>
+            <span class="cert-pill kpi-pill-cyan">ISO 20000-1 (Gestión TI)</span>
+            <span class="cert-pill kpi-pill-purple">ISO 22301 (Continuidad)</span>
+            <span class="cert-pill kpi-pill-orange">ISO 37001 (Antisoborno)</span>
+            <span class="cert-pill font-bold" style="background: rgba(220, 38, 38, 0.08); color: #DC2626; border: 1px solid rgba(220, 38, 38, 0.25);">Distintivo ESR 2026</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================================
+         SLIDE 2: RUTA DE IMPLEMENTACIÓN ÁGIL & CASOS DE ÉXITO (4 CUADRANTES)
+         ==================================================================== -->
+    <section class="slide" id="slide-2" data-slide="2">
+
+      <!-- Header Superior Diapositiva 2 -->
+      <div class="flex items-center justify-between pb-1.5 mb-1 border-b border-slate-200 flex-shrink-0">
+        <div class="flex items-center gap-3">
+          <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-8 w-auto" style="height: 32px; width: auto;">
+          <div class="h-6 w-[2px] bg-slate-300"></div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="subheading text-[11px] font-bold uppercase tracking-widest text-[#3284C6] block">Propuesta comercial | Ruta de implementación</span>
+              <span class="text-slate-300">·</span>
+              <span class="font-subheading text-[11px] font-bold text-[#EB5B27] uppercase tracking-wider">Piloto medible y casos de éxito comprobados</span>
+            </div>
+            <h1 class="subheading text-[1.28rem] font-bold text-[#222221] leading-tight">
+              Despliegue ágil para la temporada de frío y resultados medibles desde el primer día
+            </h1>
+          </div>
+        </div>
+        <div class="text-right">
+          <span class="subheading text-xs font-bold uppercase tracking-widest text-[#3284C6] bg-[#3284C6]/10 px-3 py-1 rounded-full border border-[#3284C6]/20">Telat Group | 2026</span>
+        </div>
+      </div>
+
+      <!-- Grid 4 Cuadrantes de Valor -->
+      <div class="grid grid-cols-2 gap-4 flex-1 items-stretch my-2 min-h-0">
+
+        <!-- ============================================================
+             CUADRANTE 1: PILOTO ÁGIL DE 8 SEMANAS (TEMPORADA DE FRÍO)
+             ============================================================ -->
+        <div class="card-tech rounded-2xl p-4 flex flex-col justify-between shadow-xs border-t-4 border-t-[#3284C6] bg-gradient-to-b from-blue-50/20 via-white to-white border border-slate-200/90 hover:border-[#3284C6]/50 transition-colors">
+          <div>
+            <!-- Header Cuadrante 1 -->
+            <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
+              <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-[#3284C6]/12 border border-[#3284C6]/30 text-[#3284C6] flex items-center justify-center flex-shrink-0 text-xl font-black font-subheading shadow-xs">
+                  01
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-subheading text-[1.22rem] font-black text-[#3284C6] leading-none tracking-tight">
+                      Fase 1: Entrada Rápida sin Riesgo
+                    </span>
+                    <span class="px-2 py-0.5 rounded-md bg-[#3284C6] text-white text-[9.5px] font-black uppercase tracking-wider font-subheading">
+                      Piloto de 8 Semanas
+                    </span>
+                  </div>
+                  <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-0.5 block">
+                    Desborde nocturno y de horas pico en Torreón, Gómez Palacio y Lerdo
+                  </span>
+                </div>
+              </div>
+              <span class="px-2.5 py-0.5 rounded-lg bg-[#3284C6]/15 text-[#3284C6] text-[10px] font-black uppercase tracking-wider font-subheading">
+                Arranque Rápido
+              </span>
+            </div>
+
+            <!-- Contenido Cuadrante 1 -->
+            <h2 class="subheading text-[1.12rem] font-bold text-slate-900 leading-tight mb-1">
+              Absorción Inmediata de Picos sin Alterar los Sistemas Actuales
+            </h2>
+            <p class="font-body text-[13px] text-slate-600 leading-snug">
+              Activación de célula operativa enfocada en desborde telefónico y de WhatsApp durante horas pico y noches. Blindaje directo antes del incremento de consumo invernal sin fricción para el personal interno.
+            </p>
+          </div>
+
+          <!-- Bloque de Eficiencia -->
+          <div class="bg-blue-100/60 border border-blue-300/80 rounded-xl px-3 py-1.5 my-1 shadow-2xs">
+            <div class="flex items-center gap-1.5 mb-0.5">
+              <span class="w-2 h-2 rounded-full bg-[#3284C6] flex-shrink-0"></span>
+              <span class="font-subheading text-[10.5px] font-bold text-[#3284C6] uppercase tracking-wider">Compromiso Clave del Piloto:</span>
+            </div>
+            <p class="font-body text-[11.8px] text-slate-800 leading-snug">
+              <strong>Cero llamadas perdidas</strong> en momentos de máxima demanda y resguardo de datos en célula segregada con confidencialidad absoluta (ISO 27001).
+            </p>
+          </div>
+
+          <!-- Métricas Cuadrante 1 -->
+          <div class="grid grid-cols-2 gap-2 text-center">
+            <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-[#3284C6] leading-none block">8 Semanas</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Periodo de Prueba</span>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-slate-800 leading-none block">100%</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Pedidos Capturados</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             CUADRANTE 2: ESCALABILIDAD Y SERVICIOS DE VALOR (MESES 3 A 12)
+             ============================================================ -->
+        <div class="card-tech rounded-2xl p-4 flex flex-col justify-between shadow-xs border-t-4 border-t-[#EB5B27] bg-gradient-to-b from-orange-50/20 via-white to-white border border-slate-200/90 hover:border-[#EB5B27]/50 transition-colors">
+          <div>
+            <!-- Header Cuadrante 2 -->
+            <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
+              <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-[#EB5B27]/12 border border-[#EB5B27]/30 text-[#EB5B27] flex items-center justify-center flex-shrink-0 text-xl font-black font-subheading shadow-xs">
+                  02
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-subheading text-[1.22rem] font-black text-[#EB5B27] leading-none tracking-tight">
+                      Fase 2: Consolidación Estratégica
+                    </span>
+                    <span class="px-2 py-0.5 rounded-md bg-[#EB5B27] text-white text-[9.5px] font-black uppercase tracking-wider font-subheading">
+                      Meses 3 a 12
+                    </span>
+                  </div>
+                  <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-0.5 block">
+                    Programación de estacionarios, cobranza y postventa activa
+                  </span>
+                </div>
+              </div>
+              <span class="px-2.5 py-0.5 rounded-lg bg-[#EB5B27]/15 text-[#EB5B27] text-[10px] font-black uppercase tracking-wider font-subheading">
+                Escala Integral
+              </span>
+            </div>
+
+            <!-- Contenido Cuadrante 2 -->
+            <h2 class="subheading text-[1.12rem] font-bold text-slate-900 leading-tight mb-1">
+              Servicios Integrados de Alto Valor Comercial
+            </h2>
+            <p class="font-body text-[13px] text-slate-600 leading-snug">
+              Expansión paulatina a recargas programadas de estacionarios, reactivación de clientes inactivos, seguimiento postventa por pipa/ruta, gestión de crédito y soporte integral de facturación electrónica.
+            </p>
+          </div>
+
+          <!-- Bloque de Eficiencia -->
+          <div class="bg-orange-100/60 border border-orange-300/80 rounded-xl px-3 py-1.5 my-1 shadow-2xs">
+            <div class="flex items-center gap-1.5 mb-0.5">
+              <span class="w-2 h-2 rounded-full bg-[#EB5B27] flex-shrink-0"></span>
+              <span class="font-subheading text-[10.5px] font-bold text-[#EB5B27] uppercase tracking-wider">Impacto Comercial Sostenible:</span>
+            </div>
+            <p class="font-body text-[11.8px] text-slate-800 leading-snug">
+              <strong>Retención de cuentas de gran volumen</strong> y reducción del desgaste administrativo mediante tableros de control unificados por planta y sucursal.
+            </p>
+          </div>
+
+          <!-- Métricas Cuadrante 2 -->
+          <div class="grid grid-cols-2 gap-2 text-center">
+            <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-[#EB5B27] leading-none block">+15%</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Reactivación de Base</span>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-slate-800 leading-none block">365 Días</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Acompañamiento Total</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             CUADRANTE 3: ACUERDOS DE NIVEL DE SERVICIO (SLAS PROPUESTOS)
+             ============================================================ -->
+        <div class="card-tech rounded-2xl p-4 flex flex-col justify-between shadow-xs border-t-4 border-t-[#059669] bg-gradient-to-b from-emerald-50/20 via-white to-white border border-slate-200/90 hover:border-[#059669]/50 transition-colors">
+          <div>
+            <!-- Header Cuadrante 3 -->
+            <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
+              <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-[#059669]/12 border border-[#059669]/30 text-[#059669] flex items-center justify-center flex-shrink-0 text-xl font-black font-subheading shadow-xs">
+                  03
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-subheading text-[1.22rem] font-black text-[#059669] leading-none tracking-tight">
+                      Niveles de Servicio Contractuales
+                    </span>
+                    <span class="px-2 py-0.5 rounded-md bg-[#059669] text-white text-[9.5px] font-black uppercase tracking-wider font-subheading">
+                      SLA Certificado
+                    </span>
+                  </div>
+                  <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-0.5 block">
+                    Estándares rigurosos alineados a la norma ISO 18295-1
+                  </span>
+                </div>
+              </div>
+              <span class="px-2.5 py-0.5 rounded-lg bg-[#059669]/15 text-[#059669] text-[10px] font-black uppercase tracking-wider font-subheading">
+                Garantía Operativa
+              </span>
+            </div>
+
+            <!-- Contenido Cuadrante 3 -->
+            <h2 class="subheading text-[1.12rem] font-bold text-slate-900 leading-tight mb-1">
+              Tiempos de Respuesta y Precisión Medible
+            </h2>
+            <div class="grid grid-cols-2 gap-2 text-[12px] text-slate-700 font-body my-1">
+              <div class="flex items-center gap-1.5 bg-white p-1.5 rounded-lg border border-slate-100">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#059669]"></span>
+                <span>Pedidos: <strong>&ge;80% en &le;20s</strong></span>
+              </div>
+              <div class="flex items-center gap-1.5 bg-white p-1.5 rounded-lg border border-slate-100">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#DC2626]"></span>
+                <span>Fugas: <strong>&ge;90% en &le;10s</strong></span>
+              </div>
+              <div class="flex items-center gap-1.5 bg-white p-1.5 rounded-lg border border-slate-100">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#3284C6]"></span>
+                <span>Aviso técnico: <strong>&le;2 minutos</strong></span>
+              </div>
+              <div class="flex items-center gap-1.5 bg-white p-1.5 rounded-lg border border-slate-100">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#EB5B27]"></span>
+                <span>WhatsApp: <strong>90% en &le;60s</strong></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bloque de Eficiencia -->
+          <div class="bg-emerald-100/60 border border-emerald-300/80 rounded-xl px-3 py-1.5 my-1 shadow-2xs">
+            <div class="flex items-center gap-1.5 mb-0.5">
+              <span class="w-2 h-2 rounded-full bg-[#059669] flex-shrink-0"></span>
+              <span class="font-subheading text-[10.5px] font-bold text-[#059669] uppercase tracking-wider">Alineación Estratégica:</span>
+            </div>
+            <p class="font-body text-[11.8px] text-slate-800 leading-snug">
+              <strong>Parámetros calibrables</strong> según los volúmenes, zonas y prioridades que determine la Dirección de Intergas del Norte.
+            </p>
+          </div>
+
+          <!-- Métricas Cuadrante 3 -->
+          <div class="grid grid-cols-2 gap-2 text-center">
+            <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-[#059669] leading-none block">&le;10s</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Atención Fugas</span>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-slate-800 leading-none block">&ge;85%</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Satisfacción Cliente</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             CUADRANTE 4: RESPALDO INSTITUCIONAL Y PRESTIGIO IMT
+             ============================================================ -->
+        <div class="card-tech rounded-2xl p-4 flex flex-col justify-between shadow-xs border-t-4 border-t-[#7C3AED] bg-gradient-to-b from-purple-50/20 via-white to-white border border-slate-200/90 hover:border-[#7C3AED]/50 transition-colors">
+          <div>
+            <!-- Header Cuadrante 4 -->
+            <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
+              <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-[#7C3AED]/12 border border-[#7C3AED]/30 text-[#7C3AED] flex items-center justify-center flex-shrink-0 text-xl font-black font-subheading shadow-xs">
+                  04
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-subheading text-[1.22rem] font-black text-[#7C3AED] leading-none tracking-tight">
+                      Casos de Éxito Galardonados
+                    </span>
+                    <span class="px-2 py-0.5 rounded-md bg-[#7C3AED] text-white text-[9.5px] font-black uppercase tracking-wider font-subheading">
+                      Premio Nacional IMT
+                    </span>
+                  </div>
+                  <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-0.5 block">
+                    Experiencia comprobada en absorción de volumen y cero abandono
+                  </span>
+                </div>
+              </div>
+              <span class="px-2.5 py-0.5 rounded-lg bg-[#7C3AED]/15 text-[#7C3AED] text-[10px] font-black uppercase tracking-wider font-subheading">
+                Reconocimiento
+              </span>
+            </div>
+
+            <!-- Contenido Cuadrante 4 -->
+            <h2 class="subheading text-[1.12rem] font-bold text-slate-900 leading-tight mb-1">
+              Resultados Comprobados con Grandes Cuentas
+            </h2>
+            <p class="font-body text-[13px] text-slate-600 leading-snug">
+              Casos de éxito reconocidos por el Instituto Mexicano de Teleservicios (IMT) en centralización de llamadas y retención de clientes con marcas líderes como AutoGlassNow, Carvana y ViaPath.
+            </p>
+          </div>
+
+          <!-- Bloque de Eficiencia -->
+          <div class="bg-purple-100/60 border border-purple-300/80 rounded-xl px-3 py-1.5 my-1 shadow-2xs">
+            <div class="flex items-center gap-1.5 mb-0.5">
+              <span class="w-2 h-2 rounded-full bg-[#7C3AED] flex-shrink-0"></span>
+              <span class="font-subheading text-[10.5px] font-bold text-[#7C3AED] uppercase tracking-wider">Eficiencia Comprobada en Campo:</span>
+            </div>
+            <p class="font-body text-[11.8px] text-slate-800 leading-snug">
+              <strong>Reducción drástica del abandono de llamadas de 7.9% a 3.4%</strong> y absorción masiva respaldada por más de 1,000 posiciones activas.
+            </p>
+          </div>
+
+          <!-- Métricas Cuadrante 4 -->
+          <div class="grid grid-cols-2 gap-2 text-center">
+            <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-[#7C3AED] leading-none block">-57%</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Tasa de Abandono</span>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-slate-800 leading-none block">1,000+</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Posiciones en Red</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Cintillo Inferior Diapositiva 2 -->
+      <div class="bg-white/95 border border-slate-200/90 rounded-xl px-4 py-1.5 flex flex-col gap-0.5 shadow-sm flex-shrink-0">
+        <!-- Línea 1: Siguiente Paso Sugerido -->
+        <div class="flex items-center gap-2 text-slate-700">
+          <span class="w-2 h-2 rounded-full bg-[#3284C6] flex-shrink-0 animate-pulse"></span>
+          <span class="font-subheading text-[11px] font-bold text-slate-900 flex-shrink-0">
+            Siguiente Paso Sugerido:
+          </span>
+          <span class="font-body text-[10.8px] text-slate-600 leading-normal">
+            Reunión ejecutiva exploratoria con la Dirección General y Comercialización para calibrar volúmenes por franja horaria y formalizar el piloto de 8 semanas antes de la temporada invernal.
+          </span>
+        </div>
+        <!-- Línea 2: Marco de Gobernanza -->
+        <div class="flex items-center justify-between pt-0.5 border-t border-slate-100">
+          <div class="flex items-center gap-1.5 flex-shrink-0">
+            <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading flex items-center gap-1">
+              <svg class="w-2.5 h-2.5 text-[#059669]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              Gobernanza & Certificaciones Oficiales:
+            </span>
+          </div>
+          <div class="flex items-center gap-1 flex-nowrap">
+            <span class="cert-pill kpi-pill-green">ISO 9001</span>
+            <span class="cert-pill kpi-pill-blue">ISO 18295-1 (Contact Centers)</span>
+            <span class="cert-pill kpi-pill-purple font-bold border border-purple-300">Modelo Global CIC v3.0</span>
+            <span class="cert-pill kpi-pill-blue">ISO 27001 (Seguridad)</span>
+            <span class="cert-pill kpi-pill-green">PCI-DSS v4.0 (PSI)</span>
+            <span class="cert-pill kpi-pill-cyan">ISO 20000-1 (Gestión TI)</span>
+            <span class="cert-pill kpi-pill-purple">ISO 22301 (Continuidad)</span>
+            <span class="cert-pill kpi-pill-orange">ISO 37001 (Antisoborno)</span>
+            <span class="cert-pill font-bold" style="background: rgba(220, 38, 38, 0.08); color: #DC2626; border: 1px solid rgba(220, 38, 38, 0.25);">Distintivo ESR 2026</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================================
+         SLIDE 3: CASOS DE ÉXITO CON CLIENTES ACTUALES · PODIO NACIONAL IMT
+         ==================================================================== -->
+    <section class="slide" id="slide-3" data-slide="3">
+
+      <!-- Header Superior Diapositiva 3 -->
+      <div class="flex items-center justify-between pb-1.5 mb-1 border-b border-slate-200 flex-shrink-0">
+        <div class="flex items-center gap-3">
+          <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-8 w-auto" style="height: 32px; width: auto;">
+          <div class="h-6 w-[2px] bg-slate-300"></div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="subheading text-[11px] font-bold uppercase tracking-widest text-[#3284C6] block">Trayectoria comprobada | Instituto Mexicano de Teleservicios (IMT)</span>
+              <span class="text-slate-300">·</span>
+              <span class="font-subheading text-[11px] font-bold text-[#D97706] uppercase tracking-wider">Podio nacional consecutivo: 2023 · 2024 · 2025 · 2026</span>
+            </div>
+            <h1 class="subheading text-[1.28rem] font-bold text-[#222221] leading-tight">
+              Casos de éxito con clientes actuales: 4 años consecutivos generando mejoras y ahorro en costos
+            </h1>
+          </div>
+        </div>
+        <!-- Timeline Ribbon de Madurez Operativa Directiva -->
+        <div class="flex items-center gap-2 flex-shrink-0">
+          <div class="flex items-center gap-1.5 bg-slate-100/95 px-3 py-1 rounded-full border border-slate-200 text-[10px] font-bold font-subheading shadow-2xs">
+            <span class="text-slate-400 uppercase tracking-wider text-[9px]">Madurez:</span>
+            <span class="text-[#EB5B27]">2023 Plata</span>
+            <span class="text-slate-300">➔</span>
+            <span class="text-[#3284C6]">2024 Bronce</span>
+            <span class="text-slate-300">➔</span>
+            <span class="text-[#059669]">2025 Bronce</span>
+            <span class="text-slate-300">➔</span>
+            <span class="text-amber-700 font-black bg-amber-100/90 px-1.5 py-0.5 rounded text-amber-800">2026 Oro ★</span>
+          </div>
+          <span class="subheading text-xs font-bold uppercase tracking-widest text-[#D97706] bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">Podio Oficial IMT</span>
+        </div>
+      </div>
+
+      <!-- Layout: Matriz Ejecutiva 2×2 (4 Cuadrantes Sin Espacios Vacíos y Máximo Impacto) -->
+      <div class="grid grid-cols-2 gap-3.5 flex-1 my-1 min-h-0 items-stretch">
+
+        <!-- CUADRANTE 1: 🥇 1.ER LUGAR NACIONAL · 2026 (CARVANA TITLES · ORO MÁXIMO) -->
+        <div class="card-tech rounded-2xl p-4 flex flex-col justify-between shadow-xs border-2 border-amber-400 bg-gradient-to-b from-amber-50/50 via-yellow-50/15 to-white hover:border-amber-500 transition-all relative overflow-hidden">
+          <div>
+            <div class="flex items-center justify-between pb-2 mb-2 border-b border-amber-200/80">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-yellow-500 text-white flex items-center justify-center flex-shrink-0 text-2xl shadow-sm border border-amber-300">
+                  🥇
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-subheading text-[1.28rem] font-black text-amber-800 leading-none tracking-tight">
+                      1.ᵉʳ LUGAR NACIONAL
+                    </span>
+                    <span class="px-2 py-0.5 rounded-md bg-amber-600 text-white text-[9.5px] font-black uppercase tracking-wider font-subheading">
+                      2026 · 21.ª Edición
+                    </span>
+                  </div>
+                  <span class="text-[11px] font-bold text-amber-900/85 uppercase tracking-wider font-subheading mt-0.5 block">
+                    Flipping Titles · Cliente Actual Carvana (Servicios Offshore)
+                  </span>
+                </div>
+              </div>
+              <span class="px-3 py-1 rounded-lg bg-gradient-to-r from-amber-500 to-yellow-500 text-white text-[10px] font-black uppercase tracking-wider font-subheading shadow-2xs">
+                ★ Oro de México
+              </span>
+            </div>
+
+            <h2 class="subheading text-[1.12rem] font-bold text-slate-900 leading-tight mb-1">
+              Optimización y Automatización en Revisión de Documentos
+            </h2>
+            <p class="font-body text-[13px] text-slate-600 leading-snug">
+              Transformamos la validación de expedientes vehiculares con herramientas de extracción de datos y bloques de trabajo enfocado, eliminando cuellos de botella operativos.
+            </p>
+          </div>
+
+          <div class="bg-amber-100/70 border border-amber-300/90 rounded-xl px-3 py-2 my-1 shadow-2xs">
+            <div class="flex items-center gap-1.5 mb-0.5">
+              <span class="w-2 h-2 rounded-full bg-[#059669] flex-shrink-0"></span>
+              <span class="font-subheading text-[11px] font-bold text-[#059669] uppercase tracking-wider">Ahorro en Costos & Eficiencia Comprobada:</span>
+            </div>
+            <p class="font-body text-[12px] text-slate-800 leading-snug">
+              Aumento a <strong>30 casos por hora</strong> por colaborador y reducción radical del costo operativo por trámite, alcanzando un margen de error casi nulo (0% a 0.04%).
+            </p>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="bg-white border border-amber-200/90 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-amber-600 leading-none block">90s ➔ 40s</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Validación Trámite</span>
+            </div>
+            <div class="bg-white border border-amber-200/90 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-[#059669] leading-none block">0.04%</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Margen de Error</span>
+            </div>
+            <div class="bg-white border border-amber-200/90 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-slate-800 leading-none block">+72%</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Tiempo Productivo</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CUADRANTE 2: 🥈 2.º LUGAR NACIONAL · 2023 (CARVANA CASOS · PLATA) -->
+        <div class="card-tech rounded-2xl p-4 flex flex-col justify-between shadow-xs border-t-4 border-t-[#EB5B27] bg-gradient-to-b from-orange-50/20 via-white to-white border border-slate-200/90 hover:border-[#EB5B27]/50 transition-colors">
+          <div>
+            <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-[#EB5B27]/12 border border-[#EB5B27]/30 text-[#EB5B27] flex items-center justify-center flex-shrink-0 text-2xl shadow-xs">
+                  🥈
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-subheading text-[1.28rem] font-black text-[#EB5B27] leading-none tracking-tight">
+                      2.º LUGAR NACIONAL
+                    </span>
+                    <span class="px-2 py-0.5 rounded-md bg-[#EB5B27] text-white text-[9.5px] font-black uppercase tracking-wider font-subheading">
+                      2023 · 18.ª Edición
+                    </span>
+                  </div>
+                  <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-0.5 block">
+                    Procesos Disruptivos · Cliente Actual Carvana (Operación BPO)
+                  </span>
+                </div>
+              </div>
+              <span class="px-3 py-1 rounded-lg bg-[#EB5B27]/15 text-[#EB5B27] text-[10px] font-black uppercase tracking-wider font-subheading">
+                Plata México
+              </span>
+            </div>
+
+            <h2 class="subheading text-[1.12rem] font-bold text-slate-900 leading-tight mb-1">
+              Gestión de Casos Complejos y Rigor Jurídico en Datos
+            </h2>
+            <p class="font-body text-[13px] text-slate-600 leading-snug">
+              Resolución y validación documental de expedientes vehiculares con estricto apego a normas jurídicas estatales, garantizando cero discrepancias y máxima precisión.
+            </p>
+          </div>
+
+          <div class="bg-orange-100/60 border border-orange-300/80 rounded-xl px-3 py-2 my-1 shadow-2xs">
+            <div class="flex items-center gap-1.5 mb-0.5">
+              <span class="w-2 h-2 rounded-full bg-[#059669] flex-shrink-0"></span>
+              <span class="font-subheading text-[11px] font-bold text-[#059669] uppercase tracking-wider">Ahorro en Costos & Eficiencia Comprobada:</span>
+            </div>
+            <p class="font-body text-[12px] text-slate-800 leading-snug">
+              <strong>Eliminación del 100% de penalizaciones</strong> normativas y miles de horas hombre ahorradas en reprocesos gracias a auditorías de calidad en tiempo real.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 text-center">
+            <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-[#EB5B27] leading-none block">+95%</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Precisión en Datos</span>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-slate-800 leading-none block">0%</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Errores Normativos</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CUADRANTE 3: 🥉 3.ER LUGAR NACIONAL · 2024 (VIAPATH BPO · BRONCE) -->
+        <div class="card-tech rounded-2xl p-4 flex flex-col justify-between shadow-xs border-t-4 border-t-[#3284C6] bg-gradient-to-b from-blue-50/20 via-white to-white border border-slate-200/90 hover:border-[#3284C6]/50 transition-colors">
+          <div>
+            <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-[#3284C6]/12 border border-[#3284C6]/30 text-[#3284C6] flex items-center justify-center flex-shrink-0 text-2xl shadow-xs">
+                  🥉
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-subheading text-[1.28rem] font-black text-[#3284C6] leading-none tracking-tight">
+                      3.ᵉʳ LUGAR NACIONAL
+                    </span>
+                    <span class="px-2 py-0.5 rounded-md bg-[#3284C6] text-white text-[9.5px] font-black uppercase tracking-wider font-subheading">
+                      2024 · 19.ª Edición
+                    </span>
+                  </div>
+                  <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-0.5 block">
+                    Back to Business · Cliente Actual ViaPath (Servicios Offshore)
+                  </span>
+                </div>
+              </div>
+              <span class="px-3 py-1 rounded-lg bg-[#3284C6]/15 text-[#3284C6] text-[10px] font-black uppercase tracking-wider font-subheading">
+                Bronce México
+              </span>
+            </div>
+
+            <h2 class="subheading text-[1.12rem] font-bold text-slate-900 leading-tight mb-1">
+              Expansión Tecnológica y Operación Multi-Sede Continua
+            </h2>
+            <p class="font-body text-[13px] text-slate-600 leading-snug">
+              Despliegue operativo simultáneo en tres sedes internacionales (CDMX, Ciudad Juárez y El Paso, TX) con telefonía unificada y absorción masiva de interacciones.
+            </p>
+          </div>
+
+          <div class="bg-blue-100/60 border border-blue-300/80 rounded-xl px-3 py-2 my-1 shadow-2xs">
+            <div class="flex items-center gap-1.5 mb-0.5">
+              <span class="w-2 h-2 rounded-full bg-[#059669] flex-shrink-0"></span>
+              <span class="font-subheading text-[11px] font-bold text-[#059669] uppercase tracking-wider">Ahorro en Costos & Eficiencia Comprobada:</span>
+            </div>
+            <p class="font-body text-[12px] text-slate-800 leading-snug">
+              <strong>Consolidación de infraestructura tecnológica</strong> centralizada que eliminó licencias redundantes de software y costos duplicados de servidores.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 text-center">
+            <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-[#3284C6] leading-none block">3 Sedes</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Internacionales</span>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-slate-800 leading-none block">24/7</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Continuidad Activa</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CUADRANTE 4: 🥉 3.ER LUGAR NACIONAL · 2025 (AUTOGLASSNOW · BRONCE) -->
+        <div class="card-tech rounded-2xl p-4 flex flex-col justify-between shadow-xs border-t-4 border-t-[#059669] bg-gradient-to-b from-emerald-50/20 via-white to-white border border-slate-200/90 hover:border-[#059669]/50 transition-colors">
+          <div>
+            <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-[#059669]/12 border border-[#059669]/30 text-[#059669] flex items-center justify-center flex-shrink-0 text-2xl shadow-xs">
+                  🥉
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-subheading text-[1.28rem] font-black text-[#059669] leading-none tracking-tight">
+                      3.ᵉʳ LUGAR NACIONAL
+                    </span>
+                    <span class="px-2 py-0.5 rounded-md bg-[#059669] text-white text-[9.5px] font-black uppercase tracking-wider font-subheading">
+                      2025 · 20.ª Edición
+                    </span>
+                  </div>
+                  <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-0.5 block">
+                    Cambiando el Cristal · Cliente Actual AutoGlassNow (Offshore)
+                  </span>
+                </div>
+              </div>
+              <span class="px-3 py-1 rounded-lg bg-[#059669]/15 text-[#059669] text-[10px] font-black uppercase tracking-wider font-subheading">
+                Bronce México
+              </span>
+            </div>
+
+            <h2 class="subheading text-[1.12rem] font-bold text-slate-900 leading-tight mb-1">
+              Centralización de Citas y Eliminación de Abandono
+            </h2>
+            <p class="font-body text-[13px] text-slate-600 leading-snug">
+              Centralización integral de cotizaciones y llamadas que liberó a los técnicos de talleres mecánicos en EE.UU., aumentando la conversión y recuperando clientes perdidos.
+            </p>
+          </div>
+
+          <div class="bg-emerald-100/60 border border-emerald-300/80 rounded-xl px-3 py-2 my-1 shadow-2xs">
+            <div class="flex items-center gap-1.5 mb-0.5">
+              <span class="w-2 h-2 rounded-full bg-[#059669] flex-shrink-0"></span>
+              <span class="font-subheading text-[11px] font-bold text-[#059669] uppercase tracking-wider">Ahorro en Costos & Eficiencia Comprobada:</span>
+            </div>
+            <p class="font-body text-[12px] text-slate-800 leading-snug">
+              <strong>Superamos en +30.18% las ventas</strong> frente al equipo interno en EE.UU. y redujimos a mínimos históricos las llamadas perdidas gracias a cobertura en domingos.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 text-center">
+            <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-[#059669] leading-none block">7.9% ➔ 3.4%</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Abandono de Llamadas</span>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-slate-800 leading-none block">+30.2%</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Ventas vs. Equipo EE.UU.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Cintillo Inferior de la Diapositiva 3 -->
+      <div class="bg-white/95 border border-slate-200/90 rounded-xl px-4 py-1.5 flex flex-col gap-0.5 shadow-sm flex-shrink-0">
+        <div class="flex items-center gap-2 text-slate-700">
+          <span class="w-2 h-2 rounded-full bg-[#3284C6] flex-shrink-0 animate-pulse"></span>
+          <span class="font-subheading text-[11px] font-bold text-slate-900 flex-shrink-0">
+            Garantía Institucional para Intergas del Norte:
+          </span>
+          <span class="font-body text-[10.8px] text-slate-600 leading-normal">
+            El mismo rigor de clase mundial, gobernanza multi-sede y excelencia operativa galardonada a nivel nacional respaldarán el abasto oportuno, la satisfacción y la lealtad de sus clientes en La Laguna.
+          </span>
+        </div>
+        <div class="flex items-center justify-between pt-0.5 border-t border-slate-100">
+          <div class="flex items-center gap-1.5 flex-shrink-0">
+            <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading flex items-center gap-1">
+              <svg class="w-2.5 h-2.5 text-[#059669]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              Gobernanza & Certificaciones Oficiales:
+            </span>
+          </div>
+          <div class="flex items-center gap-1 flex-nowrap">
+            <span class="cert-pill kpi-pill-green">ISO 9001</span>
+            <span class="cert-pill kpi-pill-blue">ISO 18295-1 (Contact Centers)</span>
+            <span class="cert-pill kpi-pill-purple font-bold border border-purple-300">Modelo Global CIC v3.0 (IMT)</span>
+            <span class="cert-pill kpi-pill-blue">ISO 27001 (Seguridad)</span>
+            <span class="cert-pill kpi-pill-green">PCI-DSS v4.0 (PSI)</span>
+            <span class="cert-pill kpi-pill-cyan">ISO 20000-1 (Gestión TI)</span>
+            <span class="cert-pill kpi-pill-purple">ISO 22301 (Continuidad)</span>
+            <span class="cert-pill kpi-pill-orange">ISO 37001 (Antisoborno)</span>
+            <span class="cert-pill font-bold" style="background: rgba(220, 38, 38, 0.08); color: #DC2626; border: 1px solid rgba(220, 38, 38, 0.25);">Distintivo ESR 2026</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================================
+         SLIDE 4: 9 CERTIFICACIONES INSTITUCIONALES AUDITADAS
+         ==================================================================== -->
+    <section class="slide" id="slide-4" data-slide="4">
+
+      <!-- Header Superior Diapositiva 4 -->
+      <div class="flex items-center justify-between pb-1.5 mb-1 border-b border-slate-200 flex-shrink-0">
+        <div class="flex items-center gap-3">
+          <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-8 w-auto" style="height: 32px; width: auto;">
+          <div class="h-6 w-[2px] bg-slate-300"></div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="subheading text-[11px] font-bold uppercase tracking-widest text-[#EB5B27] block">04 | Confianza, seguridad y gobernanza corporativa</span>
+              <span class="text-slate-300">·</span>
+              <span class="font-subheading text-[11px] font-bold text-[#3284C6] uppercase tracking-wider">Acreditaciones internacionales auditadas</span>
+            </div>
+            <h1 class="subheading text-[1.28rem] font-bold text-[#222221] leading-tight">
+              9 certificaciones institucionales auditadas: blindaje legal, operativo y de ciberseguridad
+            </h1>
+          </div>
+        </div>
+        <div class="text-right">
+          <span class="subheading text-xs font-bold uppercase tracking-widest text-[#059669] bg-[#059669]/10 px-3 py-1 rounded-full border border-[#059669]/20">Gobernanza Total</span>
+        </div>
+      </div>
+
+      <!-- Cuadrícula 3x3 de las 9 Certificaciones Oficiales con Sellos Auténticos -->
+      <div class="grid grid-cols-3 gap-4 flex-1 my-2 min-h-0 items-stretch">
+
+        <!-- 1. ISO 9001:2015 -->
+        <div class="bg-white p-4 rounded-2xl border border-[#3284C6]/30 shadow-xs flex items-center gap-4 hover:border-[#3284C6] transition-colors">
+          <img src="./assets/certificaciones/cert_iso_9001.png" alt="ISO 9001:2015" class="w-14 h-14 object-contain shrink-0">
+          <div class="min-w-0 flex-1">
+            <h5 class="font-subheading font-bold text-[16px] text-slate-900 leading-tight">ISO 9001:2015</h5>
+            <div class="text-[11.5px] font-bold text-[#3284C6] uppercase tracking-wider mt-0.5">Sistema de Gestión de la Calidad</div>
+            <p class="font-body text-[12.8px] text-slate-600 mt-1 leading-snug">Estandarización procedimental, control riguroso de calidad en servicios y mejora continua auditable.</p>
+          </div>
+        </div>
+
+        <!-- 2. ISO 18295-1:2017 -->
+        <div class="bg-white p-4 rounded-2xl border border-[#3284C6]/30 shadow-xs flex items-center gap-4 hover:border-[#3284C6] transition-colors">
+          <img src="./assets/certificaciones/cert_iso_18295.png" alt="ISO 18295-1:2017" class="w-14 h-14 object-contain shrink-0">
+          <div class="min-w-0 flex-1">
+            <h5 class="font-subheading font-bold text-[16px] text-slate-900 leading-tight">ISO 18295-1:2017</h5>
+            <div class="text-[11.5px] font-bold text-[#3284C6] uppercase tracking-wider mt-0.5">Requisitos para Centros de Contacto</div>
+            <p class="font-body text-[12.8px] text-slate-600 mt-1 leading-snug">Estándar internacional dedicado a centros de contacto, bienestar de agentes, ergonomía y métricas de servicio.</p>
+          </div>
+        </div>
+
+        <!-- 3. Modelo Global CIC v3.0 -->
+        <div class="bg-white p-4 rounded-2xl border border-purple-200 shadow-xs flex items-center gap-4 hover:border-purple-300 transition-colors">
+          <img src="./assets/certificaciones/cert_modelo_cic.png" alt="Modelo Global CIC v3.0" class="h-12 w-auto max-w-[105px] object-contain shrink-0">
+          <div class="min-w-0 flex-1">
+            <h5 class="font-subheading font-bold text-[16px] text-slate-900 leading-tight">Modelo Global CIC v3.0</h5>
+            <div class="text-[11.5px] font-bold text-purple-700 uppercase tracking-wider mt-0.5">Excelencia en Interacción con Clientes</div>
+            <p class="font-body text-[12.8px] text-slate-600 mt-1 leading-snug">Acreditación especializada de alta dirección en centros de interacción y gestión de relación con clientes.</p>
+          </div>
+        </div>
+
+        <!-- 4. ISO/IEC 27001:2022 -->
+        <div class="bg-white p-4 rounded-2xl border border-emerald-200 shadow-xs flex items-center gap-4 hover:border-emerald-300 transition-colors">
+          <img src="./assets/certificaciones/cert_iso_27001.png" alt="ISO/IEC 27001:2022" class="w-14 h-14 object-contain shrink-0">
+          <div class="min-w-0 flex-1">
+            <h5 class="font-subheading font-bold text-[16px] text-slate-900 leading-tight">ISO/IEC 27001:2022</h5>
+            <div class="text-[11.5px] font-bold text-emerald-700 uppercase tracking-wider mt-0.5">Seguridad de la Información (SGSI)</div>
+            <p class="font-body text-[12.8px] text-slate-600 mt-1 leading-snug">Blindaje riguroso en ciberseguridad, gestión de accesos y resguardo de datos corporativos confidenciales.</p>
+          </div>
+        </div>
+
+        <!-- 5. PCI-DSS v4.0 -->
+        <div class="bg-white p-4 rounded-2xl border border-emerald-200 shadow-xs flex items-center gap-4 hover:border-emerald-300 transition-colors">
+          <img src="./assets/certificaciones/cert_pci_dss.png" alt="PCI-DSS v4.0" class="h-12 w-auto max-w-[95px] object-contain shrink-0">
+          <div class="min-w-0 flex-1">
+            <h5 class="font-subheading font-bold text-[16px] text-slate-900 leading-tight">PCI-DSS v4.0</h5>
+            <div class="text-[11.5px] font-bold text-emerald-700 uppercase tracking-wider mt-0.5">Seguridad en Datos de Pago con Tarjeta</div>
+            <p class="font-body text-[12.8px] text-slate-600 mt-1 leading-snug">Cumplimiento total para procesamiento de transacciones financieras sin exposición de datos de tarjetahabientes.</p>
+          </div>
+        </div>
+
+        <!-- 6. ISO/IEC 20000-1:2018 -->
+        <div class="bg-white p-4 rounded-2xl border border-cyan-200 shadow-xs flex items-center gap-4 hover:border-cyan-300 transition-colors">
+          <img src="./assets/certificaciones/cert_iso_20000.png" alt="ISO/IEC 20000-1:2018" class="w-14 h-14 object-contain shrink-0">
+          <div class="min-w-0 flex-1">
+            <h5 class="font-subheading font-bold text-[16px] text-slate-900 leading-tight">ISO/IEC 20000-1:2018</h5>
+            <div class="text-[11.5px] font-bold text-cyan-800 uppercase tracking-wider mt-0.5">Gestión de Servicios de TI</div>
+            <p class="font-body text-[12.8px] text-slate-600 mt-1 leading-snug">Gobernanza de infraestructura bajo ITIL, mesas de soporte técnico e incidentes con resolución garantizada.</p>
+          </div>
+        </div>
+
+        <!-- 7. ISO 22301:2019 -->
+        <div class="bg-white p-4 rounded-2xl border border-[#EB5B27]/30 shadow-xs flex items-center gap-4 hover:border-[#EB5B27] transition-colors">
+          <img src="./assets/certificaciones/cert_iso_22301.png" alt="ISO 22301:2019" class="w-14 h-14 object-contain shrink-0">
+          <div class="min-w-0 flex-1">
+            <h5 class="font-subheading font-bold text-[16px] text-slate-900 leading-tight">ISO 22301:2019</h5>
+            <div class="text-[11.5px] font-bold text-[#EB5B27] uppercase tracking-wider mt-0.5">Continuidad del Negocio (SGCN)</div>
+            <p class="font-body text-[12.8px] text-slate-600 mt-1 leading-snug">Resiliencia y planes de recuperación operativa con redundancia cruzada entre CDMX, Ciudad Juárez y El Paso, TX.</p>
+          </div>
+        </div>
+
+        <!-- 8. ISO 37001:2016 -->
+        <div class="bg-white p-4 rounded-2xl border border-amber-200 shadow-xs flex items-center gap-4 hover:border-amber-300 transition-colors">
+          <img src="./assets/certificaciones/cert_iso_37001.png" alt="ISO 37001:2016" class="w-14 h-14 object-contain shrink-0">
+          <div class="min-w-0 flex-1">
+            <h5 class="font-subheading font-bold text-[16px] text-slate-900 leading-tight">ISO 37001:2016</h5>
+            <div class="text-[11.5px] font-bold text-amber-800 uppercase tracking-wider mt-0.5">Sistemas de Gestión Antisoborno</div>
+            <p class="font-body text-[12.8px] text-slate-600 mt-1 leading-snug">Ética corporativa sin concesiones, transparencia documental y protocolos de cero tolerancia a la corrupción.</p>
+          </div>
+        </div>
+
+        <!-- 9. Distintivo ESR 2026 -->
+        <div class="bg-white p-4 rounded-2xl border border-rose-200 shadow-xs flex items-center gap-4 hover:border-rose-300 transition-colors">
+          <img src="./assets/certificaciones/cert_esr_2026.png" alt="Distintivo ESR 2026" class="h-12 w-auto max-w-[95px] object-contain shrink-0">
+          <div class="min-w-0 flex-1">
+            <h5 class="font-subheading font-bold text-[16px] text-slate-900 leading-tight">Distintivo ESR 2026</h5>
+            <div class="text-[11.5px] font-bold text-rose-700 uppercase tracking-wider mt-0.5">Empresa Socialmente Responsable</div>
+            <p class="font-body text-[12.8px] text-slate-600 mt-1 leading-snug">Reconocimiento a salarios dignos, ambiente laboral incluyente, bienestar del colaborador y sostenibilidad comunitaria.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Cintillo Inferior de la Diapositiva 4 -->
+      <div class="bg-white/95 border border-slate-200/90 rounded-xl px-4 py-1.5 flex flex-col gap-0.5 shadow-sm flex-shrink-0">
+        <div class="flex items-center gap-2 text-slate-700">
+          <span class="w-2 h-2 rounded-full bg-[#059669] flex-shrink-0 animate-pulse"></span>
+          <span class="font-subheading text-[11px] font-bold text-slate-900 flex-shrink-0">
+            Blindaje Multi-Normativo para Intergas del Norte:
+          </span>
+          <span class="font-body text-[10.8px] text-slate-600 leading-normal">
+            Sistemas de gestión auditados anualmente por casas certificadoras internacionales, garantizando estricto apego regulatorio ante CRE, ASEA y PROFECO, con protección total de datos corporativos.
+          </span>
+        </div>
+        <div class="flex items-center justify-between pt-0.5 border-t border-slate-100">
+          <div class="flex items-center gap-1.5 flex-shrink-0">
+            <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading flex items-center gap-1">
+              <svg class="w-2.5 h-2.5 text-[#059669]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              Gobernanza & Certificaciones Oficiales:
+            </span>
+          </div>
+          <div class="flex items-center gap-1 flex-nowrap">
+            <span class="cert-pill kpi-pill-green">ISO 9001</span>
+            <span class="cert-pill kpi-pill-blue">ISO 18295-1 (Contact Centers)</span>
+            <span class="cert-pill kpi-pill-purple font-bold border border-purple-300">Modelo Global CIC v3.0 (IMT)</span>
+            <span class="cert-pill kpi-pill-blue">ISO 27001 (Seguridad)</span>
+            <span class="cert-pill kpi-pill-green">PCI-DSS v4.0 (PSI)</span>
+            <span class="cert-pill kpi-pill-cyan">ISO 20000-1 (Gestión TI)</span>
+            <span class="cert-pill kpi-pill-purple">ISO 22301 (Continuidad)</span>
+            <span class="cert-pill kpi-pill-orange">ISO 37001 (Antisoborno)</span>
+            <span class="cert-pill font-bold" style="background: rgba(220, 38, 38, 0.08); color: #DC2626; border: 1px solid rgba(220, 38, 38, 0.25);">Distintivo ESR 2026</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <!-- Controles flotantes en pantalla (Ocultos en impresión/PDF) -->
+  <div id="nav-controls">
+    <button class="nav-btn" onclick="prevSlide()" title="Diapositiva Anterior">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+    </button>
+    <span id="slide-indicator">1 / 4</span>
+    <button class="nav-btn" onclick="nextSlide()" title="Siguiente Diapositiva">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 4;
+
+    function showSlide(index) {
+      if (index < 1) index = 1;
+      if (index > totalSlides) index = totalSlides;
+      currentSlide = index;
+
+      document.querySelectorAll('.slide').forEach((slide, idx) => {
+        if (idx + 1 === currentSlide) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+
+      const indicator = document.getElementById('slide-indicator');
+      if (indicator) {
+        indicator.textContent = `${currentSlide} / ${totalSlides}`;
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        showSlide(currentSlide + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        showSlide(currentSlide - 1);
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        prevSlide();
+      }
+    });
+
+    if (window.location.hash === '#slide-4') {
+      showSlide(4);
+    } else if (window.location.hash === '#slide-3') {
+      showSlide(3);
+    } else if (window.location.hash === '#slide-2') {
+      showSlide(2);
+    } else {
+      showSlide(1);
+    }
+  </script>
+
+</body>
+</html>

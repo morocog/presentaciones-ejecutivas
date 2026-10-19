@@ -196,7 +196,7 @@
                     <!-- Métricas Rápidas -->
                     <div class="flex items-center gap-2 sm:gap-3 self-start sm:self-auto bg-black/30 p-2 sm:p-3 rounded-xl border border-white/5">
                         <div class="text-center px-3 py-1">
-                            <span class="block text-lg sm:text-xl font-black text-brandCeleste font-heading" id="totalDecksCount">9</span>
+                            <span class="block text-lg sm:text-xl font-black text-brandCeleste font-heading" id="totalDecksCount">12</span>
                             <span class="text-[10px] text-gray-400 uppercase font-semibold">Decks</span>
                         </div>
                         <div class="h-7 w-px bg-white/10"></div>
@@ -225,13 +225,13 @@
                     <!-- Botones de Categoría con Scroll Horizontal en Móvil -->
                     <div class="flex items-center gap-2 overflow-x-auto pb-1.5 no-scrollbar scroll-smooth">
                         <button onclick="filterCategory('all')" class="cat-filter-btn whitespace-nowrap px-3.5 py-2 rounded-xl text-xs font-semibold bg-brandCeleste text-white shadow-sm transition-all" data-cat="all">
-                            Todas (<span id="countAll">9</span>)
+                            Todas (<span id="countAll">12</span>)
                         </button>
                         <button onclick="filterCategory('01-comercial')" class="cat-filter-btn whitespace-nowrap px-3.5 py-2 rounded-xl text-xs font-semibold bg-white/5 text-gray-300 hover:bg-white/10 transition-all" data-cat="01-comercial">
-                            💼 Clientes & Propuestas (5)
+                            💼 Clientes & Propuestas (6)
                         </button>
                         <button onclick="filterCategory('02-estrategia')" class="cat-filter-btn whitespace-nowrap px-3.5 py-2 rounded-xl text-xs font-semibold bg-white/5 text-gray-300 hover:bg-white/10 transition-all" data-cat="02-estrategia">
-                            🚀 Dirección & Estrategia (2)
+                            🚀 Dirección & Estrategia (4)
                         </button>
                         <button onclick="filterCategory('03-operaciones')" class="cat-filter-btn whitespace-nowrap px-3.5 py-2 rounded-xl text-xs font-semibold bg-white/5 text-gray-300 hover:bg-white/10 transition-all" data-cat="03-operaciones">
                             ⚙️ Operaciones & WFM (1)
@@ -251,7 +251,7 @@
                     <span class="w-7 h-7 rounded-lg bg-brandCeleste/20 text-brandCeleste flex items-center justify-center font-bold text-xs">01</span>
                     <h3 class="text-base sm:text-lg font-bold text-white tracking-wide">Propuestas Comerciales & Clientes Estratégicos</h3>
                 </div>
-                <span class="text-[11px] text-gray-400 font-medium">5 Cuentas</span>
+                <span class="text-[11px] text-gray-400 font-medium">6 Cuentas</span>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
@@ -392,6 +392,42 @@
                     </div>
                 </div>
 
+                <!-- CARD 6: INTERGAS DEL NORTE -->
+                <div class="card-exec rounded-2xl p-5 flex flex-col justify-between space-y-4 presentation-card" data-keywords="intergas del norte gas lp comarca lagunera torreon gomez palacio lerdo desborde pedidos fugas emergencias temporada frio">
+                    <div class="space-y-3">
+                        <div class="flex items-start justify-between gap-2">
+                            <span class="badge bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                                <i class="fa-solid fa-fire-flame-simple"></i> Alianza Estratégica
+                            </span>
+                            <button onclick="copyDeckLink('./01-Propuestas-Comerciales/Intergas-del-Norte/index.html', 'Intergas del Norte')" class="text-gray-400 hover:text-white text-xs p-1" title="Copiar enlace">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                        <h4 class="text-base sm:text-lg font-bold text-white leading-snug">Propuesta Comercial Intergas del Norte</h4>
+                        <p class="text-xs text-gray-300 leading-relaxed font-normal">
+                            Potenciación operativa, desborde 24/7 de pedidos, línea de emergencias y alta disponibilidad para blindar la temporada de frío en La Laguna.
+                        </p>
+                    </div>
+                    <div class="space-y-2 pt-2 border-t border-white/5">
+                        <div class="grid grid-cols-2 gap-2">
+                            <a href="./01-Propuestas-Comerciales/Intergas-del-Norte/index.html" class="btn-portal btn-celeste text-xs py-2.5 px-3">
+                                <i class="fa-solid fa-play"></i> Presentación
+                            </a>
+                            <a href="./01-Propuestas-Comerciales/Intergas-del-Norte/Propuesta_Comercial_Intergas_del_Norte_Telat.pdf" target="_blank" class="btn-portal btn-naranja text-xs py-2.5 px-3">
+                                <i class="fa-solid fa-file-pdf"></i> PDF HD (4L)
+                            </a>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <a href="./01-Propuestas-Comerciales/Intergas-del-Norte/dossier-llamada.html" class="btn-portal btn-ghost text-xs py-2 px-2 text-brandCeleste hover:text-white">
+                                <i class="fa-solid fa-clipboard-question"></i> Dossier Táctico
+                            </a>
+                            <a href="./01-Propuestas-Comerciales/Intergas-del-Norte/Dossier_Ejecutivo_Llamada_Intergas_del_Norte.pdf" target="_blank" class="btn-portal btn-ghost text-xs py-2 px-2 text-brandAmarillo hover:text-white">
+                                <i class="fa-solid fa-file-arrow-down"></i> Dossier PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -402,10 +438,10 @@
                     <span class="w-7 h-7 rounded-lg bg-brandNaranja/20 text-brandNaranja flex items-center justify-center font-bold text-xs">02</span>
                     <h3 class="text-base sm:text-lg font-bold text-white tracking-wide">Dirección, Estrategia & Ecosistemas Digitales</h3>
                 </div>
-                <span class="text-[11px] text-gray-400 font-medium">2 Presentaciones</span>
+                <span class="text-[11px] text-gray-400 font-medium">4 Presentaciones (EN & ES)</span>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
 
                 <!-- CARD 6: PRESENTACIÓN DIGITALIZACIÓN -->
                 <div class="card-exec rounded-2xl p-5 flex flex-col justify-between space-y-4 presentation-card" data-keywords="digitalizacion inteligencia operativa automatizacion ecosistemas digitales telat innovacion transformacion software app script arquitectura">
@@ -449,6 +485,58 @@
                     <div class="pt-2 border-t border-white/5">
                         <a href="./02-Direccion-y-Estrategia/Presentacion-Comercial-Telat/index.html" class="btn-portal btn-naranja text-xs py-2.5 w-full">
                             <i class="fa-solid fa-play"></i> Abrir Presentación Comercial Telat
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CARD 8: COMPANY PROFILE TELAT (EN) -->
+                <div class="card-exec rounded-2xl p-5 flex flex-col justify-between space-y-4 presentation-card" data-keywords="company profile nearshore bilingual operations ai qa ai-powered quality assurance usa bpo carvana viapath certificaciones mauricio cruz ingles english pdf">
+                    <div class="space-y-3">
+                        <div class="flex items-start justify-between gap-2">
+                            <span class="badge bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                                <i class="fa-solid fa-globe"></i> Nearshore & AI-QA (EN)
+                            </span>
+                            <button onclick="copyDeckLink('./02-Direccion-y-Estrategia/Company-Profile-Telat-EN/index.html', 'Company Profile Telat EN')" class="text-gray-400 hover:text-white text-xs p-1" title="Copiar enlace">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                        <h4 class="text-base sm:text-lg font-bold text-white leading-snug">Nearshore Operations & AI-Powered QA (English)</h4>
+                        <p class="text-xs text-gray-300 leading-relaxed font-normal">
+                            Perfil institucional en inglés: 9 certificaciones institucionales, gobernanza BPO, casos operativos, demo de auditoría AI-QA y contacto directo de Mauricio Cruz.
+                        </p>
+                    </div>
+                    <div class="space-y-2 pt-2 border-t border-white/5">
+                        <a href="./02-Direccion-y-Estrategia/Company-Profile-Telat-EN/index.html" class="btn-portal btn-celeste text-xs py-2 px-3 w-full">
+                            <i class="fa-solid fa-play"></i> Presentación HTML
+                        </a>
+                        <a href="./02-Direccion-y-Estrategia/Company-Profile-Telat-EN/Company_Profile_Telat_EN.pdf" download class="btn-portal btn-ghost text-xs py-1.5 px-3 w-full text-brandAmarillo hover:text-white border border-brandAmarillo/30">
+                            <i class="fa-solid fa-file-pdf"></i> Descargar PDF (16:9)
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CARD 9: COMPANY PROFILE TELAT (ES) -->
+                <div class="card-exec rounded-2xl p-5 flex flex-col justify-between space-y-4 presentation-card" data-keywords="company profile perfil corporativo nearshore bilingue operaciones ai qa aseguramiento calidad mexico ee uu bpo carvana viapath certificaciones mauricio cruz espanol spanish pdf">
+                    <div class="space-y-3">
+                        <div class="flex items-start justify-between gap-2">
+                            <span class="badge bg-blue-500/15 text-blue-400 border border-blue-500/30">
+                                <i class="fa-solid fa-language"></i> Perfil Nearshore & AI-QA (ES)
+                            </span>
+                            <button onclick="copyDeckLink('./02-Direccion-y-Estrategia/Company-Profile-Telat-ES/index.html', 'Company Profile Telat ES')" class="text-gray-400 hover:text-white text-xs p-1" title="Copiar enlace">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                        <h4 class="text-base sm:text-lg font-bold text-white leading-snug">Perfil Corporativo Nearshore & Calidad con IA (Español)</h4>
+                        <p class="text-xs text-gray-300 leading-relaxed font-normal">
+                            Versión espejo en español: 9 certificaciones auditadas, modelos de alianza BPO, casos operativos (Carvana, ViaPath, Flock, AutoGlass), demo AI-QA y contacto de Mauricio Cruz.
+                        </p>
+                    </div>
+                    <div class="space-y-2 pt-2 border-t border-white/5">
+                        <a href="./02-Direccion-y-Estrategia/Company-Profile-Telat-ES/index.html" class="btn-portal btn-naranja text-xs py-2 px-3 w-full">
+                            <i class="fa-solid fa-play"></i> Presentación HTML
+                        </a>
+                        <a href="./02-Direccion-y-Estrategia/Company-Profile-Telat-ES/Company_Profile_Telat_ES.pdf" download class="btn-portal btn-ghost text-xs py-1.5 px-3 w-full text-brandAmarillo hover:text-white border border-brandAmarillo/30">
+                            <i class="fa-solid fa-file-pdf"></i> Descargar PDF (16:9)
                         </a>
                     </div>
                 </div>
