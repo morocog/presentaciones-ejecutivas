@@ -108,8 +108,16 @@ Una vez que Daniel haya verbalizado al menos dos de los puntos anteriores, hacem
 ---
 
 ### 📌 Checklist Rápido de Ricardo y Luis antes de Conectar
-- [ ] Tener abierto [index.html](file:///c:/Users/SDVP/Documents/GitHub/presentaciones-ejecutivas/01-Propuestas-Comerciales/Intergas-del-Norte/index.html) en el navegador en pantalla secundaria.
-- [ ] Tener a la mano el PDF compilado [Propuesta_Comercial_Intergas_del_Norte_Telat.pdf](file:///c:/Users/SDVP/Documents/GitHub/presentaciones-ejecutivas/01-Propuestas-Comerciales/Intergas-del-Norte/Propuesta_Comercial_Intergas_del_Norte_Telat.pdf).
-- [ ] No proyectar pantalla hasta que Daniel termine de responder las preguntas del Bloque B y C.
-- [ ] Mencionar siempre **Ciudad Juárez** y **Ciudad de México** como sedes de respaldo (nunca Monterrey NL).
-- [ ] Enfocar el cierre en: **Piloto de 8 semanas para el invierno**.
+- [x] Tener abierto index.html en el navegador en pantalla secundaria.
+- [x] Tener a la mano el PDF compilado Propuesta_Comercial_Intergas_del_Norte_Telat.pdf.
+- [x] Llamada exploratoria sostenida con Daniel Bello (15 de octubre de 2026). Foco validado: 100% outsourcing BPO tradicional de bajo costo.
+- [x] Cuestionario de afinación técnica enviado a Sofía Zarzar (20 de octubre de 2026) para el gerente de Daniel Bello.
+
+---
+
+### ⏳ Estatus Actual & Próximos Hitos (20 de Octubre de 2026)
+1. **En espera de respuestas:** Sofía Zarzar recaba los 4 datos de piso con el gerente operativo (AHT en sistema, software de captura, mix de llamadas y posiciones actuales en pico matutino).
+2. **Corrida definitiva de WFM:** En cuanto lleguen las respuestas, se envía la solicitud formal a Fabiola Álvarez con el AHT calibrado y los dos escenarios de SLA (80/20 y 70/30).
+3. **Estructuración económica:** Luis Cortina y Óscar Gómez cotizan el costo por posición/mes optimizado.
+4. **Cierre:** Agendar presentación ejecutiva con Daniel Bello y Sofía Zarzar para presentar el ahorro mensual y arrancar el piloto de invierno.
+
