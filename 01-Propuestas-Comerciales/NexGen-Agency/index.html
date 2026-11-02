@@ -163,6 +163,83 @@
             background-image: radial-gradient(rgba(50, 132, 198, 0.1) 1.5px, transparent 1.5px);
             background-size: 24px 24px;
         }
+
+        @media print {
+            @page {
+                size: 16in 9in;
+                margin: 0;
+            }
+
+            *, *:before, *:after {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+                animation: none !important;
+                transition: none !important;
+            }
+
+            html, body {
+                width: 16in !important;
+                height: auto !important;
+                min-height: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow: visible !important;
+                background-color: #FBFBFD !important;
+            }
+
+            header.fixed,
+            #nav-controls,
+            #progress-bar,
+            #slide-counter {
+                display: none !important;
+            }
+
+            .slide-container {
+                width: 16in !important;
+                height: auto !important;
+                overflow: visible !important;
+                display: block !important;
+                position: static !important;
+            }
+
+            .slide {
+                position: relative !important;
+                inset: auto !important;
+                width: 16in !important;
+                height: 9in !important;
+                min-height: 9in !important;
+                max-height: 9in !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                transform: none !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                padding: 3rem 4rem 2rem 4rem !important;
+                page-break-after: always !important;
+                page-break-inside: avoid !important;
+                break-after: page !important;
+                break-inside: avoid !important;
+                box-sizing: border-box !important;
+                overflow: hidden !important;
+                background: #FBFBFD !important;
+            }
+
+            .slide::before {
+                content: "";
+                position: absolute;
+                top: 1.5rem;
+                left: 3.5rem;
+                width: 140px;
+                height: 34px;
+                background-image: url('https://telat.mx/assets/img/logo.png');
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position: left center;
+                z-index: 50;
+            }
+        }
     </style>
 </head>
 <body class="tech-grid-bg antialiased selection:bg-brandNaranjaClaro selection:text-brandOscuro">
