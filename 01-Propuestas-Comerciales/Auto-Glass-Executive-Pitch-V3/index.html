@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telat Group | U.S. Auto Glass Revenue &amp; Intake Engine (Executive V3 - Impeccable Craft)</title>
+    
+    <!-- Trailing slash normalizer -->
+    <script>
+        if (!window.location.pathname.endsWith('/') && !window.location.pathname.endsWith('.html')) {
+            window.location.replace(window.location.pathname + '/');
+        }
+    </script>
+    
+    <!-- Google Fonts: DM Sans & Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Google Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        canvasBg: '#080A10',
+                        surfaceCard: '#10131E',
+                        surfaceHover: '#151928',
+                        surfaceElevated: '#171B2D',
+                        telatBlue: '#3284C6',
+                        telatOrange: '#EB5B27',
+                        telatYellow: '#FECA66',
+                        emeraldSuccess: '#10B981',
+                        borderSubtle: 'rgba(255, 255, 255, 0.07)',
+                        borderMedium: 'rgba(255, 255, 255, 0.12)',
+                        borderHighlight: 'rgba(50, 132, 198, 0.4)',
+                    },
+                    fontFamily: {
+                        subheadings: ['DM Sans', 'sans-serif'],
+                        body: ['Montserrat', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        momo: ['Impact', 'Arial Black', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --telat-blue: #3284C6;
+            --telat-orange: #EB5B27;
+            --telat-yellow: #FECA66;
+            --emerald-success: #10B981;
+            --canvas-bg: #080A10;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        ::selection {
+            background-color: var(--telat-orange);
+            color: #FFFFFF;
+        }
+
+        body {
+            background-color: var(--canvas-bg);
+            color: #F8FAFC;
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            margin: 0;
+            padding: 0;
+            letter-spacing: -0.01em;
+        }
+
+        /* Impeccable Craft Depth: directional soft shadows & true micro-highlights */
+        .craft-surface {
+            background: linear-gradient(175deg, rgba(20, 24, 38, 0.95) 0%, rgba(13, 16, 26, 0.98) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.09);
+        }
+
+        .craft-metric-panel {
+            background: linear-gradient(165deg, rgba(22, 27, 42, 0.92) 0%, rgba(13, 16, 26, 0.98) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s ease, box-shadow 0.22s ease;
+        }
+
+        .craft-metric-panel:hover {
+            transform: translateY(-2px);
+            border-color: rgba(50, 132, 198, 0.45);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.75), 0 0 20px -5px rgba(50, 132, 198, 0.25);
+        }
+
+        .craft-process-row {
+            background: rgba(16, 20, 32, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .craft-process-row:hover {
+            background: rgba(22, 28, 44, 0.85);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .presentation-viewport {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: radial-gradient(ellipse at 15% 15%, rgba(50, 132, 198, 0.09) 0%, transparent 50%),
+                        radial-gradient(ellipse at 85% 85%, rgba(235, 91, 39, 0.07) 0%, transparent 50%),
+                        #080A10;
+        }
+
+        .slides-viewport {
+            position: relative;
+            flex-grow: 1;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(8px) scale(0.996);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4.5rem 3.8rem 3.2rem 3.8rem;
+            z-index: 1;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(0) scale(1);
+            z-index: 10;
+        }
+
+        #top-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--telat-blue) 0%, var(--telat-orange) 100%);
+            width: 50%;
+            transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 100;
+        }
+
+        .material-symbols-outlined {
+            font-variant-numeric: tabular-nums;
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+
+        /* 16:9 Print & PDF Export Rules (Chromium Headless Proof) */
+        @media print {
+            @page {
+                size: 16in 9in;
+                margin: 0;
+            }
+
+            *, *:before, *:after {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            html, body {
+                width: 16in !important;
+                height: auto !important;
+                min-height: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow: hidden !important;
+                background-color: #080A10 !important;
+            }
+
+            .grid {
+                display: grid !important;
+            }
+            .grid-cols-12 {
+                display: grid !important;
+                grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+            }
+            .col-span-12 {
+                grid-column: span 12 / span 12 !important;
+            }
+            .col-span-6, .lg\:col-span-6 {
+                grid-column: span 6 / span 6 !important;
+            }
+            .col-span-7, .lg\:col-span-7 {
+                grid-column: span 7 / span 7 !important;
+            }
+            .col-span-5, .lg\:col-span-5 {
+                grid-column: span 5 / span 5 !important;
+            }
+            .grid-cols-2 {
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            }
+            .grid-cols-3 {
+                grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+            }
+
+            .presentation-viewport {
+                width: 16in !important;
+                height: auto !important;
+                display: block !important;
+                background: #080A10 !important;
+            }
+
+            .slides-viewport {
+                width: 16in !important;
+                height: auto !important;
+                display: block !important;
+                position: static !important;
+            }
+
+            .slide {
+                position: relative !important;
+                inset: auto !important;
+                width: 16in !important;
+                height: 8.85in !important;
+                min-height: 8.85in !important;
+                max-height: 8.85in !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                padding: 2.8rem 3.5rem 1.8rem 3.5rem !important;
+                page-break-after: always !important;
+                page-break-inside: avoid !important;
+                break-after: page !important;
+                break-inside: avoid !important;
+                box-sizing: border-box !important;
+                overflow: hidden !important;
+                background: #080A10 !important;
+            }
+
+            .slide:last-of-type {
+                page-break-after: avoid !important;
+                break-after: avoid !important;
+            }
+
+            .slide::before {
+                content: "";
+                position: absolute;
+                top: 1.15rem;
+                left: 3.5rem;
+                width: 135px;
+                height: 32px;
+                background-image: url('https://telat.mx/assets/img/logo.png');
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: left center;
+                z-index: 50;
+            }
+
+            .slide::after {
+                content: "Telat Group · U.S. Auto Glass Revenue & Intake Engine";
+                position: absolute;
+                top: 1.45rem;
+                right: 3.5rem;
+                font-family: 'DM Sans', sans-serif;
+                font-size: 0.78rem;
+                font-weight: 700;
+                color: #3284C6;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                z-index: 50;
+            }
+
+            #top-indicator,
+            .screen-only-controls,
+            footer,
+            #sideDrawer,
+            #drawerBackdrop {
+                display: none !important;
+                visibility: hidden !important;
+                height: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Top Indicator -->
+    <div id="top-indicator"></div>
+
+    <!-- Floating Top Header: Telat Official Logo + Context Badge -->
+    <header class="fixed top-3.5 left-7 z-40 flex items-center gap-3 bg-[#0E121E]/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/10 shadow-lg screen-only-controls">
+        <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-7 w-auto object-contain">
+        <span class="text-white/20 text-xs">/</span>
+        <div class="text-telatBlue text-[0.7rem] font-subheadings font-bold uppercase tracking-wider flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-telatBlue animate-pulse"></span>
+            Auto Glass Revenue &amp; Intake Engine
+        </div>
+        <span class="text-[0.62rem] font-bold text-telatOrange bg-telatOrange/15 px-2 py-0.5 rounded-full uppercase border border-telatOrange/30">Executive V3</span>
+    </header>
+
+    <!-- Right Controls -->
+    <nav class="fixed top-3.5 right-7 z-40 flex items-center gap-2 screen-only-controls" aria-label="Controls">
+        <a href="./Auto_Glass_Executive_Pitch_V3_Telat.pdf" download class="h-8 px-3.5 bg-telatOrange hover:bg-telatOrange/90 text-white rounded-full flex items-center gap-1.5 transition-all text-xs font-subheadings font-bold shadow-md shadow-telatOrange/20">
+            <span class="material-symbols-outlined text-sm">download</span> PDF (2-Slide)
+        </a>
+        <button onclick="window.print()" class="h-8 px-3 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center gap-1.5 transition-all text-xs font-subheadings font-bold border border-white/10" title="Print to 16:9 PDF">
+            <span class="material-symbols-outlined text-sm">print</span> Print
+        </button>
+        <button onclick="toggleMenu()" class="w-8 h-8 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center transition-all border border-white/10" aria-label="Navigation Menu">
+            <span class="material-symbols-outlined text-lg">menu</span>
+        </button>
+    </nav>
+
+    <div class="presentation-viewport">
+
+        <!-- Navigation Drawer -->
+        <aside id="sideDrawer" class="fixed inset-y-0 right-0 w-80 bg-[#0E121E] shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out border-l border-white/10 flex flex-col justify-between">
+            <div class="p-6">
+                <div class="flex justify-between items-center pb-4 mb-4 border-b border-white/10">
+                    <div>
+                        <h3 class="font-subheadings font-bold text-sm text-white uppercase tracking-wider">Executive Presentation</h3>
+                        <p class="font-body text-[0.68rem] text-slate-400">2-Slide Concise Format</p>
+                    </div>
+                    <button onclick="toggleMenu()" class="w-7 h-7 hover:bg-white/10 text-white rounded-full flex items-center justify-center transition-all">
+                        <span class="material-symbols-outlined text-lg">close</span>
+                    </button>
+                </div>
+                <div class="space-y-2">
+                    <button onclick="goToSlide(0); toggleMenu();" class="w-full text-left p-3 rounded-xl bg-telatBlue/15 border border-telatBlue/30 text-white text-xs font-subheadings font-bold flex items-center justify-between">
+                        <span>01. The Leak &amp; The Numbers</span>
+                        <span class="text-[0.6rem] text-telatBlue font-mono font-bold">SLIDE 1</span>
+                    </button>
+                    <button onclick="goToSlide(1); toggleMenu();" class="w-full text-left p-3 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 text-xs font-subheadings font-bold flex items-center justify-between transition-all">
+                        <span>02. The Intake Engine &amp; Pilot</span>
+                        <span class="text-[0.6rem] text-telatOrange font-mono font-bold">SLIDE 2</span>
+                    </button>
+                </div>
+            </div>
+            <div class="p-5 border-t border-white/10 text-[0.68rem] text-slate-500 flex justify-between">
+                <span>Telat Group &copy; 2026</span>
+                <span class="text-telatBlue font-bold">Confidential</span>
+            </div>
+        </aside>
+        <div id="drawerBackdrop" onclick="toggleMenu()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden transition-opacity duration-300"></div>
+
+        <!-- MAIN SLIDES WRAPPER -->
+        <main class="slides-viewport" id="slidesViewport">
+
+            <!-- ==========================================================================
+                 SLIDE 1 (V3): THE MARGIN LEAK & AUDITED PRODUCTION BENCHMARKS
+                 ========================================================================== -->
+            <section class="slide active" data-slide="0">
+                <div class="w-full max-w-[1540px] grid grid-cols-12 gap-8 items-center relative z-20">
+                    
+                    <!-- Left: Problem Statement & Direct Assertion (6 Cols) -->
+                    <div class="col-span-12 lg:col-span-6 flex flex-col justify-center text-left space-y-4">
+                        
+                        <!-- Editorial Lead Marker (No generic pill) -->
+                        <div class="flex items-center gap-2 text-telatOrange font-mono text-[0.68rem] font-bold uppercase tracking-wider">
+                            <span class="w-1.5 h-1.5 rounded-full bg-telatOrange"></span>
+                            Where U.S. Auto Glass Chains Bleed Margin
+                        </div>
+
+                        <!-- Main H1 Sentence Case -->
+                        <h1 class="font-subheadings font-extrabold text-3xl xl:text-4xl leading-[1.08] text-white tracking-tight">
+                            Stop losing work orders to passive quotes &amp; mis-triaged glass.
+                        </h1>
+
+                        <!-- Context paragraph -->
+                        <p class="font-body text-xs lg:text-[0.84rem] text-slate-300 leading-relaxed max-w-xl">
+                            When store managers answer phones while prepping glass, two things break: price-check calls abandon to regional competitors, and hurried intake sends mobile vans out with the wrong NAGS part or missing ADAS calibration.
+                        </p>
+
+                        <!-- The 3 Bleeding Points: Integrated Micro-Grid with 1px dividers -->
+                        <div class="grid grid-cols-3 gap-3 pt-1">
+                            <div class="p-3 rounded-2xl bg-white/[0.03] border border-white/10 flex flex-col justify-between">
+                                <div class="text-telatOrange text-xs font-bold flex items-center gap-1.5 mb-1.5 font-subheadings">
+                                    <span class="material-symbols-outlined text-base">call_missed</span> Lost Calls
+                                </div>
+                                <p class="text-[0.7rem] text-slate-400 leading-snug font-body">
+                                    Weekend &amp; rush hour calls go unpicked while techs work inside repair bays.
+                                </p>
+                            </div>
+                            <div class="p-3 rounded-2xl bg-white/[0.03] border border-white/10 flex flex-col justify-between">
+                                <div class="text-telatYellow text-xs font-bold flex items-center gap-1.5 mb-1.5 font-subheadings">
+                                    <span class="material-symbols-outlined text-base">cancel_presentation</span> Price Hesitation
+                                </div>
+                                <p class="text-[0.7rem] text-slate-400 leading-snug font-body">
+                                    Reps read cash quotes like robots instead of comparing comprehensive deductibles.
+                                </p>
+                            </div>
+                            <div class="p-3 rounded-2xl bg-white/[0.03] border border-white/10 flex flex-col justify-between">
+                                <div class="text-rose-400 text-xs font-bold flex items-center gap-1.5 mb-1.5 font-subheadings">
+                                    <span class="material-symbols-outlined text-base">local_shipping</span> Wasted Truck Rolls
+                                </div>
+                                <p class="text-[0.7rem] text-slate-400 leading-snug font-body">
+                                    Wrong rain sensors, HUD glass, or ADAS brackets cause dry runs and cancellations.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Audited Award Callout -->
+                        <div class="p-3.5 rounded-2xl craft-surface flex items-center gap-3.5 border-l-2 border-l-telatBlue">
+                            <div class="w-10 h-10 rounded-xl bg-telatBlue/15 text-telatBlue flex items-center justify-center shrink-0 border border-telatBlue/30">
+                                <span class="material-symbols-outlined text-2xl">emoji_events</span>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-subheadings font-bold text-xs text-telatBlue uppercase tracking-wide">
+                                        Audited 3rd Place National CX Excellence Award (2025)
+                                    </span>
+                                    <span class="text-[0.58rem] bg-telatBlue/20 text-telatBlue px-1.5 py-0.5 rounded font-mono font-bold uppercase">IMT / CX Global</span>
+                                </div>
+                                <p class="text-[0.72rem] text-slate-300 leading-tight mt-0.5 font-body">
+                                    Centralized intake restructuring for a <strong>200+ location multi-state U.S. auto glass chain</strong>, doubling conversion and scaling technician scheduling capacity.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Right: The 4 Verified Benchmarks in 2x2 Grid (6 Cols) -->
+                    <div class="col-span-12 lg:col-span-6 flex flex-col justify-center space-y-3.5">
+                        <div class="flex items-center justify-between pb-1 border-b border-white/10">
+                            <span class="text-[0.68rem] font-subheadings font-bold uppercase tracking-wider text-telatBlue flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-telatBlue"></span>
+                                Verified Intake Benchmarks (Direct A/B Production vs. U.S. Floor)
+                            </span>
+                            <span class="text-[0.6rem] font-mono text-slate-400 uppercase">Omega EDI &amp; POS Telephony</span>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3.5">
+                            
+                            <!-- Card 1: +30.2% Work Orders -->
+                            <div class="craft-metric-panel p-4 rounded-3xl relative overflow-hidden flex flex-col justify-between">
+                                <div>
+                                    <div class="text-[0.65rem] font-subheadings font-bold text-emeraldSuccess uppercase tracking-wider flex items-center gap-1 mb-1">
+                                        <span class="material-symbols-outlined text-sm">trending_up</span> Sales Yield Outperformance
+                                    </div>
+                                    <div class="font-momo text-4xl text-emeraldSuccess leading-none tracking-tight my-1">+30.2%</div>
+                                    <div class="font-subheadings font-bold text-xs text-white">Higher Closed Work Orders</div>
+                                </div>
+                                <p class="text-[0.68rem] text-slate-400 leading-snug mt-2 font-body">
+                                    Bilingual specialists closed 30.2% more scheduled orders than the client's domestic U.S. in-house team on identical queues.
+                                </p>
+                            </div>
+
+                            <!-- Card 2: 68.3% Quote-to-WO -->
+                            <div class="craft-metric-panel p-4 rounded-3xl relative overflow-hidden flex flex-col justify-between">
+                                <div>
+                                    <div class="text-[0.65rem] font-subheadings font-bold text-telatBlue uppercase tracking-wider flex items-center gap-1 mb-1">
+                                        <span class="material-symbols-outlined text-sm">point_of_sale</span> Conversion Acceleration
+                                    </div>
+                                    <div class="font-momo text-4xl text-telatBlue leading-none tracking-tight my-1">68.3%</div>
+                                    <div class="font-subheadings font-bold text-xs text-white">Peak Quote-to-Work-Order</div>
+                                </div>
+                                <p class="text-[0.68rem] text-slate-400 leading-snug mt-2 font-body">
+                                    Trained to resolve deductible hesitations: lifted conversion from <strong>33.9% baseline to 57.5% sustained and 68.3% peak</strong>.
+                                </p>
+                            </div>
+
+                            <!-- Card 3: 99.6% NAGS & ADAS Precision -->
+                            <div class="craft-metric-panel p-4 rounded-3xl relative overflow-hidden flex flex-col justify-between">
+                                <div>
+                                    <div class="text-[0.65rem] font-subheadings font-bold text-telatYellow uppercase tracking-wider flex items-center gap-1 mb-1">
+                                        <span class="material-symbols-outlined text-sm">precision_manufacturing</span> Mobile Route Integrity
+                                    </div>
+                                    <div class="font-momo text-4xl text-telatYellow leading-none tracking-tight my-1">99.6%</div>
+                                    <div class="font-subheadings font-bold text-xs text-white">NAGS &amp; ADAS Lookup Accuracy</div>
+                                </div>
+                                <p class="text-[0.68rem] text-slate-400 leading-snug mt-2 font-body">
+                                    Accurate 17-digit VIN decoding eliminated dry runs, dropping job delay cancellations from <strong>12.0% down to 1.5%</strong>.
+                                </p>
+                            </div>
+
+                            <!-- Card 4: >50% Abandonment Reduction -->
+                            <div class="craft-metric-panel p-4 rounded-3xl relative overflow-hidden flex flex-col justify-between">
+                                <div>
+                                    <div class="text-[0.65rem] font-subheadings font-bold text-telatOrange uppercase tracking-wider flex items-center gap-1 mb-1">
+                                        <span class="material-symbols-outlined text-sm">phone_in_talk</span> Peak Queue Governance
+                                    </div>
+                                    <div class="font-momo text-4xl text-telatOrange leading-none tracking-tight my-1">&gt;50%</div>
+                                    <div class="font-subheadings font-bold text-xs text-white">Abandonment Baseline Cut</div>
+                                </div>
+                                <p class="text-[0.68rem] text-slate-400 leading-snug mt-2 font-body">
+                                    Absorbed morning insurance FNOL surges and added <strong>Sunday coverage</strong>, stabilizing lost calls below <strong>3.5%</strong>.
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <!-- Scalability Footer Strip -->
+                        <div class="p-2.5 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-between text-xs text-slate-300 font-body">
+                            <div class="flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-emeraldSuccess"></span>
+                                <span class="font-bold text-white">Enterprise Scalability:</span> 4 Sites (2 CDMX, Juárez &amp; El Paso TX) · +650 Specialists · 24/7/365
+                            </div>
+                            <span class="text-[0.62rem] font-mono text-telatBlue bg-telatBlue/10 px-2 py-0.5 rounded border border-telatBlue/20">
+                                9 Audited ISO / PCI Standards
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ==========================================================================
+                 SLIDE 2 (V3): THE 4-STEP INTAKE ENGINE & 30-DAY HEAD-TO-HEAD PILOT
+                 ========================================================================== -->
+            <section class="slide" data-slide="1">
+                <div class="w-full max-w-[1540px] grid grid-cols-12 gap-8 items-center relative z-20">
+                    
+                    <!-- Left: 4-Step Intake Workflow (7 Cols) -->
+                    <div class="col-span-12 lg:col-span-7 flex flex-col justify-center space-y-3.5">
+                        
+                        <div class="flex items-center gap-2 text-telatBlue font-mono text-[0.68rem] font-bold uppercase tracking-wider">
+                            <span class="w-1.5 h-1.5 rounded-full bg-telatBlue"></span>
+                            Agnostic Integration · Omega EDI, CCC ONE, GlasPacLX, Mainstreet or Proprietary POS
+                        </div>
+
+                        <h2 class="font-subheadings font-extrabold text-2xl xl:text-3xl text-white tracking-tight leading-tight">
+                            How the intake engine converts calls without shop friction.
+                        </h2>
+
+                        <!-- 4 Step Sequential Process: Clean, horizontal rows with 1px border & badges -->
+                        <div class="space-y-2.5">
+                            
+                            <!-- Step 1 -->
+                            <div class="craft-process-row p-3.5 rounded-2xl flex items-start gap-3.5">
+                                <div class="w-8 h-8 rounded-xl bg-telatBlue/15 text-telatBlue flex items-center justify-center font-bold text-xs shrink-0 font-mono border border-telatBlue/30">01</div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="font-subheadings font-bold text-xs lg:text-sm text-white">Centralized Inbound &amp; Sunday Queue Capture</h3>
+                                        <span class="text-[0.6rem] font-mono text-telatBlue bg-telatBlue/10 px-2 py-0.5 rounded border border-telatBlue/20">Sub-3.5% Abandonment</span>
+                                    </div>
+                                    <p class="text-[0.72rem] text-slate-400 leading-snug mt-1 font-body">
+                                        Calls bypass shop counters completely. Techs stay focused on windshield installs while our pods answer within 15 seconds, absorbing morning FNOL surges and weekend leads.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div class="craft-process-row p-3.5 rounded-2xl flex items-start gap-3.5">
+                                <div class="w-8 h-8 rounded-xl bg-telatYellow/15 text-telatYellow flex items-center justify-center font-bold text-xs shrink-0 font-mono border border-telatYellow/30">02</div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="font-subheadings font-bold text-xs lg:text-sm text-white">17-Digit VIN &amp; ADAS Recalibration Triage</h3>
+                                        <span class="text-[0.6rem] font-mono text-telatYellow bg-telatYellow/10 px-2 py-0.5 rounded border border-telatYellow/20">99.6% NAGS Match</span>
+                                    </div>
+                                    <p class="text-[0.72rem] text-slate-400 leading-snug mt-1 font-body">
+                                        Real-time decoding detects rain sensors, acoustic interlayers, HUD, and forward cameras. Bundles static/dynamic recalibration immediately ($350–$600 margin protected).
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div class="craft-process-row p-3.5 rounded-2xl flex items-start gap-3.5">
+                                <div class="w-8 h-8 rounded-xl bg-telatOrange/15 text-telatOrange flex items-center justify-center font-bold text-xs shrink-0 font-mono border border-telatOrange/30">03</div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="font-subheadings font-bold text-xs lg:text-sm text-white">Objection Clearing &amp; Deductible vs. Cash Comparison</h3>
+                                        <span class="text-[0.6rem] font-mono text-telatOrange bg-telatOrange/10 px-2 py-0.5 rounded border border-telatOrange/20">68.3% Peak Conversion</span>
+                                    </div>
+                                    <p class="text-[0.72rem] text-slate-400 leading-snug mt-1 font-body">
+                                        Trained booking specialists compare $100 glass deductibles against out-of-pocket cash quotes, clear aftermarket hesitation, and collect deposits or 3-way conference TPA claims.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Step 4 -->
+                            <div class="craft-process-row p-3.5 rounded-2xl flex items-start gap-3.5">
+                                <div class="w-8 h-8 rounded-xl bg-emeraldSuccess/15 text-emeraldSuccess flex items-center justify-center font-bold text-xs shrink-0 font-mono border border-emeraldSuccess/30">04</div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="font-subheadings font-bold text-xs lg:text-sm text-white">Work Order Booking &amp; Clean Dispatch Confirmation</h3>
+                                        <span class="text-[0.6rem] font-mono text-emeraldSuccess bg-emeraldSuccess/10 px-2 py-0.5 rounded border border-emeraldSuccess/20">96.8% 24-48h Dispatch</span>
+                                    </div>
+                                    <p class="text-[0.72rem] text-slate-400 leading-snug mt-1 font-body">
+                                        Slots shop bay drops or routes mobile vans with verified inventory, pushing confirmed work orders directly into your POS under audited PCI-DSS v4.0 tokenization.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Right: Pilot Framework & Mauricio Cruz Direct Contact (5 Cols) -->
+                    <div class="col-span-12 lg:col-span-5 flex flex-col justify-center space-y-3.5">
+                        
+                        <!-- 30-Day Head-to-Head Pilot Container -->
+                        <div class="p-4 rounded-3xl craft-surface space-y-2.5 border-l-2 border-l-telatOrange">
+                            <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                                <div class="text-xs font-subheadings font-bold text-telatOrange uppercase tracking-wider flex items-center gap-1.5">
+                                    <span class="material-symbols-outlined text-base">speed</span> 30-Day Head-to-Head Pilot
+                                </div>
+                                <span class="text-[0.6rem] font-bold text-white bg-telatOrange px-2.5 py-0.5 rounded-full uppercase">Zero Risk Validation</span>
+                            </div>
+                            <p class="text-xs text-slate-300 leading-snug font-body">
+                                Carve out a slice of overflow, Sunday traffic, or a regional cluster. We integrate via VDI / VPN into your POS within <strong>14 to 30 days</strong>. If our Quote-to-Work-Order conversion does not beat your internal benchmark, walk away with zero penalty.
+                            </p>
+                            <div class="grid grid-cols-3 gap-2 pt-1 text-center font-mono text-[0.65rem]">
+                                <div class="p-1.5 rounded-xl bg-black/40 border border-white/5">
+                                    <span class="text-white block font-bold">14-30 Days</span>
+                                    <span class="text-slate-400 text-[0.55rem]">Launch Window</span>
+                                </div>
+                                <div class="p-1.5 rounded-xl bg-black/40 border border-white/5">
+                                    <span class="text-emeraldSuccess block font-bold">100% AI-QA</span>
+                                    <span class="text-slate-400 text-[0.55rem]">Audited Intake</span>
+                                </div>
+                                <div class="p-1.5 rounded-xl bg-black/40 border border-white/5">
+                                    <span class="text-telatBlue block font-bold">A/B Testing</span>
+                                    <span class="text-slate-400 text-[0.55rem]">Live Metrics</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Direct Executive Contact Card (Mauricio Cruz) -->
+                        <div class="p-4 rounded-3xl craft-surface space-y-3 border-l-2 border-l-telatBlue">
+                            <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
+                                <div>
+                                    <span class="text-[0.62rem] font-subheadings font-bold text-telatBlue uppercase tracking-wider block">Direct Executive Contact</span>
+                                    <h3 class="font-subheadings font-extrabold text-xl text-white">Mauricio Cruz</h3>
+                                    <p class="font-body text-xs text-slate-300">Operations Director | Telat Group</p>
+                                </div>
+                                <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-6 w-auto object-contain">
+                            </div>
+
+                            <div class="space-y-2 text-xs font-body">
+                                <a href="mailto:mcruz@telat-group.com?subject=Executive%20Auto%20Glass%20Discovery%20Call%20-%20Telat%20Group" class="flex items-center gap-2.5 p-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] transition-colors border border-white/5">
+                                    <span class="material-symbols-outlined text-telatBlue text-base">mail</span>
+                                    <span class="text-white font-semibold">mcruz@telat-group.com</span>
+                                </a>
+
+                                <div class="grid grid-cols-2 gap-2">
+                                    <a href="tel:+525530985727" class="flex items-center gap-1.5 p-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] transition-colors border border-white/5">
+                                        <span class="material-symbols-outlined text-telatOrange text-sm">call</span>
+                                        <span class="text-slate-200 text-[0.72rem] font-mono">+52 (55) 3098 5727</span>
+                                    </a>
+                                    <a href="tel:+525522716071" class="flex items-center gap-1.5 p-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] transition-colors border border-white/5">
+                                        <span class="material-symbols-outlined text-emeraldSuccess text-sm">smartphone</span>
+                                        <span class="text-slate-200 text-[0.72rem] font-mono">+52 55 2271 6071</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="pt-1 flex gap-2 screen-only-controls">
+                                <a href="mailto:mcruz@telat-group.com?subject=Executive%20Auto%20Glass%20Discovery%20Call%20-%20Telat%20Group" class="flex-1 py-2 px-3 rounded-xl bg-telatOrange hover:bg-telatOrange/90 text-white font-subheadings font-bold text-center text-xs transition-all shadow-md flex items-center justify-center gap-1.5">
+                                    <span class="material-symbols-outlined text-sm">calendar_month</span> Schedule 15-Min Call
+                                </a>
+                                <a href="./Auto_Glass_Executive_Pitch_V3_Telat.pdf" download class="py-2 px-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-subheadings font-bold text-center text-xs transition-all border border-white/10 flex items-center justify-center gap-1">
+                                    <span class="material-symbols-outlined text-sm">download</span> PDF
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FOOTER SLIDE NAVIGATION -->
+        <footer class="flex justify-between items-center px-10 py-2.5 z-40 border-t border-white/10 bg-[#080A10]/95 backdrop-blur-md relative font-subheadings">
+            <div class="text-xs font-body text-slate-400 flex items-center gap-2">
+                <span class="font-bold text-white">Telat Group</span>
+                <span class="text-white/20">•</span>
+                <span>U.S. Auto Glass Revenue &amp; Intake Engine</span>
+                <span class="text-white/20">•</span>
+                <span class="text-[0.62rem] bg-telatBlue/20 text-telatBlue px-2 py-0.5 rounded font-bold uppercase">Executive 2-Slide Punch (V3)</span>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <button onclick="prevSlide()" class="w-8 h-8 hover:bg-white/10 text-white rounded-full flex items-center justify-center transition-all border border-white/10" aria-label="Previous Slide">
+                    <span class="material-symbols-outlined text-base">arrow_back</span>
+                </button>
+                <div class="bg-white/5 border border-white/10 rounded-full px-3 py-0.5 text-xs font-bold text-slate-200 tracking-wider flex items-center gap-1">
+                    <span id="current-slide-num">01</span> <span class="text-white/20">/</span> <span id="total-slides-num">02</span>
+                </div>
+                <button onclick="nextSlide()" class="w-8 h-8 hover:bg-white/10 text-white rounded-full flex items-center justify-center transition-all border border-white/10" aria-label="Next Slide">
+                    <span class="material-symbols-outlined text-base">arrow_forward</span>
+                </button>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- SCRIPT FOR NAVIGATION & KEYBOARD EVENTS -->
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function updateSlideUI() {
+            slides.forEach((slide, idx) => {
+                if (idx === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+
+            document.getElementById('current-slide-num').innerText = String(currentSlide + 1).padStart(2, '0');
+            document.getElementById('total-slides-num').innerText = String(totalSlides).padStart(2, '0');
+
+            const pct = ((currentSlide + 1) / totalSlides) * 100;
+            document.getElementById('top-indicator').style.width = `${pct}%`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlideUI();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlideUI();
+        }
+
+        function goToSlide(idx) {
+            currentSlide = idx;
+            updateSlideUI();
+        }
+
+        function toggleMenu() {
+            const drawer = document.getElementById('sideDrawer');
+            const backdrop = document.getElementById('drawerBackdrop');
+            if (drawer.classList.contains('translate-x-full')) {
+                drawer.classList.remove('translate-x-full');
+                backdrop.classList.remove('hidden');
+            } else {
+                drawer.classList.add('translate-x-full');
+                backdrop.classList.add('hidden');
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key === 'Escape') {
+                const drawer = document.getElementById('sideDrawer');
+                const backdrop = document.getElementById('drawerBackdrop');
+                drawer.classList.add('translate-x-full');
+                backdrop.classList.add('hidden');
+            }
+        });
+
+        updateSlideUI();
+    </script>
+</body>
+</html>
