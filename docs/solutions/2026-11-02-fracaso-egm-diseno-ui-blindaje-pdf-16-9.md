@@ -57,3 +57,4 @@ Esto desató una **regresión visual severa**, deformando una maquetación moder
    - Recompilación exitosa del PDF en 2 páginas exactas (1.63 MB): [Auto_Glass_Executive_Pitch_V2_Telat.pdf](file:///c:/Users/SDVP/Documents/GitHub/presentaciones-ejecutivas/01-Propuestas-Comerciales/Auto-Glass-Executive-Pitch-V2/Auto_Glass_Executive_Pitch_V2_Telat.pdf).
 3. **Registro en Bóveda Central:**
    - La propuesta V2 (Dark 3D 2-Slide Punch) y la propuesta V1 (4 Slides Clásica) conviven en la bóveda de presentaciones ejecutivas (`index.html`).
+
