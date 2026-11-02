@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telat Group | U.S. Auto Glass Operations & Revenue Conversion Pitch</title>
+    
+    <!-- Trailing slash normalizer -->
+    <script>
+        if (!window.location.pathname.endsWith('/') && !window.location.pathname.endsWith('.html')) {
+            window.location.replace(window.location.pathname + '/');
+        }
+    </script>
+    
+    <!-- Google Fonts: DM Sans & Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Google Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandOscuro: '#222221',
+                        brandCeleste: '#3284C6',
+                        brandNaranja: '#EB5B27',
+                        brandAmarillo: '#FECA66',
+                        brandClaro: '#FBFBFD',
+                    },
+                    fontFamily: {
+                        subheadings: ['DM Sans', 'sans-serif'],
+                        body: ['Montserrat', 'sans-serif'],
+                        momo: ['Impact', 'Arial Black', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --brand-celeste: #3284C6;
+            --brand-naranja: #EB5B27;
+            --brand-amarillo: #FECA66;
+            --brand-oscuro: #222221;
+            --brand-claro: #FBFBFD;
+            --grad-vibrante: linear-gradient(90deg, var(--brand-celeste) 0%, var(--brand-naranja) 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--brand-claro);
+            color: var(--brand-oscuro);
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            margin: 0;
+            padding: 0;
+        }
+
+        .presentation-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: linear-gradient(135deg, #FBFBFD 0%, #EFF4F9 100%);
+        }
+
+        .slides-wrapper {
+            position: relative;
+            flex-grow: 1;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1), transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(14px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4.8rem 3.5rem 3.5rem 3.5rem;
+            z-index: 1;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(0);
+            z-index: 10;
+        }
+
+        .tech-grid-bg {
+            background-image: radial-gradient(rgba(50, 132, 198, 0.08) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        #top-progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: var(--grad-vibrante);
+            width: 25%;
+            transition: width 0.35s ease;
+            z-index: 100;
+        }
+
+        .material-symbols-outlined {
+            font-variant-numeric: tabular-nums;
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+
+        /* ==========================================================================
+           CANONICAL 16:9 PANORAMIC PDF & PRINT EXPORT
+           ========================================================================== */
+        @media print {
+            @page {
+                size: 16in 9in;
+                margin: 0;
+            }
+
+            *, *:before, *:after {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+                animation: none !important;
+                transition: none !important;
+            }
+
+            html, body {
+                width: 16in !important;
+                height: auto !important;
+                min-height: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow: visible !important;
+                background-color: #FBFBFD !important;
+            }
+
+            .grid {
+                display: grid !important;
+            }
+            .grid-cols-1.lg\:grid-cols-12,
+            .lg\:grid-cols-12 {
+                display: grid !important;
+                grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+            }
+            .col-span-5, .lg\:col-span-5 { grid-column: span 5 / span 5 !important; }
+            .col-span-6, .lg\:col-span-6 { grid-column: span 6 / span 6 !important; }
+            .col-span-7, .lg\:col-span-7 { grid-column: span 7 / span 7 !important; }
+
+            .grid-cols-2, .lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+            .grid-cols-3, .md\:grid-cols-3, .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+            .grid-cols-4, .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+
+            #top-progress-bar,
+            .fixed-nav-controls,
+            .fixed,
+            #executiveDrawer,
+            #drawerOverlay,
+            .print\:hidden,
+            .no-print,
+            footer {
+                display: none !important;
+            }
+
+            .presentation-container {
+                width: 16in !important;
+                height: auto !important;
+                display: block !important;
+                background: #FBFBFD !important;
+                background-image: radial-gradient(rgba(50, 132, 198, 0.08) 1px, transparent 1px) !important;
+                background-size: 24px 24px !important;
+            }
+
+            .slides-wrapper {
+                width: 16in !important;
+                height: auto !important;
+                position: static !important;
+                display: block !important;
+            }
+
+            .slide {
+                position: relative !important;
+                inset: auto !important;
+                width: 16in !important;
+                height: 9in !important;
+                min-height: 9in !important;
+                max-height: 9in !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                pointer-events: auto !important;
+                transform: none !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                padding: 3.6rem 3rem 1.5rem 3rem !important;
+                page-break-after: always !important;
+                page-break-inside: avoid !important;
+                break-after: page !important;
+                break-inside: avoid !important;
+                box-sizing: border-box !important;
+                overflow: hidden !important;
+                background: transparent !important;
+            }
+
+            .slide::before {
+                content: "";
+                position: absolute;
+                top: 1.15rem;
+                left: 3rem;
+                width: 135px;
+                height: 32px;
+                background-image: url('https://telat.mx/assets/img/logo.png');
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: left center;
+                z-index: 50;
+            }
+
+            .slide::after {
+                content: "Telat Group · U.S. Auto Glass Operations & Revenue Conversion";
+                position: absolute;
+                top: 1.4rem;
+                right: 3rem;
+                font-family: 'DM Sans', sans-serif;
+                font-size: 0.78rem;
+                font-weight: 700;
+                color: #3284C6;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+                z-index: 50;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brandAmarillo selection:text-brandOscuro">
+
+    <!-- Top Fixed Progress Bar -->
+    <div id="top-progress-bar"></div>
+
+    <!-- Floating Header Navbar (Includes Official Telat Logo h-8 w-auto) -->
+    <div class="fixed top-3.5 left-7 z-40 flex items-center gap-2.5 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-brandOscuro/10 shadow-sm fixed-nav-controls">
+        <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-8 w-auto object-contain filter drop-shadow-sm">
+        <span class="text-gray-300 text-lg font-light">|</span>
+        <div class="bg-brandCeleste/10 border border-brandCeleste/25 text-brandCeleste text-[0.68rem] font-subheadings px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider flex items-center gap-1">
+            <span class="material-symbols-outlined text-xs">directions_car</span> Auto Glass Executive Pitch
+        </div>
+        <span class="text-[0.62rem] font-extrabold text-brandNaranja bg-brandNaranja/10 px-2 py-0.5 rounded-full uppercase">C-Suite Brief</span>
+    </div>
+
+    <div class="fixed top-3.5 right-7 z-40 flex items-center gap-2 fixed-nav-controls">
+        <a href="./Auto_Glass_Executive_Pitch_Telat.pdf" download class="h-9 px-3.5 bg-brandNaranja hover:bg-brandNaranja/90 text-white rounded-full flex items-center gap-1.5 transition-all shadow-sm text-xs font-subheadings font-bold" title="Download 16:9 HD PDF">
+            <span class="material-symbols-outlined text-sm">download</span> PDF Deck
+        </a>
+        <button onclick="window.print()" class="h-9 px-3 bg-white/90 hover:bg-white text-brandOscuro rounded-full flex items-center gap-1.5 transition-all shadow-sm border border-brandOscuro/10 text-xs font-subheadings font-bold hover:text-brandCeleste" title="Print / Save as PDF">
+            <span class="material-symbols-outlined text-sm">print</span> Print
+        </button>
+        <button onclick="toggleMenu()" class="w-9 h-9 bg-white/90 hover:bg-white text-brandOscuro rounded-full flex items-center justify-center transition-all shadow-sm border border-brandOscuro/10" aria-label="Open Navigation Menu">
+            <span class="material-symbols-outlined text-xl">menu</span>
+        </button>
+    </div>
+
+    <div class="presentation-container tech-grid-bg">
+
+        <!-- Navigation Drawer (Click-Outside & Escape Supported) -->
+        <div id="executiveDrawer" class="fixed inset-y-0 right-0 w-80 bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out border-l border-brandOscuro/10 flex flex-col justify-between">
+            <div class="p-6 overflow-y-auto">
+                <div class="flex justify-between items-center pb-4 mb-4 border-b border-brandOscuro/10">
+                    <div>
+                        <h3 class="font-subheadings font-bold text-sm text-brandOscuro uppercase tracking-wider">Executive Navigation</h3>
+                        <p class="font-body text-[0.68rem] text-brandOscuro/60">U.S. Auto Glass Value Proposition</p>
+                    </div>
+                    <button onclick="toggleMenu()" class="w-8 h-8 hover:bg-brandOscuro/5 text-brandOscuro rounded-full flex items-center justify-center transition-all">
+                        <span class="material-symbols-outlined text-xl">close</span>
+                    </button>
+                </div>
+                <nav class="space-y-1.5" id="drawerList">
+                    <!-- Injected via JS -->
+                </nav>
+            </div>
+            <div class="p-5 border-t border-brandOscuro/5 bg-brandClaro">
+                <div class="flex items-center justify-between text-[0.68rem] font-body text-brandOscuro/60">
+                    <span>Telat Group &copy; 2026</span>
+                    <span class="font-bold text-brandCeleste">Executive Confidential</span>
+                </div>
+            </div>
+        </div>
+        <div id="drawerOverlay" onclick="toggleMenu()" class="fixed inset-0 bg-brandOscuro/25 backdrop-blur-sm z-40 hidden transition-opacity duration-300"></div>
+
+        <!-- MAIN SLIDES CONTAINER -->
+        <main class="slides-wrapper" id="slidesWrapper">
+
+            <!-- ==========================================================================
+                 SLIDE 1: EXECUTIVE HOOK & PROVEN U.S. AUTO GLASS BENCHMARKS
+                 ========================================================================== -->
+            <section class="slide active" data-slide="0" data-label="01. Proven Auto Glass Track Record">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full max-w-[1540px] items-center relative z-20">
+                    
+                    <!-- Left Column: Value Proposition & 4 Structural Pillars -->
+                    <div class="col-span-7 flex flex-col justify-center text-left">
+                        <div class="inline-flex items-center gap-2 text-brandNaranja font-subheadings uppercase text-xs font-bold tracking-widest mb-2">
+                            <span class="material-symbols-outlined text-base">verified</span> Specialized U.S. Auto Glass Contact Center Operations
+                        </div>
+                        
+                        <h1 class="font-subheadings font-extrabold text-3xl lg:text-4xl xl:text-[2.75rem] leading-[1.08] mb-3.5 text-brandOscuro tracking-tight">
+                            PROVEN U.S. AUTO GLASS INTAKE.<br>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-brandCeleste to-brandNaranja">
+                                OUTPERFORMING IN-HOUSE U.S. TEAMS.
+                            </span>
+                        </h1>
+                        
+                        <p class="font-body text-xs lg:text-[0.88rem] text-brandOscuro/80 leading-relaxed mb-4 max-w-2xl">
+                            Offload inbound phones from your repair counters and mobile service bays. Telat Group centralizes retail quoting, insurance TPA triage, 17-digit VIN decoding, and ADAS recalibration capture across nationwide U.S. networks, converting price-shoppers into scheduled work orders before they call a competitor.
+                        </p>
+
+                        <!-- 3rd Place National CX Award Highlight Box -->
+                        <div class="bg-gradient-to-r from-emerald-50 via-white to-brandCeleste/5 border-l-4 border-emerald-600 p-3.5 rounded-r-2xl border border-emerald-200/80 shadow-sm mb-4 flex items-center gap-3.5">
+                            <div class="w-11 h-11 rounded-xl bg-emerald-600/10 border border-emerald-600/25 text-emerald-700 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-2xl">emoji_events</span>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <span class="font-subheadings font-extrabold text-xs lg:text-sm text-emerald-800 uppercase tracking-wide">
+                                        Audited Track Record · 3rd Place National CX Award (2025)
+                                    </span>
+                                    <span class="bg-emerald-600 text-white text-[0.6rem] font-subheadings font-bold px-2 py-0.5 rounded uppercase">
+                                        IMT / CX Global
+                                    </span>
+                                </div>
+                                <p class="font-body text-[0.74rem] text-brandOscuro/80 leading-snug mt-0.5">
+                                    Awarded for operational restructuring of a <strong>200+ location multi-state U.S. auto glass chain</strong> (<em>"Changing the Glass: From Disconnected Appointments to Centralized Success"</em>), doubling conversion and scaling technician booking capacity.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- 4 Core Structural Pillars of Telat Group -->
+                        <div class="grid grid-cols-4 gap-3 border-t border-brandOscuro/10 pt-3.5 mb-3.5">
+                            <div class="bg-white/90 p-2.5 rounded-xl border border-brandOscuro/10 shadow-xs">
+                                <div class="font-momo text-2xl lg:text-3xl text-brandNaranja leading-none">+20 Yrs</div>
+                                <p class="font-body text-[0.65rem] text-brandOscuro/70 uppercase font-bold mt-1">Enterprise Delivery</p>
+                            </div>
+                            <div class="bg-white/90 p-2.5 rounded-xl border border-brandOscuro/10 shadow-xs">
+                                <div class="font-momo text-2xl lg:text-3xl text-brandCeleste leading-none">4 Sites</div>
+                                <p class="font-body text-[0.65rem] text-brandOscuro/70 uppercase font-bold mt-1">CDMX (2), Juárez &amp; El Paso TX</p>
+                            </div>
+                            <div class="bg-white/90 p-2.5 rounded-xl border border-brandOscuro/10 shadow-xs">
+                                <div class="font-momo text-2xl lg:text-3xl text-brandNaranja leading-none">+650</div>
+                                <p class="font-body text-[0.65rem] text-brandOscuro/70 uppercase font-bold mt-1">Bilingual Specialists</p>
+                            </div>
+                            <div class="bg-white/90 p-2.5 rounded-xl border border-brandOscuro/10 shadow-xs">
+                                <div class="font-momo text-2xl lg:text-3xl text-brandCeleste leading-none">24/7/365</div>
+                                <p class="font-body text-[0.65rem] text-brandOscuro/70 uppercase font-bold mt-1">Sunday &amp; Peak Overflow</p>
+                            </div>
+                        </div>
+
+                        <!-- 9-Certification Compact Trust Ribbon -->
+                        <div class="bg-white/90 p-2.5 rounded-xl border border-brandOscuro/10 shadow-xs">
+                            <div class="text-[0.62rem] font-subheadings font-bold text-brandOscuro/60 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-xs text-brandCeleste">verified_user</span> 9 Audited Certifications &amp; Institutional Compliance Standards:
+                            </div>
+                            <div class="flex flex-wrap gap-1.5 text-[0.62rem] font-semibold text-brandOscuro/85">
+                                <span class="bg-brandCeleste/10 text-brandCeleste px-2 py-0.5 rounded">ISO 9001:2015</span>
+                                <span class="bg-brandCeleste/10 text-brandCeleste px-2 py-0.5 rounded">ISO 18295-1 (Contact Centers)</span>
+                                <span class="bg-purple-50 text-purple-700 px-2 py-0.5 rounded">Modelo Global CIC v3.0</span>
+                                <span class="bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded">ISO 27001 (Data Security)</span>
+                                <span class="bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded">PCI-DSS v4.0 (Card Security)</span>
+                                <span class="bg-cyan-50 text-cyan-800 px-2 py-0.5 rounded">ISO 20000-1 (ITSM)</span>
+                                <span class="bg-brandNaranja/10 text-brandNaranja px-2 py-0.5 rounded">ISO 22301 (Continuity)</span>
+                                <span class="bg-amber-50 text-amber-800 px-2 py-0.5 rounded">ISO 37001 (Anti-Bribery)</span>
+                                <span class="bg-rose-50 text-rose-700 px-2 py-0.5 rounded">Distintivo ESR 2026</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column: The 4 Hard Auto Glass Metrics Card -->
+                    <div class="col-span-5 flex flex-col justify-center">
+                        <div class="bg-white rounded-3xl border-2 border-brandCeleste/25 shadow-2xl overflow-hidden">
+                            <!-- Card Header -->
+                            <div class="bg-brandOscuro text-white px-6 py-4 flex items-center justify-between border-b border-white/10">
+                                <div>
+                                    <span class="text-[0.65rem] font-subheadings font-bold uppercase tracking-widest text-brandAmarillo block">
+                                        Audited Performance · 200+ Location U.S. Chain
+                                    </span>
+                                    <h3 class="font-subheadings font-extrabold text-base lg:text-lg text-white mt-0.5">
+                                        Telat Operations vs. Domestic U.S. Baseline
+                                    </h3>
+                                </div>
+                                <span class="bg-white/10 border border-white/20 text-white text-[0.65rem] font-subheadings font-bold px-2.5 py-1 rounded-full">
+                                    Omega EDI &amp; POS Telephony
+                                </span>
+                            </div>
+
+                            <!-- 4 Metric Rows -->
+                            <div class="p-5 space-y-3">
+                                
+                                <!-- Metric 1: +30.2% Sales vs US Team -->
+                                <div class="p-3.5 rounded-2xl bg-gradient-to-r from-emerald-50/90 to-white border border-emerald-200 flex items-center gap-4">
+                                    <div class="w-24 text-center shrink-0 bg-white py-2 px-1 rounded-xl border border-emerald-200 shadow-xs">
+                                        <span class="font-momo text-2xl lg:text-3xl text-emerald-700 leading-none block">+30.2%</span>
+                                        <span class="text-[0.58rem] font-subheadings font-bold text-emerald-800 uppercase block mt-0.5">Work Orders</span>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <h4 class="font-subheadings font-bold text-xs lg:text-sm text-brandOscuro">
+                                            Outperformed In-House U.S. Sales Agents
+                                        </h4>
+                                        <p class="font-body text-[0.72rem] text-brandOscuro/75 leading-snug mt-0.5">
+                                            Dedicated bilingual specialists generated <strong>+30.18% higher sales yield</strong> compared directly on the same inbound queues against the client's domestic U.S. call center.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Metric 2: Quote to Work Order -->
+                                <div class="p-3.5 rounded-2xl bg-brandClaro border border-brandOscuro/10 flex items-center gap-4">
+                                    <div class="w-24 text-center shrink-0 bg-white py-2 px-1 rounded-xl border border-brandCeleste/30 shadow-xs">
+                                        <span class="font-momo text-2xl lg:text-3xl text-brandCeleste leading-none block">68.3%</span>
+                                        <span class="text-[0.58rem] font-subheadings font-bold text-brandCeleste uppercase block mt-0.5">Peak Q-to-WO</span>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <h4 class="font-subheadings font-bold text-xs lg:text-sm text-brandOscuro">
+                                            Quote-to-Work-Order Conversion (Up from 33.9%)
+                                        </h4>
+                                        <p class="font-body text-[0.72rem] text-brandOscuro/75 leading-snug mt-0.5">
+                                            Trained intake teams to resolve price-check hesitations: lifted conversion from a <strong>33.96% baseline to 57.45% sustained and 68.27% peak</strong> (surpassing the 50% target).
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Metric 3: Call Abandonment Cut in Half -->
+                                <div class="p-3.5 rounded-2xl bg-brandClaro border border-brandOscuro/10 flex items-center gap-4">
+                                    <div class="w-24 text-center shrink-0 bg-white py-2 px-1 rounded-xl border border-brandNaranja/30 shadow-xs">
+                                        <span class="font-momo text-2xl lg:text-3xl text-brandNaranja leading-none block">&gt;50%</span>
+                                        <span class="text-[0.58rem] font-subheadings font-bold text-brandNaranja uppercase block mt-0.5">Drop Cut</span>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <h4 class="font-subheadings font-bold text-xs lg:text-sm text-brandOscuro">
+                                            Peak &amp; Weekend Call Abandonment Cut in Half
+                                        </h4>
+                                        <p class="font-body text-[0.72rem] text-brandOscuro/75 leading-snug mt-0.5">
+                                            Absorbed Monday morning insurance claim spikes and added <strong>full Sunday coverage</strong>, driving lost call baselines down by <strong>&gt;50% to floor minimums</strong>.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Metric 4: VIN & Glass Part Match -->
+                                <div class="p-3.5 rounded-2xl bg-brandClaro border border-brandOscuro/10 flex items-center gap-4">
+                                    <div class="w-24 text-center shrink-0 bg-white py-2 px-1 rounded-xl border border-brandCeleste/30 shadow-xs">
+                                        <span class="font-momo text-2xl lg:text-3xl text-brandCeleste leading-none block">99.6%</span>
+                                        <span class="text-[0.58rem] font-subheadings font-bold text-brandCeleste uppercase block mt-0.5">Part Accuracy</span>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <h4 class="font-subheadings font-bold text-xs lg:text-sm text-brandOscuro">
+                                            99.6% NAGS &amp; ADAS Part Lookup Accuracy
+                                        </h4>
+                                        <p class="font-body text-[0.72rem] text-brandOscuro/75 leading-snug mt-0.5">
+                                            Increased part matching from <strong>88.0% to 99.6%</strong> and 1st-contact scheduling from <strong>40% to 88%</strong>, eliminating dry runs and misordered windshield mobile truck rolls.
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ==========================================================================
+                 SLIDE 2: HOW WE OUTPERFORM IN AUTO GLASS (WORKFLOW + REAL-TIME INTELLIGENCE)
+                 ========================================================================== -->
+            <section class="slide" data-slide="1" data-label="02. Auto Glass Operations &amp; Intelligence">
+                <div class="w-full max-w-[1540px] relative z-20 flex flex-col justify-center">
+                    
+                    <!-- Top Header -->
+                    <div class="mb-4 text-left flex flex-col lg:flex-row lg:items-end justify-between gap-2">
+                        <div>
+                            <div class="inline-flex items-center gap-2 text-brandCeleste font-subheadings uppercase text-xs font-bold tracking-widest mb-1">
+                                <span class="material-symbols-outlined text-base">build_circle</span> 01 | Operational Execution &amp; Floor Intelligence
+                            </div>
+                            <h2 class="font-subheadings font-extrabold text-2xl lg:text-4xl text-brandOscuro tracking-tight leading-tight">
+                                TURNING INBOUND PRICE-CHECKS INTO <span class="text-brandCeleste">BOOKED WORK ORDERS</span>
+                            </h2>
+                        </div>
+                        <p class="font-body text-xs text-brandOscuro/75 max-w-xl leading-relaxed">
+                            Agnostic integration with <strong>Omega EDI, CCC ONE, GlasPacLX, Mainstreet, or proprietary enterprise systems</strong>. Offloading counter phones to protect installation bay schedules and capture ADAS recalibration margins.
+                        </p>
+                    </div>
+
+                    <!-- Asymmetric Two-Wing Architecture -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                        
+                        <!-- Left Wing (6 Cols): Shop Bay & Technician Protection -->
+                        <div class="col-span-6 bg-white p-5 rounded-3xl border border-brandCeleste/25 shadow-lg flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between pb-3 mb-3.5 border-b border-brandOscuro/10">
+                                    <div class="flex items-center gap-2.5">
+                                        <span class="w-9 h-9 rounded-xl bg-brandCeleste/10 text-brandCeleste flex items-center justify-center">
+                                            <span class="material-symbols-outlined text-xl">storefront</span>
+                                        </span>
+                                        <div>
+                                            <h3 class="font-subheadings font-extrabold text-sm lg:text-base text-brandOscuro uppercase tracking-wide">
+                                                Service Bay &amp; Technician Protection
+                                            </h3>
+                                            <p class="font-body text-[0.68rem] text-brandOscuro/60">
+                                                Centralized intake for retail walk-ins, commercial fleets &amp; mobile vans
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <span class="bg-brandCeleste/10 text-brandCeleste text-[0.65rem] font-subheadings font-bold px-2.5 py-1 rounded-full uppercase">
+                                        Intake to Dispatch
+                                    </span>
+                                </div>
+
+                                <div class="space-y-3">
+                                    <div class="p-3 rounded-2xl bg-brandClaro border border-brandOscuro/5 flex items-start gap-3">
+                                        <span class="material-symbols-outlined text-brandCeleste text-xl shrink-0 mt-0.5">phone_disabled</span>
+                                        <div>
+                                            <h4 class="font-subheadings font-bold text-xs lg:text-sm text-brandOscuro">
+                                                1. Offload Phone Burden Away from Shop Counters
+                                            </h4>
+                                            <p class="font-body text-[0.72rem] text-brandOscuro/75 leading-snug mt-0.5">
+                                                When store managers and installers answer ringing phones while prepping glass, calls drop and urethane cure windows stall. Telat centralizes all inbound retail and policyholder traffic, including <strong>Sunday and storm surge coverage</strong>.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-3 rounded-2xl bg-brandClaro border border-brandOscuro/5 flex items-start gap-3">
+                                        <span class="material-symbols-outlined text-brandNaranja text-xl shrink-0 mt-0.5">point_of_sale</span>
+                                        <div>
+                                            <h4 class="font-subheadings font-bold text-xs lg:text-sm text-brandOscuro">
+                                                2. Resolving Price Resistance &amp; Insurance Deductible Thresholds
+                                            </h4>
+                                            <p class="font-body text-[0.72rem] text-brandOscuro/75 leading-snug mt-0.5">
+                                                Specialists compare cash pricing directly against policyholder deductibles ($100 glass endorsements vs. $500 comp), explain aftermarket vs. OEM fitment, and bundle static/dynamic recalibration, raising Quote-to-Work-Order from <strong>33.9% to 68.3% peak</strong>.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-3 rounded-2xl bg-brandClaro border border-brandOscuro/5 flex items-start gap-3">
+                                        <span class="material-symbols-outlined text-brandCeleste text-xl shrink-0 mt-0.5">pin_drop</span>
+                                        <div>
+                                            <h4 class="font-subheadings font-bold text-xs lg:text-sm text-brandOscuro">
+                                                3. Precision 17-Digit VIN, NAGS &amp; Sensor Decoding
+                                            </h4>
+                                            <p class="font-body text-[0.72rem] text-brandOscuro/75 leading-snug mt-0.5">
+                                                Upfront mapping of rain/humidity sensors, acoustic glass interlayers, HUD cutouts, and camera brackets lifts 24-to-48h dispatch fulfillment from <strong>74.0% to 96.8%</strong> and slashes delay cancellations from <strong>12.0% down to 1.5%</strong>.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bottom Mini KPI Bar Left -->
+                            <div class="grid grid-cols-3 gap-2.5 pt-3 mt-3 border-t border-brandOscuro/10 text-center">
+                                <div class="bg-brandCeleste/5 p-2 rounded-xl border border-brandCeleste/20">
+                                    <span class="font-momo text-lg text-brandCeleste block leading-none">88%</span>
+                                    <span class="text-[0.6rem] font-subheadings font-bold text-brandOscuro/70 uppercase">1st-Call Scheduling (vs 40%)</span>
+                                </div>
+                                <div class="bg-brandNaranja/5 p-2 rounded-xl border border-brandNaranja/20">
+                                    <span class="font-momo text-lg text-brandNaranja block leading-none">96.8%</span>
+                                    <span class="text-[0.6rem] font-subheadings font-bold text-brandOscuro/70 uppercase">24-48h Dispatch Rate</span>
+                                </div>
+                                <div class="bg-emerald-50 p-2 rounded-xl border border-emerald-200">
+                                    <span class="font-momo text-lg text-emerald-700 block leading-none">1.5%</span>
+                                    <span class="text-[0.6rem] font-subheadings font-bold text-emerald-800 uppercase">Delay Cancels (vs 12%)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Wing (6 Cols): Real-Time Intake Intelligence & Floor Adherence -->
+                        <div class="col-span-6 bg-white p-5 rounded-3xl border border-brandNaranja/25 shadow-lg flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between pb-3 mb-3.5 border-b border-brandOscuro/10">
+                                    <div class="flex items-center gap-2.5">
+                                        <span class="w-9 h-9 rounded-xl bg-brandNaranja/10 text-brandNaranja flex items-center justify-center">
+                                            <span class="material-symbols-outlined text-xl">psychology</span>
+                                        </span>
+                                        <div>
+                                            <h3 class="font-subheadings font-extrabold text-sm lg:text-base text-brandOscuro uppercase tracking-wide">
+                                                Intake Intelligence &amp; Floor Governance
+                                            </h3>
+                                            <p class="font-body text-[0.68rem] text-brandOscuro/60">
+                                                Proprietary software suite embedded across dedicated agent pods
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <span class="bg-brandNaranja/10 text-brandNaranja text-[0.65rem] font-subheadings font-bold px-2.5 py-1 rounded-full uppercase">
+                                        Zero Client Licensing Fees
+                                    </span>
+                                </div>
+
+                                <div class="space-y-3">
+                                    <div class="p-3 rounded-2xl bg-brandClaro border border-brandOscuro/5 flex items-start gap-3">
+                                        <span class="material-symbols-outlined text-brandNaranja text-xl shrink-0 mt-0.5">tune</span>
+                                        <div>
+                                            <h4 class="font-subheadings font-bold text-xs lg:text-sm text-brandOscuro">
+                                                1. Real-Time Glass Option &amp; Recalibration Assistant
+                                            </h4>
+                                            <p class="font-body text-[0.72rem] text-brandOscuro/75 leading-snug mt-0.5">
+                                                Live on-screen prompts guide specialists through complex trim options (heated wiper parks, lane departure cameras, acoustic interlayers), eliminating hold times and preventing ADAS recalibration margin leakage.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-3 rounded-2xl bg-brandClaro border border-brandOscuro/5 flex items-start gap-3">
+                                        <span class="material-symbols-outlined text-brandCeleste text-xl shrink-0 mt-0.5">verified</span>
+                                        <div>
+                                            <h4 class="font-subheadings font-bold text-xs lg:text-sm text-brandOscuro">
+                                                2. 100% AI-QA Auditing on Operational Intake Gates
+                                            </h4>
+                                            <p class="font-body text-[0.72rem] text-brandOscuro/75 leading-snug mt-0.5">
+                                                Our automated QA engine audits <strong>100% of calls</strong> against your auto glass intake rubric: 17-digit VIN confirmation, exact NAGS part mapping, deductible vs. cash price presentation, and shop bay / mobile time-slot confirmation.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-3 rounded-2xl bg-brandClaro border border-brandOscuro/5 flex items-start gap-3">
+                                        <span class="material-symbols-outlined text-brandNaranja text-xl shrink-0 mt-0.5">monitoring</span>
+                                        <div>
+                                            <h4 class="font-subheadings font-bold text-xs lg:text-sm text-brandOscuro">
+                                                3. Intraday Interval Precision &amp; Peak Queue Absorption
+                                            </h4>
+                                            <p class="font-body text-[0.72rem] text-brandOscuro/75 leading-snug mt-0.5">
+                                                WFM interval precision maintains <strong>&gt;92% schedule adherence</strong>, absorbing Monday morning insurance First Notice of Loss (FNOL) spikes and retail weather surges without letting callers bounce to competitors.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bottom Mini KPI Bar Right -->
+                            <div class="grid grid-cols-3 gap-2.5 pt-3 mt-3 border-t border-brandOscuro/10 text-center">
+                                <div class="bg-brandNaranja/5 p-2 rounded-xl border border-brandNaranja/20">
+                                    <span class="font-momo text-lg text-brandNaranja block leading-none">100%</span>
+                                    <span class="text-[0.6rem] font-subheadings font-bold text-brandOscuro/70 uppercase">Calls Audited by AI-QA</span>
+                                </div>
+                                <div class="bg-brandCeleste/5 p-2 rounded-xl border border-brandCeleste/20">
+                                    <span class="font-momo text-lg text-brandCeleste block leading-none">&gt;92%</span>
+                                    <span class="text-[0.6rem] font-subheadings font-bold text-brandOscuro/70 uppercase">Schedule Adherence</span>
+                                </div>
+                                <div class="bg-emerald-50 p-2 rounded-xl border border-emerald-200">
+                                    <span class="font-momo text-lg text-emerald-700 block leading-none">$350+</span>
+                                    <span class="text-[0.6rem] font-subheadings font-bold text-emerald-800 uppercase">ADAS Recalibration Ticket</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==========================================================================
+                 SLIDE 3: ENTERPRISE COMPLIANCE & INSURANCE TPA SHIELDING (9 NORMAS)
+                 ========================================================================== -->
+            <section class="slide" data-slide="2" data-label="03. Compliance &amp; Insurance Shielding">
+                <div class="w-full max-w-[1540px] relative z-20 flex flex-col justify-center">
+                    <div class="mb-3.5 text-left">
+                        <div class="inline-flex items-center gap-2 text-brandNaranja font-subheadings uppercase text-xs font-bold tracking-widest mb-1">
+                            <span class="material-symbols-outlined text-base">shield</span> 02 | Insurance TPA Compliance &amp; Enterprise Governance
+                        </div>
+                        <h2 class="font-subheadings font-extrabold text-2xl lg:text-4xl leading-tight text-brandOscuro tracking-tight">
+                            ENTERPRISE COMPLIANCE &amp; <span class="text-brandNaranja">INSURANCE TPA SHIELDING</span>
+                        </h2>
+                        <p class="font-body text-xs text-brandOscuro/75 max-w-4xl mt-1">
+                            Audited PCI-DSS cardholder tokenization for over-the-phone deductibles, ISO 27001 data protection for policyholder PII, and ISO 22301 storm-surge failover across 4 binational hubs.
+                        </p>
+                    </div>
+
+                    <!-- 3x3 Grid of 9 Official Certifications with Authentic Badges -->
+                    <div class="grid grid-cols-3 gap-3.5 lg:gap-4 mb-3">
+                        <div class="bg-white p-3.5 lg:p-4 rounded-2xl border border-brandCeleste/25 shadow-sm flex items-start gap-3.5 hover:border-brandCeleste transition-colors">
+                            <img src="../../02-Direccion-y-Estrategia/assets/certificaciones/cert_iso_9001.png" alt="ISO 9001:2015" class="w-11 h-11 object-contain shrink-0">
+                            <div class="min-w-0 flex-1">
+                                <div class="flex items-center justify-between gap-1">
+                                    <h5 class="font-subheadings font-bold text-xs lg:text-sm text-brandOscuro">ISO 9001:2015</h5>
+                                    <span class="text-[0.55rem] font-bold bg-brandCeleste/10 text-brandCeleste px-1.5 py-0.5 rounded uppercase">Quality Management</span>
+                                </div>
+                                <div class="text-[0.62rem] font-bold text-brandCeleste uppercase">Standardized Intake Protocols</div>
+                                <p class="font-body text-[0.68rem] text-brandOscuro/70 mt-0.5 leading-snug">Audited intake workflows, 17-digit VIN verification gates, and continuous defect reduction to eliminate retail booking errors.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-3.5 lg:p-4 rounded-2xl border border-brandCeleste/25 shadow-sm flex items-start gap-3.5 hover:border-brandCeleste transition-colors">
+                            <img src="../../02-Direccion-y-Estrategia/assets/certificaciones/cert_iso_18295.png" alt="ISO 18295-1:2017" class="w-11 h-11 object-contain shrink-0">
+                            <div class="min-w-0 flex-1">
+                                <div class="flex items-center justify-between gap-1">
+                                    <h5 class="font-subheadings font-bold text-xs lg:text-sm text-brandOscuro">ISO 18295-1:2017</h5>
+                                    <span class="text-[0.55rem] font-bold bg-brandCeleste/10 text-brandCeleste px-1.5 py-0.5 rounded uppercase">Contact Center Standard</span>
+                                </div>
+                                <div class="text-[0.62rem] font-bold text-brandCeleste uppercase">Queue Responsiveness &amp; SLAs</div>
+                                <p class="font-body text-[0.68rem] text-brandOscuro/70 mt-0.5 leading-snug">International benchmark dedicated to contact center responsiveness, sub-3.5% call abandonment targets, and first-contact resolution.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-3.5 lg:p-4 rounded-2xl border border-purple-200 shadow-sm flex items-start gap-3.5 hover:border-purple-300 transition-colors">
+                            <img src="../../02-Direccion-y-Estrategia/assets/certificaciones/cert_modelo_cic.png" alt="Modelo Global CIC v3.0" class="h-10 w-auto max-w-[88px] object-contain shrink-0">
+                            <div class="min-w-0 flex-1">
+                                <div class="flex items-center justify-between gap-1">
+                                    <h5 class="font-subheadings font-bold text-xs lg:text-sm text-brandOscuro">Modelo Global CIC v3.0</h5>
+                                    <span class="text-[0.55rem] font-bold bg-purple-50 text-purple-700 px-1.5 py-0.5 rounded uppercase">Omnichannel Model</span>
+                                </div>
+                                <div class="text-[0.62rem] font-bold text-purple-700 uppercase">Seamless Customer Interaction</div>
+                                <p class="font-body text-[0.68rem] text-brandOscuro/70 mt-0.5 leading-snug">Synchronized intake execution across inbound voice quotes, web-to-call leads, and automated SMS appointment reminders.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-3.5 lg:p-4 rounded-2xl border border-emerald-200 shadow-sm flex items-start gap-3.5 hover:border-emerald-300 transition-colors">
+                            <img src="../../02-Direccion-y-Estrategia/assets/certificaciones/cert_iso_27001.png" alt="ISO/IEC 27001:2022" class="w-11 h-11 object-contain shrink-0">
+                            <div class="min-w-0 flex-1">
+                                <div class="flex items-center justify-between gap-1">
+                                    <h5 class="font-subheadings font-bold text-xs lg:text-sm text-brandOscuro">ISO/IEC 27001:2022</h5>
+                                    <span class="text-[0.55rem] font-bold bg-emerald-50 text-emerald-700 px-1.5 py-0.5 rounded uppercase">Data Security (ISMS)</span>
+                                </div>
+                                <div class="text-[0.62rem] font-bold text-emerald-700 uppercase">Policyholder &amp; Fleet PII Protection</div>
+                                <p class="font-body text-[0.68rem] text-brandOscuro/70 mt-0.5 leading-snug">Rigorous data encryption, perimeter firewalls, and audited access controls protecting driver records and corporate fleet accounts.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-3.5 lg:p-4 rounded-2xl border border-emerald-200 shadow-sm flex items-start gap-3.5 hover:border-emerald-300 transition-colors">
+                            <img src="../../02-Direccion-y-Estrategia/assets/certificaciones/cert_pci_dss.png" alt="PCI-DSS v4.0" class="h-10 w-auto max-w-[85px] object-contain shrink-0">
+                            <div class="min-w-0 flex-1">
+                                <div class="flex items-center justify-between gap-1">
+                                    <h5 class="font-subheadings font-bold text-xs lg:text-sm text-brandOscuro">PCI-DSS v4.0</h5>
+                                    <span class="text-[0.55rem] font-bold bg-emerald-50 text-emerald-800 px-1.5 py-0.5 rounded uppercase">Payment Security</span>
+                                </div>
+                                <div class="text-[0.62rem] font-bold text-emerald-700 uppercase">Phone Deductible Collection</div>
+                                <p class="font-body text-[0.68rem] text-brandOscuro/70 mt-0.5 leading-snug">Clean-desk certified environment for collecting insurance deductibles ($50, $100, $500) and retail deposits without storing card PANs.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-3.5 lg:p-4 rounded-2xl border border-cyan-200 shadow-sm flex items-start gap-3.5 hover:border-cyan-300 transition-colors">
+                            <img src="../../02-Direccion-y-Estrategia/assets/certificaciones/cert_iso_20000.png" alt="ISO/IEC 20000-1:2018" class="w-11 h-11 object-contain shrink-0">
+                            <div class="min-w-0 flex-1">
+                                <div class="flex items-center justify-between gap-1">
+                                    <h5 class="font-subheadings font-bold text-xs lg:text-sm text-brandOscuro">ISO/IEC 20000-1:2018</h5>
+                                    <span class="text-[0.55rem] font-bold bg-cyan-50 text-cyan-800 px-1.5 py-0.5 rounded uppercase">ITSM Infrastructure</span>
+                                </div>
+                                <div class="text-[0.62rem] font-bold text-cyan-800 uppercase">Secure CRM &amp; VDI Connectivity</div>
+                                <p class="font-body text-[0.68rem] text-brandOscuro/70 mt-0.5 leading-snug">High-availability VDI and VPN pipelines integrating seamlessly into Omega EDI, CCC ONE, GlasPacLX, or proprietary client platforms.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-3.5 lg:p-4 rounded-2xl border border-brandNaranja/25 shadow-sm flex items-start gap-3.5 hover:border-brandNaranja transition-colors">
+                            <img src="../../02-Direccion-y-Estrategia/assets/certificaciones/cert_iso_22301.png" alt="ISO 22301:2019" class="w-11 h-11 object-contain shrink-0">
+                            <div class="min-w-0 flex-1">
+                                <div class="flex items-center justify-between gap-1">
+                                    <h5 class="font-subheadings font-bold text-xs lg:text-sm text-brandOscuro">ISO 22301:2019</h5>
+                                    <span class="text-[0.55rem] font-bold bg-brandNaranja/10 text-brandNaranja px-1.5 py-0.5 rounded uppercase">Business Continuity</span>
+                                </div>
+                                <div class="text-[0.62rem] font-bold text-brandNaranja uppercase">Storm Surge &amp; Hail Failover</div>
+                                <p class="font-body text-[0.68rem] text-brandOscuro/70 mt-0.5 leading-snug">Active redundancy across 4 sites (CDMX, Juárez &amp; El Paso) guaranteeing zero-downtime failover during severe regional hail storms.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-3.5 lg:p-4 rounded-2xl border border-amber-200 shadow-sm flex items-start gap-3.5 hover:border-amber-300 transition-colors">
+                            <img src="../../02-Direccion-y-Estrategia/assets/certificaciones/cert_iso_37001.png" alt="ISO 37001:2016" class="w-11 h-11 object-contain shrink-0">
+                            <div class="min-w-0 flex-1">
+                                <div class="flex items-center justify-between gap-1">
+                                    <h5 class="font-subheadings font-bold text-xs lg:text-sm text-brandOscuro">ISO 37001:2016</h5>
+                                    <span class="text-[0.55rem] font-bold bg-amber-50 text-amber-800 px-1.5 py-0.5 rounded uppercase">Corporate Governance</span>
+                                </div>
+                                <div class="text-[0.62rem] font-bold text-amber-800 uppercase">Vendor Integrity &amp; Transparency</div>
+                                <p class="font-body text-[0.68rem] text-brandOscuro/70 mt-0.5 leading-snug">Strict anti-bribery standards meeting the rigorous compliance frameworks of publicly traded automotive corporations.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-3.5 lg:p-4 rounded-2xl border border-rose-200 shadow-sm flex items-start gap-3.5 hover:border-rose-300 transition-colors">
+                            <img src="../../02-Direccion-y-Estrategia/assets/certificaciones/cert_esr_2026.png" alt="Distintivo ESR 2026" class="h-10 w-auto max-w-[84px] object-contain shrink-0">
+                            <div class="min-w-0 flex-1">
+                                <div class="flex items-center justify-between gap-1">
+                                    <h5 class="font-subheadings font-bold text-xs lg:text-sm text-brandOscuro">Distintivo ESR 2026</h5>
+                                    <span class="text-[0.55rem] font-bold bg-rose-50 text-rose-700 px-1.5 py-0.5 rounded uppercase">Workplace Stability</span>
+                                </div>
+                                <div class="text-[0.62rem] font-bold text-rose-700 uppercase">Low Attrition &amp; Talent Retention</div>
+                                <p class="font-body text-[0.68rem] text-brandOscuro/70 mt-0.5 leading-snug">Preserving specialized auto glass knowledge, reducing re-training cycles, and maintaining seasoned booking agents on your queues.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Governance Banner -->
+                    <div class="bg-white/95 border border-brandOscuro/10 rounded-2xl px-5 py-2.5 flex items-center justify-between gap-4 shadow-xs">
+                        <div class="flex items-center gap-2.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-brandCeleste shrink-0"></span>
+                            <span class="font-subheadings text-xs font-bold text-brandOscuro">
+                                Insurance Claims &amp; TPA Protocol Alignment:
+                            </span>
+                            <span class="font-body text-xs text-brandOscuro/75">
+                                Seamless 3-way conference calling and claim intake for LYNX Services, Safelite Solutions, and major carrier comprehensive glass endorsements.
+                            </span>
+                        </div>
+                        <span class="bg-emerald-50 border border-emerald-200 text-emerald-800 text-[0.65rem] font-subheadings font-bold px-3 py-1 rounded-full shrink-0">
+                            PCI-DSS v4.0 · ISO 27001 · ISO 22301
+                        </span>
+                    </div>
+                </div>
+            </section>
+                </div>
+            </section>
+
+            <!-- ==========================================================================
+                 SLIDE 4: BINATIONAL FOOTPRINT, 30-DAY PILOT & DIRECT CONTACT (MAURICIO CRUZ)
+                 ========================================================================== -->
+            <section class="slide" data-slide="3" data-label="04. Binational Footprint &amp; Executive Contact">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full max-w-[1540px] items-center relative z-20">
+                    
+                    <!-- Left Column: Binational Sites & Fast-Track Pilot -->
+                    <div class="col-span-6 flex flex-col justify-center text-left space-y-3.5">
+                        <div>
+                            <div class="inline-flex items-center gap-2 text-brandCeleste font-subheadings uppercase text-xs font-bold tracking-widest mb-1">
+                                <span class="material-symbols-outlined text-base">rocket_launch</span> 03 | Binational Scale &amp; Low-Risk Validation
+                            </div>
+                            <h2 class="font-subheadings font-extrabold text-2xl lg:text-4xl leading-tight text-brandOscuro tracking-tight">
+                                READY TO SCALE &amp; <span class="text-brandNaranja">OUTPERFORM IN 30 DAYS</span>
+                            </h2>
+                        </div>
+
+                        <!-- Binational Footprint Card -->
+                        <div class="bg-white p-4 rounded-2xl border border-brandCeleste/25 shadow-md space-y-2.5">
+                            <div class="flex items-center justify-between border-b border-brandOscuro/10 pb-2">
+                                <h4 class="font-subheadings font-bold text-xs lg:text-sm text-brandOscuro flex items-center gap-1.5">
+                                    <span class="material-symbols-outlined text-brandCeleste text-base">public</span> 4 Binational Operational Sites (ISO 22301 Redundancy)
+                                </h4>
+                                <span class="text-[0.62rem] font-subheadings font-extrabold text-brandCeleste bg-brandCeleste/10 px-2.5 py-0.5 rounded-full uppercase">
+                                    Mexico &amp; U.S. Footprint
+                                </span>
+                            </div>
+                            <div class="grid grid-cols-3 gap-2.5 text-xs font-body">
+                                <div class="p-2.5 rounded-xl bg-brandClaro border border-brandOscuro/5">
+                                    <strong class="font-subheadings text-brandOscuro block text-xs">Mexico City (2 Sites)</strong>
+                                    <span class="text-[0.68rem] text-brandOscuro/75 leading-tight block mt-0.5">Insurgentes Sur &amp; Monterrey St. (Col. Roma) · Core Operations</span>
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-brandClaro border border-brandOscuro/5">
+                                    <strong class="font-subheadings text-brandOscuro block text-xs">Ciudad Juárez, MX</strong>
+                                    <span class="text-[0.68rem] text-brandOscuro/75 leading-tight block mt-0.5">Northern Frontier Hub · Native Bilingual Delivery</span>
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-brandNaranja/5 border border-brandNaranja/20">
+                                    <strong class="font-subheadings text-brandNaranja block text-xs">El Paso, Texas (USA)</strong>
+                                    <span class="text-[0.68rem] text-brandOscuro/80 leading-tight block mt-0.5">Binational U.S. Gateway &amp; BCP Failover Site</span>
+                                </div>
+                            </div>
+                            <div class="p-2 bg-brandCeleste/5 rounded-xl border border-brandCeleste/20 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-brandCeleste text-base shrink-0">groups</span>
+                                <p class="font-body text-[0.7rem] text-brandOscuro/90 leading-snug">
+                                    <strong>Active capacity:</strong> +650 bilingual floor specialists with immediate absorption and ramp-up capacity of <strong>+200 seats in under 30 days</strong>.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- 3-Step Head-to-Head Pilot -->
+                        <div class="bg-white p-4 rounded-2xl border border-brandOscuro/10 shadow-md space-y-2.5">
+                            <div class="flex items-center justify-between">
+                                <h4 class="font-subheadings font-bold text-xs lg:text-sm text-brandOscuro uppercase tracking-wide flex items-center gap-1.5">
+                                    <span class="material-symbols-outlined text-brandNaranja text-base">speed</span> 3-Step Head-to-Head Pilot Framework
+                                </h4>
+                                <span class="text-[0.62rem] font-subheadings font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
+                                    14 to 30 Days to Launch
+                                </span>
+                            </div>
+
+                            <div class="grid grid-cols-3 gap-2.5">
+                                <div class="p-2.5 rounded-xl bg-brandClaro border border-brandOscuro/5">
+                                    <div class="font-subheadings font-bold text-xs text-brandCeleste mb-0.5">1. Targeted Queue</div>
+                                    <p class="font-body text-[0.68rem] text-brandOscuro/75 leading-snug">Assign overflow traffic, Sunday coverage, or a regional store group with zero disruption.</p>
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-brandClaro border border-brandOscuro/5">
+                                    <div class="font-subheadings font-bold text-xs text-brandNaranja mb-0.5">2. Live Benchmark</div>
+                                    <p class="font-body text-[0.68rem] text-brandOscuro/75 leading-snug">Compare our Quote-to-Work-Order conversion and abandonment cut directly against your U.S. floor.</p>
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-brandClaro border border-brandOscuro/5">
+                                    <div class="font-subheadings font-bold text-xs text-emerald-700 mb-0.5">3. Scale with ROI</div>
+                                    <p class="font-body text-[0.68rem] text-brandOscuro/75 leading-snug">Expand dedicated bilingual pods backed by 100% AI-QA auditing and nearshore unit economics.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Direct Executive Contact Card (Mauricio Cruz) -->
+                    <div class="col-span-6 flex justify-center">
+                        <div class="w-full max-w-lg bg-white rounded-3xl border-2 border-brandCeleste/30 shadow-2xl overflow-hidden flex flex-col justify-between">
+                            
+                            <!-- Card Top Banner -->
+                            <div class="bg-gradient-to-r from-brandOscuro to-stone-800 text-white p-5 relative overflow-hidden">
+                                <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-brandCeleste/15 rounded-full blur-xl pointer-events-none"></div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-[0.65rem] font-subheadings font-extrabold uppercase tracking-widest text-brandAmarillo bg-brandAmarillo/10 border border-brandAmarillo/30 px-3 py-0.5 rounded-full">
+                                        Direct Executive Contact
+                                    </span>
+                                    <div class="bg-white/95 px-3 py-1 rounded-xl shadow-sm border border-white/20 flex items-center justify-center">
+                                        <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-5 w-auto object-contain">
+                                    </div>
+                                </div>
+                                <h3 class="font-subheadings font-extrabold text-2xl text-white">Mauricio Cruz</h3>
+                                <p class="font-body text-xs text-white/85 font-semibold mt-0.5">Operations Director | Telat Group</p>
+                            </div>
+
+                            <!-- Contact Details Body -->
+                            <div class="p-5 space-y-3 font-body text-xs">
+                                <div class="flex items-center gap-3 p-3 rounded-xl bg-brandClaro border border-brandOscuro/10 hover:border-brandCeleste transition-colors">
+                                    <span class="material-symbols-outlined text-brandCeleste text-xl shrink-0">mail</span>
+                                    <div class="min-w-0 flex-1">
+                                        <div class="text-[0.62rem] font-bold text-brandOscuro/60 uppercase">Direct Executive Email</div>
+                                        <a href="mailto:mcruz@telat-group.com?subject=Executive%20Auto%20Glass%20Discovery%20Call%20-%20Telat%20Group" class="text-xs lg:text-sm font-bold text-brandCeleste hover:underline block">
+                                            mcruz@telat-group.com
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div class="p-3 rounded-xl bg-brandClaro border border-brandOscuro/10">
+                                        <div class="text-[0.62rem] font-bold text-brandOscuro/60 uppercase flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-xs text-brandNaranja">call</span> Office Line
+                                        </div>
+                                        <a href="tel:+525530985727" class="text-xs font-bold text-brandOscuro hover:text-brandNaranja block mt-0.5">
+                                            +52 (55) 3098 5727
+                                        </a>
+                                    </div>
+                                    <div class="p-3 rounded-xl bg-brandClaro border border-brandOscuro/10">
+                                        <div class="text-[0.62rem] font-bold text-brandOscuro/60 uppercase flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-xs text-emerald-600">smartphone</span> Direct Mobile
+                                        </div>
+                                        <a href="tel:+525522716071" class="text-xs font-bold text-brandOscuro hover:text-emerald-700 block mt-0.5">
+                                            +52 55 2271 6071
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="p-3 rounded-xl bg-brandClaro border border-brandOscuro/10">
+                                    <div class="text-[0.62rem] font-bold text-brandOscuro/60 uppercase flex items-center gap-1 mb-0.5">
+                                        <span class="material-symbols-outlined text-xs text-brandCeleste">location_on</span> Corporate Headquarters &amp; Operational Hubs
+                                    </div>
+                                    <p class="text-[0.72rem] text-brandOscuro/85 leading-snug">
+                                        Monterrey 149 &amp; Insurgentes Sur 263, Col. Roma Nte., Cuauhtémoc, 06700 Mexico City, CDMX · Plus Ciudad Juárez, MX &amp; El Paso, TX (USA).
+                                    </p>
+                                </div>
+
+                                <div class="pt-1 grid grid-cols-2 gap-2.5 no-print">
+                                    <a href="mailto:mcruz@telat-group.com?subject=Executive%20Auto%20Glass%20Discovery%20Call%20-%20Telat%20Group" class="bg-brandNaranja hover:bg-brandNaranja/90 text-white font-subheadings font-bold py-2.5 px-3 rounded-xl shadow-md flex items-center justify-center gap-1.5 text-xs transition-all">
+                                        <span class="material-symbols-outlined text-sm">calendar_month</span> Schedule Call
+                                    </a>
+                                    <a href="./Auto_Glass_Executive_Pitch_Telat.pdf" download class="bg-white hover:bg-brandClaro text-brandOscuro font-subheadings font-bold py-2.5 px-3 rounded-xl border border-brandOscuro/15 shadow-sm flex items-center justify-center gap-1.5 text-xs transition-all">
+                                        <span class="material-symbols-outlined text-sm text-brandCeleste">download</span> Download PDF
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FOOTER / SLIDE CONTROLS -->
+        <footer class="flex justify-between items-center px-10 py-2.5 z-40 border-t border-brandOscuro/5 bg-brandClaro/95 backdrop-blur-md relative font-subheadings">
+            <div class="text-xs font-body text-brandOscuro/60 flex items-center gap-2">
+                <span class="font-bold text-brandOscuro/80">Telat Group</span>
+                <span class="text-brandOscuro/20">•</span>
+                <span>U.S. Auto Glass Operations &amp; Revenue Conversion Pitch</span>
+                <span class="text-brandOscuro/20">•</span>
+                <span class="text-[0.65rem] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-bold">Executive Brief</span>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <button onclick="prevSlide()" class="w-9 h-9 hover:bg-brandOscuro/5 text-brandOscuro rounded-full flex items-center justify-center transition-all border border-brandOscuro/10 shadow-sm" aria-label="Previous Slide">
+                    <span class="material-symbols-outlined text-lg">arrow_back</span>
+                </button>
+                <div class="bg-white border border-brandOscuro/10 rounded-full px-3.5 py-1 text-xs font-bold text-brandOscuro/80 tracking-wider shadow-sm flex items-center gap-1">
+                    <span id="current-slide-num">01</span> <span class="text-brandOscuro/30">/</span> <span id="total-slides-num">04</span>
+                </div>
+                <button onclick="nextSlide()" class="w-9 h-9 hover:bg-brandOscuro/5 text-brandOscuro rounded-full flex items-center justify-center transition-all border border-brandOscuro/10 shadow-sm" aria-label="Next Slide">
+                    <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                </button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- PRESENTATION LOGIC JAVASCRIPT -->
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const drawerList = document.getElementById('drawerList');
+
+        function initDrawer() {
+            drawerList.innerHTML = '';
+            slides.forEach((slide, idx) => {
+                const label = slide.getAttribute('data-label') || `Slide ${idx + 1}`;
+                const btn = document.createElement('button');
+                btn.className = `w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-subheadings font-bold transition-all flex items-center gap-2 ${
+                    idx === currentSlide 
+                        ? 'bg-brandCeleste/10 text-brandCeleste border-l-4 border-brandCeleste' 
+                        : 'text-brandOscuro/80 hover:bg-brandOscuro/5'
+                }`;
+                const iconSpan = document.createElement('span');
+                iconSpan.className = 'material-symbols-outlined text-sm';
+                iconSpan.textContent = idx === 0 ? 'home' : 'label_important';
+                const textSpan = document.createElement('span');
+                textSpan.textContent = label;
+                btn.appendChild(iconSpan);
+                btn.appendChild(textSpan);
+                btn.onclick = () => {
+                    goToSlide(idx);
+                    toggleMenu();
+                };
+                drawerList.appendChild(btn);
+            });
+        }
+
+        function updateSlideUI() {
+            slides.forEach((slide, idx) => {
+                if (idx === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+
+            document.getElementById('current-slide-num').innerText = String(currentSlide + 1).padStart(2, '0');
+            document.getElementById('total-slides-num').innerText = String(totalSlides).padStart(2, '0');
+
+            const pct = ((currentSlide + 1) / totalSlides) * 100;
+            document.getElementById('top-progress-bar').style.width = `${pct}%`;
+
+            const drawerBtns = drawerList.querySelectorAll('button');
+            drawerBtns.forEach((btn, idx) => {
+                if (idx === currentSlide) {
+                    btn.className = 'w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-subheadings font-bold transition-all flex items-center gap-2 bg-brandCeleste/10 text-brandCeleste border-l-4 border-brandCeleste';
+                } else {
+                    btn.className = 'w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-subheadings font-bold transition-all flex items-center gap-2 text-brandOscuro/80 hover:bg-brandOscuro/5';
+                }
+            });
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlideUI();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlideUI();
+            }
+        }
+
+        function goToSlide(idx) {
+            if (idx >= 0 && idx < totalSlides) {
+                currentSlide = idx;
+                updateSlideUI();
+            }
+        }
+
+        function toggleMenu() {
+            const drawer = document.getElementById('executiveDrawer');
+            const overlay = document.getElementById('drawerOverlay');
+            const isOpen = !drawer.classList.contains('translate-x-full');
+
+            if (isOpen) {
+                drawer.classList.add('translate-x-full');
+                overlay.classList.add('hidden');
+            } else {
+                drawer.classList.remove('translate-x-full');
+                overlay.classList.remove('hidden');
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                prevSlide();
+            } else if (e.key === 'Home') {
+                goToSlide(0);
+            } else if (e.key === 'End') {
+                goToSlide(totalSlides - 1);
+            } else if (e.key === 'Escape') {
+                const drawer = document.getElementById('executiveDrawer');
+                if (!drawer.classList.contains('translate-x-full')) {
+                    toggleMenu();
+                }
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initDrawer();
+            updateSlideUI();
+        });
+    </script>
+</body>
+</html>

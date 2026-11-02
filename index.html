@@ -196,7 +196,7 @@
                     <!-- Métricas Rápidas -->
                     <div class="flex items-center gap-2 sm:gap-3 self-start sm:self-auto bg-black/30 p-2 sm:p-3 rounded-xl border border-white/5">
                         <div class="text-center px-3 py-1">
-                            <span class="block text-lg sm:text-xl font-black text-brandCeleste font-heading" id="totalDecksCount">12</span>
+                            <span class="block text-lg sm:text-xl font-black text-brandCeleste font-heading" id="totalDecksCount">14</span>
                             <span class="text-[10px] text-gray-400 uppercase font-semibold">Decks</span>
                         </div>
                         <div class="h-7 w-px bg-white/10"></div>
@@ -216,7 +216,7 @@
                 <div class="space-y-3 pt-2">
                     <div class="relative">
                         <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
-                        <input type="text" id="searchInput" placeholder="Buscar por cliente (TIP, Instituto, ViaPath...), WFM, IA, tarifas..." class="w-full bg-[#181817] border border-white/15 rounded-xl pl-10 pr-10 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brandCeleste shadow-inner transition-colors">
+                        <input type="text" id="searchInput" placeholder="Buscar por cliente (Auto Glass, Safelite, TIP, Instituto, ViaPath...), WFM, IA..." class="w-full bg-[#181817] border border-white/15 rounded-xl pl-10 pr-10 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brandCeleste shadow-inner transition-colors">
                         <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white text-xs p-1">
                             <i class="fa-solid fa-xmark"></i>
                         </button>
@@ -225,10 +225,10 @@
                     <!-- Botones de Categoría con Scroll Horizontal en Móvil -->
                     <div class="flex items-center gap-2 overflow-x-auto pb-1.5 no-scrollbar scroll-smooth">
                         <button onclick="filterCategory('all')" class="cat-filter-btn whitespace-nowrap px-3.5 py-2 rounded-xl text-xs font-semibold bg-brandCeleste text-white shadow-sm transition-all" data-cat="all">
-                            Todas (<span id="countAll">12</span>)
+                            Todas (<span id="countAll">14</span>)
                         </button>
                         <button onclick="filterCategory('01-comercial')" class="cat-filter-btn whitespace-nowrap px-3.5 py-2 rounded-xl text-xs font-semibold bg-white/5 text-gray-300 hover:bg-white/10 transition-all" data-cat="01-comercial">
-                            💼 Clientes & Propuestas (6)
+                            💼 Clientes & Propuestas (8)
                         </button>
                         <button onclick="filterCategory('02-estrategia')" class="cat-filter-btn whitespace-nowrap px-3.5 py-2 rounded-xl text-xs font-semibold bg-white/5 text-gray-300 hover:bg-white/10 transition-all" data-cat="02-estrategia">
                             🚀 Dirección & Estrategia (4)
@@ -251,10 +251,66 @@
                     <span class="w-7 h-7 rounded-lg bg-brandCeleste/20 text-brandCeleste flex items-center justify-center font-bold text-xs">01</span>
                     <h3 class="text-base sm:text-lg font-bold text-white tracking-wide">Propuestas Comerciales & Clientes Estratégicos</h3>
                 </div>
-                <span class="text-[11px] text-gray-400 font-medium">6 Cuentas</span>
+                <span class="text-[11px] text-gray-400 font-medium">8 Cuentas / Versiones</span>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+
+                <!-- CARD 0B: U.S. AUTO GLASS V2 (DARK 3D · 2-SLIDE PUNCH) -->
+                <div class="card-exec rounded-2xl p-5 flex flex-col justify-between space-y-4 presentation-card border-brandNaranja/50 shadow-lg shadow-brandNaranja/5" data-keywords="auto glass v2 safelite gerber caliber glass america dark 3d punch 2 slide intake engine mauricio cruz nags adas">
+                    <div class="space-y-3">
+                        <div class="flex items-start justify-between gap-2">
+                            <span class="badge bg-brandNaranja/15 text-brandNaranja border border-brandNaranja/40">
+                                <i class="fa-solid fa-bolt"></i> V2 Executive Punch (2-Slide)
+                            </span>
+                            <button onclick="copyDeckLink('./01-Propuestas-Comerciales/Auto-Glass-Executive-Pitch-V2/index.html', 'U.S. Auto Glass Pitch V2')" class="text-gray-400 hover:text-white text-xs p-1" title="Copiar enlace">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                        <h4 class="text-base sm:text-lg font-bold text-white leading-snug">Auto Glass Revenue & Intake Engine (V2 Dark 3D)</h4>
+                        <p class="text-xs text-gray-300 leading-relaxed font-normal">
+                            Versión EGM 2 láminas panorámicas HD en tema oscuro 3D de alto impacto: ataca directo la fuga de llamadas y mostrador, métricas +30.2% en tarjetas 3D, flujo cinético de admisión en 4 pasos y piloto de 30 días.
+                        </p>
+                    </div>
+                    <div class="space-y-2 pt-2 border-t border-white/5">
+                        <div class="grid grid-cols-2 gap-2">
+                            <a href="./01-Propuestas-Comerciales/Auto-Glass-Executive-Pitch-V2/index.html" class="btn-portal btn-naranja text-xs py-2.5 px-3">
+                                <i class="fa-solid fa-play"></i> V2 Deck (2 Slides)
+                            </a>
+                            <a href="./01-Propuestas-Comerciales/Auto-Glass-Executive-Pitch-V2/Auto_Glass_Executive_Pitch_V2_Telat.pdf" target="_blank" class="btn-portal btn-ghost text-xs py-2.5 px-3">
+                                <i class="fa-solid fa-file-pdf text-brandNaranja"></i> PDF V2 HD
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 0: U.S. AUTO GLASS EXECUTIVE PITCH (V1 4-SLIDE) -->
+                <div class="card-exec rounded-2xl p-5 flex flex-col justify-between space-y-4 presentation-card border-brandCeleste/40" data-keywords="auto glass safelite gerber caliber glass america autoglassnow omega edi english pitch mauricio cruz vin nags">
+                    <div class="space-y-3">
+                        <div class="flex items-start justify-between gap-2">
+                            <span class="badge bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                                <i class="fa-solid fa-car-side"></i> V1 Classic (4 Slides)
+                            </span>
+                            <button onclick="copyDeckLink('./01-Propuestas-Comerciales/Auto-Glass-Executive-Pitch/index.html', 'U.S. Auto Glass Executive Pitch')" class="text-gray-400 hover:text-white text-xs p-1" title="Copiar enlace">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                        <h4 class="text-base sm:text-lg font-bold text-white leading-snug">U.S. Auto Glass Executive Pitch (V1 Clásica 4-Slide)</h4>
+                        <p class="text-xs text-gray-300 leading-relaxed font-normal">
+                            Deck C-Suite de 4 láminas en tema claro corporativo: +30.2% ventas vs. equipos in-house, 68.3% conversión en Omega EDI, 9 certificaciones auditadas y red de sedes binacionales.
+                        </p>
+                    </div>
+                    <div class="space-y-2 pt-2 border-t border-white/5">
+                        <div class="grid grid-cols-2 gap-2">
+                            <a href="./01-Propuestas-Comerciales/Auto-Glass-Executive-Pitch/index.html" class="btn-portal btn-celeste text-xs py-2.5 px-3">
+                                <i class="fa-solid fa-play"></i> V1 Deck
+                            </a>
+                            <a href="./01-Propuestas-Comerciales/Auto-Glass-Executive-Pitch/Auto_Glass_Executive_Pitch_Telat.pdf" target="_blank" class="btn-portal btn-ghost text-xs py-2.5 px-3">
+                                <i class="fa-solid fa-file-pdf text-brandCeleste"></i> PDF V1 HD
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- CARD 1: TIP MÉXICO -->
                 <div class="card-exec rounded-2xl p-5 flex flex-col justify-between space-y-4 presentation-card" data-keywords="tip mexico net2alliance dids telefonia contact center direccion comercial propuesta arrendamiento automotriz">
