@@ -91,6 +91,31 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -2px rgba(0, 0, 0, 0.02);
         }
 
+        
+    @font-face {
+        font-family: 'Material Icons';
+        font-style: normal;
+        font-weight: 400;
+        src: url('assets/fonts/material-icons.woff2') format('woff2');
+        font-display: block;
+    }
+
+    .material-icons {
+        font-family: 'Material Icons' !important;
+        font-weight: normal;
+        font-style: normal;
+        font-size: 20px;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+        -webkit-font-feature-settings: 'liga';
+        -webkit-font-smoothing: antialiased;
+    }
+
         /* Screen Navigation Controls */
         #nav-controls {
             position: fixed;
@@ -629,7 +654,7 @@
                     <div class="p-5 rounded-2xl bg-white border border-brandOscuro/10 shadow-sm space-y-3">
                         <div class="flex items-center justify-between border-b border-brandOscuro/5 pb-2">
                             <div class="flex items-center gap-2">
-                                <span class="material-symbols-outlined text-brandNaranja text-base">trending_up</span>
+                                <span class="material-icons text-brandNaranja text-base">trending_up</span>
                                 <h4 class="font-subheadings font-bold text-xs uppercase tracking-wider text-brandOscuro">Human Talent Evolution</h4>
                             </div>
                             <span class="text-[10px] font-bold text-brandNaranja bg-brandNaranja/10 px-2.5 py-0.5 rounded-full font-subheadings">2005 - 2026</span>
@@ -671,7 +696,7 @@
                     <div class="p-4 rounded-2xl bg-white border border-brandOscuro/10 shadow-sm space-y-3">
                         <div class="flex items-center justify-between border-b border-brandOscuro/5 pb-2">
                             <div class="flex items-center gap-2">
-                                <span class="material-symbols-outlined text-brandCeleste text-base">map</span>
+                                <span class="material-icons text-brandCeleste text-base">map</span>
                                 <h4 class="font-subheadings font-bold text-xs uppercase tracking-wider text-brandOscuro">Operational Hubs Map</h4>
                             </div>
                             <span class="text-[10px] font-bold text-brandCeleste bg-brandCeleste/10 px-2.5 py-0.5 rounded-full font-subheadings">Binational US / MX</span>
@@ -703,15 +728,15 @@
                         <!-- 3 Location Cards -->
                         <div class="space-y-1.5 pt-1">
                             <div class="flex items-center gap-2.5 p-2 rounded-xl bg-slate-50 border border-slate-100 text-xs font-body font-medium text-brandOscuro">
-                                <span class="material-symbols-outlined text-brandNaranja text-sm">near_me</span>
+                                <span class="material-icons text-brandNaranja text-sm">near_me</span>
                                 <div><strong class="font-subheadings text-brandOscuro">CDMX (Roma):</strong> Corporate HQ &amp; Strategic Operations</div>
                             </div>
                             <div class="flex items-center gap-2.5 p-2 rounded-xl bg-slate-50 border border-slate-100 text-xs font-body font-medium text-brandOscuro">
-                                <span class="material-symbols-outlined text-brandCeleste text-sm">dns</span>
+                                <span class="material-icons text-brandCeleste text-sm">dns</span>
                                 <div><strong class="font-subheadings text-brandOscuro">Cd. Juárez:</strong> Critical Nearshore Support &amp; IT Hub</div>
                             </div>
                             <div class="flex items-center gap-2.5 p-2 rounded-xl bg-slate-50 border border-slate-100 text-xs font-body font-medium text-brandOscuro">
-                                <span class="material-symbols-outlined text-amber-600 text-sm">public</span>
+                                <span class="material-icons text-amber-600 text-sm">public</span>
                                 <div><strong class="font-subheadings text-brandOscuro">El Paso, TX:</strong> Bilingual Nearshore Hub (USA Gateway)</div>
                             </div>
                         </div>
@@ -719,7 +744,7 @@
 
                     <!-- Bottom AI Optimization Banner -->
                     <div class="p-3 bg-orange-50/80 rounded-xl border border-orange-200 flex items-center gap-2.5">
-                        <span class="material-symbols-outlined text-brandNaranja text-lg shrink-0">percent</span>
+                        <span class="material-icons text-brandNaranja text-lg shrink-0">percent</span>
                         <p class="font-body text-xs text-brandOscuro/80 leading-snug font-medium">
                             <strong>Human talent optimization with AI:</strong> Operation calibrated to 650+ high-performance specialists and high-productivity floor copilots.
                         </p>
@@ -884,40 +909,40 @@
             </div>
 
             <!-- Content Grid (Strict 2 Columns - SS4 Format) -->
-            <div class="grid grid-cols-12 gap-8 my-auto items-center">
+            <div class="grid grid-cols-12 gap-10 my-auto items-center">
                 
                 <!-- Left Column (7 cols): 4 Deployment Phases -->
-                <div class="col-span-7 space-y-3.5">
+                <div class="col-span-7 space-y-4">
                     
-                    <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-start gap-4">
-                        <span class="w-8 h-8 rounded-xl bg-brandCeleste text-white font-momo text-sm flex items-center justify-center flex-shrink-0">1</span>
-                        <div>
-                            <h4 class="font-subheadings font-bold text-sm text-brandOscuro">Diagnostic &amp; Process Profiling (Week 1)</h4>
-                            <p class="text-xs text-slate-500 mt-0.5 leading-relaxed">We analyze current call volumes, AHT patterns, manual review bottlenecks, and system integrations.</p>
+                    <div class="py-5 px-6 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center gap-5 hover:border-slate-300 transition-colors">
+                        <span class="w-12 h-12 rounded-xl bg-brandCeleste text-white font-momo text-lg flex items-center justify-center flex-shrink-0 shadow-sm">1</span>
+                        <div class="min-w-0">
+                            <h4 class="font-subheadings font-bold text-base text-brandOscuro">Diagnostic &amp; Process Profiling (Week 1)</h4>
+                            <p class="text-xs lg:text-sm text-slate-500 mt-1 leading-relaxed">We analyze current call volumes, AHT patterns, manual review bottlenecks, and system integrations.</p>
                         </div>
                     </div>
 
-                    <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-start gap-4">
-                        <span class="w-8 h-8 rounded-xl bg-brandNaranja text-white font-momo text-sm flex items-center justify-center flex-shrink-0">2</span>
-                        <div>
-                            <h4 class="font-subheadings font-bold text-sm text-brandOscuro">AI Virtualization &amp; Sandbox Setup (Weeks 2-3)</h4>
-                            <p class="text-xs text-slate-500 mt-0.5 leading-relaxed">Deploy customized AI copilots, OCR pipelines, and telephony routing configurations in a sandbox.</p>
+                    <div class="py-5 px-6 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center gap-5 hover:border-slate-300 transition-colors">
+                        <span class="w-12 h-12 rounded-xl bg-brandNaranja text-white font-momo text-lg flex items-center justify-center flex-shrink-0 shadow-sm">2</span>
+                        <div class="min-w-0">
+                            <h4 class="font-subheadings font-bold text-base text-brandOscuro">AI Virtualization &amp; Sandbox Setup (Weeks 2-3)</h4>
+                            <p class="text-xs lg:text-sm text-slate-500 mt-1 leading-relaxed">Deploy customized AI copilots, OCR pipelines, and telephony routing configurations in a sandbox.</p>
                         </div>
                     </div>
 
-                    <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-start gap-4">
-                        <span class="w-8 h-8 rounded-xl bg-emerald-600 text-white font-momo text-sm flex items-center justify-center flex-shrink-0">3</span>
-                        <div>
-                            <h4 class="font-subheadings font-bold text-sm text-brandOscuro">Specialist Roster Alignment (Weeks 3-4)</h4>
-                            <p class="text-xs text-slate-500 mt-0.5 leading-relaxed">Onboard vetted bilingual specialists in our Roma or Ciudad Juárez facilities, calibrated with AI copilot training.</p>
+                    <div class="py-5 px-6 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center gap-5 hover:border-slate-300 transition-colors">
+                        <span class="w-12 h-12 rounded-xl bg-emerald-600 text-white font-momo text-lg flex items-center justify-center flex-shrink-0 shadow-sm">3</span>
+                        <div class="min-w-0">
+                            <h4 class="font-subheadings font-bold text-base text-brandOscuro">Specialist Roster Alignment (Weeks 3-4)</h4>
+                            <p class="text-xs lg:text-sm text-slate-500 mt-1 leading-relaxed">Onboard vetted bilingual specialists in our Roma or Ciudad Juárez facilities, calibrated with AI copilot training.</p>
                         </div>
                     </div>
 
-                    <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-start gap-4">
-                        <span class="w-8 h-8 rounded-xl bg-brandOscuro text-white font-momo text-sm flex items-center justify-center flex-shrink-0">4</span>
-                        <div>
-                            <h4 class="font-subheadings font-bold text-sm text-brandOscuro">Go-Live &amp; Continuous Optimization (Day 30+)</h4>
-                            <p class="text-xs text-slate-500 mt-0.5 leading-relaxed">Full operational transition under SLA guarantees, 100% speech analytics quality auditing, and executive reporting.</p>
+                    <div class="py-5 px-6 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center gap-5 hover:border-slate-300 transition-colors">
+                        <span class="w-12 h-12 rounded-xl bg-brandOscuro text-white font-momo text-lg flex items-center justify-center flex-shrink-0 shadow-sm">4</span>
+                        <div class="min-w-0">
+                            <h4 class="font-subheadings font-bold text-base text-brandOscuro">Go-Live &amp; Continuous Optimization (Day 30+)</h4>
+                            <p class="text-xs lg:text-sm text-slate-500 mt-1 leading-relaxed">Full operational transition under SLA guarantees, 100% speech analytics quality auditing, and executive reporting.</p>
                         </div>
                     </div>
 
@@ -925,35 +950,35 @@
 
                 <!-- Right Column (5 cols): Executive Contact Card (SS4 Format) -->
                 <div class="col-span-5 flex justify-center">
-                    <div class="card-glass p-7 rounded-3xl border border-brandOscuro/15 shadow-xl w-full text-left space-y-5">
+                    <div class="card-glass p-8 rounded-3xl border border-brandOscuro/15 shadow-xl w-full text-left space-y-6">
                         <div class="border-b border-brandOscuro/10 pb-4">
                             <span class="text-xs font-subheadings font-bold text-brandNaranja uppercase tracking-wider block mb-1">Executive Operational Leadership</span>
                             <h3 class="font-subheadings font-bold text-2xl text-brandOscuro">Mauricio Cruz</h3>
                             <p class="font-body text-xs text-brandOscuro/70 font-semibold mt-0.5">Operations Director &amp; Commercial Lead · Telat Group</p>
                         </div>
                         
-                        <div class="space-y-3.5 font-body text-xs lg:text-sm text-brandOscuro/80 font-medium">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-lg bg-brandCeleste/10 text-brandCeleste flex items-center justify-center flex-shrink-0">
-                                    <span class="material-symbols-outlined text-base">mail</span>
+                        <div class="space-y-4 font-body text-xs lg:text-sm text-brandOscuro/80 font-medium">
+                            <div class="flex items-center gap-3.5">
+                                <div class="w-10 h-10 rounded-xl bg-brandCeleste/10 text-brandCeleste flex items-center justify-center flex-shrink-0">
+                                    <span class="material-icons text-xl text-brandCeleste">email</span>
                                 </div>
                                 <span class="font-semibold text-brandOscuro">mcruz@telat-group.com</span>
                             </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-lg bg-brandNaranja/10 text-brandNaranja flex items-center justify-center flex-shrink-0">
-                                    <span class="material-symbols-outlined text-base">call</span>
+                            <div class="flex items-center gap-3.5">
+                                <div class="w-10 h-10 rounded-xl bg-brandNaranja/10 text-brandNaranja flex items-center justify-center flex-shrink-0">
+                                    <span class="material-icons text-xl text-brandNaranja">call</span>
                                 </div>
                                 <span>+52 (55) 3098 5727</span>
                             </div>
-                            <div class="flex items-start gap-3">
-                                <div class="w-8 h-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                    <span class="material-symbols-outlined text-base">location_on</span>
+                            <div class="flex items-start gap-3.5">
+                                <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <span class="material-icons text-xl text-slate-600">place</span>
                                 </div>
                                 <span>Calle Monterrey 149, Col. Roma Nte., Cuauhtémoc, 06700 Ciudad de México, CDMX</span>
                             </div>
                         </div>
 
-                        <div class="p-3 bg-brandNaranja/10 rounded-xl border border-brandNaranja/25 text-center text-xs font-bold text-brandNaranja font-subheadings">
+                        <div class="p-3.5 bg-brandNaranja/10 rounded-xl border border-brandNaranja/25 text-center text-xs font-bold text-brandNaranja font-subheadings">
                             Confidential B2B Executive Proposal · Telat Group 2026
                         </div>
                     </div>
