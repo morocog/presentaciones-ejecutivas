@@ -3,17 +3,15 @@
 **Fecha:** 2026-11-02  
 **Repositorio:** `presentaciones-ejecutivas`  
 **Autor:** Ricardo García (Subdirector de Operaciones / IT & Ops Leader) / Antigravity Assistant  
-**Módulos Afectados:** `01-Propuestas-Comerciales/Auto-Glass-Executive-Pitch-V2`, `@media print`, `scripts/export_auto_glass_v2_pdf.ps1`
+**Módulos Afectados:** `01-Propuestas-Comerciales/Auto-Glass-Executive-Pitch-V2`, `01-Propuestas-Comerciales/Auto-Glass-Executive-Pitch-V3`, `00-Executive-Decks-EN`, `@media print`
 
 ---
 
 ## 1. Problema Raíz & Diagnóstico del Fallo
 
-Durante el desarrollo de la propuesta comercial ejecutiva para el sector de cristales automotrices en EE. UU. (dirigida a C-Levels como Safelite y Gerber), se intentó aplicar el modelo **Elephant-Goldfish Model (EGM)** (`google/elephant-goldfish-model`) para auditar y "optimizar" la presentación visual (V2).
+Durante el desarrollo de la propuesta comercial ejecutiva para el sector de cristales automotrices en EE. UU. (dirigida a C-Levels como Safelite y Gerber) y la consolidación de los 4 decks ejecutivos en inglés (`00-Executive-Decks-EN`), se identificaron y resolvieron 4 riesgos estructurales de diseño y compilación PDF:
 
-Esto desató una **regresión visual severa**, deformando una maquetación moderna, compacta y profesional en una interfaz desproporcionada, alargada y rota.
-
-### Las 3 Fallas Críticas Identificadas:
+### Las 4 Fallas Críticas Identificadas:
 
 1. **Incompatibilidad Fundamental de EGM con UI/UX Frontend:**
    - **Causa:** EGM está diseñado estrictamente para documentos de texto y especificaciones técnicas (RFCs, PRDs, Markdown de arquitectura backend). 
@@ -44,17 +42,19 @@ Esto desató una **regresión visual severa**, deformando una maquetación moder
      }
      ```
 
+4. **Texto Crudo de Ligaduras por Fuentes de Iconos CDN en Chromium Headless (`.woff2` Local Obligatorio):**
+   - **Causa:** Al compilar PDFs con `chrome.exe --headless=new --print-to-pdf`, las hojas de estilo remotas de Google Material Icons / Material Symbols (`fonts.googleapis.com`) sufren condiciones de carrera de red (`font-display` asíncrono) o contienen nombres de ligaduras inexistentes en la familia clásica (`shield_lock`, `target`).
+   - **Efecto:** El PDF exportado imprime el texto literal de la ligadura (`trending_up`, `verified_user`, `shield_lock`) desbordando las cajas de iconos.
+   - **Regla:** Empaquetar siempre localmente `material-icons.woff2` y `material-symbols.woff2` en `assets/fonts/` con `@font-face { font-display: block; }` y validar que cada ligadura exista en el mapa oficial de codepoints antes de exportar.
+
 ---
 
 ## 2. Acciones Realizadas & Estado Final
 
-1. **Rollback Total de la Regresión:**
-   - Se descartaron al 100% las "mejoras" sugeridas por EGM.
-   - Se restauró el layout original de V2 en [Auto-Glass-Executive-Pitch-V2/index.html](file:///c:/Users/SDVP/Documents/GitHub/presentaciones-ejecutivas/01-Propuestas-Comerciales/Auto-Glass-Executive-Pitch-V2/index.html): limpio, centrado, geométricamente armónico y altamente legible.
-2. **Blindaje del Pipeline de Exportación PDF:**
-   - Inyección de las reglas CSS de anulación de grid en `@media print`.
-   - Altura de impresión calibrada a `height: 8.85in !important; max-height: 8.85in !important;` con `.slide:last-of-type { break-after: avoid !important; }` para erradicar páginas en blanco intermedias.
-   - Recompilación exitosa del PDF en 2 páginas exactas (1.63 MB): [Auto_Glass_Executive_Pitch_V2_Telat.pdf](file:///c:/Users/SDVP/Documents/GitHub/presentaciones-ejecutivas/01-Propuestas-Comerciales/Auto-Glass-Executive-Pitch-V2/Auto_Glass_Executive_Pitch_V2_Telat.pdf).
-3. **Registro en Bóveda Central:**
-   - La propuesta V2 (Dark 3D 2-Slide Punch) y la propuesta V1 (4 Slides Clásica) conviven en la bóveda de presentaciones ejecutivas (`index.html`).
+1. **Rollback Total de la Regresión y Lanzamiento de V3:**
+   - Se descartaron al 100% las "mejoras" sugeridas por EGM y se restauró el layout original de V2 en [Auto-Glass-Executive-Pitch-V2/index.html](file:///c:/Users/SDVP/Documents/GitHub/presentaciones-ejecutivas/01-Propuestas-Comerciales/Auto-Glass-Executive-Pitch-V2/index.html), además de construir la versión V3 de dos horizontes en [Auto-Glass-Executive-Pitch-V3/index.html](file:///c:/Users/SDVP/Documents/GitHub/presentaciones-ejecutivas/01-Propuestas-Comerciales/Auto-Glass-Executive-Pitch-V3/index.html).
+2. **Consolidación de los 4 Executive Decks en Inglés (`00-Executive-Decks-EN`):**
+   - Estandarización de `01-Telat-AI-Solutions`, `02-Operations-Driven-by-Intelligence`, `03-Technology-Differentiators` y `04-Commercial-Capabilities-Deck` con las 4 láminas estructurales de cierre (**SS1:** Mapa de 4 Sedes Binacionales; **SS2:** 9 Certificaciones con logotipos vectoriales; **SS3:** Gobernanza Operativa; **SS4:** Liderazgo de Mauricio Cruz como Operations Director) y fuentes `.woff2` locales.
+3. **Blindaje del Pipeline de Exportación PDF:**
+   - Inyección de las reglas CSS de anulación de grid en `@media print` y empaquetado local `.woff2` con `font-display: block`.
 
