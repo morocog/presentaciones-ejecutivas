@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telat Group - Operations Driven by Intelligence, Built for Scale</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800&family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+    <!-- Material Symbols Outlined -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandOscuro: '#222221',
+                        brandCeleste: '#3284C6',
+                        brandNaranja: '#EB5B27',
+                        brandNaranjaClaro: '#FECA66',
+                        brandClaro: '#FBFBFD',
+                    },
+                    fontFamily: {
+                        headings: ['Playfair Display', 'serif'],
+                        subheadings: ['DM Sans', 'sans-serif'],
+                        body: ['Montserrat', 'sans-serif'],
+                        momo: ['Impact', 'Arial Black', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --brand-celeste: #3284C6;
+            --brand-naranja: #EB5B27;
+            --brand-naranja-claro: #FECA66;
+            --brand-oscuro: #222221;
+            --brand-claro: #FBFBFD;
+            --grad-vibrante: linear-gradient(90deg, var(--brand-celeste) 0%, var(--brand-naranja) 100%);
+        }
+
+        body {
+            background-color: var(--brand-claro);
+            color: var(--brand-oscuro);
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .slide-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: scale(0.99);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 4.5rem 2rem 4.5rem;
+            box-sizing: border-box;
+            background-color: var(--brand-claro);
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+            z-index: 10;
+        }
+
+        .card-glass {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(50, 132, 198, 0.16);
+            box-shadow: 0 10px 28px -6px rgba(0, 0, 0, 0.05);
+            border-radius: 1.25rem;
+        }
+
+        /* Controls */
+        #nav-controls {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 2.5rem;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .nav-btn {
+            width: 2.75rem;
+            height: 2.75rem;
+            border-radius: 50%;
+            background: #222221;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav-btn:hover {
+            background: #EB5B27;
+            transform: scale(1.06);
+        }
+
+        #progress-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #3284C6, #EB5B27);
+            width: 0%;
+            transition: width 0.3s ease;
+            z-index: 100;
+        }
+
+        #slide-counter {
+            position: fixed;
+            bottom: 1.75rem;
+            left: 2.5rem;
+            z-index: 100;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #3284C6;
+        }
+
+        .tech-grid-bg {
+            background-image: radial-gradient(rgba(50, 132, 198, 0.08) 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+        }
+
+        /* ==============================================================
+           ESTANDAR CANONICO DE IMPRESION 16:9 HD Y FORZADO DE COLUMNAS
+           ============================================================== */
+        @media print {
+            @page {
+                size: 16in 9in;
+                margin: 0;
+            }
+
+            *, *:before, *:after {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+                animation: none !important;
+                transition: none !important;
+            }
+
+            html, body {
+                width: 16in !important;
+                height: auto !important;
+                min-height: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow: visible !important;
+                background-color: #FBFBFD !important;
+            }
+
+            header.fixed,
+            #nav-controls,
+            #progress-bar,
+            #slide-counter {
+                display: none !important;
+            }
+
+            .slide-container {
+                width: 16in !important;
+                height: auto !important;
+                overflow: visible !important;
+                display: block !important;
+                position: static !important;
+            }
+
+            .slide {
+                position: relative !important;
+                inset: auto !important;
+                width: 16in !important;
+                height: 9in !important;
+                min-height: 9in !important;
+                max-height: 9in !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                transform: none !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                padding: 3rem 4.5rem 2rem 4.5rem !important;
+                page-break-after: always !important;
+                page-break-inside: avoid !important;
+                break-after: page !important;
+                break-inside: avoid !important;
+                box-sizing: border-box !important;
+                overflow: hidden !important;
+                background: #FBFBFD !important;
+            }
+
+            .slide::before {
+                content: "";
+                position: absolute;
+                top: 1.5rem;
+                left: 3.5rem;
+                width: 140px;
+                height: 34px;
+                background-image: url('https://telat.mx/assets/img/logo.png');
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position: left center;
+                z-index: 50;
+            }
+
+            /* Forzado de columnas en impresión para evitar apilamiento vertical */
+            .grid {
+                display: grid !important;
+            }
+            .grid-cols-1.md:grid-cols-2,
+            .grid-cols-1.lg:grid-cols-2,
+            .grid-cols-2,
+            .md:grid-cols-2,
+            .lg:grid-cols-2 {
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            }
+
+            .grid-cols-1.md:grid-cols-3,
+            .grid-cols-1.lg:grid-cols-3,
+            .grid-cols-3,
+            .md:grid-cols-3,
+            .lg:grid-cols-3 {
+                grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+            }
+
+            .grid-cols-1.md:grid-cols-4,
+            .grid-cols-2.md:grid-cols-4,
+            .grid-cols-4,
+            .md:grid-cols-4,
+            .lg:grid-cols-4 {
+                grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+            }
+
+            .grid-cols-1.lg:grid-cols-12,
+            .lg:grid-cols-12 {
+                display: grid !important;
+                grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+            }
+
+            .col-span-4, .lg:col-span-4 { grid-column: span 4 / span 4 !important; }
+            .col-span-5, .lg:col-span-5 { grid-column: span 5 / span 5 !important; }
+            .col-span-6, .lg:col-span-6 { grid-column: span 6 / span 6 !important; }
+            .col-span-7, .lg:col-span-7 { grid-column: span 7 / span 7 !important; }
+            .col-span-8, .lg:col-span-8 { grid-column: span 8 / span 8 !important; }
+        }
+    </style>
+</head>
+<body class="tech-grid-bg antialiased selection:bg-brandNaranjaClaro selection:text-brandOscuro">
+
+    <!-- INSTITUTIONAL HEADER -->
+    <header class="fixed top-0 left-0 w-full z-50 px-8 py-3.5 flex justify-between items-center bg-white/85 backdrop-blur-md border-b border-brandOscuro/10">
+        <div class="flex items-center gap-3">
+            <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-9 object-contain">
+            <span class="text-gray-300 font-light">|</span>
+            <div>
+                <h1 class="text-xs font-subheadings font-bold text-brandOscuro uppercase tracking-wider">Enterprise Operations Architecture</h1>
+                <p class="text-[10px] text-brandCeleste font-semibold">Operational Intelligence &amp; AI Suite</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-2 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200 text-xs font-bold text-slate-700">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Executive Deck · 2026
+        </div>
+    </header>
+
+    <div class="slide-container">
+
+        <!-- ==============================================================
+             SLIDE 1: HERO OVERVIEW
+             ============================================================== -->
+        <div class="slide active" id="slide-1">
+            <div class="max-w-6xl w-full text-center space-y-7 mt-8">
+                <span class="bg-brandCeleste/10 text-brandCeleste text-xs font-subheadings px-4 py-2 rounded-full font-bold uppercase tracking-widest border border-brandCeleste/20">
+                    AI-Enabled Contact Center Architecture
+                </span>
+                
+                <h1 class="font-momo text-5xl md:text-7xl lg:text-[5.2rem] tracking-tight text-brandOscuro leading-[0.92]">
+                    OPERATIONS DRIVEN BY INTELLIGENCE.<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brandCeleste via-brandNaranja to-brandNaranjaClaro">
+                        BUILT FOR SCALE.
+                    </span>
+                </h1>
+
+                <p class="text-base lg:text-lg text-slate-600 font-medium max-w-3xl mx-auto leading-relaxed">
+                    Enhancing customer operations by seamlessly pairing artificial intelligence, automated governance, and streamlined digital workflows.
+                </p>
+
+                <div class="pt-2 flex justify-center gap-4">
+                    <button onclick="nextSlide()" class="bg-brandNaranja hover:bg-brandNaranja/90 text-white font-subheadings font-bold px-8 py-3.5 rounded-2xl shadow-lg transition-all flex items-center gap-2 text-sm">
+                        Explore Capabilities <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </button>
+                </div>
+
+                <!-- 4 Bottom KPI Badges -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-slate-200/80">
+                    <div class="card-glass p-4 text-center">
+                        <div class="font-momo text-3xl text-brandNaranja">-65%</div>
+                        <div class="text-[11px] font-bold text-slate-500 uppercase mt-0.5">AHT Reduction</div>
+                    </div>
+                    <div class="card-glass p-4 text-center">
+                        <div class="font-momo text-3xl text-brandCeleste">-80%</div>
+                        <div class="text-[11px] font-bold text-slate-500 uppercase mt-0.5">Cycle Time</div>
+                    </div>
+                    <div class="card-glass p-4 text-center">
+                        <div class="font-momo text-3xl text-emerald-600">99.6%</div>
+                        <div class="text-[11px] font-bold text-slate-500 uppercase mt-0.5">Data Accuracy</div>
+                    </div>
+                    <div class="card-glass p-4 text-center">
+                        <div class="font-momo text-3xl text-brandOscuro">24/7</div>
+                        <div class="text-[11px] font-bold text-slate-500 uppercase mt-0.5">Continuous Coverage</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==============================================================
+             SLIDE 2: AI VIRTUALIZATION
+             ============================================================== -->
+        <div class="slide" id="slide-2">
+            <div class="max-w-6xl w-full space-y-6 mt-4">
+                <div class="text-left border-l-4 border-l-brandNaranja pl-4">
+                    <span class="text-xs font-subheadings font-bold text-brandNaranja uppercase tracking-widest block mb-1">02 — AI &amp; Operational Evolution</span>
+                    <h2 class="font-momo text-4xl lg:text-5xl text-brandOscuro">
+                        AI VIRTUALIZATION: <span class="text-brandNaranja">SCALING EFFICIENCY FOR HIGH-VOLUME OPERATIONS</span>
+                    </h2>
+                </div>
+
+                <p class="text-sm lg:text-base text-slate-600 font-medium leading-relaxed max-w-4xl">
+                    We help organizations transition from physical headcount dependency to an AI-virtualized hybrid ecosystem. We can virtualize your operational footprint—optimizing required human headcount by <strong>50% or more</strong>—and flexibly align capacity with campaign volume spikes and SLA demands.
+                </p>
+
+                <!-- Comparative Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-1">
+                    
+                    <!-- Card 1: Traditional BPO Model -->
+                    <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-md space-y-3 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-slate-200 text-slate-700 text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider">
+                            Previous Baseline
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-slate-400 text-3xl">groups</span>
+                            <h3 class="font-momo text-xl text-slate-700">Traditional BPO Model [200+ Human Agents]</h3>
+                        </div>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            Previously, scaling campaign volume required expanding physical seat headcount—managing over 200 dedicated human agents on the floor to absorb peak transaction hours.
+                        </p>
+                        <div class="p-2.5 bg-red-50 border border-red-200 rounded-xl text-xs text-red-700 font-semibold flex items-center gap-2">
+                            <span class="material-symbols-outlined text-sm">warning</span> High seat overhead &amp; long ramp-up cycles
+                        </div>
+                    </div>
+
+                    <!-- Card 2: AI Virtualization -->
+                    <div class="bg-gradient-to-br from-white to-brandNaranja/5 p-6 rounded-3xl border-2 border-brandNaranja shadow-lg space-y-3 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-brandNaranja text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider">
+                            Telat AI Model
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-brandNaranja text-3xl">smart_toy</span>
+                            <h3 class="font-momo text-xl text-brandOscuro">AI-Driven Virtualization [50%+ Headcount Optimization]</h3>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                            By embedding conversational AI, automated data verification, and smart routing, we virtualize routine interactions—reducing human agent requirements by 50% or more while maintaining 100% SLA throughput.
+                        </p>
+                        <div class="p-2.5 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-800 font-semibold flex items-center gap-2">
+                            <span class="material-symbols-outlined text-sm">verified</span> Flexible workforce ratio tailored to campaign needs
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- 3 Bottom Value Pillars -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
+                    <div class="card-glass p-3.5 flex items-center gap-3">
+                        <span class="material-symbols-outlined text-brandCeleste text-2xl">tune</span>
+                        <div>
+                            <div class="text-xs font-bold font-subheadings text-brandOscuro">Dynamic Campaign Ratios</div>
+                            <div class="text-[10px] text-slate-500">Scale AI vs. Human mix on demand</div>
+                        </div>
+                    </div>
+                    <div class="card-glass p-3.5 flex items-center gap-3">
+                        <span class="material-symbols-outlined text-emerald-600 text-2xl">verified_user</span>
+                        <div>
+                            <div class="text-xs font-bold font-subheadings text-brandOscuro">100% SLA Protection</div>
+                            <div class="text-[10px] text-slate-500">24/7 coverage during volume spikes</div>
+                        </div>
+                    </div>
+                    <div class="card-glass p-3.5 flex items-center gap-3">
+                        <span class="material-symbols-outlined text-brandNaranja text-2xl">trending_down</span>
+                        <div>
+                            <div class="text-xs font-bold font-subheadings text-brandOscuro">Overhead Reduction</div>
+                            <div class="text-[10px] text-slate-500">Lower physical seat &amp; training costs</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==============================================================
+             SLIDE 3: CASE STUDIES (PART I) - 3 SPACIOUS SEPARATE CARDS
+             ============================================================== -->
+        <div class="slide" id="slide-3">
+            <div class="max-w-6xl w-full space-y-5 mt-4">
+                <div class="text-left border-l-4 border-l-brandCeleste pl-4">
+                    <span class="text-xs font-subheadings font-bold text-brandCeleste uppercase tracking-widest block mb-1">03 — Case Studies (Part I)</span>
+                    <h2 class="font-momo text-4xl text-brandOscuro">
+                        PROVEN IMPACT IN <span class="text-brandCeleste">OPERATIONAL EXCELLENCE (PART I)</span>
+                    </h2>
+                </div>
+
+                <!-- 3 Large Cards in 3 Columns Side-by-Side -->
+                <div class="grid grid-cols-3 gap-5 pt-1">
+                    
+                    <!-- Case 1: Telecommunication Platforms -->
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-3 hover:border-brandCeleste/40 transition-all">
+                        <div class="space-y-2.5">
+                            <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+                                <span class="bg-brandCeleste/10 text-brandCeleste text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase">Operational Engine</span>
+                                <span class="text-[10px] text-slate-400 font-bold">Case 1 of 6</span>
+                            </div>
+                            <h3 class="font-momo text-lg text-brandOscuro">1. Telecommunication Platforms</h3>
+                            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
+                                <div class="text-[9.5px] font-bold text-brandNaranja uppercase tracking-wider mb-0.5">Previous Manual Process</div>
+                                <p class="text-[11px] text-slate-600 leading-snug">Manual balance checks and payment setups creating long queues and operational overhead.</p>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-brandCeleste/5 border border-brandCeleste/20">
+                                <div class="text-[9.5px] font-bold text-brandCeleste uppercase tracking-wider mb-0.5">Telat AI &amp; Workflow Solution</div>
+                                <p class="text-[11px] text-slate-700 leading-snug font-medium">Self-service digital tablets for balance checks, automated ticket routing, and AI content verification.</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100">
+                            <div>
+                                <div class="text-[9px] font-bold text-slate-400 uppercase">Activation Error</div>
+                                <div class="font-momo text-2xl text-brandNaranja leading-none mt-0.5">-85%</div>
+                            </div>
+                            <div>
+                                <div class="text-[9px] font-bold text-slate-400 uppercase">Customer CSAT</div>
+                                <div class="font-momo text-2xl text-brandCeleste leading-none mt-0.5">98.4%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case 2: Automotive Marketplace -->
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-3 hover:border-brandCeleste/40 transition-all">
+                        <div class="space-y-2.5">
+                            <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+                                <span class="bg-brandNaranja/10 text-brandNaranja text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase">E-Commerce OCR</span>
+                                <span class="text-[10px] text-slate-400 font-bold">Case 2 of 6</span>
+                            </div>
+                            <h3 class="font-momo text-lg text-brandOscuro">2. Automotive Marketplace</h3>
+                            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
+                                <div class="text-[9.5px] font-bold text-brandNaranja uppercase tracking-wider mb-0.5">Previous Manual Process</div>
+                                <p class="text-[11px] text-slate-600 leading-snug">Slow manual title verification causing delivery delays and multi-state compliance exposure.</p>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-brandCeleste/5 border border-brandCeleste/20">
+                                <div class="text-[9.5px] font-bold text-brandCeleste uppercase tracking-wider mb-0.5">Telat AI &amp; Workflow Solution</div>
+                                <p class="text-[11px] text-slate-700 leading-snug font-medium">Instant automated title verification, financial background checks, and state compliance validation.</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100">
+                            <div>
+                                <div class="text-[9px] font-bold text-slate-400 uppercase">Title Verification</div>
+                                <div class="font-momo text-2xl text-brandNaranja leading-none mt-0.5">-70%</div>
+                            </div>
+                            <div>
+                                <div class="text-[9px] font-bold text-slate-400 uppercase">Compliance Acc.</div>
+                                <div class="font-momo text-2xl text-emerald-600 leading-none mt-0.5">100%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case 3: Video Security & Surveillance -->
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-3 hover:border-brandCeleste/40 transition-all">
+                        <div class="space-y-2.5">
+                            <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+                                <span class="bg-emerald-500/10 text-emerald-700 text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase">Tier-1 Support</span>
+                                <span class="text-[10px] text-slate-400 font-bold">Case 3 of 6</span>
+                            </div>
+                            <h3 class="font-momo text-lg text-brandOscuro">3. Video Security &amp; Surveillance</h3>
+                            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
+                                <div class="text-[9.5px] font-bold text-brandNaranja uppercase tracking-wider mb-0.5">Previous Manual Process</div>
+                                <p class="text-[11px] text-slate-600 leading-snug">Unstructured escalation of camera faults directly to field engineers without initial diagnostics.</p>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-brandCeleste/5 border border-brandCeleste/20">
+                                <div class="text-[9.5px] font-bold text-brandCeleste uppercase tracking-wider mb-0.5">Telat AI &amp; Workflow Solution</div>
+                                <p class="text-[11px] text-slate-700 leading-snug font-medium">Unified Tier-1 support using remote diagnostic software, resolving server issues instantly.</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100">
+                            <div>
+                                <div class="text-[9px] font-bold text-slate-400 uppercase">First Contact Res.</div>
+                                <div class="font-momo text-2xl text-brandCeleste leading-none mt-0.5">+45%</div>
+                            </div>
+                            <div>
+                                <div class="text-[9px] font-bold text-slate-400 uppercase">MTTR Reduction</div>
+                                <div class="font-momo text-2xl text-brandNaranja leading-none mt-0.5">-60%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ==============================================================
+             SLIDE 4: CASE STUDIES (PART II) - 3 SPACIOUS SEPARATE CARDS
+             ============================================================== -->
+        <div class="slide" id="slide-4">
+            <div class="max-w-6xl w-full space-y-5 mt-4">
+                <div class="text-left border-l-4 border-l-brandCeleste pl-4">
+                    <span class="text-xs font-subheadings font-bold text-brandCeleste uppercase tracking-widest block mb-1">04 — Case Studies (Part II)</span>
+                    <h2 class="font-momo text-4xl text-brandOscuro">
+                        PROVEN IMPACT IN <span class="text-brandCeleste">OPERATIONAL EXCELLENCE (PART II)</span>
+                    </h2>
+                </div>
+
+                <!-- 3 Large Cards in 3 Columns Side-by-Side -->
+                <div class="grid grid-cols-3 gap-5 pt-1">
+                    
+                    <!-- Case 4: Seasonal Retail & Logistics -->
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-3 hover:border-brandCeleste/40 transition-all">
+                        <div class="space-y-2.5">
+                            <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+                                <span class="bg-brandNaranja/10 text-brandNaranja text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase">Retail &amp; Logistics</span>
+                                <span class="text-[10px] text-slate-400 font-bold">Case 4 of 6</span>
+                            </div>
+                            <h3 class="font-momo text-lg text-brandOscuro">4. Seasonal Retail &amp; Logistics</h3>
+                            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
+                                <div class="text-[9.5px] font-bold text-brandNaranja uppercase tracking-wider mb-0.5">Previous Manual Process</div>
+                                <p class="text-[11px] text-slate-600 leading-snug">Massive seasonal order surges overloading support queues during holiday peak shopping windows.</p>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-brandCeleste/5 border border-brandCeleste/20">
+                                <div class="text-[9.5px] font-bold text-brandCeleste uppercase tracking-wider mb-0.5">Telat AI &amp; Workflow Solution</div>
+                                <p class="text-[11px] text-slate-700 leading-snug font-medium">Automated queue prioritization and AI order tracking assistant protecting SLA resolution targets.</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100">
+                            <div>
+                                <div class="text-[9px] font-bold text-slate-400 uppercase">Peak Abandon Rate</div>
+                                <div class="font-momo text-2xl text-brandNaranja leading-none mt-0.5">-90%</div>
+                            </div>
+                            <div>
+                                <div class="text-[9px] font-bold text-slate-400 uppercase">SLA Stability</div>
+                                <div class="font-momo text-2xl text-emerald-600 leading-none mt-0.5">99.8%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case 5: Omnichannel Custom Product Support -->
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-3 hover:border-brandCeleste/40 transition-all">
+                        <div class="space-y-2.5">
+                            <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+                                <span class="bg-brandCeleste/10 text-brandCeleste text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase">Omnichannel CX</span>
+                                <span class="text-[10px] text-slate-400 font-bold">Case 5 of 6</span>
+                            </div>
+                            <h3 class="font-momo text-lg text-brandOscuro">5. Omnichannel Custom Support</h3>
+                            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
+                                <div class="text-[9.5px] font-bold text-brandNaranja uppercase tracking-wider mb-0.5">Previous Manual Process</div>
+                                <p class="text-[11px] text-slate-600 leading-snug">Siloed channels and manual spec entry causing fulfillment delays for custom corporate merchandise.</p>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-brandCeleste/5 border border-brandCeleste/20">
+                                <div class="text-[9.5px] font-bold text-brandCeleste uppercase tracking-wider mb-0.5">Telat AI &amp; Workflow Solution</div>
+                                <p class="text-[11px] text-slate-700 leading-snug font-medium">Unified omnichannel hub (Chat, SMS, Email) with automated design verification and rapid routing.</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100">
+                            <div>
+                                <div class="text-[9px] font-bold text-slate-400 uppercase">Config Abandonment</div>
+                                <div class="font-momo text-2xl text-brandNaranja leading-none mt-0.5">-75%</div>
+                            </div>
+                            <div>
+                                <div class="text-[9px] font-bold text-slate-400 uppercase">Customer CSAT</div>
+                                <div class="font-momo text-2xl text-brandCeleste leading-none mt-0.5">97.5%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case 6: Automotive Parts & Logistics -->
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-3 hover:border-brandCeleste/40 transition-all">
+                        <div class="space-y-2.5">
+                            <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+                                <span class="bg-emerald-500/10 text-emerald-700 text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase">US Logistics</span>
+                                <span class="text-[10px] text-slate-400 font-bold">Case 6 of 6</span>
+                            </div>
+                            <h3 class="font-momo text-lg text-brandOscuro">6. Automotive Parts &amp; Logistics (US)</h3>
+                            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
+                                <div class="text-[9.5px] font-bold text-brandNaranja uppercase tracking-wider mb-0.5">Previous Manual Process</div>
+                                <p class="text-[11px] text-slate-600 leading-snug">Manual parts lookup and inability to schedule technician appointments during initial calls.</p>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-brandCeleste/5 border border-brandCeleste/20">
+                                <div class="text-[9.5px] font-bold text-brandCeleste uppercase tracking-wider mb-0.5">Telat AI &amp; Workflow Solution</div>
+                                <p class="text-[11px] text-slate-700 leading-snug font-medium">Vehicle profiling, automated compatibility checks, parts geolocation, and one-call dispatch.</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100">
+                            <div>
+                                <div class="text-[9px] font-bold text-slate-400 uppercase">Geolocation Acc.</div>
+                                <div class="font-momo text-2xl text-emerald-600 leading-none mt-0.5">99.9%</div>
+                            </div>
+                            <div>
+                                <div class="text-[9px] font-bold text-slate-400 uppercase">24-48h Dispatch</div>
+                                <div class="font-momo text-2xl text-brandCeleste leading-none mt-0.5">100%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ==============================================================
+             SLIDE 5: THE CHALLENGE (BRIDGING TRADITIONAL BPO)
+             ============================================================== -->
+        <div class="slide" id="slide-5">
+            <div class="max-w-6xl w-full space-y-6 mt-4">
+                <div class="text-left border-l-4 border-l-brandNaranja pl-4">
+                    <span class="text-xs font-subheadings font-bold text-brandNaranja uppercase tracking-widest block mb-1">05 — The Challenge</span>
+                    <h2 class="font-momo text-4xl lg:text-5xl text-brandOscuro">
+                        BRIDGING TRADITIONAL BPO <span class="text-brandNaranja">WITH MODERN AGILITY</span>
+                    </h2>
+                </div>
+
+                <p class="text-sm lg:text-base text-slate-600 font-medium max-w-4xl leading-relaxed">
+                    Industry leaders often face operational drag from legacy procedures: manual document reviews, error-prone data entry, idle agent hold times, and fragmented systems.
+                </p>
+
+                <div class="grid grid-cols-2 gap-6 pt-1">
+                    
+                    <!-- Legacy Operations -->
+                    <div class="bg-white p-7 rounded-3xl border-2 border-red-100 shadow-sm space-y-3">
+                        <div class="text-xs font-bold font-subheadings text-red-600 uppercase tracking-widest flex items-center gap-2">
+                            <span class="material-symbols-outlined text-sm">cancel</span> Legacy Manual Operations
+                        </div>
+                        <ul class="space-y-2.5 text-xs lg:text-sm text-slate-600 font-medium">
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 flex-shrink-0"></span>
+                                Manual data input prone to human transcription errors.
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 flex-shrink-0"></span>
+                                Siloed data repositories lacking real-time tracking.
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 flex-shrink-0"></span>
+                                Extended wait times for workflow and document validation.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Telat Platform -->
+                    <div class="bg-white p-7 rounded-3xl border-2 border-emerald-100 shadow-sm space-y-3">
+                        <div class="text-xs font-bold font-subheadings text-emerald-600 uppercase tracking-widest flex items-center gap-2">
+                            <span class="material-symbols-outlined text-sm">check_circle</span> Telat Intelligent Platform
+                        </div>
+                        <ul class="space-y-2.5 text-xs lg:text-sm text-slate-700 font-bold">
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 flex-shrink-0"></span>
+                                Automated validation with real-time data verification.
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 flex-shrink-0"></span>
+                                Secure digital records accessible 24/7 across team hubs.
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 flex-shrink-0"></span>
+                                Instant response times backed by continuous SLA monitoring.
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ==============================================================
+             SLIDE 6: OUR SOLUTION (INTEGRATED WORKFLOWS)
+             ============================================================== -->
+        <div class="slide" id="slide-6">
+            <div class="max-w-6xl w-full space-y-6 mt-4">
+                <div class="text-left border-l-4 border-l-brandCeleste pl-4">
+                    <span class="text-xs font-subheadings font-bold text-brandCeleste uppercase tracking-widest block mb-1">06 — Our Solution</span>
+                    <h2 class="font-momo text-4xl lg:text-5xl text-brandOscuro">
+                        INTEGRATED WORKFLOWS: <span class="text-brandCeleste">END-TO-END AUTOMATION</span>
+                    </h2>
+                </div>
+
+                <p class="text-sm lg:text-base text-slate-600 font-medium max-w-4xl leading-relaxed">
+                    Telat Group delivers more than contact center support. We analyze, optimize, and connect modern technology to streamline end-to-end customer and back-office operations.
+                </p>
+
+                <div class="grid grid-cols-4 gap-5 pt-1">
+                    
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2.5">
+                        <div class="w-9 h-9 rounded-xl bg-brandCeleste/10 text-brandCeleste flex items-center justify-center font-momo text-base">
+                            1
+                        </div>
+                        <h3 class="font-subheadings font-bold text-sm text-brandOscuro">Intake &amp; Data Capture</h3>
+                        <p class="text-[11px] text-slate-500 leading-snug">Smart ingestion and extraction of structured data for automated cloud-based processing.</p>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2.5">
+                        <div class="w-9 h-9 rounded-xl bg-brandNaranja/10 text-brandNaranja flex items-center justify-center font-momo text-base">
+                            2
+                        </div>
+                        <h3 class="font-subheadings font-bold text-sm text-brandOscuro">Business Rules Engine</h3>
+                        <p class="text-[11px] text-slate-500 leading-snug">Automated compliance and document verification for contract files and compliance records.</p>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2.5">
+                        <div class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center font-momo text-base">
+                            3
+                        </div>
+                        <h3 class="font-subheadings font-bold text-sm text-brandOscuro">Smart Routing &amp; Dispatch</h3>
+                        <p class="text-[11px] text-slate-500 leading-snug">Integrated dispatch and resource coordination to track operational orders without friction.</p>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2.5">
+                        <div class="w-9 h-9 rounded-xl bg-brandOscuro/10 text-brandOscuro flex items-center justify-center font-momo text-base">
+                            4
+                        </div>
+                        <h3 class="font-subheadings font-bold text-sm text-brandOscuro">Centralized Orchestration</h3>
+                        <p class="text-[11px] text-slate-500 leading-snug">Seamless bridge connecting CRMs, back-office tools, and engagement channels with 24/7 insights.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ==============================================================
+             SLIDE 7: ABOUT TELAT GROUP (HUBS & TALENT EVOLUTION)
+             ============================================================== -->
+        <div class="slide" id="slide-7">
+            <div class="max-w-6xl w-full space-y-5 mt-4">
+                <div class="text-left border-l-4 border-l-brandCeleste pl-4">
+                    <span class="text-xs font-subheadings font-bold text-brandCeleste uppercase tracking-widest block mb-1">07 — About Telat Group</span>
+                    <h2 class="font-momo text-4xl lg:text-5xl text-brandOscuro">
+                        APPLIED TECHNOLOGY FOR <span class="text-brandCeleste">MODERN OPERATIONS</span>
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-2 gap-6 items-center pt-1">
+                    
+                    <!-- Left: Talent Evolution -->
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                        <div class="flex justify-between items-center border-b border-slate-100 pb-1.5">
+                            <span class="text-xs font-bold text-brandOscuro uppercase tracking-wider">Talent &amp; Technology Evolution</span>
+                            <span class="text-xs font-bold text-slate-400">2005 - 2026</span>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Over 20 years leading customer experience, automation, and AI operational capabilities across North America. We are an operational partner driving technology and team excellence.
+                        </p>
+                        <div class="grid grid-cols-4 gap-2 pt-1 text-center">
+                            <div class="p-2 bg-slate-50 rounded-xl">
+                                <div class="text-[9.5px] font-bold text-slate-400">2005</div>
+                                <div class="font-momo text-base text-slate-700">7 pers.</div>
+                            </div>
+                            <div class="p-2 bg-slate-50 rounded-xl">
+                                <div class="text-[9.5px] font-bold text-slate-400">2015</div>
+                                <div class="font-momo text-base text-slate-700">280 pers.</div>
+                            </div>
+                            <div class="p-2 bg-slate-50 rounded-xl">
+                                <div class="text-[9.5px] font-bold text-slate-400">2022</div>
+                                <div class="font-momo text-base text-brandNaranja">1,000</div>
+                            </div>
+                            <div class="p-2 bg-brandCeleste/10 rounded-xl border border-brandCeleste/30">
+                                <div class="text-[9.5px] font-bold text-brandCeleste">2026</div>
+                                <div class="font-momo text-base text-brandCeleste">+650</div>
+                            </div>
+                        </div>
+                        <div class="p-2.5 bg-slate-50 rounded-xl text-[11px] text-slate-600 font-medium border border-slate-200">
+                            Human talent optimization via AI technology, scaling to 650+ bilingual specialists.
+                        </div>
+                    </div>
+
+                    <!-- Right: Hubs Map -->
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                        <div class="flex justify-between items-center border-b border-slate-100 pb-1.5">
+                            <span class="text-xs font-bold text-brandOscuro uppercase tracking-wider">Operational Hubs Network</span>
+                            <span class="bg-brandCeleste/10 text-brandCeleste text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Binational US / MX</span>
+                        </div>
+                        <div class="rounded-xl overflow-hidden border border-slate-200">
+                            <img src="mapa_hubs.png" alt="Operational Hubs" class="w-full h-auto object-cover max-h-[160px]">
+                        </div>
+                        <div class="space-y-1 text-[11px] text-slate-600">
+                            <div class="flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-brandNaranja flex-shrink-0"></span>
+                                <span><strong>CDMX (2 Campuses):</strong> Roma &amp; Insurgentes — Corporate &amp; Operations HQ</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-brandCeleste flex-shrink-0"></span>
+                                <span><strong>Ciudad Juárez:</strong> Northern Frontier Mission-Critical Hub</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></span>
+                                <span><strong>El Paso, Texas (USA):</strong> Bilingual Nearshore &amp; BCP Gateway</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ==============================================================
+             SLIDE 8: METHODOLOGY & CALL TO ACTION
+             ============================================================== -->
+        <div class="slide" id="slide-8">
+            <div class="max-w-6xl w-full space-y-5 mt-4">
+                <div class="text-left border-l-4 border-l-brandNaranja pl-4">
+                    <span class="text-xs font-subheadings font-bold text-brandNaranja uppercase tracking-widest block mb-1">08 — Assessment &amp; Next Steps</span>
+                    <h2 class="font-momo text-4xl lg:text-5xl text-brandOscuro">
+                        OUR METHODOLOGY &amp; <span class="text-brandNaranja">EXECUTIVE CALL TO ACTION</span>
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-2 gap-6 items-center pt-1">
+                    
+                    <!-- Left: 4 Implementation Steps -->
+                    <div class="space-y-2.5">
+                        <div class="p-3.5 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-start gap-3">
+                            <span class="w-6 h-6 rounded-lg bg-brandCeleste text-white font-momo text-xs flex items-center justify-center flex-shrink-0">1</span>
+                            <div>
+                                <h3 class="font-subheadings font-bold text-xs text-brandOscuro">Operational Profiling &amp; Audit</h3>
+                                <p class="text-[11px] text-slate-500 leading-snug">Identifying bottlenecks and mapping operational workflows at zero cost.</p>
+                            </div>
+                        </div>
+                        <div class="p-3.5 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-start gap-3">
+                            <span class="w-6 h-6 rounded-lg bg-brandNaranja text-white font-momo text-xs flex items-center justify-center flex-shrink-0">2</span>
+                            <div>
+                                <h3 class="font-subheadings font-bold text-xs text-brandOscuro">Architecture &amp; AI Prototype Integration</h3>
+                                <p class="text-[11px] text-slate-500 leading-snug">Configuring conversational AI tools and automated business rules.</p>
+                            </div>
+                        </div>
+                        <div class="p-3.5 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-start gap-3">
+                            <span class="w-6 h-6 rounded-lg bg-emerald-600 text-white font-momo text-xs flex items-center justify-center flex-shrink-0">3</span>
+                            <div>
+                                <h3 class="font-subheadings font-bold text-xs text-brandOscuro">Deployment &amp; Team Onboarding</h3>
+                                <p class="text-[11px] text-slate-500 leading-snug">Go-live execution with active floor support and supervisor coaching.</p>
+                            </div>
+                        </div>
+                        <div class="p-3.5 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-start gap-3">
+                            <span class="w-6 h-6 rounded-lg bg-brandOscuro text-white font-momo text-xs flex items-center justify-center flex-shrink-0">4</span>
+                            <div>
+                                <h3 class="font-subheadings font-bold text-xs text-brandOscuro">Continuous SLA Optimization</h3>
+                                <p class="text-[11px] text-slate-500 leading-snug">Ongoing quality auditing and performance refinement backed by contract.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Call to Action Card -->
+                    <div class="bg-gradient-to-br from-[#222221] to-[#15161E] p-7 rounded-3xl text-white shadow-xl space-y-4 text-center relative overflow-hidden">
+                        <div class="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center mx-auto text-brandNaranjaClaro">
+                            <span class="material-symbols-outlined text-xl">handshake</span>
+                        </div>
+                        <span class="text-brandNaranjaClaro text-[9.5px] font-bold uppercase tracking-widest block">Executive Strategic Next Step</span>
+                        <h3 class="font-momo text-2xl lg:text-3xl leading-tight">
+                            READY TO ELEVATE<br>YOUR OPERATIONS?
+                        </h3>
+                        <p class="text-xs text-white/70 max-w-sm mx-auto leading-relaxed">
+                            We evaluate your operational workflows at zero cost, architect a tailored automation prototype incorporating AI tools, and deliver a contractually backed operational efficiency model.
+                        </p>
+                        <div class="pt-1">
+                            <a href="mailto:lcortina@telat-group.com" class="inline-flex items-center justify-center gap-2 w-full py-3 bg-gradient-to-r from-brandCeleste to-brandNaranja text-white font-subheadings font-bold text-xs rounded-xl shadow-md hover:opacity-95 transition-all">
+                                Schedule Executive Onboarding Briefing <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navigation Controls -->
+    <div id="slide-counter">01 / 08</div>
+    <div id="nav-controls">
+        <button class="nav-btn" onclick="prevSlide()" aria-label="Previous Slide">
+            <span class="material-symbols-outlined">arrow_back</span>
+        </button>
+        <button class="nav-btn" onclick="nextSlide()" aria-label="Next Slide">
+            <span class="material-symbols-outlined">arrow_forward</span>
+        </button>
+    </div>
+
+    <!-- Bottom Progress Bar -->
+    <div id="progress-bar"></div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 8;
+
+        function updateSlide() {
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            const activeSlide = document.getElementById('slide-' + currentSlide);
+            if (activeSlide) {
+                activeSlide.classList.add('active');
+            }
+
+            const counter = document.getElementById('slide-counter');
+            if (counter) {
+                const currentFormatted = String(currentSlide).padStart(2, '0');
+                const totalFormatted = String(totalSlides).padStart(2, '0');
+                counter.textContent = currentFormatted + ' / ' + totalFormatted;
+            }
+
+            const progressBar = document.getElementById('progress-bar');
+            if (progressBar) {
+                const progress = ((currentSlide - 1) / (totalSlides - 1)) * 100;
+                progressBar.style.width = progress + '%';
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        updateSlide();
+    </script>
+</body>
+</html>
