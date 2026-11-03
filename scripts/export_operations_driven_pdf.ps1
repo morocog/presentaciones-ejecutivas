@@ -38,3 +38,4 @@ if (Test-Path $outputPdf) {
     Write-Host "ERROR: Falló generación de PDF." -ForegroundColor Red
     exit 1
 }
+
