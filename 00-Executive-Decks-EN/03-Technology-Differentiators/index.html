@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Key Technology & Operational Differentiators · Telat Group</title>
+
+  <!-- Modern Google Fonts: DM Sans & Montserrat with display swap -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN v3 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            telat: {
+              celeste: '#3284C6',
+              naranja: '#EB5B27',
+              amarillo: '#FECA66',
+              oscuro: '#222221',
+              claro: '#FBFBFD'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    @font-face {
+      font-family: 'Momo Trust';
+      src: local('Impact'), local('Arial Black');
+      font-weight: 800;
+      font-display: swap;
+    }
+
+    :root {
+      --oscuro: #222221;
+      --azul-claro: #FBFBFD;
+      --celeste: #3284C6;
+      --naranja: #EB5B27;
+      --amarillo: #FECA66;
+    }
+
+    body {
+      background-color: var(--azul-claro);
+      color: var(--oscuro);
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .font-subheading,
+    .subheading {
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .font-body {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .metric-number {
+      font-family: 'Momo Trust', sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    #presentation-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 1;
+      background-color: #FBFBFD;
+      box-sizing: border-box;
+      padding: 1.15rem 3.5rem 0.85rem 3.5rem;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    .card-tech {
+      background: #FFFFFF;
+      border-radius: 1.25rem;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -2px rgba(0, 0, 0, 0.02);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .cert-pill {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 8.5px;
+      font-weight: 700;
+      padding: 0.15rem 0.45rem;
+      border-radius: 0.375rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      line-height: 1.2;
+    }
+
+    .kpi-pill-green { background: rgba(5, 150, 105, 0.08); color: #059669; border: 1px solid rgba(5, 150, 105, 0.25); }
+    .kpi-pill-blue { background: rgba(50, 132, 198, 0.08); color: #3284C6; border: 1px solid rgba(50, 132, 198, 0.25); }
+    .kpi-pill-orange { background: rgba(235, 91, 39, 0.08); color: #EB5B27; border: 1px solid rgba(235, 91, 39, 0.25); }
+    .kpi-pill-purple { background: rgba(124, 58, 237, 0.08); color: #7C3AED; border: 1px solid rgba(124, 58, 237, 0.25); }
+    .kpi-pill-cyan { background: rgba(8, 145, 178, 0.08); color: #0891B2; border: 1px solid rgba(8, 145, 178, 0.25); }
+
+    #nav-controls {
+      position: fixed;
+      bottom: 1.25rem;
+      right: 2rem;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      padding: 0.35rem 0.65rem;
+      border-radius: 9999px;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-btn {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #F1F5F9;
+      color: #334155;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .nav-btn:hover {
+      background: #3284C6;
+      color: #FFFFFF;
+    }
+    #slide-indicator {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #64748B;
+      padding: 0 0.5rem;
+    }
+
+    @media print {
+      @page {
+        size: 16in 9in;
+        margin: 0;
+      }
+      html, body {
+        width: 16in !important;
+        height: 9in !important;
+        overflow: visible !important;
+        background: #FBFBFD !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      #nav-controls {
+        display: none !important;
+      }
+      #presentation-container {
+        display: block !important;
+        width: 16in !important;
+        height: auto !important;
+        position: static !important;
+      }
+      .slide {
+        display: flex !important;
+        position: relative !important;
+        width: 16in !important;
+        height: 9in !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        box-sizing: border-box !important;
+        padding: 1.15rem 3.5rem 0.85rem 3.5rem !important;
+      }
+      .grid-cols-2 {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+      .grid-cols-3 {
+        display: grid !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="presentation-container">
+
+    <!-- ====================================================================
+         SLIDE 1: EXECUTIVE VISION · SPLIT-MAP ARCHITECTURE
+         ==================================================================== -->
+    <section class="slide active" id="slide-1" data-slide="1">
+
+      <!-- Slide Top Header -->
+      <div class="flex items-center justify-between pb-1.5 mb-1 border-b border-slate-200 flex-shrink-0">
+        <div class="flex items-center gap-3">
+          <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-8 w-auto" style="height: 32px; width: auto;">
+          <div class="h-6 w-[2px] bg-slate-300"></div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="subheading text-[11px] font-bold uppercase tracking-widest text-[#3284C6] block">Technical Proposal · Executive Institutional Vision</span>
+              <span class="text-slate-300">·</span>
+              <span class="font-subheading text-[11px] font-bold text-[#EB5B27] uppercase tracking-wider">Client Proven Success Stories · Operational Improvements & Cost Reductions</span>
+            </div>
+            <h1 class="subheading text-[1.28rem] font-bold text-[#222221] leading-tight">
+              Key Differentiators: Cutting-Edge Technology, Specialized Talent, and High-Impact Operations
+            </h1>
+          </div>
+        </div>
+        <div class="text-right">
+          <span class="subheading text-xs font-bold uppercase tracking-widest text-[#3284C6] bg-[#3284C6]/10 px-3 py-1 rounded-full border border-[#3284C6]/20">Telat Group · 2026</span>
+        </div>
+      </div>
+
+      <!-- Split-Map Layout (2 Large Value Wings) -->
+      <div class="grid grid-cols-2 gap-5 flex-1 items-stretch my-2 min-h-0">
+
+        <!-- ============================================================
+             WING 1: FLOOR TECHNOLOGY & LIVE CUSTOMER CARE
+             ============================================================ -->
+        <div class="card-tech p-5 flex flex-col justify-between border-t-4 border-t-[#3284C6] bg-gradient-to-b from-blue-50/20 to-white">
+          
+          <!-- Wing Header -->
+          <div class="pb-3 border-b border-slate-100 flex items-center justify-between flex-shrink-0">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="px-2.5 py-0.5 rounded-md bg-[#3284C6]/15 text-[#3284C6] text-[11px] font-black uppercase tracking-wider font-subheading">
+                  Front-Office Core · Operational Floor
+                </span>
+                <span class="text-[11px] font-bold text-slate-400 font-subheading">Live Customer Care</span>
+              </div>
+              <h2 class="subheading text-[1.48rem] font-bold text-[#222221] leading-tight">
+                Live Floor Technology and Enterprise Privacy
+              </h2>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-[#3284C6]/10 text-[#3284C6] flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+          </div>
+
+          <!-- Wing 1 Three Pillars -->
+          <div class="my-auto flex flex-col justify-center gap-4 py-2">
+
+            <!-- Row 1: AI Copilot -->
+            <div class="bg-white border border-slate-200/90 rounded-2xl py-5 px-5 flex items-center justify-between shadow-xs hover:border-[#3284C6]/50 transition-colors">
+              <div class="flex items-center gap-4 flex-1 min-w-0 pr-4">
+                <div class="w-12 h-12 rounded-xl bg-[#3284C6]/12 text-[#3284C6] flex items-center justify-center flex-shrink-0 font-black font-subheading text-lg">
+                  1
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="font-subheading text-[17px] font-bold text-slate-900">AI Operational Copilot</span>
+                    <span class="text-[11px] font-bold text-[#3284C6] bg-[#3284C6]/10 px-2 py-0.5 rounded-md whitespace-nowrap">Live Copilot</span>
+                  </div>
+                  <p class="font-body text-[13.8px] text-slate-600 leading-snug">
+                    While the specialist assists a customer, an AI copilot surfaces relevant knowledge and context-aware responses to resolve inquiries rapidly.
+                  </p>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0 pl-5 border-l border-slate-100 min-w-[125px]">
+                <span class="metric-number text-[2.75rem] text-[#3284C6] leading-none block">&lt; 2s</span>
+                <span class="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider font-subheading mt-1 block">On-Screen</span>
+              </div>
+            </div>
+
+            <!-- Row 2: Automated Notes & Case Wrap-Up -->
+            <div class="bg-white border border-slate-200/90 rounded-2xl py-5 px-5 flex items-center justify-between shadow-xs hover:border-[#EB5B27]/50 transition-colors">
+              <div class="flex items-center gap-4 flex-1 min-w-0 pr-4">
+                <div class="w-12 h-12 rounded-xl bg-[#EB5B27]/12 text-[#EB5B27] flex items-center justify-center flex-shrink-0 font-black font-subheading text-lg">
+                  2
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="font-subheading text-[17px] font-bold text-slate-900">Automated Notes & Case Ticketing</span>
+                    <span class="text-[11px] font-bold text-[#EB5B27] bg-[#EB5B27]/10 px-2 py-0.5 rounded-md whitespace-nowrap">Auto-Synthesis</span>
+                  </div>
+                  <p class="font-body text-[13.8px] text-slate-600 leading-snug">
+                    Immediately upon call wrap-up, an automated summary and disposition are generated and logged with a tracking ID, capturing requirements and resolutions with zero manual overhead.
+                  </p>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0 pl-5 border-l border-slate-100 min-w-[125px]">
+                <span class="metric-number text-[2.75rem] text-[#EB5B27] leading-none block">≤ 20s</span>
+                <span class="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider font-subheading mt-1 block">Fast Wrap-Up</span>
+              </div>
+            </div>
+
+            <!-- Row 3: Data Protection & Masking -->
+            <div class="bg-white border border-slate-200/90 rounded-2xl py-5 px-5 flex items-center justify-between shadow-xs hover:border-[#059669]/50 transition-colors">
+              <div class="flex items-center gap-4 flex-1 min-w-0 pr-4">
+                <div class="w-12 h-12 rounded-xl bg-[#059669]/12 text-[#059669] flex items-center justify-center flex-shrink-0 font-black font-subheading text-lg">
+                  3
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="font-subheading text-[17px] font-bold text-slate-900">Sensitive Data Masking & Cybersecurity</span>
+                    <span class="text-[11px] font-bold text-[#059669] bg-[#059669]/10 px-2 py-0.5 rounded-md whitespace-nowrap">Total Shield</span>
+                  </div>
+                  <p class="font-body text-[13.8px] text-slate-600 leading-snug">
+                    When a customer shares confidential information, the platform automatically masks and encrypts sensitive fields in real time, preventing exposure across screens, call recordings, and logs.
+                  </p>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0 pl-5 border-l border-slate-100 min-w-[125px]">
+                <span class="metric-number text-[2.75rem] text-[#059669] leading-none block">100%</span>
+                <span class="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider font-subheading mt-1 block">Protected</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Wing 1 Footer -->
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between flex-shrink-0">
+            <span class="text-[11.8px] font-medium text-slate-500 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-[#3284C6]"></span>
+              Models validated across enterprise clients with high CSAT
+            </span>
+            <span class="px-3.5 py-1.5 rounded-lg bg-[#3284C6]/10 text-[#3284C6] font-bold text-[12px] font-subheading flex items-center gap-1">
+              See Case Studies and Cost Reductions on Slide 2 ➔
+            </span>
+          </div>
+
+        </div>
+
+        <!-- ============================================================
+             WING 2: TALENT, QUALITY & OPERATIONAL CAPACITY
+             ============================================================ -->
+        <div class="card-tech p-5 flex flex-col justify-between border-t-4 border-t-[#EB5B27] bg-gradient-to-b from-orange-50/20 to-white">
+          
+          <!-- Wing Header -->
+          <div class="pb-3 border-b border-slate-100 flex items-center justify-between flex-shrink-0">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="px-2.5 py-0.5 rounded-md bg-[#EB5B27]/15 text-[#EB5B27] text-[11px] font-black uppercase tracking-wider font-subheading">
+                  Back-Office Core · Operational Support
+                </span>
+                <span class="text-[11px] font-bold text-slate-400 font-subheading">Governance & Deployment</span>
+              </div>
+              <h2 class="subheading text-[1.48rem] font-bold text-[#222221] leading-tight">
+                Talent, Quality Assurance, and Deployment Certainty
+              </h2>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-[#EB5B27]/10 text-[#EB5B27] flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+            </div>
+          </div>
+
+          <!-- Wing 2 Three Pillars -->
+          <div class="my-auto flex flex-col justify-center gap-4 py-2">
+
+            <!-- Row 4: Talent Selection -->
+            <div class="bg-white border border-slate-200/90 rounded-2xl py-5 px-5 flex items-center justify-between shadow-xs hover:border-[#7C3AED]/50 transition-colors">
+              <div class="flex items-center gap-4 flex-1 min-w-0 pr-4">
+                <div class="w-12 h-12 rounded-xl bg-[#8B5CF6]/12 text-[#7C3AED] flex items-center justify-center flex-shrink-0 font-black font-subheading text-lg">
+                  4
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="font-subheading text-[17px] font-bold text-slate-900">Specialized Talent Sourcing</span>
+                    <span class="text-[11px] font-bold text-[#7C3AED] bg-[#8B5CF6]/10 px-2 py-0.5 rounded-md whitespace-nowrap">Talent Filters</span>
+                  </div>
+                  <p class="font-body text-[13.8px] text-slate-600 leading-snug">
+                    Rigorous vetting evaluates verbal communication, computer navigation, problem solving, and bilingual English fluency before onboarding.
+                  </p>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0 pl-5 border-l border-slate-100 min-w-[125px]">
+                <span class="metric-number text-[2.75rem] text-[#7C3AED] leading-none block">4 Filters</span>
+                <span class="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider font-subheading mt-1 block">95% Retention</span>
+              </div>
+            </div>
+
+            <!-- Row 5: AI QA -->
+            <div class="bg-white border border-slate-200/90 rounded-2xl py-5 px-5 flex items-center justify-between shadow-xs hover:border-[#3284C6]/50 transition-colors">
+              <div class="flex items-center gap-4 flex-1 min-w-0 pr-4">
+                <div class="w-12 h-12 rounded-xl bg-[#3284C6]/12 text-[#3284C6] flex items-center justify-center flex-shrink-0 font-black font-subheading text-lg">
+                  5
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="font-subheading text-[17px] font-bold text-slate-900">AI-Powered Quality Assurance</span>
+                    <span class="text-[11px] font-bold text-[#3284C6] bg-[#3284C6]/10 px-2 py-0.5 rounded-md whitespace-nowrap">100% QA Audit</span>
+                  </div>
+                  <p class="font-body text-[13.8px] text-slate-600 leading-snug">
+                    Speech analytics and automated scorecards evaluate customer interactions to identify compliance risks, verify protocol adherence, and coach agents.
+                  </p>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0 pl-5 border-l border-slate-100 min-w-[125px]">
+                <span class="metric-number text-[2.5rem] text-[#3284C6] leading-none block">Up to 100%</span>
+                <span class="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider font-subheading mt-1 block">Flexible Sampling</span>
+              </div>
+            </div>
+
+            <!-- Row 6: Readiness to Deploy -->
+            <div class="bg-white border border-slate-200/90 rounded-2xl py-5 px-5 flex items-center justify-between shadow-xs hover:border-[#EB5B27]/50 transition-colors">
+              <div class="flex items-center gap-4 flex-1 min-w-0 pr-4">
+                <div class="w-12 h-12 rounded-xl bg-[#EB5B27]/12 text-[#EB5B27] flex items-center justify-center flex-shrink-0 font-black font-subheading text-lg">
+                  6
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="font-subheading text-[17px] font-bold text-slate-900">Rapid Ramp-Up & Scaling Readiness</span>
+                    <span class="text-[11px] font-bold text-[#EB5B27] bg-[#EB5B27]/10 px-2 py-0.5 rounded-md whitespace-nowrap">Training Facilities</span>
+                  </div>
+                  <p class="font-body text-[13.8px] text-slate-600 leading-snug">
+                    Turnkey physical facilities, high-performance training curriculums, and dynamic scheduling ensure operational readiness from day one.
+                  </p>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0 pl-5 border-l border-slate-100 min-w-[125px]">
+                <span class="metric-number text-[2.75rem] text-[#EB5B27] leading-none block">0 to 450</span>
+                <span class="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider font-subheading mt-1 block">Day-1 Certainty</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Wing 2 Footer -->
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between flex-shrink-0">
+            <span class="text-[11.5px] font-medium text-slate-500 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-[#EB5B27]"></span>
+              Physical infrastructure and institutional governance ready
+            </span>
+            <span class="px-3 py-1 rounded-lg bg-[#EB5B27]/10 text-[#EB5B27] font-bold text-[11.5px] font-subheading flex items-center gap-1">
+              See National Awards and Enhancements on Slide 2 ➔
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Bottom Strip: Direct Impact & Certifications -->
+      <div class="bg-white/95 border border-slate-200/90 rounded-xl px-4 py-1.5 flex flex-col gap-0.5 shadow-sm flex-shrink-0">
+        <!-- Line 1: Direct Customer Impact -->
+        <div class="flex items-center gap-2 text-slate-700">
+          <span class="w-2 h-2 rounded-full bg-[#059669] flex-shrink-0 animate-pulse"></span>
+          <span class="font-subheading text-[11px] font-bold text-slate-900 flex-shrink-0">
+            Direct Customer Impact:
+          </span>
+          <span class="font-body text-[10.8px] text-slate-600 leading-normal">
+            Immediate and empathetic care, radical reduction in idle wait times, and end-to-end operational certainty from day one.
+          </span>
+        </div>
+        <!-- Line 2: Governance & Certifications -->
+        <div class="flex items-center justify-between pt-0.5 border-t border-slate-100">
+          <div class="flex items-center gap-1.5 flex-shrink-0">
+            <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading flex items-center gap-1">
+              <svg class="w-2.5 h-2.5 text-[#059669]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              Governance & Certifications:
+            </span>
+          </div>
+          <div class="flex items-center gap-1 flex-nowrap">
+            <span class="cert-pill kpi-pill-green">ISO 9001</span>
+            <span class="cert-pill kpi-pill-blue">ISO 18295-1 (Contact Centers)</span>
+            <span class="cert-pill kpi-pill-purple font-bold border border-purple-300">Global CIC Model v3.0</span>
+            <span class="cert-pill kpi-pill-blue">ISO 27001 (Security)</span>
+            <span class="cert-pill kpi-pill-green">PCI-DSS v4.0 (PSI)</span>
+            <span class="cert-pill kpi-pill-cyan">ISO 20000-1 (ITSM)</span>
+            <span class="cert-pill kpi-pill-purple">ISO 22301 (Continuity)</span>
+            <span class="cert-pill kpi-pill-orange">ISO 37001 (Anti-Bribery)</span>
+            <span class="cert-pill font-bold" style="background: rgba(220, 38, 38, 0.08); color: #DC2626; border: 1px solid rgba(220, 38, 38, 0.25);">ESR Distintivo 2026</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================================
+         SLIDE 2: CLIENT PROVEN SUCCESS STORIES · NATIONAL IMT AWARDS
+         ==================================================================== -->
+    <section class="slide" id="slide-2" data-slide="2">
+
+      <!-- Header with Maturity Ribbon -->
+      <div class="flex items-center justify-between pb-1.5 mb-1 border-b border-slate-200 flex-shrink-0">
+        <div class="flex items-center gap-3">
+          <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-8 w-auto" style="height: 32px; width: auto;">
+          <div class="h-6 w-[2px] bg-slate-300"></div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="subheading text-[11px] font-bold uppercase tracking-widest text-[#3284C6] block">Proven Track Record · Mexican Institute of Teleservices (IMT)</span>
+              <span class="text-slate-300">·</span>
+              <span class="font-subheading text-[11px] font-bold text-[#D97706] uppercase tracking-wider">Consecutive National Podium: 2023 · 2024 · 2025 · 2026</span>
+            </div>
+            <h1 class="subheading text-[1.28rem] font-bold text-[#222221] leading-tight">
+              Proven Client Success Stories: 4 Consecutive Years Delivering Value and Cost Reductions
+            </h1>
+          </div>
+        </div>
+        <!-- Operational Maturity Ribbon -->
+        <div class="flex items-center gap-2 flex-shrink-0">
+          <div class="flex items-center gap-1.5 bg-slate-100/95 px-3 py-1 rounded-full border border-slate-200 text-[10px] font-bold font-subheading shadow-2xs">
+            <span class="text-slate-400 uppercase tracking-wider text-[9px]">Maturity:</span>
+            <span class="text-[#EB5B27]">2023 Silver</span>
+            <span class="text-slate-300">➔</span>
+            <span class="text-[#3284C6]">2024 Bronze</span>
+            <span class="text-slate-300">➔</span>
+            <span class="text-[#059669]">2025 Bronze</span>
+            <span class="text-slate-300">➔</span>
+            <span class="text-amber-700 font-black bg-amber-100/90 px-1.5 py-0.5 rounded text-amber-800">2026 Gold ★</span>
+          </div>
+          <span class="subheading text-xs font-bold uppercase tracking-widest text-[#D97706] bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">Official IMT Podium</span>
+        </div>
+      </div>
+
+      <!-- 2×2 Matrix Layout -->
+      <div class="grid grid-cols-2 gap-3.5 flex-1 my-1 min-h-0 items-stretch">
+
+        <!-- ============================================================
+             QUADRANT 1: 🥇 1ST PLACE NATIONWIDE · 2026 (CARVANA TITLES · GOLD)
+             ============================================================ -->
+        <div class="card-tech rounded-2xl p-4 flex flex-col justify-between shadow-xs border-2 border-amber-400 bg-gradient-to-b from-amber-50/50 via-yellow-50/15 to-white hover:border-amber-500 transition-all relative overflow-hidden">
+          
+          <div>
+            <!-- Header Quadrant 1 -->
+            <div class="flex items-center justify-between pb-2 mb-2 border-b border-amber-200/80">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-yellow-500 text-white flex items-center justify-center flex-shrink-0 text-2xl shadow-sm border border-amber-300">
+                  🥇
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-subheading text-[1.28rem] font-black text-amber-800 leading-none tracking-tight">
+                      1ST PLACE NATIONWIDE
+                    </span>
+                    <span class="px-2 py-0.5 rounded-md bg-amber-600 text-white text-[9.5px] font-black uppercase tracking-wider font-subheading">
+                      2026 · 21st Edition
+                    </span>
+                  </div>
+                  <span class="text-[11px] font-bold text-amber-900/85 uppercase tracking-wider font-subheading mt-0.5 block">
+                    Flipping Titles · Enterprise Client Carvana (Offshore Services)
+                  </span>
+                </div>
+              </div>
+              <span class="px-3 py-1 rounded-lg bg-gradient-to-r from-amber-500 to-yellow-500 text-white text-[10px] font-black uppercase tracking-wider font-subheading shadow-2xs">
+                ★ National Gold
+              </span>
+            </div>
+
+            <!-- Content Quadrant 1 -->
+            <h2 class="subheading text-[1.12rem] font-bold text-slate-900 leading-tight mb-1">
+              Optimization and Automation in Document Verification
+            </h2>
+            <p class="font-body text-[13px] text-slate-600 leading-snug">
+              Transformed motor vehicle title validation with automated data extraction tools and focused work intervals, completely removing operational bottlenecks.
+            </p>
+          </div>
+
+          <!-- Cost Reduction Highlight Block -->
+          <div class="bg-amber-100/70 border border-amber-300/90 rounded-xl px-3 py-2 my-1 shadow-2xs">
+            <div class="flex items-center gap-1.5 mb-0.5">
+              <span class="w-2 h-2 rounded-full bg-[#059669] flex-shrink-0"></span>
+              <span class="font-subheading text-[11px] font-bold text-[#059669] uppercase tracking-wider">Cost Reduction & Proven Efficiency:</span>
+            </div>
+            <p class="font-body text-[12px] text-slate-800 leading-snug">
+              Boosted throughput to <strong>30 cases per hour</strong> per specialist and radically reduced operational cost per transaction with near-zero error rates (0.04%).
+            </p>
+          </div>
+
+          <!-- Metrics Quadrant 1 -->
+          <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="bg-white border border-amber-200/90 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-amber-600 leading-none block">90s ➔ 40s</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Title Verification</span>
+            </div>
+            <div class="bg-white border border-amber-200/90 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-[#059669] leading-none block">0.04%</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Error Margin</span>
+            </div>
+            <div class="bg-white border border-amber-200/90 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-slate-800 leading-none block">+72%</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Productive Time</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ============================================================
+             QUADRANT 2: 🥈 2ND PLACE NATIONWIDE · 2023 (CARVANA DISPUTES · SILVER)
+             ============================================================ -->
+        <div class="card-tech rounded-2xl p-4 flex flex-col justify-between shadow-xs border-t-4 border-t-[#EB5B27] bg-gradient-to-b from-orange-50/20 via-white to-white border border-slate-200/90 hover:border-[#EB5B27]/50 transition-colors">
+          
+          <div>
+            <!-- Header Quadrant 2 -->
+            <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-[#EB5B27]/12 border border-[#EB5B27]/30 text-[#EB5B27] flex items-center justify-center flex-shrink-0 text-2xl shadow-xs">
+                  🥈
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-subheading text-[1.28rem] font-black text-[#EB5B27] leading-none tracking-tight">
+                      2ND PLACE NATIONWIDE
+                    </span>
+                    <span class="px-2 py-0.5 rounded-md bg-[#EB5B27] text-white text-[9.5px] font-black uppercase tracking-wider font-subheading">
+                      2023 · 18th Edition
+                    </span>
+                  </div>
+                  <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-0.5 block">
+                    Disruptive Processes · Enterprise Client Carvana (BPO Operations)
+                  </span>
+                </div>
+              </div>
+              <span class="px-3 py-1 rounded-lg bg-[#EB5B27]/15 text-[#EB5B27] text-[10px] font-black uppercase tracking-wider font-subheading">
+                National Silver
+              </span>
+            </div>
+
+            <!-- Content Quadrant 2 -->
+            <h2 class="subheading text-[1.12rem] font-bold text-slate-900 leading-tight mb-1">
+              Complex Case Management and Legal Compliance Rigor
+            </h2>
+            <p class="font-body text-[13px] text-slate-600 leading-snug">
+              Resolution and legal validation of multi-state vehicle title disputes with rigorous adherence to statutory regulations, ensuring zero audit discrepancies.
+            </p>
+          </div>
+
+          <!-- Highlight Block -->
+          <div class="bg-orange-100/60 border border-orange-300/80 rounded-xl px-3 py-2 my-1 shadow-2xs">
+            <div class="flex items-center gap-1.5 mb-0.5">
+              <span class="w-2 h-2 rounded-full bg-[#059669] flex-shrink-0"></span>
+              <span class="font-subheading text-[11px] font-bold text-[#059669] uppercase tracking-wider">Cost Reduction & Proven Efficiency:</span>
+            </div>
+            <p class="font-body text-[12px] text-slate-800 leading-snug">
+              <strong>100% elimination of regulatory penalties</strong> and thousands of engineering and agent hours saved from rework through real-time quality auditing.
+            </p>
+          </div>
+
+          <!-- Metrics Quadrant 2 -->
+          <div class="grid grid-cols-2 gap-2 text-center">
+            <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-[#EB5B27] leading-none block">+95%</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Data Precision</span>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-[#059669] leading-none block">0%</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Regulatory Errors</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ============================================================
+             QUADRANT 3: 🥉 3RD PLACE NATIONWIDE · 2024 (VIAPATH · BRONZE)
+             ============================================================ -->
+        <div class="card-tech rounded-2xl p-4 flex flex-col justify-between shadow-xs border-t-4 border-t-[#3284C6] bg-gradient-to-b from-blue-50/20 via-white to-white border border-slate-200/90 hover:border-[#3284C6]/50 transition-colors">
+          
+          <div>
+            <!-- Header Quadrant 3 -->
+            <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-[#3284C6]/12 border border-[#3284C6]/30 text-[#3284C6] flex items-center justify-center flex-shrink-0 text-2xl shadow-xs">
+                  🥉
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-subheading text-[1.28rem] font-black text-[#3284C6] leading-none tracking-tight">
+                      3RD PLACE NATIONWIDE
+                    </span>
+                    <span class="px-2 py-0.5 rounded-md bg-[#3284C6] text-white text-[9.5px] font-black uppercase tracking-wider font-subheading">
+                      2024 · 19th Edition
+                    </span>
+                  </div>
+                  <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-0.5 block">
+                    Back to Business · Enterprise Client ViaPath (Offshore Services)
+                  </span>
+                </div>
+              </div>
+              <span class="px-3 py-1 rounded-lg bg-[#3284C6]/15 text-[#3284C6] text-[10px] font-black uppercase tracking-wider font-subheading">
+                National Bronze
+              </span>
+            </div>
+
+            <!-- Content Quadrant 3 -->
+            <h2 class="subheading text-[1.12rem] font-bold text-slate-900 leading-tight mb-1">
+              Multi-Site Technological Expansion & Continuous Operations
+            </h2>
+            <p class="font-body text-[13px] text-slate-600 leading-snug">
+              Simultaneous operational deployment across three binational hubs (Mexico City, Ciudad Juárez, and El Paso, TX) with unified telephony and high-volume surge absorption.
+            </p>
+          </div>
+
+          <!-- Highlight Block -->
+          <div class="bg-blue-100/60 border border-blue-300/80 rounded-xl px-3 py-2 my-1 shadow-2xs">
+            <div class="flex items-center gap-1.5 mb-0.5">
+              <span class="w-2 h-2 rounded-full bg-[#059669] flex-shrink-0"></span>
+              <span class="font-subheading text-[11px] font-bold text-[#059669] uppercase tracking-wider">Cost Reduction & Proven Efficiency:</span>
+            </div>
+            <p class="font-body text-[12px] text-slate-800 leading-snug">
+              <strong>Consolidation of centralized technology infrastructure</strong> that eliminated redundant software licenses and duplicated server hosting costs.
+            </p>
+          </div>
+
+          <!-- Metrics Quadrant 3 -->
+          <div class="grid grid-cols-2 gap-2 text-center">
+            <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-[#3284C6] leading-none block">3 Hubs</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Binational Footprint</span>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-slate-800 leading-none block">24/7</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Active Continuity</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ============================================================
+             QUADRANT 4: 🥉 3RD PLACE NATIONWIDE · 2025 (AUTOGLASSNOW · BRONZE)
+             ============================================================ -->
+        <div class="card-tech rounded-2xl p-4 flex flex-col justify-between shadow-xs border-t-4 border-t-[#059669] bg-gradient-to-b from-emerald-50/20 via-white to-white border border-slate-200/90 hover:border-[#059669]/50 transition-colors">
+          
+          <div>
+            <!-- Header Quadrant 4 -->
+            <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-[#059669]/12 border border-[#059669]/30 text-[#059669] flex items-center justify-center flex-shrink-0 text-2xl shadow-xs">
+                  🥉
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-subheading text-[1.28rem] font-black text-[#059669] leading-none tracking-tight">
+                      3RD PLACE NATIONWIDE
+                    </span>
+                    <span class="px-2 py-0.5 rounded-md bg-[#059669] text-white text-[9.5px] font-black uppercase tracking-wider font-subheading">
+                      2025 · 20th Edition
+                    </span>
+                  </div>
+                  <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-0.5 block">
+                    Changing the Glass · Enterprise Client AutoGlassNow (Offshore Services)
+                  </span>
+                </div>
+              </div>
+              <span class="px-3 py-1 rounded-lg bg-[#059669]/15 text-[#059669] text-[10px] font-black uppercase tracking-wider font-subheading">
+                National Bronze
+              </span>
+            </div>
+
+            <!-- Content Quadrant 4 -->
+            <h2 class="subheading text-[1.12rem] font-bold text-slate-900 leading-tight mb-1">
+              Centralized Scheduling and Elimination of Call Abandonment
+            </h2>
+            <p class="font-body text-[13px] text-slate-600 leading-snug">
+              End-to-end centralization of quotes and inbound inquiries that freed U.S. auto glass shop technicians to focus on installations, boosting conversions and recapturing lost demand.
+            </p>
+          </div>
+
+          <!-- Highlight Block -->
+          <div class="bg-emerald-100/60 border border-emerald-300/80 rounded-xl px-3 py-2 my-1 shadow-2xs">
+            <div class="flex items-center gap-1.5 mb-0.5">
+              <span class="w-2 h-2 rounded-full bg-[#059669] flex-shrink-0"></span>
+              <span class="font-subheading text-[11px] font-bold text-[#059669] uppercase tracking-wider">Cost Reduction & Proven Efficiency:</span>
+            </div>
+            <p class="font-body text-[12px] text-slate-800 leading-snug">
+              <strong>Outperformed internal U.S. sales teams by +30.18%</strong> and drove call abandonment to historic lows through extended Sunday coverage.
+            </p>
+          </div>
+
+          <!-- Metrics Quadrant 4 -->
+          <div class="grid grid-cols-2 gap-2 text-center">
+            <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-[#059669] leading-none block">7.9% ➔ 3.4%</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Call Abandonment</span>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-slate-800 leading-none block">+30.2%</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Sales vs. U.S. Team</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Bottom Strip -->
+      <div class="bg-white/95 border border-slate-200/90 rounded-xl px-4 py-1.5 flex flex-col gap-0.5 shadow-sm flex-shrink-0">
+        <!-- Line 1: Institutional Partner Commitment -->
+        <div class="flex items-center gap-2 text-slate-700">
+          <span class="w-2 h-2 rounded-full bg-[#3284C6] flex-shrink-0 animate-pulse"></span>
+          <span class="font-subheading text-[11px] font-bold text-slate-900 flex-shrink-0">
+            Institutional Partner Commitment:
+          </span>
+          <span class="font-body text-[10.8px] text-slate-600 leading-normal">
+            The same technology, governance, and operational rigor that drive tangible cost savings and excellence for our enterprise clients back all our client service commitments.
+          </span>
+        </div>
+        <!-- Line 2: Governance & Official Certifications -->
+        <div class="flex items-center justify-between pt-0.5 border-t border-slate-100">
+          <div class="flex items-center gap-1.5 flex-shrink-0">
+            <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading flex items-center gap-1">
+              <svg class="w-2.5 h-2.5 text-[#059669]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              Governance & Official Certifications:
+            </span>
+          </div>
+          <div class="flex items-center gap-1 flex-nowrap">
+            <span class="cert-pill kpi-pill-green">ISO 9001</span>
+            <span class="cert-pill kpi-pill-blue">ISO 18295-1 (Contact Centers)</span>
+            <span class="cert-pill kpi-pill-purple font-bold border border-purple-300">Global CIC Model v3.0 (IMT)</span>
+            <span class="cert-pill kpi-pill-blue">ISO 27001 (Security)</span>
+            <span class="cert-pill kpi-pill-green">PCI-DSS v4.0 (PSI)</span>
+            <span class="cert-pill kpi-pill-cyan">ISO 20000-1 (ITSM)</span>
+            <span class="cert-pill kpi-pill-purple">ISO 22301 (Continuity)</span>
+            <span class="cert-pill kpi-pill-orange">ISO 37001 (Anti-Bribery)</span>
+            <span class="cert-pill font-bold" style="background: rgba(220, 38, 38, 0.08); color: #DC2626; border: 1px solid rgba(220, 38, 38, 0.25);">ESR Distintivo 2026</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <!-- Screen Floating Navigation Controls (Hidden in Print) -->
+  <div id="nav-controls">
+    <button class="nav-btn" onclick="prevSlide()" title="Previous Slide">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+    </button>
+    <span id="slide-indicator">1 / 2</span>
+    <button class="nav-btn" onclick="nextSlide()" title="Next Slide">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 2;
+
+    function showSlide(index) {
+      if (index < 1 || index > totalSlides) return;
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      const active = document.getElementById(`slide-${index}`);
+      if (active) active.classList.add('active');
+      document.getElementById('slide-indicator').textContent = `${index} / ${totalSlides}`;
+      currentSlide = index;
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) showSlide(currentSlide - 1);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      }
+    });
+  </script>
+</body>
+
+</html>

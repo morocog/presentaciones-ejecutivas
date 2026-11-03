@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Telat AI Solutions · Executive Presentation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #0F172A;
+      color: #F8FAFC;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .font-subheading { font-family: 'DM Sans', sans-serif; }
+  </style>
+</head>
+<body class="flex flex-col h-screen">
+  <!-- Top Navigation Header -->
+  <header class="bg-slate-900 border-b border-slate-800 px-6 py-3 flex items-center justify-between flex-shrink-0">
+    <div class="flex items-center gap-3">
+      <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-8 w-auto">
+      <div class="h-5 w-[1px] bg-slate-700"></div>
+      <div>
+        <h1 class="font-subheading text-sm font-bold text-white tracking-wide">Telat AI Solutions</h1>
+        <p class="text-[11px] text-slate-400">Quality Assurance, Operational AI & Real-Time Intelligence</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="01_Telat_AI_Solutions.pdf" download="01_Telat_AI_Solutions.pdf" class="inline-flex items-center gap-2 bg-[#3284C6] hover:bg-[#2563EB] text-white text-xs font-semibold px-4 py-2 rounded-lg transition-colors shadow-sm">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        Download Vector PDF
+      </a>
+      <a href="01_Telat_AI_Solutions.pdf" target="_blank" class="inline-flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium px-3 py-2 rounded-lg transition-colors border border-slate-700">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        Open Raw PDF
+      </a>
+    </div>
+  </header>
+
+  <!-- PDF Viewport Frame -->
+  <main class="flex-1 w-full bg-slate-950 p-2 overflow-hidden flex items-center justify-center">
+    <object data="01_Telat_AI_Solutions.pdf#view=FitH" type="application/pdf" class="w-full h-full rounded-lg shadow-2xl border border-slate-800">
+      <iframe src="01_Telat_AI_Solutions.pdf#view=FitH" class="w-full h-full rounded-lg" frameborder="0">
+        <p class="text-slate-400 p-6 text-center">Your browser does not support inline PDFs. <a href="01_Telat_AI_Solutions.pdf" class="text-blue-400 underline">Download 01_Telat_AI_Solutions.pdf</a>.</p>
+      </iframe>
+    </object>
+  </main>
+</body>
+</html>
