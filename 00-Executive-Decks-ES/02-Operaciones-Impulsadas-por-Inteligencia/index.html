@@ -62,14 +62,18 @@
         @font-face {
             font-family: 'Momo Trust';
             src: local('Impact'), local('Arial Black');
-            font-weight: 800;
+            font-weight: normal;
             font-display: swap;
         }
 
         .font-momo {
             font-family: 'Momo Trust', 'Impact', sans-serif;
-            font-weight: 800;
-            letter-spacing: -0.02em;
+            font-weight: normal !important;
+            letter-spacing: -0.01em;
+        }
+
+        h1.font-momo, h2.font-momo, h3.font-momo, h4.font-momo, .font-momo {
+            font-weight: normal !important;
         }
 
         body {

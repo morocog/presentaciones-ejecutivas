@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Soluciones de IA y analítica operativa Telat · Telat Group</title>
+  <title>Soluciones de IA y analítica operativa · Telat Group</title>
 
-  <!-- Tipografías: DM Sans & Montserrat -->
+  <!-- Google Fonts: Bricolage Grotesque (titulares de impacto geométrico original) y DM Sans (cuerpo y datos) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS v3 -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -18,15 +18,14 @@
       theme: {
         extend: {
           colors: {
-            brandOscuro: '#1E293B',
-            brandCeleste: '#3284C6',
             brandNaranja: '#EB5B27',
-            navyDark: '#172B4D',
-            navyDarker: '#13223D',
+            brandCeleste: '#2079C8',
+            navyDark: '#14295C',
+            ivoryBg: '#F6F4F0',
           },
           fontFamily: {
-            subheadings: ['"DM Sans"', 'sans-serif'],
-            body: ['Montserrat', 'sans-serif'],
+            sans: ['"DM Sans"', 'sans-serif'],
+            display: ['"Bricolage Grotesque"', 'sans-serif'],
           }
         }
       }
@@ -34,23 +33,16 @@
   </script>
 
   <style>
-    @font-face {
-      font-family: 'Momo Trust';
-      src: local('Impact'), local('Arial Black');
-      font-weight: 800;
-      font-display: swap;
-    }
-
-    .font-momo {
-      font-family: 'Momo Trust', 'Impact', sans-serif;
-      font-weight: 800;
-      letter-spacing: -0.02em;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      background-color: #F8F9FA;
-      color: #1E293B;
-      font-family: 'Montserrat', sans-serif;
+      background-color: #F6F4F0;
+      color: #111827;
+      font-family: 'DM Sans', sans-serif;
       margin: 0;
       padding: 0;
       overflow: hidden;
@@ -75,9 +67,10 @@
       flex-direction: column;
       justify-content: space-between;
       box-sizing: border-box;
-      padding: 3.5rem 5rem 2.8rem 5rem;
+      padding: 3.5rem 5.5rem 2.5rem 5.5rem;
       z-index: 1;
-      background-color: #F8F9FA;
+      background-color: #F6F4F0;
+      overflow: hidden;
     }
 
     .slide.active {
@@ -86,37 +79,11 @@
     }
 
     .slide-dark {
-      background: #172B4D;
+      background: #14295C;
       color: #FFFFFF;
     }
 
-    /* Anillos concéntricos decorativos para portada y cierre */
-    .rings-bg {
-      position: absolute;
-      top: 50%;
-      right: -8%;
-      transform: translateY(-50%);
-      width: 650px;
-      height: 650px;
-      border-radius: 50%;
-      border: 55px solid #EB5B27;
-      pointer-events: none;
-      opacity: 0.95;
-    }
-
-    .rings-bg-inner {
-      position: absolute;
-      top: 50%;
-      right: 2%;
-      transform: translateY(-50%);
-      width: 480px;
-      height: 480px;
-      border-radius: 50%;
-      background: #2080D0;
-      pointer-events: none;
-      opacity: 0.95;
-    }
-
+    /* Navegación interactiva en pantalla */
     #nav-controls {
       position: fixed;
       bottom: 1.5rem;
@@ -148,7 +115,7 @@
     }
 
     .nav-btn:hover {
-      background: #3284C6;
+      background: #2079C8;
       color: #FFFFFF;
     }
 
@@ -176,7 +143,7 @@
         width: 16in !important;
         height: 9in !important;
         overflow: visible !important;
-        background: #F8F9FA !important;
+        background: #F6F4F0 !important;
         margin: 0 !important;
         padding: 0 !important;
       }
@@ -200,7 +167,7 @@
         page-break-after: always !important;
         break-after: page !important;
         box-sizing: border-box !important;
-        padding: 3.5rem 5rem 2.8rem 5rem !important;
+        padding: 3.5rem 5.5rem 2.5rem 5.5rem !important;
         overflow: hidden !important;
       }
 
@@ -209,19 +176,26 @@
         break-after: auto !important;
       }
 
-      .grid-cols-2 {
+      .slide-dark {
+        background: #14295C !important;
+      }
+
+      .grid {
         display: grid !important;
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
       }
 
       .grid-cols-12 {
         display: grid !important;
         grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
       }
-      .col-span-4 { grid-column: span 4 / span 4 !important; }
-      .col-span-5 { grid-column: span 5 / span 5 !important; }
-      .col-span-7 { grid-column: span 7 / span 7 !important; }
-      .col-span-8 { grid-column: span 8 / span 8 !important; }
+
+      .col-span-7 {
+        grid-column: span 7 / span 7 !important;
+      }
+
+      .col-span-5 {
+        grid-column: span 5 / span 5 !important;
+      }
     }
   </style>
 </head>
@@ -231,42 +205,44 @@
   <div class="presentation-container">
 
     <!-- ==============================================================
-         LÁMINA 1: PORTADA (DARK NAVY CON AROS CORPORATIVOS)
+         LÁMINA 1: PORTADA EJECUTIVA (DARK NAVY CON AROS CORPORATIVOS)
          ============================================================== -->
-    <section class="slide slide-dark active relative overflow-hidden" id="slide-1" data-slide="1">
-      <!-- Aros decorativos concéntricos -->
-      <div class="rings-bg"></div>
-      <div class="rings-bg-inner"></div>
+    <section class="slide slide-dark active relative" id="slide-1" data-slide="1">
+      <!-- Aros corporativos concéntricos vectoriales SVG idénticos al original -->
+      <svg class="absolute -right-24 top-1/2 -translate-y-1/2 w-[720px] h-[720px] pointer-events-none" viewBox="0 0 600 600" fill="none">
+        <circle cx="300" cy="300" r="236" stroke="#EB5B27" stroke-width="48" opacity="0.95" />
+        <circle cx="300" cy="300" r="188" fill="#2079C8" opacity="0.95" />
+      </svg>
 
-      <!-- Logotipo Telat -->
+      <!-- Logotipo Telat auténtico circular -->
       <div class="relative z-10">
-        <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-12 w-auto brightness-0 invert">
+        <img src="assets/logo_telat_icon.png" alt="Telat Group" class="h-14 w-14 object-contain">
       </div>
 
-      <!-- Texto central de impacto -->
-      <div class="relative z-10 max-w-3xl my-auto space-y-6">
-        <h1 class="font-subheadings font-bold text-5xl md:text-6xl lg:text-[4.6rem] leading-[1.02] text-white">
+      <!-- Texto principal de impacto -->
+      <div class="relative z-10 max-w-4xl my-auto space-y-6">
+        <h1 class="font-display font-extrabold text-white text-6xl lg:text-[4.85rem] leading-[1.04] tracking-tight">
           Llamadas más inteligentes.<br>
           Mayor calidad.<br>
           Menos trabajo manual.
         </h1>
-        <p class="font-body text-base lg:text-xl text-white/80 max-w-2xl leading-relaxed font-normal">
-          Cuatro herramientas impulsadas por IA que ayudan a agentes, supervisores y equipos de calidad a lograr más en cada interacción.
+        <p class="font-sans text-white/85 text-xl max-w-2xl font-normal leading-relaxed">
+          Cuatro soluciones de inteligencia artificial que ayudan a agentes, supervisores y equipos de calidad a lograr más en cada interacción.
         </p>
       </div>
 
-      <!-- 4 Píldoras inferiores -->
-      <div class="relative z-10 flex items-center gap-3 pt-4 border-t border-white/15 flex-wrap">
-        <span class="px-5 py-2.5 rounded-full border border-white/30 text-white/90 text-sm font-subheadings font-semibold bg-white/5">
-          Motor de QA
+      <!-- 4 Píldoras de producto en cápsulas -->
+      <div class="relative z-10 flex items-center gap-3 pt-6 border-t border-white/20 flex-wrap">
+        <span class="px-6 py-2.5 rounded-full border border-white/25 text-white/95 text-sm font-sans font-semibold bg-white/5">
+          QA Engine
         </span>
-        <span class="px-5 py-2.5 rounded-full border border-white/30 text-white/90 text-sm font-subheadings font-semibold bg-white/5">
+        <span class="px-6 py-2.5 rounded-full border border-white/25 text-white/95 text-sm font-sans font-semibold bg-white/5">
           Asistente Kai
         </span>
-        <span class="px-5 py-2.5 rounded-full border border-white/30 text-white/90 text-sm font-subheadings font-semibold bg-white/5">
+        <span class="px-6 py-2.5 rounded-full border border-white/25 text-white/95 text-sm font-sans font-semibold bg-white/5">
           Note Generator
         </span>
-        <span class="px-5 py-2.5 rounded-full border border-white/30 text-white/90 text-sm font-subheadings font-semibold bg-white/5">
+        <span class="px-6 py-2.5 rounded-full border border-white/25 text-white/95 text-sm font-sans font-semibold bg-white/5">
           Notas AutoSummary
         </span>
       </div>
@@ -277,80 +253,82 @@
          LÁMINA 2: MOTOR DE QA (VALOR CENTRAL)
          ============================================================== -->
     <section class="slide" id="slide-2" data-slide="2">
-      <!-- Encabezado con punto naranja -->
-      <div class="flex items-center gap-2">
+      <!-- Tag superior con punto naranja -->
+      <div class="flex items-center gap-2.5">
         <span class="w-2.5 h-2.5 rounded-full bg-[#EB5B27]"></span>
-        <span class="font-subheadings font-bold text-sm text-[#EB5B27] uppercase tracking-wider">Motor de QA</span>
+        <span class="font-sans font-bold text-xs tracking-wider text-[#EB5B27] uppercase">QA Engine</span>
       </div>
 
-      <!-- Contenido principal en 2 columnas -->
+      <!-- Layout 2 columnas (7 + 5) -->
       <div class="grid grid-cols-12 gap-16 my-auto items-center">
-        <!-- Columna izquierda (7 cols) -->
+        <!-- Columna izquierda: Título, bajada y 3 checks -->
         <div class="col-span-7 space-y-6">
-          <h2 class="font-subheadings font-bold text-4xl lg:text-5xl text-slate-900 leading-[1.08]">
+          <h2 class="font-display font-extrabold text-slate-900 text-5xl lg:text-[3.25rem] leading-[1.08] tracking-tight">
             Cada interacción evaluada,<br>
             no solo una muestra.
           </h2>
-          <p class="font-body text-base lg:text-lg text-slate-600 leading-relaxed font-normal">
-            El Motor de QA transcribe, analiza y califica interacciones de voz y texto automáticamente, aplicando su propia rúbrica y estándares de calidad.
+          <p class="font-sans text-slate-600 text-lg leading-relaxed max-w-xl font-normal">
+            QA Engine transcribe, analiza y califica interacciones de voz y texto automáticamente, aplicando su propia rúbrica y estándares de calidad.
           </p>
 
-          <!-- 3 Checks azules -->
+          <!-- 3 Checks con círculo azul -->
           <div class="space-y-4 pt-2">
-            <div class="flex items-start gap-3.5">
-              <div class="w-6 h-6 rounded-full bg-[#3284C6] text-white flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-bold">
+            <div class="flex items-center gap-3.5">
+              <div class="w-6 h-6 rounded-full bg-[#2079C8] text-white flex items-center justify-center flex-shrink-0 text-xs font-bold shadow-sm">
                 ✓
               </div>
-              <span class="font-body text-base text-slate-800 font-medium">
+              <span class="font-sans text-slate-800 text-base font-medium">
                 Visibilidad completa en lugar de muestreo aleatorio
               </span>
             </div>
-            <div class="flex items-start gap-3.5">
-              <div class="w-6 h-6 rounded-full bg-[#3284C6] text-white flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-bold">
+            <div class="flex items-center gap-3.5">
+              <div class="w-6 h-6 rounded-full bg-[#2079C8] text-white flex items-center justify-center flex-shrink-0 text-xs font-bold shadow-sm">
                 ✓
               </div>
-              <span class="font-body text-base text-slate-800 font-medium">
+              <span class="font-sans text-slate-800 text-base font-medium">
                 Desviaciones críticas detectadas en el momento en que ocurren
               </span>
             </div>
-            <div class="flex items-start gap-3.5">
-              <div class="w-6 h-6 rounded-full bg-[#3284C6] text-white flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-bold">
+            <div class="flex items-center gap-3.5">
+              <div class="w-6 h-6 rounded-full bg-[#2079C8] text-white flex items-center justify-center flex-shrink-0 text-xs font-bold shadow-sm">
                 ✓
               </div>
-              <span class="font-body text-base text-slate-800 font-medium">
+              <span class="font-sans text-slate-800 text-base font-medium">
                 Calificaciones calibradas según los criterios de sus auditores humanos
               </span>
             </div>
           </div>
         </div>
 
-        <!-- Columna derecha: 3 Métricas apiladas (5 cols) -->
-        <div class="col-span-5 space-y-8 pl-8 border-l border-slate-200">
+        <!-- Columna derecha: 3 Métricas apiladas con divisores sutiles -->
+        <div class="col-span-5 pl-10 border-l border-slate-300/80 space-y-6">
           <div>
-            <div class="font-momo text-5xl lg:text-6xl text-[#EB5B27] leading-none">
+            <div class="font-display font-extrabold text-6xl text-[#EB5B27] tracking-tight leading-none">
               Hasta 100%
             </div>
-            <p class="font-body text-xs text-slate-500 mt-2 font-medium">de interacciones evaluadas</p>
+            <p class="font-sans text-xs text-slate-500 font-medium mt-1.5">de interacciones evaluadas</p>
           </div>
+          <div class="h-[1px] bg-slate-200"></div>
           <div>
-            <div class="font-momo text-5xl lg:text-6xl text-slate-900 leading-none">
+            <div class="font-display font-extrabold text-6xl text-slate-900 tracking-tight leading-none">
               28
             </div>
-            <p class="font-body text-xs text-slate-500 mt-2 font-medium">criterios de rúbrica evaluados en cada llamada</p>
+            <p class="font-sans text-xs text-slate-500 font-medium mt-1.5">criterios de rúbrica evaluados en cada llamada</p>
           </div>
+          <div class="h-[1px] bg-slate-200"></div>
           <div>
-            <div class="font-momo text-4xl lg:text-5xl text-slate-900 leading-none">
+            <div class="font-display font-extrabold text-5xl lg:text-6xl text-slate-900 tracking-tight leading-none">
               Instantánea
             </div>
-            <p class="font-body text-xs text-slate-500 mt-2 font-medium">detección de desviaciones críticas</p>
+            <p class="font-sans text-xs text-slate-500 font-medium mt-1.5">detección de desviaciones críticas</p>
           </div>
         </div>
       </div>
 
-      <!-- Pie de lámina: Logo corporativo -->
-      <div class="flex items-center gap-2 pt-2 border-t border-slate-200">
-        <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-6 w-auto">
-        <span class="text-xs font-subheadings font-bold text-slate-400">Telat Group</span>
+      <!-- Pie de página: Logotipo auténtico y nombre -->
+      <div class="flex items-center gap-2 pt-3 border-t border-slate-200">
+        <img src="assets/logo_telat_icon.png" alt="Telat" class="h-5 w-5 object-contain">
+        <span class="text-xs font-sans font-bold text-slate-400">Telat Group</span>
       </div>
     </section>
 
@@ -359,77 +337,77 @@
          LÁMINA 3: MOTOR DE QA · CÓMO FUNCIONA
          ============================================================== -->
     <section class="slide" id="slide-3" data-slide="3">
-      <!-- Encabezado con punto naranja -->
-      <div class="flex items-center gap-2">
+      <!-- Tag superior -->
+      <div class="flex items-center gap-2.5">
         <span class="w-2.5 h-2.5 rounded-full bg-[#EB5B27]"></span>
-        <span class="font-subheadings font-bold text-sm text-[#EB5B27] uppercase tracking-wider">Motor de QA · Cómo funciona</span>
+        <span class="font-sans font-bold text-xs tracking-wider text-[#EB5B27] uppercase">QA Engine · Cómo funciona</span>
       </div>
 
-      <!-- Título de sección -->
+      <!-- Título de lámina -->
       <div class="pt-1">
-        <h2 class="font-subheadings font-bold text-4xl text-slate-900 leading-tight">
+        <h2 class="font-display font-extrabold text-slate-900 text-4xl lg:text-5xl tracking-tight leading-tight">
           De la grabación al diagnóstico en un solo lugar.
         </h2>
       </div>
 
-      <!-- Layout central: Dashboard a la izquierda + 3 pasos a la derecha -->
-      <div class="grid grid-cols-12 gap-8 my-auto items-center">
-        <!-- Dashboard Screenshot -->
+      <!-- Layout central: Dashboard UI a la izquierda (7 cols) + 3 pasos (5 cols) -->
+      <div class="grid grid-cols-12 gap-10 my-auto items-center">
+        <!-- Dashboard Mockup Card -->
         <div class="col-span-7">
-          <div class="rounded-2xl overflow-hidden border border-slate-300 shadow-xl bg-slate-900">
-            <div class="h-6 bg-slate-800 px-3 flex items-center gap-1.5 border-b border-slate-700">
-              <span class="w-2 h-2 rounded-full bg-red-500"></span>
-              <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <div class="rounded-2xl border border-slate-300 shadow-xl overflow-hidden bg-slate-900">
+            <div class="h-7 bg-slate-800/90 px-3 flex items-center gap-1.5 border-b border-slate-700/80">
+              <span class="w-2.5 h-2.5 rounded-full bg-red-500/90"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-500/90"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/90"></span>
             </div>
-            <img src="assets/img_4.jpg" alt="Motor de QA Dashboard" class="w-full h-auto object-cover">
+            <img src="assets/img_4.jpg" alt="QA Engine Dashboard" class="w-full h-auto object-cover block">
           </div>
         </div>
 
-        <!-- 3 Pasos explicativos -->
-        <div class="col-span-5 space-y-6">
+        <!-- 3 Pasos numerados con círculos limpios -->
+        <div class="col-span-5 space-y-7 pl-4">
           <div class="flex items-start gap-4">
-            <div class="w-10 h-10 rounded-full border-2 border-slate-300 text-slate-800 flex items-center justify-center font-subheadings font-bold text-base flex-shrink-0">
+            <div class="w-9 h-9 rounded-full border border-slate-300 bg-white text-slate-800 flex items-center justify-center font-display font-extrabold text-base flex-shrink-0 shadow-sm mt-0.5">
               1
             </div>
             <div>
-              <h4 class="font-subheadings font-bold text-lg text-slate-900 leading-tight mb-1">Transcribir y calificar</h4>
-              <p class="font-body text-xs lg:text-sm text-slate-600 leading-relaxed font-normal">
+              <h4 class="font-sans font-bold text-slate-900 text-lg leading-snug mb-1">Transcribir y calificar</h4>
+              <p class="font-sans text-slate-600 text-sm leading-relaxed font-normal">
                 Cada llamada se analiza en audio, habilidades conversacionales y apego al procedimiento.
               </p>
             </div>
           </div>
 
           <div class="flex items-start gap-4">
-            <div class="w-10 h-10 rounded-full border-2 border-slate-300 text-slate-800 flex items-center justify-center font-subheadings font-bold text-base flex-shrink-0">
+            <div class="w-9 h-9 rounded-full border border-slate-300 bg-white text-slate-800 flex items-center justify-center font-display font-extrabold text-base flex-shrink-0 shadow-sm mt-0.5">
               2
             </div>
             <div>
-              <h4 class="font-subheadings font-bold text-lg text-slate-900 leading-tight mb-1">Monitorear desempeño</h4>
-              <p class="font-body text-xs lg:text-sm text-slate-600 leading-relaxed font-normal">
-                Tableros dinámicos con calificaciones, tasas de aprobación y principales brechas por sede y campaña.
+              <h4 class="font-sans font-bold text-slate-900 text-lg leading-snug mb-1">Seguimiento del desempeño</h4>
+              <p class="font-sans text-slate-600 text-sm leading-relaxed font-normal">
+                Paneles con calificaciones, tasas de aprobación y principales áreas de coaching por equipo y campaña.
               </p>
             </div>
           </div>
 
           <div class="flex items-start gap-4">
-            <div class="w-10 h-10 rounded-full border-2 border-slate-300 text-slate-800 flex items-center justify-center font-subheadings font-bold text-base flex-shrink-0">
+            <div class="w-9 h-9 rounded-full border border-slate-300 bg-white text-slate-800 flex items-center justify-center font-display font-extrabold text-base flex-shrink-0 shadow-sm mt-0.5">
               3
             </div>
             <div>
-              <h4 class="font-subheadings font-bold text-lg text-slate-900 leading-tight mb-1">Coaching con diagnósticos de IA</h4>
-              <p class="font-body text-xs lg:text-sm text-slate-600 leading-relaxed font-normal">
-                Resúmenes ejecutivos que señalan con exactitud dónde enfocar la capacitación del personal.
+              <h4 class="font-sans font-bold text-slate-900 text-lg leading-snug mb-1">Coaching con hallazgos de IA</h4>
+              <p class="font-sans text-slate-600 text-sm leading-relaxed font-normal">
+                Resúmenes ejecutivos que señalan con exactitud dónde enfocar la capacitación.
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Pie de lámina: Logo -->
-      <div class="flex items-center gap-2 pt-2 border-t border-slate-200">
-        <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-6 w-auto">
-        <span class="text-xs font-subheadings font-bold text-slate-400">Telat Group</span>
+      <!-- Pie de página -->
+      <div class="flex items-center gap-2 pt-3 border-t border-slate-200">
+        <img src="assets/logo_telat_icon.png" alt="Telat" class="h-5 w-5 object-contain">
+        <span class="text-xs font-sans font-bold text-slate-400">Telat Group</span>
       </div>
     </section>
 
@@ -438,80 +416,82 @@
          LÁMINA 4: ASISTENTE KAI (VALOR CENTRAL)
          ============================================================== -->
     <section class="slide" id="slide-4" data-slide="4">
-      <!-- Encabezado con punto naranja -->
-      <div class="flex items-center gap-2">
+      <!-- Tag superior -->
+      <div class="flex items-center gap-2.5">
         <span class="w-2.5 h-2.5 rounded-full bg-[#EB5B27]"></span>
-        <span class="font-subheadings font-bold text-sm text-[#EB5B27] uppercase tracking-wider">Kai · Asistente con IA</span>
+        <span class="font-sans font-bold text-xs tracking-wider text-[#EB5B27] uppercase">Kai · Asistente de IA</span>
       </div>
 
-      <!-- Contenido principal -->
+      <!-- Layout 2 columnas (7 + 5) -->
       <div class="grid grid-cols-12 gap-16 my-auto items-center">
-        <!-- Columna izquierda (7 cols) -->
+        <!-- Columna izquierda -->
         <div class="col-span-7 space-y-6">
-          <h2 class="font-subheadings font-bold text-4xl lg:text-5xl text-slate-900 leading-[1.08]">
+          <h2 class="font-display font-extrabold text-slate-900 text-5xl lg:text-[3.25rem] leading-[1.08] tracking-tight">
             La respuesta correcta, en segundos,<br>
             mientras el cliente sigue en la línea.
           </h2>
-          <p class="font-body text-base lg:text-lg text-slate-600 leading-relaxed font-normal">
-            Kai es un copiloto en tiempo real para especialistas. Localiza el procedimiento oficial al instante y transforma consultas complejas en pasos claros y directos.
+          <p class="font-sans text-slate-600 text-lg leading-relaxed max-w-xl font-normal">
+            Kai es un copiloto en tiempo real para agentes. Encuentra el procedimiento oficial al instante y transforma preguntas complejas en pasos claros.
           </p>
 
           <!-- 3 Checks azules -->
           <div class="space-y-4 pt-2">
-            <div class="flex items-start gap-3.5">
-              <div class="w-6 h-6 rounded-full bg-[#3284C6] text-white flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-bold">
+            <div class="flex items-center gap-3.5">
+              <div class="w-6 h-6 rounded-full bg-[#2079C8] text-white flex items-center justify-center flex-shrink-0 text-xs font-bold shadow-sm">
                 ✓
               </div>
-              <span class="font-body text-base text-slate-800 font-medium">
-                Menores tiempos de operación con respuestas directas y aplicables
+              <span class="font-sans text-slate-800 text-base font-medium">
+                Tiempos de atención más cortos con respuestas directas y accionables
               </span>
             </div>
-            <div class="flex items-start gap-3.5">
-              <div class="w-6 h-6 rounded-full bg-[#3284C6] text-white flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-bold">
+            <div class="flex items-center gap-3.5">
+              <div class="w-6 h-6 rounded-full bg-[#2079C8] text-white flex items-center justify-center flex-shrink-0 text-xs font-bold shadow-sm">
                 ✓
               </div>
-              <span class="font-body text-base text-slate-800 font-medium">
-                Mayor resolución en primer contacto mediante procesos homogéneos
+              <span class="font-sans text-slate-800 text-base font-medium">
+                Mayor resolución en primer contacto mediante procedimientos consistentes
               </span>
             </div>
-            <div class="flex items-start gap-3.5">
-              <div class="w-6 h-6 rounded-full bg-[#3284C6] text-white flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-bold">
+            <div class="flex items-center gap-3.5">
+              <div class="w-6 h-6 rounded-full bg-[#2079C8] text-white flex items-center justify-center flex-shrink-0 text-xs font-bold shadow-sm">
                 ✓
               </div>
-              <span class="font-body text-base text-slate-800 font-medium">
-                Respuestas respaldadas exclusivamente en su base de conocimiento autorizada
+              <span class="font-sans text-slate-800 text-base font-medium">
+                Respuestas respaldadas únicamente en su base de conocimiento autorizada
               </span>
             </div>
           </div>
         </div>
 
-        <!-- Columna derecha: 3 Métricas apiladas (5 cols) -->
-        <div class="col-span-5 space-y-8 pl-8 border-l border-slate-200">
+        <!-- Columna derecha: 3 Métricas -->
+        <div class="col-span-5 pl-10 border-l border-slate-300/80 space-y-6">
           <div>
-            <div class="font-momo text-5xl lg:text-6xl text-[#EB5B27] leading-none">
-              0.0s
+            <div class="font-display font-extrabold text-6xl text-[#EB5B27] tracking-tight leading-none">
+              0.8s
             </div>
-            <p class="font-body text-xs text-slate-500 mt-2 font-medium">para localizar procedimientos y manuales vigentes</p>
+            <p class="font-sans text-xs text-slate-500 font-medium mt-1.5">para encontrar procedimientos y manuales</p>
           </div>
+          <div class="h-[1px] bg-slate-200"></div>
           <div>
-            <div class="font-momo text-5xl lg:text-6xl text-slate-900 leading-none">
+            <div class="font-display font-extrabold text-6xl text-slate-900 tracking-tight leading-none">
               1 clic
             </div>
-            <p class="font-body text-xs text-slate-500 mt-2 font-medium">para cambiar de campaña a mitad del turno</p>
+            <p class="font-sans text-xs text-slate-500 font-medium mt-1.5">para cambiar de campaña durante el turno</p>
           </div>
+          <div class="h-[1px] bg-slate-200"></div>
           <div>
-            <div class="font-momo text-4xl lg:text-5xl text-slate-900 leading-none">
+            <div class="font-display font-extrabold text-5xl lg:text-6xl text-slate-900 tracking-tight leading-none">
               En vivo
             </div>
-            <p class="font-body text-xs text-slate-500 mt-2 font-medium">alertas de supervisión dirigidas a cada especialista</p>
+            <p class="font-sans text-xs text-slate-500 font-medium mt-1.5">alertas de supervisores para cada agente</p>
           </div>
         </div>
       </div>
 
-      <!-- Pie de lámina: Logo -->
-      <div class="flex items-center gap-2 pt-2 border-t border-slate-200">
-        <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-6 w-auto">
-        <span class="text-xs font-subheadings font-bold text-slate-400">Telat Group</span>
+      <!-- Pie de página -->
+      <div class="flex items-center gap-2 pt-3 border-t border-slate-200">
+        <img src="assets/logo_telat_icon.png" alt="Telat" class="h-5 w-5 object-contain">
+        <span class="text-xs font-sans font-bold text-slate-400">Telat Group</span>
       </div>
     </section>
 
@@ -520,77 +500,77 @@
          LÁMINA 5: ASISTENTE KAI · CÓMO FUNCIONA
          ============================================================== -->
     <section class="slide" id="slide-5" data-slide="5">
-      <!-- Encabezado con punto naranja -->
-      <div class="flex items-center gap-2">
+      <!-- Tag superior -->
+      <div class="flex items-center gap-2.5">
         <span class="w-2.5 h-2.5 rounded-full bg-[#EB5B27]"></span>
-        <span class="font-subheadings font-bold text-sm text-[#EB5B27] uppercase tracking-wider">Kai · Cómo funciona</span>
+        <span class="font-sans font-bold text-xs tracking-wider text-[#EB5B27] uppercase">Kai · Cómo funciona</span>
       </div>
 
-      <!-- Título de sección -->
+      <!-- Título de lámina -->
       <div class="pt-1">
-        <h2 class="font-subheadings font-bold text-4xl text-slate-900 leading-tight">
-          Búsqueda en tiempo real. Asistencia guiada ante casos complejos.
+        <h2 class="font-display font-extrabold text-slate-900 text-4xl lg:text-5xl tracking-tight leading-tight">
+          Búsqueda predictiva al escribir. Preguntas guiadas ante casos complejos.
         </h2>
       </div>
 
       <!-- Layout central -->
-      <div class="grid grid-cols-12 gap-8 my-auto items-center">
-        <!-- Screenshot Asistente Kai -->
+      <div class="grid grid-cols-12 gap-10 my-auto items-center">
+        <!-- UI Screenshot Card -->
         <div class="col-span-7">
-          <div class="rounded-2xl overflow-hidden border border-slate-300 shadow-xl bg-slate-900">
-            <div class="h-6 bg-slate-800 px-3 flex items-center gap-1.5 border-b border-slate-700">
-              <span class="w-2 h-2 rounded-full bg-red-500"></span>
-              <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <div class="rounded-2xl border border-slate-300 shadow-xl overflow-hidden bg-slate-900">
+            <div class="h-7 bg-slate-800/90 px-3 flex items-center gap-1.5 border-b border-slate-700/80">
+              <span class="w-2.5 h-2.5 rounded-full bg-red-500/90"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-500/90"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/90"></span>
             </div>
-            <img src="assets/img_6.jpg" alt="Asistente Kai Pantalla" class="w-full h-auto object-cover">
+            <img src="assets/img_6.jpg" alt="Kai Assistant Copilot" class="w-full h-auto object-cover block">
           </div>
         </div>
 
-        <!-- 3 Pasos explicativos -->
-        <div class="col-span-5 space-y-6">
+        <!-- 3 Pasos -->
+        <div class="col-span-5 space-y-7 pl-4">
           <div class="flex items-start gap-4">
-            <div class="w-10 h-10 rounded-full border-2 border-slate-300 text-slate-800 flex items-center justify-center font-subheadings font-bold text-base flex-shrink-0">
+            <div class="w-9 h-9 rounded-full border border-slate-300 bg-white text-slate-800 flex items-center justify-center font-display font-extrabold text-base flex-shrink-0 shadow-sm mt-0.5">
               1
             </div>
             <div>
-              <h4 class="font-subheadings font-bold text-lg text-slate-900 leading-tight mb-1">Selección de campaña</h4>
-              <p class="font-body text-xs lg:text-sm text-slate-600 leading-relaxed font-normal">
-                Los especialistas acceden a lo específico sin perder de vista las políticas generales.
+              <h4 class="font-sans font-bold text-slate-900 text-lg leading-snug mb-1">Seleccione la campaña</h4>
+              <p class="font-sans text-slate-600 text-sm leading-relaxed font-normal">
+                Los agentes ven exactamente lo que necesitan sin perder las políticas generales.
               </p>
             </div>
           </div>
 
           <div class="flex items-start gap-4">
-            <div class="w-10 h-10 rounded-full border-2 border-slate-300 text-slate-800 flex items-center justify-center font-subheadings font-bold text-base flex-shrink-0">
+            <div class="w-9 h-9 rounded-full border border-slate-300 bg-white text-slate-800 flex items-center justify-center font-display font-extrabold text-base flex-shrink-0 shadow-sm mt-0.5">
               2
             </div>
             <div>
-              <h4 class="font-subheadings font-bold text-lg text-slate-900 leading-tight mb-1">Escribir o consultar</h4>
-              <p class="font-body text-xs lg:text-sm text-slate-600 leading-relaxed font-normal">
-                Resultados inmediatos al teclear o consulta guiada para soporte paso a paso.
+              <h4 class="font-sans font-bold text-slate-900 text-lg leading-snug mb-1">Escriba o pregunte</h4>
+              <p class="font-sans text-slate-600 text-sm leading-relaxed font-normal">
+                Resultados instantáneos mientras escribe, o una consulta completa para asistencia guiada.
               </p>
             </div>
           </div>
 
           <div class="flex items-start gap-4">
-            <div class="w-10 h-10 rounded-full border-2 border-slate-300 text-slate-800 flex items-center justify-center font-subheadings font-bold text-base flex-shrink-0">
+            <div class="w-9 h-9 rounded-full border border-slate-300 bg-white text-slate-800 flex items-center justify-center font-display font-extrabold text-base flex-shrink-0 shadow-sm mt-0.5">
               3
             </div>
             <div>
-              <h4 class="font-subheadings font-bold text-lg text-slate-900 leading-tight mb-1">Seguir el procedimiento</h4>
-              <p class="font-body text-xs lg:text-sm text-slate-600 leading-relaxed font-normal">
-                Diagnóstico, acciones numeradas y fraseología exacta sugerida al cliente.
+              <h4 class="font-sans font-bold text-slate-900 text-lg leading-snug mb-1">Siga los pasos</h4>
+              <p class="font-sans text-slate-600 text-sm leading-relaxed font-normal">
+                Diagnóstico claro, acciones numeradas y la formulación sugerida para el cliente.
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Pie de lámina: Logo -->
-      <div class="flex items-center gap-2 pt-2 border-t border-slate-200">
-        <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-6 w-auto">
-        <span class="text-xs font-subheadings font-bold text-slate-400">Telat Group</span>
+      <!-- Pie de página -->
+      <div class="flex items-center gap-2 pt-3 border-t border-slate-200">
+        <img src="assets/logo_telat_icon.png" alt="Telat" class="h-5 w-5 object-contain">
+        <span class="text-xs font-sans font-bold text-slate-400">Telat Group</span>
       </div>
     </section>
 
@@ -599,80 +579,81 @@
          LÁMINA 6: NOTE GENERATOR (VALOR CENTRAL)
          ============================================================== -->
     <section class="slide" id="slide-6" data-slide="6">
-      <!-- Encabezado con punto naranja -->
-      <div class="flex items-center gap-2">
+      <!-- Tag superior -->
+      <div class="flex items-center gap-2.5">
         <span class="w-2.5 h-2.5 rounded-full bg-[#EB5B27]"></span>
-        <span class="font-subheadings font-bold text-sm text-[#EB5B27] uppercase tracking-wider">Note Generator</span>
+        <span class="font-sans font-bold text-xs tracking-wider text-[#EB5B27] uppercase">Note Generator</span>
       </div>
 
-      <!-- Contenido principal -->
+      <!-- Layout 2 columnas (7 + 5) -->
       <div class="grid grid-cols-12 gap-16 my-auto items-center">
-        <!-- Columna izquierda (7 cols) -->
+        <!-- Columna izquierda -->
         <div class="col-span-7 space-y-6">
-          <h2 class="font-subheadings font-bold text-4xl lg:text-5xl text-slate-900 leading-[1.08]">
-            Cada ticket en un sistema<br>
-            vivo y unificado.
+          <h2 class="font-display font-extrabold text-slate-900 text-5xl lg:text-[3.25rem] leading-[1.08] tracking-tight">
+            Cada ticket en un solo sistema en vivo.
           </h2>
-          <p class="font-body text-base lg:text-lg text-slate-600 leading-relaxed font-normal">
-            Note Generator sustituye hojas de cálculo dispersas por una plataforma única para crear, asignar y resolver tickets con visibilidad en tiempo real para todo el equipo.
+          <p class="font-sans text-slate-600 text-lg leading-relaxed max-w-xl font-normal">
+            Note Generator reemplaza hojas de cálculo dispersas por una sola plataforma para crear, asignar y resolver tickets con visibilidad en tiempo real para todo el equipo.
           </p>
 
           <!-- 3 Checks azules -->
           <div class="space-y-4 pt-2">
-            <div class="flex items-start gap-3.5">
-              <div class="w-6 h-6 rounded-full bg-[#3284C6] text-white flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-bold">
+            <div class="flex items-center gap-3.5">
+              <div class="w-6 h-6 rounded-full bg-[#2079C8] text-white flex items-center justify-center flex-shrink-0 text-xs font-bold shadow-sm">
                 ✓
               </div>
-              <span class="font-body text-base text-slate-800 font-medium">
-                Asignación y resolución más ágil
+              <span class="font-sans text-slate-800 text-base font-medium">
+                Asignación y resolución más ágiles
               </span>
             </div>
-            <div class="flex items-start gap-3.5">
-              <div class="w-6 h-6 rounded-full bg-[#3284C6] text-white flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-bold">
+            <div class="flex items-center gap-3.5">
+              <div class="w-6 h-6 rounded-full bg-[#2079C8] text-white flex items-center justify-center flex-shrink-0 text-xs font-bold shadow-sm">
                 ✓
               </div>
-              <span class="font-body text-base text-slate-800 font-medium">
-                Formularios validados que preservan la integridad de la información
+              <span class="font-sans text-slate-800 text-base font-medium">
+                Formularios validados que mantienen la información limpia
               </span>
             </div>
-            <div class="flex items-start gap-3.5">
-              <div class="w-6 h-6 rounded-full bg-[#3284C6] text-white flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-bold">
+            <div class="flex items-center gap-3.5">
+              <div class="w-6 h-6 rounded-full bg-[#2079C8] text-white flex items-center justify-center flex-shrink-0 text-xs font-bold shadow-sm">
                 ✓
               </div>
-              <span class="font-body text-base text-slate-800 font-medium">
-                Reportes en Excel en un clic y filtros por campaña, tipología y estatus
+              <span class="font-sans text-slate-800 text-base font-medium">
+                Reportes en Excel en un clic y filtros por campaña, tipo y estatus
               </span>
             </div>
           </div>
         </div>
 
-        <!-- Columna derecha: 3 Métricas apiladas (5 cols) -->
-        <div class="col-span-5 space-y-8 pl-8 border-l border-slate-200">
+        <!-- Columna derecha: 3 Métricas -->
+        <div class="col-span-5 pl-10 border-l border-slate-300/80 space-y-6">
           <div>
-            <div class="font-momo text-5xl lg:text-6xl text-[#EB5B27] leading-none">
+            <div class="font-display font-extrabold text-6xl text-[#EB5B27] tracking-tight leading-none">
               1
             </div>
-            <p class="font-body text-xs text-slate-500 mt-2 font-medium">sistema centralizado en lugar de hojas dispersas</p>
+            <p class="font-sans text-xs text-slate-500 font-medium mt-1.5">sistema unificado en lugar de archivos separados</p>
           </div>
+          <div class="h-[1px] bg-slate-200"></div>
           <div>
-            <div class="font-momo text-5xl lg:text-6xl text-slate-900 leading-none">
+            <div class="font-display font-extrabold text-6xl text-slate-900 tracking-tight leading-none">
               72h
             </div>
-            <p class="font-body text-xs text-slate-500 mt-2 font-medium">alerta de vencimiento que resalta tickets demorados</p>
+            <p class="font-sans text-xs text-slate-500 font-medium mt-1.5">alerta de vencimiento que resalta tickets en rojo</p>
           </div>
+          <div class="h-[1px] bg-slate-200"></div>
           <div>
-            <div class="font-momo text-4xl lg:text-5xl text-slate-900 leading-none">
+            <div class="font-display font-extrabold text-5xl lg:text-6xl text-slate-900 tracking-tight leading-none">
               Tiempo real
             </div>
-            <p class="font-body text-xs text-slate-500 mt-2 font-medium">visibilidad de cada ticket abierto</p>
+            <p class="font-sans text-xs text-slate-500 font-medium mt-1.5">visibilidad de cada ticket abierto</p>
           </div>
         </div>
       </div>
 
-      <!-- Pie de lámina: Logo -->
-      <div class="flex items-center gap-2 pt-2 border-t border-slate-200">
-        <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-6 w-auto">
-        <span class="text-xs font-subheadings font-bold text-slate-400">Telat Group</span>
+      <!-- Pie de página -->
+      <div class="flex items-center gap-2 pt-3 border-t border-slate-200">
+        <img src="assets/logo_telat_icon.png" alt="Telat" class="h-5 w-5 object-contain">
+        <span class="text-xs font-sans font-bold text-slate-400">Telat Group</span>
       </div>
     </section>
 
@@ -681,77 +662,77 @@
          LÁMINA 7: NOTE GENERATOR · CÓMO FUNCIONA
          ============================================================== -->
     <section class="slide" id="slide-7" data-slide="7">
-      <!-- Encabezado con punto naranja -->
-      <div class="flex items-center gap-2">
+      <!-- Tag superior -->
+      <div class="flex items-center gap-2.5">
         <span class="w-2.5 h-2.5 rounded-full bg-[#EB5B27]"></span>
-        <span class="font-subheadings font-bold text-sm text-[#EB5B27] uppercase tracking-wider">Note Generator · Cómo funciona</span>
+        <span class="font-sans font-bold text-xs tracking-wider text-[#EB5B27] uppercase">Note Generator · Cómo funciona</span>
       </div>
 
-      <!-- Título de sección -->
+      <!-- Título de lámina -->
       <div class="pt-1">
-        <h2 class="font-subheadings font-bold text-4xl text-slate-900 leading-tight">
+        <h2 class="font-display font-extrabold text-slate-900 text-4xl lg:text-5xl tracking-tight leading-tight">
           Crear, asignar, resolver.
         </h2>
       </div>
 
       <!-- Layout central -->
-      <div class="grid grid-cols-12 gap-8 my-auto items-center">
-        <!-- Screenshot Note Generator -->
+      <div class="grid grid-cols-12 gap-10 my-auto items-center">
+        <!-- UI Screenshot Card -->
         <div class="col-span-7">
-          <div class="rounded-2xl overflow-hidden border border-slate-300 shadow-xl bg-slate-900">
-            <div class="h-6 bg-slate-800 px-3 flex items-center gap-1.5 border-b border-slate-700">
-              <span class="w-2 h-2 rounded-full bg-red-500"></span>
-              <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <div class="rounded-2xl border border-slate-300 shadow-xl overflow-hidden bg-slate-900">
+            <div class="h-7 bg-slate-800/90 px-3 flex items-center gap-1.5 border-b border-slate-700/80">
+              <span class="w-2.5 h-2.5 rounded-full bg-red-500/90"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-500/90"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/90"></span>
             </div>
-            <img src="assets/img_8.jpg" alt="Note Generator Panel" class="w-full h-auto object-cover">
+            <img src="assets/img_8.jpg" alt="Note Generator Dashboard" class="w-full h-auto object-cover block">
           </div>
         </div>
 
-        <!-- 3 Pasos explicativos -->
-        <div class="col-span-5 space-y-6">
+        <!-- 3 Pasos -->
+        <div class="col-span-5 space-y-7 pl-4">
           <div class="flex items-start gap-4">
-            <div class="w-10 h-10 rounded-full border-2 border-slate-300 text-slate-800 flex items-center justify-center font-subheadings font-bold text-base flex-shrink-0">
+            <div class="w-9 h-9 rounded-full border border-slate-300 bg-white text-slate-800 flex items-center justify-center font-display font-extrabold text-base flex-shrink-0 shadow-sm mt-0.5">
               1
             </div>
             <div>
-              <h4 class="font-subheadings font-bold text-lg text-slate-900 leading-tight mb-1">Crear el ticket</h4>
-              <p class="font-body text-xs lg:text-sm text-slate-600 leading-relaxed font-normal">
-                Formularios prediseñados para cada tipología disponibles de inmediato en el panel.
+              <h4 class="font-sans font-bold text-slate-900 text-lg leading-snug mb-1">Crear el ticket</h4>
+              <p class="font-sans text-slate-600 text-sm leading-relaxed font-normal">
+                Formularios prediseñados para cada tipo de ticket disponibles al instante en el panel.
               </p>
             </div>
           </div>
 
           <div class="flex items-start gap-4">
-            <div class="w-10 h-10 rounded-full border-2 border-slate-300 text-slate-800 flex items-center justify-center font-subheadings font-bold text-base flex-shrink-0">
+            <div class="w-9 h-9 rounded-full border border-slate-300 bg-white text-slate-800 flex items-center justify-center font-display font-extrabold text-base flex-shrink-0 shadow-sm mt-0.5">
               2
             </div>
             <div>
-              <h4 class="font-subheadings font-bold text-lg text-slate-900 leading-tight mb-1">Asignar responsable</h4>
-              <p class="font-body text-xs lg:text-sm text-slate-600 leading-relaxed font-normal">
-                Los supervisores eligen al colaborador idóneo para su atención oportuna.
+              <h4 class="font-sans font-bold text-slate-900 text-lg leading-snug mb-1">Asignar un responsable</h4>
+              <p class="font-sans text-slate-600 text-sm leading-relaxed font-normal">
+                Los supervisores eligen al especialista operativo que gestionará el caso.
               </p>
             </div>
           </div>
 
           <div class="flex items-start gap-4">
-            <div class="w-10 h-10 rounded-full border-2 border-slate-300 text-slate-800 flex items-center justify-center font-subheadings font-bold text-base flex-shrink-0">
+            <div class="w-9 h-9 rounded-full border border-slate-300 bg-white text-slate-800 flex items-center justify-center font-display font-extrabold text-base flex-shrink-0 shadow-sm mt-0.5">
               3
             </div>
             <div>
-              <h4 class="font-subheadings font-bold text-lg text-slate-900 leading-tight mb-1">Cerrar con justificación</h4>
-              <p class="font-body text-xs lg:text-sm text-slate-600 leading-relaxed font-normal">
-                Los estados de cierre exigen nota de resolución para blindar la trazabilidad de cada caso.
+              <h4 class="font-sans font-bold text-slate-900 text-lg leading-snug mb-1">Cerrar con motivo documentado</h4>
+              <p class="font-sans text-slate-600 text-sm leading-relaxed font-normal">
+                El estatus final exige una nota justificativa, garantizando trazabilidad total.
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Pie de lámina: Logo -->
-      <div class="flex items-center gap-2 pt-2 border-t border-slate-200">
-        <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-6 w-auto">
-        <span class="text-xs font-subheadings font-bold text-slate-400">Telat Group</span>
+      <!-- Pie de página -->
+      <div class="flex items-center gap-2 pt-3 border-t border-slate-200">
+        <img src="assets/logo_telat_icon.png" alt="Telat" class="h-5 w-5 object-contain">
+        <span class="text-xs font-sans font-bold text-slate-400">Telat Group</span>
       </div>
     </section>
 
@@ -760,80 +741,82 @@
          LÁMINA 8: NOTAS AUTOSUMMARY (VALOR CENTRAL)
          ============================================================== -->
     <section class="slide" id="slide-8" data-slide="8">
-      <!-- Encabezado con punto naranja -->
-      <div class="flex items-center gap-2">
+      <!-- Tag superior -->
+      <div class="flex items-center gap-2.5">
         <span class="w-2.5 h-2.5 rounded-full bg-[#EB5B27]"></span>
-        <span class="font-subheadings font-bold text-sm text-[#EB5B27] uppercase tracking-wider">Notas AutoSummary</span>
+        <span class="font-sans font-bold text-xs tracking-wider text-[#EB5B27] uppercase">Notas AutoSummary</span>
       </div>
 
-      <!-- Contenido principal -->
+      <!-- Layout 2 columnas (7 + 5) -->
       <div class="grid grid-cols-12 gap-16 my-auto items-center">
-        <!-- Columna izquierda (7 cols) -->
+        <!-- Columna izquierda -->
         <div class="col-span-7 space-y-6">
-          <h2 class="font-subheadings font-bold text-4xl lg:text-5xl text-slate-900 leading-[1.08]">
-            Transforme 90 segundos de trabajo<br>
+          <h2 class="font-display font-extrabold text-slate-900 text-5xl lg:text-[3.25rem] leading-[1.08] tracking-tight">
+            Convierta 90 segundos de trabajo<br>
             posterior a la llamada en un solo clic.
           </h2>
-          <p class="font-body text-base lg:text-lg text-slate-600 leading-relaxed font-normal">
-            AutoSummary procesa la llamada en tiempo real y redacta una nota estructurada para el CRM en el instante en que el especialista cuelga.
+          <p class="font-sans text-slate-600 text-lg leading-relaxed max-w-xl font-normal">
+            AutoSummary procesa la conversación en vivo y redacta una nota estructurada para el CRM en el instante en que el agente cuelga.
           </p>
 
           <!-- 3 Checks azules -->
           <div class="space-y-4 pt-2">
-            <div class="flex items-start gap-3.5">
-              <div class="w-6 h-6 rounded-full bg-[#3284C6] text-white flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-bold">
+            <div class="flex items-center gap-3.5">
+              <div class="w-6 h-6 rounded-full bg-[#2079C8] text-white flex items-center justify-center flex-shrink-0 text-xs font-bold shadow-sm">
                 ✓
               </div>
-              <span class="font-body text-base text-slate-800 font-medium">
-                Los especialistas se concentran en el cliente, no en redactar
+              <span class="font-sans text-slate-800 text-base font-medium">
+                Los agentes se concentran en el cliente, no en redactar
               </span>
             </div>
-            <div class="flex items-start gap-3.5">
-              <div class="w-6 h-6 rounded-full bg-[#3284C6] text-white flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-bold">
+            <div class="flex items-center gap-3.5">
+              <div class="w-6 h-6 rounded-full bg-[#2079C8] text-white flex items-center justify-center flex-shrink-0 text-xs font-bold shadow-sm">
                 ✓
               </div>
-              <span class="font-body text-base text-slate-800 font-medium">
-                Cada nota mantiene una estructura limpia y estandarizada
+              <span class="font-sans text-slate-800 text-base font-medium">
+                Cada nota mantiene el mismo formato claro y estandarizado
               </span>
             </div>
-            <div class="flex items-start gap-3.5">
-              <div class="w-6 h-6 rounded-full bg-[#3284C6] text-white flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-bold">
+            <div class="flex items-center gap-3.5">
+              <div class="w-6 h-6 rounded-full bg-[#2079C8] text-white flex items-center justify-center flex-shrink-0 text-xs font-bold shadow-sm">
                 ✓
               </div>
-              <span class="font-body text-base text-slate-800 font-medium">
-                Importes, números de cuenta y análisis de sentimiento capturados automáticamente
+              <span class="font-sans text-slate-800 text-base font-medium">
+                Montos, números de cuenta y sentimiento capturados automáticamente
               </span>
             </div>
           </div>
         </div>
 
-        <!-- Columna derecha: 3 Métricas apiladas (5 cols) -->
-        <div class="col-span-5 space-y-8 pl-8 border-l border-slate-200">
+        <!-- Columna derecha: 3 Métricas -->
+        <div class="col-span-5 pl-10 border-l border-slate-300/80 space-y-6">
           <div>
-            <div class="font-momo text-5xl lg:text-6xl text-[#EB5B27] leading-none">
-              -78%
+            <div class="font-display font-extrabold text-6xl text-[#EB5B27] tracking-tight leading-none">
+              −78%
             </div>
-            <p class="font-body text-xs text-slate-500 mt-2 font-medium">tiempo de trabajo posterior a la llamada (wrap-up)</p>
+            <p class="font-sans text-xs text-slate-500 font-medium mt-1.5">de tiempo de trabajo posterior a la llamada</p>
           </div>
+          <div class="h-[1px] bg-slate-200"></div>
           <div>
-            <div class="font-momo text-5xl lg:text-6xl text-slate-900 leading-none">
+            <div class="font-display font-extrabold text-6xl text-slate-900 tracking-tight leading-none">
               1.1s
             </div>
-            <p class="font-body text-xs text-slate-500 mt-2 font-medium">para estructurar y redactar la nota</p>
+            <p class="font-sans text-xs text-slate-500 font-medium mt-1.5">para generar la nota completa</p>
           </div>
+          <div class="h-[1px] bg-slate-200"></div>
           <div>
-            <div class="font-momo text-4xl lg:text-5xl text-slate-900 leading-none">
+            <div class="font-display font-extrabold text-5xl lg:text-6xl text-slate-900 tracking-tight leading-none">
               +25%
             </div>
-            <p class="font-body text-xs text-slate-500 mt-2 font-medium">capacidad operativa adicional</p>
+            <p class="font-sans text-xs text-slate-500 font-medium mt-1.5">de capacidad operativa adicional</p>
           </div>
         </div>
       </div>
 
-      <!-- Pie de lámina: Logo -->
-      <div class="flex items-center gap-2 pt-2 border-t border-slate-200">
-        <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-6 w-auto">
-        <span class="text-xs font-subheadings font-bold text-slate-400">Telat Group</span>
+      <!-- Pie de página -->
+      <div class="flex items-center gap-2 pt-3 border-t border-slate-200">
+        <img src="assets/logo_telat_icon.png" alt="Telat" class="h-5 w-5 object-contain">
+        <span class="text-xs font-sans font-bold text-slate-400">Telat Group</span>
       </div>
     </section>
 
@@ -842,163 +825,174 @@
          LÁMINA 9: NOTAS AUTOSUMMARY · CÓMO FUNCIONA
          ============================================================== -->
     <section class="slide" id="slide-9" data-slide="9">
-      <!-- Encabezado con punto naranja -->
-      <div class="flex items-center gap-2">
+      <!-- Tag superior -->
+      <div class="flex items-center gap-2.5">
         <span class="w-2.5 h-2.5 rounded-full bg-[#EB5B27]"></span>
-        <span class="font-subheadings font-bold text-sm text-[#EB5B27] uppercase tracking-wider">Notas AutoSummary · Cómo funciona</span>
+        <span class="font-sans font-bold text-xs tracking-wider text-[#EB5B27] uppercase">Notas AutoSummary · Cómo funciona</span>
       </div>
 
-      <!-- Título de sección -->
+      <!-- Título de lámina -->
       <div class="pt-1">
-        <h2 class="font-subheadings font-bold text-4xl text-slate-900 leading-tight">
-          Atienda la llamada. Valide. Guarde.
+        <h2 class="font-display font-extrabold text-slate-900 text-4xl lg:text-5xl tracking-tight leading-tight">
+          Atienda la llamada. Revise. Pegue.
         </h2>
       </div>
 
       <!-- Layout central -->
-      <div class="grid grid-cols-12 gap-8 my-auto items-center">
-        <!-- Screenshot AutoSummary & InContact -->
+      <div class="grid grid-cols-12 gap-10 my-auto items-center">
+        <!-- UI Screenshot Card -->
         <div class="col-span-7">
-          <div class="rounded-2xl overflow-hidden border border-slate-300 shadow-xl bg-slate-900">
-            <div class="h-6 bg-slate-800 px-3 flex items-center gap-1.5 border-b border-slate-700">
-              <span class="w-2 h-2 rounded-full bg-red-500"></span>
-              <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <div class="rounded-2xl border border-slate-300 shadow-xl overflow-hidden bg-slate-900">
+            <div class="h-7 bg-slate-800/90 px-3 flex items-center gap-1.5 border-b border-slate-700/80">
+              <span class="w-2.5 h-2.5 rounded-full bg-red-500/90"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-500/90"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/90"></span>
             </div>
-            <img src="assets/img_10.jpg" alt="InContact con AutoSummary" class="w-full h-auto object-cover">
+            <img src="assets/img_10.jpg" alt="AutoSummary Notes in InContact" class="w-full h-auto object-cover block">
           </div>
         </div>
 
-        <!-- 3 Pasos explicativos -->
-        <div class="col-span-5 space-y-6">
+        <!-- 3 Pasos -->
+        <div class="col-span-5 space-y-7 pl-4">
           <div class="flex items-start gap-4">
-            <div class="w-10 h-10 rounded-full border-2 border-slate-300 text-slate-800 flex items-center justify-center font-subheadings font-bold text-base flex-shrink-0">
+            <div class="w-9 h-9 rounded-full border border-slate-300 bg-white text-slate-800 flex items-center justify-center font-display font-extrabold text-base flex-shrink-0 shadow-sm mt-0.5">
               1
             </div>
             <div>
-              <h4 class="font-subheadings font-bold text-lg text-slate-900 leading-tight mb-1">Atienda la llamada normalmente</h4>
-              <p class="font-body text-xs lg:text-sm text-slate-600 leading-relaxed font-normal">
-                Cero alteraciones en el flujo operativo ni en la telefonía del especialista.
+              <h4 class="font-sans font-bold text-slate-900 text-lg leading-snug mb-1">Gestione la llamada habitualmente</h4>
+              <p class="font-sans text-slate-600 text-sm leading-relaxed font-normal">
+                Sin cambios en el flujo de trabajo del agente ni en la telefonía InContact.
               </p>
             </div>
           </div>
 
           <div class="flex items-start gap-4">
-            <div class="w-10 h-10 rounded-full border-2 border-slate-300 text-slate-800 flex items-center justify-center font-subheadings font-bold text-base flex-shrink-0">
+            <div class="w-9 h-9 rounded-full border border-slate-300 bg-white text-slate-800 flex items-center justify-center font-display font-extrabold text-base flex-shrink-0 shadow-sm mt-0.5">
               2
             </div>
             <div>
-              <h4 class="font-subheadings font-bold text-lg text-slate-900 leading-tight mb-1">La nota aparece al colgar</h4>
-              <p class="font-body text-xs lg:text-sm text-slate-600 leading-relaxed font-normal">
-                Motivo, detalles, resolución y sentimiento listos en pantalla al instante.
+              <h4 class="font-sans font-bold text-slate-900 text-lg leading-snug mb-1">La nota aparece al colgar</h4>
+              <p class="font-sans text-slate-600 text-sm leading-relaxed font-normal">
+                Motivo, detalles, resolución y sentimiento listos en pantalla.
               </p>
             </div>
           </div>
 
           <div class="flex items-start gap-4">
-            <div class="w-10 h-10 rounded-full border-2 border-slate-300 text-slate-800 flex items-center justify-center font-subheadings font-bold text-base flex-shrink-0">
+            <div class="w-9 h-9 rounded-full border border-slate-300 bg-white text-slate-800 flex items-center justify-center font-display font-extrabold text-base flex-shrink-0 shadow-sm mt-0.5">
               3
             </div>
             <div>
-              <h4 class="font-subheadings font-bold text-lg text-slate-900 leading-tight mb-1">Registro directo en el CRM</h4>
-              <p class="font-body text-xs lg:text-sm text-slate-600 leading-relaxed font-normal">
-                Un solo clic y la nota queda guardada en la ficha del cliente, con datos confidenciales enmascarados.
+              <h4 class="font-sans font-bold text-slate-900 text-lg leading-snug mb-1">Pegue en el CRM</h4>
+              <p class="font-sans text-slate-600 text-sm leading-relaxed font-normal">
+                Con un solo clic la nota queda registrada en el expediente. Los datos sensibles quedan enmascarados.
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Pie de lámina: Logo -->
-      <div class="flex items-center gap-2 pt-2 border-t border-slate-200">
-        <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-6 w-auto">
-        <span class="text-xs font-subheadings font-bold text-slate-400">Telat Group</span>
+      <!-- Pie de página -->
+      <div class="flex items-center gap-2 pt-3 border-t border-slate-200">
+        <img src="assets/logo_telat_icon.png" alt="Telat" class="h-5 w-5 object-contain">
+        <span class="text-xs font-sans font-bold text-slate-400">Telat Group</span>
       </div>
     </section>
 
 
     <!-- ==============================================================
-         LÁMINA 10: CIERRE (DARK NAVY CON AROS)
+         LÁMINA 10: CIERRE EJECUTIVO (DARK NAVY CON AROS CORPORATIVOS)
          ============================================================== -->
-    <section class="slide slide-dark relative overflow-hidden" id="slide-10" data-slide="10">
-      <!-- Aros decorativos concéntricos -->
-      <div class="rings-bg"></div>
-      <div class="rings-bg-inner"></div>
+    <section class="slide slide-dark relative" id="slide-10" data-slide="10">
+      <!-- Aros corporativos concéntricos vectoriales SVG idénticos al original -->
+      <svg class="absolute -right-24 top-1/2 -translate-y-1/2 w-[720px] h-[720px] pointer-events-none" viewBox="0 0 600 600" fill="none">
+        <circle cx="300" cy="300" r="236" stroke="#EB5B27" stroke-width="48" opacity="0.95" />
+        <circle cx="300" cy="300" r="188" fill="#2079C8" opacity="0.95" />
+      </svg>
 
-      <!-- Logotipo Telat -->
+      <!-- Logotipo Telat auténtico circular -->
       <div class="relative z-10">
-        <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-12 w-auto brightness-0 invert">
+        <img src="assets/logo_telat_icon.png" alt="Telat Group" class="h-14 w-14 object-contain">
       </div>
 
-      <!-- Texto central de impacto -->
-      <div class="relative z-10 max-w-3xl my-auto space-y-6">
-        <h1 class="font-subheadings font-bold text-5xl md:text-6xl lg:text-[4.6rem] leading-[1.02] text-white">
-          Llevemos esta tecnología<br>
-          a su operación.
-        </h1>
-        <p class="font-body text-base lg:text-xl text-white/80 max-w-2xl leading-relaxed font-normal">
-          Mayor calidad, respuestas más rápidas y menos trabajo manual desde el primer día.
+      <!-- Texto principal de cierre -->
+      <div class="relative z-10 max-w-4xl my-auto space-y-6">
+        <h2 class="font-display font-extrabold text-white text-6xl lg:text-[4.85rem] leading-[1.04] tracking-tight">
+          Integremos estas soluciones<br>
+          en su operación.
+        </h2>
+        <p class="font-sans text-white/85 text-xl max-w-2xl font-normal leading-relaxed">
+          Mayor calidad, respuestas más ágiles y menos trabajo manual desde el primer día.
         </p>
       </div>
 
-      <!-- 3 Píldoras inferiores -->
-      <div class="relative z-10 flex items-center gap-3 pt-4 border-t border-white/15 flex-wrap">
-        <span class="px-5 py-2.5 rounded-full border border-white/30 text-white/90 text-sm font-subheadings font-semibold bg-white/5">
-          Inicie con un piloto
-        </span>
-        <span class="px-5 py-2.5 rounded-full border border-white/30 text-white/90 text-sm font-subheadings font-semibold bg-white/5">
-          Adaptado a sus campañas
-        </span>
-        <span class="px-5 py-2.5 rounded-full border border-white/30 text-white/90 text-sm font-subheadings font-semibold bg-white/5">
-          Listo en semanas
-        </span>
+      <!-- 3 Píldoras de valor y llamada a la acción -->
+      <div class="relative z-10 flex items-center justify-between pt-6 border-t border-white/20">
+        <div class="flex items-center gap-3 flex-wrap">
+          <span class="px-6 py-2.5 rounded-full border border-white/25 text-white/95 text-sm font-sans font-semibold bg-white/5">
+            Inicio mediante prueba piloto
+          </span>
+          <span class="px-6 py-2.5 rounded-full border border-white/25 text-white/95 text-sm font-sans font-semibold bg-white/5">
+            Calibrado para sus campañas
+          </span>
+          <span class="px-6 py-2.5 rounded-full border border-white/25 text-white/95 text-sm font-sans font-semibold bg-white/5">
+            Listo para operar en semanas
+          </span>
+        </div>
+        <div class="text-right text-xs text-white/60 font-sans">
+          <span class="font-semibold text-white/90">Telat Group</span> · Operaciones y Tecnología
+        </div>
       </div>
     </section>
 
   </div>
 
-  <!-- Controles flotantes de navegación (Ocultos en impresión) -->
-  <div id="nav-controls">
-    <button class="nav-btn" onclick="prevSlide()" title="Lámina anterior">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+  <!-- Controles flotantes de navegación en navegador -->
+  <div id="nav-controls" class="no-print">
+    <button class="nav-btn" id="prev-btn" title="Lámina anterior (←)">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
     </button>
-    <div id="slide-indicator">01 / 10</div>
-    <button class="nav-btn" onclick="nextSlide()" title="Siguiente lámina">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+    <span id="slide-indicator">1 / 10</span>
+    <button class="nav-btn" id="next-btn" title="Siguiente lámina (→)">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
     </button>
   </div>
 
   <script>
-    let currentSlide = 1;
-    const totalSlides = 10;
+    (function () {
+      let currentSlide = 1;
+      const totalSlides = 10;
+      const slides = document.querySelectorAll('.slide');
+      const indicator = document.getElementById('slide-indicator');
 
-    function showSlide(index) {
-      if (index < 1 || index > totalSlides) return;
-      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
-      const target = document.getElementById(`slide-${index}`);
-      if (target) target.classList.add('active');
-      document.getElementById('slide-indicator').textContent = `${String(index).padStart(2, '0')} / ${String(totalSlides).padStart(2, '0')}`;
-      currentSlide = index;
-    }
+      function showSlide(n) {
+        if (n < 1) n = 1;
+        if (n > totalSlides) n = totalSlides;
+        currentSlide = n;
 
-    function nextSlide() {
-      if (currentSlide < totalSlides) showSlide(currentSlide + 1);
-    }
+        slides.forEach((s, idx) => {
+          if (idx + 1 === currentSlide) {
+            s.classList.add('active');
+          } else {
+            s.classList.remove('active');
+          }
+        });
 
-    function prevSlide() {
-      if (currentSlide > 1) showSlide(currentSlide - 1);
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
-        e.preventDefault();
-        nextSlide();
-      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
-        e.preventDefault();
-        prevSlide();
+        if (indicator) {
+          indicator.textContent = `${currentSlide} / ${totalSlides}`;
+        }
       }
-    });
+
+      document.getElementById('prev-btn')?.addEventListener('click', () => showSlide(currentSlide - 1));
+      document.getElementById('next-btn')?.addEventListener('click', () => showSlide(currentSlide + 1));
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' || e.key === 'PageUp') showSlide(currentSlide - 1);
+        if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') showSlide(currentSlide + 1);
+      });
+    })();
   </script>
+
 </body>
 
 </html>
