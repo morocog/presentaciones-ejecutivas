@@ -213,3 +213,4 @@ Para conciliar la visualización interactiva en cualquier monitor (desde laptops
 | **Geometría** | Alinear vectores u ornamentos al centro por intuición. | Calcular centro y radios mediante las coordenadas `m/c` del PDF: `(1730, 190)`, `r=415` y `r=250`. |
 | **Listas de Pasos** | Pastillas genéricas grises con números oscuros. | Círculo con borde `#EB5B27`, número interior naranja `#EB5B27` y título en azul marino `#14295C`. |
 | **Visualización** | Desbordar la pantalla en monitores pequeños o colapsar en impresión. | `viewport-scaler` reactivo en navegador y `@page { size: 1920px 1080px; }` con `transform: none` en impresión. |
+
