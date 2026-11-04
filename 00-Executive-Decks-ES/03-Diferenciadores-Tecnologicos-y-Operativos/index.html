@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diferenciadores tecnológicos y operativos clave · Telat Group</title>
+
+  <!-- Tipografías oficiales: DM Sans & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN v3 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            telat: {
+              celeste: '#3284C6',
+              naranja: '#EB5B27',
+              amarillo: '#FECA66',
+              oscuro: '#222221',
+              claro: '#FBFBFD'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    @font-face {
+      font-family: 'Momo Trust';
+      src: local('Impact'), local('Arial Black');
+      font-weight: 800;
+      font-display: swap;
+    }
+
+    :root {
+      --oscuro: #222221;
+      --azul-claro: #FBFBFD;
+      --celeste: #3284C6;
+      --naranja: #EB5B27;
+      --amarillo: #FECA66;
+    }
+
+    body {
+      background-color: var(--azul-claro);
+      color: var(--oscuro);
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .font-subheading,
+    .subheading {
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .font-body {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .metric-number {
+      font-family: 'Momo Trust', sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    #presentation-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 1;
+      background-color: #FBFBFD;
+      box-sizing: border-box;
+      padding: 1.15rem 3.5rem 0.85rem 3.5rem;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    .card-tech {
+      background: #FFFFFF;
+      border-radius: 1.25rem;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -2px rgba(0, 0, 0, 0.02);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .cert-pill {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 8.5px;
+      font-weight: 700;
+      padding: 0.15rem 0.45rem;
+      border-radius: 0.375rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      line-height: 1.2;
+    }
+
+    .kpi-pill-green { background: rgba(5, 150, 105, 0.08); color: #059669; border: 1px solid rgba(5, 150, 105, 0.25); }
+    .kpi-pill-blue { background: rgba(50, 132, 198, 0.08); color: #3284C6; border: 1px solid rgba(50, 132, 198, 0.25); }
+    .kpi-pill-orange { background: rgba(235, 91, 39, 0.08); color: #EB5B27; border: 1px solid rgba(235, 91, 39, 0.25); }
+    .kpi-pill-purple { background: rgba(124, 58, 237, 0.08); color: #7C3AED; border: 1px solid rgba(124, 58, 237, 0.25); }
+    .kpi-pill-cyan { background: rgba(8, 145, 178, 0.08); color: #0891B2; border: 1px solid rgba(8, 145, 178, 0.25); }
+
+    #nav-controls {
+      position: fixed;
+      bottom: 1.25rem;
+      right: 2rem;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      padding: 0.35rem 0.65rem;
+      border-radius: 9999px;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-btn {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #F1F5F9;
+      color: #334155;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .nav-btn:hover {
+      background: #3284C6;
+      color: #FFFFFF;
+    }
+
+    #slide-indicator {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #64748B;
+      padding: 0 0.5rem;
+    }
+
+    @media print {
+      @page {
+        size: 16in 9in;
+        margin: 0;
+      }
+      html, body {
+        width: 16in !important;
+        height: 9in !important;
+        overflow: visible !important;
+        background: #FBFBFD !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      #nav-controls {
+        display: none !important;
+      }
+      #presentation-container {
+        display: block !important;
+        width: 16in !important;
+        height: auto !important;
+        position: static !important;
+      }
+      .slide {
+        display: flex !important;
+        position: relative !important;
+        width: 16in !important;
+        height: 9in !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        box-sizing: border-box !important;
+        padding: 1.15rem 3.5rem 0.85rem 3.5rem !important;
+      }
+      .grid-cols-2 {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+      .grid-cols-3 {
+        display: grid !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="presentation-container">
+
+    <!-- ====================================================================
+         LÁMINA 1: VISIÓN EJECUTIVA · ARQUITECTURA SPLIT-MAP
+         ==================================================================== -->
+    <section class="slide active" id="slide-1" data-slide="1">
+
+      <!-- Encabezado superior -->
+      <div class="flex items-center justify-between pb-1.5 mb-1 border-b border-slate-200 flex-shrink-0">
+        <div class="flex items-center gap-3">
+          <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-8 w-auto" style="height: 32px; width: auto;">
+          <div class="h-6 w-[2px] bg-slate-300"></div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="subheading text-[11px] font-bold uppercase tracking-widest text-[#3284C6] block">Propuesta técnica · Visión institucional ejecutiva</span>
+              <span class="text-slate-300">·</span>
+              <span class="font-subheading text-[11px] font-bold text-[#EB5B27] uppercase tracking-wider">Casos de éxito probados · Eficiencia operativa y reducción de costos</span>
+            </div>
+            <h1 class="subheading text-[1.28rem] font-bold text-[#222221] leading-tight">
+              Diferenciadores clave: tecnología de punta, talento especializado y operaciones de alto impacto
+            </h1>
+          </div>
+        </div>
+        <div class="text-right">
+          <span class="subheading text-xs font-bold uppercase tracking-widest text-[#3284C6] bg-[#3284C6]/10 px-3 py-1 rounded-full border border-[#3284C6]/20">Telat Group · 2026</span>
+        </div>
+      </div>
+
+      <!-- Distribución Split-Map (2 alas de valor) -->
+      <div class="grid grid-cols-2 gap-5 flex-1 items-stretch my-2 min-h-0">
+
+        <!-- ============================================================
+             ALA 1: TECNOLOGÍA EN PISO Y ATENCIÓN EN TIEMPO REAL
+             ============================================================ -->
+        <div class="card-tech p-5 flex flex-col justify-between border-t-4 border-t-[#3284C6] bg-gradient-to-b from-blue-50/20 to-white">
+          
+          <!-- Encabezado de ala -->
+          <div class="pb-3 border-b border-slate-100 flex items-center justify-between flex-shrink-0">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="px-2.5 py-0.5 rounded-md bg-[#3284C6]/15 text-[#3284C6] text-[11px] font-black uppercase tracking-wider font-subheading">
+                  Núcleo front-office · Piso operativo
+                </span>
+                <span class="text-[11px] font-bold text-slate-400 font-subheading">Atención en tiempo real</span>
+              </div>
+              <h2 class="subheading text-[1.48rem] font-bold text-[#222221] leading-tight">
+                Tecnología en piso de operaciones y privacidad corporativa
+              </h2>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-[#3284C6]/10 text-[#3284C6] flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+          </div>
+
+          <!-- Pilares del Ala 1 -->
+          <div class="my-auto flex flex-col justify-center gap-4 py-2">
+
+            <!-- Fila 1: Copiloto IA -->
+            <div class="bg-white border border-slate-200/90 rounded-2xl py-5 px-5 flex items-center justify-between shadow-xs hover:border-[#3284C6]/50 transition-colors">
+              <div class="flex items-center gap-4 flex-1 min-w-0 pr-4">
+                <div class="w-12 h-12 rounded-xl bg-[#3284C6]/12 text-[#3284C6] flex items-center justify-center flex-shrink-0 font-black font-subheading text-lg">
+                  1
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="font-subheading text-[17px] font-bold text-slate-900">Copiloto operativo con inteligencia artificial</span>
+                    <span class="text-[11px] font-bold text-[#3284C6] bg-[#3284C6]/10 px-2 py-0.5 rounded-md whitespace-nowrap">Asistencia en vivo</span>
+                  </div>
+                  <p class="font-body text-[13.8px] text-slate-600 leading-snug">
+                    Mientras el especialista atiende al cliente, un copiloto con IA despliega conocimiento normativo y respuestas contextuales para resolver consultas con agilidad.
+                  </p>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0 pl-5 border-l border-slate-100 min-w-[125px]">
+                <span class="metric-number text-[2.75rem] text-[#3284C6] leading-none block">&lt; 2s</span>
+                <span class="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider font-subheading mt-1 block">En pantalla</span>
+              </div>
+            </div>
+
+            <!-- Fila 2: Notas automatizadas y tipificación -->
+            <div class="bg-white border border-slate-200/90 rounded-2xl py-5 px-5 flex items-center justify-between shadow-xs hover:border-[#EB5B27]/50 transition-colors">
+              <div class="flex items-center gap-4 flex-1 min-w-0 pr-4">
+                <div class="w-12 h-12 rounded-xl bg-[#EB5B27]/12 text-[#EB5B27] flex items-center justify-center flex-shrink-0 font-black font-subheading text-lg">
+                  2
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="font-subheading text-[17px] font-bold text-slate-900">Notas automatizadas y tipificación de tickets</span>
+                    <span class="text-[11px] font-bold text-[#EB5B27] bg-[#EB5B27]/10 px-2 py-0.5 rounded-md whitespace-nowrap">Auto-síntesis</span>
+                  </div>
+                  <p class="font-body text-[13.8px] text-slate-600 leading-snug">
+                    Al concluir la llamada, se generan y tipifican de inmediato un resumen estructurado y la disposición del caso con ID de seguimiento, sin carga manual para el agente.
+                  </p>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0 pl-5 border-l border-slate-100 min-w-[125px]">
+                <span class="metric-number text-[2.75rem] text-[#EB5B27] leading-none block">≤ 20s</span>
+                <span class="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider font-subheading mt-1 block">Cierre ágil</span>
+              </div>
+            </div>
+
+            <!-- Fila 3: Enmascaramiento y ciberseguridad -->
+            <div class="bg-white border border-slate-200/90 rounded-2xl py-5 px-5 flex items-center justify-between shadow-xs hover:border-[#059669]/50 transition-colors">
+              <div class="flex items-center gap-4 flex-1 min-w-0 pr-4">
+                <div class="w-12 h-12 rounded-xl bg-[#059669]/12 text-[#059669] flex items-center justify-center flex-shrink-0 font-black font-subheading text-lg">
+                  3
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="font-subheading text-[17px] font-bold text-slate-900">Enmascaramiento de datos sensibles y ciberseguridad</span>
+                    <span class="text-[11px] font-bold text-[#059669] bg-[#059669]/10 px-2 py-0.5 rounded-md whitespace-nowrap">Blindaje total</span>
+                  </div>
+                  <p class="font-body text-[13.8px] text-slate-600 leading-snug">
+                    Cuando un usuario comparte información confidencial, la plataforma enmascara y encripta datos sensibles en tiempo real, evitando su exposición en pantalla o grabaciones.
+                  </p>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0 pl-5 border-l border-slate-100 min-w-[125px]">
+                <span class="metric-number text-[2.75rem] text-[#059669] leading-none block">100%</span>
+                <span class="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider font-subheading mt-1 block">Protegido</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Pie del Ala 1 -->
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between flex-shrink-0">
+            <span class="text-[11.8px] font-medium text-slate-500 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-[#3284C6]"></span>
+              Modelos validados en clientes corporativos con alto nivel de satisfacción
+            </span>
+            <span class="px-3.5 py-1.5 rounded-lg bg-[#3284C6]/10 text-[#3284C6] font-bold text-[12px] font-subheading flex items-center gap-1">
+              Ver casos de éxito y reducción de costos en lámina 2 ➔
+            </span>
+          </div>
+
+        </div>
+
+        <!-- ============================================================
+             ALA 2: TALENTO, CALIDAD Y CERTIDUMBRE OPERATIVA
+             ============================================================ -->
+        <div class="card-tech p-5 flex flex-col justify-between border-t-4 border-t-[#EB5B27] bg-gradient-to-b from-orange-50/20 to-white">
+          
+          <!-- Encabezado de ala -->
+          <div class="pb-3 border-b border-slate-100 flex items-center justify-between flex-shrink-0">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="px-2.5 py-0.5 rounded-md bg-[#EB5B27]/15 text-[#EB5B27] text-[11px] font-black uppercase tracking-wider font-subheading">
+                  Núcleo back-office · Soporte operativo
+                </span>
+                <span class="text-[11px] font-bold text-slate-400 font-subheading">Gobernanza y despliegue</span>
+              </div>
+              <h2 class="subheading text-[1.48rem] font-bold text-[#222221] leading-tight">
+                Talento, aseguramiento de calidad y certidumbre operativa
+              </h2>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-[#EB5B27]/10 text-[#EB5B27] flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+            </div>
+          </div>
+
+          <!-- Pilares del Ala 2 -->
+          <div class="my-auto flex flex-col justify-center gap-4 py-2">
+
+            <!-- Fila 4: Atracción de talento -->
+            <div class="bg-white border border-slate-200/90 rounded-2xl py-5 px-5 flex items-center justify-between shadow-xs hover:border-[#7C3AED]/50 transition-colors">
+              <div class="flex items-center gap-4 flex-1 min-w-0 pr-4">
+                <div class="w-12 h-12 rounded-xl bg-[#8B5CF6]/12 text-[#7C3AED] flex items-center justify-center flex-shrink-0 font-black font-subheading text-lg">
+                  4
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="font-subheading text-[17px] font-bold text-slate-900">Atracción y selección de talento especializado</span>
+                    <span class="text-[11px] font-bold text-[#7C3AED] bg-[#8B5CF6]/10 px-2 py-0.5 rounded-md whitespace-nowrap">Filtros de talento</span>
+                  </div>
+                  <p class="font-body text-[13.8px] text-slate-600 leading-snug">
+                    Evaluación exhaustiva de comunicación verbal, navegación informática, resolución de problemas y dominio bilingüe antes de su incorporación.
+                  </p>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0 pl-5 border-l border-slate-100 min-w-[125px]">
+                <span class="metric-number text-[2.75rem] text-[#7C3AED] leading-none block">4 filtros</span>
+                <span class="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider font-subheading mt-1 block">95% retención</span>
+              </div>
+            </div>
+
+            <!-- Fila 5: Calidad con IA -->
+            <div class="bg-white border border-slate-200/90 rounded-2xl py-5 px-5 flex items-center justify-between shadow-xs hover:border-[#3284C6]/50 transition-colors">
+              <div class="flex items-center gap-4 flex-1 min-w-0 pr-4">
+                <div class="w-12 h-12 rounded-xl bg-[#3284C6]/12 text-[#3284C6] flex items-center justify-center flex-shrink-0 font-black font-subheading text-lg">
+                  5
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="font-subheading text-[17px] font-bold text-slate-900">Aseguramiento de calidad potenciado por IA</span>
+                    <span class="text-[11px] font-bold text-[#3284C6] bg-[#3284C6]/10 px-2 py-0.5 rounded-md whitespace-nowrap">Auditoría QA 100%</span>
+                  </div>
+                  <p class="font-body text-[13.8px] text-slate-600 leading-snug">
+                    Analítica de voz y cédulas de evaluación automáticas auditan interacciones para mitigar riesgos normativos, verificar apego a procesos y retroalimentar al personal.
+                  </p>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0 pl-5 border-l border-slate-100 min-w-[125px]">
+                <span class="metric-number text-[2.5rem] text-[#3284C6] leading-none block">Hasta 100%</span>
+                <span class="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider font-subheading mt-1 block">Muestreo flexible</span>
+              </div>
+            </div>
+
+            <!-- Fila 6: Rápido escalamiento -->
+            <div class="bg-white border border-slate-200/90 rounded-2xl py-5 px-5 flex items-center justify-between shadow-xs hover:border-[#EB5B27]/50 transition-colors">
+              <div class="flex items-center gap-4 flex-1 min-w-0 pr-4">
+                <div class="w-12 h-12 rounded-xl bg-[#EB5B27]/12 text-[#EB5B27] flex items-center justify-center flex-shrink-0 font-black font-subheading text-lg">
+                  6
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="font-subheading text-[17px] font-bold text-slate-900">Rápido escalamiento y disponibilidad operativa</span>
+                    <span class="text-[11px] font-bold text-[#EB5B27] bg-[#EB5B27]/10 px-2 py-0.5 rounded-md whitespace-nowrap">Capacitación</span>
+                  </div>
+                  <p class="font-body text-[13.8px] text-slate-600 leading-snug">
+                    Instalaciones físicas listas para operar, currículas de formación de alto desempeño y dimensionamiento dinámico aseguran certidumbre desde el primer día.
+                  </p>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0 pl-5 border-l border-slate-100 min-w-[125px]">
+                <span class="metric-number text-[2.75rem] text-[#EB5B27] leading-none block">0 a 450</span>
+                <span class="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider font-subheading mt-1 block">Certidumbre día 1</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Pie del Ala 2 -->
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between flex-shrink-0">
+            <span class="text-[11.5px] font-medium text-slate-500 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-[#EB5B27]"></span>
+              Infraestructura física y gobernanza institucional listas para operar
+            </span>
+            <span class="px-3 py-1 rounded-lg bg-[#EB5B27]/10 text-[#EB5B27] font-bold text-[11.5px] font-subheading flex items-center gap-1">
+              Ver galardones nacionales y mejoras en lámina 2 ➔
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Franja inferior: Impacto directo y certificaciones -->
+      <div class="bg-white/95 border border-slate-200/90 rounded-xl px-4 py-1.5 flex flex-col gap-0.5 shadow-sm flex-shrink-0">
+        <!-- Línea 1: Impacto directo al usuario -->
+        <div class="flex items-center gap-2 text-slate-700">
+          <span class="w-2 h-2 rounded-full bg-[#059669] flex-shrink-0 animate-pulse"></span>
+          <span class="font-subheading text-[11px] font-bold text-slate-900 flex-shrink-0">
+            Impacto directo en la operación:
+          </span>
+          <span class="font-body text-[10.8px] text-slate-600 leading-normal">
+            Atención inmediata y empática, reducción radical de tiempos muertos en espera y certidumbre operativa de inicio a fin desde el primer día.
+          </span>
+        </div>
+        <!-- Línea 2: Gobernanza y certificaciones oficiales -->
+        <div class="flex items-center justify-between pt-0.5 border-t border-slate-100">
+          <div class="flex items-center gap-1.5 flex-shrink-0">
+            <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading flex items-center gap-1">
+              <svg class="w-2.5 h-2.5 text-[#059669]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              Gobernanza y certificaciones oficiales:
+            </span>
+          </div>
+          <div class="flex items-center gap-1 flex-nowrap">
+            <span class="cert-pill kpi-pill-green">ISO 9001</span>
+            <span class="cert-pill kpi-pill-blue">ISO 18295-1 (Contact Centers)</span>
+            <span class="cert-pill kpi-pill-purple font-bold border border-purple-300">Modelo Global CIC v3.0</span>
+            <span class="cert-pill kpi-pill-blue">ISO 27001 (Seguridad)</span>
+            <span class="cert-pill kpi-pill-green">PCI-DSS v4.0 (PSI)</span>
+            <span class="cert-pill kpi-pill-cyan">ISO 20000-1 (ITSM)</span>
+            <span class="cert-pill kpi-pill-purple">ISO 22301 (Continuidad)</span>
+            <span class="cert-pill kpi-pill-orange">ISO 37001 (Antisoborno)</span>
+            <span class="cert-pill font-bold" style="background: rgba(220, 38, 38, 0.08); color: #DC2626; border: 1px solid rgba(220, 38, 38, 0.25);">Distintivo ESR 2026</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================================
+         LÁMINA 2: CASOS DE ÉXITO PROBADOS · PREMIOS NACIONALES IMT
+         ==================================================================== -->
+    <section class="slide" id="slide-2" data-slide="2">
+
+      <!-- Encabezado con cintillo de madurez -->
+      <div class="flex items-center justify-between pb-1.5 mb-1 border-b border-slate-200 flex-shrink-0">
+        <div class="flex items-center gap-3">
+          <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-8 w-auto" style="height: 32px; width: auto;">
+          <div class="h-6 w-[2px] bg-slate-300"></div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="subheading text-[11px] font-bold uppercase tracking-widest text-[#3284C6] block">Trayectoria comprobada · Instituto Mexicano de Teleservicios (IMT)</span>
+              <span class="text-slate-300">·</span>
+              <span class="font-subheading text-[11px] font-bold text-[#D97706] uppercase tracking-wider">Podio nacional consecutivo: 2023 · 2024 · 2025 · 2026</span>
+            </div>
+            <h1 class="subheading text-[1.28rem] font-bold text-[#222221] leading-tight">
+              Casos de éxito probados con clientes: 4 años consecutivos generando valor y reduciendo costos
+            </h1>
+          </div>
+        </div>
+        <!-- Cintillo de madurez operativa -->
+        <div class="flex items-center gap-2 flex-shrink-0">
+          <div class="flex items-center gap-1.5 bg-slate-100/95 px-3 py-1 rounded-full border border-slate-200 text-[10px] font-bold font-subheading shadow-2xs">
+            <span class="text-slate-400 uppercase tracking-wider text-[9px]">Madurez:</span>
+            <span class="text-[#EB5B27]">2023 Plata</span>
+            <span class="text-slate-300">➔</span>
+            <span class="text-[#3284C6]">2024 Bronce</span>
+            <span class="text-slate-300">➔</span>
+            <span class="text-[#059669]">2025 Bronce</span>
+            <span class="text-slate-300">➔</span>
+            <span class="text-amber-700 font-black bg-amber-100/90 px-1.5 py-0.5 rounded text-amber-800">2026 Oro ★</span>
+          </div>
+          <span class="subheading text-xs font-bold uppercase tracking-widest text-[#D97706] bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">Podio oficial IMT</span>
+        </div>
+      </div>
+
+      <!-- Matriz 2×2 -->
+      <div class="grid grid-cols-2 gap-3.5 flex-1 my-1 min-h-0 items-stretch">
+
+        <!-- ============================================================
+             CUADRANTE 1: 🥇 1ER LUGAR NACIONAL · 2026 (ORO)
+             ============================================================ -->
+        <div class="card-tech rounded-2xl p-4 flex flex-col justify-between shadow-xs border-2 border-amber-400 bg-gradient-to-b from-amber-50/50 via-yellow-50/15 to-white hover:border-amber-500 transition-all relative overflow-hidden">
+          
+          <div>
+            <!-- Encabezado Cuadrante 1 -->
+            <div class="flex items-center justify-between pb-2 mb-2 border-b border-amber-200/80">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-yellow-500 text-white flex items-center justify-center flex-shrink-0 text-2xl shadow-sm border border-amber-300">
+                  🥇
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-subheading text-[1.28rem] font-black text-amber-800 leading-none tracking-tight">
+                      1ER LUGAR NACIONAL
+                    </span>
+                    <span class="px-2 py-0.5 rounded-md bg-amber-600 text-white text-[9.5px] font-black uppercase tracking-wider font-subheading">
+                      2026 · Edición 21
+                    </span>
+                  </div>
+                  <span class="text-[11px] font-bold text-amber-900/85 uppercase tracking-wider font-subheading mt-0.5 block">
+                    Gestión de títulos vehiculares · Cliente corporativo de comercio electrónico automotriz
+                  </span>
+                </div>
+              </div>
+              <span class="px-3 py-1 rounded-lg bg-gradient-to-r from-amber-500 to-yellow-500 text-white text-[10px] font-black uppercase tracking-wider font-subheading shadow-2xs">
+                ★ Oro Nacional
+              </span>
+            </div>
+
+            <!-- Contenido Cuadrante 1 -->
+            <h2 class="subheading text-[1.12rem] font-bold text-slate-900 leading-tight mb-1">
+              Optimización y automatización en verificación documental
+            </h2>
+            <p class="font-body text-[13px] text-slate-600 leading-snug">
+              Transformación de la validación de títulos vehiculares con extracción automatizada de datos y bloques de trabajo focalizado, eliminando cuellos de botella operativos.
+            </p>
+          </div>
+
+          <!-- Bloque de reducción de costos -->
+          <div class="bg-amber-100/70 border border-amber-300/90 rounded-xl px-3 py-2 my-1 shadow-2xs">
+            <div class="flex items-center gap-1.5 mb-0.5">
+              <span class="w-2 h-2 rounded-full bg-[#059669] flex-shrink-0"></span>
+              <span class="font-subheading text-[11px] font-bold text-[#059669] uppercase tracking-wider">Reducción de costos y eficiencia comprobada:</span>
+            </div>
+            <p class="font-body text-[12px] text-slate-800 leading-snug">
+              Incremento de productividad a <strong>30 casos por hora</strong> por especialista y reducción radical del costo operativo por transacción con margen de error de 0.04%.
+            </p>
+          </div>
+
+          <!-- Métricas Cuadrante 1 -->
+          <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="bg-white border border-amber-200/90 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-amber-600 leading-none block">90s ➔ 40s</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Validación documental</span>
+            </div>
+            <div class="bg-white border border-amber-200/90 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-[#059669] leading-none block">0.04%</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Margen de error</span>
+            </div>
+            <div class="bg-white border border-amber-200/90 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-slate-800 leading-none block">+72%</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Tiempo productivo</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ============================================================
+             CUADRANTE 2: 🥈 2DO LUGAR NACIONAL · 2023 (PLATA)
+             ============================================================ -->
+        <div class="card-tech rounded-2xl p-4 flex flex-col justify-between shadow-xs border-t-4 border-t-[#EB5B27] bg-gradient-to-b from-orange-50/20 via-white to-white border border-slate-200/90 hover:border-[#EB5B27]/50 transition-colors">
+          
+          <div>
+            <!-- Encabezado Cuadrante 2 -->
+            <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-[#EB5B27]/12 border border-[#EB5B27]/30 text-[#EB5B27] flex items-center justify-center flex-shrink-0 text-2xl shadow-xs">
+                  🥈
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-subheading text-[1.28rem] font-black text-[#EB5B27] leading-none tracking-tight">
+                      2DO LUGAR NACIONAL
+                    </span>
+                    <span class="px-2 py-0.5 rounded-md bg-[#EB5B27] text-white text-[9.5px] font-black uppercase tracking-wider font-subheading">
+                      2023 · Edición 18
+                    </span>
+                  </div>
+                  <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-0.5 block">
+                    Procesos disruptivos · Operación BPO de retail automotriz en EE. UU.
+                  </span>
+                </div>
+              </div>
+              <span class="px-3 py-1 rounded-lg bg-[#EB5B27]/15 text-[#EB5B27] text-[10px] font-black uppercase tracking-wider font-subheading">
+                Plata Nacional
+              </span>
+            </div>
+
+            <!-- Contenido Cuadrante 2 -->
+            <h2 class="subheading text-[1.12rem] font-bold text-slate-900 leading-tight mb-1">
+              Gestión de casos complejos y rigor en cumplimiento legal
+            </h2>
+            <p class="font-body text-[13px] text-slate-600 leading-snug">
+              Resolución y validación legal de controversias de títulos vehiculares en múltiples estados con estricto apego regulatorio, garantizando cero discrepancias en auditoría.
+            </p>
+          </div>
+
+          <!-- Bloque destacado -->
+          <div class="bg-orange-100/60 border border-orange-300/80 rounded-xl px-3 py-2 my-1 shadow-2xs">
+            <div class="flex items-center gap-1.5 mb-0.5">
+              <span class="w-2 h-2 rounded-full bg-[#059669] flex-shrink-0"></span>
+              <span class="font-subheading text-[11px] font-bold text-[#059669] uppercase tracking-wider">Reducción de costos y eficiencia comprobada:</span>
+            </div>
+            <p class="font-body text-[12px] text-slate-800 leading-snug">
+              <strong>100% de eliminación de multas regulatorias</strong> y miles de horas de ingeniería y agentes ahorradas en retrabajos mediante auditoría de calidad en tiempo real.
+            </p>
+          </div>
+
+          <!-- Métricas Cuadrante 2 -->
+          <div class="grid grid-cols-2 gap-2 text-center">
+            <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-[#EB5B27] leading-none block">+95%</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Precisión en datos</span>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-[#059669] leading-none block">0%</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Errores regulatorios</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ============================================================
+             CUADRANTE 3: 🥉 3ER LUGAR NACIONAL · 2024 (BRONCE)
+             ============================================================ -->
+        <div class="card-tech rounded-2xl p-4 flex flex-col justify-between shadow-xs border-t-4 border-t-[#3284C6] bg-gradient-to-b from-blue-50/20 via-white to-white border border-slate-200/90 hover:border-[#3284C6]/50 transition-colors">
+          
+          <div>
+            <!-- Encabezado Cuadrante 3 -->
+            <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-[#3284C6]/12 border border-[#3284C6]/30 text-[#3284C6] flex items-center justify-center flex-shrink-0 text-2xl shadow-xs">
+                  🥉
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-subheading text-[1.28rem] font-black text-[#3284C6] leading-none tracking-tight">
+                      3ER LUGAR NACIONAL
+                    </span>
+                    <span class="px-2 py-0.5 rounded-md bg-[#3284C6] text-white text-[9.5px] font-black uppercase tracking-wider font-subheading">
+                      2024 · Edición 19
+                    </span>
+                  </div>
+                  <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-0.5 block">
+                    Continuidad operativa · Operaciones corporativas de telecomunicaciones en EE. UU.
+                  </span>
+                </div>
+              </div>
+              <span class="px-3 py-1 rounded-lg bg-[#3284C6]/15 text-[#3284C6] text-[10px] font-black uppercase tracking-wider font-subheading">
+                Bronce Nacional
+              </span>
+            </div>
+
+            <!-- Contenido Cuadrante 3 -->
+            <h2 class="subheading text-[1.12rem] font-bold text-slate-900 leading-tight mb-1">
+              Expansión tecnológica multisitio y continuidad operativa
+            </h2>
+            <p class="font-body text-[13px] text-slate-600 leading-snug">
+              Despliegue operativo simultáneo en tres sedes binacionales (Ciudad de México, Ciudad Juárez y El Paso, Texas) con telefonía unificada y absorción de picos de alto volumen.
+            </p>
+          </div>
+
+          <!-- Bloque destacado -->
+          <div class="bg-blue-100/60 border border-blue-300/80 rounded-xl px-3 py-2 my-1 shadow-2xs">
+            <div class="flex items-center gap-1.5 mb-0.5">
+              <span class="w-2 h-2 rounded-full bg-[#059669] flex-shrink-0"></span>
+              <span class="font-subheading text-[11px] font-bold text-[#059669] uppercase tracking-wider">Reducción de costos y eficiencia comprobada:</span>
+            </div>
+            <p class="font-body text-[12px] text-slate-800 leading-snug">
+              <strong>Consolidación de infraestructura tecnológica centralizada</strong> que eliminó licencias redundantes y costos duplicados de servidores y alojamiento.
+            </p>
+          </div>
+
+          <!-- Métricas Cuadrante 3 -->
+          <div class="grid grid-cols-2 gap-2 text-center">
+            <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-[#3284C6] leading-none block">3 sedes</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Presencia binacional</span>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-slate-800 leading-none block">24/7</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Continuidad activa</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ============================================================
+             CUADRANTE 4: 🥉 3ER LUGAR NACIONAL · 2025 (BRONCE)
+             ============================================================ -->
+        <div class="card-tech rounded-2xl p-4 flex flex-col justify-between shadow-xs border-t-4 border-t-[#059669] bg-gradient-to-b from-emerald-50/20 via-white to-white border border-slate-200/90 hover:border-[#059669]/50 transition-colors">
+          
+          <div>
+            <!-- Encabezado Cuadrante 4 -->
+            <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-[#059669]/12 border border-[#059669]/30 text-[#059669] flex items-center justify-center flex-shrink-0 text-2xl shadow-xs">
+                  🥉
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-subheading text-[1.28rem] font-black text-[#059669] leading-none tracking-tight">
+                      3ER LUGAR NACIONAL
+                    </span>
+                    <span class="px-2 py-0.5 rounded-md bg-[#059669] text-white text-[9.5px] font-black uppercase tracking-wider font-subheading">
+                      2025 · Edición 20
+                    </span>
+                  </div>
+                  <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-0.5 block">
+                    Agendamiento centralizado · Operación de reemplazo de cristales automotrices en EE. UU.
+                  </span>
+                </div>
+              </div>
+              <span class="px-3 py-1 rounded-lg bg-[#059669]/15 text-[#059669] text-[10px] font-black uppercase tracking-wider font-subheading">
+                Bronce Nacional
+              </span>
+            </div>
+
+            <!-- Contenido Cuadrante 4 -->
+            <h2 class="subheading text-[1.12rem] font-bold text-slate-900 leading-tight mb-1">
+              Agendamiento centralizado y eliminación de llamadas abandonadas
+            </h2>
+            <p class="font-body text-[13px] text-slate-600 leading-snug">
+              Centralización integral de cotizaciones y llamadas de entrada, liberando a los técnicos en taller para enfocarse en instalaciones y recuperando demanda no atendida.
+            </p>
+          </div>
+
+          <!-- Bloque destacado -->
+          <div class="bg-emerald-100/60 border border-emerald-300/80 rounded-xl px-3 py-2 my-1 shadow-2xs">
+            <div class="flex items-center gap-1.5 mb-0.5">
+              <span class="w-2 h-2 rounded-full bg-[#059669] flex-shrink-0"></span>
+              <span class="font-subheading text-[11px] font-bold text-[#059669] uppercase tracking-wider">Reducción de costos y eficiencia comprobada:</span>
+            </div>
+            <p class="font-body text-[12px] text-slate-800 leading-snug">
+              <strong>Superó en un +30.18% las ventas del equipo interno en EE. UU.</strong> y redujo la tasa de abandono a mínimos históricos mediante cobertura extendida en domingo.
+            </p>
+          </div>
+
+          <!-- Métricas Cuadrante 4 -->
+          <div class="grid grid-cols-2 gap-2 text-center">
+            <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-[#059669] leading-none block">7.9% ➔ 3.4%</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Abandono de llamadas</span>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs">
+              <span class="metric-number text-[1.8rem] text-slate-800 leading-none block">+30.2%</span>
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading mt-1 block">Ventas vs. equipo en EE. UU.</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Franja inferior -->
+      <div class="bg-white/95 border border-slate-200/90 rounded-xl px-4 py-1.5 flex flex-col gap-0.5 shadow-sm flex-shrink-0">
+        <!-- Línea 1: Compromiso institucional -->
+        <div class="flex items-center gap-2 text-slate-700">
+          <span class="w-2 h-2 rounded-full bg-[#3284C6] flex-shrink-0 animate-pulse"></span>
+          <span class="font-subheading text-[11px] font-bold text-slate-900 flex-shrink-0">
+            Compromiso institucional como socio estratégico:
+          </span>
+          <span class="font-body text-[10.8px] text-slate-600 leading-normal">
+            La misma tecnología, gobernanza y rigor operativo que generan ahorros sustanciales y excelencia para clientes corporativos respaldan cada una de nuestras operaciones.
+          </span>
+        </div>
+        <!-- Línea 2: Gobernanza y certificaciones oficiales -->
+        <div class="flex items-center justify-between pt-0.5 border-t border-slate-100">
+          <div class="flex items-center gap-1.5 flex-shrink-0">
+            <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-subheading flex items-center gap-1">
+              <svg class="w-2.5 h-2.5 text-[#059669]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              Gobernanza y certificaciones oficiales:
+            </span>
+          </div>
+          <div class="flex items-center gap-1 flex-nowrap">
+            <span class="cert-pill kpi-pill-green">ISO 9001</span>
+            <span class="cert-pill kpi-pill-blue">ISO 18295-1 (Contact Centers)</span>
+            <span class="cert-pill kpi-pill-purple font-bold border border-purple-300">Modelo Global CIC v3.0 (IMT)</span>
+            <span class="cert-pill kpi-pill-blue">ISO 27001 (Seguridad)</span>
+            <span class="cert-pill kpi-pill-green">PCI-DSS v4.0 (PSI)</span>
+            <span class="cert-pill kpi-pill-cyan">ISO 20000-1 (ITSM)</span>
+            <span class="cert-pill kpi-pill-purple">ISO 22301 (Continuidad)</span>
+            <span class="cert-pill kpi-pill-orange">ISO 37001 (Antisoborno)</span>
+            <span class="cert-pill font-bold" style="background: rgba(220, 38, 38, 0.08); color: #DC2626; border: 1px solid rgba(220, 38, 38, 0.25);">Distintivo ESR 2026</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <!-- Controles flotantes de navegación (ocultos al imprimir) -->
+  <div id="nav-controls">
+    <button class="nav-btn" onclick="prevSlide()" title="Lámina anterior">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+    </button>
+    <span id="slide-indicator">1 / 2</span>
+    <button class="nav-btn" onclick="nextSlide()" title="Siguiente lámina">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 2;
+
+    function showSlide(n) {
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      const activeSlide = document.getElementById(`slide-${n}`);
+      if (activeSlide) {
+        activeSlide.classList.add('active');
+        document.getElementById('slide-indicator').textContent = `${n} / ${totalSlides}`;
+        currentSlide = n;
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        showSlide(currentSlide + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        showSlide(currentSlide - 1);
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      }
+    });
+  </script>
+
+</body>
+
+</html>
