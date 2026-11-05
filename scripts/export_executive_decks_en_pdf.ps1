@@ -69,3 +69,4 @@ foreach ($d in $decks) {
 }
 
 Write-Host "`nBatch compilation completed." -ForegroundColor Cyan
+
