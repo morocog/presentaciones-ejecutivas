@@ -30,6 +30,11 @@ $decks = @(
         Name = "Deck 04 - Portafolio Capacidades Comerciales"
         Dir = "04-Portafolio-Capacidades-Comerciales"
         Pdf = "04_Portafolio_Capacidades_Comerciales.pdf"
+    },
+    @{
+        Name = "Deck 05 - TIP Mexico AI Quality Engine"
+        Dir = "05-TIP-Mexico-AI-Quality-Engine"
+        Pdf = "05_TIP_Mexico_AI_Quality_Engine.pdf"
     }
 )
 

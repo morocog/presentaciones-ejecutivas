@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TIP México · AI Quality Engine | Telat BPO</title>
+
+  <!-- Google Fonts: Bricolage Grotesque (titulares y números de impacto) y DM Sans (cuerpo, viñetas y títulos) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS v3 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandNaranja: '#EB5B27',
+            brandCeleste: '#2079C8',
+            tipRojo: '#E30613',
+            tipNavy: '#0B1220',
+            tipCard: '#16213A',
+            ivoryBg: '#F6F4F0',
+          },
+          fontFamily: {
+            sans: ['"DM Sans"', 'sans-serif'],
+            display: ['"Bricolage Grotesque"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: #070D18;
+      color: #111827;
+      font-family: 'DM Sans', sans-serif;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Contenedor canónico 1920x1080 (16:9 Full HD) */
+    .viewport-scaler {
+      width: 1920px;
+      height: 1080px;
+      position: relative;
+      flex-shrink: 0;
+      transform-origin: center center;
+    }
+
+    .slide {
+      width: 1920px;
+      height: 1080px;
+      position: absolute;
+      inset: 0;
+      box-sizing: border-box;
+      padding: 80px 110px 56px 110px;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: #F6F4F0;
+      overflow: hidden;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    .slide-dark {
+      background-color: #0B1220 !important;
+      color: #FFFFFF !important;
+    }
+
+    /* Neutralización de falso engrosamiento */
+    h1.font-display, h2.font-display, h3.font-display, .font-display {
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    /* Navegación flotante interactiva en pantalla */
+    #nav-controls {
+      position: fixed;
+      bottom: 2rem;
+      right: 2.5rem;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      padding: 0.5rem 0.9rem;
+      border-radius: 9999px;
+      box-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-btn {
+      width: 2.6rem;
+      height: 2.6rem;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #F1F5F9;
+      color: #334155;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .nav-btn:hover {
+      background: #E30613;
+      color: #FFFFFF;
+    }
+
+    #slide-indicator {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #64748B;
+      padding: 0 0.5rem;
+    }
+
+    /* Reglas de impresión PDF 16:9 (1920x1080) */
+    @media print {
+      @page {
+        size: 1920px 1080px;
+        margin: 0;
+      }
+
+      *, *:before, *:after {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      html, body {
+        width: 1920px !important;
+        height: 1080px !important;
+        background: #F6F4F0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        display: block !important;
+      }
+
+      #nav-controls {
+        display: none !important;
+      }
+
+      .viewport-scaler {
+        transform: none !important;
+        width: 1920px !important;
+        height: auto !important;
+        position: static !important;
+        display: block !important;
+      }
+
+      .slide {
+        display: flex !important;
+        position: relative !important;
+        width: 1920px !important;
+        height: 1080px !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        box-sizing: border-box !important;
+        padding: 80px 110px 56px 110px !important;
+        overflow: hidden !important;
+      }
+
+      .slide:last-of-type, .slide:last-child {
+        page-break-after: auto !important;
+        break-after: auto !important;
+      }
+
+      .slide-dark {
+        background-color: #0B1220 !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="viewport-scaler">
+
+    <!-- ==============================================================
+         LÁMINA 1: PORTADA EJECUTIVA (DARK NAVY CON AROS Y CO-BRANDING)
+         ============================================================== -->
+    <section class="slide slide-dark active" id="slide-1" data-slide="1">
+      <!-- Círculos concéntricos vectoriales SVG esquinados a la parte superior derecha -->
+      <svg class="absolute top-0 right-0 w-[1920px] h-[1080px] pointer-events-none" viewBox="0 0 1920 1080" fill="none">
+        <circle cx="1730" cy="190" r="415" stroke="#E30613" stroke-width="70" fill="none" opacity="0.9" />
+        <circle cx="1730" cy="190" r="250" fill="#2079C8" opacity="0.9" />
+      </svg>
+
+      <!-- Co-branding superior -->
+      <div class="relative z-10 flex items-center justify-between">
+        <div class="flex items-center gap-6 bg-white/10 backdrop-blur-md px-6 py-3 rounded-2xl border border-white/15">
+          <img src="assets/logo_tip.png" alt="TIP México" class="h-10 w-auto object-contain bg-white rounded-lg px-2 py-1">
+          <span class="text-white/60 text-2xl font-light">×</span>
+          <img src="assets/logo_telat.png" alt="Telat BPO" class="h-9 w-auto object-contain bg-white rounded-lg px-2 py-1">
+        </div>
+        <div class="flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/10 border border-white/20 text-white/90 text-[18px] font-sans font-medium">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#E30613] animate-pulse"></span>
+          Propuesta tecnológica para TIP México
+        </div>
+      </div>
+
+      <!-- Titular principal y bajada directiva -->
+      <div class="relative z-10 max-w-[1360px] my-auto space-y-7">
+        <div class="inline-block px-5 py-2 rounded-lg bg-[#E30613]/20 border border-[#E30613]/40 text-[#FF6B6B] font-bold text-[20px] tracking-wider uppercase">
+          Aseguramiento de calidad con inteligencia artificial
+        </div>
+        <h1 class="font-display text-white text-[96px] leading-[1.04] tracking-tight">
+          AI Quality Engine:<br>
+          calidad consistente en <span class="text-[#E30613]">cada llamada</span>
+        </h1>
+        <p class="font-sans text-white/85 text-[32px] max-w-[1240px] font-normal leading-[1.4]">
+          Una plataforma que escucha y evalúa el 100% de las llamadas de atención a clientes con el mismo criterio, entrega retroalimentación al instante y le da a la dirección visibilidad en tiempo real. Desarrollada por Telat BPO a la medida de TIP México.
+        </p>
+      </div>
+
+      <!-- 4 Píldoras de unidades de negocio cubiertas y pie directivo -->
+      <div class="relative z-10 flex items-center justify-between pt-6 border-t border-white/20">
+        <div class="flex items-center gap-4 flex-wrap">
+          <span class="text-white/60 text-[20px] font-medium mr-2">Unidades cubiertas:</span>
+          <span class="px-7 py-3 rounded-full border border-white/25 text-white text-[22px] font-semibold bg-white/10 shadow-sm">
+            TIP Auto
+          </span>
+          <span class="px-7 py-3 rounded-full border border-white/25 text-white text-[22px] font-semibold bg-white/10 shadow-sm">
+            Bitcar
+          </span>
+          <span class="px-7 py-3 rounded-full border border-white/25 text-white text-[22px] font-semibold bg-white/10 shadow-sm">
+            Chirey Alianza
+          </span>
+          <span class="px-7 py-3 rounded-full border border-white/25 text-white text-[22px] font-semibold bg-white/10 shadow-sm">
+            Flotas Corporativas
+          </span>
+        </div>
+        <div class="text-right text-[20px] text-white/60">
+          <span class="text-white font-bold">Telat BPO</span> · Suite de Innovación Operativa
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==============================================================
+         LÁMINA 2: EL RETO OPERATIVO (CALIDAD TRADICIONAL DISPERSA)
+         ============================================================== -->
+    <section class="slide" id="slide-2" data-slide="2">
+      <!-- Tag superior -->
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="w-3.5 h-3.5 rounded-full bg-[#E30613]"></span>
+          <span class="font-sans font-bold text-[22px] tracking-wider text-[#E30613] uppercase">El reto operativo</span>
+        </div>
+        <span class="text-slate-400 font-sans font-medium text-[19px]">Diagnóstico de auditoría tradicional</span>
+      </div>
+
+      <!-- Título de impacto y bajada -->
+      <div class="my-auto space-y-3">
+        <h2 class="font-display text-[#111827] text-[58px] leading-[1.08] tracking-tight">
+          Hoy la calidad depende de quién escucha la llamada
+        </h2>
+        <p class="font-sans text-slate-600 text-[26px] max-w-[1400px] leading-relaxed">
+          Cuando la evaluación es manual, dos analistas raramente califican con el mismo rigor y es imposible revisar todo el volumen. El resultado es dispersión de criterios, desinformación operativa y riesgos desatendidos.
+        </p>
+      </div>
+
+      <!-- Retícula de 4 dolores operativos (2x2) -->
+      <div class="grid grid-cols-2 gap-7 mb-auto">
+        <!-- Dolor 1 -->
+        <div class="bg-white rounded-3xl p-8 border border-slate-200/90 shadow-sm flex items-start gap-6 hover:border-[#E30613]/50 transition-all">
+          <div class="w-16 h-16 rounded-2xl bg-red-50 border border-red-100 flex items-center justify-center text-3xl shrink-0">
+            ⚖️
+          </div>
+          <div>
+            <h3 class="font-display text-[#111827] text-[28px] mb-2">Criterios que varían</h3>
+            <p class="font-sans text-slate-600 text-[21px] leading-snug">
+              Cada evaluador interpreta el protocolo a su manera. La misma llamada puede recibir calificaciones radicalmente distintas, provocando fricción y desconfianza en el equipo de asesores.
+            </p>
+          </div>
+        </div>
+
+        <!-- Dolor 2 -->
+        <div class="bg-white rounded-3xl p-8 border border-slate-200/90 shadow-sm flex items-start gap-6 hover:border-[#E30613]/50 transition-all">
+          <div class="w-16 h-16 rounded-2xl bg-red-50 border border-red-100 flex items-center justify-center text-3xl shrink-0">
+            🔍
+          </div>
+          <div>
+            <h3 class="font-display text-[#111827] text-[28px] mb-2">Poca cobertura (muestra marginal)</h3>
+            <p class="font-sans text-slate-600 text-[21px] leading-snug">
+              Solo se alcanza a revisar entre un 2% y 5% del volumen mensual. Más del 95% de las interacciones quedan en un punto ciego donde pueden ocultarse fallas críticas de servicio.
+            </p>
+          </div>
+        </div>
+
+        <!-- Dolor 3 -->
+        <div class="bg-white rounded-3xl p-8 border border-slate-200/90 shadow-sm flex items-start gap-6 hover:border-[#E30613]/50 transition-all">
+          <div class="w-16 h-16 rounded-2xl bg-amber-50 border border-amber-100 flex items-center justify-center text-3xl shrink-0">
+            ⏳
+          </div>
+          <div>
+            <h3 class="font-display text-[#111827] text-[28px] mb-2">Retroalimentación tardía</h3>
+            <p class="font-sans text-slate-600 text-[21px] leading-snug">
+              Cuando el asesor recibe la retroalimentación, la llamada ya ocurrió días o semanas atrás. El contexto se olvida y la oportunidad pedagógica pierde casi todo su impacto formativo.
+            </p>
+          </div>
+        </div>
+
+        <!-- Dolor 4 -->
+        <div class="bg-white rounded-3xl p-8 border border-slate-200/90 shadow-sm flex items-start gap-6 hover:border-[#E30613]/50 transition-all">
+          <div class="w-16 h-16 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-3xl shrink-0">
+            🙈
+          </div>
+          <div>
+            <h3 class="font-display text-[#111827] text-[28px] mb-2">Poca visibilidad directiva</h3>
+            <p class="font-sans text-slate-600 text-[21px] leading-snug">
+              Sin una fuente única de verdad ni analíticas unificadas, la dirección desconoce con precisión qué áreas reforzar, qué conductas provocan deserciones y si realmente se cumple la meta.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de pie comparativa -->
+      <div class="pt-5 border-t border-slate-200 flex items-center justify-between text-slate-500 font-sans text-[20px]">
+        <div class="flex items-center gap-2">
+          <span class="font-bold text-[#E30613]">Consecuencia directa:</span>
+          <span>Incertidumbre operativa, riesgo de quejas ante Profeco/Condusef y desgaste de cartera.</span>
+        </div>
+        <div class="font-semibold text-slate-600">02 / 11</div>
+      </div>
+    </section>
+
+
+    <!-- ==============================================================
+         LÁMINA 3: LA SOLUCIÓN CUANTITATIVA (ESTADÍSTICAS MONUMENTALES)
+         ============================================================== -->
+    <section class="slide" id="slide-3" data-slide="3">
+      <!-- Tag superior -->
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="w-3.5 h-3.5 rounded-full bg-[#2079C8]"></span>
+          <span class="font-sans font-bold text-[22px] tracking-wider text-[#2079C8] uppercase">La solución tecnológica</span>
+        </div>
+        <span class="text-slate-400 font-sans font-medium text-[19px]">Estandarización y cobertura 100%</span>
+      </div>
+
+      <!-- Titular -->
+      <div class="my-auto space-y-3">
+        <h2 class="font-display text-[#111827] text-[58px] leading-[1.08] tracking-tight">
+          Una sola vara de medir, aplicada a todas las llamadas
+        </h2>
+        <p class="font-sans text-slate-600 text-[26px] max-w-[1440px] leading-relaxed">
+          TIP México | AI Quality Engine procesa cada llamada con inteligencia artificial y calibración humana experta. Está calibrada con el scorecard oficial de TIP y cubre el ecosistema integral de negocio.
+        </p>
+      </div>
+
+      <!-- 4 Tarjetas métricas monumentales -->
+      <div class="grid grid-cols-4 gap-6 mb-6">
+        <!-- KPI 1 -->
+        <div class="bg-white rounded-3xl p-8 border-t-8 border-[#E30613] border-x border-b border-slate-200 shadow-sm text-center">
+          <div class="font-display text-[84px] text-[#E30613] leading-none mb-3">100</div>
+          <div class="font-sans font-bold text-[24px] text-[#111827] mb-1">Puntos de scorecard</div>
+          <p class="font-sans text-slate-500 text-[18px]">Ponderación equilibrada en 4 macro-dimensiones</p>
+        </div>
+
+        <!-- KPI 2 -->
+        <div class="bg-white rounded-3xl p-8 border-t-8 border-[#2079C8] border-x border-b border-slate-200 shadow-sm text-center">
+          <div class="font-display text-[84px] text-[#2079C8] leading-none mb-3">16</div>
+          <div class="font-sans font-bold text-[24px] text-[#111827] mb-1">Criterios oficiales</div>
+          <p class="font-sans text-slate-500 text-[18px]">Evaluación objetiva respaldada en evidencia de audio</p>
+        </div>
+
+        <!-- KPI 3 -->
+        <div class="bg-white rounded-3xl p-8 border-t-8 border-[#EB5B27] border-x border-b border-slate-200 shadow-sm text-center">
+          <div class="font-display text-[84px] text-[#EB5B27] leading-none mb-3">6</div>
+          <div class="font-sans font-bold text-[24px] text-[#111827] mb-1">Cero tolerancia</div>
+          <p class="font-sans text-slate-500 text-[18px]">Blindaje inmediato ante riesgos legales y operativos</p>
+        </div>
+
+        <!-- KPI 4 -->
+        <div class="bg-white rounded-3xl p-8 border-t-8 border-emerald-500 border-x border-b border-slate-200 shadow-sm text-center">
+          <div class="font-display text-[84px] text-emerald-600 leading-none mb-3">-85%</div>
+          <div class="font-sans font-bold text-[24px] text-[#111827] mb-1">Tiempo de evaluación</div>
+          <p class="font-sans text-slate-500 text-[18px]">De 25 minutos manuales a segundos por llamada</p>
+        </div>
+      </div>
+
+      <!-- Barra de cobertura unificada de marcas de TIP -->
+      <div class="bg-slate-900 text-white rounded-2xl p-6 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+          <span class="font-sans font-bold text-[22px] text-white">Cobertura homologada:</span>
+          <span class="text-slate-300 text-[20px]">Mismos estándares de excelencia adaptados a cada flujo de negocio</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="px-4 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-white text-[18px] font-semibold">TIP Auto</span>
+          <span class="px-4 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-white text-[18px] font-semibold">Bitcar</span>
+          <span class="px-4 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-white text-[18px] font-semibold">Chirey Alianza</span>
+          <span class="px-4 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-white text-[18px] font-semibold">Flotas Corporativas</span>
+        </div>
+      </div>
+
+      <!-- Pie -->
+      <div class="pt-4 border-t border-slate-200 flex items-center justify-between text-slate-500 font-sans text-[20px]">
+        <span>Telat BPO para TIP México · Plataforma analítica de aseguramiento de calidad</span>
+        <span class="font-semibold text-slate-600">03 / 11</span>
+      </div>
+    </section>
+
+
+    <!-- ==============================================================
+         LÁMINA 4: EL FLUJO OPERATIVO EN TRES PASOS
+         ============================================================== -->
+    <section class="slide" id="slide-4" data-slide="4">
+      <!-- Tag superior -->
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="w-3.5 h-3.5 rounded-full bg-[#EB5B27]"></span>
+          <span class="font-sans font-bold text-[22px] tracking-wider text-[#EB5B27] uppercase">Flujo metodológico</span>
+        </div>
+        <span class="text-slate-400 font-sans font-medium text-[19px]">Proceso integrado de punta a punta</span>
+      </div>
+
+      <!-- Titular -->
+      <div class="my-auto space-y-3">
+        <h2 class="font-display text-[#111827] text-[58px] leading-[1.08] tracking-tight">
+          De la grabación al plan de acción en tres pasos
+        </h2>
+        <p class="font-sans text-slate-600 text-[26px] max-w-[1400px] leading-relaxed">
+          Un flujo de trabajo transparente, reproducible y sin cuellos de botella que transforma una grabación de audio en retroalimentación inmediata para el supervisor.
+        </p>
+      </div>
+
+      <!-- 3 Pasos en tarjetas horizontales amplias -->
+      <div class="grid grid-cols-3 gap-8 mb-auto">
+        <!-- Paso 1 -->
+        <div class="bg-white rounded-3xl p-9 border border-slate-200/90 shadow-sm relative flex flex-col justify-between hover:border-[#E30613]/50 transition-all">
+          <div>
+            <div class="w-16 h-16 rounded-full bg-[#E30613] text-white font-display text-[32px] flex items-center justify-center font-bold mb-6 shadow-md">
+              1
+            </div>
+            <h3 class="font-display text-[#111827] text-[30px] mb-3">Cargar la llamada</h3>
+            <p class="font-sans text-slate-600 text-[21px] leading-relaxed mb-6">
+              Se sube la grabación en cualquier formato estándar (WAV, MP3 o M4A) y se capturan los datos contextuales clave:
+            </p>
+            <ul class="space-y-2.5 font-sans text-slate-600 text-[19px]">
+              <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[#E30613]"></span> Nombre del asesor y supervisor</li>
+              <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[#E30613]"></span> Campaña (TIP Auto, Bitcar, Chirey)</li>
+              <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[#E30613]"></span> Folio de cliente y placas / unidad</li>
+            </ul>
+          </div>
+          <div class="mt-8 pt-4 border-t border-slate-100 text-[17px] font-bold text-[#E30613] uppercase tracking-wider">
+            Recepción e ingesta de datos
+          </div>
+        </div>
+
+        <!-- Paso 2 -->
+        <div class="bg-white rounded-3xl p-9 border border-slate-200/90 shadow-sm relative flex flex-col justify-between hover:border-[#2079C8]/50 transition-all">
+          <div>
+            <div class="w-16 h-16 rounded-full bg-[#2079C8] text-white font-display text-[32px] flex items-center justify-center font-bold mb-6 shadow-md">
+              2
+            </div>
+            <h3 class="font-display text-[#111827] text-[30px] mb-3">Auditoría inteligente</h3>
+            <p class="font-sans text-slate-600 text-[21px] leading-relaxed mb-6">
+              En segundos, el motor de IA analiza la interacción completa contra los 16 criterios oficiales:
+            </p>
+            <ul class="space-y-2.5 font-sans text-slate-600 text-[19px]">
+              <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[#2079C8]"></span> Transcripción de alta fidelidad en español</li>
+              <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[#2079C8]"></span> Evaluación acústica y de empatía</li>
+              <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[#2079C8]"></span> Cita textual exacta con minuto y segundo</li>
+            </ul>
+          </div>
+          <div class="mt-8 pt-4 border-t border-slate-100 text-[17px] font-bold text-[#2079C8] uppercase tracking-wider">
+            Análisis acústico y semántico
+          </div>
+        </div>
+
+        <!-- Paso 3 -->
+        <div class="bg-white rounded-3xl p-9 border border-slate-200/90 shadow-sm relative flex flex-col justify-between hover:border-emerald-500/50 transition-all">
+          <div>
+            <div class="w-16 h-16 rounded-full bg-emerald-600 text-white font-display text-[32px] flex items-center justify-center font-bold mb-6 shadow-md">
+              3
+            </div>
+            <h3 class="font-display text-[#111827] text-[30px] mb-3">Calibrar y guardar</h3>
+            <p class="font-sans text-slate-600 text-[21px] leading-relaxed mb-6">
+              El analista valida los resultados con total control y consolida el expediente en la nube:
+            </p>
+            <ul class="space-y-2.5 font-sans text-slate-600 text-[19px]">
+              <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-600"></span> Calibración humana de cualquier puntaje</li>
+              <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-600"></span> Cédula con fortalezas y plan de coaching</li>
+              <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-600"></span> Publicación directa al tablero directivo</li>
+            </ul>
+          </div>
+          <div class="mt-8 pt-4 border-t border-slate-100 text-[17px] font-bold text-emerald-600 uppercase tracking-wider">
+            Consolidación y coaching 1 a 1
+          </div>
+        </div>
+      </div>
+
+      <!-- Pie -->
+      <div class="pt-4 border-t border-slate-200 flex items-center justify-between text-slate-500 font-sans text-[20px]">
+        <span>Tiempo total promedio de procesamiento por expediente: menos de 60 segundos</span>
+        <span class="font-semibold text-slate-600">04 / 11</span>
+      </div>
+    </section>
+
+
+    <!-- ==============================================================
+         LÁMINA 5: HERRAMIENTA 1 · LABORATORIO DE AUDITORÍA CON IA
+         ============================================================== -->
+    <section class="slide" id="slide-5" data-slide="5">
+      <!-- Tag superior -->
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="w-3.5 h-3.5 rounded-full bg-[#E30613]"></span>
+          <span class="font-sans font-bold text-[22px] tracking-wider text-[#E30613] uppercase">Herramienta 01 · Auditoría en piso</span>
+        </div>
+        <span class="text-slate-400 font-sans font-medium text-[19px]">Módulo de evaluación y captura</span>
+      </div>
+
+      <!-- Layout 2 columnas: Texto explicativo + Screenshot real -->
+      <div class="flex items-center justify-between my-auto w-full gap-14">
+        <!-- Columna izquierda: 48% -->
+        <div class="w-[48%] space-y-7">
+          <div>
+            <h2 class="font-display text-[#111827] text-[54px] leading-[1.08] tracking-tight mb-4">
+              Laboratorio de auditoría con IA
+            </h2>
+            <p class="font-sans text-slate-600 text-[24px] leading-relaxed">
+              El entorno operativo donde el analista de calidad carga cada grabación y procesa la interacción en tiempo récord con respaldo total en los protocolos de TIP.
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+              <span class="font-sans font-bold text-[18px] tracking-wider uppercase text-[#EB5B27] block mb-2">Qué hace</span>
+              <p class="font-sans text-slate-700 text-[21px] leading-relaxed">
+                Escucha la llamada completa y la califica de extremo a extremo contra el scorecard oficial de TIP, extrayendo las citas textuales exactas del diálogo.
+              </p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+              <span class="font-sans font-bold text-[18px] tracking-wider uppercase text-[#2079C8] block mb-2">Beneficios inmediatos</span>
+              <ul class="space-y-2.5 font-sans text-slate-700 text-[20px]">
+                <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> <strong>Evaluaciones en segundos:</strong> Máxima productividad para el equipo QA.</li>
+                <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> <strong>Evidencia objetiva:</strong> Citas textuales con minuto y segundo de ocurrencia.</li>
+                <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> <strong>Plan de coaching instantáneo:</strong> Puntos de mejora redactados al momento.</li>
+                <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> <strong>Calibración humana:</strong> El criterio analítico prevalece sobre la IA.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna derecha: 52% Captura de pantalla real -->
+        <div class="w-[52%] flex flex-col items-center">
+          <div class="w-full bg-slate-900 rounded-3xl p-3 shadow-2xl border border-slate-800">
+            <img src="assets/lab_auditoria.jpeg" alt="Laboratorio de auditoría" class="w-full h-auto rounded-2xl object-cover shadow-inner">
+          </div>
+          <div class="mt-4 text-center font-sans text-slate-500 text-[18px]">
+            Carga de la grabación de audio y metadatos de campaña (Asesor, Cliente, Unidad)
+          </div>
+        </div>
+      </div>
+
+      <!-- Pie -->
+      <div class="pt-4 border-t border-slate-200 flex items-center justify-between text-slate-500 font-sans text-[20px]">
+        <span>AI Quality Engine · Desarrollado por Telat BPO para TIP México</span>
+        <span class="font-semibold text-slate-600">05 / 11</span>
+      </div>
+    </section>
+
+
+    <!-- ==============================================================
+         LÁMINA 6: HERRAMIENTA 1 · EL EXPEDIENTE DE AUDITORÍA
+         ============================================================== -->
+    <section class="slide" id="slide-6" data-slide="6">
+      <!-- Tag superior -->
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="w-3.5 h-3.5 rounded-full bg-[#2079C8]"></span>
+          <span class="font-sans font-bold text-[22px] tracking-wider text-[#2079C8] uppercase">Herramienta 01 · Detalle y trazabilidad</span>
+        </div>
+        <span class="text-slate-400 font-sans font-medium text-[19px]">Expediente clínico de calidad</span>
+      </div>
+
+      <!-- Layout 2 columnas: 2 capturas a la izquierda + Análisis a la derecha -->
+      <div class="flex items-center justify-between my-auto w-full gap-12">
+        <!-- Columna izquierda: 48% (Dos capturas apiladas de la cédula real) -->
+        <div class="w-[48%] space-y-4">
+          <div class="bg-slate-900 rounded-2xl p-2.5 shadow-xl border border-slate-800">
+            <img src="assets/resultado_auditoria.jpeg" alt="Resultado de auditoría" class="w-full h-auto rounded-xl object-cover">
+          </div>
+          <div class="bg-slate-900 rounded-2xl p-2.5 shadow-xl border border-slate-800">
+            <img src="assets/matriz_criterios.jpeg" alt="Matriz de criterios" class="w-full h-auto rounded-xl object-cover">
+          </div>
+        </div>
+
+        <!-- Columna derecha: 52% Explicación del expediente -->
+        <div class="w-[52%] space-y-6">
+          <div>
+            <h2 class="font-display text-[#111827] text-[52px] leading-[1.08] tracking-tight mb-3">
+              Un expediente claro, auditable y accionable
+            </h2>
+            <p class="font-sans text-slate-600 text-[23px] leading-relaxed">
+              Cada llamada evaluada genera un informe forense con desglose numérico, estampa temporal de citas y cédula pedagógica para el supervisor.
+            </p>
+          </div>
+
+          <!-- Qué ve el supervisor -->
+          <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+            <span class="font-sans font-bold text-[18px] tracking-wider uppercase text-[#E30613] block mb-2">Qué visualiza el equipo</span>
+            <ul class="space-y-2 font-sans text-slate-700 text-[20px]">
+              <li class="flex items-center gap-2.5"><span class="w-2 h-2 rounded-full bg-[#E30613]"></span> <strong>Calificación global sobre 100:</strong> Nivel de desempeño con semáforo cromático.</li>
+              <li class="flex items-center gap-2.5"><span class="w-2 h-2 rounded-full bg-[#E30613]"></span> <strong>Avance en 4 categorías:</strong> Porcentaje de cumplimiento por área operativa.</li>
+              <li class="flex items-center gap-2.5"><span class="w-2 h-2 rounded-full bg-[#E30613]"></span> <strong>Matriz de 16 criterios:</strong> Con cita exacta de lo expresado en audio.</li>
+              <li class="flex items-center gap-2.5"><span class="w-2 h-2 rounded-full bg-[#E30613]"></span> <strong>Plan de acción:</strong> Fortalezas y compromisos listos para sesión 1 a 1.</li>
+            </ul>
+          </div>
+
+          <!-- Calibración humana -->
+          <div class="bg-slate-900 text-white rounded-2xl p-6 shadow-sm border border-slate-800">
+            <span class="font-sans font-bold text-[18px] tracking-wider uppercase text-[#FF6B6B] block mb-2">Gobernanza mediante calibración humana</span>
+            <p class="font-sans text-slate-300 text-[20px] leading-relaxed">
+              El analista puede ajustar puntajes con el interruptor «Calibración Humana», ingresar comentarios justificativos y guardar la versión auditada en la nube con firma de responsabilidad.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pie -->
+      <div class="pt-4 border-t border-slate-200 flex items-center justify-between text-slate-500 font-sans text-[20px]">
+        <span>Transparencia total: cada calificación cuenta con evidencia textual verificable</span>
+        <span class="font-semibold text-slate-600">06 / 11</span>
+      </div>
+    </section>
+
+
+    <!-- ==============================================================
+         LÁMINA 7: EL SCORECARD CANÓNICO DE TIP MÉXICO
+         ============================================================== -->
+    <section class="slide" id="slide-7" data-slide="7">
+      <!-- Tag superior -->
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="w-3.5 h-3.5 rounded-full bg-[#E30613]"></span>
+          <span class="font-sans font-bold text-[22px] tracking-wider text-[#E30613] uppercase">Marco metodológico</span>
+        </div>
+        <span class="text-slate-400 font-sans font-medium text-[19px]">Scorecard oficial ponderado</span>
+      </div>
+
+      <!-- Titular -->
+      <div class="my-auto space-y-2">
+        <h2 class="font-display text-[#111827] text-[54px] leading-[1.08] tracking-tight">
+          Lo que se evalúa: 4 categorías, 16 criterios
+        </h2>
+        <p class="font-sans text-slate-600 text-[24px] max-w-[1400px] leading-relaxed">
+          La ponderación refleja lo que más importa a TIP: cómo trata el asesor al cliente, qué tan ágil resuelve, si evita fricciones y cómo formaliza los acuerdos.
+        </p>
+      </div>
+
+      <!-- Barra proporcional de ponderación -->
+      <div class="space-y-2">
+        <div class="flex h-6 rounded-xl overflow-hidden shadow-sm">
+          <div style="width: 34%;" class="bg-[#E30613]"></div>
+          <div style="width: 22%;" class="bg-[#EB5B27]"></div>
+          <div style="width: 30%;" class="bg-[#2079C8]"></div>
+          <div style="width: 14%;" class="bg-emerald-500"></div>
+        </div>
+        <div class="flex justify-between font-sans text-[20px] font-medium text-slate-700">
+          <span class="flex items-center gap-2"><strong class="text-[#E30613]">34 pts</strong> Conexión humana</span>
+          <span class="flex items-center gap-2"><strong class="text-[#EB5B27]">22 pts</strong> Disponibilidad</span>
+          <span class="flex items-center gap-2"><strong class="text-[#2079C8]">30 pts</strong> Solución de fondo</span>
+          <span class="flex items-center gap-2"><strong class="text-emerald-600">14 pts</strong> Seguridad y cierre</span>
+        </div>
+      </div>
+
+      <!-- 4 Tarjetas de categoría -->
+      <div class="grid grid-cols-4 gap-5">
+        <div class="bg-white rounded-2xl p-6 border-t-4 border-[#E30613] border-x border-b border-slate-200 shadow-sm">
+          <h3 class="font-display text-[24px] text-[#111827] mb-2">Conexión humana</h3>
+          <p class="font-sans text-slate-600 text-[18px] leading-snug">
+            Saludo institucional, escucha activa, empatía genuina y trato profesional a lo largo de toda la llamada.
+          </p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border-t-4 border-[#EB5B27] border-x border-b border-slate-200 shadow-sm">
+          <h3 class="font-display text-[24px] text-[#111827] mb-2">Disponibilidad</h3>
+          <p class="font-sans text-slate-600 text-[18px] leading-snug">
+            Evitar repeticiones y rebotes, aprovechar el historial del cliente y ofrecer alternativas viables.
+          </p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border-t-4 border-[#2079C8] border-x border-b border-slate-200 shadow-sm">
+          <h3 class="font-display text-[24px] text-[#111827] mb-2">Solución</h3>
+          <p class="font-sans text-slate-600 text-[18px] leading-snug">
+            Apropiación real del caso, investigación técnica, avance en sistema y confirmación explícita del acuerdo.
+          </p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border-t-4 border-emerald-500 border-x border-b border-slate-200 shadow-sm">
+          <h3 class="font-display text-[24px] text-[#111827] mb-2">Seguridad</h3>
+          <p class="font-sans text-slate-600 text-[18px] leading-snug">
+            Validación de identidad, resumen claro de acuerdos, fijar expectativas honestas y despedida formal.
+          </p>
+        </div>
+      </div>
+
+      <!-- Escala de desempeño y 6 reglas de cero tolerancia -->
+      <div class="grid grid-cols-12 gap-6">
+        <!-- Escala: 5 cols -->
+        <div class="col-span-5 bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between">
+          <span class="font-sans font-bold text-[17px] tracking-wider uppercase text-slate-500 mb-2 block">Escala de desempeño</span>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-center">
+              <span class="block font-bold text-emerald-700 text-[20px]">Excelente</span>
+              <span class="text-slate-600 text-[17px]">95 – 100%</span>
+            </div>
+            <div class="p-3 rounded-xl bg-blue-50 border border-blue-200 text-center">
+              <span class="block font-bold text-blue-700 text-[20px]">Cumple meta</span>
+              <span class="text-slate-600 text-[17px]">85 – 94%</span>
+            </div>
+            <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-center">
+              <span class="block font-bold text-amber-700 text-[20px]">Requiere mejora</span>
+              <span class="text-slate-600 text-[17px]">75 – 84%</span>
+            </div>
+            <div class="p-3 rounded-xl bg-red-50 border border-red-200 text-center">
+              <span class="block font-bold text-red-700 text-[20px]">Crítico</span>
+              <span class="text-slate-600 text-[17px]">&lt; 75%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cero tolerancia: 7 cols -->
+        <div class="col-span-7 bg-red-50/90 rounded-2xl p-5 border-2 border-red-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-sans font-bold text-[18px] text-[#E30613] flex items-center gap-2">
+                <span>🚨</span> 6 reglas de cero tolerancia
+              </span>
+              <span class="text-xs font-bold bg-[#E30613] text-white px-3 py-1 rounded-full uppercase">Calificación 0% inmediata</span>
+            </div>
+            <p class="font-sans text-slate-600 text-[17px] mb-3">
+              Si se presenta alguna, la llamada se marca automáticamente en 0% y genera alerta de intervención urgente.
+            </p>
+            <div class="grid grid-cols-2 gap-x-6 gap-y-1.5 font-sans text-slate-700 text-[18px]">
+              <div>1. Abandono injustificado del caso</div>
+              <div>4. Cierre ficticio de reporte</div>
+              <div>2. Información falsa o sin sustento</div>
+              <div>5. Omisión ante riesgo de seguridad</div>
+              <div>3. Deslinde sin gestión previa</div>
+              <div>6. Trato irrespetuoso al cliente</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pie -->
+      <div class="pt-3 border-t border-slate-200 flex items-center justify-between text-slate-500 font-sans text-[20px]">
+        <span>Meta operativa consensuada para TIP México: 85% de calidad general</span>
+        <span class="font-semibold text-slate-600">07 / 11</span>
+      </div>
+    </section>
+
+
+    <!-- ==============================================================
+         LÁMINA 8: HERRAMIENTA 2 · HISTÓRICO CENTRALIZADO
+         ============================================================== -->
+    <section class="slide" id="slide-8" data-slide="8">
+      <!-- Tag superior -->
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="w-3.5 h-3.5 rounded-full bg-[#EB5B27]"></span>
+          <span class="font-sans font-bold text-[22px] tracking-wider text-[#EB5B27] uppercase">Herramienta 02 · Repositorio y auditoría</span>
+        </div>
+        <span class="text-slate-400 font-sans font-medium text-[19px]">Trazabilidad y respaldo en la nube</span>
+      </div>
+
+      <!-- Layout 2 columnas: Captura a la izquierda + Capacidades a la derecha -->
+      <div class="flex items-center justify-between my-auto w-full gap-14">
+        <!-- Columna izquierda: 52% Captura real -->
+        <div class="w-[52%] flex flex-col items-center">
+          <div class="w-full bg-slate-900 rounded-3xl p-3 shadow-2xl border border-slate-800">
+            <img src="assets/historico_auditorias.jpeg" alt="Histórico de auditorías" class="w-full h-auto rounded-2xl object-cover shadow-inner">
+          </div>
+          <div class="mt-4 text-center font-sans text-slate-500 text-[18px]">
+            Consulta multidimensional, filtros dinámicos por vehículo/asesor y exportación masiva
+          </div>
+        </div>
+
+        <!-- Columna derecha: 48% Descripción -->
+        <div class="w-[48%] space-y-7">
+          <div>
+            <h2 class="font-display text-[#111827] text-[54px] leading-[1.08] tracking-tight mb-4">
+              Histórico de auditorías
+            </h2>
+            <p class="font-sans text-slate-600 text-[24px] leading-relaxed">
+              Consolida el 100% de las evaluaciones en un repositorio centralizado de alta disponibilidad, siempre accesible para consulta, calibración y auditorías de servicio.
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+              <span class="font-sans font-bold text-[18px] tracking-wider uppercase text-[#EB5B27] block mb-2">Qué hace</span>
+              <p class="font-sans text-slate-700 text-[21px] leading-relaxed">
+                Almacena cada expediente con su transcripción, audio sincronizado, calificación de los 16 criterios y notas de coaching en la nube.
+              </p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+              <span class="font-sans font-bold text-[18px] tracking-wider uppercase text-[#2079C8] block mb-2">Capacidades y beneficios</span>
+              <ul class="space-y-2.5 font-sans text-slate-700 text-[20px]">
+                <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> <strong>Búsqueda en segundos:</strong> Localice por asesor, cliente, vehículo o folio.</li>
+                <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> <strong>Segmentación por campaña:</strong> Filtre por TIP Auto, Bitcar o Chirey.</li>
+                <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> <strong>Reproducción vinculada:</strong> Escuche la llamada junto al expediente.</li>
+                <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> <strong>Exportación ejecutiva:</strong> Descargue información completa a Excel (CSV).</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pie -->
+      <div class="pt-4 border-t border-slate-200 flex items-center justify-between text-slate-500 font-sans text-[20px]">
+        <span>Acceso seguro con cifrado de datos en reposo y tránsito</span>
+        <span class="font-semibold text-slate-600">08 / 11</span>
+      </div>
+    </section>
+
+
+    <!-- ==============================================================
+         LÁMINA 9: HERRAMIENTA 3 · PERFORMANCE ANALYTICS
+         ============================================================== -->
+    <section class="slide" id="slide-9" data-slide="9">
+      <!-- Tag superior -->
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="w-3.5 h-3.5 rounded-full bg-[#2079C8]"></span>
+          <span class="font-sans font-bold text-[22px] tracking-wider text-[#2079C8] uppercase">Herramienta 03 · Inteligencia directiva</span>
+        </div>
+        <span class="text-slate-400 font-sans font-medium text-[19px]">Tablero ejecutivo en tiempo real</span>
+      </div>
+
+      <!-- Layout 2 columnas: Descripción a la izquierda + Captura a la derecha -->
+      <div class="flex items-center justify-between my-auto w-full gap-14">
+        <!-- Columna izquierda: 48% -->
+        <div class="w-[48%] space-y-7">
+          <div>
+            <h2 class="font-display text-[#111827] text-[54px] leading-[1.08] tracking-tight mb-4">
+              Performance Analytics
+            </h2>
+            <p class="font-sans text-slate-600 text-[24px] leading-relaxed">
+              Transforma miles de minutos de audio en un tablero ejecutivo interactivo para que la dirección de TIP conozca el pulso de la calidad sin depender de reportes manuales.
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+              <span class="font-sans font-bold text-[18px] tracking-wider uppercase text-[#E30613] block mb-2">Visibilidad gerencial</span>
+              <ul class="space-y-2.5 font-sans text-slate-700 text-[20px]">
+                <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-[#E30613]"></span> <strong>Calidad global vs. Meta 85%:</strong> Cumplimiento contractual a la vista.</li>
+                <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-[#E30613]"></span> <strong>Alertas de cero tolerancia:</strong> Detección inmediata de fallas graves.</li>
+                <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-[#E30613]"></span> <strong>Focos de capacitación:</strong> Mapa de criterios donde más se falla para coaching.</li>
+                <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-[#E30613]"></span> <strong>Ranking de asesores:</strong> Reconocimiento de mejores talentos y planes de apoyo.</li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900 text-white rounded-2xl p-6 shadow-sm border border-slate-800">
+              <span class="font-sans font-bold text-[18px] tracking-wider uppercase text-emerald-400 block mb-1">Actualización continua</span>
+              <p class="font-sans text-slate-300 text-[19px] leading-relaxed">
+                Cada auditoría guardada por los analistas refresca los indicadores en tiempo real, permitiendo tomar decisiones operativas el mismo día.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna derecha: 52% Captura real -->
+        <div class="w-[52%] flex flex-col items-center">
+          <div class="w-full bg-slate-900 rounded-3xl p-3 shadow-2xl border border-slate-800">
+            <img src="assets/analiticas_ejecutivas.jpeg" alt="Analíticas ejecutivas" class="w-full h-auto rounded-2xl object-cover shadow-inner">
+          </div>
+          <div class="mt-4 text-center font-sans text-slate-500 text-[18px]">
+            Tablero ejecutivo: KPIs de calidad, focos de capacitación y ranking de desempeño
+          </div>
+        </div>
+      </div>
+
+      <!-- Pie -->
+      <div class="pt-4 border-t border-slate-200 flex items-center justify-between text-slate-500 font-sans text-[20px]">
+        <span>Decisiones basadas en datos consolidados, no en suposiciones</span>
+        <span class="font-semibold text-slate-600">09 / 11</span>
+      </div>
+    </section>
+
+
+    <!-- ==============================================================
+         LÁMINA 10: MATRIZ DE GOBERNANZA Y ACCESOS
+         ============================================================== -->
+    <section class="slide" id="slide-10" data-slide="10">
+      <!-- Tag superior -->
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="w-3.5 h-3.5 rounded-full bg-[#EB5B27]"></span>
+          <span class="font-sans font-bold text-[22px] tracking-wider text-[#EB5B27] uppercase">Gobernanza y seguridad</span>
+        </div>
+        <span class="text-slate-400 font-sans font-medium text-[19px]">Control de accesos basado en roles (RBAC)</span>
+      </div>
+
+      <!-- Titular -->
+      <div class="my-auto space-y-3">
+        <h2 class="font-display text-[#111827] text-[56px] leading-[1.08] tracking-tight">
+          Cada persona ve lo que necesita
+        </h2>
+        <p class="font-sans text-slate-600 text-[26px] max-w-[1400px] leading-relaxed">
+          Segregación clara de funciones para salvaguardar la privacidad de la información de los clientes de TIP y garantizar que cada nivel operativo cuente con las herramientas exactas para su labor.
+        </p>
+      </div>
+
+      <!-- Tabla ejecutiva con 4 perfiles -->
+      <div class="bg-white rounded-3xl border border-slate-200/90 shadow-sm overflow-hidden mb-auto">
+        <div class="grid grid-cols-12 bg-slate-900 text-white font-sans font-bold text-[20px] px-8 py-5">
+          <div class="col-span-4 uppercase tracking-wider text-slate-300">Perfil y organización</div>
+          <div class="col-span-8 uppercase tracking-wider text-slate-300">Alcance y permisos operativos</div>
+        </div>
+
+        <div class="divide-y divide-slate-100">
+          <!-- Rol 1 -->
+          <div class="grid grid-cols-12 px-8 py-6 items-center hover:bg-slate-50/80 transition-colors">
+            <div class="col-span-4">
+              <div class="font-display text-[26px] text-[#111827]">Auditor / Analista QA</div>
+              <span class="inline-block px-3 py-1 bg-red-100 text-[#E30613] font-bold text-[15px] rounded-md mt-1">Telat BPO</span>
+            </div>
+            <div class="col-span-8 font-sans text-slate-700 text-[21px] leading-relaxed">
+              Auditar llamadas con IA, calibrar puntajes con criterio experto, adjuntar justificaciones técnicas, guardar expedientes oficiales y consultar el histórico completo.
+            </div>
+          </div>
+
+          <!-- Rol 2 -->
+          <div class="grid grid-cols-12 px-8 py-6 items-center hover:bg-slate-50/80 transition-colors">
+            <div class="col-span-4">
+              <div class="font-display text-[26px] text-[#111827]">Supervisor Operativo</div>
+              <span class="inline-block px-3 py-1 bg-blue-100 text-[#2079C8] font-bold text-[15px] rounded-md mt-1">Telat BPO</span>
+            </div>
+            <div class="col-span-8 font-sans text-slate-700 text-[21px] leading-relaxed">
+              Revisar expedientes y planes de coaching, escuchar audios con transcripción, dar retroalimentación 1 a 1 a sus asesores, consultar analíticas de su equipo y exportar reportes.
+            </div>
+          </div>
+
+          <!-- Rol 3 -->
+          <div class="grid grid-cols-12 px-8 py-6 items-center hover:bg-slate-50/80 transition-colors bg-amber-50/30">
+            <div class="col-span-4">
+              <div class="font-display text-[26px] text-[#111827]">Dirección / Cliente TIP</div>
+              <span class="inline-block px-3 py-1 bg-[#E30613] text-white font-bold text-[15px] rounded-md mt-1">TIP México</span>
+            </div>
+            <div class="col-span-8 font-sans text-slate-800 text-[21px] leading-relaxed font-medium">
+              Vista directiva 24/7: cumplimiento de meta global del 85%, desempeño por unidad de negocio (TIP Auto, Bitcar, Chirey, Flotas), ranking de asesores y alertas de cero tolerancia.
+            </div>
+          </div>
+
+          <!-- Rol 4 -->
+          <div class="grid grid-cols-12 px-8 py-6 items-center hover:bg-slate-50/80 transition-colors">
+            <div class="col-span-4">
+              <div class="font-display text-[26px] text-[#111827]">Administrador General</div>
+              <span class="inline-block px-3 py-1 bg-slate-200 text-slate-700 font-bold text-[15px] rounded-md mt-1">Sistemas Telat / TIP</span>
+            </div>
+            <div class="col-span-8 font-sans text-slate-700 text-[21px] leading-relaxed">
+              Control integral de usuarios, asignación de credenciales, configuración de ponderaciones del scorecard, actualización de reglas de negocio y bitácoras de seguridad.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pie -->
+      <div class="pt-4 border-t border-slate-200 flex items-center justify-between text-slate-500 font-sans text-[20px]">
+        <span>Cumplimiento con estándares ISO 27001 de seguridad de la información</span>
+        <span class="font-semibold text-slate-600">10 / 11</span>
+      </div>
+    </section>
+
+
+    <!-- ==============================================================
+         LÁMINA 11: VALOR PARA TIP MÉXICO Y SIGUIENTES PASOS
+         ============================================================== -->
+    <section class="slide slide-dark" id="slide-11" data-slide="11">
+      <!-- Círculos concéntricos vectoriales SVG esquinados a la parte superior derecha -->
+      <svg class="absolute top-0 right-0 w-[1920px] h-[1080px] pointer-events-none" viewBox="0 0 1920 1080" fill="none">
+        <circle cx="1730" cy="190" r="415" stroke="#E30613" stroke-width="70" fill="none" opacity="0.9" />
+        <circle cx="1730" cy="190" r="250" fill="#2079C8" opacity="0.9" />
+      </svg>
+
+      <!-- Co-branding superior -->
+      <div class="relative z-10 flex items-center justify-between">
+        <div class="flex items-center gap-6 bg-white/10 backdrop-blur-md px-6 py-3 rounded-2xl border border-white/15">
+          <img src="assets/logo_tip.png" alt="TIP México" class="h-9 w-auto object-contain bg-white rounded-lg px-2 py-1">
+          <span class="text-white/60 text-xl font-light">×</span>
+          <img src="assets/logo_telat.png" alt="Telat BPO" class="h-8 w-auto object-contain bg-white rounded-lg px-2 py-1">
+        </div>
+        <div class="text-white/80 font-sans text-[20px]">
+          Alianza estratégica de operaciones y tecnología
+        </div>
+      </div>
+
+      <!-- Titular de valor -->
+      <div class="relative z-10 my-auto space-y-4">
+        <h2 class="font-display text-white text-[72px] leading-[1.04] tracking-tight">
+          Lo que gana la operación de TIP México
+        </h2>
+        <p class="font-sans text-white/85 text-[28px] max-w-[1300px]">
+          Una solución lista para transformar el aseguramiento de calidad en una ventaja competitiva sustentable.
+        </p>
+
+        <!-- 4 Pilares de valor -->
+        <div class="grid grid-cols-4 gap-6 pt-4">
+          <div class="bg-white/10 backdrop-blur border border-white/15 rounded-2xl p-6">
+            <div class="text-3xl mb-3">🎯</div>
+            <h3 class="font-display text-white text-[24px] mb-2">Consistencia total</h3>
+            <p class="font-sans text-white/80 text-[18px] leading-relaxed">
+              Los mismos 16 criterios para todas las campañas, eliminando cualquier sesgo o subjetividad humana.
+            </p>
+          </div>
+          <div class="bg-white/10 backdrop-blur border border-white/15 rounded-2xl p-6">
+            <div class="text-3xl mb-3">⚡</div>
+            <h3 class="font-display text-white text-[24px] mb-2">Agilidad extrema</h3>
+            <p class="font-sans text-white/80 text-[18px] leading-relaxed">
+              Hasta 85% menos tiempo por evaluación y coaching entregado al asesor el mismo día de la llamada.
+            </p>
+          </div>
+          <div class="bg-white/10 backdrop-blur border border-white/15 rounded-2xl p-6">
+            <div class="text-3xl mb-3">🛡️</div>
+            <h3 class="font-display text-white text-[24px] mb-2">Blindaje de riesgos</h3>
+            <p class="font-sans text-white/80 text-[18px] leading-relaxed">
+              Detección al 100% de infracciones de cero tolerancia antes de que se conviertan en pérdidas o multas.
+            </p>
+          </div>
+          <div class="bg-white/10 backdrop-blur border border-white/15 rounded-2xl p-6">
+            <div class="text-3xl mb-3">📊</div>
+            <h3 class="font-display text-white text-[24px] mb-2">Visibilidad 24/7</h3>
+            <p class="font-sans text-white/80 text-[18px] leading-relaxed">
+              Tablero gerencial siempre disponible en la nube para dirección sin esperar cierres de mes.
+            </p>
+          </div>
+        </div>
+
+        <!-- Siguientes pasos acordados -->
+        <div class="bg-gradient-to-r from-[#E30613] to-[#A30410] rounded-2xl p-7 text-white shadow-xl mt-6 flex items-center justify-between">
+          <div class="space-y-2">
+            <span class="text-white/80 font-bold text-[16px] uppercase tracking-widest block">Ruta de inicio rápido</span>
+            <div class="font-display text-[28px]">Empecemos con sus propias llamadas</div>
+            <div class="flex items-center gap-6 font-sans text-white/95 text-[18px] pt-1">
+              <span>1. Calibrar KPIs y meta del 85%</span>
+              <span>·</span>
+              <span>2. Procesar lote piloto</span>
+              <span>·</span>
+              <span>3. Afinar scorecard con equipo TIP</span>
+              <span>·</span>
+              <span>4. Habilitar accesos directivos</span>
+            </div>
+          </div>
+          <div class="text-right shrink-0">
+            <div class="font-sans text-white/80 text-[16px]">Contacto oficial de operaciones:</div>
+            <div class="font-display text-white text-[22px] font-bold">mcruz@telat-group.com</div>
+            <div class="font-sans text-white/70 text-[16px]">Mauricio Cruz · Director de Operaciones</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pie directivo -->
+      <div class="relative z-10 flex items-center justify-between pt-5 border-t border-white/20 text-white/60 font-sans text-[20px]">
+        <span>Telat Group &copy; 2026 · Soluciones de centros de contacto B2B y tecnología operativa</span>
+        <div class="flex items-center gap-4">
+          <span>Contacto: <strong>rgarcia@telat-group.com</strong></span>
+          <span>·</span>
+          <span>11 / 11</span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Controles flotantes de navegación en navegador -->
+  <div id="nav-controls" class="no-print">
+    <button class="nav-btn" id="prev-btn" title="Lámina anterior (←)">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+    </button>
+    <span id="slide-indicator">1 / 11</span>
+    <button class="nav-btn" id="next-btn" title="Siguiente lámina (→)">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+
+  <script>
+    (function () {
+      let currentSlide = 1;
+      const totalSlides = 11;
+      const slides = document.querySelectorAll('.slide');
+      const indicator = document.getElementById('slide-indicator');
+      const scaler = document.querySelector('.viewport-scaler');
+
+      // Escalador reactivo para encajar en cualquier resolución o monitor
+      function fitToWindow() {
+        if (!scaler) return;
+        const availableW = window.innerWidth;
+        const availableH = window.innerHeight;
+        const scale = Math.min(availableW / 1920, availableH / 1080);
+        scaler.style.transform = `scale(${scale})`;
+      }
+
+      window.addEventListener('resize', fitToWindow);
+      fitToWindow();
+
+      function showSlide(n) {
+        if (n < 1) n = 1;
+        if (n > totalSlides) n = totalSlides;
+        currentSlide = n;
+
+        slides.forEach((s, idx) => {
+          if (idx + 1 === currentSlide) {
+            s.classList.add('active');
+          } else {
+            s.classList.remove('active');
+          }
+        });
+
+        if (indicator) {
+          indicator.textContent = `${currentSlide} / ${totalSlides}`;
+        }
+      }
+
+      document.getElementById('prev-btn')?.addEventListener('click', () => showSlide(currentSlide - 1));
+      document.getElementById('next-btn')?.addEventListener('click', () => showSlide(currentSlide + 1));
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' || e.key === 'PageUp') showSlide(currentSlide - 1);
+        if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') showSlide(currentSlide + 1);
+      });
+    })();
+  </script>
+
+</body>
+
+</html>
+
