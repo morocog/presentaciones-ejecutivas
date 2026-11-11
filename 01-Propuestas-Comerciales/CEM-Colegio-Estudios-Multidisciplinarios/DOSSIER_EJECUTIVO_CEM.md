@@ -9,7 +9,10 @@
 * **Mauricio Cruz**, Director de Operaciones y Dirección Comercial (en funciones)
 * **Alejandro Valente Ortega**, Gerente de Procesos y Calidad de Telat Group
 
-**Interlocutora Clave de CEM:** Jacqueline, Líder General de CEM  
+**Interlocutora Clave de CEM:** Lic. Jacqueline Maldonado, Coordinadora Administrativa  
+* **Correo Oficial:** `coordinacionadmin@colegio-cem.mx`  
+* **Teléfono / WhatsApp Directo:** `56 1953 8258`  
+* **Portal Institucional:** `colegio-cem.mx`  
 **Archivo PDF Generado (3 Páginas Exactas):** [Dossier_Ejecutivo_CEM_Colegio_Estudios_Multidisciplinarios.pdf](file:///c:/Users/SDVP/Documents/GitHub/presentaciones-ejecutivas/01-Propuestas-Comerciales/CEM-Colegio-Estudios-Multidisciplinarios/Dossier_Ejecutivo_CEM_Colegio_Estudios_Multidisciplinarios.pdf)  
 **Versión Web Interactiva:** [dossier-ejecutivo-cem.html](file:///c:/Users/SDVP/Documents/GitHub/presentaciones-ejecutivas/01-Propuestas-Comerciales/CEM-Colegio-Estudios-Multidisciplinarios/dossier-ejecutivo-cem.html)
 
