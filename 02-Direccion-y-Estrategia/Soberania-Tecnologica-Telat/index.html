@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telat Group - Soberanía Tecnológica e Independencia de Infraestructura</title>
+    
+    <!-- Redirección para normalizar la barra diagonal final (trailing slash) y asegurar rutas relativas -->
+    <script>
+        if (!window.location.pathname.endsWith('/') && !window.location.pathname.endsWith('.html')) {
+            window.location.replace(window.location.pathname + '/');
+        }
+    </script>
+    
+    <!-- Google Fonts oficiales (DM Sans & Montserrat) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Google Material Symbols para iconografía limpia -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandOscuro: '#222221',
+                        brandCeleste: '#3284C6',
+                        brandNaranja: '#EB5B27',
+                        brandAmarillo: '#FECA66',
+                        brandClaro: '#FBFBFD',
+                        cardBg: '#FFFFFF',
+                        cardBorder: '#E5E7EB',
+                    },
+                    fontFamily: {
+                        subheadings: ['DM Sans', 'sans-serif'],
+                        body: ['Montserrat', 'sans-serif'],
+                        momo: ['Impact', 'Arial Black', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --brand-celeste: #3284C6;
+            --brand-naranja: #EB5B27;
+            --brand-amarillo: #FECA66;
+            --brand-oscuro: #222221;
+            --brand-claro: #FBFBFD;
+        }
+
+        body {
+            background-color: var(--brand-claro);
+            color: var(--brand-oscuro);
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        /* Blindaje contra falso engrosamiento (anti-synthetic bolding) */
+        h1.font-momo, h2.font-momo, h3.font-momo, h4.font-momo, .font-momo {
+            font-weight: normal !important;
+            letter-spacing: -0.01em;
+        }
+
+        /* Contenedor de Diapositivas SPA */
+        .presentation-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: linear-gradient(135deg, #FBFBFD 0%, #F0F4F8 100%);
+        }
+
+        .slides-wrapper {
+            position: relative;
+            flex-grow: 1;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5.5rem 3rem 1.5rem 3rem;
+            z-index: 1;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(0);
+            z-index: 10;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(229, 231, 235, 0.8);
+            box-shadow: 0 10px 30px rgba(34, 34, 33, 0.05);
+        }
+
+        .glow-celeste {
+            box-shadow: 0 10px 25px rgba(50, 132, 198, 0.12);
+            border: 1px solid rgba(50, 132, 198, 0.25);
+        }
+
+        .glow-naranja {
+            box-shadow: 0 10px 25px rgba(235, 91, 39, 0.12);
+            border: 1px solid rgba(235, 91, 39, 0.25);
+        }
+    </style>
+</head>
+<body class="select-none">
+
+    <div class="presentation-container">
+        
+        <!-- BARRA SUPERIOR CANÓNICA -->
+        <header class="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 bg-white/80 backdrop-blur-md border-b border-brandOscuro/5">
+            <div class="flex items-center gap-4">
+                <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-8 w-auto object-contain">
+                <div class="h-5 w-[1px] bg-brandOscuro/20"></div>
+                <div>
+                    <span class="text-xs font-subheadings font-bold text-brandOscuro tracking-wide uppercase">Mesa Estratégica de Soberanía Tecnológica</span>
+                    <span class="hidden sm:inline-block text-[11px] font-body text-brandOscuro/50 ml-2">Dirección de Operaciones & TI</span>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <span class="text-xs font-subheadings font-semibold text-brandOscuro/60" id="slideIndicator">1 / 4</span>
+                <div class="flex items-center bg-brandOscuro/5 rounded-lg p-1">
+                    <button onclick="prevSlide()" class="p-1.5 rounded hover:bg-white hover:shadow-sm text-brandOscuro/70 hover:text-brandOscuro transition-all" title="Anterior (Flecha izquierda)">
+                        <span class="material-symbols-outlined text-base">arrow_back</span>
+                    </button>
+                    <button onclick="nextSlide()" class="p-1.5 rounded hover:bg-white hover:shadow-sm text-brandOscuro/70 hover:text-brandOscuro transition-all" title="Siguiente (Flecha derecha)">
+                        <span class="material-symbols-outlined text-base">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- CONTENEDOR DE DIAPOSITIVAS -->
+        <main class="slides-wrapper" id="slidesWrapper">
+
+            <!-- SLIDE 1: DIAGNÓSTICO Y VISIÓN ESTRATÉGICA -->
+            <section class="slide active" data-slide="0">
+                <div class="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <div class="col-span-12 lg:col-span-7 flex flex-col justify-center">
+                        <div class="inline-flex items-center gap-2 text-brandNaranja font-subheadings uppercase text-xs font-bold tracking-wider mb-2">
+                            <span class="material-symbols-outlined text-sm">hub</span> Visión Estratégica &bull; Encomienda de Dirección
+                        </div>
+                        <h1 class="text-3xl lg:text-4xl font-bold text-brandOscuro leading-tight mb-3">
+                            De cliente cautivo a <span class="text-brandCeleste">operador propio</span> de telecomunicaciones y omnicanalidad
+                        </h1>
+                        <p class="font-body text-sm text-brandOscuro/80 leading-relaxed mb-6">
+                            Plan de autosuficiencia tecnológica para sustituir progresivamente a Net2Alliance (N2A). El objetivo es internalizar la telefonía SIP, conmutación, bots de Meta y gestión de reputación de llamadas, protegiendo los márgenes operativos de Telat Group.
+                        </p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                            <div class="glass-card p-4 rounded-xl border-l-4 border-l-brandNaranja">
+                                <div class="text-xs font-subheadings font-bold text-brandOscuro uppercase mb-1">Situación actual (con N2A)</div>
+                                <ul class="text-xs font-body text-brandOscuro/75 space-y-1.5">
+                                    <li class="flex items-start gap-1.5">
+                                        <span class="material-symbols-outlined text-brandNaranja text-sm">close</span>
+                                        <span>Sobreprecio de reventa en cada minuto y mensaje.</span>
+                                    </li>
+                                    <li class="flex items-start gap-1.5">
+                                        <span class="material-symbols-outlined text-brandNaranja text-sm">close</span>
+                                        <span>Caja negra en la lógica de bots y enrutamiento.</span>
+                                    </li>
+                                    <li class="flex items-start gap-1.5">
+                                        <span class="material-symbols-outlined text-brandNaranja text-sm">close</span>
+                                        <span>Dependencia de tickets externos para resolver caídas.</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="glass-card p-4 rounded-xl border-l-4 border-l-brandCeleste">
+                                <div class="text-xs font-subheadings font-bold text-brandOscuro uppercase mb-1">Meta de soberanía (Telat)</div>
+                                <ul class="text-xs font-body text-brandOscuro/75 space-y-1.5">
+                                    <li class="flex items-start gap-1.5">
+                                        <span class="material-symbols-outlined text-brandCeleste text-sm">check</span>
+                                        <span>Trato directo con carriers mayoristas y Meta.</span>
+                                    </li>
+                                    <li class="flex items-start gap-1.5">
+                                        <span class="material-symbols-outlined text-brandCeleste text-sm">check</span>
+                                        <span>Desarrollo propio de software, bots y webhooks.</span>
+                                    </li>
+                                    <li class="flex items-start gap-1.5">
+                                        <span class="material-symbols-outlined text-brandCeleste text-sm">check</span>
+                                        <span>Control de la reputación de números y DIDs.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Métricas clave -->
+                        <div class="grid grid-cols-4 gap-3 border-t border-brandOscuro/10 pt-4">
+                            <div>
+                                <h4 class="font-momo text-2xl text-brandNaranja">0</h4>
+                                <p class="font-body text-[0.65rem] text-brandOscuro/60 uppercase font-semibold">Intermediarios Meta</p>
+                            </div>
+                            <div>
+                                <h4 class="font-momo text-2xl text-brandCeleste">-50%</h4>
+                                <p class="font-body text-[0.65rem] text-brandOscuro/60 uppercase font-semibold">Costo Mensajería</p>
+                            </div>
+                            <div>
+                                <h4 class="font-momo text-2xl text-brandNaranja">4</h4>
+                                <p class="font-body text-[0.65rem] text-brandOscuro/60 uppercase font-semibold">Sedes Conectadas</p>
+                            </div>
+                            <div>
+                                <h4 class="font-momo text-2xl text-brandCeleste">100%</h4>
+                                <p class="font-body text-[0.65rem] text-brandOscuro/60 uppercase font-semibold">Código Propio</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-span-12 lg:col-span-5 flex flex-col gap-3">
+                        <div class="glass-card p-5 rounded-2xl glow-celeste">
+                            <div class="text-xs font-subheadings font-bold text-brandCeleste uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-base">groups</span> Roles en esta mesa de trabajo
+                            </div>
+                            <div class="space-y-3">
+                                <div class="p-2.5 rounded-lg bg-brandOscuro/5">
+                                    <div class="text-xs font-subheadings font-bold text-brandOscuro">Luis Cortina &bull; Apoderado Legal</div>
+                                    <p class="text-[11px] font-body text-brandOscuro/70 mt-0.5">Sponsor del proyecto. Prioriza rentabilidad, soberanía de activos, blindaje contractual y mitigación de riesgos regulatorios.</p>
+                                </div>
+                                <div class="p-2.5 rounded-lg bg-brandOscuro/5">
+                                    <div class="text-xs font-subheadings font-bold text-brandOscuro">Ricardo Morales &bull; Gerente de TI y Comunicaciones</div>
+                                    <p class="text-[11px] font-body text-brandOscuro/70 mt-0.5">Líder de infraestructura física. Enlaces dedicados, seguridad de red perimetral, SBCs, telefonía SIP y redundancia inter-sedes (ISO 22301).</p>
+                                </div>
+                                <div class="p-2.5 rounded-lg bg-brandOscuro/5">
+                                    <div class="text-xs font-subheadings font-bold text-brandOscuro">Natasha &bull; Desarrollo y Programación</div>
+                                    <p class="text-[11px] font-body text-brandOscuro/70 mt-0.5">Líder de desarrollo de software. Meta Cloud API directa, bots conversacionales, webhooks de WhatsApp/Messenger y panel de agentes.</p>
+                                </div>
+                                <div class="p-2.5 rounded-lg bg-brandOscuro/5">
+                                    <div class="text-xs font-subheadings font-bold text-brandOscuro">Ricardo García &bull; Subdirector de Operaciones y TI</div>
+                                    <p class="text-[11px] font-body text-brandOscuro/70 mt-0.5">Articulador de la solución. Alineación de requerimientos del contact center con la ejecución técnica de TI y desarrollo.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- SLIDE 2: FIERROS VS CÓDIGO (EL MAPA DE CAPACIDADES) -->
+            <section class="slide" data-slide="1">
+                <div class="w-full max-w-7xl mx-auto flex flex-col justify-center">
+                    
+                    <div class="text-center max-w-3xl mx-auto mb-6">
+                        <div class="inline-flex items-center gap-2 text-brandCeleste font-subheadings uppercase text-xs font-bold tracking-wider mb-1">
+                            <span class="material-symbols-outlined text-sm">account_tree</span> Arquitectura de Capacidades
+                        </div>
+                        <h2 class="text-3xl font-bold text-brandOscuro leading-tight mb-2">
+                            El mapa integral: <span class="text-brandNaranja">los fierros</span> frente a <span class="text-brandCeleste">el código</span>
+                        </h2>
+                        <p class="font-body text-xs text-brandOscuro/75">
+                            Convertirse en nuestro propio proveedor requiere atacar dos frentes paralelos pero perfectamente sincronizados.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <!-- Columna Fierros (TI / Ricardo Morales) -->
+                        <div class="glass-card p-6 rounded-2xl glow-naranja border-t-4 border-t-brandNaranja flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-8 h-8 rounded-lg bg-brandNaranja/10 text-brandNaranja flex items-center justify-center">
+                                            <span class="material-symbols-outlined text-lg">router</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-base font-bold text-brandOscuro">La infraestructura física ("Los fierros")</h3>
+                                            <span class="text-[11px] font-subheadings font-semibold text-brandNaranja uppercase tracking-wider">Liderado por Ricardo Morales</span>
+                                        </div>
+                                    </div>
+                                    <span class="text-[10px] font-body px-2 py-0.5 bg-brandNaranja/10 text-brandNaranja font-bold rounded-full">Red y Voz</span>
+                                </div>
+
+                                <ul class="space-y-3 text-xs font-body text-brandOscuro/80">
+                                    <li class="flex items-start gap-2.5">
+                                        <span class="material-symbols-outlined text-brandNaranja text-base mt-0.5">check_circle</span>
+                                        <div>
+                                            <strong class="font-subheadings text-brandOscuro">Troncales SIP mayoristas (BYOC):</strong>
+                                            <span class="block text-brandOscuro/70 mt-0.5">Contratar capacidad directa con operadores Tier 1 (Alestra, Lumen, Telmex, Bandwidth), eliminando la comisión de intermediación de N2A.</span>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start gap-2.5">
+                                        <span class="material-symbols-outlined text-brandNaranja text-base mt-0.5">check_circle</span>
+                                        <div>
+                                            <strong class="font-subheadings text-brandOscuro">SBCs (Session Border Controllers):</strong>
+                                            <span class="block text-brandOscuro/70 mt-0.5">Clúster de seguridad perimetral para aislar la red interna, filtrar ataques SIP y gestionar transcodificación de codecs de audio.</span>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start gap-2.5">
+                                        <span class="material-symbols-outlined text-brandNaranja text-base mt-0.5">check_circle</span>
+                                        <div>
+                                            <strong class="font-subheadings text-brandOscuro">Gestión de reputación y pool de DIDs:</strong>
+                                            <span class="block text-brandOscuro/70 mt-0.5">Rotación algorítmica de números, periodos de enfriamiento, firma STIR/SHAKEN y acuerdos de llamada verificada para evitar bloqueos.</span>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start gap-2.5">
+                                        <span class="material-symbols-outlined text-brandNaranja text-base mt-0.5">check_circle</span>
+                                        <div>
+                                            <strong class="font-subheadings text-brandOscuro">Redundancia inter-sedes (ISO 22301):</strong>
+                                            <span class="block text-brandOscuro/70 mt-0.5">Conectividad balanceada entre Insurgentes Sur, Calle Monterrey 149, Ciudad Juárez y El Paso para asegurar continuidad de negocio.</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="mt-4 pt-3 border-t border-brandOscuro/10 text-[11px] font-subheadings font-semibold text-brandNaranja flex items-center justify-between">
+                                <span>Entregable clave: Conectividad carrier directa y SBC activo</span>
+                                <span class="material-symbols-outlined text-sm">settings_ethernet</span>
+                            </div>
+                        </div>
+
+                        <!-- Columna Código (Desarrollo / Natasha) -->
+                        <div class="glass-card p-6 rounded-2xl glow-celeste border-t-4 border-t-brandCeleste flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-8 h-8 rounded-lg bg-brandCeleste/10 text-brandCeleste flex items-center justify-center">
+                                            <span class="material-symbols-outlined text-lg">code</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-base font-bold text-brandOscuro">El software y la automatización ("El código")</h3>
+                                            <span class="text-[11px] font-subheadings font-semibold text-brandCeleste uppercase tracking-wider">Liderado por Natasha</span>
+                                        </div>
+                                    </div>
+                                    <span class="text-[10px] font-body px-2 py-0.5 bg-brandCeleste/10 text-brandCeleste font-bold rounded-full">APIs y Bots</span>
+                                </div>
+
+                                <ul class="space-y-3 text-xs font-body text-brandOscuro/80">
+                                    <li class="flex items-start gap-2.5">
+                                        <span class="material-symbols-outlined text-brandCeleste text-base mt-0.5">check_circle</span>
+                                        <div>
+                                            <strong class="font-subheadings text-brandOscuro">Conexión directa a Meta Cloud API:</strong>
+                                            <span class="block text-brandOscuro/70 mt-0.5">WhatsApp Business, Messenger e Instagram integrados directo al Meta Business Manager de Telat sin intermediarios BSP.</span>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start gap-2.5">
+                                        <span class="material-symbols-outlined text-brandCeleste text-base mt-0.5">check_circle</span>
+                                        <div>
+                                            <strong class="font-subheadings text-brandOscuro">Motor de automatización y bots conversacionales:</strong>
+                                            <span class="block text-brandOscuro/70 mt-0.5">Calificación autónoma de prospectos, respuestas inmediatas y transferencia transparente a agente humano (human handoff).</span>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start gap-2.5">
+                                        <span class="material-symbols-outlined text-brandCeleste text-base mt-0.5">check_circle</span>
+                                        <div>
+                                            <strong class="font-subheadings text-brandOscuro">Bandeja unificada de agentes (ACD omnicanal):</strong>
+                                            <span class="block text-brandOscuro/70 mt-0.5">Panel web donde los ejecutivos reciben llamadas WebRTC y chats con asignación por habilidades y medición de SLAs.</span>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start gap-2.5">
+                                        <span class="material-symbols-outlined text-brandCeleste text-base mt-0.5">check_circle</span>
+                                        <div>
+                                            <strong class="font-subheadings text-brandOscuro">API de Conversiones de Meta (CAPI):</strong>
+                                            <span class="block text-brandOscuro/70 mt-0.5">Cierre del embudo entre anuncios Click to WhatsApp y el resultado comercial en CRM para optimizar la pauta de clientes.</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="mt-4 pt-3 border-t border-brandOscuro/10 text-[11px] font-subheadings font-semibold text-brandCeleste flex items-center justify-between">
+                                <span>Entregable clave: Webhook propio y panel omnicanal integrado</span>
+                                <span class="material-symbols-outlined text-sm">terminal</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- SLIDE 3: RESPUESTAS CLAVE Y HOJA DE RUTA -->
+            <section class="slide" data-slide="2">
+                <div class="w-full max-w-7xl mx-auto flex flex-col justify-center">
+                    
+                    <div class="text-center max-w-3xl mx-auto mb-5">
+                        <div class="inline-flex items-center gap-2 text-brandNaranja font-subheadings uppercase text-xs font-bold tracking-wider mb-1">
+                            <span class="material-symbols-outlined text-sm">timeline</span> Estrategia de Ejecución
+                        </div>
+                        <h2 class="text-3xl font-bold text-brandOscuro leading-tight mb-2">
+                            Respuestas a las preguntas clave y <span class="text-brandCeleste">hoja de ruta en tres fases</span>
+                        </h2>
+                        <p class="font-body text-xs text-brandOscuro/75">
+                            Cómo independizarnos sin comprometer el tráfico operativo ni realizar inversiones desproporcionadas de arranque.
+                        </p>
+                    </div>
+
+                    <!-- 3 Preguntas Clave Respondidas -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div class="glass-card p-4 rounded-xl border-t-2 border-t-brandCeleste">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="w-5 h-5 rounded-full bg-brandCeleste text-white text-[10px] font-bold flex items-center justify-center">1</span>
+                                <h4 class="text-xs font-subheadings font-bold text-brandOscuro">¿Dónde está el mayor ahorro?</h4>
+                            </div>
+                            <p class="text-[11px] font-body text-brandOscuro/75 leading-relaxed">
+                                En la mensajería de WhatsApp y Meta. N2A revende las conversaciones con margen adicional. Al ir directo con Meta Cloud API, el ahorro de margen es de entre 40% y 60% por mensaje de forma inmediata.
+                            </p>
+                        </div>
+
+                        <div class="glass-card p-4 rounded-xl border-t-2 border-t-brandNaranja">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="w-5 h-5 rounded-full bg-brandNaranja text-white text-[10px] font-bold flex items-center justify-center">2</span>
+                                <h4 class="text-xs font-subheadings font-bold text-brandOscuro">¿Por dónde debemos arrancar?</h4>
+                            </div>
+                            <p class="text-[11px] font-body text-brandOscuro/75 leading-relaxed">
+                                Por la capa de software (Meta Cloud API y bots). Es 100% código, no requiere comprar hardware nuevo, no interrumpe el conmutador telefónico y genera una victoria palpable en 4 semanas.
+                            </p>
+                        </div>
+
+                        <div class="glass-card p-4 rounded-xl border-t-2 border-t-brandAmarillo">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="w-5 h-5 rounded-full bg-brandAmarillo text-brandOscuro text-[10px] font-bold flex items-center justify-center">3</span>
+                                <h4 class="text-xs font-subheadings font-bold text-brandOscuro">¿Cómo resolvemos la telefonía?</h4>
+                            </div>
+                            <p class="text-[11px] font-body text-brandOscuro/75 leading-relaxed">
+                                Modelo BYOC (Bring Your Own Carrier). Contratamos troncales mayoristas directamente y montamos un conmutador/marcador abierto (FreeSWITCH/Kamailio) en servidores propios.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Roadmap en 3 Fases -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        
+                        <div class="glass-card p-4 rounded-xl border border-brandCeleste/40 bg-brandCeleste/5">
+                            <div class="text-[10px] font-subheadings font-bold text-brandCeleste uppercase tracking-wider mb-1">Fase 1 &bull; Semanas 1 a 6</div>
+                            <h4 class="text-sm font-bold text-brandOscuro mb-1">Soberanía en mensajería Meta</h4>
+                            <p class="text-[11px] font-body text-brandOscuro/70 mb-3">Conexión directa a Meta Cloud API para WhatsApp Business y Messenger. Bots propios y bandeja web inicial.</p>
+                            <span class="inline-block text-[10px] font-subheadings font-bold px-2 py-0.5 rounded bg-brandCeleste text-white">Riesgo Mínimo &bull; Retorno Inmediato</span>
+                        </div>
+
+                        <div class="glass-card p-4 rounded-xl border border-brandNaranja/40 bg-brandNaranja/5">
+                            <div class="text-[10px] font-subheadings font-bold text-brandNaranja uppercase tracking-wider mb-1">Fase 2 &bull; Meses 2 a 5</div>
+                            <h4 class="text-sm font-bold text-brandOscuro mb-1">Telefonía híbrida y marcador propio</h4>
+                            <p class="text-[11px] font-body text-brandOscuro/70 mb-3">Troncales SIP mayoristas bajo BYOC, conmutador en servidor propio, gestión de pool de DIDs y piloto en una campaña acotada.</p>
+                            <span class="inline-block text-[10px] font-subheadings font-bold px-2 py-0.5 rounded bg-brandNaranja text-white">Prueba Controlada en Operación</span>
+                        </div>
+
+                        <div class="glass-card p-4 rounded-xl border border-brandOscuro/20 bg-white">
+                            <div class="text-[10px] font-subheadings font-bold text-brandOscuro/60 uppercase tracking-wider mb-1">Fase 3 &bull; Meses 6 a 12</div>
+                            <h4 class="text-sm font-bold text-brandOscuro mb-1">Independencia carrier integral</h4>
+                            <p class="text-[11px] font-body text-brandOscuro/70 mb-3">Clúster de SBCs de alta disponibilidad, redundancia total inter-sedes y evaluación de comercializadora ante el IFT.</p>
+                            <span class="inline-block text-[10px] font-subheadings font-bold px-2 py-0.5 rounded bg-brandOscuro text-white">Soberanía Total de Plataforma</span>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- SLIDE 4: PREGUNTAS CLAVE PARA LA MESA Y ACUERDOS -->
+            <section class="slide" data-slide="3">
+                <div class="w-full max-w-7xl mx-auto flex flex-col justify-center">
+                    
+                    <div class="text-center max-w-3xl mx-auto mb-6">
+                        <div class="inline-flex items-center gap-2 text-brandCeleste font-subheadings uppercase text-xs font-bold tracking-wider mb-1">
+                            <span class="material-symbols-outlined text-sm">quiz</span> Preguntas Clave &bull; Alineación de la Mesa
+                        </div>
+                        <h2 class="text-3xl font-bold text-brandOscuro leading-tight mb-2">
+                            Decisiones críticas para definir el <span class="text-brandNaranja">plan de arranque</span>
+                        </h2>
+                        <p class="font-body text-xs text-brandOscuro/75">
+                            Cuestionamientos específicos para acordar el alcance, los recursos y los tiempos de entrega.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                        
+                        <!-- Bloque Luis Cortina -->
+                        <div class="glass-card p-5 rounded-2xl border-l-4 border-l-brandOscuro">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="material-symbols-outlined text-brandOscuro text-xl">gavel</span>
+                                <div>
+                                    <h4 class="text-xs font-subheadings font-bold text-brandOscuro uppercase">Para Luis Cortina</h4>
+                                    <span class="text-[10px] font-body text-brandOscuro/60">Gobernanza & Presupuesto</span>
+                                </div>
+                            </div>
+                            <ul class="text-xs font-body text-brandOscuro/80 space-y-2.5">
+                                <li class="flex items-start gap-1.5">
+                                    <span class="text-brandNaranja font-bold text-sm leading-none">&rsaquo;</span>
+                                    <span>¿Cuál es el horizonte de tiempo prioritario que busca la alta dirección para completar la independencia de N2A?</span>
+                                </li>
+                                <li class="flex items-start gap-1.5">
+                                    <span class="text-brandNaranja font-bold text-sm leading-none">&rsaquo;</span>
+                                    <span>¿Qué campaña interna o cliente estratégico asignamos como piloto controlado para no poner en riesgo la facturación global?</span>
+                                </li>
+                                <li class="flex items-start gap-1.5">
+                                    <span class="text-brandNaranja font-bold text-sm leading-none">&rsaquo;</span>
+                                    <span>¿Autorizamos explorar el registro de comercializadora ante el IFT para ser legalmente dueños de la numeración?</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Bloque Ricardo Morales -->
+                        <div class="glass-card p-5 rounded-2xl border-l-4 border-l-brandNaranja">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="material-symbols-outlined text-brandNaranja text-xl">dns</span>
+                                <div>
+                                    <h4 class="text-xs font-subheadings font-bold text-brandOscuro uppercase">Para Ricardo Morales</h4>
+                                    <span class="text-[10px] font-body text-brandOscuro/60">Infraestructura & Telecom</span>
+                                </div>
+                            </div>
+                            <ul class="text-xs font-body text-brandOscuro/80 space-y-2.5">
+                                <li class="flex items-start gap-1.5">
+                                    <span class="text-brandNaranja font-bold text-sm leading-none">&rsaquo;</span>
+                                    <span>¿Cómo están dimensionados los enlaces dedicados en Insurgentes, Roma 149, Juárez y El Paso para tráfico SIP directo?</span>
+                                </li>
+                                <li class="flex items-start gap-1.5">
+                                    <span class="text-brandNaranja font-bold text-sm leading-none">&rsaquo;</span>
+                                    <span>¿Contamos con servidores dedicados o clúster virtual para montar el primer conmutador de prueba (FreeSWITCH/Kamailio)?</span>
+                                </li>
+                                <li class="flex items-start gap-1.5">
+                                    <span class="text-brandNaranja font-bold text-sm leading-none">&rsaquo;</span>
+                                    <span>¿Cómo estructuraremos el protocolo de guardia técnica si se degrada una troncal de telefonía fuera de horario?</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Bloque Natasha -->
+                        <div class="glass-card p-5 rounded-2xl border-l-4 border-l-brandCeleste">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="material-symbols-outlined text-brandCeleste text-xl">code_blocks</span>
+                                <div>
+                                    <h4 class="text-xs font-subheadings font-bold text-brandOscuro uppercase">Para Natasha</h4>
+                                    <span class="text-[10px] font-body text-brandOscuro/60">Desarrollo & Software</span>
+                                </div>
+                            </div>
+                            <ul class="text-xs font-body text-brandOscuro/80 space-y-2.5">
+                                <li class="flex items-start gap-1.5">
+                                    <span class="text-brandCeleste font-bold text-sm leading-none">&rsaquo;</span>
+                                    <span>¿Qué stack utilizaremos para el orquestador de webhooks y el panel de agentes (Node.js/Python, WebSockets)?</span>
+                                </li>
+                                <li class="flex items-start gap-1.5">
+                                    <span class="text-brandCeleste font-bold text-sm leading-none">&rsaquo;</span>
+                                    <span>¿En cuántos días hábiles tendríamos listo el primer prototipo de webhook directo con Meta Cloud API para WhatsApp?</span>
+                                </li>
+                                <li class="flex items-start gap-1.5">
+                                    <span class="text-brandCeleste font-bold text-sm leading-none">&rsaquo;</span>
+                                    <span>¿Cómo almacenaremos el histórico de conversaciones y métricas de SLAs para auditorías operativas?</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <!-- Acuerdos de Arranque -->
+                    <div class="glass-card p-4 rounded-xl border border-brandOscuro/10 bg-white flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-full bg-brandNaranja/10 text-brandNaranja flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-lg">flag</span>
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-subheadings font-bold text-brandOscuro">Acuerdo de arranque propuesto para hoy</h4>
+                                <p class="text-[11px] font-body text-brandOscuro/70">Aprobar la Fase 1: Natasha y Ricardo García desarrollan el piloto directo de WhatsApp (Meta Cloud API), mientras Ricardo Morales evalúa cotizaciones de troncales SIP mayoristas.</p>
+                            </div>
+                        </div>
+                        <button onclick="goToSlide(0)" class="shrink-0 px-4 py-2 bg-brandOscuro hover:bg-brandOscuro/90 text-white font-subheadings font-bold text-xs rounded-lg transition-all flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-sm">replay</span> Reiniciar Presentación
+                        </button>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+
+        <!-- BARRA INFERIOR DE NAVEGACIÓN -->
+        <footer class="absolute bottom-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-3 bg-white/70 backdrop-blur-md border-t border-brandOscuro/5 text-xs font-body text-brandOscuro/60">
+            <div class="flex items-center gap-4">
+                <span>Telat Group &bull; Plan de Soberanía Tecnológica 2026</span>
+                <span class="hidden md:inline">&bull; Insurgentes &bull; Roma 149 &bull; Cd. Juárez &bull; El Paso</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="hidden sm:inline text-[11px]">Navega con flechas del teclado</span>
+                <div class="flex gap-1.5" id="slideDots">
+                    <span class="w-2.5 h-2.5 rounded-full bg-brandCeleste cursor-pointer" onclick="goToSlide(0)"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-brandOscuro/20 cursor-pointer" onclick="goToSlide(1)"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-brandOscuro/20 cursor-pointer" onclick="goToSlide(2)"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-brandOscuro/20 cursor-pointer" onclick="goToSlide(3)"></span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- CONTROLADOR JAVASCRIPT SPA -->
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const slideIndicator = document.getElementById('slideIndicator');
+        const dots = document.getElementById('slideDots').querySelectorAll('span');
+
+        function updateSlideUI() {
+            slides.forEach((slide, index) => {
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+
+            slideIndicator.textContent = `${currentSlide + 1} / ${totalSlides}`;
+
+            dots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.className = 'w-2.5 h-2.5 rounded-full bg-brandCeleste cursor-pointer transition-all';
+                } else {
+                    dot.className = 'w-2.5 h-2.5 rounded-full bg-brandOscuro/20 cursor-pointer transition-all hover:bg-brandOscuro/40';
+                }
+            });
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlideUI();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlideUI();
+            }
+        }
+
+        function goToSlide(index) {
+            if (index >= 0 && index < totalSlides) {
+                currentSlide = index;
+                updateSlideUI();
+            }
+        }
+
+        // Navegación por teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'Space') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        // Soporte táctil / swipe
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, false);
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, false);
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            if (touchEndX < touchStartX - swipeThreshold) {
+                nextSlide();
+            }
+            if (touchEndX > touchStartX + swipeThreshold) {
+                prevSlide();
+            }
+        }
+    </script>
+</body>
+</html>
+

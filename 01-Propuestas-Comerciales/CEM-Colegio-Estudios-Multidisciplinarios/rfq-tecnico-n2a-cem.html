@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RFQ Técnico · Net2Alliance · Telat Group</title>
+
+  <!-- Google Fonts: DM Sans & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Tailwind CSS CDN v3 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            telat: {
+              celeste: '#3284C6',
+              naranja: '#EB5B27',
+              amarillo: '#FECA66',
+              oscuro: '#222221',
+              claro: '#FBFBFD',
+              gris: '#64748B',
+              borde: '#E2E8F0'
+            }
+          },
+          fontFamily: {
+            sans: ['"DM Sans"', 'sans-serif'],
+            title: ['Montserrat', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --telat-oscuro: #222221;
+      --telat-celeste: #3284C6;
+      --telat-naranja: #EB5B27;
+      --telat-amarillo: #FECA66;
+      --telat-claro: #FBFBFD;
+      --telat-borde: #E2E8F0;
+    }
+
+    body {
+      background-color: #F1F5F9;
+      color: #0F172A;
+      font-family: 'DM Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .font-title {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .doc-page {
+      background: #FFFFFF;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto 1.5rem auto;
+      padding: 1.75rem 2.2rem;
+      border: 1px solid var(--telat-borde);
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.05);
+      box-sizing: border-box;
+    }
+
+    .callout-orange {
+      background: linear-gradient(135deg, rgba(235, 91, 39, 0.05) 0%, rgba(255, 255, 255, 0.98) 100%);
+      border-left: 3.5px solid #EB5B27;
+    }
+
+    .callout-blue {
+      background: linear-gradient(135deg, rgba(50, 132, 198, 0.05) 0%, rgba(255, 255, 255, 0.98) 100%);
+      border-left: 3.5px solid #3284C6;
+    }
+
+    .callout-dark {
+      background: linear-gradient(135deg, rgba(34, 34, 33, 0.04) 0%, rgba(255, 255, 255, 0.98) 100%);
+      border-left: 3.5px solid #222221;
+    }
+
+    .callout-green {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(255, 255, 255, 0.98) 100%);
+      border-left: 3.5px solid #059669;
+    }
+
+    /* Impresión estricta en exactamente 2 páginas (Letter Portrait) */
+    @media print {
+      body {
+        background-color: #FFFFFF !important;
+        padding: 0 !important;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+
+      .doc-page {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        height: 100vh !important;
+        box-sizing: border-box !important;
+      }
+
+      .doc-page:last-child {
+        page-break-after: auto !important;
+        break-after: auto !important;
+      }
+
+      @page {
+        size: letter portrait;
+        margin: 8mm 11mm 8mm 11mm;
+      }
+    }
+  </style>
+</head>
+
+<body class="py-6 px-4 md:px-8">
+
+  <!-- BARRA DE ACCIÓN SUPERIOR (SOLO PANTALLA) -->
+  <div class="no-print max-w-[900px] mx-auto mb-4 flex items-center justify-between bg-white px-5 py-2.5 rounded-xl border border-slate-200 shadow-sm">
+    <div class="flex items-center gap-2">
+      <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Solicitud técnica formal · Telat Group para Net2Alliance</span>
+    </div>
+    <button onclick="window.print()" class="inline-flex items-center gap-2 bg-[#222221] hover:bg-[#3284C6] text-white px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-colors shadow">
+      <i class="fa-solid fa-print"></i> Guardar en PDF
+    </button>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- PÁGINA 1: GOBERNANZA, OBJETIVO Y ESPECIFICACIÓN TÉCNICA  -->
+  <!-- ======================================================== -->
+  <div class="doc-page flex flex-col justify-between">
+    <div>
+      <!-- HEADER CON LOGO TELAT -->
+      <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+        <div class="flex items-center gap-3.5">
+          <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-10 w-auto">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-widest text-[#EB5B27] block">Telat Group · Dirección de Operaciones & Tecnología</span>
+            <h1 class="text-xl font-black text-[#222221] font-title leading-tight">Solicitud de cotización técnica (RFQ)</h1>
+          </div>
+        </div>
+        <div class="text-right">
+          <span class="inline-block bg-slate-100 text-slate-800 text-xs px-2.5 py-0.5 rounded font-bold uppercase tracking-wider border border-slate-200">
+            RFQ-TELAT-N2A-2026-01
+          </span>
+          <p class="text-xs text-slate-500 mt-1">10 de noviembre de 2026</p>
+        </div>
+      </div>
+
+      <!-- MEMORÁNDUM DE GOBERNANZA -->
+      <div class="grid grid-cols-2 gap-3.5 mt-3 p-3 bg-slate-50 rounded-lg border border-slate-200 text-sm text-slate-700">
+        <div>
+          <span class="font-bold text-slate-500 uppercase text-[11px] tracking-wider block mb-1">Destinatario (Carrier / Partner tecnológico):</span>
+          <p class="font-medium leading-snug">• <strong class="text-[#222221]">Javier Jaime</strong>, Director General de Net2Alliance</p>
+          <p class="font-medium leading-snug">• Empresa: <strong class="text-[#3284C6]">Net2Alliance (N2A)</strong></p>
+        </div>
+        <div>
+          <span class="font-bold text-slate-500 uppercase text-[11px] tracking-wider block mb-1">Emisor & Proyecto:</span>
+          <p class="font-medium leading-snug">• <strong>Dirección de Operaciones & Tecnología</strong> · Telat Group</p>
+          <p class="font-medium leading-snug">• Proyecto: <strong>Plataforma Omnicanal y Triaje · Cuenta Educativa CEM</strong></p>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 1: OBJETIVO Y VOLUMETRÍA -->
+      <div class="mt-3.5">
+        <div class="flex items-center gap-2.5 mb-1.5">
+          <span class="flex items-center justify-center w-6 h-6 rounded-full bg-[#EB5B27] text-white text-xs font-bold">1</span>
+          <h2 class="text-base font-bold text-[#222221] font-title">Objetivo del proyecto y volumetría de tráfico</h2>
+        </div>
+        <p class="text-sm text-slate-700 leading-snug">
+          Telat Group requiere que Net2Alliance cotice e implemente una <strong>solución integral de comunicación omnicanal llave en mano</strong> para un cliente del sector educativo. El sistema reemplazará la atención dispersa en teléfonos celulares mediante una consola centralizada en la nube con WhatsApp oficial, telefonía y un asistente automático de enrutamiento 24/7.
+        </p>
+
+        <!-- TARJETAS DE VOLUMETRÍA -->
+        <div class="grid grid-cols-3 gap-2.5 mt-2.5 text-xs">
+          <div class="p-2.5 rounded-lg border border-slate-200 bg-slate-50">
+            <span class="text-[11px] font-bold text-slate-500 uppercase block">Tráfico mensual</span>
+            <strong class="text-[#222221] text-base block mt-0.5">4,000 prospectos</strong>
+            <p class="text-[12px] text-slate-600 mt-0.5 leading-snug">
+              Inyección continua desde anuncios digitales en Meta (Facebook e Instagram).
+            </p>
+          </div>
+          <div class="p-2.5 rounded-lg border border-blue-200 bg-blue-50/50">
+            <span class="text-[11px] font-bold text-[#3284C6] uppercase block">Horario de atención</span>
+            <strong class="text-[#3284C6] text-base block mt-0.5">24/7 / 365 días</strong>
+            <p class="text-[12px] text-slate-600 mt-0.5 leading-snug">
+              El 60% del tráfico ingresa en noches, madrugadas y fines de semana.
+            </p>
+          </div>
+          <div class="p-2.5 rounded-lg border border-orange-200 bg-orange-50/50">
+            <span class="text-[11px] font-bold text-[#EB5B27] uppercase block">Licencias de consola</span>
+            <strong class="text-[#EB5B27] text-base block mt-0.5">5 a 6 usuarias</strong>
+            <p class="text-[12px] text-slate-600 mt-0.5 leading-snug">
+              4 vendedoras de cierre + 1 vendedora de certificaciones + 1 supervisora.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: ALCANCE TÉCNICO POR MÓDULOS -->
+      <div class="mt-3.5">
+        <div class="flex items-center gap-2.5 mb-1.5">
+          <span class="flex items-center justify-center w-6 h-6 rounded-full bg-[#3284C6] text-white text-xs font-bold">2</span>
+          <h2 class="text-base font-bold text-[#222221] font-title">Especificación de requerimientos funcionales</h2>
+        </div>
+
+        <div class="space-y-2 text-xs">
+          <!-- MÓDULO A -->
+          <div class="p-2.5 rounded-lg border border-slate-200 bg-slate-50 flex items-start gap-2.5">
+            <div class="w-6 h-6 rounded bg-[#222221] text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">A</div>
+            <div>
+              <strong class="text-xs text-[#222221]">Línea Oficial WhatsApp Business API (Meta BSP)</strong>
+              <p class="text-[12px] text-slate-600 mt-0.5 leading-snug">
+                Alta y verificación del número corporativo oficial. Aprobación y configuración de catálogo de plantillas oficiales (HSM) con botones interactivos para recontactar prospectos tras vencerse la ventana de 24 horas (en días 2, 5 y 15). Cero pérdida de mensajes ni historiales.
+              </p>
+            </div>
+          </div>
+
+          <!-- MÓDULO B -->
+          <div class="p-2.5 rounded-lg border border-slate-200 bg-slate-50 flex items-start gap-2.5">
+            <div class="w-6 h-6 rounded bg-[#3284C6] text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">B</div>
+            <div>
+              <strong class="text-xs text-[#222221]">Motor de Triaje Automático 24/7 (Sin alucinaciones)</strong>
+              <p class="text-[12px] text-slate-600 mt-0.5 leading-snug">
+                Flujo estructurado con botones de respuesta rápida en WhatsApp (sin texto libre que desvíe la conversación). En 5 segundos saluda al prospecto, captura su ocupación (abogado, perito, policía, estudiante) y valida su interés: si solo busca el taller gratuito le entrega la liga de acceso; si busca certificación o diplomado de paga, detona transferencia inmediata a la consola de las vendedoras.
+              </p>
+            </div>
+          </div>
+
+          <!-- MÓDULO C -->
+          <div class="p-2.5 rounded-lg border border-slate-200 bg-slate-50 flex items-start gap-2.5">
+            <div class="w-6 h-6 rounded bg-[#EB5B27] text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">C</div>
+            <div>
+              <strong class="text-xs text-[#222221]">Consola CRM Multiagente en la Nube</strong>
+              <p class="text-[12px] text-slate-600 mt-0.5 leading-snug">
+                Bandeja web unificada donde las vendedoras atienden desde su navegador. Reparto balanceado de prospectos calificados, historial completo por alumno, capacidad de adjuntar fotos de comprobantes de pago bancarios y notas de seguimiento.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PIE DE PÁGINA 1 -->
+    <div class="pt-2 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
+      <span>Telat Group · RFQ Técnico Net2Alliance</span>
+      <span>Página 1 de 2</span>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- PÁGINA 2: PIPELINE, TELEFONÍA, SUPERVISIÓN Y COTIZACIÓN -->
+  <!-- ======================================================== -->
+  <div class="doc-page flex flex-col justify-between">
+    <div>
+      <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+        <span class="text-xs font-bold text-[#EB5B27] font-title uppercase tracking-wider">Detalle del Sistema & Formato de Cotización</span>
+        <span class="text-xs text-slate-500 font-semibold">Página 2 de 2</span>
+      </div>
+
+      <!-- SECCIÓN 3: ESTADOS DEL TABLERO EN ESPAÑOL SIMPLE -->
+      <div class="mt-3.5">
+        <div class="flex items-center gap-2.5 mb-1.5">
+          <span class="flex items-center justify-center w-6 h-6 rounded-full bg-[#EB5B27] text-white text-xs font-bold">3</span>
+          <h2 class="text-base font-bold text-[#222221] font-title">Estados requeridos en el tablero de seguimiento (En español claro)</h2>
+        </div>
+        <p class="text-sm text-slate-700 leading-snug mb-2">
+          Para que el personal del colegio y las vendedoras operen sin enredos técnicos, el flujo de prospectos debe reflejar los siguientes estados en su pantalla:
+        </p>
+
+        <div class="grid grid-cols-3 gap-2 text-xs">
+          <div class="p-2 rounded-lg bg-slate-100 border border-slate-200">
+            <strong class="text-[#222221] text-xs block">1. Registrado a Taller Gratuito</strong>
+            <span class="text-[11px] text-slate-500 block leading-tight mt-0.5">Atendido por el asistente automático, recibió liga de Teams.</span>
+          </div>
+          <div class="p-2 rounded-lg bg-blue-50 border border-blue-200">
+            <strong class="text-[#3284C6] text-xs block">2. Prospecto con Interés de Compra</strong>
+            <span class="text-[11px] text-slate-600 block leading-tight mt-0.5">Pidió certificación o diplomado; transferido a vendedora.</span>
+          </div>
+          <div class="p-2 rounded-lg bg-amber-50 border border-amber-200">
+            <strong class="text-amber-700 text-xs block">3. En Asesoría / Dudas</strong>
+            <span class="text-[11px] text-slate-600 block leading-tight mt-0.5">Vendedora resolviendo horarios, temario y facilidades.</span>
+          </div>
+          <div class="p-2 rounded-lg bg-purple-50 border border-purple-200">
+            <strong class="text-purple-700 text-xs block">4. Pendiente de Comprobante</strong>
+            <span class="text-[11px] text-slate-600 block leading-tight mt-0.5">Prospecto recibió datos de cuenta; esperando depósito.</span>
+          </div>
+          <div class="p-2 rounded-lg bg-emerald-50 border border-emerald-200">
+            <strong class="text-emerald-700 text-xs block">5. Alumno Inscrito Confirmado</strong>
+            <span class="text-[11px] text-slate-600 block leading-tight mt-0.5">Pago validado y matrícula asignada formalmente.</span>
+          </div>
+          <div class="p-2 rounded-lg bg-rose-50 border border-rose-200">
+            <strong class="text-rose-700 text-xs block">6. No Interesado / Descartado</strong>
+            <span class="text-[11px] text-slate-600 block leading-tight mt-0.5">Sin respuesta o no cumplió perfil profesional.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: TELEFONÍA Y SUPERVISIÓN -->
+      <div class="mt-3.5">
+        <div class="flex items-center gap-2.5 mb-1.5">
+          <span class="flex items-center justify-center w-6 h-6 rounded-full bg-[#3284C6] text-white text-xs font-bold">4</span>
+          <h2 class="text-base font-bold text-[#222221] font-title">Telefonía integrada y módulo de supervisión</h2>
+        </div>
+        <div class="grid grid-cols-2 gap-2.5 text-xs">
+          <div class="p-2.5 rounded-lg border border-slate-200 bg-slate-50">
+            <strong class="text-slate-800 text-xs block mb-0.5">Llamadas directas desde el chat (Click-to-call):</strong>
+            <p class="text-[12px] text-slate-600 leading-snug">
+              Botonera de llamada telefónica web dentro de la misma pantalla para que la vendedora aclare dudas por voz al instante sin marcar en un teléfono físico, con grabación de audio en el expediente.
+            </p>
+          </div>
+          <div class="p-2.5 rounded-lg border border-slate-200 bg-slate-50">
+            <strong class="text-slate-800 text-xs block mb-0.5">Panel de control para supervisión:</strong>
+            <p class="text-[12px] text-slate-600 leading-snug">
+              Acceso para la Coordinadora del colegio con visualización en tiempo real de chats abiertos, tiempos de respuesta de cada vendedora y reportes semanales de alumnos inscritos.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: FORMATO DE COTIZACIÓN SOLICITADO -->
+      <div class="mt-3.5">
+        <div class="flex items-center gap-2.5 mb-1.5">
+          <span class="flex items-center justify-center w-6 h-6 rounded-full bg-[#222221] text-white text-xs font-bold">5</span>
+          <h2 class="text-base font-bold text-[#222221] font-title">Estructura de cotización requerida a Net2Alliance</h2>
+        </div>
+        <p class="text-sm text-slate-700 leading-snug mb-2">
+          Solicitamos a Javier Jaime y al equipo de N2A desglosar su propuesta en los siguientes rubros:
+        </p>
+
+        <table class="w-full text-left text-xs border border-slate-200 rounded-lg overflow-hidden">
+          <thead class="bg-[#222221] text-white font-title text-[11px]">
+            <tr>
+              <th class="p-2">Concepto</th>
+              <th class="p-2">Alcance técnico a cotizar</th>
+              <th class="p-2">Tipo de cobro</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200 text-slate-700 text-[12px]">
+            <tr>
+              <td class="p-2 font-bold text-[#222221]">A. Setup de Ingeniería</td>
+              <td class="p-2 text-slate-600 leading-snug">Conexión WABA oficial, configuración del CRM, programación del árbol de triaje y pruebas.</td>
+              <td class="p-2 font-semibold text-slate-500">Pago único inicial</td>
+            </tr>
+            <tr>
+              <td class="p-2 font-bold text-[#222221]">B. Renta de Servidor / PBX</td>
+              <td class="p-2 text-slate-600 leading-snug">Infraestructura en la nube, conmutador para telefonía y soporte técnico del carrier.</td>
+              <td class="p-2 font-semibold text-slate-500">Renta mensual fija</td>
+            </tr>
+            <tr>
+              <td class="p-2 font-bold text-[#222221]">C. Licencias de Usuarias</td>
+              <td class="p-2 text-slate-600 leading-snug">Costo por usuaria concurrente en consola (paquete base de 5 accesos + usuaria adicional).</td>
+              <td class="p-2 font-semibold text-slate-500">Mensual por usuario</td>
+            </tr>
+            <tr>
+              <td class="p-2 font-bold text-[#222221]">D. Mensajería WhatsApp</td>
+              <td class="p-2 text-slate-600 leading-snug">Costo por conversación de Meta (Servicio vs Marketing) o bolsa recomendada para 4,000 prospectos.</td>
+              <td class="p-2 font-semibold text-slate-500">Consumo mensual</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PIE DE PÁGINA 2 -->
+    <div class="pt-2 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
+      <div>
+        <strong>Telat Group</strong> · Av. Insurgentes Sur 263, Col. Roma Norte, CDMX
+      </div>
+      <div>
+        Dirección de Operaciones & Tecnología
+      </div>
+      <div class="text-slate-400">
+        Página 2 de 2
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
+
