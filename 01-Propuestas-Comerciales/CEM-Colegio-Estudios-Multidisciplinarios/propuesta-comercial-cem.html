@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Propuesta Técnica y Económica · Colegio de Estudios Multidisciplinarios (CEM) · Telat Group</title>
+
+  <!-- Google Fonts: DM Sans & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Tailwind CSS CDN v3 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            telat: {
+              celeste: '#3284C6',
+              naranja: '#EB5B27',
+              amarillo: '#FECA66',
+              oscuro: '#222221',
+              claro: '#FBFBFD',
+              gris: '#64748B',
+              borde: '#E2E8F0'
+            }
+          },
+          fontFamily: {
+            sans: ['"DM Sans"', 'sans-serif'],
+            title: ['Montserrat', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --telat-oscuro: #222221;
+      --telat-celeste: #3284C6;
+      --telat-naranja: #EB5B27;
+      --telat-amarillo: #FECA66;
+      --telat-claro: #FBFBFD;
+      --telat-borde: #E2E8F0;
+    }
+
+    body {
+      background-color: #F1F5F9;
+      color: #0F172A;
+      font-family: 'DM Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .font-title {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .doc-page {
+      background: #FFFFFF;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto 1.5rem auto;
+      padding: 1.75rem 2.2rem;
+      border: 1px solid var(--telat-borde);
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.05);
+      box-sizing: border-box;
+    }
+
+    .callout-orange {
+      background: linear-gradient(135deg, rgba(235, 91, 39, 0.05) 0%, rgba(255, 255, 255, 0.98) 100%);
+      border-left: 3.5px solid #EB5B27;
+    }
+
+    .callout-blue {
+      background: linear-gradient(135deg, rgba(50, 132, 198, 0.05) 0%, rgba(255, 255, 255, 0.98) 100%);
+      border-left: 3.5px solid #3284C6;
+    }
+
+    .callout-green {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(255, 255, 255, 0.98) 100%);
+      border-left: 3.5px solid #059669;
+    }
+
+    /* Impresión estricta en exactamente 3 páginas (Letter Portrait) */
+    @media print {
+      body {
+        background-color: #FFFFFF !important;
+        padding: 0 !important;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+
+      .doc-page {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        height: 100vh !important;
+        box-sizing: border-box !important;
+      }
+
+      .doc-page:last-child {
+        page-break-after: auto !important;
+        break-after: auto !important;
+      }
+
+      @page {
+        size: letter portrait;
+        margin: 8mm 11mm 8mm 11mm;
+      }
+    }
+  </style>
+</head>
+
+<body class="py-6 px-4 md:px-8">
+
+  <!-- BARRA DE ACCIÓN SUPERIOR (SOLO PANTALLA) -->
+  <div class="no-print max-w-[900px] mx-auto mb-4 flex items-center justify-between bg-white px-5 py-2.5 rounded-xl border border-slate-200 shadow-sm">
+    <div class="flex items-center gap-2">
+      <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Propuesta técnica y económica formal · Telat Group para Colegio CEM</span>
+    </div>
+    <button onclick="window.print()" class="inline-flex items-center gap-2 bg-[#222221] hover:bg-[#3284C6] text-white px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-colors shadow">
+      <i class="fa-solid fa-print"></i> Guardar en PDF
+    </button>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- PÁGINA 1: PRESENTACIÓN FORMAL, CONTEXTO Y DIAGNÓSTICO    -->
+  <!-- ======================================================== -->
+  <div class="doc-page flex flex-col justify-between">
+    <div>
+      <!-- HEADER CORPORATIVO TELAT -->
+      <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+        <div class="flex items-center gap-3.5">
+          <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-10 w-auto">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-widest text-[#EB5B27] block">Telat Group · Consultoría Operativa & Soluciones de Contact Center</span>
+            <h1 class="text-xl font-black text-[#222221] font-title leading-tight">Propuesta técnica y económica</h1>
+          </div>
+        </div>
+        <div class="text-right">
+          <span class="inline-block bg-slate-100 text-slate-800 text-xs px-2.5 py-0.5 rounded font-bold uppercase tracking-wider border border-slate-200">
+            Propuesta Comercial Oficial
+          </span>
+          <p class="text-xs text-slate-500 mt-1">11 de noviembre de 2026</p>
+        </div>
+      </div>
+
+      <!-- CARÁTULA DE ATENCIÓN AL CLIENTE -->
+      <div class="grid grid-cols-2 gap-3.5 mt-3 p-3 bg-slate-50 rounded-lg border border-slate-200 text-sm text-slate-700">
+        <div>
+          <span class="font-bold text-slate-500 uppercase text-[11px] tracking-wider block mb-1">Para:</span>
+          <p class="font-medium leading-snug">• <strong class="text-[#222221]">Lic. Jacqueline Maldonado</strong>, Coordinadora Administrativa</p>
+          <p class="font-medium leading-snug">• Institución: <strong class="text-[#3284C6]">Colegio de Estudios Multidisciplinarios (CEM S.C.)</strong></p>
+          <p class="text-[11px] text-slate-500 font-medium leading-snug mt-0.5">• coordinacionadmin@colegio-cem.mx · 56 1953 8258</p>
+        </div>
+        <div>
+          <span class="font-bold text-slate-500 uppercase text-[11px] tracking-wider block mb-1">Presenta:</span>
+          <p class="font-medium leading-snug">• <strong>Dirección de Operaciones & Consultoría Tecnológica</strong></p>
+          <p class="font-medium leading-snug">• <strong class="text-[#222221]">Telat Group</strong> · Av. Insurgentes Sur 263, Col. Roma Norte, CDMX</p>
+          <p class="text-[11px] text-slate-500 font-medium leading-snug mt-0.5">• Proyecto: Estandarización de Procesos y Plataforma Omnicanal</p>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 1: INTRODUCCIÓN Y OBJETIVO -->
+      <div class="mt-3.5">
+        <div class="flex items-center gap-2.5 mb-1.5">
+          <span class="flex items-center justify-center w-6 h-6 rounded-full bg-[#EB5B27] text-white text-xs font-bold">1</span>
+          <h2 class="text-base font-bold text-[#222221] font-title">Propósito estratégico de la propuesta</h2>
+        </div>
+        <p class="text-sm text-slate-700 leading-snug">
+          Acompañar al <strong>Colegio de Estudios Multidisciplinarios (CEM)</strong> en la modernización integral de su modelo comercial y operativo, dotando a la institución de una <strong>infraestructura tecnológica omnicanal en la nube</strong> y un <strong>Sistema de Gestión de Procesos estandarizado</strong> que permita absorber de manera eficiente su flujo de <strong>4,000 prospectos mensuales</strong>, protegiendo su base operativa actual de <strong>112 alumnos inscritos</strong> y acelerando la captación hacia la meta de <strong>150 a 180 alumnos en temporada alta</strong>, con proyección de escala a <strong>250 a 400 inscripciones mensuales</strong> en su catálogo de 22 diplomados y certificaciones.
+        </p>
+
+        <!-- LLAMADA DE ATENCIÓN CONSULTIVA -->
+        <div class="callout-blue p-3 rounded-lg mt-2.5 text-xs text-slate-800">
+          <strong class="text-[#3284C6] uppercase text-[11px] tracking-wide block mb-0.5">
+            Visión compartida del proyecto:
+          </strong>
+          <span class="text-[12.5px] leading-snug block">
+            El valor del Colegio CEM radica en su prestigio y en el alto impacto laboral de sus programas periciales, jurídicos y policiales ante la STPS y SEP-CONOCER. La presente solución tiene como objetivo <strong>eliminar la sobrecarga administrativa de su equipo actual</strong> mediante automatización inteligente, permitiendo que sus vendedoras se concentren exclusivamente en el cierre comercial y la asesoría de valor.
+          </span>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: DIAGNÓSTICO OPERATIVO Y OPORTUNIDADES DETECTADAS -->
+      <div class="mt-3.5">
+        <div class="flex items-center gap-2.5 mb-1.5">
+          <span class="flex items-center justify-center w-6 h-6 rounded-full bg-[#3284C6] text-white text-xs font-bold">2</span>
+          <h2 class="text-base font-bold text-[#222221] font-title">Diagnóstico operativo: Áreas clave de optimización identificadas</h2>
+        </div>
+        <div class="grid grid-cols-2 gap-2.5 text-xs">
+          <div class="p-2.5 rounded-lg border border-slate-200 bg-slate-50">
+            <strong class="text-slate-900 text-xs block mb-0.5">A. Desconexión de canales de WhatsApp:</strong>
+            <p class="text-[12px] text-slate-600 leading-snug">
+              La atención comercial dispersa en dispositivos móviles independientes limita la trazabilidad y supervisión centralizada, impidiendo dar seguimiento continuo a prospectos que superan la ventana de 24 horas de WhatsApp.
+            </p>
+          </div>
+          <div class="p-2.5 rounded-lg border border-slate-200 bg-slate-50">
+            <strong class="text-slate-900 text-xs block mb-0.5">B. Alta carga en tareas administrativas:</strong>
+            <p class="text-[12px] text-slate-600 leading-snug">
+              El equipo comercial dedica gran parte de su jornada a tareas burocráticas de captura, comprobantes y expedientes, reduciendo el tiempo disponible para llamadas de cierre y seguimiento consultivo.
+            </p>
+          </div>
+          <div class="p-2.5 rounded-lg border border-slate-200 bg-slate-50">
+            <strong class="text-slate-900 text-xs block mb-0.5">C. Traspaso manual entre programas:</strong>
+            <p class="text-[12px] text-slate-600 leading-snug">
+              Al operar vendedoras independientes para talleres gratuitos, certificaciones y diplomados, el traspaso de prospectos es manual, dejando escapar oportunidades naturales de venta cruzada.
+            </p>
+          </div>
+          <div class="p-2.5 rounded-lg border border-slate-200 bg-slate-50">
+            <strong class="text-slate-900 text-xs block mb-0.5">D. Oportunidad en estandarización de procesos:</strong>
+            <p class="text-[12px] text-slate-600 leading-snug">
+              La ausencia de manuales de procedimientos y guiones estructurados de objeciones genera variaciones en la atención; formalizar el proceso bajo normas ISO elevará la calidad y la efectividad comercial.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PIE DE PÁGINA 1 -->
+    <div class="pt-2 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
+      <span>Telat Group · Propuesta Técnica y Económica · Colegio CEM</span>
+      <span>Página 1 de 3</span>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- PÁGINA 2: SOLUCIÓN INTEGRAL EN TRES FRENTES              -->
+  <!-- ======================================================== -->
+  <div class="doc-page flex flex-col justify-between">
+    <div>
+      <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+        <span class="text-xs font-bold text-[#EB5B27] font-title uppercase tracking-wider">Solución Integral & Modelo de Operación</span>
+        <span class="text-xs text-slate-500 font-semibold">Página 2 de 3</span>
+      </div>
+
+      <!-- SECCIÓN 3: ALCANCE TÉCNICO EN TRES FRENTES -->
+      <div class="mt-3.5">
+        <div class="flex items-center gap-2.5 mb-1.5">
+          <span class="flex items-center justify-center w-6 h-6 rounded-full bg-[#EB5B27] text-white text-xs font-bold">3</span>
+          <h2 class="text-base font-bold text-[#222221] font-title">Arquitectura de la solución en tres frentes de trabajo</h2>
+        </div>
+        <p class="text-sm text-slate-700 leading-snug mb-3">
+          Telat Group propone un esquema integral que combina <strong>ingeniería de procesos organizacionales</strong> con <strong>tecnología de contact center en la nube</strong>, potenciando la labor de su equipo comercial actual:
+        </p>
+
+        <div class="space-y-3 text-xs">
+          <!-- FRENTE 1: ALEJANDRO VALENTE SGC ISO -->
+          <div class="p-3 rounded-lg border border-slate-200 bg-slate-50 flex items-start gap-3">
+            <div class="w-8 h-8 rounded bg-[#222221] text-white flex items-center justify-center text-sm font-bold shrink-0 mt-0.5">
+              <i class="fa-solid fa-certificate"></i>
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <strong class="text-sm text-[#222221]">Frente 1: Consultoría en Procesos y Sistema de Gestión de Calidad (SGC / ISO)</strong>
+                <span class="text-[10px] font-bold text-[#EB5B27] uppercase bg-[#EB5B27]/10 px-2 py-0.5 rounded">Líder: Alejandro Valente Ortega</span>
+              </div>
+              <p class="text-[12px] text-slate-600 mt-1.5 leading-snug">
+                Levantamiento y mapeo formal del ciclo del alumno virtual (Customer Journey), definición de manuales de procedimientos comerciales, catálogo de manejo de objeciones y scripts de cierre, reglas de traspaso transparente entre talleres, certificaciones y diplomados, e integración de la base documental del <strong>Sistema de Gestión de Calidad alineada a estándares ISO</strong>.
+              </p>
+            </div>
+          </div>
+
+          <!-- FRENTE 2: ASISTENTE DE TRIAJE 24/7 -->
+          <div class="p-3 rounded-lg border border-slate-200 bg-slate-50 flex items-start gap-3">
+            <div class="w-8 h-8 rounded bg-[#3284C6] text-white flex items-center justify-center text-sm font-bold shrink-0 mt-0.5">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <strong class="text-sm text-[#222221]">Frente 2: Asistente Automático de Triaje 24/7 (WhatsApp Business API Oficial)</strong>
+                <span class="text-[10px] font-bold text-[#3284C6] uppercase bg-[#3284C6]/10 px-2 py-0.5 rounded">Atención Inmediata</span>
+              </div>
+              <p class="text-[12px] text-slate-600 mt-1.5 leading-snug">
+                Habilitación de la línea oficial con Meta Business Platform. Implementación de un asistente estructurado por botones que responde en menos de 5 segundos las 24 horas del día. Filtra a los interesados de talleres gratuitos entregando su acceso a Teams en automático, y canaliza de forma inmediata a los prospectos con intención de compra directamente a la consola de sus vendedoras.
+              </p>
+            </div>
+          </div>
+
+          <!-- FRENTE 3: CONSOLA CRM MULTIAGENTE -->
+          <div class="p-3 rounded-lg border border-slate-200 bg-slate-50 flex items-start gap-3">
+            <div class="w-8 h-8 rounded bg-[#EB5B27] text-white flex items-center justify-center text-sm font-bold shrink-0 mt-0.5">
+              <i class="fa-solid fa-headset"></i>
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <strong class="text-sm text-[#222221]">Frente 3: Consola CRM Multiagente en la Nube y Telefonía Integrada</strong>
+                <span class="text-[10px] font-bold text-[#EB5B27] uppercase bg-[#EB5B27]/10 px-2 py-0.5 rounded">Herramienta Unificada</span>
+              </div>
+              <p class="text-[12px] text-slate-600 mt-1.5 leading-snug">
+                Plataforma web para las 5 a 6 usuarias del colegio (vendedoras y supervisión) con tablero de seguimiento en español claro, registro de historiales, función de click-to-call para llamadas de cierre por voz desde la pantalla, módulo para adjuntar comprobantes de pago y panel de supervisión en tiempo real para la Coordinación de CEM.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: BENEFICIOS OPERATIVOS CLAVE -->
+      <div class="mt-3.5">
+        <div class="flex items-center gap-2.5 mb-1.5">
+          <span class="flex items-center justify-center w-6 h-6 rounded-full bg-[#222221] text-white text-xs font-bold">4</span>
+          <h2 class="text-base font-bold text-[#222221] font-title">Impacto directo en la operación de CEM</h2>
+        </div>
+        <div class="grid grid-cols-3 gap-2.5 text-center text-xs">
+          <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
+            <strong class="text-[#222221] text-xs block font-title">Respuesta en 5 segundos</strong>
+            <p class="text-[11px] text-slate-600 mt-1 leading-snug">Atención 24/7 sin importar la hora de ingreso del prospecto.</p>
+          </div>
+          <div class="p-2.5 rounded-lg bg-blue-50 border border-blue-200">
+            <strong class="text-[#3284C6] text-xs block font-title">Trazabilidad total</strong>
+            <p class="text-[11px] text-slate-600 mt-1 leading-snug">Cero pérdida de chats; historial institucional respaldado.</p>
+          </div>
+          <div class="p-2.5 rounded-lg bg-emerald-50 border border-emerald-200">
+            <strong class="text-emerald-700 text-xs block font-title">Enfoque 100% comercial</strong>
+            <p class="text-[11px] text-slate-600 mt-1 leading-snug">Sus vendedoras solo atienden prospectos calificados para venta.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PIE DE PÁGINA 2 -->
+    <div class="pt-2 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
+      <span>Telat Group · Propuesta Técnica y Económica · Colegio CEM</span>
+      <span>Página 2 de 3</span>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- PÁGINA 3: PROPUESTA ECONÓMICA, ROI Y TÉRMINOS            -->
+  <!-- ======================================================== -->
+  <div class="doc-page flex flex-col justify-between">
+    <div>
+      <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+        <span class="text-xs font-bold text-[#EB5B27] font-title uppercase tracking-wider">Inversión, Retorno & Términos Comerciales</span>
+        <span class="text-xs text-slate-500 font-semibold">Página 3 de 3</span>
+      </div>
+
+      <!-- SECCIÓN 5: ESTRUCTURA DE INVERSIÓN COMPARATIVA -->
+      <div class="mt-2.5">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="flex items-center justify-center w-5 h-5 rounded-full bg-[#EB5B27] text-white text-[11px] font-bold">5</span>
+          <h2 class="text-sm font-bold text-[#222221] font-title">Estructura de inversión: Proyecto Integral vs. Opción Piloto de Temporada Alta</h2>
+        </div>
+        <p class="text-[12px] text-slate-700 leading-tight mb-2">
+          Para garantizar la continuidad operativa de sus <strong>112 alumnos inscritos base</strong> y capitalizar la temporada alta sin riesgos, Telat Group presenta dos esquemas de contratación: el <strong>Proyecto Integral (22 diplomados)</strong> y el <strong>Piloto de Arranque Inmediato (3 a 4 certificaciones clave)</strong> con inversión 100% tomada a cuenta:
+        </p>
+
+        <!-- TABLA COMPARATIVA DE ESCENARIOS -->
+        <table class="w-full text-left text-xs border border-slate-200 rounded-lg overflow-hidden shadow-sm">
+          <thead class="bg-[#222221] text-white font-title text-[10.5px]">
+            <tr>
+              <th class="p-2 w-[34%]">Concepto / Entregable Técnico</th>
+              <th class="p-2 w-[33%] border-l border-slate-700 bg-[#1E293B]">
+                <span class="text-[#3284C6] block font-extrabold uppercase text-[10px]">Escenario A</span>
+                Proyecto Integral (22 Diplomados)
+              </th>
+              <th class="p-2 w-[33%] border-l border-slate-700 bg-[#2D2A26]">
+                <span class="text-[#EB5B27] block font-extrabold uppercase text-[10px]">Escenario B</span>
+                Piloto Fast-Track (3-4 Certificaciones)
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200 text-slate-700 text-[11px]">
+            <tr>
+              <td class="p-2 font-bold text-[#222221] leading-tight">
+                1. Consultoría Procesos & SGC ISO
+                <span class="block text-[9.5px] font-normal text-slate-500">Mapeo, manuales y guiones de objeciones</span>
+              </td>
+              <td class="p-2 border-l border-slate-200 bg-slate-50/50">
+                <span class="font-bold text-[#222221]">$70,000 MXN</span>
+                <span class="block text-[9.5px] text-slate-500">Catálogo completo (22 diplomados)</span>
+              </td>
+              <td class="p-2 border-l border-slate-200 bg-orange-50/30">
+                <span class="font-bold text-[#EB5B27]">$45,000 MXN</span>
+                <span class="block text-[9.5px] text-slate-600">Guiones de cierre para 3-4 programas top</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2 font-bold text-[#222221] leading-tight">
+                2. Implementación Cloud CRM & WABA
+                <span class="block text-[9.5px] font-normal text-slate-500">Bot de triaje 24/7 y consola para 5 usuarias</span>
+              </td>
+              <td class="p-2 border-l border-slate-200 bg-slate-50/50">
+                <span class="font-bold text-[#222221]">$125,000 MXN</span>
+                <span class="block text-[9.5px] text-slate-500">Árboles de triaje para 22 programas</span>
+              </td>
+              <td class="p-2 border-l border-slate-200 bg-orange-50/30">
+                <span class="font-bold text-[#EB5B27]">$65,000 MXN</span>
+                <span class="block text-[9.5px] text-slate-600">Árbol para 3-4 programas prioritarios</span>
+              </td>
+            </tr>
+            <tr class="bg-slate-100/80 font-bold border-t-2 border-slate-300">
+              <td class="p-2 text-[#222221] uppercase text-[10px] tracking-wide">
+                Total Inversión Inicial (Setup Único)
+              </td>
+              <td class="p-2 border-l border-slate-200 text-[#222221] text-xs">
+                $195,000 MXN
+              </td>
+              <td class="p-2 border-l border-slate-200 text-[#EB5B27] text-xs bg-orange-100/50">
+                $110,000 MXN
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2 font-bold text-[#222221] leading-tight">
+                3. Póliza Mensual Soporte & Auditoría QA
+                <span class="block text-[9.5px] font-normal text-slate-500">Hosting nube, licencias, auditoría y monitoreo</span>
+              </td>
+              <td class="p-2 border-l border-slate-200 bg-slate-50/50">
+                <span class="font-bold text-[#222221]">$38,000 MXN / mes</span>
+                <span class="block text-[9.5px] text-slate-500">Supervisión integral de toda la cuenta</span>
+              </td>
+              <td class="p-2 border-l border-slate-200 bg-orange-50/30">
+                <span class="font-bold text-[#EB5B27]">$28,000 MXN / mes</span>
+                <span class="block text-[9.5px] text-slate-600">Tarifa preferencial durante piloto (60 días)</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="p-1.5 font-bold text-slate-600 text-[10px]">Tiempo de Salida a Producción</td>
+              <td class="p-1.5 border-l border-slate-200 text-[10px] text-slate-600">4 a 6 semanas calendario</td>
+              <td class="p-1.5 border-l border-slate-200 text-[10px] font-bold text-emerald-700 bg-emerald-50/50">10 a 14 días hábiles (Fast-Track)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- CLÁUSULA DE GARANTÍA: 100% TOMADO A CUENTA Y CASO DE NEGOCIO -->
+        <div class="mt-2 grid grid-cols-2 gap-2 text-xs">
+          <div class="callout-orange p-2 rounded-lg text-slate-800">
+            <strong class="text-[#EB5B27] uppercase text-[10px] tracking-wide block mb-0.5 flex items-center gap-1">
+              <i class="fa-solid fa-shield-halved"></i> Garantía: 100% Tomado a Cuenta del Proyecto Integral
+            </strong>
+            <p class="text-[11px] text-slate-700 leading-snug">
+              El <strong>100% del importe invertido en el Setup del Piloto ($110,000 MXN)</strong> se tomará a cuenta del Setup del Proyecto Integral ($195,000 MXN) al momento de migrar los 18 diplomados restantes, protegiendo el capital de CEM en su totalidad.
+            </p>
+          </div>
+
+          <div class="callout-green p-2 rounded-lg text-slate-800">
+            <strong class="text-emerald-800 uppercase text-[10px] tracking-wide block mb-0.5 flex items-center gap-1">
+              <i class="fa-solid fa-chart-line text-emerald-600"></i> Retorno de Inversión (112 a 150-180 Alumnos)
+            </strong>
+            <p class="text-[11px] text-slate-700 leading-snug">
+              Cero riesgo al flujo actual de 112 inscritos. El brinco incremental hacia <strong>150 a 180 alumnos (+38 a +68 inscripciones)</strong> genera entre <strong>+$104,500 y +$187,000 MXN netos mensuales</strong>, amortizando el piloto en menos de 45 días.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: TÉRMINOS Y BLOQUE DE FIRMAS -->
+      <div class="mt-2.5">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="flex items-center justify-center w-5 h-5 rounded-full bg-[#222221] text-white text-[11px] font-bold">6</span>
+          <h2 class="text-sm font-bold text-[#222221] font-title">Condiciones comerciales y aceptación de propuesta</h2>
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-[11px] text-slate-600 mb-2">
+          <div>
+            <p>• <strong>Forma de pago Setup:</strong> 50% de anticipo a la firma y 50% contra entrega de accesos y puesta en marcha.</p>
+            <p>• <strong>Puesta en marcha:</strong> 10 a 14 días hábiles para Opción Piloto · 4 semanas para Proyecto Integral.</p>
+          </div>
+          <div>
+            <p>• <strong>Vigencia de la propuesta:</strong> 30 días naturales a partir de su emisión.</p>
+            <p>• <strong>Precios expresados:</strong> Moneda nacional (MXN), más IVA correspondiente.</p>
+          </div>
+        </div>
+
+        <!-- FIRMAS -->
+        <div class="grid grid-cols-2 gap-6 pt-2 border-t border-slate-200 text-center text-xs">
+          <div>
+            <div class="h-6 border-b border-slate-300 mx-auto w-3/4"></div>
+            <strong class="text-slate-800 block mt-0.5 text-[11px]">Por Telat Group</strong>
+            <span class="text-slate-500 text-[10px] block">Dirección de Operaciones & Tecnología</span>
+          </div>
+          <div>
+            <div class="h-6 border-b border-slate-300 mx-auto w-3/4"></div>
+            <strong class="text-slate-800 block mt-0.5 text-[11px]">Por Colegio de Estudios Multidisciplinarios</strong>
+            <span class="text-slate-500 text-[10px] block">Aceptación y Visto Bueno (Indicar Escenario A o B)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PIE DE PÁGINA 3 -->
+    <div class="pt-2 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
+      <div>
+        <strong>Telat Group</strong> · Av. Insurgentes Sur 263, Col. Roma Norte, CDMX
+      </div>
+      <div>
+        Propuesta Comercial Formal · Vigencia 30 días
+      </div>
+      <div class="text-slate-400">
+        Página 3 de 3
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
+

@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Triaje WhatsApp CEM · Flujo Omnicanal</title>
+    <!-- Fuentes Corporativas Oficiales -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --telat-celeste: #3284C6;
+            --telat-celeste-dark: #205E94;
+            --telat-celeste-light: #EBF4FC;
+            --telat-naranja: #EB5B27;
+            --telat-amarillo: #FECA66;
+            --telat-oscuro: #222221;
+            --telat-gris-claro: #F8FAFC;
+            --telat-borde: #E2E8F0;
+            --wa-green: #075E54;
+            --wa-green-light: #25D366;
+            --wa-green-bubble: #E7FCE3;
+            --wa-bg: #EFEAE2;
+            --font-subheadings: 'DM Sans', sans-serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: #0F172A;
+            color: #1E293B;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Barra Superior Ejecutiva */
+        .header-bar {
+            background: #1E293B;
+            border-bottom: 2px solid #334155;
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #FFFFFF;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .header-brand .logo-tag {
+            background: var(--telat-naranja);
+            color: #FFFFFF;
+            font-weight: 800;
+            font-size: 13px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            letter-spacing: 0.05em;
+        }
+
+        .header-brand h1 {
+            font-family: var(--font-subheadings);
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .header-brand p {
+            font-size: 13px;
+            color: #94A3B8;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn-scenario {
+            background: #334155;
+            color: #F1F5F9;
+            border: 1px solid #475569;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-scenario:hover {
+            background: #475569;
+            border-color: #64748B;
+        }
+
+        .btn-scenario.active {
+            background: var(--telat-celeste);
+            border-color: #60A5FA;
+            color: #FFFFFF;
+            box-shadow: 0 0 12px rgba(50, 132, 198, 0.4);
+        }
+
+        .btn-reset {
+            background: rgba(235, 91, 39, 0.15);
+            color: #FF8A65;
+            border: 1px solid rgba(235, 91, 39, 0.4);
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-reset:hover {
+            background: var(--telat-naranja);
+            color: #FFFFFF;
+        }
+
+        /* Contenedor Principal */
+        .workspace {
+            display: grid;
+            grid-template-columns: 460px 1fr;
+            gap: 24px;
+            padding: 24px 32px;
+            flex: 1;
+            max-width: 1720px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* PANEL 1: CELULAR MOCKUP */
+        .phone-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .phone-frame {
+            width: 100%;
+            height: 720px;
+            background: #FFFFFF;
+            border-radius: 40px;
+            border: 12px solid #1E293B;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 2px #334155;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Notcha Superior */
+        .phone-notch {
+            height: 24px;
+            background: #1E293B;
+            width: 160px;
+            margin: 0 auto;
+            border-bottom-left-radius: 14px;
+            border-bottom-right-radius: 14px;
+            z-index: 10;
+        }
+
+        /* Cabecera WhatsApp */
+        .wa-header {
+            background: var(--wa-green);
+            color: #FFFFFF;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            z-index: 5;
+        }
+
+        .wa-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .wa-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #FFFFFF;
+            color: var(--wa-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 13px;
+            border: 2px solid var(--wa-green-light);
+        }
+
+        .wa-info h3 {
+            font-size: 14px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .wa-verified {
+            display: inline-block;
+            background: var(--wa-green-light);
+            color: #000;
+            border-radius: 50%;
+            width: 13px;
+            height: 13px;
+            font-size: 9px;
+            line-height: 13px;
+            text-align: center;
+            font-weight: 900;
+        }
+
+        .wa-info p {
+            font-size: 11px;
+            color: #D1FAE5;
+        }
+
+        /* Cuerpo del Chat WhatsApp */
+        .wa-chat-body {
+            flex: 1;
+            background: var(--wa-bg);
+            background-image: radial-gradient(#CBD5E1 0.75px, transparent 0.75px);
+            background-size: 14px 14px;
+            padding: 14px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            scroll-behavior: smooth;
+        }
+
+        .chat-date-pill {
+            align-self: center;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 6px;
+            font-size: 11px;
+            color: #64748B;
+            padding: 4px 10px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            font-weight: 600;
+        }
+
+        .chat-security-banner {
+            background: #FEF3C7;
+            border: 1px solid #FDE68A;
+            border-radius: 8px;
+            padding: 8px 10px;
+            font-size: 11px;
+            color: #92400E;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        /* Mensajes */
+        .wa-msg {
+            max-width: 85%;
+            padding: 8px 12px 6px;
+            border-radius: 10px;
+            font-size: 12.5px;
+            line-height: 1.45;
+            position: relative;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .wa-msg.in {
+            align-self: flex-start;
+            background: #FFFFFF;
+            color: #1E293B;
+            border-top-left-radius: 2px;
+        }
+
+        .wa-msg.out {
+            align-self: flex-end;
+            background: var(--wa-green-bubble);
+            color: #064E3B;
+            border-top-right-radius: 2px;
+        }
+
+        .wa-msg .time {
+            font-size: 10px;
+            color: #94A3B8;
+            float: right;
+            margin-top: 4px;
+            margin-left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .wa-msg .ticks {
+            color: #38BDF8;
+            font-weight: 700;
+        }
+
+        /* Botones Rápidos de WhatsApp */
+        .wa-quick-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 4px;
+        }
+
+        .wa-btn {
+            background: #FFFFFF;
+            border: 1px solid #CBD5E1;
+            border-radius: 8px;
+            padding: 9px 12px;
+            color: #0284C7;
+            font-weight: 700;
+            font-size: 12px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            transition: all 0.15s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .wa-btn:hover {
+            background: #F0F9FF;
+            border-color: #0284C7;
+            transform: translateY(-1px);
+        }
+
+        .wa-btn.selected {
+            background: #0284C7;
+            color: #FFFFFF;
+            border-color: #0284C7;
+        }
+
+        .wa-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* Estado de Pausa del Bot */
+        .wa-system-status {
+            align-self: center;
+            background: #EEF2F6;
+            border: 1px dashed #94A3B8;
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 11px;
+            color: #475569;
+            text-align: center;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Barra de Escritura WhatsApp */
+        .wa-input-bar {
+            background: #F0F2F5;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-top: 1px solid #E2E8F0;
+        }
+
+        .wa-fake-input {
+            flex: 1;
+            background: #FFFFFF;
+            border-radius: 20px;
+            padding: 8px 14px;
+            font-size: 12px;
+            color: #94A3B8;
+            border: 1px solid #E2E8F0;
+        }
+
+        .wa-send-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--wa-green);
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        /* PANEL 2: CONSOLA DE LA VENDEDORA & ARQUITECTURA */
+        .dashboard-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Tarjeta de Métricas en Vivo */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .stat-card {
+            background: #1E293B;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 14px 18px;
+            color: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--telat-celeste);
+        }
+
+        .stat-card.orange::before { background: var(--telat-naranja); }
+        .stat-card.green::before { background: var(--wa-green-light); }
+        .stat-card.yellow::before { background: var(--telat-amarillo); }
+
+        .stat-card .label {
+            font-size: 11.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #94A3B8;
+            font-weight: 600;
+        }
+
+        .stat-card .val {
+            font-family: var(--font-subheadings);
+            font-size: 26px;
+            font-weight: 800;
+            margin-top: 4px;
+            color: #F8FAFC;
+        }
+
+        .stat-card .sub {
+            font-size: 11px;
+            color: #64748B;
+            margin-top: 2px;
+        }
+
+        /* Consola de Operaciones de Asesora */
+        .console-card {
+            background: #1E293B;
+            border: 1px solid #334155;
+            border-radius: 14px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .console-header {
+            background: #0F172A;
+            border-bottom: 1px solid #334155;
+            padding: 14px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .console-header h2 {
+            font-family: var(--font-subheadings);
+            font-size: 15px;
+            font-weight: 700;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .console-badge {
+            background: #10B981;
+            color: #064E3B;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .console-badge.pulsing::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #064E3B;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.4); opacity: 0.3; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+
+        .console-content {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 20px;
+        }
+
+        /* Lista de Bandeja de Tickets */
+        .tickets-list {
+            background: #0F172A;
+            border-radius: 10px;
+            border: 1px solid #334155;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 380px;
+            overflow-y: auto;
+        }
+
+        .ticket-item {
+            background: #1E293B;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 10px 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .ticket-item.active {
+            border-color: var(--telat-celeste);
+            background: #253349;
+        }
+
+        .ticket-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .ticket-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+
+        .ticket-time {
+            font-size: 10px;
+            color: #94A3B8;
+        }
+
+        .ticket-topic {
+            font-size: 11.5px;
+            color: #CBD5E1;
+            margin-bottom: 6px;
+        }
+
+        .ticket-tag {
+            display: inline-block;
+            font-size: 9.5px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .tag-bot { background: #334155; color: #94A3B8; }
+        .tag-hot { background: rgba(235, 91, 39, 0.2); color: #FF8A65; border: 1px solid var(--telat-naranja); }
+        .tag-closed { background: rgba(16, 185, 129, 0.2); color: #6EE7B7; }
+
+        /* Ficha de Detalle de Alumno / Lead */
+        .lead-detail-card {
+            background: #0F172A;
+            border-radius: 10px;
+            border: 1px solid #334155;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .lead-meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .meta-box {
+            background: #1E293B;
+            border-radius: 6px;
+            padding: 10px 12px;
+            border: 1px solid #334155;
+        }
+
+        .meta-box .k {
+            font-size: 10.5px;
+            color: #94A3B8;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .meta-box .v {
+            font-size: 13px;
+            color: #FFFFFF;
+            font-weight: 700;
+            margin-top: 3px;
+        }
+
+        /* Notificación Flotante de Transferencia */
+        .transfer-alert-box {
+            background: rgba(235, 91, 39, 0.12);
+            border: 1px solid var(--telat-naranja);
+            border-radius: 8px;
+            padding: 12px 14px;
+            margin-bottom: 16px;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .transfer-alert-box.visible {
+            display: block;
+        }
+
+        .transfer-alert-box h4 {
+            color: #FF8A65;
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+
+        .transfer-alert-box p {
+            font-size: 12px;
+            color: #CBD5E1;
+            line-height: 1.4;
+        }
+
+        /* Acciones Rápidas de la Vendedora */
+        .advisor-actions {
+            display: flex;
+            gap: 10px;
+            padding-top: 14px;
+            border-top: 1px solid #334155;
+        }
+
+        .btn-action {
+            flex: 1;
+            background: #334155;
+            color: #FFFFFF;
+            border: 1px solid #475569;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .btn-action:hover {
+            background: #475569;
+        }
+
+        .btn-action.primary {
+            background: var(--telat-celeste);
+            border-color: #60A5FA;
+        }
+
+        .btn-action.primary:hover {
+            background: var(--telat-celeste-dark);
+        }
+
+        .btn-action.success {
+            background: #059669;
+            border-color: #10B981;
+        }
+
+        .btn-action:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* Explicación Técnica y Beneficios */
+        .bottom-flow-section {
+            background: #1E293B;
+            border: 1px solid #334155;
+            border-radius: 14px;
+            padding: 20px 24px;
+            color: #FFFFFF;
+        }
+
+        .flow-title {
+            font-family: var(--font-subheadings);
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--telat-amarillo);
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .step-card {
+            background: #0F172A;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            padding: 14px;
+            position: relative;
+        }
+
+        .step-num {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            font-size: 20px;
+            font-weight: 900;
+            color: #334155;
+        }
+
+        .step-card h5 {
+            font-size: 13px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 6px;
+        }
+
+        .step-card p {
+            font-size: 11.5px;
+            color: #94A3B8;
+            line-height: 1.45;
+        }
+
+        /* Responsividad */
+        @media (max-width: 1200px) {
+            .workspace {
+                grid-template-columns: 1fr;
+            }
+            .phone-container {
+                max-width: 480px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA SUPERIOR EJECUTIVA -->
+    <header class="header-bar">
+        <div class="header-brand">
+            <span class="logo-tag">TELAT GROUP</span>
+            <div>
+                <h1>Simulador de Flujo Omnicanal WhatsApp · CEM</h1>
+                <p>Demostración en vivo para la Lic. Jacqueline Maldonado · Triaje Inteligente y Derivación Asistida</p>
+            </div>
+        </div>
+
+        <div class="header-controls">
+            <button class="btn-scenario active" id="btn-scen-sep" onclick="setScenario('sep')">
+                <span>🎯</span> Caso A: Interés en Certificación SEP ($2,750)
+            </button>
+            <button class="btn-scenario" id="btn-scen-free" onclick="setScenario('free')">
+                <span>🎓</span> Caso B: Alumno Solo Taller Gratuito (Teams)
+            </button>
+            <button class="btn-scenario" id="btn-scen-diplo" onclick="setScenario('diplo')">
+                <span>📜</span> Caso C: Diplomado Oficial ($14,500)
+            </button>
+            <button class="btn-reset" onclick="resetChat()">
+                <span>🔄</span> Reiniciar
+            </button>
+        </div>
+    </header>
+
+    <!-- ÁREA DE TRABAJO DUAL -->
+    <main class="workspace">
+
+        <!-- PANEL IZQUIERDO: CELULAR WHATSAPP (VISTA DEL ALUMNO) -->
+        <section class="phone-container">
+            <div class="phone-frame">
+                <div class="phone-notch"></div>
+                
+                <!-- Header de WhatsApp Business Oficial -->
+                <div class="wa-header">
+                    <div class="wa-profile">
+                        <div class="wa-avatar">CEM</div>
+                        <div class="wa-info">
+                            <h3>CEM Admisiones <span class="wa-verified" title="Cuenta Oficial Verificada">✓</span></h3>
+                            <p id="wa-status-text">En línea · Verificada Meta WABA</p>
+                        </div>
+                    </div>
+                    <div style="font-size: 16px; cursor: pointer; color: #D1FAE5;">⋮</div>
+                </div>
+
+                <!-- Historial del Chat -->
+                <div class="wa-chat-body" id="chat-stream">
+                    <div class="chat-date-pill">HOY</div>
+                    <div class="chat-security-banner">
+                        🔒 Las llamadas y mensajes están cifrados de extremo a extremo. Esta es la cuenta institucional oficial del Colegio de Estudios Multidisciplinarios.
+                    </div>
+                    
+                    <!-- Mensaje Inicial de Disparo (Trigger de Facebook) -->
+                    <div class="wa-msg out">
+                        Hola, vi el anuncio en Facebook del <strong>Taller Gratuito de Criminología y Grafoscopía</strong>. Quiero apartar mi lugar, por favor.
+                        <span class="time">12:45 <span class="ticks">✓✓</span></span>
+                    </div>
+
+                    <!-- Mensaje 1 del Bot: Saludo y Perfilamiento -->
+                    <div class="wa-msg in" id="msg-greeting">
+                        ¡Hola! 👋 Qué gusto saludarte. Bienvenido al <strong>Colegio de Estudios Multidisciplinarios (CEM)</strong>.<br><br>
+                        Tu solicitud para el <strong>Taller Gratuito de Grafoscopía Forense</strong> por Microsoft Teams está siendo procesada.<br><br>
+                        Para personalizar tu constancia y material didáctico, por favor indícanos tu perfil:
+                        <span class="time">12:45</span>
+                    </div>
+
+                    <!-- Botones de Perfilamiento -->
+                    <div class="wa-quick-actions" id="step-profile-btns">
+                        <div class="wa-btn" onclick="selectProfile('Abogado Litigante / Perito', this)">
+                            ⚖️ 1. Abogado Litigante o Perito Judicial
+                        </div>
+                        <div class="wa-btn" onclick="selectProfile('Seguridad Pública / Policía', this)">
+                            🛡️ 2. Seguridad Pública o Corporativa
+                        </div>
+                        <div class="wa-btn" onclick="selectProfile('Estudiante Universitario / Otro', this)">
+                            🎓 3. Estudiante o Interés General
+                        </div>
+                    </div>
+
+                    <!-- Espacio dinámico para respuestas subsecuentes -->
+                    <div id="dynamic-chat-elements"></div>
+                </div>
+
+                <!-- Input Falso de WhatsApp -->
+                <div class="wa-input-bar">
+                    <span style="font-size: 18px; color: #64748B;">😊</span>
+                    <div class="wa-fake-input" id="fake-input-placeholder">Selecciona una opción arriba...</div>
+                    <span style="font-size: 18px; color: #64748B;">📎</span>
+                    <div class="wa-send-btn">➤</div>
+                </div>
+            </div>
+            
+            <p style="font-size: 12px; color: #64748B; margin-top: 12px; text-align: center;">
+                📱 <em>Interacción en vivo. Haz clic en las opciones para ver cómo responde el bot y la vendedora.</em>
+            </p>
+        </section>
+
+        <!-- PANEL DERECHO: CONSOLA DE LA VENDEDORA & SUPERVISIÓN EJECUTIVA -->
+        <section class="dashboard-container">
+            
+            <!-- TARJETAS DE IMPACTO EN VIVO -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="label">Leads Meta Hoy</div>
+                    <div class="val" id="stat-total">142</div>
+                    <div class="sub">Disparo vía Webhook (<5s)</div>
+                </div>
+                <div class="stat-card green">
+                    <div class="label">Triaje 100% Bot</div>
+                    <div class="val" id="stat-bot">114</div>
+                    <div class="sub">80.3% carga automatizada</div>
+                </div>
+                <div class="stat-card orange">
+                    <div class="label">Transferidos a Asesoras</div>
+                    <div class="val" id="stat-human">28</div>
+                    <div class="sub">19.7% compradores listos</div>
+                </div>
+                <div class="stat-card yellow">
+                    <div class="label">Tiempo Respuesta</div>
+                    <div class="val">2.8 seg</div>
+                    <div class="sub">Cero leads "en visto"</div>
+                </div>
+            </div>
+
+            <!-- CONSOLA DE LA ASESORA (VISTA EN COMPUTADORA) -->
+            <div class="console-card">
+                <div class="console-header">
+                    <h2>
+                        <span>🖥️</span> Consola Unificada de Admisiones CEM (Vista de la Asesora)
+                    </h2>
+                    <div class="console-badge pulsing" id="console-live-badge">
+                        OPERANDO EN VIVO
+                    </div>
+                </div>
+
+                <div class="console-content">
+                    <!-- Lista de Tickets -->
+                    <div class="tickets-list">
+                        <div style="font-size: 11px; font-weight: 700; color: #64748B; text-transform: uppercase; margin-bottom: 4px;">
+                            Bandeja Centralizada (5 Asesoras)
+                        </div>
+
+                        <!-- Ticket Activo del Simulador -->
+                        <div class="ticket-item active" id="ticket-current">
+                            <div class="ticket-top">
+                                <span class="ticket-name" id="t-name">Lic. Marco Antonio Solís</span>
+                                <span class="ticket-time">Ahora</span>
+                            </div>
+                            <div class="ticket-topic" id="t-topic">Taller Criminología y Grafoscopía</div>
+                            <span class="ticket-tag tag-bot" id="t-tag">En Triaje Bot</span>
+                        </div>
+
+                        <!-- Tickets de Ejemplo de Fondo -->
+                        <div class="ticket-item">
+                            <div class="ticket-top">
+                                <span class="ticket-name">Dra. Claudia Ramos</span>
+                                <span class="ticket-time">Hace 4m</span>
+                            </div>
+                            <div class="ticket-topic">Certificación SEP EC0076</div>
+                            <span class="ticket-tag tag-hot">Atendiendo: Rocío M.</span>
+                        </div>
+
+                        <div class="ticket-item">
+                            <div class="ticket-top">
+                                <span class="ticket-name">Lic. Roberto Morales</span>
+                                <span class="ticket-time">Hace 12m</span>
+                            </div>
+                            <div class="ticket-topic">Enlace Teams Enviado</div>
+                            <span class="ticket-tag tag-closed">Completado por Bot</span>
+                        </div>
+
+                        <div class="ticket-item">
+                            <div class="ticket-top">
+                                <span class="ticket-name">Oficial Sandra Gutiérrez</span>
+                                <span class="ticket-time">Hace 18m</span>
+                            </div>
+                            <div class="ticket-topic">Diplomado Balística Forense</div>
+                            <span class="ticket-tag tag-hot">Pago Validado ($3,058)</span>
+                        </div>
+                    </div>
+
+                    <!-- Detalle del Prospecto Seleccionado -->
+                    <div class="lead-detail-card">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                                <div>
+                                    <h3 style="font-size: 16px; color: #FFFFFF; font-weight: 700;" id="card-lead-name">Lic. Marco Antonio Solís</h3>
+                                    <p style="font-size: 12px; color: #94A3B8;">ID Meta: META_LEAD_892182 · WhatsApp: +52 55 4912 8841</p>
+                                </div>
+                                <span style="font-size: 11px; background: #334155; color: #CBD5E1; padding: 4px 8px; border-radius: 6px;" id="bot-status-pill">
+                                    🤖 Bot Activo
+                                </span>
+                            </div>
+
+                            <!-- Metadatos Perfilados -->
+                            <div class="lead-meta-grid">
+                                <div class="meta-box">
+                                    <div class="k">Origen de Pauta</div>
+                                    <div class="v" id="meta-campaign">Facebook Ads · Grafoscopía 2026</div>
+                                </div>
+                                <div class="meta-box">
+                                    <div class="k">Profesión / Perfil</div>
+                                    <div class="v" id="meta-profile">Pendiente de selección...</div>
+                                </div>
+                                <div class="meta-box">
+                                    <div class="k">Interés Primario</div>
+                                    <div class="v" id="meta-intent">Pendiente...</div>
+                                </div>
+                                <div class="meta-box">
+                                    <div class="k">Asesora Asignada</div>
+                                    <div class="v" id="meta-advisor">Ninguna (Gestión Automática)</div>
+                                </div>
+                            </div>
+
+                            <!-- Alerta de Transferencia Calificada -->
+                            <div class="transfer-alert-box" id="transfer-box">
+                                <h4>🚨 ¡Prospecto con Intención de Compra Detectado!</h4>
+                                <p id="transfer-msg">
+                                    El usuario solicitó <strong>Certificación Oficial SEP-CONOCER ($2,750 MXN)</strong>. 
+                                    El bot se ha silenciado para evitar respuestas genéricas. Se ha transferido la sesión a la Lic. Rocío Mendoza.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Botones de Acción de la Asesora -->
+                        <div class="advisor-actions">
+                            <button class="btn-action primary" id="btn-advisor-send-brochure" disabled onclick="advisorSendBrochure()">
+                                📄 Enviar Ficha Técnica y Validez SEP
+                            </button>
+                            <button class="btn-action success" id="btn-advisor-send-payment" disabled onclick="advisorSendPayment()">
+                                💳 Enviar CLABE / Practicaja y Cerrar Venta
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXPLICACIÓN ARQUITECTÓNICA DEL FLUJO -->
+            <div class="bottom-flow-section">
+                <div class="flow-title">
+                    <span>⚡</span> Cómo Funciona la Solución Tecnológica Propuesta por Telat Group
+                </div>
+                <div class="steps-container">
+                    <div class="step-card">
+                        <span class="step-num">1</span>
+                        <h5>Captación Inmediata</h5>
+                        <p>El anuncio en Meta dispara un Webhook a la API Oficial de WhatsApp. El prospecto recibe respuesta en <strong>menos de 3 segundos</strong>, evitando fugas.</p>
+                    </div>
+                    <div class="step-card">
+                        <span class="step-num">2</span>
+                        <h5>Triaje Determinista</h5>
+                        <p>Mediante botones de respuesta rápida, el bot perfila la ocupación y separa al curioso gratuito del profesional que busca un documento con valor SEP.</p>
+                    </div>
+                    <div class="step-card">
+                        <span class="step-num">3</span>
+                        <h5>Derivación Inteligente</h5>
+                        <p>El 80% (oyentes) recibe el acceso a Teams por bot sin intervención humana. El 20% (compradores) entra directo a la pantalla de la asesora con datos en mano.</p>
+                    </div>
+                    <div class="step-card">
+                        <span class="step-num">4</span>
+                        <h5>Trazabilidad Institucional</h5>
+                        <p>Las conversaciones ya no viven en celulares personales de las vendedoras. Todo queda en la plataforma centralizada con auditoría de calidad de Telat.</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script>
+        // Estado de la Simulación
+        let currentScenario = 'sep';
+        let userProfile = '';
+        let leadName = 'Lic. Marco Antonio Solís';
+        let isBotPaused = false;
+
+        function setScenario(scen) {
+            currentScenario = scen;
+            document.querySelectorAll('.btn-scenario').forEach(b => b.classList.remove('active'));
+            if (scen === 'sep') document.getElementById('btn-scen-sep').classList.add('active');
+            if (scen === 'free') document.getElementById('btn-scen-free').classList.add('active');
+            if (scen === 'diplo') document.getElementById('btn-scen-diplo').classList.add('active');
+            resetChat();
+        }
+
+        function resetChat() {
+            isBotPaused = false;
+            document.getElementById('dynamic-chat-elements').innerHTML = '';
+            document.getElementById('step-profile-btns').style.display = 'flex';
+            document.querySelectorAll('#step-profile-btns .wa-btn').forEach(b => {
+                b.classList.remove('disabled', 'selected');
+            });
+            
+            // Reset Consola
+            document.getElementById('t-tag').className = 'ticket-tag tag-bot';
+            document.getElementById('t-tag').innerText = 'En Triaje Bot';
+            document.getElementById('meta-profile').innerText = 'Pendiente de selección...';
+            document.getElementById('meta-intent').innerText = 'Pendiente...';
+            document.getElementById('meta-advisor').innerText = 'Ninguna (Gestión Automática)';
+            document.getElementById('bot-status-pill').innerText = '🤖 Bot Activo';
+            document.getElementById('bot-status-pill').style.background = '#334155';
+            document.getElementById('bot-status-pill').style.color = '#CBD5E1';
+            document.getElementById('transfer-box').classList.remove('visible');
+            document.getElementById('btn-advisor-send-brochure').disabled = true;
+            document.getElementById('btn-advisor-send-payment').disabled = true;
+            document.getElementById('wa-status-text').innerText = 'En línea · Verificada Meta WABA';
+            document.getElementById('fake-input-placeholder').innerText = 'Selecciona una opción arriba...';
+
+            // Scroll al inicio
+            document.getElementById('chat-stream').scrollTop = 0;
+        }
+
+        // Paso 1: Selección de Perfil
+        function selectProfile(profile, btnElement) {
+            userProfile = profile;
+            
+            // Marcar botón seleccionado
+            document.querySelectorAll('#step-profile-btns .wa-btn').forEach(b => b.classList.add('disabled'));
+            btnElement.classList.remove('disabled');
+            btnElement.classList.add('selected');
+
+            // Actualizar Consola CRM
+            document.getElementById('meta-profile').innerText = profile;
+
+            // Enviar respuesta del usuario en chat
+            setTimeout(() => {
+                appendUserMessage(profile);
+
+                // Bot responde con la Bifurcación Crítica
+                setTimeout(() => {
+                    presentForkQuestion();
+                }, 800);
+            }, 300);
+        }
+
+        // Paso 2: Pregunta Filtro (Conversión a Venta)
+        function presentForkQuestion() {
+            let container = document.getElementById('dynamic-chat-elements');
+
+            let botMsg = document.createElement('div');
+            botMsg.className = 'wa-msg in';
+            botMsg.innerHTML = `
+                ¡Excelente! El taller de <strong>Grafoscopía Forense</strong> se impartirá este sábado a las 10:00 AM (CDMX) por Microsoft Teams.<br><br>
+                Para apartar tu lugar con la modalidad correcta, indícanos por favor:
+                <span class="time">12:46</span>
+            `;
+            container.appendChild(botMsg);
+
+            // Botones de Conversión según escenario
+            let actions = document.createElement('div');
+            actions.className = 'wa-quick-actions';
+            actions.id = 'fork-actions';
+
+            actions.innerHTML = `
+                <div class="wa-btn" style="border-left: 4px solid #10B981;" onclick="handleForkChoice('free', this)">
+                    🎟️ 1. Solo deseo asistir como oyente al Taller Gratuito (Teams)
+                </div>
+                <div class="wa-btn" style="border-left: 4px solid var(--telat-naranja);" onclick="handleForkChoice('sep', this)">
+                    📜 2. Deseo Taller + Constancia Oficial SEP-CONOCER / STPS ($2,750 MXN)
+                </div>
+                <div class="wa-btn" style="border-left: 4px solid var(--telat-celeste);" onclick="handleForkChoice('diplo', this)">
+                    🎓 3. Me interesa el Diplomado Completo con Validez Oficial
+                </div>
+            `;
+            container.appendChild(actions);
+
+            scrollChat();
+        }
+
+        // Paso 3: Manejo de la Bifurcación
+        function handleForkChoice(choice, btnElement) {
+            document.querySelectorAll('#fork-actions .wa-btn').forEach(b => b.classList.add('disabled'));
+            btnElement.classList.remove('disabled');
+            btnElement.classList.add('selected');
+
+            let choiceText = btnElement.innerText.trim();
+            appendUserMessage(choiceText);
+
+            setTimeout(() => {
+                if (choice === 'free') {
+                    // CAMINO A: SOLO OYENTE GRATUITO (100% BOT)
+                    handleFreePath();
+                } else if (choice === 'sep') {
+                    // CAMINO B: COMPRADOR DE CERTIFICACIÓN SEP (TRANSFERENCIA A HUMANO)
+                    handleSepPath();
+                } else {
+                    // CAMINO C: INTERÉS EN DIPLOMADO
+                    handleDiplomadoPath();
+                }
+            }, 800);
+        }
+
+        // Camino A: Alumno Gratuito
+        function handleFreePath() {
+            document.getElementById('meta-intent').innerText = 'Taller Gratuito (Oyente)';
+            document.getElementById('t-tag').className = 'ticket-tag tag-closed';
+            document.getElementById('t-tag').innerText = 'Atendido 100% Bot';
+
+            let container = document.getElementById('dynamic-chat-elements');
+            
+            let botMsg = document.createElement('div');
+            botMsg.className = 'wa-msg in';
+            botMsg.innerHTML = `
+                ¡Listo, ${leadName}! Tu acceso al aula virtual ha sido confirmado:<br><br>
+                🔗 <strong>Enlace Microsoft Teams:</strong><br>
+                <a href="#" style="color:#0284C7; text-decoration: underline;" onclick="return false;">https://teams.microsoft.com/l/meetup-join/cem-grafoscopia</a><br><br>
+                📅 <strong>Fecha:</strong> Sábado 10:00 AM (CDMX)<br>
+                📌 <em>Te enviaremos un recordatorio 15 minutos antes de iniciar por aquí mismo. ¡Te esperamos!</em>
+                <span class="time">12:47</span>
+            `;
+            container.appendChild(botMsg);
+            scrollChat();
+        }
+
+        // Camino B: Certificación SEP (El negocio real de CEM)
+        function handleSepPath() {
+            document.getElementById('meta-intent').innerText = 'Certificación SEP-CONOCER ($2,750 MXN)';
+            triggerHandover('Lic. Rocío Mendoza (Asesora Senior CEM)', 'Certificación SEP-CONOCER');
+        }
+
+        // Camino C: Diplomado
+        function handleDiplomadoPath() {
+            document.getElementById('meta-intent').innerText = 'Diplomado Forense ($14,500 MXN)';
+            triggerHandover('Mtra. Andrea Morales (Coordinadora de Diplomados)', 'Diplomado Oficial');
+        }
+
+        // Función de Transferencia Humana (Handover Protocol)
+        function triggerHandover(advisorName, product) {
+            isBotPaused = true;
+            
+            // 1. Pausa visual en WhatsApp
+            let container = document.getElementById('dynamic-chat-elements');
+            
+            let botHandoverMsg = document.createElement('div');
+            botHandoverMsg.className = 'wa-msg in';
+            botHandoverMsg.innerHTML = `
+                ¡Excelente elección! Dado tu perfil profesional, tu solicitud requiere asignación preferente para la emisión de tu constancia con valor curricular.<br><br>
+                ⏳ He reservado tu lugar y transferido tu chat a tu Asesora Académica Oficial: <strong>${advisorName}</strong>. En unos instantes se comunicará contigo por aquí.
+                <span class="time">12:47</span>
+            `;
+            container.appendChild(botHandoverMsg);
+
+            // Banner de Estado: Bot Silenciado
+            let botStatus = document.createElement('div');
+            botStatus.className = 'wa-system-status';
+            botStatus.innerHTML = `
+                <span>🔒</span> Bot pausado automáticamente · Asesora conectada: ${advisorName}
+            `;
+            container.appendChild(botStatus);
+
+            scrollChat();
+
+            // 2. Actualización de Consola CRM
+            document.getElementById('t-tag').className = 'ticket-tag tag-hot';
+            document.getElementById('t-tag').innerText = 'Transf. a Asesora';
+            document.getElementById('meta-advisor').innerText = advisorName;
+            
+            document.getElementById('bot-status-pill').innerText = '⏸️ Bot Pausado (En Asesora)';
+            document.getElementById('bot-status-pill').style.background = '#EB5B27';
+            document.getElementById('bot-status-pill').style.color = '#FFFFFF';
+
+            document.getElementById('transfer-msg').innerHTML = `
+                El prospecto solicita <strong>${product}</strong>. El bot se ha silenciado con éxito. 
+                Utiliza las acciones rápidas para remitir la ficha técnica y la cuenta CLABE bancaria.
+            `;
+            document.getElementById('transfer-box').classList.add('visible');
+
+            // Habilitar botones de la asesora
+            document.getElementById('btn-advisor-send-brochure').disabled = false;
+            document.getElementById('wa-status-text').innerText = `${advisorName} está escribiendo...`;
+            document.getElementById('fake-input-placeholder').innerText = `Asesora conectada en consola web...`;
+        }
+
+        // Asesora Envía Ficha Técnica (Demostración)
+        function advisorSendBrochure() {
+            let container = document.getElementById('dynamic-chat-elements');
+            
+            let advisorMsg = document.createElement('div');
+            advisorMsg.className = 'wa-msg in';
+            advisorMsg.style.borderLeft = '4px solid #10B981';
+            advisorMsg.innerHTML = `
+                Buenas tardes, ${leadName}. Le atiende la <strong>Lic. Rocío Mendoza</strong> de Admisiones CEM.<br><br>
+                Con gusto le hago llegar la ficha oficial del estándar de competencia SEP-CONOCER y Registro STPS para Grafoscopía y Documentoscopía.<br><br>
+                📄 <strong>Ficha_Tecnica_Certificacion_SEP_CEM.pdf</strong> (1.4 MB)<br>
+                <em>Validez oficial a nivel nacional con cédula de perito ante tribunales.</em>
+                <span class="time">12:48</span>
+            `;
+            container.appendChild(advisorMsg);
+
+            document.getElementById('btn-advisor-send-brochure').disabled = true;
+            document.getElementById('btn-advisor-send-payment').disabled = false;
+            scrollChat();
+        }
+
+        // Asesora Envía Datos de Pago y Cierra Venta
+        function advisorSendPayment() {
+            let container = document.getElementById('dynamic-chat-elements');
+            
+            let paymentMsg = document.createElement('div');
+            paymentMsg.className = 'wa-msg in';
+            paymentMsg.style.borderLeft = '4px solid #059669';
+            paymentMsg.innerHTML = `
+                Para asegurar su tarifa preferencial de <strong>$2,750 MXN</strong> (con descuento de taller), puede realizar su pago por transferencia o en cualquier Practicaja BBVA:<br><br>
+                🏦 <strong>Banco:</strong> BBVA México<br>
+                👤 <strong>Beneficiario:</strong> Colegio de Estudios Multidisciplinarios S.C.<br>
+                💳 <strong>Cuenta CLABE:</strong> 012 180 0011 2345 6789<br>
+                📌 <strong>Concepto:</strong> SEP-${leadName.split(' ')[1]}<br><br>
+                En cuanto realice su movimiento, envíeme la fotografía de su comprobante por aquí para emitir su matrícula y factura inmediata.
+                <span class="time">12:49</span>
+            `;
+            container.appendChild(paymentMsg);
+
+            // Simular respuesta del usuario con comprobante
+            setTimeout(() => {
+                let userProof = document.createElement('div');
+                userProof.className = 'wa-msg out';
+                userProof.innerHTML = `
+                    Excelente Lic. Rocío, ya quedó la transferencia. Le adjunto el comprobante del banco.<br><br>
+                    📸 <strong>Comprobante_Transferencia_BBVA.jpg</strong>
+                    <span class="time">12:51 <span class="ticks">✓✓</span></span>
+                `;
+                container.appendChild(userProof);
+
+                // Confirmación Final de la Asesora
+                setTimeout(() => {
+                    let finalConfirm = document.createElement('div');
+                    finalConfirm.className = 'wa-msg in';
+                    finalConfirm.innerHTML = `
+                        ¡Pago confirmado con éxito, Lic. Solís! 🎉 Su matrícula ha quedado registrada. Le acabo de enviar su carta de bienvenida y clave de acceso por correo institucional. ¡Nos vemos en sesión!
+                        <span class="time">12:52</span>
+                    `;
+                    container.appendChild(finalConfirm);
+
+                    // Actualizar Estado en Consola a VENTA CERRADA
+                    document.getElementById('t-tag').className = 'ticket-tag tag-closed';
+                    document.getElementById('t-tag').innerText = 'Venta Cerrada ($2,750 MXN)';
+                    document.getElementById('transfer-msg').innerHTML = `
+                        🎉 <strong>¡Transacción Completada!</strong> Matrícula asignada y comprobante bancario validado. Venta contabilizada en corte diario.
+                    `;
+                    document.getElementById('btn-advisor-send-payment').disabled = true;
+                    scrollChat();
+                }, 1000);
+
+                scrollChat();
+            }, 1200);
+
+            scrollChat();
+        }
+
+        // Helpers de Chat
+        function appendUserMessage(text) {
+            let container = document.getElementById('dynamic-chat-elements');
+            let userMsg = document.createElement('div');
+            userMsg.className = 'wa-msg out';
+            userMsg.innerHTML = `
+                ${text}
+                <span class="time">12:46 <span class="ticks">✓✓</span></span>
+            `;
+            container.appendChild(userMsg);
+            scrollChat();
+        }
+
+        function scrollChat() {
+            let chat = document.getElementById('chat-stream');
+            chat.scrollTop = chat.scrollHeight;
+        }
+
+        // Inicialización automática
+        window.onload = function() {
+            // Listo para interactuar
+        };
+    </script>
+</body>
+</html>

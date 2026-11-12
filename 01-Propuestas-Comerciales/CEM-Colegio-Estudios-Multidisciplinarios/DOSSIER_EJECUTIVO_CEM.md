@@ -2,8 +2,8 @@
 ## Colegio de Estudios Multidisciplinarios (CEM S.C.)
 
 **Documento Estratégico de Uso Interno · Confidencial**  
-**Fecha:** 5 de noviembre de 2026  
-**Área Emisora:** Operaciones & Tecnología · Telat Group  
+**Fecha:** 11 de noviembre de 2026  
+**Área Emisora:** Dirección de Operaciones & Tecnología · Telat Group  
 **Para:**
 * **Luis Cortina**, Apoderado Legal de Telat Group
 * **Mauricio Cruz**, Director de Operaciones y Dirección Comercial (en funciones)
@@ -51,37 +51,35 @@ CEM **no atiende alumnos en vivo ni tiene cierre en sucursales**. Sus 4 plantele
 
 ---
 
-### 4. Propuesta de Valor Telat: Solución Integral en Cuatro Pilares
+### 4. Propuesta de Valor Telat: Solución Integral en Cuatro Pilares (Sin Nómina de Agentes)
 
 1. **Pilar 1: Consultoría en Procesos y SGC ISO (Líder: Alejandro Valente Ortega):**  
-   Mapeo de Customer Journey del alumno virtual, manuales de procedimiento, matrices de control y base documental del Sistema de Gestión de Calidad alineado a normas ISO.
+   Mapeo de Customer Journey del alumno virtual, manuales de procedimiento, scripts de objeciones, matrices de control y base documental del Sistema de Gestión de Calidad alineado a normas ISO.
 2. **Pilar 2: Infraestructura Unificada provista por Net2Alliance (N2A):**  
-   Telat no es Meta Business Partner ni programador interno de HSMs. Para evitar curvas de aprendizaje, coordinamos directamente con **Javier Jaime** (Director General de N2A) para habilitar WhatsApp Business API oficial, plantillas HSM aprobadas, telefonía y consola unificada.
-3. **Pilar 3: Célula Comercial Especializada (Inside Sales Digital 12/6):**  
-   4 ejecutivos dedicados de Telat que atienden en < 2 minutos, asesoran con criterio el catálogo forense y valor STPS/CONOCER, y asisten en tiempo real hasta confirmar el pago en línea.
+   Telat no asume curvas de aprendizaje; se apoya en Net2Alliance para habilitar WhatsApp Business API oficial, plantillas HSM aprobadas, telefonía IP y consola unificada.
+3. **Pilar 3: Asistente de Triaje 24/7 y Potenciación de Vendedoras (Cero Riesgo Laboral):**  
+   No se contrata personal físico adicional. Se implementa un asistente automático por botones que atiende en 5 segundos los 4,000 leads a cualquier hora, filtra a los curiosos del taller gratuito y canaliza en caliente los prospectos calificados a las vendedoras actuales de CEM en su consola web.
 4. **Pilar 4: IA a la Medida con Rieles Blindados (Fase 2 - Mes 4+):**  
-   Entrenada con las conversaciones reales y exitosas de los agentes humanos, con restricciones estrictas de contexto.
+   Entrenada con las conversaciones reales y exitosas de las vendedoras en consola, con restricciones estrictas de contexto.
 
 ---
 
-### 5. Estructura Comercial y Traslado de Costos N2A
+### 5. Estructura Comercial y Modelo de Negocio para Telat
 
-Considerando que **Net2Alliance (N2A)** nos cobrará aproximadamente entre **\$70,000 y \$80,000 MXN** por el setup e integración de WhatsApp, CRM y telefonía, se traslada dicho costo con margen operativo para Telat:
-
-| Módulo / Alcance | Composición de Costos y Entregables | Modalidad | Inversión (MXN) |
-| :--- | :--- | :--- | :---: |
-| **Bloque 1: Consultoría SGC ISO**<br>*(Alejandro Valente Ortega)* | Mapeo de procesos, manuales de calidad, matrices de riesgo y base documental para certificación ISO. | Proyecto único (6 a 8 semanas) | **\$75,000 MXN** |
-| **Bloque 2: Setup & Onboarding**<br>*(N2A + Margen Telat)* | WhatsApp Business API oficial ante Meta, conector CRM unificado, plantillas HSM y telefonía (absorbe ~\$75k de costo N2A). | Implementación inicial (Única vez) | **\$125,000 MXN** |
-| **Bloque 3: Operación Célula Comercial**<br>*(Inside Sales 12/6)* | 4 ejecutivos dedicados de cierre digital, supervisión QA, licencias de plataforma y reportería semanal de conversión. | Fee operativo mensual | **\$165,000 MXN** / mes |
-| **Bono por Desempeño Comercial**<br>*(Success Fee)* | Incentivo por alumno inscrito por encima de la línea base histórica de CEM (a partir del alumno 113 confirmado). | Por alumno incremental | **\$250 MXN** / matrícula extra |
+| Módulo / Alcance | Composición de Costos y Entregables | Modalidad | Inversión CEM (MXN) | Margen Neto Telat |
+| :--- | :--- | :--- | :---: | :---: |
+| **Bloque 1: Consultoría SGC ISO**<br>*(Alejandro Valente Ortega)* | Mapeo de procesos de ventas, manual de objeciones y scripts, políticas de traspaso y base documental ISO. | Proyecto único (6 semanas) | **\$70,000 MXN** | **\$70,000 MXN** *(100% margen)* |
+| **Bloque 2: Setup Tecnológico & CRM**<br>*(N2A + Margen Telat)* | WhatsApp Business API oficial, CRM unificado para 5 vendedoras de CEM, asistente de triaje 24/7 y telefonía (absorbe ~\$75k N2A). | Implementación inicial (Única vez) | **\$125,000 MXN** | **\$50,000 MXN** *(Margen de gestión)* |
+| **Bloque 3: Póliza Mensual CCaaS & QA**<br>*(Soporte + Auditoría Valente)* | Servidor en la nube, soporte técnico de plataforma N2A, licencias, bolsa de mensajería y auditoría mensual de calidad de vendedoras. | Renta mensual (Sin nómina) | **\$38,000 MXN** / mes | **\$23,000 MXN** / mes *(Margen recurrente)* |
 
 #### Retorno de Inversión para CEM (Business Case):
-* Con la mezcla de certificaciones SEP-CONOCER (\$1,500 - \$2,750 MXN) y diplomados (\$1,390 - \$3,058 MXN/mes), sumar **150 alumnos adicionales al mes** genera entre **+\$300,000 y +\$450,000 MXN mensuales de flujo nuevo**, pagando la operación de Telat y dejando utilidad líquida a CEM desde el primer mes.
+* Con la mezcla de certificaciones SEP-CONOCER (\$1,500 - \$2,750 MXN) y diplomados (\$1,390 - \$3,058 MXN/mes), sumar **únicamente 15 a 20 alumnos adicionales al mes** cubre la póliza mensual de Telat y deja utilidad neta directa para CEM desde el primer mes, sin costo de nómina extra.
 
 ---
 
 ### 6. Ruta de Acción Interna y Siguientes Pasos
 
-1. **Procesos & SGC (Alejandro Valente):** Definir alcance formal de la consultoría documental y cronograma de trabajo ISO.
-2. **Cotización Carrier (Net2Alliance - N2A):** Revisar directamente con **Javier Jaime** la cotización formal de setup de WhatsApp Business API, conector CRM y licenciamiento.
-3. **Validación Comercial (Luis Cortina & Mauricio Cruz):** Aprobación de la estructura de márgenes y presentación ejecutiva formal a Jacqueline.
+1. **Aprobación de Mesa Directiva (Luis Cortina & Mauricio Cruz):** Validación del modelo de consultoría + tecnología sin riesgo laboral.
+2. **Coordinación de Procesos (Alejandro Valente):** Definir alcance formal de la consultoría documental y cronograma de trabajo ISO.
+3. **Cotización Carrier (Net2Alliance - N2A):** Revisar la cotización de plataforma de acuerdo con el RFQ enviado.
+4. **Presentación Ejecutiva a Jacqueline Maldonado:** Sesión formal para presentar la propuesta integral y firmar el acuerdo de arranque y setup.
