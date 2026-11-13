@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Propuesta Comercial y Solución Operativa · Unlimited Vacation Club (UVC) - Telat Group</title>
+
+  <!-- Google Fonts: DM Sans & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,500;0,9..40,600;0,9..40,700&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN v3 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            telat: {
+              celeste: '#2079C8',
+              naranja: '#EB5B27',
+              amarillo: '#FECA66',
+              oscuro: '#0F172A',
+              navy: '#14295C',
+              claro: '#F8FAFC'
+            },
+            uvc: {
+              blue: '#0072CE',
+              cyan: '#38BDF8',
+              dark: '#1E3A5F'
+            }
+          },
+          fontFamily: {
+            sans: ['"Montserrat"', 'sans-serif'],
+            body: ['"DM Sans"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    @font-face {
+      font-family: 'Momo Trust';
+      src: local('Impact'), local('Arial Black');
+      font-weight: 800;
+      font-display: swap;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #0B132B;
+      color: #0F172A;
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .slide {
+      width: 1920px;
+      height: 1080px;
+      min-width: 1920px;
+      min-height: 1080px;
+      max-width: 1920px;
+      max-height: 1080px;
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+      display: flex;
+      flex-direction: column;
+      background-color: #F8FAFC;
+    }
+
+    @media print {
+      @page {
+        size: 1920px 1080px;
+        margin: 0;
+      }
+      body {
+        background-color: #F8FAFC;
+      }
+      .slide {
+        page-break-after: always;
+      }
+    }
+
+    .font-num {
+      font-family: 'Momo Trust', 'Impact', sans-serif;
+      letter-spacing: -0.5px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ==========================================
+       SLIDE 1: PORTADA EJECUTIVA CO-BRANDED
+  =========================================== -->
+  <section class="slide bg-gradient-to-br from-[#0B132B] via-[#0F172A] to-[#14295C] text-white px-24 py-16 justify-between">
+    <!-- Top Co-Branding Bar -->
+    <div class="flex items-center justify-between border-b border-slate-700/70 pb-8">
+      <div class="flex items-center gap-6">
+        <img src="assets/logo_telat_canonical.png" alt="Telat Group" class="h-24 w-24 object-contain drop-shadow-lg">
+        <div>
+          <span class="text-3xl font-extrabold tracking-wider text-white block">TELAT GROUP</span>
+          <span class="text-sm tracking-widest text-telat-naranja font-bold uppercase">Soluciones de Centro de Contacto y BPO</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-6 bg-slate-800/90 px-8 py-4 rounded-2xl border border-slate-600 shadow-xl">
+        <span class="text-sm uppercase tracking-widest text-slate-300 font-bold">Propuesta para:</span>
+        <img src="assets/uvc_logo_dark.png" alt="UVC Logo" class="h-16 object-contain">
+      </div>
+    </div>
+
+    <!-- Center Hero -->
+    <div class="max-w-5xl space-y-8 my-auto">
+      <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-telat-naranja/20 border-2 border-telat-naranja text-telat-amarillo text-lg font-bold tracking-wider uppercase">
+        ● Solución Telat · Propuesta Económica Formal
+      </div>
+      <h1 class="text-7xl font-black leading-[1.1] tracking-tight text-white">
+        Operación Bilingüe con <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-telat-celeste to-amber-300">Inteligencia Artificial</span> y Personal Dedicado
+      </h1>
+      <p class="text-3xl text-slate-200 font-body font-medium leading-relaxed max-w-4xl">
+        Modelo operativo diseñado a la medida de <strong class="text-white">Unlimited Vacation Club</strong>: atención exclusiva al socio, analítica al 100% y blindaje transaccional PCI DSS.
+      </p>
+    </div>
+
+    <!-- Bottom Meta Cards -->
+    <div class="grid grid-cols-4 gap-6 pt-8 border-t border-slate-700/70">
+      <div class="bg-slate-800/70 p-6 rounded-2xl border border-slate-600">
+        <p class="text-sm uppercase tracking-wider text-sky-400 font-bold">Cliente Objetivo</p>
+        <p class="text-2xl font-extrabold text-white mt-1">Unlimited Vacation Club</p>
+      </div>
+      <div class="bg-slate-800/70 p-6 rounded-2xl border border-slate-600">
+        <p class="text-sm uppercase tracking-wider text-telat-amarillo font-bold">Esquema Operativo</p>
+        <p class="text-2xl font-extrabold text-white mt-1">Recursos 100% Dedicados</p>
+      </div>
+      <div class="bg-slate-800/70 p-6 rounded-2xl border border-slate-600">
+        <p class="text-sm uppercase tracking-wider text-emerald-400 font-bold">Cobertura</p>
+        <p class="text-2xl font-extrabold text-white mt-1">Bilingüe México – EE. UU.</p>
+      </div>
+      <div class="bg-slate-800/70 p-6 rounded-2xl border border-slate-600">
+        <p class="text-sm uppercase tracking-wider text-slate-300 font-bold">Vigencia</p>
+        <p class="text-2xl font-extrabold text-white mt-1">Noviembre 2026</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SLIDE 2: ACERCA DE NOSOTROS + EVOLUCIÓN 1,000 ➔ 650 CON IA
+  =========================================== -->
+  <section class="slide px-20 py-14 justify-between bg-slate-50">
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b-2 border-slate-200 pb-5">
+      <div>
+        <p class="text-sm font-extrabold tracking-widest text-telat-naranja uppercase">Identidad Corporativa y Evolución</p>
+        <h2 class="text-5xl font-black text-slate-900 mt-1">Acerca de Nosotros</h2>
+      </div>
+      <div class="flex items-center gap-6">
+        <img src="assets/logo_telat_canonical.png" alt="Telat" class="h-16 w-16 object-contain">
+        <div class="h-10 w-0.5 bg-slate-300"></div>
+        <img src="assets/uvc_logo.png" alt="UVC" class="h-14 object-contain">
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="grid grid-cols-12 gap-10 items-center my-auto">
+      <!-- Left: Narrative + Historical Bar Chart (2005 -> 2022 +1,000 -> 2026 650+ IA) -->
+      <div class="col-span-7 space-y-5">
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm space-y-2">
+          <span class="px-4 py-1 rounded-full bg-blue-100 text-telat-celeste text-sm font-extrabold uppercase">20+ Años de Experiencia</span>
+          <h3 class="text-2xl font-extrabold text-slate-900 leading-snug">
+            Empresa 100% Mexicana de Centro de Contacto y Gestión de Procesos BPO con presencia binacional en México y Estados Unidos.
+          </h3>
+        </div>
+
+        <!-- Historical Evolution Bar Chart (2005 -> 2015 -> 2022 +1,000 -> 2026 650+ IA) -->
+        <div class="bg-white p-7 rounded-3xl border-2 border-slate-200 shadow-lg space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <h4 class="text-xl font-black text-slate-900 uppercase tracking-wide">Evolución del Talento y Optimización con IA</h4>
+            <span class="px-4 py-1 bg-orange-100 text-telat-naranja text-sm font-extrabold rounded-full">2005 – 2026</span>
+          </div>
+
+          <!-- 4 Bars -->
+          <div class="grid grid-cols-4 gap-6 items-end h-52 border-b-2 border-slate-300 px-4 pt-4">
+            <div class="flex flex-col items-center justify-end h-full">
+              <span class="text-lg font-extrabold text-slate-500 mb-2">7 pers.</span>
+              <div class="w-full bg-slate-400 rounded-t-xl h-6"></div>
+            </div>
+            <div class="flex flex-col items-center justify-end h-full">
+              <span class="text-lg font-extrabold text-slate-700 mb-2">280 pers.</span>
+              <div class="w-full bg-sky-400 rounded-t-xl h-20"></div>
+            </div>
+            <div class="flex flex-col items-center justify-end h-full">
+              <span class="text-2xl font-black text-telat-naranja mb-2">+1,000</span>
+              <div class="w-full bg-gradient-to-t from-orange-600 to-telat-naranja rounded-t-xl h-40 shadow-md"></div>
+            </div>
+            <div class="flex flex-col items-center justify-end h-full border-l-2 border-dashed border-telat-naranja pl-4">
+              <span class="text-2xl font-black text-telat-celeste mb-2">650 + IA</span>
+              <div class="w-full bg-gradient-to-t from-blue-700 to-sky-400 rounded-t-xl h-32 shadow-lg ring-4 ring-sky-100"></div>
+            </div>
+          </div>
+
+          <!-- Labels -->
+          <div class="grid grid-cols-4 gap-6 text-center px-4">
+            <div>
+              <p class="text-base font-black text-slate-800">2005</p>
+              <p class="text-xs font-bold text-slate-500">Fundación</p>
+            </div>
+            <div>
+              <p class="text-base font-black text-slate-800">2015</p>
+              <p class="text-xs font-bold text-slate-500">Expansión MX</p>
+            </div>
+            <div>
+              <p class="text-base font-black text-telat-naranja">2022</p>
+              <p class="text-xs font-extrabold text-telat-naranja">Pico Pre-IA (1,000 Est.)</p>
+            </div>
+            <div class="pl-4">
+              <p class="text-base font-black text-telat-celeste">2026</p>
+              <p class="text-xs font-extrabold text-telat-celeste">Era Post-IA Optimizada</p>
+            </div>
+          </div>
+
+          <div class="bg-blue-50 border-l-4 border-telat-celeste p-3.5 rounded-xl text-sm font-body font-bold text-slate-800">
+            ⚡ Evolucionamos de <strong>+1,000 estaciones tradicionales</strong> a una operación de <strong>650 especialistas con integración completa de Inteligencia Artificial</strong>, logrando mayor capacidad resolutiva y eficiencia.
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: 4 Key Pillars with Rich Jewel-Gradient Vector Badges -->
+      <div class="col-span-5 space-y-5">
+        <div class="bg-white p-6 rounded-2xl border-2 border-slate-200 shadow-md flex items-start gap-5">
+          <!-- High-Presence US Flag Vector Badge with Deep Navy-to-Sky Gradient -->
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#0B132B] via-[#14295C] to-[#38BDF8] ring-1 ring-inset ring-white/25 shadow-lg flex items-center justify-center flex-shrink-0 overflow-hidden p-2">
+            <svg viewBox="0 0 60 40" class="w-full h-full rounded-md shadow-sm">
+              <rect width="60" height="40" fill="#ffffff"/>
+              <g fill="#B22234">
+                <rect y="0" width="60" height="3.08"/>
+                <rect y="6.15" width="60" height="3.08"/>
+                <rect y="12.3" width="60" height="3.08"/>
+                <rect y="18.46" width="60" height="3.08"/>
+                <rect y="24.61" width="60" height="3.08"/>
+                <rect y="30.77" width="60" height="3.08"/>
+                <rect y="36.92" width="60" height="3.08"/>
+              </g>
+              <rect width="26" height="21.54" fill="#3C3B6E"/>
+              <g fill="#ffffff">
+                <circle cx="4.5" cy="4" r="1.3"/><circle cx="10" cy="4" r="1.3"/><circle cx="15.5" cy="4" r="1.3"/><circle cx="21" cy="4" r="1.3"/>
+                <circle cx="7.2" cy="8" r="1.3"/><circle cx="12.7" cy="8" r="1.3"/><circle cx="18.2" cy="8" r="1.3"/>
+                <circle cx="4.5" cy="12" r="1.3"/><circle cx="10" cy="12" r="1.3"/><circle cx="15.5" cy="12" r="1.3"/><circle cx="21" cy="12" r="1.3"/>
+                <circle cx="7.2" cy="16" r="1.3"/><circle cx="12.7" cy="16" r="1.3"/><circle cx="18.2" cy="16" r="1.3"/>
+              </g>
+            </svg>
+          </div>
+          <div>
+            <h5 class="text-xl font-extrabold text-slate-900">Importante Presencia en EE. UU.</h5>
+            <p class="text-base text-slate-600 font-body mt-1">Operación binacional bilingüe con sede activa en El Paso, Texas y atención directa al mercado norteamericano.</p>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border-2 border-slate-200 shadow-md flex items-start gap-5">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#7C2D12] via-[#EA580C] to-[#FBBF24] text-white ring-1 ring-inset ring-white/25 shadow-lg flex items-center justify-center flex-shrink-0">
+            <svg class="w-9 h-9 drop-shadow-sm" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </div>
+          <div>
+            <h5 class="text-xl font-extrabold text-slate-900">Soluciones Parciales e Integrales BPO</h5>
+            <p class="text-base text-slate-600 font-body mt-1">Gestión de procesos de extremo a extremo diseñada a la medida de cada operación.</p>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border-2 border-slate-200 shadow-md flex items-start gap-5">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#064E3B] via-[#059669] to-[#34D399] text-white ring-1 ring-inset ring-white/25 shadow-lg flex items-center justify-center flex-shrink-0">
+            <svg class="w-9 h-9 drop-shadow-sm" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+          </div>
+          <div>
+            <h5 class="text-xl font-extrabold text-slate-900">Mesa de Control y de Trabajo</h5>
+            <p class="text-base text-slate-600 font-body mt-1">Supervisión en tiempo real, planificación operativa, adherencia y auditoría de calidad automatizada al 100%.</p>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border-2 border-slate-200 shadow-md flex items-start gap-5">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#0F172A] via-[#14295C] to-[#38BDF8] text-white ring-1 ring-inset ring-white/25 shadow-lg flex items-center justify-center flex-shrink-0">
+            <svg class="w-9 h-9 drop-shadow-sm" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <div>
+            <h5 class="text-xl font-extrabold text-slate-900">Fondo de Inversión y Solidez</h5>
+            <p class="text-base text-slate-600 font-body mt-1">Respaldo financiero institucional que garantiza la innovación continua y el desarrollo futuro.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-between text-sm font-semibold text-slate-500 border-t border-slate-200 pt-4">
+      <span>Telat Group · Solución Operativa para Unlimited Vacation Club</span>
+      <span>02 / 11</span>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SLIDE 3: NUESTRA EXPERIENCIA (CONTRASTE LIMPIO Y SIN EXCESO DE NEGRITAS)
+  =========================================== -->
+  <section class="slide px-20 py-14 justify-between bg-slate-100">
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b-2 border-slate-300 pb-5">
+      <div>
+        <p class="text-sm font-extrabold tracking-widest text-telat-naranja uppercase">Trayectoria Comprobada y Galardonada (IMT 2023–2026)</p>
+        <h2 class="text-5xl font-black text-slate-900 mt-1">Nuestra Experiencia Multisectorial</h2>
+      </div>
+      <div class="flex items-center gap-6">
+        <img src="assets/logo_telat_canonical.png" alt="Telat" class="h-16 w-16 object-contain">
+        <div class="h-10 w-0.5 bg-slate-300"></div>
+        <img src="assets/uvc_logo.png" alt="UVC" class="h-14 object-contain">
+      </div>
+    </div>
+
+    <!-- 6 Real Proven Sectors: Zero Client Names, Clean Sector Leader Descriptions -->
+    <div class="grid grid-cols-3 gap-6 my-auto">
+      <!-- 1. Automotriz & Flotillas -->
+      <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-md flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-3">
+            <div class="flex items-center gap-3.5">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#0F172A] via-[#14295C] to-[#38BDF8] text-white flex items-center justify-center shadow-lg ring-1 ring-inset ring-white/25">
+                <svg class="w-7 h-7 drop-shadow-sm" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0M3 11l2-5h14l2 5m-18 0h18v6H3v-6z"/>
+                </svg>
+              </div>
+              <h3 class="text-2xl font-extrabold text-slate-900">Automotriz y Flotillas</h3>
+            </div>
+            <span class="px-3 py-1 bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold rounded-full uppercase">Oro IMT 2026</span>
+          </div>
+          <p class="text-base text-slate-600 font-body font-normal leading-relaxed">
+            Aliados de marcas líderes en comercio automotriz en EE. UU., redes de servicios vehiculares y arrendadoras de flotillas corporativas.
+          </p>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span class="px-3.5 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-700">Plataformas Automotrices EE. UU.</span>
+            <span class="px-3.5 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-700">Gestión de Flotillas y Citas</span>
+          </div>
+        </div>
+        <div class="bg-gradient-to-r from-slate-950 via-slate-900 to-telat-navy border border-slate-700/80 text-slate-200 px-4 py-2.5 rounded-2xl mt-4 flex items-center justify-between text-xs font-body font-normal shadow-inner">
+          <span>Validación: <span class="font-bold text-sky-300">90s ➔ 40s</span></span>
+          <span>Conversión EE. UU.: <span class="font-bold text-emerald-400">+30.2%</span></span>
+          <span>Precisión: <span class="font-bold text-white">99.96%</span></span>
+        </div>
+      </div>
+
+      <!-- 2. Telecomunicaciones & Tecnología B2B -->
+      <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-md flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-3">
+            <div class="flex items-center gap-3.5">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#1E1B4B] via-[#4338CA] to-[#818CF8] text-white flex items-center justify-center shadow-lg ring-1 ring-inset ring-white/25">
+                <svg class="w-7 h-7 drop-shadow-sm" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"/>
+                </svg>
+              </div>
+              <h3 class="text-2xl font-extrabold text-slate-900">Telecomunicaciones</h3>
+            </div>
+            <span class="px-3 py-1 bg-indigo-50 border border-indigo-200 text-indigo-800 text-xs font-bold rounded-full uppercase">Bronce IMT 2024</span>
+          </div>
+          <p class="text-base text-slate-600 font-body font-normal leading-relaxed">
+            Soporte técnico bilingüe para corporativos globales de conectividad, dispositivos inteligentes y soluciones de videovigilancia con IA.
+          </p>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span class="px-3.5 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-700">Conectividad Corporativa EE. UU.</span>
+            <span class="px-3.5 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-700">Videovigilancia Global con IA</span>
+          </div>
+        </div>
+        <div class="bg-gradient-to-r from-slate-950 via-slate-900 to-indigo-950 border border-slate-700/80 text-slate-200 px-4 py-2.5 rounded-2xl mt-4 flex items-center justify-between text-xs font-body font-normal shadow-inner">
+          <span>Tiempo de Registro: <span class="font-bold text-indigo-300">14 min ➔ 3 min</span></span>
+          <span>Resolución Primer Contacto: <span class="font-bold text-emerald-400">62% ➔ 84%</span></span>
+        </div>
+      </div>
+
+      <!-- 3. Comercio Electrónico y Retail -->
+      <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-md flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-3">
+            <div class="flex items-center gap-3.5">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#7C2D12] via-[#EA580C] to-[#FBBF24] text-white flex items-center justify-center shadow-lg ring-1 ring-inset ring-white/25">
+                <svg class="w-7 h-7 drop-shadow-sm" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                </svg>
+              </div>
+              <h3 class="text-2xl font-extrabold text-slate-900">Comercio Digital y Retail</h3>
+            </div>
+            <span class="px-3 py-1 bg-orange-50 border border-orange-200 text-orange-800 text-xs font-bold rounded-full uppercase">Mercado EE. UU.</span>
+          </div>
+          <p class="text-base text-slate-600 font-body font-normal leading-relaxed">
+            Operación omnicanal para marcas líderes de comercio electrónico en EE. UU., atención a pedidos personalizados y campañas estacionales.
+          </p>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span class="px-3.5 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-700">Marcas Líderes de Retail EE. UU.</span>
+            <span class="px-3.5 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-700">Programas de Lealtad y Retención</span>
+          </div>
+        </div>
+        <div class="bg-gradient-to-r from-slate-950 via-slate-900 to-amber-950 border border-slate-700/80 text-slate-200 px-4 py-2.5 rounded-2xl mt-4 flex items-center justify-between text-xs font-body font-normal shadow-inner">
+          <span>Venta Cruzada: <span class="font-bold text-amber-300">8% ➔ 24%</span></span>
+          <span>Satisfacción del Cliente: <span class="font-bold text-emerald-400">78% ➔ 93%</span></span>
+        </div>
+      </div>
+
+      <!-- 4. Salud y Farmacéutico -->
+      <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-md flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-3">
+            <div class="flex items-center gap-3.5">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#064E3B] via-[#059669] to-[#34D399] text-white flex items-center justify-center shadow-lg ring-1 ring-inset ring-white/25">
+                <svg class="w-7 h-7 drop-shadow-sm" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                </svg>
+              </div>
+              <h3 class="text-2xl font-extrabold text-slate-900">Salud y Farmacéutico</h3>
+            </div>
+            <span class="px-3 py-1 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold rounded-full uppercase">Sector Salud EE. UU.</span>
+          </div>
+          <p class="text-base text-slate-600 font-body font-normal leading-relaxed">
+            Atención bilingüe para organizaciones líderes de beneficios farmacéuticos en Estados Unidos, redes de farmacias y orientación médica.
+          </p>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span class="px-3.5 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-700">Redes Farmacéuticas EE. UU.</span>
+            <span class="px-3.5 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-700">Asistencia Médica 24/7</span>
+          </div>
+        </div>
+        <div class="bg-gradient-to-r from-slate-950 via-slate-900 to-emerald-950 border border-slate-700/80 text-slate-200 px-4 py-2.5 rounded-2xl mt-4 flex items-center justify-between text-xs font-body font-normal shadow-inner">
+          <span>Privacidad: <span class="font-bold text-emerald-300">ISO 27001</span></span>
+          <span>Cobertura: <span class="font-bold text-sky-300">Bilingüe C1/C2</span></span>
+        </div>
+      </div>
+
+      <!-- 5. Servicios y Logística -->
+      <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-md flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-3">
+            <div class="flex items-center gap-3.5">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#3B0764] via-[#7E22CE] to-[#C084FC] text-white flex items-center justify-center shadow-lg ring-1 ring-inset ring-white/25">
+                <svg class="w-7 h-7 drop-shadow-sm" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                </svg>
+              </div>
+              <h3 class="text-2xl font-extrabold text-slate-900">Servicios y Logística</h3>
+            </div>
+            <span class="px-3 py-1 bg-purple-50 border border-purple-200 text-purple-800 text-xs font-bold rounded-full uppercase">BPO Integral</span>
+          </div>
+          <p class="text-base text-slate-600 font-body font-normal leading-relaxed">
+            Respaldo operativo a corporativos líderes en logística aduanal e intermodal, así como programas de orientación ciudadana a gran escala.
+          </p>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span class="px-3.5 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-700">Logística Aduanal e Intermodal</span>
+            <span class="px-3.5 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-700">Atención Institucional Masiva</span>
+          </div>
+        </div>
+        <div class="bg-gradient-to-r from-slate-950 via-slate-900 to-purple-950 border border-slate-700/80 text-slate-200 px-4 py-2.5 rounded-2xl mt-4 flex items-center justify-between text-xs font-body font-normal shadow-inner">
+          <span>Nivel de Servicio: <span class="font-bold text-purple-300">SLA &gt; 95%</span></span>
+          <span>Auditoría: <span class="font-bold text-emerald-400">100% Calidad IA</span></span>
+        </div>
+      </div>
+
+      <!-- 6. Sector Financiero -->
+      <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-md flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-3">
+            <div class="flex items-center gap-3.5">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#0C4A6E] via-[#0284C7] to-[#38BDF8] text-white flex items-center justify-center shadow-lg ring-1 ring-inset ring-white/25">
+                <svg class="w-7 h-7 drop-shadow-sm" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                </svg>
+              </div>
+              <h3 class="text-2xl font-extrabold text-slate-900">Sector Financiero</h3>
+            </div>
+            <span class="px-3 py-1 bg-sky-50 border border-sky-200 text-sky-800 text-xs font-bold rounded-full uppercase">PCI DSS v4.0</span>
+          </div>
+          <p class="text-base text-slate-600 font-body font-normal leading-relaxed">
+            Operaciones para instituciones líderes de banca, seguros y tecnología financiera en validación de identidad, cobranza y pagos seguros.
+          </p>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span class="px-3.5 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-700">Banca, Seguros y Fintech</span>
+            <span class="px-3.5 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-700">Pagos Certificados PCI</span>
+          </div>
+        </div>
+        <div class="bg-gradient-to-r from-slate-950 via-slate-900 to-sky-950 border border-slate-700/80 text-slate-200 px-4 py-2.5 rounded-2xl mt-4 flex items-center justify-between text-xs font-body font-normal shadow-inner">
+          <span>Seguridad: <span class="font-bold text-sky-300">Cero Almacenamiento CVV</span></span>
+          <span>Cumplimiento: <span class="font-bold text-emerald-400">100% Auditado</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-between text-sm font-semibold text-slate-500 border-t border-slate-300 pt-4">
+      <span>Telat Group · Casos de Éxito Reales y Trayectoria Multisectorial</span>
+      <span>03 / 11</span>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SLIDE 4: UBICACIONES (MAPA CON ESTRELLAS + 4 SEDES EN ESPAÑOL)
+  =========================================== -->
+  <section class="slide px-20 py-14 justify-between bg-slate-50">
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b-2 border-slate-200 pb-5">
+      <div>
+        <p class="text-sm font-extrabold tracking-widest text-telat-naranja uppercase">Infraestructura Física</p>
+        <h2 class="text-5xl font-black text-slate-900 mt-1">Ubicaciones y Presencia Binacional</h2>
+      </div>
+      <div class="flex items-center gap-6">
+        <img src="assets/logo_telat_canonical.png" alt="Telat" class="h-16 w-16 object-contain">
+        <div class="h-10 w-0.5 bg-slate-300"></div>
+        <img src="assets/uvc_logo.png" alt="UVC" class="h-14 object-contain">
+      </div>
+    </div>
+
+    <!-- Body: Starred Map + 4 Sedes Cards -->
+    <div class="grid grid-cols-12 gap-8 items-center my-auto">
+      <!-- Left: Visual Geographic Map with Glowing Stars -->
+      <div class="col-span-6 bg-white p-4 rounded-3xl border-2 border-slate-200 shadow-lg">
+        <img src="assets/mapa_hubs_starred.png" alt="Mapa de Ubicaciones con Estrellas" class="w-full h-[550px] object-cover rounded-2xl">
+      </div>
+
+      <!-- Right: 4 Sedes Cards 100% Español + Structured 3-Card KPI Row -->
+      <div class="col-span-6 space-y-5">
+        <p class="text-xl text-slate-700 font-body font-medium leading-snug mb-1">
+          Gracias a la confianza de nuestros clientes, operamos <strong>4 centros operativos estratégicos</strong> con redundancia respaldada por ISO 22301:
+        </p>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-white p-6 rounded-2xl border-2 border-slate-200 shadow-sm">
+            <span class="text-xs font-extrabold uppercase tracking-wider text-telat-naranja">Ciudad de México</span>
+            <h4 class="text-2xl font-black text-slate-900 mt-1">Sede Insurgentes</h4>
+            <p class="text-base text-slate-600 font-body mt-1">Av. Insurgentes Sur 263, Col. Roma</p>
+            <div class="mt-3.5 inline-block px-3 py-1 bg-orange-50 border border-orange-200 rounded-lg text-xs font-bold text-telat-naranja uppercase">
+              Centro Corporativo y Operativo
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border-2 border-slate-200 shadow-sm">
+            <span class="text-xs font-extrabold uppercase tracking-wider text-telat-naranja">Ciudad de México</span>
+            <h4 class="text-2xl font-black text-slate-900 mt-1">Sede Monterrey</h4>
+            <p class="text-base text-slate-600 font-body mt-1">Calle Monterrey 149, Col. Roma</p>
+            <div class="mt-3.5 inline-block px-3 py-1 bg-orange-50 border border-orange-200 rounded-lg text-xs font-bold text-telat-naranja uppercase">
+              Centro Operativo Principal
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border-2 border-slate-200 shadow-sm">
+            <span class="text-xs font-extrabold uppercase tracking-wider text-telat-celeste">Frontera Norte</span>
+            <h4 class="text-2xl font-black text-slate-900 mt-1">Ciudad Juárez</h4>
+            <p class="text-base text-slate-600 font-body mt-1">Chihuahua · Centro Bilingüe</p>
+            <div class="mt-3.5 inline-block px-3 py-1 bg-blue-50 border border-blue-200 rounded-lg text-xs font-bold text-telat-celeste uppercase">
+              Operación Bilingüe Fronteriza
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border-2 border-slate-200 shadow-sm">
+            <span class="text-xs font-extrabold uppercase tracking-wider text-amber-600">Estados Unidos</span>
+            <h4 class="text-2xl font-black text-slate-900 mt-1">El Paso, Texas</h4>
+            <p class="text-base text-slate-600 font-body mt-1">Sede Binacional EE. UU.</p>
+            <div class="mt-3.5 inline-block px-3 py-1 bg-amber-50 border border-amber-200 rounded-lg text-xs font-bold text-amber-700 uppercase">
+              Centro Operativo en EE. UU.
+            </div>
+          </div>
+        </div>
+
+        <!-- Refactored Dimensional 3-Column KPI Strip (Replaces flat black bar) -->
+        <div class="grid grid-cols-3 gap-4 pt-1">
+          <div class="bg-gradient-to-br from-slate-900 to-telat-navy text-white p-4 rounded-2xl border-t-4 border-telat-naranja shadow-md flex items-center gap-3.5">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#7C2D12] via-[#EA580C] to-[#FBBF24] text-white flex items-center justify-center flex-shrink-0 shadow-lg ring-1 ring-inset ring-white/25">
+              <svg class="w-6 h-6 drop-shadow-sm" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-2xl font-black text-telat-amarillo leading-none">4 Sedes</p>
+              <p class="text-xs font-semibold text-slate-200 mt-1">Centros Operativos</p>
+            </div>
+          </div>
+
+          <div class="bg-gradient-to-br from-slate-900 to-telat-navy text-white p-4 rounded-2xl border-t-4 border-sky-400 shadow-md flex items-center gap-3.5">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0F172A] via-[#14295C] to-[#38BDF8] text-white flex items-center justify-center flex-shrink-0 shadow-lg ring-1 ring-inset ring-white/25">
+              <svg class="w-6 h-6 drop-shadow-sm" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-2xl font-black text-sky-300 leading-none">650 + IA</p>
+              <p class="text-xs font-semibold text-slate-200 mt-1">Especialistas Activos</p>
+            </div>
+          </div>
+
+          <div class="bg-gradient-to-br from-slate-900 to-telat-navy text-white p-4 rounded-2xl border-t-4 border-emerald-400 shadow-md flex items-center gap-3.5">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#064E3B] via-[#059669] to-[#34D399] text-white flex items-center justify-center flex-shrink-0 shadow-lg ring-1 ring-inset ring-white/25">
+              <svg class="w-6 h-6 drop-shadow-sm" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-2xl font-black text-emerald-300 leading-none">24 / 7</p>
+              <p class="text-xs font-semibold text-slate-200 mt-1">Redundancia Binacional</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-between text-sm font-semibold text-slate-500 border-t border-slate-200 pt-4">
+      <span>Telat Group · Cobertura Binacional México y Estados Unidos</span>
+      <span>04 / 11</span>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SLIDE 5: SOLUCIONES INTEGRALES (LISTA INACTA + CUADRO DERECHO GRANDE Y LEGIBLE)
+  =========================================== -->
+  <section class="slide px-20 py-14 justify-between bg-white">
+    <!-- Top Header -->
+    <div class="flex items-center justify-between border-b-2 border-slate-200 pb-5">
+      <div>
+        <h2 class="text-5xl font-black text-slate-900">Soluciones Integrales</h2>
+        <p class="text-xl text-slate-600 font-body mt-1">
+          Nuestra tecnología puede ser aplicada en cualquier sector empresarial con el fin de hacer más competitiva y eficiente la actividad de la empresa.
+        </p>
+      </div>
+      <div class="flex items-center gap-6">
+        <img src="assets/logo_telat_canonical.png" alt="Telat" class="h-16 w-16 object-contain">
+        <div class="h-10 w-0.5 bg-slate-300"></div>
+        <img src="assets/uvc_logo.png" alt="UVC" class="h-14 object-contain">
+      </div>
+    </div>
+
+    <!-- Center 2-Column Layout: Left List (exact same size) + Shifted Right Card giving room for 1-line Point 11 -->
+    <div class="grid grid-cols-12 gap-8 items-center my-auto">
+      <!-- Left: Numbered List 01 to 12 on Exact Vertical Axis (Expanded to col-span-7 so Point 11 stays on 1 single crisp line) -->
+      <div class="col-span-7 space-y-2.5">
+        <div class="grid grid-cols-[52px_1fr] items-center text-xl font-bold text-slate-800">
+          <span class="text-telat-naranja font-black">01.</span>
+          <span>Software integrado con nuestros aliados</span>
+        </div>
+        <div class="grid grid-cols-[52px_1fr] items-center text-xl font-bold text-slate-800">
+          <span class="text-telat-naranja font-black">02.</span>
+          <span>Equipo de desarrollo, operaciones y soporte local</span>
+        </div>
+        <div class="grid grid-cols-[52px_1fr] items-center text-xl font-bold text-slate-800">
+          <span class="text-telat-naranja font-black">03.</span>
+          <span>Plan de Continuidad de Negocio (BCP)</span>
+        </div>
+        <div class="grid grid-cols-[52px_1fr] items-center text-xl font-bold text-slate-800">
+          <span class="text-telat-naranja font-black">04.</span>
+          <span>Continuidad operativa con respaldo internacional</span>
+        </div>
+        <div class="grid grid-cols-[52px_1fr] items-center text-xl font-bold text-slate-800">
+          <span class="text-telat-naranja font-black">05.</span>
+          <span>Gran estabilidad del servicio (99.99% de Disponibilidad)</span>
+        </div>
+        <div class="grid grid-cols-[52px_1fr] items-center text-xl font-bold text-slate-800">
+          <span class="text-telat-naranja font-black">06.</span>
+          <span>Avalado por más de 20 años de experiencia en plataformas SaaS</span>
+        </div>
+        <div class="grid grid-cols-[52px_1fr] items-center text-xl font-bold text-slate-800">
+          <span class="text-telat-naranja font-black">07.</span>
+          <span>Fondo de inversión</span>
+        </div>
+        <div class="grid grid-cols-[52px_1fr] items-center text-xl font-bold text-slate-800">
+          <span class="text-telat-naranja font-black">08.</span>
+          <span>Innovación continua (bajo demanda)</span>
+        </div>
+        <div class="grid grid-cols-[52px_1fr] items-center text-xl font-bold text-slate-800">
+          <span class="text-telat-naranja font-black">09.</span>
+          <span>Atención Omnicanal (Voz, WhatsApp, Chat, Correo, Redes)</span>
+        </div>
+        <div class="grid grid-cols-[52px_1fr] items-center text-xl font-bold text-slate-800">
+          <span class="text-telat-naranja font-black">10.</span>
+          <span>CRM e Integración Nativa vía API / Webhooks</span>
+        </div>
+        <!-- Point 11: 100% Aligned on the exact same 52px column grid & guaranteed 1 single line -->
+        <div class="grid grid-cols-[52px_1fr] items-center text-xl font-black">
+          <span class="text-telat-naranja font-black">11.</span>
+          <div>
+            <span class="bg-gradient-to-r from-telat-naranja to-telat-celeste text-white px-4 py-1.5 rounded-lg shadow-sm inline-block whitespace-nowrap">
+              Las soluciones de IA · Analítica de Voz y Texto y Auditoría de Calidad 100%
+            </span>
+          </div>
+        </div>
+        <div class="grid grid-cols-[52px_1fr] items-center text-xl font-bold text-slate-800">
+          <span class="text-telat-naranja font-black">12.</span>
+          <span>Chatbots, Copiloto en Tiempo Real y Automatización</span>
+        </div>
+      </div>
+
+      <!-- Right: Shifted Executive Card col-span-5 perfectly proportioned and legible -->
+      <div class="col-span-5">
+        <div class="bg-gradient-to-br from-[#0B132B] via-[#0F172A] to-[#1E3A8A] text-white p-7 rounded-[32px] border-2 border-slate-700 shadow-2xl space-y-5">
+          <!-- Card Header -->
+          <div class="flex items-center justify-between border-b border-slate-700/80 pb-3.5">
+            <span class="px-4 py-1.5 bg-telat-naranja text-white text-xs font-black rounded-full uppercase tracking-wider shadow">
+              Ecosistema Tecnológico Telat
+            </span>
+            <div class="bg-white p-1.5 rounded-2xl shadow-md">
+              <img src="assets/logo_telat_canonical.png" alt="Telat" class="h-10 w-10 object-contain">
+            </div>
+          </div>
+
+          <!-- 2x2 Grid of Feature Blocks -->
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-600/80 space-y-2">
+              <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-[#78350F] via-[#D97706] to-[#FDE047] text-white flex items-center justify-center shadow-lg ring-1 ring-inset ring-white/25">
+                <svg class="w-6 h-6 drop-shadow-sm" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <h4 class="text-lg font-extrabold text-telat-amarillo leading-tight">IA y Analítica de Voz</h4>
+              <p class="text-sm text-slate-200 font-body leading-snug">
+                Transcripción, sentimiento y auditoría automática del 100% de llamadas.
+              </p>
+            </div>
+
+            <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-600/80 space-y-2">
+              <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-[#0F172A] via-[#14295C] to-[#38BDF8] text-white flex items-center justify-center shadow-lg ring-1 ring-inset ring-white/25">
+                <svg class="w-6 h-6 drop-shadow-sm" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                </svg>
+              </div>
+              <h4 class="text-lg font-extrabold text-telat-amarillo leading-tight">Omnicanalidad 360°</h4>
+              <p class="text-sm text-slate-200 font-body leading-snug">
+                Voz, WhatsApp, Chat, Redes y Correo integrados en una consola.
+              </p>
+            </div>
+
+            <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-600/80 space-y-2">
+              <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-[#064E3B] via-[#059669] to-[#34D399] text-white flex items-center justify-center shadow-lg ring-1 ring-inset ring-white/25">
+                <svg class="w-6 h-6 drop-shadow-sm" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+                </svg>
+              </div>
+              <h4 class="text-lg font-extrabold text-telat-amarillo leading-tight">Integración CRM / SaaS</h4>
+              <p class="text-sm text-slate-200 font-body leading-snug">
+                Conexión nativa API/Webhooks con más de 20 años de experiencia.
+              </p>
+            </div>
+
+            <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-600/80 space-y-2">
+              <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-[#7C2D12] via-[#EA580C] to-[#FBBF24] text-white flex items-center justify-center shadow-lg ring-1 ring-inset ring-white/25">
+                <svg class="w-6 h-6 drop-shadow-sm" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+              </div>
+              <h4 class="text-lg font-extrabold text-telat-amarillo leading-tight">Continuidad BCP / DRP</h4>
+              <p class="text-sm text-slate-200 font-body leading-snug">
+                Disponibilidad 99.99% con respaldo internacional multi-sede activo.
+              </p>
+            </div>
+          </div>
+
+          <!-- Bottom Pill inside Card -->
+          <div class="bg-slate-950/90 px-5 py-3 rounded-2xl border border-slate-700 flex items-center justify-between text-xs font-bold">
+            <span class="text-sky-400 uppercase tracking-wider">Supervisión Experta de IA</span>
+            <span class="text-telat-amarillo">ISO 27001 · PCI DSS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Strip with Official Logos -->
+    <div class="flex items-center justify-between pt-2">
+      <img src="assets/partner_logos_strip.png" alt="Aliados Tecnológicos" class="h-16 object-contain">
+      <span class="text-sm font-bold text-slate-500">05 / 11</span>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SLIDE 6: NUESTRA INFRAESTRUCTURA (DIAGRAMA HD PROPIO)
+  =========================================== -->
+  <section class="slide px-20 py-14 justify-between bg-slate-50">
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b-2 border-slate-200 pb-5">
+      <div>
+        <p class="text-sm font-extrabold tracking-widest text-telat-naranja uppercase">Arquitectura de Interconexión</p>
+        <h2 class="text-5xl font-black text-slate-900 mt-1">Nuestra Infraestructura</h2>
+      </div>
+      <div class="flex items-center gap-6">
+        <img src="assets/logo_telat_canonical.png" alt="Telat" class="h-16 w-16 object-contain">
+        <div class="h-10 w-0.5 bg-slate-300"></div>
+        <img src="assets/uvc_logo.png" alt="UVC" class="h-14 object-contain">
+      </div>
+    </div>
+
+    <!-- Center: 80% Ultra-HD Network Diagram + 20% Key Specs -->
+    <div class="grid grid-cols-12 gap-8 items-center my-auto">
+      <div class="col-span-8 bg-white p-3 rounded-3xl border-2 border-slate-200 shadow-lg flex items-center justify-center">
+        <img src="assets/network_diagram_hd.png" alt="Diagrama de Red e Interconexión Telat HD" class="w-full h-[630px] object-contain rounded-2xl">
+      </div>
+
+      <!-- Right Key Specs with Socios Estratégicos -->
+      <div class="col-span-4 space-y-5">
+        <div class="bg-slate-900 text-white p-7 rounded-3xl shadow-xl space-y-4 border-t-8 border-telat-naranja">
+          <span class="text-xs font-extrabold uppercase tracking-widest text-telat-amarillo">Conectividad Empresarial</span>
+          <h3 class="text-2xl font-extrabold">Redundancia con Socios Estratégicos</h3>
+          <p class="text-base text-slate-300 font-body leading-relaxed">
+            Interconexión dedicada entre nuestros centros operativos (CDMX Insurgentes, CDMX Monterrey, Cd. Juárez y El Paso, TX) y Centros de Datos internacionales.
+          </p>
+          <div class="pt-3 border-t border-slate-700 space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-slate-300 font-bold">Disponibilidad de Red</span>
+              <span class="text-2xl font-black text-emerald-400">99.99%</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-slate-300 font-bold">Seguridad y Conmutación</span>
+              <span class="text-lg font-extrabold text-sky-400">Alta Disponibilidad (HA)</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-slate-300 font-bold">Segmentación</span>
+              <span class="text-lg font-extrabold text-amber-300">VLANs Dedicadas</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border-2 border-slate-200 shadow-sm space-y-2">
+          <h4 class="text-lg font-extrabold text-slate-900">Nodos de Respaldo Activos</h4>
+          <p class="text-sm text-slate-600 font-body">
+            • Enlaces redundantes hacia Dallas, Houston y Centro de Datos KIO Querétaro.<br>
+            • Directorio Activo, Servidores Web y Bases de Datos en clúster.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-between text-sm font-semibold text-slate-500 border-t border-slate-200 pt-4">
+      <span>Telat Group · Topología de Red y Enlaces con Socios Estratégicos</span>
+      <span>06 / 11</span>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SLIDE 7: SEGURIDAD EN INFORMACIÓN - PCI DSS
+  =========================================== -->
+  <section class="slide px-20 py-14 justify-between bg-white">
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b-2 border-slate-200 pb-5">
+      <div>
+        <p class="text-sm font-extrabold tracking-widest text-telat-naranja uppercase">Blindaje Transaccional</p>
+        <h2 class="text-5xl font-black text-slate-900 mt-1">Seguridad en Información – PCI DSS</h2>
+      </div>
+      <div class="flex items-center gap-6">
+        <img src="assets/logo_telat_canonical.png" alt="Telat" class="h-16 w-16 object-contain">
+        <div class="h-10 w-0.5 bg-slate-300"></div>
+        <img src="assets/uvc_logo.png" alt="UVC" class="h-14 object-contain">
+      </div>
+    </div>
+
+    <!-- Top Hero Banner with Large PCI Badge -->
+    <div class="bg-gradient-to-r from-slate-900 via-telat-navy to-slate-900 p-8 rounded-3xl text-white flex items-center justify-between shadow-xl">
+      <div class="space-y-2 max-w-4xl">
+        <span class="px-4 py-1 bg-telat-naranja text-white text-sm font-extrabold rounded-full uppercase">Sistemas Avanzados de Seguridad</span>
+        <h3 class="text-3xl font-extrabold">Protección Total en Pagos y Datos de Socios UVC</h3>
+        <p class="text-xl text-slate-200 font-body">
+          Apego riguroso a los controles técnicos y operativos para proteger cada transacción con tarjeta y datos personales.
+        </p>
+      </div>
+      <div class="bg-white p-4 rounded-2xl shadow-lg">
+        <img src="assets/certificaciones/cert_pci_dss.png" alt="PCI DSS" class="h-24 object-contain">
+      </div>
+    </div>
+
+    <!-- 6 Big Visual Security Blocks with Vector SVG Icons -->
+    <div class="grid grid-cols-3 gap-6 my-auto">
+      <div class="bg-slate-50 p-7 rounded-2xl border-2 border-slate-200 flex items-start gap-5">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#0F172A] via-[#14295C] to-[#38BDF8] text-white shadow-lg ring-1 ring-inset ring-white/25 flex items-center justify-center flex-shrink-0">
+          <svg class="w-8 h-8 drop-shadow-sm" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"/>
+          </svg>
+        </div>
+        <div>
+          <h4 class="text-2xl font-extrabold text-slate-900">Identificación</h4>
+          <p class="text-base text-slate-600 font-body mt-1">Control biométrico en instalaciones y trazabilidad de cada usuario en plataforma.</p>
+        </div>
+      </div>
+
+      <div class="bg-slate-50 p-7 rounded-2xl border-2 border-slate-200 flex items-start gap-5">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1E1B4B] via-[#4338CA] to-[#818CF8] text-white shadow-lg ring-1 ring-inset ring-white/25 flex items-center justify-center flex-shrink-0">
+          <svg class="w-8 h-8 drop-shadow-sm" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+          </svg>
+        </div>
+        <div>
+          <h4 class="text-2xl font-extrabold text-slate-900">Autenticación</h4>
+          <p class="text-base text-slate-600 font-body mt-1">Políticas de acceso seguro, validación multifactor (MFA) y directorio activo segmentado.</p>
+        </div>
+      </div>
+
+      <div class="bg-slate-50 p-7 rounded-2xl border-2 border-slate-200 flex items-start gap-5">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#064E3B] via-[#059669] to-[#34D399] text-white shadow-lg ring-1 ring-inset ring-white/25 flex items-center justify-center flex-shrink-0">
+          <svg class="w-8 h-8 drop-shadow-sm" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+        </div>
+        <div>
+          <h4 class="text-2xl font-extrabold text-slate-900">Cifrado de Extremo a Extremo</h4>
+          <p class="text-base text-slate-600 font-body mt-1">Encriptación integral en transmisiones de voz, pantallas y bases de datos.</p>
+        </div>
+      </div>
+
+      <div class="bg-slate-50 p-7 rounded-2xl border-2 border-slate-200 flex items-start gap-5">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#78350F] via-[#D97706] to-[#FDE047] text-white shadow-lg ring-1 ring-inset ring-white/25 flex items-center justify-center flex-shrink-0">
+          <svg class="w-8 h-8 drop-shadow-sm" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+        </div>
+        <div>
+          <h4 class="text-2xl font-extrabold text-slate-900">Continuidad de Negocio (BCP)</h4>
+          <p class="text-base text-slate-600 font-body mt-1">Plan de continuidad operativa auditado bajo ISO 22301 ante cualquier eventualidad.</p>
+        </div>
+      </div>
+
+      <div class="bg-slate-50 p-7 rounded-2xl border-2 border-slate-200 flex items-start gap-5">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#7F1D1D] via-[#E11D48] to-[#FDA4AF] text-white shadow-lg ring-1 ring-inset ring-white/25 flex items-center justify-center flex-shrink-0">
+          <svg class="w-8 h-8 drop-shadow-sm" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <div>
+          <h4 class="text-2xl font-extrabold text-slate-900">Recuperación de Desastres (DRP)</h4>
+          <p class="text-base text-slate-600 font-body mt-1">Plan de respaldo inmediato con redundancia geográfica activa en nuestras 4 sedes.</p>
+        </div>
+      </div>
+
+      <div class="bg-slate-50 p-7 rounded-2xl border-2 border-slate-200 flex items-start gap-5">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#134E4A] via-[#0D9488] to-[#5EEAD4] text-white shadow-lg ring-1 ring-inset ring-white/25 flex items-center justify-center flex-shrink-0">
+          <svg class="w-8 h-8 drop-shadow-sm" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+          </svg>
+        </div>
+        <div>
+          <h4 class="text-2xl font-extrabold text-slate-900">Cumplimiento PCI DSS</h4>
+          <p class="text-base text-slate-600 font-body mt-1">Transferencia y procesamiento seguro de pagos sin almacenamiento de CVV ni exposición.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-between text-sm font-semibold text-slate-500 border-t border-slate-200 pt-4">
+      <span>Telat Group · Blindaje de Información y Cumplimiento PCI DSS</span>
+      <span>07 / 11</span>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SLIDE 8: NUESTRAS CERTIFICACIONES (LOGO IMT GRANDE Y VISIBLE)
+  =========================================== -->
+  <section class="slide px-20 py-14 justify-between bg-slate-50">
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b-2 border-slate-200 pb-5">
+      <div>
+        <p class="text-sm font-extrabold tracking-widest text-telat-naranja uppercase">Respaldo Auditado</p>
+        <h2 class="text-5xl font-black text-slate-900 mt-1">Nuestras Certificaciones y Modelo Global CIC</h2>
+      </div>
+      <div class="flex items-center gap-6">
+        <img src="assets/logo_telat_canonical.png" alt="Telat" class="h-16 w-16 object-contain">
+        <div class="h-10 w-0.5 bg-slate-300"></div>
+        <img src="assets/uvc_logo.png" alt="UVC" class="h-14 object-contain">
+      </div>
+    </div>
+
+    <!-- Unified Balanced Certifications Block (9 Cards Centered Vertically) -->
+    <div class="space-y-6 my-auto">
+      <!-- Top Row: Featured Modelo Global CIC + PCI DSS + ESR & IMT -->
+      <div class="grid grid-cols-3 gap-6">
+        <!-- Modelo Global CIC Hero Card -->
+        <div class="bg-gradient-to-br from-slate-900 to-telat-navy text-white p-6 rounded-3xl shadow-xl flex items-center gap-6 border-2 border-telat-amarillo">
+          <div class="bg-white p-3 rounded-2xl flex-shrink-0">
+            <img src="assets/certificaciones/cert_modelo_cic.png" alt="Modelo Global CIC" class="h-24 w-24 object-contain">
+          </div>
+          <div>
+            <span class="px-3 py-0.5 bg-telat-amarillo text-slate-900 text-xs font-black rounded-full uppercase">Excelencia Operativa</span>
+            <h3 class="text-2xl font-black mt-1">Modelo Global CIC</h3>
+            <p class="text-sm text-slate-200 font-body mt-1">Certificación líder en la industria para la excelencia en la gestión de Centros de Interacción con Clientes.</p>
+          </div>
+        </div>
+
+        <!-- PCI DSS Hero Card -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-md flex items-center gap-6">
+          <img src="assets/certificaciones/cert_pci_dss.png" alt="PCI DSS" class="h-24 w-24 object-contain flex-shrink-0">
+          <div>
+            <span class="px-3 py-0.5 bg-blue-100 text-telat-celeste text-xs font-black rounded-full uppercase">Seguridad Transaccional</span>
+            <h3 class="text-2xl font-black text-slate-900 mt-1">Cumplimiento PCI DSS</h3>
+            <p class="text-sm text-slate-600 font-body mt-1">Estándar de Seguridad de Datos para la Industria de Tarjetas de Pago.</p>
+          </div>
+        </div>
+
+        <!-- ESR & IMT Hero Card (WITH LARGE CROPPED LOGO_IMT.PNG) -->
+        <div class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-md flex items-center gap-5">
+          <div class="flex flex-col items-center justify-center gap-2.5 flex-shrink-0 bg-slate-50 px-4 py-3 rounded-2xl border border-slate-200">
+            <img src="assets/certificaciones/cert_esr_2026.png" alt="ESR" class="h-11 object-contain">
+            <img src="assets/certificaciones/logo_imt.png" alt="IMT Oficial" class="h-12 w-32 object-contain">
+          </div>
+          <div>
+            <span class="px-3 py-0.5 bg-emerald-100 text-emerald-700 text-xs font-black rounded-full uppercase">Responsabilidad y Calidad</span>
+            <h3 class="text-2xl font-black text-slate-900 mt-1">ESR y Premios IMT</h3>
+            <p class="text-sm text-slate-600 font-body mt-1">Empresa Socialmente Responsable y 4 años consecutivos galardonados por el IMT.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subtle Elegant Separator Line with Central Pill Label -->
+      <div class="relative flex items-center justify-center py-1">
+        <div class="absolute inset-0 flex items-center">
+          <div class="w-full border-t border-slate-200"></div>
+        </div>
+        <div class="relative bg-slate-50 px-5 text-xs font-bold text-slate-600 uppercase tracking-widest flex items-center gap-2">
+          <span>Estándares Internacionales ISO Auditados</span>
+        </div>
+      </div>
+
+      <!-- Bottom Grid: 6 Large ISO Certifications -->
+      <div class="grid grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-2xl border-2 border-slate-200 shadow-sm flex items-center gap-5">
+          <img src="assets/certificaciones/cert_iso_27001.png" alt="ISO 27001" class="h-24 w-24 object-contain flex-shrink-0">
+          <div>
+            <h4 class="text-2xl font-black text-slate-900">ISO 27001</h4>
+            <p class="text-base text-slate-600 font-body">Seguridad de la Información y Protección de Datos</p>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border-2 border-slate-200 shadow-sm flex items-center gap-5">
+          <img src="assets/certificaciones/cert_iso_22301.png" alt="ISO 22301" class="h-24 w-24 object-contain flex-shrink-0">
+          <div>
+            <h4 class="text-2xl font-black text-slate-900">ISO 22301</h4>
+            <p class="text-base text-slate-600 font-body">Continuidad de la Operación del Negocio (BCP)</p>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border-2 border-slate-200 shadow-sm flex items-center gap-5">
+          <img src="assets/certificaciones/cert_iso_9001.png" alt="ISO 9001" class="h-24 w-24 object-contain flex-shrink-0">
+          <div>
+            <h4 class="text-2xl font-black text-slate-900">ISO 9001</h4>
+            <p class="text-base text-slate-600 font-body">Sistema de Gestión de la Calidad Auditado</p>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border-2 border-slate-200 shadow-sm flex items-center gap-5">
+          <img src="assets/certificaciones/cert_iso_20000.png" alt="ISO 20000-1" class="h-24 w-24 object-contain flex-shrink-0">
+          <div>
+            <h4 class="text-2xl font-black text-slate-900">ISO 20000-1</h4>
+            <p class="text-base text-slate-600 font-body">Gestión de la Calidad en Servicios de TI</p>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border-2 border-slate-200 shadow-sm flex items-center gap-5">
+          <img src="assets/certificaciones/cert_iso_37001.png" alt="ISO 37001" class="h-24 w-24 object-contain flex-shrink-0">
+          <div>
+            <h4 class="text-2xl font-black text-slate-900">ISO 37001</h4>
+            <p class="text-base text-slate-600 font-body">Sistema de Gestión Antisoborno y Ética</p>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border-2 border-slate-200 shadow-sm flex items-center gap-5">
+          <img src="assets/certificaciones/cert_iso_18295.png" alt="ISO 18295-1" class="h-24 w-24 object-contain flex-shrink-0">
+          <div>
+            <h4 class="text-2xl font-black text-slate-900">ISO 18295-1</h4>
+            <p class="text-base text-slate-600 font-body">Buenas Prácticas en Centros de Contacto</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-between text-sm font-semibold text-slate-500 border-t border-slate-200 pt-4">
+      <span>Telat Group · Ecosistema de Certificaciones Internacionales y Modelo Global CIC</span>
+      <span>08 / 11</span>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SLIDE 9: POR QUÉ CONTRATAR LOS SERVICIOS DE TELAT (IMT GRANDE)
+  =========================================== -->
+  <section class="slide px-20 py-14 justify-between bg-white">
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b-2 border-slate-200 pb-5">
+      <div>
+        <p class="text-sm font-extrabold tracking-widest text-telat-naranja uppercase">Valor Diferencial</p>
+        <h2 class="text-5xl font-black text-slate-900 mt-1">¿Por Qué Contratar los Servicios de Telat?</h2>
+      </div>
+      <div class="flex items-center gap-6">
+        <img src="assets/logo_telat_canonical.png" alt="Telat" class="h-16 w-16 object-contain">
+        <div class="h-10 w-0.5 bg-slate-300"></div>
+        <img src="assets/uvc_logo.png" alt="UVC" class="h-14 object-contain">
+      </div>
+    </div>
+
+    <!-- 2x4 High-Impact Differentiator Grid -->
+    <div class="grid grid-cols-4 gap-6 my-auto">
+      <div class="bg-slate-50 p-6 rounded-3xl border-2 border-slate-200 space-y-2">
+        <span class="font-num text-4xl text-telat-celeste font-normal">20+ Años</span>
+        <h4 class="text-xl font-extrabold text-slate-900">Experiencia BPO</h4>
+        <p class="text-base text-slate-600 font-body">Especialistas en diversos tipos de campañas y optimización de cada llamada.</p>
+      </div>
+
+      <div class="bg-slate-50 p-6 rounded-3xl border-2 border-slate-200 space-y-2">
+        <span class="font-num text-4xl text-telat-naranja font-normal">24 / 7</span>
+        <h4 class="text-xl font-extrabold text-slate-900">Presencia Binacional</h4>
+        <p class="text-base text-slate-600 font-body">Operación en CDMX, Ciudad Juárez y El Paso, TX con cobertura continua.</p>
+      </div>
+
+      <div class="bg-slate-50 p-6 rounded-3xl border-2 border-slate-200 space-y-2">
+        <span class="font-num text-4xl text-emerald-600 font-normal">9 Sellos</span>
+        <h4 class="text-xl font-extrabold text-slate-900">Certificaciones y CIC</h4>
+        <p class="text-base text-slate-600 font-body">Modelo Global CIC, PCI DSS, ISO 27001, ISO 22301, ISO 9001 y ESR.</p>
+      </div>
+
+      <div class="bg-slate-50 p-6 rounded-3xl border-2 border-slate-200 space-y-2">
+        <span class="font-num text-4xl text-purple-600 font-normal">100% IA</span>
+        <h4 class="text-xl font-extrabold text-slate-900">Analítica de Voz y Texto</h4>
+        <p class="text-base text-slate-600 font-body">Inteligencia artificial aplicada para mejorar la toma de decisiones comerciales.</p>
+      </div>
+
+      <div class="bg-slate-50 p-6 rounded-3xl border-2 border-slate-200 space-y-2">
+        <span class="font-num text-4xl text-amber-600 font-normal">360°</span>
+        <h4 class="text-xl font-extrabold text-slate-900">Servicios Omnicanal</h4>
+        <p class="text-base text-slate-600 font-body">Manejo integrado de Voz, Chat, WhatsApp, redes sociales y correo.</p>
+      </div>
+
+      <div class="bg-slate-50 p-6 rounded-3xl border-2 border-slate-200 space-y-2">
+        <span class="font-num text-4xl text-rose-600 font-normal">BCP/DRP</span>
+        <h4 class="text-xl font-extrabold text-slate-900">Continuidad Total</h4>
+        <p class="text-base text-slate-600 font-body">Arquitectura redundante que asegura la operación ante cualquier contingencia.</p>
+      </div>
+
+      <div class="bg-slate-50 p-6 rounded-3xl border-2 border-slate-200 space-y-2">
+        <span class="font-num text-4xl text-teal-600 font-normal">Flex</span>
+        <h4 class="text-xl font-extrabold text-slate-900">Atención de Desborde</h4>
+        <p class="text-base text-slate-600 font-body">Capacidad inmediata ante situaciones atípicas de alto tráfico de llamadas.</p>
+      </div>
+
+      <div class="bg-slate-50 p-6 rounded-3xl border-2 border-slate-200 space-y-2">
+        <span class="font-num text-4xl text-sky-600 font-normal">ROI</span>
+        <h4 class="text-xl font-extrabold text-slate-900">Costos Competitivos</h4>
+        <p class="text-base text-slate-600 font-body">Nos adaptamos a la escala de Unlimited Vacation Club maximizando rentabilidad.</p>
+      </div>
+    </div>
+
+    <!-- Bottom Recognition Banner (WITH LARGE HIGH-IMPACT LOGO_IMT.PNG) -->
+    <div class="bg-gradient-to-r from-slate-900 to-telat-navy text-white p-6 rounded-3xl flex items-center justify-between shadow-lg">
+      <div class="flex items-center gap-7">
+        <div class="bg-white px-7 py-3.5 rounded-2xl shadow-md flex items-center justify-center flex-shrink-0">
+          <img src="assets/certificaciones/logo_imt.png" alt="IMT Oficial" class="h-16 w-44 object-contain">
+        </div>
+        <div>
+          <h4 class="text-2xl font-extrabold text-telat-amarillo">Reconocidos en México y Latinoamérica por 4to Año Consecutivo (IMT)</h4>
+          <p class="text-base text-slate-200 font-body mt-0.5">Galardonados en Experiencia al Cliente por la operación de las mejores campañas internacionales (2023 Plata · 2024 Bronce · 2025 Bronce · 2026 Oro).</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3 flex-shrink-0">
+        <span class="px-5 py-2.5 bg-amber-400 text-slate-950 font-black rounded-xl text-sm uppercase tracking-wide">Oro IMT 2026</span>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-between text-sm font-semibold text-slate-500 border-t border-slate-200 pt-4">
+      <span>Telat Group · Ventajas Competitivas para Unlimited Vacation Club</span>
+      <span>09 / 11</span>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SLIDE 10: PROPUESTA DE INVERSIÓN · UVC
+  =========================================== -->
+  <section class="slide px-20 py-14 justify-between bg-slate-50">
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b-2 border-slate-200 pb-5">
+      <div>
+        <p class="text-sm font-extrabold tracking-widest text-telat-naranja uppercase">Condiciones Económicas Formales</p>
+        <h2 class="text-5xl font-black text-slate-900 mt-1">Propuesta de Inversión · UVC</h2>
+      </div>
+      <div class="flex items-center gap-6">
+        <img src="assets/logo_telat_canonical.png" alt="Telat" class="h-16 w-16 object-contain">
+        <div class="h-10 w-0.5 bg-slate-300"></div>
+        <img src="assets/uvc_logo.png" alt="UVC" class="h-14 object-contain">
+      </div>
+    </div>
+
+    <!-- Top 4 Hero Economic Cards -->
+    <div class="grid grid-cols-4 gap-6">
+      <div class="bg-white p-7 rounded-3xl border-4 border-telat-celeste shadow-md">
+        <span class="text-xs font-extrabold text-telat-celeste uppercase tracking-wider">Tarifa Operativa</span>
+        <h4 class="text-xl font-black text-slate-900 mt-1">Costo por Hora Conectada</h4>
+        <div class="flex items-baseline gap-2 mt-3">
+          <span class="font-num text-6xl text-slate-900 font-normal">$17.30</span>
+          <span class="text-lg font-extrabold text-slate-600">USD / hora</span>
+        </div>
+        <p class="text-sm text-slate-600 font-body mt-2">Incluye telefonía saliente e infraestructura.</p>
+      </div>
+
+      <div class="bg-white p-7 rounded-3xl border-2 border-slate-300 shadow-md">
+        <span class="text-xs font-extrabold text-telat-naranja uppercase tracking-wider">Formación Especializada</span>
+        <h4 class="text-xl font-black text-slate-900 mt-1">Costo por Hora Capacitación</h4>
+        <div class="flex items-baseline gap-2 mt-3">
+          <span class="font-num text-6xl text-slate-900 font-normal">$15.00</span>
+          <span class="text-lg font-extrabold text-slate-600">USD / hora</span>
+        </div>
+        <p class="text-sm text-slate-600 font-body mt-2">Capacitación dedicada en programa UVC.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-slate-900 to-telat-navy p-7 rounded-3xl text-white shadow-xl">
+        <span class="text-xs font-extrabold text-telat-amarillo uppercase tracking-wider">Inversión Mensual</span>
+        <h4 class="text-xl font-black text-white mt-1">Presupuesto Mensual</h4>
+        <div class="flex items-baseline gap-2 mt-3">
+          <span class="font-num text-5xl text-telat-amarillo font-normal">$350,575</span>
+          <span class="text-lg font-extrabold text-slate-300">USD</span>
+        </div>
+        <p class="text-sm text-slate-300 font-body mt-2">Facturación mensual según Sistema ACD.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-slate-900 to-telat-navy p-7 rounded-3xl text-white shadow-xl">
+        <span class="text-xs font-extrabold text-sky-400 uppercase tracking-wider">Proyección Anual</span>
+        <h4 class="text-xl font-black text-white mt-1">Presupuesto Anual</h4>
+        <div class="flex items-baseline gap-2 mt-3">
+          <span class="font-num text-5xl text-sky-400 font-normal">$4,206,889</span>
+          <span class="text-lg font-extrabold text-slate-300">USD</span>
+        </div>
+        <p class="text-sm text-slate-300 font-body mt-2">Operación anual continua garantizada.</p>
+      </div>
+    </div>
+
+    <!-- Center Details: Dedicated Staff & Considerations -->
+    <div class="grid grid-cols-12 gap-8 items-stretch my-auto">
+      <div class="col-span-6 bg-white p-7 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between border-b border-slate-200 pb-3 mb-4">
+            <h4 class="text-2xl font-black text-slate-900">Implementación con Recursos Dedicados</h4>
+            <span class="px-4 py-1 bg-emerald-100 text-emerald-800 text-sm font-black rounded-full uppercase">100% Dedicado</span>
+          </div>
+          <div class="grid grid-cols-2 gap-4 text-lg font-bold text-slate-800">
+            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">✓ Agentes 100% Dedicados</div>
+            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">✓ Supervisores Dedicados</div>
+            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">✓ Control Operativo (WFM) Dedicado</div>
+            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">✓ Instructor de Campaña Dedicado</div>
+            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 col-span-2 text-telat-celeste">✓ Auditoría de Calidad con Inteligencia Artificial Dedicada</div>
+          </div>
+        </div>
+        <p class="text-sm text-slate-500 font-body mt-3">
+          * Esta campaña opera con estructura y personal de supervisión 100% dedicado a Unlimited Vacation Club.
+        </p>
+      </div>
+
+      <div class="col-span-6 bg-white p-7 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between">
+        <div>
+          <h4 class="text-2xl font-black text-slate-900 border-b border-slate-200 pb-3 mb-4">Alcance Operativo y Consideraciones</h4>
+          <ul class="space-y-2.5 text-base text-slate-700 font-body font-medium">
+            <li>• <strong>Precio por hora conectada:</strong> Tiempo en llamada entrante/saliente, trabajo post-llamada, espera, disponible, comida y tiempos auxiliares (fuente oficial de facturación: Sistema ACD).</li>
+            <li>• <strong>Estación de trabajo incluida:</strong> Computadora, teléfono, diadema, escritorio, silla e infraestructura tecnológica de Telat.</li>
+            <li>• <strong>Reportería ejecutiva:</strong> Tablero de actividad, productividad y avance de campaña en tiempo real.</li>
+            <li>• <strong>Escalabilidad:</strong> Solución ajustable de acuerdo con el volumen de interacciones de UVC.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fiscal Strip -->
+    <div class="bg-gradient-to-r from-slate-950 via-slate-900 to-telat-navy border border-slate-700/80 text-white p-5 rounded-2xl flex items-center justify-between shadow-lg">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#78350F] via-[#D97706] to-[#FDE047] p-2 flex items-center justify-center flex-shrink-0 shadow-lg ring-1 ring-inset ring-white/25">
+          <!-- Balanza de la Justicia / Legal / Fiscal en PNG de Alta Resolución -->
+          <img src="assets/icono_balanza_fiscal.png" alt="Condiciones Fiscales" class="w-full h-full object-contain drop-shadow-sm">
+        </div>
+        <p class="text-lg font-body">
+          <strong class="text-telat-amarillo font-sans">Condiciones Fiscales:</strong> Precios expresados en USD antes de impuestos. Aplica IVA (16%) únicamente para facturación en territorio mexicano; facturación corporativa en EE. UU. libre de impuestos trasladados.
+        </p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-between text-sm font-semibold text-slate-500 border-t border-slate-200 pt-4">
+      <span>Telat Group · Propuesta Económica para Unlimited Vacation Club</span>
+      <span>10 / 11</span>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SLIDE 11: CIERRE EJECUTIVO & CO-BRANDING GIGANTE
+  =========================================== -->
+  <section class="slide bg-gradient-to-br from-[#0B132B] via-[#0F172A] to-[#14295C] text-white px-24 py-16 justify-between">
+    <!-- Top Header -->
+    <div class="flex items-center justify-between border-b border-slate-700/70 pb-6">
+      <span class="text-base tracking-widest text-telat-amarillo font-extrabold uppercase">Alianza Estratégica de Largo Plazo</span>
+      <span class="text-base text-slate-400 font-semibold">Noviembre 2026</span>
+    </div>
+
+    <!-- Center Hero: Giant Logos Together + Closing Message -->
+    <div class="my-auto text-center space-y-10">
+      <div class="inline-flex items-center justify-center gap-14 bg-slate-800/70 px-16 py-10 rounded-[40px] border-2 border-slate-600 shadow-2xl">
+        <div class="flex items-center gap-6">
+          <img src="assets/logo_telat_canonical.png" alt="Telat Group" class="h-36 w-36 object-contain drop-shadow-xl">
+          <div class="text-left">
+            <span class="text-5xl font-black tracking-wider text-white block">TELAT</span>
+            <span class="text-base font-bold tracking-widest text-telat-naranja uppercase block mt-1">La Voz de su Empresa</span>
+          </div>
+        </div>
+
+        <div class="text-6xl font-light text-telat-amarillo px-4">×</div>
+
+        <div class="bg-slate-900/90 px-10 py-6 rounded-3xl border border-slate-700">
+          <img src="assets/uvc_logo_dark.png" alt="Unlimited Vacation Club" class="h-28 object-contain">
+        </div>
+      </div>
+
+      <div class="max-w-4xl mx-auto space-y-4">
+        <h2 class="text-5xl font-black leading-tight text-white">
+          Listos para Impulsar la Experiencia de los Socios de <span class="text-sky-400">Unlimited Vacation Club</span>
+        </h2>
+        <p class="text-2xl text-slate-300 font-body">
+          Personal 100% dedicado, tecnología de Inteligencia Artificial e infraestructura binacional a su servicio.
+        </p>
+      </div>
+    </div>
+
+    <!-- Bottom Institutional Contact (Exclusively Luis Cortina) -->
+    <div class="bg-slate-800/80 p-8 rounded-3xl border border-slate-600 flex items-center justify-between">
+      <div class="space-y-1">
+        <p class="text-xs uppercase tracking-widest text-telat-amarillo font-extrabold">Representación Institucional</p>
+        <p class="text-3xl font-black text-white">Luis Cortina</p>
+        <p class="text-lg text-slate-300 font-body font-medium">Apoderado Legal · Telat Group</p>
+      </div>
+
+      <div class="h-14 w-px bg-slate-600"></div>
+
+      <div class="space-y-1">
+        <p class="text-xs uppercase tracking-widest text-sky-400 font-extrabold">Contacto Corporativo</p>
+        <p class="text-xl font-bold text-white">contacto@telat-group.com</p>
+        <p class="text-base text-slate-300 font-body">www.telat-group.com</p>
+      </div>
+
+      <div class="h-14 w-px bg-slate-600"></div>
+
+      <div class="text-right space-y-1">
+        <p class="text-xs uppercase tracking-widest text-emerald-400 font-extrabold">Presencia Binacional</p>
+        <p class="text-lg font-bold text-white">Ciudad de México (Insurgentes & Roma)</p>
+        <p class="text-base text-slate-300 font-body">Ciudad Juárez, Chih. · El Paso, Texas, USA</p>
+      </div>
+    </div>
+  </section>
+
+</body>
+
+</html>
