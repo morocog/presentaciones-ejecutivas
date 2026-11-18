@@ -72,3 +72,18 @@
    - Prueba de tráfico entrante desde WhatsApp personal.
 3. Definir subdominio de marca blanca (`admisiones.telat.mx` / `cem.telat.mx`).
 
+---
+
+## 6. Actualización Comercial y Negociación (17 de noviembre de 2026)
+- **Retroalimentación de Jacqueline Maldonado (Mensaje de voz tras revisión de los dueños / Lic. Eduardo Alarcón):**
+  1. *ROI y meta de alumnos:* Preguntaron si los **+38 alumnos** corresponden también al Escenario B (Piloto Fast-Track de 3 a 4 diplomados).
+  2. *Esquema de pago:* Propusieron **50% de anticipo a la firma y 50% al cumplimiento del objetivo**, debido a desconfianza y malas experiencias pasadas con agencias de publicidad.
+  3. *Fecha de arranque:* Les agrada mucho el proyecto, pero por fin de año, aguinaldos y vacaciones judiciales piden **arrancar a principios de febrero de 2027**.
+- **Postura Estratégica Acordada (Telat Group):**
+  - **Punto 1 (Meta alumnos):** SÍ es viable. La clave es que CEM nos ayude a escoger los 3-4 programas de mayor demanda histórica donde se concentra el volumen; enfocando ahí la respuesta inmediata y llamadas de cierre, se alcanza el objetivo.
+  - **Punto 2 (Forma de pago):** Telat **no es agencia de publicidad** y no absorbe riesgo de colocación ajeno. El Setup ($110,000 MXN) se mantiene firme: **50% anticipo y 50% contra entrega operativa**. Como concesión de alineación, la flexibilidad se traslada a la **póliza mensual** ($28k/mes), reduciendo base fija y agregando bono de éxito por alumno adicional arriba de 112.
+  - **Punto 3 (Arranque en febrero):** Se respeta su calendario sin presiones, y **se les congelan los precios y condiciones preferenciales del piloto hasta febrero de 2027** como gesto de colaboración institucional.
+- **Acción Inmediata:** Ricardo García envió la redacción a Alejandro Valente para que la despache formalmente por correo a Jacqueline Maldonado. En espera de respuesta el día 18 de noviembre de 2026.
+- **Alineación Interna:** Esquema validado para socializar con Luis Cortina (Apoderado Legal) y Mauricio Cruz (Director de Operaciones), garantizando blindaje de costos e ingreso neto día 1 de +$93k MXN.
+
+
