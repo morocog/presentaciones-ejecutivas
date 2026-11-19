@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informe Forense e Histórico · Wine Country Gift Baskets (WCGB) · Telat Group</title>
+
+  <!-- Google Fonts: DM Sans & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Tailwind CSS CDN v3 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            telat: {
+              celeste: '#3284C6',
+              naranja: '#EB5B27',
+              amarillo: '#FECA66',
+              oscuro: '#222221',
+              claro: '#FBFBFD',
+              gris: '#64748B',
+              borde: '#E2E8F0',
+              navy: '#0F2C59'
+            }
+          },
+          fontFamily: {
+            sans: ['"DM Sans"', 'sans-serif'],
+            title: ['Montserrat', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --telat-oscuro: #222221;
+      --telat-celeste: #3284C6;
+      --telat-naranja: #EB5B27;
+      --telat-amarillo: #FECA66;
+      --telat-claro: #FBFBFD;
+      --telat-borde: #E2E8F0;
+      --telat-navy: #0F2C59;
+    }
+
+    body {
+      background-color: #F1F5F9;
+      color: #0F172A;
+      font-family: 'DM Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .font-title {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .dossier-container {
+      background: #FFFFFF;
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      border: 1px solid var(--telat-borde);
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.05);
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    .callout-orange {
+      background: linear-gradient(135deg, rgba(235, 91, 39, 0.04) 0%, rgba(255, 255, 255, 0.98) 100%);
+      border-left: 3px solid #EB5B27;
+    }
+
+    .callout-blue {
+      background: linear-gradient(135deg, rgba(50, 132, 198, 0.04) 0%, rgba(255, 255, 255, 0.98) 100%);
+      border-left: 3px solid #3284C6;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    @media print {
+      body {
+        background-color: #FFFFFF !important;
+        padding: 0 !important;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+
+      .dossier-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+      }
+
+      .page-break {
+        page-break-after: always !important;
+        break-after: page !important;
+      }
+
+      .avoid-break {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+
+      @page {
+        size: letter portrait;
+        margin: 12mm 14mm 12mm 14mm;
+      }
+    }
+  </style>
+</head>
+
+<body class="py-6 px-4 md:px-8">
+
+  <!-- TOP ACTION BAR (SCREEN ONLY) -->
+  <div class="no-print max-w-[960px] mx-auto mb-4 flex items-center justify-between bg-white px-5 py-2.5 rounded-xl border border-slate-200 shadow-sm">
+    <div class="flex items-center gap-2">
+      <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Informe Técnico de Auditoría Forense · Telat Group</span>
+    </div>
+    <button onclick="window.print()" class="inline-flex items-center gap-2 bg-[#222221] hover:bg-[#3284C6] text-white px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-colors shadow">
+      <i class="fa-solid fa-print"></i> Guardar en PDF
+    </button>
+  </div>
+
+  <div class="dossier-container">
+
+    <!-- HEADER CON LOGO TELAT -->
+    <header class="p-8 pb-5 border-b border-slate-200 bg-white">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-200">
+        <div class="flex items-center gap-4">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyQAAAMkCAYAAABJCuQEAAAACXBIWXMAAAsTAAALEwEAmpwYAAAE7mlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgOS4wLWMwMDAgNzkuMTcxYzI3ZiwgMjAyMi8wOC8xNi0xODowMjo0MyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDI0LjEgKFdpbmRvd3MpIiB4bXA6Q3JlYXRlRGF0ZT0iMjAyMy0wMS0xOFQxMToyNzowOC0wNjowMCIgeG1wOk1vZGlmeURhdGU9IjIwMjMtMDEtMThUMTI6NTI6MzQtMDY6MDAiIHhtcDpNZXRhZGF0YURhdGU9IjIwMjMtMDEtMThUMTI6NTI6MzQtMDY6MDAiIGRjOmZvcm1hdD0iaW1hZ2UvcG5nIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjExZDM5MzE5LTViZmMtZTA0MS1hMWYzLWMxNGExMDc3MGQ2YyIgeG1wTU06RG9jdW1lbnRJRD0i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" alt="Telat Group" class="h-11 w-auto object-contain">
+          <div>
+            <span class="text-[10.5px] font-bold uppercase tracking-widest text-[#EB5B27] block">Telat Group · Dirección de Operaciones & Tecnología</span>
+            <h1 class="text-2xl font-black text-[#222221] font-title leading-tight">Auditoría Forense e Histórica: Wine Country Gift Baskets (WCGB)</h1>
+          </div>
+        </div>
+        <div class="text-right">
+          <span class="inline-block bg-slate-100 text-slate-800 text-xs px-3 py-1 rounded font-bold uppercase tracking-wider border border-slate-200">
+            Confidencial Interno
+          </span>
+          <p class="text-xs text-slate-500 mt-1">18 de Noviembre de 2026</p>
+        </div>
+      </div>
+
+      <!-- MEMORÁNDUM DE GOBERNANZA -->
+      <div class="grid grid-cols-2 gap-3.5 mt-4 p-3.5 bg-slate-50 rounded-lg border border-slate-200 text-xs text-slate-700">
+        <div>
+          <span class="font-bold text-slate-500 uppercase text-[10.5px] tracking-wider block mb-1">Entidades Auditadas:</span>
+          <p class="font-semibold text-slate-900 leading-snug">• <strong>Wine Country Gift Baskets (WCGB)</strong> (Cliente Final)</p>
+          <p class="font-medium text-slate-700 leading-snug">• <strong>NexGen Agency</strong> (Broker / Partner Contratante)</p>
+          <p class="font-medium text-slate-700 leading-snug">• <strong>Telat Group</strong> (Proveedor de Contact Center)</p>
+        </div>
+        <div>
+          <span class="font-bold text-slate-500 uppercase text-[10.5px] tracking-wider block mb-1">Fuente de Información & Alcance:</span>
+          <p class="font-medium text-slate-700 leading-snug">• Telat Workspace Gateway v2.4 (Google Drive & Gmail corporativo)</p>
+          <p class="font-medium text-slate-700 leading-snug">• Archivos de nómina, WFM, matrices de horarios y reportes inContact</p>
+          <p class="font-medium text-slate-700 leading-snug">• Período histórico auditado: <strong>2020 a 2023</strong></p>
+        </div>
+      </div>
+    </header>
+
+    <!-- CUERPO PRINCIPAL -->
+    <main class="p-8 pt-6 space-y-6 text-slate-700 text-sm">
+
+      <!-- EXECUTIVE SUMMARY CALLOUT -->
+      <div class="callout-orange p-4 rounded-lg">
+        <h3 class="font-bold text-slate-900 text-sm font-title uppercase tracking-wide mb-1">Resumen Ejecutivo de la Auditoría</h3>
+        <p class="text-xs text-slate-700 leading-relaxed">
+          La cuenta de <strong>Wine Country Gift Baskets (WCGB)</strong> operó durante tres ciclos consecutivos de alta demanda de fin de año (2020, 2021 y 2022) a través de la agencia intermediaria <strong>NexGen Agency</strong>. Telat Group movilizó en total a <strong>más de 220 profesionales bilingües</strong>, alcanzando picos de facturación de <strong>84.50 FTEs semanales</strong> en la semana 49 de 2021 (>3,379 horas netas) y una dotación de <strong>116 colaboradores registrados en nómina</strong> en 2022 (7,209.15 horas netas). Toda la información operativa, contractual, de capacitación y WFM se encuentra plenamente identificada y auditada en Google Workspace.
+        </p>
+      </div>
+
+      <!-- KPI METRIC CARDS -->
+      <div class="grid grid-cols-4 gap-3 text-center text-xs avoid-break">
+        <div class="p-3 rounded-lg border border-slate-200 bg-slate-50">
+          <span class="text-[10px] font-bold text-slate-500 uppercase block">Headcount 2021</span>
+          <strong class="text-2xl font-black text-[#222221] font-title block mt-0.5">98</strong>
+          <span class="text-[11px] text-slate-600 block">Roster oficial de facturación</span>
+        </div>
+        <div class="p-3 rounded-lg border border-slate-200 bg-slate-50">
+          <span class="text-[10px] font-bold text-slate-500 uppercase block">Headcount 2022</span>
+          <strong class="text-2xl font-black text-[#222221] font-title block mt-0.5">116</strong>
+          <span class="text-[11px] text-slate-600 block">Nómina auditada ($714k MXN)</span>
+        </div>
+        <div class="p-3 rounded-lg border border-orange-200 bg-orange-50/40">
+          <span class="text-[10px] font-bold text-[#EB5B27] uppercase block">FTE Semanal Pico</span>
+          <strong class="text-2xl font-black text-[#EB5B27] font-title block mt-0.5">84.5</strong>
+          <span class="text-[11px] text-slate-600 block">Semana 49 (3,379.96 hrs netas)</span>
+        </div>
+        <div class="p-3 rounded-lg border border-blue-200 bg-blue-50/40">
+          <span class="text-[10px] font-bold text-[#3284C6] uppercase block">Pico Concurrente en Piso</span>
+          <strong class="text-2xl font-black text-[#3284C6] font-title block mt-0.5">77</strong>
+          <span class="text-[11px] text-slate-600 block">Agentes simultáneos a las 13:00 PT</span>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 1: CRONOLOGÍA DE TEMPORADAS -->
+      <section class="avoid-break">
+        <div class="flex items-center gap-2 mb-2 pb-1 border-b border-slate-200">
+          <span class="flex items-center justify-center w-5 h-5 rounded-full bg-[#EB5B27] text-white text-[11px] font-bold">1</span>
+          <h2 class="text-base font-bold text-[#222221] font-title">Cronología Histórica y Ciclo de Vida de las Campañas</h2>
+        </div>
+        <div class="border border-slate-200 rounded-lg overflow-hidden text-xs shadow-sm">
+          <table>
+            <thead>
+              <tr class="bg-[#0F2C59] text-white text-left text-[11px] uppercase tracking-wider">
+                <th class="py-2 px-3">Temporada</th>
+                <th class="py-2 px-3">Período de Ejecución</th>
+                <th class="py-2 px-3 text-right">Headcount</th>
+                <th class="py-2 px-3 text-right">Horas Netas</th>
+                <th class="py-2 px-3">Hitos Operativos y Contractuales</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 text-slate-700">
+              <tr class="bg-white hover:bg-slate-50">
+                <td class="py-2 px-3 font-semibold text-[#222221]">Temporada 2020</td>
+                <td class="py-2 px-3">Octubre a Diciembre 2020</td>
+                <td class="py-2 px-3 text-right font-bold">15</td>
+                <td class="py-2 px-3 text-right">~800 hrs</td>
+                <td class="py-2 px-3">Kickoff y primer Train-the-Trainer (TTT) impartido por JC Velez (19-Oct-2020). Calibración y pilotaje de procesos.</td>
+              </tr>
+              <tr class="bg-orange-50/30 hover:bg-orange-50/50">
+                <td class="py-2 px-3 font-semibold text-[#222221]">Temporada 2021</td>
+                <td class="py-2 px-3">15-Nov a 23-Dic 2021</td>
+                <td class="py-2 px-3 text-right font-bold text-[#EB5B27]">98</td>
+                <td class="py-2 px-3 text-right font-bold">>11,000 hrs</td>
+                <td class="py-2 px-3">Go-live masivo el 1-Dic. Pico histórico en semana 49 (3,379.96 hrs netas). Registro de 4,798 marcaciones en inContact.</td>
+              </tr>
+              <tr class="bg-orange-50/30 hover:bg-orange-50/50">
+                <td class="py-2 px-3 font-semibold text-[#222221]">Temporada 2022</td>
+                <td class="py-2 px-3">4-Oct a 19-Dic 2022</td>
+                <td class="py-2 px-3 text-right font-bold text-[#EB5B27]">116</td>
+                <td class="py-2 px-3 text-right font-bold">7,209.15 hrs</td>
+                <td class="py-2 px-3">Entrenamiento conducido por Oscar Rosales con JC Velez en sitio en CDMX. Ampliación de +21 HC (Batch 4.2). Cierre formal 19-Dic.</td>
+              </tr>
+              <tr class="bg-white hover:bg-slate-50">
+                <td class="py-2 px-3 font-semibold text-[#222221]">Conciliación 2023</td>
+                <td class="py-2 px-3">Septiembre a Noviembre 2023</td>
+                <td class="py-2 px-3 text-right text-slate-400">—</td>
+                <td class="py-2 px-3 text-right text-slate-400">—</td>
+                <td class="py-2 px-3">Cierre de nóminas históricas y conciliación de saldos y finiquitos de temporada.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 2: MAPEO DE ACTORES E INTERLOCUTORES -->
+      <section class="avoid-break">
+        <div class="flex items-center gap-2 mb-2 pb-1 border-b border-slate-200">
+          <span class="flex items-center justify-center w-5 h-5 rounded-full bg-[#3284C6] text-white text-[11px] font-bold">2</span>
+          <h2 class="text-base font-bold text-[#222221] font-title">Mapeo de Actores Clave e Interlocutores</h2>
+        </div>
+        <div class="border border-slate-200 rounded-lg overflow-hidden text-xs shadow-sm">
+          <table>
+            <thead>
+              <tr class="bg-[#0F2C59] text-white text-left text-[11px] uppercase tracking-wider">
+                <th class="py-2 px-3">Empresa</th>
+                <th class="py-2 px-3">Nombre</th>
+                <th class="py-2 px-3">Cargo / Rol</th>
+                <th class="py-2 px-3">Contacto Oficial</th>
+                <th class="py-2 px-3">Responsabilidad Operativa</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 text-slate-700">
+              <tr class="bg-white">
+                <td class="py-2 px-3 font-bold text-slate-900" rowspan="4">NexGen Agency<br><span class="text-[10px] text-slate-500 font-normal">(Partner / Broker)</span></td>
+                <td class="py-2 px-3 font-semibold">Jose Carlos (JC) Velez Jr.</td>
+                <td class="py-2 px-3">Operations & Training Mgr</td>
+                <td class="py-2 px-3 text-[#3284C6]">jc@nexgenagency.com</td>
+                <td class="py-2 px-3">Dueño de matrices maestras de staffing y currícula. Viajó físicamente a CDMX en noviembre de 2022.</td>
+              </tr>
+              <tr class="bg-white">
+                <td class="py-2 px-3 font-semibold">Gladimir Cruz ("Glad")</td>
+                <td class="py-2 px-3">Operations Manager</td>
+                <td class="py-2 px-3 text-[#3284C6]">glad.cruz@nexgenagency.com</td>
+                <td class="py-2 px-3">Autor de guías técnicas de setup, configuración de Edge, MFA en MyApps y reglas de visualización de IVR.</td>
+              </tr>
+              <tr class="bg-white">
+                <td class="py-2 px-3 font-semibold">Christina Crespo</td>
+                <td class="py-2 px-3">Senior VP of Operations</td>
+                <td class="py-2 px-3 text-[#3284C6]">christina@nexgenagency.com</td>
+                <td class="py-2 px-3">Interlocutora comercial principal para aprobación de Headcount adicional, tarifas y facturación.</td>
+              </tr>
+              <tr class="bg-white">
+                <td class="py-2 px-3 font-semibold">Ephraim Samson</td>
+                <td class="py-2 px-3">RTA & Reporting Lead</td>
+                <td class="py-2 px-3 text-[#3284C6]">ephraim.samson@nexgenexpert.com</td>
+                <td class="py-2 px-3">Analista desde Filipinas; remitía los reportes de inContact para cálculo de horas facturables netas.</td>
+              </tr>
+              <tr class="bg-slate-50">
+                <td class="py-2 px-3 font-bold text-slate-900" rowspan="2">WCGB<br><span class="text-[10px] text-slate-500 font-normal">(Cliente Final)</span></td>
+                <td class="py-2 px-3 font-semibold">Angela Johnson</td>
+                <td class="py-2 px-3">Operations & Training Mgr</td>
+                <td class="py-2 px-3 text-slate-500">Vía NexGen</td>
+                <td class="py-2 px-3">Materiales de capacitación de producto y generación de credenciales WebOE.</td>
+              </tr>
+              <tr class="bg-slate-50">
+                <td class="py-2 px-3 font-semibold">Jeff Faucet</td>
+                <td class="py-2 px-3">Director</td>
+                <td class="py-2 px-3 text-slate-500">Vía NexGen</td>
+                <td class="py-2 px-3">Dirección ejecutiva del programa e incentivos comerciales por cumplimiento.</td>
+              </tr>
+              <tr class="bg-white">
+                <td class="py-2 px-3 font-bold text-slate-900" rowspan="5">Telat Group<br><span class="text-[10px] text-slate-500 font-normal">(Proveedor)</span></td>
+                <td class="py-2 px-3 font-semibold">Mauricio Cruz</td>
+                <td class="py-2 px-3">Director de Operaciones</td>
+                <td class="py-2 px-3 text-[#3284C6]">mcruz@telat-group.com</td>
+                <td class="py-2 px-3">Relación comercial con Christina Crespo y acuerdos contractuales de capacidad.</td>
+              </tr>
+              <tr class="bg-white">
+                <td class="py-2 px-3 font-semibold">Ricardo García</td>
+                <td class="py-2 px-3">Subdirector de Operaciones</td>
+                <td class="py-2 px-3 text-[#3284C6]">rgarcia@telat-group.com</td>
+                <td class="py-2 px-3">Gobernanza operativa integral, supervisión de KPIs y auditoría de horas.</td>
+              </tr>
+              <tr class="bg-white">
+                <td class="py-2 px-3 font-semibold">Oscar Rosales</td>
+                <td class="py-2 px-3">Operations Mgr & Lead Trainer</td>
+                <td class="py-2 px-3 text-[#3284C6]">orosales@telat-group.com</td>
+                <td class="py-2 px-3">Conducción de aulas de entrenamiento en CDMX, asignación de turnos y cierre de campaña.</td>
+              </tr>
+              <tr class="bg-white">
+                <td class="py-2 px-3 font-semibold">Fabiola Alvarez</td>
+                <td class="py-2 px-3">WFM Specialist</td>
+                <td class="py-2 px-3 text-[#3284C6]">falvarez@telat-group.com</td>
+                <td class="py-2 px-3">Conciliación de horas contra reportes de inContact y prenóminas.</td>
+              </tr>
+              <tr class="bg-white">
+                <td class="py-2 px-3 font-semibold">Ricardo Morales</td>
+                <td class="py-2 px-3">Gerente de TI</td>
+                <td class="py-2 px-3 text-[#3284C6]">rmorales@telat-group.com</td>
+                <td class="py-2 px-3">Configuración y desmovilización de computadoras y 47 diademas USB en Sede Insurgentes.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 3: ANÁLISIS MATEMÁTICO DE FTES -->
+      <section class="avoid-break">
+        <div class="flex items-center gap-2 mb-2 pb-1 border-b border-slate-200">
+          <span class="flex items-center justify-center w-5 h-5 rounded-full bg-[#222221] text-white text-[11px] font-bold">3</span>
+          <h2 class="text-base font-bold text-[#222221] font-title">Análisis Matemático de FTEs Semanales y Diarios (Temporada 2021)</h2>
+        </div>
+        <p class="text-xs text-slate-600 mb-2 leading-relaxed">
+          A partir de los 4,798 registros de log de inContact en <code>WCGB Billable Hours 2021.xlsx</code>, se calculó el número exacto de FTEs semanales (base contractual BPO de 40 horas/semana):
+        </p>
+
+        <div class="border border-slate-200 rounded-lg overflow-hidden text-xs shadow-sm mb-3">
+          <table>
+            <thead>
+              <tr class="bg-[#0F2C59] text-white text-left text-[11px] uppercase tracking-wider">
+                <th class="py-2 px-3">Semana ISO</th>
+                <th class="py-2 px-3">Rango de Fechas</th>
+                <th class="py-2 px-3 text-right">HC Activo</th>
+                <th class="py-2 px-3 text-right">Horas Facturadas MX</th>
+                <th class="py-2 px-3 text-right">FTE Semanal MX (40h)</th>
+                <th class="py-2 px-3 text-right">Horas Globales</th>
+                <th class="py-2 px-3 text-right">FTE Global (40h)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 text-slate-700">
+              <tr class="bg-white">
+                <td class="py-2 px-3 font-semibold">Semana 46</td>
+                <td class="py-2 px-3">15 al 20 de Noviembre</td>
+                <td class="py-2 px-3 text-right font-bold">1</td>
+                <td class="py-2 px-3 text-right">40.00</td>
+                <td class="py-2 px-3 text-right font-bold text-[#3284C6]">1.00</td>
+                <td class="py-2 px-3 text-right">80.00</td>
+                <td class="py-2 px-3 text-right">2.00</td>
+              </tr>
+              <tr class="bg-white">
+                <td class="py-2 px-3 font-semibold">Semana 47</td>
+                <td class="py-2 px-3">26 al 28 de Noviembre</td>
+                <td class="py-2 px-3 text-right font-bold">48</td>
+                <td class="py-2 px-3 text-right">1,050.30</td>
+                <td class="py-2 px-3 text-right font-bold text-[#3284C6]">26.26</td>
+                <td class="py-2 px-3 text-right">2,100.60</td>
+                <td class="py-2 px-3 text-right">52.51</td>
+              </tr>
+              <tr class="bg-white">
+                <td class="py-2 px-3 font-semibold">Semana 48</td>
+                <td class="py-2 px-3">29 Nov al 5 de Diciembre</td>
+                <td class="py-2 px-3 text-right font-bold">78</td>
+                <td class="py-2 px-3 text-right">3,150.87</td>
+                <td class="py-2 px-3 text-right font-bold text-[#3284C6]">78.77</td>
+                <td class="py-2 px-3 text-right">6,301.75</td>
+                <td class="py-2 px-3 text-right">157.54</td>
+              </tr>
+              <tr class="bg-orange-50/40 font-semibold">
+                <td class="py-2 px-3 text-[#EB5B27]">Semana 49 (PICO)</td>
+                <td class="py-2 px-3">6 al 12 de Diciembre</td>
+                <td class="py-2 px-3 text-right font-bold text-[#EB5B27]">81</td>
+                <td class="py-2 px-3 text-right text-[#EB5B27]">3,379.96</td>
+                <td class="py-2 px-3 text-right font-black text-sm text-[#EB5B27]">84.50</td>
+                <td class="py-2 px-3 text-right">6,759.91</td>
+                <td class="py-2 px-3 text-right font-bold">169.00</td>
+              </tr>
+              <tr class="bg-white">
+                <td class="py-2 px-3 font-semibold">Semana 50</td>
+                <td class="py-2 px-3">13 al 19 de Diciembre</td>
+                <td class="py-2 px-3 text-right font-bold">71</td>
+                <td class="py-2 px-3 text-right">2,608.73</td>
+                <td class="py-2 px-3 text-right font-bold text-[#3284C6]">65.22</td>
+                <td class="py-2 px-3 text-right">5,217.46</td>
+                <td class="py-2 px-3 text-right">130.44</td>
+              </tr>
+              <tr class="bg-white">
+                <td class="py-2 px-3 font-semibold">Semana 51</td>
+                <td class="py-2 px-3">20 al 22 de Diciembre</td>
+                <td class="py-2 px-3 text-right font-bold">41</td>
+                <td class="py-2 px-3 text-right">804.07</td>
+                <td class="py-2 px-3 text-right font-bold text-[#3284C6]">20.10</td>
+                <td class="py-2 px-3 text-right">1,608.13</td>
+                <td class="py-2 px-3 text-right">40.20</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 4: CURVA HORARIA DE CONCURRENCIA EN PISO -->
+      <section class="avoid-break">
+        <div class="flex items-center gap-2 mb-2 pb-1 border-b border-slate-200">
+          <span class="flex items-center justify-center w-5 h-5 rounded-full bg-[#EB5B27] text-white text-[11px] font-bold">4</span>
+          <h2 class="text-base font-bold text-[#222221] font-title">Curva Horaria de Concurrencia de FTEs en Piso (Intradía)</h2>
+        </div>
+        <p class="text-xs text-slate-600 mb-2 leading-relaxed">
+          Distribución de posiciones simultáneas activas en piso entre las 05:00 y las 21:00 horas Pacific Time (07:00 a 23:00 CST en CDMX), demostrando un piso sostenido de más de 50 agentes en la mañana y un pico de <strong>74 a 77 agentes concurrentes</strong> a las 13:00 PT:
+        </p>
+
+        <div class="border border-slate-200 rounded-lg overflow-hidden text-xs shadow-sm">
+          <table>
+            <thead>
+              <tr class="bg-[#0F2C59] text-white text-left text-[11px] uppercase tracking-wider">
+                <th class="py-1.5 px-3">Intervalo PT</th>
+                <th class="py-1.5 px-3">Hora CDMX (CST)</th>
+                <th class="py-1.5 px-3 text-right">Lunes</th>
+                <th class="py-1.5 px-3 text-right">Miércoles</th>
+                <th class="py-1.5 px-3 text-right">Viernes</th>
+                <th class="py-1.5 px-3 text-right">Domingo</th>
+                <th class="py-1.5 px-3">Comportamiento Operativo</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 text-slate-700 text-[11px]">
+              <tr class="bg-white"><td class="py-1.5 px-3">05:00 - 06:00 PT</td><td class="py-1.5 px-3">07:00 - 08:00 CST</td><td class="py-1.5 px-3 text-right font-bold">7</td><td class="py-1.5 px-3 text-right">4</td><td class="py-1.5 px-3 text-right">5</td><td class="py-1.5 px-3 text-right">8</td><td class="py-1.5 px-3">Apertura temprana</td></tr>
+              <tr class="bg-slate-50"><td class="py-1.5 px-3">06:00 - 07:00 PT</td><td class="py-1.5 px-3">08:00 - 09:00 CST</td><td class="py-1.5 px-3 text-right font-bold">18</td><td class="py-1.5 px-3 text-right">12</td><td class="py-1.5 px-3 text-right">17</td><td class="py-1.5 px-3 text-right">19</td><td class="py-1.5 px-3">Rampa matutina inicial</td></tr>
+              <tr class="bg-white"><td class="py-1.5 px-3">07:00 - 08:00 PT</td><td class="py-1.5 px-3">09:00 - 10:00 CST</td><td class="py-1.5 px-3 text-right font-bold">39</td><td class="py-1.5 px-3 text-right">31</td><td class="py-1.5 px-3 text-right">32</td><td class="py-1.5 px-3 text-right">46</td><td class="py-1.5 px-3">Entrada de turnos intermedios</td></tr>
+              <tr class="bg-slate-50"><td class="py-1.5 px-3">08:00 - 11:00 PT</td><td class="py-1.5 px-3">10:00 - 13:00 CST</td><td class="py-1.5 px-3 text-right font-bold">63</td><td class="py-1.5 px-3 text-right">53</td><td class="py-1.5 px-3 text-right">56</td><td class="py-1.5 px-3 text-right font-bold">73</td><td class="py-1.5 px-3">Meseta alta sostenida</td></tr>
+              <tr class="bg-white"><td class="py-1.5 px-3">11:00 - 13:00 PT</td><td class="py-1.5 px-3">13:00 - 15:00 CST</td><td class="py-1.5 px-3 text-right font-bold">64</td><td class="py-1.5 px-3 text-right">53</td><td class="py-1.5 px-3 text-right">57</td><td class="py-1.5 px-3 text-right font-bold">74</td><td class="py-1.5 px-3">Entrada de turnos de mediodía</td></tr>
+              <tr class="bg-orange-50/40 font-bold"><td class="py-1.5 px-3 text-[#EB5B27]">13:00 - 14:00 PT</td><td class="py-1.5 px-3 text-[#EB5B27]">15:00 - 16:00 CST</td><td class="py-1.5 px-3 text-right text-sm text-[#EB5B27]">74</td><td class="py-1.5 px-3 text-right text-sm text-[#EB5B27]">60</td><td class="py-1.5 px-3 text-right text-sm text-[#EB5B27]">63</td><td class="py-1.5 px-3 text-right text-sm text-[#EB5B27]">77</td><td class="py-1.5 px-3 text-[#EB5B27]">Pico máximo en piso (corte logístico 1:00 PM PST)</td></tr>
+              <tr class="bg-white"><td class="py-1.5 px-3">14:00 - 15:00 PT</td><td class="py-1.5 px-3">16:00 - 17:00 CST</td><td class="py-1.5 px-3 text-right font-bold">67</td><td class="py-1.5 px-3 text-right">56</td><td class="py-1.5 px-3 text-right">58</td><td class="py-1.5 px-3 text-right font-bold">72</td><td class="py-1.5 px-3">Salida gradual de turnos matutinos</td></tr>
+              <tr class="bg-slate-50"><td class="py-1.5 px-3">15:00 - 16:00 PT</td><td class="py-1.5 px-3">17:00 - 18:00 CST</td><td class="py-1.5 px-3 text-right font-bold">35</td><td class="py-1.5 px-3 text-right">29</td><td class="py-1.5 px-3 text-right">31</td><td class="py-1.5 px-3 text-right">34</td><td class="py-1.5 px-3">Transición vespertina</td></tr>
+              <tr class="bg-white"><td class="py-1.5 px-3">16:00 - 17:00 PT</td><td class="py-1.5 px-3">18:00 - 19:00 CST</td><td class="py-1.5 px-3 text-right font-bold">21</td><td class="py-1.5 px-3 text-right">15</td><td class="py-1.5 px-3 text-right">13</td><td class="py-1.5 px-3 text-right">14</td><td class="py-1.5 px-3">Descenso de volumen de llamadas</td></tr>
+              <tr class="bg-slate-50"><td class="py-1.5 px-3">17:00 - 21:00 PT</td><td class="py-1.5 px-3">19:00 - 23:00 CST</td><td class="py-1.5 px-3 text-right font-bold">10 - 11</td><td class="py-1.5 px-3 text-right">7</td><td class="py-1.5 px-3 text-right">6 - 7</td><td class="py-1.5 px-3 text-right">6 - 7</td><td class="py-1.5 px-3">Cobertura tardía extendida (Batch 4.2)</td></tr>
+              <tr class="bg-white"><td class="py-1.5 px-3">21:00 PT</td><td class="py-1.5 px-3">23:00 CST</td><td class="py-1.5 px-3 text-right">0</td><td class="py-1.5 px-3 text-right">0</td><td class="py-1.5 px-3 text-right">0</td><td class="py-1.5 px-3 text-right">0</td><td class="py-1.5 px-3">Cierre de operación</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 5: REPOSITORIOS Y ENLACES DIRECTOS -->
+      <section class="avoid-break">
+        <div class="flex items-center gap-2 mb-2 pb-1 border-b border-slate-200">
+          <span class="flex items-center justify-center w-5 h-5 rounded-full bg-[#3284C6] text-white text-[11px] font-bold">5</span>
+          <h2 class="text-base font-bold text-[#222221] font-title">Repositorio de Recursos con Enlaces Directos en Google Workspace</h2>
+        </div>
+        <div class="border border-slate-200 rounded-lg overflow-hidden text-xs shadow-sm">
+          <table>
+            <thead>
+              <tr class="bg-[#0F2C59] text-white text-left text-[11px] uppercase tracking-wider">
+                <th class="py-2 px-3">Área Funcional</th>
+                <th class="py-2 px-3">Documento / Archivo</th>
+                <th class="py-2 px-3">Propietario</th>
+                <th class="py-2 px-3">Tipo</th>
+                <th class="py-2 px-3">Enlace Directo en Google Workspace</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 text-slate-700">
+              <tr class="bg-white">
+                <td class="py-2 px-3 font-bold text-slate-900" rowspan="4">Workforce Management & Roster</td>
+                <td class="py-2 px-3 font-semibold">Overall Program Expectations & Info</td>
+                <td class="py-2 px-3">JC Velez</td>
+                <td class="py-2 px-3">Google Sheet</td>
+                <td class="py-2 px-3"><a href="https://docs.google.com/open?id=1dtqth3PO2ua4AjfrNymnBCxw0W_XkhBbYLSYZi_d5Pg" target="_blank" class="text-[#3284C6] font-semibold hover:underline">Abrir en Google Drive</a></td>
+              </tr>
+              <tr class="bg-white">
+                <td class="py-2 px-3 font-semibold">Copia de WCGB (MX) 11/2021</td>
+                <td class="py-2 px-3">Ricardo García</td>
+                <td class="py-2 px-3">Google Sheet</td>
+                <td class="py-2 px-3"><a href="https://docs.google.com/open?id=1hOh2j5PzW844rs9J80E8N_7JA_BTqu_s907O0wRDHzE" target="_blank" class="text-[#3284C6] font-semibold hover:underline">Abrir en Google Drive</a></td>
+              </tr>
+              <tr class="bg-white">
+                <td class="py-2 px-3 font-semibold">Attendance Notification</td>
+                <td class="py-2 px-3">JC Velez</td>
+                <td class="py-2 px-3">Google Sheet</td>
+                <td class="py-2 px-3"><a href="https://docs.google.com/open?id=11ixGMlCyxn9uqUK-spibrVo92Wcn_C-EoK2_ZDAi3pc" target="_blank" class="text-[#3284C6] font-semibold hover:underline">Abrir en Google Drive</a></td>
+              </tr>
+              <tr class="bg-white">
+                <td class="py-2 px-3 font-semibold">Nómina Operativa 2022 (WINE NEXGEN.xlsx)</td>
+                <td class="py-2 px-3">Fabiola Alvarez</td>
+                <td class="py-2 px-3">MS Excel</td>
+                <td class="py-2 px-3">Hilo Gmail: <code class="bg-slate-100 px-1 py-0.5 rounded text-[11px]">18aae487098593c0</code></td>
+              </tr>
+              <tr class="bg-slate-50">
+                <td class="py-2 px-3 font-bold text-slate-900" rowspan="4">Capacitación & Guías Operativas</td>
+                <td class="py-2 px-3 font-semibold">Frequently Asked Questions (FAQ)</td>
+                <td class="py-2 px-3">Gladimir Cruz</td>
+                <td class="py-2 px-3">MS Word</td>
+                <td class="py-2 px-3"><a href="https://docs.google.com/open?id=1amWupVYSVce3PqfkipPD58Ve--yMLyEv" target="_blank" class="text-[#3284C6] font-semibold hover:underline">Abrir en Google Drive</a></td>
+              </tr>
+              <tr class="bg-slate-50">
+                <td class="py-2 px-3 font-semibold">WCGB Leadership Coaching Process</td>
+                <td class="py-2 px-3">JC Velez</td>
+                <td class="py-2 px-3">Google Doc</td>
+                <td class="py-2 px-3"><a href="https://docs.google.com/open?id=1BIEPNXHP8ULCxPukSDVx1feiocgZvH5b9EGXBELsiw0" target="_blank" class="text-[#3284C6] font-semibold hover:underline">Abrir en Google Drive</a></td>
+              </tr>
+              <tr class="bg-slate-50">
+                <td class="py-2 px-3 font-semibold">WCGB Computer Set Up 2021</td>
+                <td class="py-2 px-3">Gladimir Cruz</td>
+                <td class="py-2 px-3">MS Word</td>
+                <td class="py-2 px-3"><a href="https://docs.google.com/open?id=1aCKSlAv-jli6vzOTGlALsxcCsRR_3WC3" target="_blank" class="text-[#3284C6] font-semibold hover:underline">Abrir en Google Drive</a></td>
+              </tr>
+              <tr class="bg-slate-50">
+                <td class="py-2 px-3 font-semibold">WCGB 2021 Computer Requirements</td>
+                <td class="py-2 px-3">Ricardo García</td>
+                <td class="py-2 px-3">Google Doc</td>
+                <td class="py-2 px-3"><a href="https://docs.google.com/open?id=1_oW2g7ZsoaaYAOVX8J-nWqm2RT3_g3HnB81DxTmj0Wk" target="_blank" class="text-[#3284C6] font-semibold hover:underline">Abrir en Google Drive</a></td>
+              </tr>
+              <tr class="bg-white">
+                <td class="py-2 px-3 font-bold text-slate-900" rowspan="3">Gobernanza & Finanzas (Gmail)</td>
+                <td class="py-2 px-3 font-semibold">Fórmula de Facturación Neta inContact</td>
+                <td class="py-2 px-3">Ephraim Samson</td>
+                <td class="py-2 px-3">Hilo Gmail</td>
+                <td class="py-2 px-3">Hilo Gmail: <code class="bg-slate-100 px-1 py-0.5 rounded text-[11px]">184beb2db6a3fa3c</code></td>
+              </tr>
+              <tr class="bg-white">
+                <td class="py-2 px-3 font-semibold">Aprobación de Batches Adicionales (+21 HC)</td>
+                <td class="py-2 px-3">Christina Crespo</td>
+                <td class="py-2 px-3">Hilo Gmail</td>
+                <td class="py-2 px-3">Hilo Gmail: <code class="bg-slate-100 px-1 py-0.5 rounded text-[11px]">1846255d4c5ccd3a</code></td>
+              </tr>
+              <tr class="bg-white">
+                <td class="py-2 px-3 font-semibold">Notificación Oficial de Fin de Proyecto</td>
+                <td class="py-2 px-3">Oscar Rosales</td>
+                <td class="py-2 px-3">Hilo Gmail</td>
+                <td class="py-2 px-3">Hilo Gmail: <code class="bg-slate-100 px-1 py-0.5 rounded text-[11px]">1852c5fb975eab2e</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 6: REGLAS OPERATIVAS CRÍTICAS -->
+      <section class="avoid-break">
+        <div class="flex items-center gap-2 mb-2 pb-1 border-b border-slate-200">
+          <span class="flex items-center justify-center w-5 h-5 rounded-full bg-[#EB5B27] text-white text-[11px] font-bold">6</span>
+          <h2 class="text-base font-bold text-[#222221] font-title">Reglas Operativas y Parámetros Técnicos de la Cuenta</h2>
+        </div>
+        <div class="grid grid-cols-2 gap-3 text-xs">
+          <div class="p-3 rounded-lg border border-slate-200 bg-slate-50">
+            <strong class="text-slate-900 text-xs block mb-1">Sistema WebOE (OMS)</strong>
+            <p class="text-[11.5px] text-slate-600 leading-relaxed">
+              Captura obligatoria en <strong>ALL CAPS</strong> en todos los campos (comprador, destinatario, mensaje de dedicatoria). Navegación estricta con la tecla <strong>TAB</strong> y clic del ratón; prohibido presionar ENTER. Búsquedas de clientes limitadas exclusivamente a <em>Customer Search</em>.
+            </p>
+          </div>
+          <div class="p-3 rounded-lg border border-slate-200 bg-slate-50">
+            <strong class="text-slate-900 text-xs block mb-1">Telefonía inContact & Pasarela de Pagos IVR</strong>
+            <p class="text-[11.5px] text-slate-600 leading-relaxed">
+              Desactivación mandatoria de paneles (<code>Display -> Panels: OFF</code>) para evitar que la ventana emergente de cobro bancario sea bloqueada. El agente permanece en línea en silencio mientras el cliente digita la tarjeta en el IVR hasta recibir el número de confirmación.
+            </p>
+          </div>
+          <div class="p-3 rounded-lg border border-slate-200 bg-slate-50">
+            <strong class="text-slate-900 text-xs block mb-1">Restricciones Legales de Alcohol</strong>
+            <p class="text-[11.5px] text-slate-600 leading-relaxed">
+              Prohibición legal estricta de envío de canastas con vino a <strong>Alabama (AL), Mississippi (MS), South Dakota (SD) y Utah (UT)</strong>. En el resto de los estados permitidos, la entrega requiere obligatoriamente firma presencial de un adulto de 21 años o más.
+            </p>
+          </div>
+          <div class="p-3 rounded-lg border border-slate-200 bg-slate-50">
+            <strong class="text-slate-900 text-xs block mb-1">Empoderamiento & Cortes de Paquetería</strong>
+            <p class="text-[11.5px] text-slate-600 leading-relaxed">
+              Autonomía de hasta <strong>$500 USD por orden</strong> para que el agente resuelva incidencias (reemplazos hasta $150 USD o descuentos del 5%) sin escalamiento. Hora de corte para despacho el mismo día: <strong>1:00 PM PST</strong> con paqueterías UPS (EE. UU.) y FedEx (Canadá).
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="p-6 border-t border-slate-200 bg-slate-50 flex items-center justify-between text-xs text-slate-500">
+      <div>
+        <strong>TELAT GROUP</strong> · Dirección de Operaciones & Tecnología · Subdirección de Operaciones
+      </div>
+      <div>
+        Fuente: Telat Workspace Gateway v2.4 · Google Workspace Corporativo
+      </div>
+    </footer>
+
+  </div>
+
+</body>
+</html>

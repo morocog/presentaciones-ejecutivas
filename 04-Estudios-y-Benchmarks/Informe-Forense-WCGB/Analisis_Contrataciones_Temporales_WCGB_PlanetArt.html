@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capacidad Operativa en Picos de Fin de Año: WCGB y PlanetArt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --telat-navy: #0F2C59;
+      --telat-blue: #3284C6;
+      --telat-orange: #EB5B27;
+      --telat-yellow: #FECA66;
+      --slate-50: #F8FAFC;
+      --slate-100: #F1F5F9;
+      --slate-200: #E2E8F0;
+      --slate-300: #CBD5E1;
+      --slate-500: #64748B;
+      --slate-600: #475569;
+      --slate-700: #334155;
+      --slate-800: #1E293B;
+      --slate-900: #0F172A;
+      --font-heading: 'Montserrat', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: #F1F5F9;
+      color: var(--slate-800);
+      line-height: 1.5;
+      padding: 30px 15px;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      background: #FFFFFF;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+      overflow: hidden;
+      border: 1px solid var(--slate-200);
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, var(--telat-navy) 0%, #1A365D 70%, #1E4E8C 100%);
+      color: #FFFFFF;
+      padding: 32px 36px;
+    }
+
+    .header-badge {
+      display: inline-block;
+      background: rgba(235, 91, 39, 0.2);
+      border: 1px solid rgba(235, 91, 39, 0.5);
+      color: #FFB088;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 16px;
+      margin-bottom: 10px;
+    }
+
+    .header h1 {
+      font-family: var(--font-heading);
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.2;
+      color: #FFFFFF;
+      margin-bottom: 6px;
+    }
+
+    .header p.subtitle {
+      font-size: 14.5px;
+      color: #CBD5E1;
+      max-width: 800px;
+    }
+
+    .meta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 12.5px;
+      color: #E2E8F0;
+    }
+
+    .meta-item strong {
+      color: #FFFFFF;
+    }
+
+    /* Main Content */
+    .content {
+      padding: 32px 36px;
+    }
+
+    /* Executive Highlights */
+    .highlight-card {
+      background: var(--slate-50);
+      border-left: 4px solid var(--telat-orange);
+      border-radius: 0 10px 10px 0;
+      padding: 16px 20px;
+      margin-bottom: 26px;
+      font-size: 14px;
+      color: var(--slate-700);
+      line-height: 1.6;
+    }
+
+    .highlight-card strong {
+      color: var(--telat-navy);
+    }
+
+    /* KPI Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 26px;
+    }
+
+    @media (max-width: 840px) {
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .kpi-card {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .kpi-card.accent {
+      background: #FFF9F5;
+      border-color: #FED7AA;
+    }
+
+    .kpi-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--slate-500);
+      margin-bottom: 4px;
+    }
+
+    .kpi-value {
+      font-family: var(--font-heading);
+      font-size: 30px;
+      font-weight: 800;
+      color: var(--telat-navy);
+      line-height: 1.1;
+      margin-bottom: 2px;
+    }
+
+    .kpi-card.accent .kpi-value {
+      color: var(--telat-orange);
+    }
+
+    .kpi-desc {
+      font-size: 12px;
+      color: var(--slate-600);
+      font-weight: 500;
+    }
+
+    /* Section Titles */
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--telat-navy);
+      margin-top: 28px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 4px;
+      height: 18px;
+      background: var(--telat-blue);
+      border-radius: 2px;
+    }
+
+    /* Consolidated Table */
+    .table-container {
+      border: 1px solid var(--slate-200);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      text-align: left;
+    }
+
+    thead {
+      background: var(--telat-navy);
+      color: #FFFFFF;
+    }
+
+    th {
+      font-family: var(--font-heading);
+      padding: 12px 14px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: var(--slate-50);
+    }
+
+    tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    tbody tr.highlight-row {
+      background-color: #FFF7ED !important;
+      font-weight: 600;
+    }
+
+    td {
+      padding: 12px 14px;
+      color: var(--slate-700);
+    }
+
+    td.num-col {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      text-align: right;
+      color: var(--slate-900);
+    }
+
+    td.accent-num {
+      color: var(--telat-orange);
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    /* Visual Bars */
+    .chart-box {
+      background: #FFFFFF;
+      border: 1px solid var(--slate-200);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 26px;
+    }
+
+    .chart-title {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--slate-800);
+      margin-bottom: 18px;
+    }
+
+    .bar-group {
+      position: relative;
+      padding-top: 18px;
+    }
+
+    .threshold-line {
+      position: absolute;
+      left: calc((120 / 250) * 100%);
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #DC2626;
+      z-index: 5;
+    }
+
+    .threshold-badge {
+      position: absolute;
+      left: calc((120 / 250) * 100%);
+      top: -6px;
+      transform: translateX(-50%);
+      background: #DC2626;
+      color: #FFFFFF;
+      font-size: 9.5px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 190px 1fr 70px;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .bar-label {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--slate-700);
+    }
+
+    .bar-track {
+      background: var(--slate-100);
+      border-radius: 4px;
+      height: 22px;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 8px;
+      color: #FFFFFF;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .fill-total-21 {
+      width: calc((232 / 250) * 100%);
+      background: linear-gradient(90deg, #1E4E8C, var(--telat-navy));
+    }
+
+    .fill-total-22 {
+      width: calc((221 / 250) * 100%);
+      background: linear-gradient(90deg, #1E4E8C, var(--telat-navy));
+      opacity: 0.9;
+    }
+
+    .fill-pa-21 {
+      width: calc((134 / 250) * 100%);
+      background: var(--telat-orange);
+    }
+
+    .fill-wcgb-22 {
+      width: calc((116 / 250) * 100%);
+      background: var(--telat-blue);
+    }
+
+    .fill-pa-22 {
+      width: calc((105 / 250) * 100%);
+      background: var(--telat-orange);
+      opacity: 0.85;
+    }
+
+    .fill-wcgb-21 {
+      width: calc((98 / 250) * 100%);
+      background: var(--telat-blue);
+      opacity: 0.85;
+    }
+
+    .bar-val {
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--slate-800);
+      text-align: right;
+    }
+
+    /* Practical Pillars Grid */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 14px;
+    }
+
+    @media (max-width: 700px) {
+      .pillars-grid {
+        grid-template-columns: 1fr;
+      }
+      .bar-row {
+        grid-template-columns: 140px 1fr 50px;
+      }
+      .header, .content {
+        padding: 20px;
+      }
+    }
+
+    .pillar-card {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .pillar-card h4 {
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--telat-navy);
+      margin-bottom: 6px;
+    }
+
+    .pillar-card p {
+      font-size: 12.5px;
+      color: var(--slate-600);
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--slate-50);
+      border-top: 1px solid var(--slate-200);
+      padding: 14px 36px;
+      font-size: 11.5px;
+      color: var(--slate-500);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    @media print {
+      body { background: #FFFFFF; padding: 0; }
+      .container { box-shadow: none; border: none; max-width: 100%; }
+      .header { background: var(--telat-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-badge">Capacidad Operativa y Dimensionamiento Histórico</div>
+      <h1>Absorción de Personal Temporal en Picos de Fin de Año</h1>
+      <p class="subtitle">
+        Análisis cuantitativo de personal contratado en temporadas altas para <strong>Wine Country Gift Baskets (WCGB)</strong> y <strong>PlanetArt</strong>. Soporte objetivo de capacidad instalada para clientes potenciales de retail estacional (ej. Harry & David).
+      </p>
+
+      <div class="meta-bar">
+        <div class="meta-item"><strong>Destinatario:</strong> Mauricio Cruz (Director de Operaciones)</div>
+        <div class="meta-item"><strong>Elaborado por:</strong> Ricardo García (Subdirector de Operaciones)</div>
+        <div class="meta-item"><strong>Cuentas Base:</strong> WCGB & PlanetArt (2020 – 2023)</div>
+        <div class="meta-item"><strong>Fuente:</strong> Nóminas Auditadas, Roster de Facturación y WFM</div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="content">
+
+      <!-- Executive Highlight -->
+      <div class="highlight-card">
+        <strong>Hallazgo Clave de Capacidad:</strong> Telat Group ha absorbido históricamente <strong>más de 120 contrataciones temporales en una sola campaña</strong> (máximo de <strong>134 temporales</strong> en PlanetArt y <strong>116 colaboradores</strong> en nómina de WCGB). A escala global, la empresa absorbió simultáneamente <strong>más de 220–230 posiciones temporales</strong> en cada uno de los ejercicios 2021 y 2022.
+      </div>
+
+      <!-- 4 KPI Cards -->
+      <div class="kpi-grid">
+        <div class="kpi-card accent">
+          <div class="kpi-label">Pico Temporal / Campaña</div>
+          <div class="kpi-value">134</div>
+          <div class="kpi-desc">PlanetArt (Temp. 2021)</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-label">Pico Nómina / Campaña</div>
+          <div class="kpi-value">116</div>
+          <div class="kpi-desc">WCGB (Temp. 2022)</div>
+        </div>
+
+        <div class="kpi-card accent">
+          <div class="kpi-label">Total Temporales Absorbidos</div>
+          <div class="kpi-value">232</div>
+          <div class="kpi-desc">Ambas Cuentas (Temp. 2021)</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-label">Headcount Global Pico</div>
+          <div class="kpi-value">270</div>
+          <div class="kpi-desc">Total Activo (Temp. 2021)</div>
+        </div>
+      </div>
+
+      <!-- Consolidated Annual Table -->
+      <h2 class="section-title">Consolidado Anual de Absorción Temporal y Headcount</h2>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Temporada Anual</th>
+              <th style="text-align: right;">Temporales WCGB</th>
+              <th style="text-align: right;">Temporales PlanetArt</th>
+              <th style="text-align: right; background: #0A1E3D;">Total Temporales Telat</th>
+              <th style="text-align: right;">Headcount Global (All-In)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Temporada 2020</strong></td>
+              <td class="num-col">15</td>
+              <td class="num-col">—</td>
+              <td class="num-col">15</td>
+              <td class="num-col">15</td>
+            </tr>
+            <tr class="highlight-row">
+              <td><strong>Temporada 2021</strong></td>
+              <td class="num-col">98</td>
+              <td class="num-col accent-num">134</td>
+              <td class="num-col accent-num" style="background: #FEEAD9;">232</td>
+              <td class="num-col"><strong>270</strong></td>
+            </tr>
+            <tr class="highlight-row">
+              <td><strong>Temporada 2022</strong></td>
+              <td class="num-col accent-num">116</td>
+              <td class="num-col">105</td>
+              <td class="num-col accent-num" style="background: #FEEAD9;">221</td>
+              <td class="num-col"><strong>246</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Temporada 2023</strong></td>
+              <td class="num-col">—</td>
+              <td class="num-col">38</td>
+              <td class="num-col">38</td>
+              <td class="num-col">58</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Chart Comparison -->
+      <div class="chart-box">
+        <div class="chart-title">Distribución de Personal Temporal Absorbido vs. Umbral de 120 Posiciones</div>
+        
+        <div class="bar-group">
+          <div class="threshold-badge">UMBRAL 120</div>
+          <div class="threshold-line"></div>
+
+          <!-- Total 2021 -->
+          <div class="bar-row">
+            <div class="bar-label"><strong>Total Telat (Temp. 2021)</strong></div>
+            <div class="bar-track">
+              <div class="bar-fill fill-total-21">232</div>
+            </div>
+            <div class="bar-val">232</div>
+          </div>
+
+          <!-- Total 2022 -->
+          <div class="bar-row">
+            <div class="bar-label"><strong>Total Telat (Temp. 2022)</strong></div>
+            <div class="bar-track">
+              <div class="bar-fill fill-total-22">221</div>
+            </div>
+            <div class="bar-val">221</div>
+          </div>
+
+          <!-- PlanetArt 2021 -->
+          <div class="bar-row">
+            <div class="bar-label">PlanetArt (Temp. 2021)</div>
+            <div class="bar-track">
+              <div class="bar-fill fill-pa-21">134</div>
+            </div>
+            <div class="bar-val" style="color: var(--telat-orange);">134</div>
+          </div>
+
+          <!-- WCGB 2022 -->
+          <div class="bar-row">
+            <div class="bar-label">WCGB (Temp. 2022)</div>
+            <div class="bar-track">
+              <div class="bar-fill fill-wcgb-22">116</div>
+            </div>
+            <div class="bar-val" style="color: var(--telat-blue);">116</div>
+          </div>
+
+          <!-- PlanetArt 2022 -->
+          <div class="bar-row">
+            <div class="bar-label">PlanetArt (Temp. 2022)</div>
+            <div class="bar-track">
+              <div class="bar-fill fill-pa-22">105</div>
+            </div>
+            <div class="bar-val">105</div>
+          </div>
+
+          <!-- WCGB 2021 -->
+          <div class="bar-row">
+            <div class="bar-label">WCGB (Temp. 2021)</div>
+            <div class="bar-track">
+              <div class="bar-fill fill-wcgb-21">98</div>
+            </div>
+            <div class="bar-val">98</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Account Breakdown Tables -->
+      <h2 class="section-title">Detalle por Cuenta</h2>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
+        <!-- WCGB Table -->
+        <div class="table-container" style="margin-bottom: 0;">
+          <table>
+            <thead>
+              <tr>
+                <th colspan="3" style="background: var(--telat-navy);">Wine Country Gift Baskets (WCGB)</th>
+              </tr>
+              <tr>
+                <th>Temporada</th>
+                <th>Tipo de Dotación</th>
+                <th style="text-align: right;">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Temp. 2020</td>
+                <td>Piloto / TTT</td>
+                <td class="num-col">15</td>
+              </tr>
+              <tr>
+                <td>Temp. 2021</td>
+                <td>Roster de Piso</td>
+                <td class="num-col">98</td>
+              </tr>
+              <tr class="highlight-row">
+                <td>Temp. 2022</td>
+                <td>Nómina Auditada</td>
+                <td class="num-col accent-num">116</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- PlanetArt Table -->
+        <div class="table-container" style="margin-bottom: 0;">
+          <table>
+            <thead>
+              <tr>
+                <th colspan="4" style="background: var(--telat-navy);">PlanetArt (FreePrints & Websites)</th>
+              </tr>
+              <tr>
+                <th>Temporada</th>
+                <th style="text-align: right;">Core</th>
+                <th style="text-align: right;">Temporales</th>
+                <th style="text-align: right;">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="highlight-row">
+                <td>Temp. 2021</td>
+                <td class="num-col">38</td>
+                <td class="num-col accent-num">134</td>
+                <td class="num-col">172</td>
+              </tr>
+              <tr>
+                <td>Temp. 2022</td>
+                <td class="num-col">25</td>
+                <td class="num-col">105</td>
+                <td class="num-col">130</td>
+              </tr>
+              <tr>
+                <td>Temp. 2023</td>
+                <td class="num-col">20</td>
+                <td class="num-col">38</td>
+                <td class="num-col">58</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Commercial Justification Pillars (Harry & David) -->
+      <h2 class="section-title">Sustento de Capacidad para Harry & David</h2>
+
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <h4>Escala Individual (>120 Agentes)</h4>
+          <p>
+            Telat ha operado exitosamente campañas individuales con más de 120–134 agentes temporales, absorbiendo picos estacionales de e-commerce retail con curvas de capacitación cortas.
+          </p>
+        </div>
+
+        <div class="pillar-card">
+          <h4>Escala Agregada (>220 Agentes)</h4>
+          <p>
+            La infraestructura física (Sedes Insurgentes y Roma CDMX) y el área de atracción de talento han sostenido más de 220 contrataciones temporales simultáneas en temporadas concurrentes.
+          </p>
+        </div>
+
+        <div class="pillar-card">
+          <h4>Especialización Retail / Gifting</h4>
+          <p>
+            Ambas campañas corresponden al mismo sector operativo: órdenes multiremitente, pedidos perecederos, reglas de envíos y catálogo estacional idénticos al modelo de Harry & David.
+          </p>
+        </div>
+
+        <div class="pillar-card">
+          <h4>Factibilidad Inmediata</h4>
+          <p>
+            Cualquier requerimiento comercial entre 50 y 120 posiciones para Harry & David se encuentra completamente dentro de los rangos de absorción ya ejecutados y comprobados por la empresa.
+          </p>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div><strong>TELAT GROUP</strong> · Dirección de Operaciones</div>
+      <div>Sede Insurgentes Sur & Sede Monterrey, Roma Norte, CDMX</div>
+    </footer>
+
+  </div>
+
+</body>
+</html>
