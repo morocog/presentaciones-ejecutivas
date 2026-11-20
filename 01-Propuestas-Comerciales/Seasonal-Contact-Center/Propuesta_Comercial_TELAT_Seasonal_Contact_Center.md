@@ -23,6 +23,7 @@ Telat Group cuenta con un modelo maduro y probado para absorber requerimientos m
 - **Campañas individuales superiores a 120–130 agentes:** Despliegue de operaciones estacionales dedicadas con rampas aceleradas de 2 a 4 semanas.
 - **Apego a turnos del 99.8%:** Rigurosa adherencia a las matrices de programación horaria para mitigar el ausentismo en fechas de alta demanda.
 - **Retención estacional del 95%:** Estabilidad de la plantilla a lo largo de todo el ciclo temporal mediante esquemas de incentivos semanales y supervisión cercana.
+- **20 años de trayectoria en el mercado y flexibilidad anual:** Con 20 años de historia operativa (fundada en 2005), Telat opera campañas temporales desde 2020 y cubre requerimientos de *overstaff* para temporadas altas durante todo el año (*year-round*).
 
 ---
 

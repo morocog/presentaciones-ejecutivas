@@ -32,6 +32,10 @@
   - Simular tráfico entrante desde WhatsApp personal para verificar captura de leads en tiempo real.
 - [x] Exportador de presentaciones a PDF de alta resolución con vista ejecutiva 16:9 panorámica — **COMPLETADO 2026-10-01**: Implementado estándar `@media print` en `Presentacion-Comercial-Telat` con división balanceada de 6 casos en 2 láminas horizontales de 3 columnas (3 y 3), sustitución de iframes por fichas mockup HD de software y compilador headless Chromium automatizado (`scripts/export_pdf.ps1`). Generado `Presentacion_Comercial_Telat_Group.pdf` (11 páginas vectoriales HD).
 - [ ] Script unificado en PowerShell para archivar micro-sitios públicos con 1 solo comando tras la firma de contratos.
+- [ ] **Revisión y Reenvío de Portafolio Ejecutivo Completo (Decks 01 al 04 en inglés) — Prioridad Baja:**
+  - El Deck 04 (`04_Commercial_Capabilities_Deck.pdf`) ya fue sanitizado (sin marcas de clientes) y validado con 0 delatores de IA.
+  - Como el paquete completo de 4 presentaciones ya se mandó por correo, antes de enviar la actualización consolidada conviene darle una pasada de revisión y homologación preventiva a los Decks 01, 02 y 03.
+  - Una vez validados, preparar y despachar el correo con los 4 PDFs actualizados.
 
 ---
 
