@@ -1,0 +1,68 @@
+[SPAN] Official Executive Proposal · Client Presentation (Strict 3-Page Format)
+[SPAN] Telat Group · Executive Business Proposal
+[H1] Seasonal Contact Center Support Proposal
+[SPAN] Confidential · Client Briefing
+[P] Contact Center Operations & Vendor Management
+[P] Retail, E-Commerce & Perishable Gifting Division
+[SPAN] Commercial Point of Contact (POC):
+[P] Mauricio Cruz · Director of Operations
+[P] Email: mcruz@telat-group.com
+[P] Operating Hubs: Mexico City (Nearshore Hub) & El Paso, Texas
+[H2] Proposed Partnership & Purpose
+[P] TELAT proposes dedicated bilingual customer service teams operating from Mexico to support Harry & David during seasonal peaks, temporary projects, and periods of excess call volume. This proposal outlines an operational service model for discussion and the planning inputs required to develop an exact staffing plan and commercial agreement. We welcome an initial discussion with your contact center operations or vendor management team to determine where external seasonal capacity will reliably support your service goals.
+[H2] Relevant Experience & What TELAT Provides
+[P] TELAT brings extensive multi-year experience supporting seasonal customer service campaigns for prominent U.S. businesses. Our proven core competencies include peak-season call handling, multi-item order inquiries, delivery follow-ups, and post-purchase support in English and Spanish.
+[P] A dedicated turnkey team supported by rigorous agent training, on-floor operational supervision, quality assurance (QA), real-time workforce management (WFM), and continuous reporting. Scope, staffing, coverage hours, and milestones are customized with Harry & David.
+[P] TELAT will operate strictly within Harry & David’s approved procedures, CRM/OMS software, and designated escalation paths. The following core activities form the baseline scope for seasonal support:
+[TD] Answer order status, catalogue inquiries, item verification, and general order entry questions using approved systems and knowledge base.
+[TD] Review carrier shipment information (UPS, FedEx), explain delivery tracking, manage address updates, and proactively escalate delays or weather exceptions.
+[TD] Handle customer concerns, damaged product reports, and support requests for modifications, cancellations, reshipments, or refunds within approved permissions.
+[TD] Provide agreed elastic capacity when incoming queue volumes exceed internal staffing thresholds, preventing high abandonment rates during peak hours.
+[P] English & Spanish delivered from modern contact centers in Mexico. U.S.-based delivery via El Paso, TX available.
+[P] Initial focus on inbound voice. Email and live chat can be integrated directly on demand. Direct integration with client OMS.
+[P] Training and QA aligned with Harry & David’s voice, service policies, resolution guidelines, and PCI payment protocols.
+[SPAN] Telat Group · Executive Business Proposal · Harry & David Seasonal Support
+[SPAN] Operating Model, Implementation & Commercial Framework
+[H2] Operating Model and Implementation
+[P] TELAT manages day-to-day operations through specialized leadership, dedicated workforce management (WFM), and structured quality assurance to ensure full alignment with client expectations:
+[STRONG] Team & Workforce Management
+[P] TELAT oversees attendance, coaching, real-time queue adherence, and supervisory coverage. Real-time WFM continuously aligns interval staffing against agreed arrival patterns and forecast curves.
+[STRONG] Training, Train-the-Trainer (TTT) & QA
+[P] Curriculum covers product knowledge, order entry workflows, exception handling, and brand voice. Joint calibration sessions ensure readiness before production launch.
+[TH] Activities and Key Deliverables
+[TD] Confirm activities, volume forecast, staffing curves, shift rosters, governance cadence, and commercial agreement.
+[TD] Arrange approved VPN/system access, credentials, telephony routing, knowledge base resources, escalation contacts, and reporting feeds.
+[TD] Train the agent batches, conduct mock call simulations, execute order capture tests, and validate operational readiness against mutual criteria.
+[TD] Begin production with on-floor supervisors and trainers, review early case trends, monitor ASA/CSAT, and optimize interval scheduling.
+[STRONG] Performance Management & Proposed Service Targets
+[H2] Commercial Approach & Information Needed for Pricing
+[P] We propose an hourly service model for the agreed seasonal period. A formal commercial offer will specify the hourly billable rate (in USD), net billable time definition, minimum committed hours, payment terms, and treatment of onboarding, QA, and supervision.
+[TH] Details Requested from Harry & David
+[TD] Expected start date, service duration, anticipated peak order weeks, and wind-down timeline.
+[TD] Forecasted call volume by channel and interval (half-hour arrival curves), historical volumes, and target Average Handle Time (AHT).
+[TD] Operating days of the week, service hours (e.g., 5:00 AM – 9:00 PM PT), time zones, and English vs. Spanish split.
+[TD] Priority activities, target SLAs, tier-2 escalation rules, reporting frequency, and dedicated supervisor ratios.
+[SPAN] Telat Group · Executive Business Proposal · Harry & David Seasonal Support
+[SPAN] Proven Track Record, Infrastructure & Engagement
+[H2] Proven High-Volume Track Record & Empirical Case Study
+[SPAN] Temporary agents absorbed across concurrent holiday peaks
+[SPAN] Seasonal agents deployed in a single retail campaign
+[SPAN] Attendance and schedule compliance in critical weeks
+[SPAN] Low attrition maintained through weekly incentives
+[STRONG] Operational Track Record in Seasonal Retail & Gifting:
+[P] TELAT possesses a documented, multi-year history providing seasonal customer service for premier U.S. gift basket, perishable gifting, and customized holiday product retailers. In peak seasonal operations, TELAT has mobilized over 200 temporary agents simultaneously across concurrent holiday programs, scaling individual campaigns to more than 120–130 frontline seasonal representatives within a 2-to-4 week ramp.
+[P] Our agents are specifically trained in multi-recipient order capture, perishable shipping regulations, strict carrier cutoff times (e.g., 1:00 PM PST same-day dispatch via UPS and FedEx), and customer satisfaction recovery. Operations run under strict PCI-DSS compliance , guiding callers through automated IVR payment capture without exposing sensitive cardholder data to agent screens.
+[P] 20-Year Operational Heritage & Year-Round Surge Capacity: Backed by 20 years of proven market experience in bilingual contact center operations (founded in 2005), TELAT has operated high-demand seasonal and temporary campaigns since 2020 . We provide reliable overstaff coverage for peak seasons year-round , absorbing demand surges across Q1–Q4 without adding fixed operational overhead.
+[H2] Resilient Infrastructure & Dual-Border Operations
+[STRONG] Corporate Physical Facilities
+[P] Operating from two state-of-the-art contact centers in Mexico City (Av. Insurgentes Sur 263 and Calle Monterrey 149, Roma Norte), alongside border operations in Ciudad Juárez and El Paso, Texas . Over 1,000 fully equipped workstations with noise-cancelling USB headsets and dual monitors.
+[STRONG] Business Continuity (ISO 22301)
+[P] Enterprise-grade infrastructure backed by dedicated on-site emergency power generators, dual carrier-diverse fiber-optic internet feeds with automatic failover, and strict ISO 22301 business continuity standards ensuring zero downtime during critical Q4 trading days.
+[H2] Next Steps & Commercial Point of Contact
+[P] We welcome a brief discovery call with your operations or vendor management leadership to review your anticipated seasonal volumes, required service hours, and campaign milestones. With these inputs, TELAT will deliver a formal staffing plan, schedule commitment, and competitive hourly proposal.
+[SPAN] Exclusive Commercial Point of Contact
+[H3] Mauricio Cruz · Director of Operations
+[P] Telat Group · Contact Center & BPO Solutions
+[P] Corporate Office: Insurgentes Sur 263, Roma Norte, Mexico City
+[SPAN] Direct Operational Inquiries
+[SPAN] Telat Group · Executive Business Proposal · Harry & David Seasonal Support

@@ -1,0 +1,75 @@
+[H1] YOUR CUSTOMERS DON'T CALL TO CHAT. THEY CALL TO RESOLVE.
+[P] We deliver high-volume customer operations through dedicated bilingual staffing, proprietary AI copilots, and disciplined SLA governance.
+[H2] THE BOTTLENECK OF TRADITIONAL BPO
+[P] High attrition, scattered legacy tools, and blind-spot quality audits degrade customer satisfaction and drive up transaction costs.
+[H3] High Floor Attrition & Knowledge Drain
+[P] Complex procedures and post-call administrative burdens burn out agents, creating continuous re-training cycles and erratic service quality.
+[H3] Prolonged Hold Times & Slow Wrap-Up
+[P] Agents toggle between disconnected windows to locate policies, inflating average handle times (AHT) and forcing long hold queues.
+[H3] 2% Manual Sampling Blind Spots
+[P] Conventional QA audits evaluate only 1 to 2 interactions per agent each week, leaving 98% of calls completely unmonitored for regulatory compliance.
+[H4] Automated Voice & Syntax Analysis
+[P] Real-time bilingual phonetics and grammar scoring
+[SPAN] English Fluency & Neutral Accent
+[SPAN] Empathy & Cognitive Troubleshooting
+[H2] PREDICTIVE HIRING & SKILLS VERIFICATION
+[P] We pre-screen candidates through practical typing tests, C1/B2 bilingual evaluations, and situational troubleshooting before they enter the classroom.
+[SPAN] 85%+ 90-day retention rate across operational teams.
+[SPAN] Zero classroom attrition via realistic day-in-the-life simulations.
+[SPAN] Bilingual talent pool curated across 4 North American hubs.
+[H2] REAL-TIME COPILOT & AUTOMATED TICKETING
+[P] Our AI Copilot listens in real time, surfaces policy answers within 2 seconds, and auto-generates structured case notes and CRM dispositions immediately upon call wrap-up.
+[SPAN] AHT reduced from 8 minutes to 3.5 minutes on complex calls.
+[SPAN] Under 15s wrap-up with 100% complete CRM field population.
+[SPAN] Dynamic knowledge base updates propagated to all agents instantly.
+[P] "I need to split my holiday gift order between 3 corporate addresses with custom greetings..."
+[P] Multi-recipient routing active. Ground shipping cutoff Dec 18. Apply corporate volume discount (15%).
+[P] Disposition: Corporate Gifting Order | 3 Deliveries | Status: Dispatched to OMS
+[SPAN] 100% Automated Speech Analytics
+[P] Replaces 2% manual sampling
+[P] Automated 1-on-1 scorecards
+[H2] 100% SPEECH ANALYTICS & OBJECTIVE QA AUDITING
+[P] We audit every single customer conversation using natural language processing. Sensitive data masking, disclosure verification, and customer sentiment scores are updated continuously.
+[SPAN] Complete operational visibility replacing subjective spot checks.
+[SPAN] Critical compliance breaches flagged the moment they occur.
+[SPAN] Automated coaching cards ready for supervisor 1-on-1 coaching sessions.
+[H2] OUR ACHIEVEMENTS IN OPERATIONAL EXCELLENCE
+[H3] U.S. National Online Retailer
+[P] Restructured shift scheduling via interval balancing and daily coaching to remove idle downtime.
+[H3] Order Hygiene & Address Verification
+[P] Automated multi-recipient address verification and greeting card checks, reducing delivery exception errors to 0.4%.
+[H3] Automotive Supply Chain & Logistics
+[P] VIN verification, precise parts inventory matching, and nationwide mobile tech scheduling.
+[H3] Tier-1 Enterprise Telecom Provider
+[P] Multi-site bilingual operations absorbing surge volumes across voice, chat, and transaction tickets.
+[H3] Holiday Peak Staffing (+200 Temps)
+[P] Turnkey ramp-up of 200+ seasonal agents in 2–4 weeks via TTT. Multi-recipient order entry, CRM/OMS navigation, and parcel cutoff management.
+[H3] U.S. Omnichannel Upselling
+[P] Bilingual specialists trained in conversational upselling and cart recovery during Q4 surges.
+[H2] TECHNOLOGY APPLIED TO CUSTOMER EXPERIENCE
+[P] Over 20 years leading binational customer experience and applied artificial intelligence across Mexico and the USA (2005 - 2026).
+[P] We operate as a high-discipline nearshore partner, combining certified bilingual teams with proprietary AI workflows for enterprise North American clients.
+[P] Human talent optimization via AI: Operation calibrated to 650+ high-performance specialists.
+[H2] ENTERPRISE SECURITY & AUDITED CERTIFICATIONS
+[P] Telat Group operates under audited international standards, protecting consumer data, payment transactions, and business continuity across every operating hub.
+[P] Audited quality standards, consistent service delivery, and continuous improvement.
+[P] International benchmark dedicated specifically to contact centres, agent welfare, and KPIs.
+[P] Rigorous accreditation in customer relationship management and operational execution.
+[P] Strict cybersecurity protocols, clean-desk policy, role-based access controls, and data privacy safeguards.
+[P] Strict access controls, encrypted channels, and zero retention of sensitive cardholder data.
+[P] ITIL-aligned infrastructure governance, Tier-1/2/3 technical service desks, and incident tracking.
+[P] Resilient disaster recovery and failover redundancy between CDMX, Ciudad Juárez, and El Paso.
+[P] Uncompromising corporate ethics, legal compliance, and zero-tolerance anti-corruption protocols.
+[P] Recognized fair-wage employment, agent wellness, diversity, and community sustainability.
+[H2] FROM DISCOVERY TO HIGH PERFORMANCE
+[P] We analyze transaction histories, call arrival curves, CRM bottlenecks, and compliance checkpoints.
+[P] We ingest knowledge repositories, configure speech models, and calibrate automated CRM fields.
+[P] Selected specialists undergo scenario simulations, tool mastery, and policy certification.
+[P] Full volume cutover backed by real-time speech analytics, daily scorecards, and executive reporting.
+[H2] LET'S REDESIGN YOUR OPERATIONS TODAY.
+[P] Deploy a dedicated nearshore operation backed by proprietary floor copilots, automated CRM documentation, and 100% speech analytics across our binational hubs.
+[P] We review your transaction curves and staffing requirements to formulate a high-efficiency nearshore deployment proposal.
+[SPAN] Executive Operational Leadership
+[P] Operations Director & Commercial Lead · Telat Group
+[SPAN] Calle Monterrey 149, Col. Roma Nte., Cuauhtémoc, 06700 Ciudad de México, CDMX
+[SPAN] ${String(idx + 1).padStart(2, '0')}. ${label}
